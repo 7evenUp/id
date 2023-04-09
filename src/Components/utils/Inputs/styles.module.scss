@@ -1,0 +1,12 @@
+.inputField {
+  border: 0;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  text-align: right;
+  &:active {
+    border: 0;
+  }
+  &:focus {
+    outline: 0;
+  }
+}

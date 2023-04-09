@@ -1,0 +1,58 @@
+@import '~bootstrap/scss/bootstrap';
+
+.namedButton {
+  font-family: 'Helvetica Neue', monospace !important;
+  font-size: 1.65vh !important;
+  line-height: 1.65vh !important;
+  margin: 0 0.3vw;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  cursor: pointer;
+  border: 1px solid #333333 !important;
+  border-radius: 50px !important;
+  padding: 0 0.6vw !important;
+  height: 2.6vh;
+}
+
+.namedButton:hover {
+  background: black !important;
+  color: #ffffff !important;
+  transition: 0.9s;
+}
+
+.boxInsideSwitch {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  > p {
+    margin: 0 !important;
+    font-family: 'Neue Machina', monospace;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2vh;
+    line-height: 1.2vh;
+  }
+}
+
+.wrapSwitch {
+  &[aria-checked='true'] {
+    > .switch > div:last-of-type {
+      background: #333333 !important;
+    }
+  }
+  &[aria-checked='false'] {
+    > .switch > div:last-of-type {
+      background: #b6b6b6 !important;
+    }
+  }
+  > .switch {
+    border: 0.746544px solid #333333 !important;
+    border-radius: 14.9309px !important;
+    > div:first-of-type {
+      background: transparent !important;
+    }
+  }
+}

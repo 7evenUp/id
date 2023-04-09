@@ -1,0 +1,23 @@
+.topNavBar {
+  display: inline-block;
+  width: 100%;
+  a {
+    float: left;
+    font-family: 'Neue Machina';
+    font-style: normal;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 1.65vh;
+    line-height: 1.65vh;
+    color: #333333;
+  }
+  > div {
+    float: right;
+    align-self: flex-end;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.2vh;
+  }
+}
