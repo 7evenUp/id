@@ -2,6 +2,7 @@ import Avatar from "./components/Avatar"
 import Profile from "./components/Profile"
 import Referral from "./components/Referral"
 import Subscription from "./components/Subscription"
+import Tabs from "./components/Tabs"
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
             <span>изменить тему</span>
           </div>
         </header>
-        <main className="flex">
+        <main className="flex justify-between gap-20">
           <div>
             <div className="flex justify-between">
               <h1>Личный кабинет</h1>
@@ -31,7 +32,7 @@ const App = () => {
               </div>
             </div>
           </div>
-          <div></div>
+            <Tabs />
         </main>
       </div>
     </div>
