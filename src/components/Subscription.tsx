@@ -1,4 +1,4 @@
-import React from "react"
+import Button from "./ui/Button"
 
 const Subscription = () => {
   return (
@@ -10,8 +10,8 @@ const Subscription = () => {
             мой баланс: <span className="text-res-bot-blue">$100</span>
           </span>
           <div className="flex gap-3">
-            <button>история</button>
-            <button>пополнить баланс</button>
+            <Button>история</Button>
+            <Button>пополнить баланс</Button>
           </div>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4">
@@ -19,7 +19,7 @@ const Subscription = () => {
             дней до конца подписки:{" "}
             <span className="text-res-bot-blue">13</span>
           </span>
-          <button>продлить подписку</button>
+          <Button>продлить подписку</Button>
         </div>
       </div>
     </div>

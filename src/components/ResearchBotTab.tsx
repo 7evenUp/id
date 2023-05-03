@@ -1,12 +1,13 @@
 import ProjectsSettings from "./ProjectsSettings"
+import Button from "./ui/Button"
 
 const ResearchBotTab = () => {
   return (
     <>
-      <div className="flex gap-5 border-b border-gray-4 pb-4">
+      <div className="flex items-center gap-5 border-b border-gray-4 pb-4">
         <h2>Research Bot</h2>
         <a href="#">на сайт</a>
-        <button className="ml-auto">сохранить изменения</button>
+        <Button className="ml-auto">сохранить изменения</Button>
       </div>
       <div className="flex justify-between items-center py-2 border-b border-gray-4">
         <span>Уведомления в браузере</span>

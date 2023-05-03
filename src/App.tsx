@@ -6,7 +6,7 @@ import Tabs from "./components/Tabs"
 
 const App = () => {
   return (
-    <div className="w-full min-h-screen bg-white bg-background-texture">
+    <div className="w-full min-h-screen bg-white bg-background-texture font-montserrat">
       <div className="px-9">
         <header className="flex justify-between items-center">
           <a href="#">Назад к сайту</a>

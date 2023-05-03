@@ -1,4 +1,4 @@
-import React from "react"
+import Button from "./ui/Button"
 
 const Referral = () => {
   return (
@@ -10,19 +10,19 @@ const Referral = () => {
             реферальная система: <span className="text-res-bot-blue">15%</span>
           </span>
           <div className="flex gap-3">
-            <button>промокод</button>
-            <button>ссылка</button>
+            <Button>промокод</Button>
+            <Button>ссылка</Button>
           </div>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4">
           <span>
             реферальный баланс: <span className="text-res-bot-blue">$250</span>
           </span>
-          <button>вывести</button>
+          <Button>вывести</Button>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4">
           <span>статистика</span>
-          <button>посмотреть</button>
+          <Button>посмотреть</Button>
         </div>
       </div>
     </div>
