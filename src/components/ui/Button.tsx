@@ -8,7 +8,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={cn(
-          "px-[10px] py-[3px] border border-gray-1 rounded-full text-sm leading-[14px] text-gray-1 hover:bg-gray-1 hover:text-white transition-colors",
+          "typography-btn-big px-[10px] py-[3px] border border-gray-1 rounded-full text-gray-1 hover:bg-gray-1 hover:text-white active:bg-opacity-80 transition-colors",
           className
         )}
         {...props}

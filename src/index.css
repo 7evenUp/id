@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .typography-head {
+    @apply text-[22px] leading-[22px] tracking-[3%] font-semibold;
+  }
+
+  .typography-semi-head {
+    @apply text-lg -tracking-[1%] font-semibold;
+  }
+
+  .typography-text-0 {
+    @apply text-sm -tracking-[1%] font-normal;
+  }
+
+  .typography-text-1 {
+    @apply text-[10px] leading-[140%] font-medium;
+  }
+
+  .typography-text-2 {
+    @apply text-[10px] leading-[140%] font-semibold;
+  }
+
+  .typography-accent {
+    @apply text-sm font-medium;
+  }
+
+  .typography-balance {
+    @apply text-[8px] leading-[140%] tracking-[1%] font-medium;
+  }
+
+  .typography-btn-big {
+    @apply text-sm leading-[14px] font-normal;
+  }
+
+  .typography-btn-standart {
+    @apply text-[10px] leading-[10px] font-medium;
+  }
+
+  .typography-btn-additional {
+    @apply text-[10px] leading-[140%] tracking-[5%] font-medium;
+  }
+}
