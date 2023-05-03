@@ -3,13 +3,16 @@ import Profile from "./components/Profile"
 import Referral from "./components/Referral"
 import Subscription from "./components/Subscription"
 import Tabs from "./components/Tabs"
+import Button from "./components/ui/Button"
 
 const App = () => {
   return (
-    <div className="w-full min-h-screen bg-white bg-background-texture font-montserrat">
+    <div className="w-full min-h-screen text-gray-1 bg-white bg-background-texture font-montserrat">
       <div className="px-9">
         <header className="flex justify-between items-center">
-          <a href="#">Назад к сайту</a>
+          <a className="typography-btn-big" href="#">
+            Назад к сайту
+          </a>
           <div>
             <span>изменить язык</span>
             <span>изменить тему</span>
@@ -18,7 +21,7 @@ const App = () => {
         <main className="flex justify-between gap-20">
           <div>
             <div className="flex justify-between">
-              <h1>Личный кабинет</h1>
+              <h1 className="typography-head uppercase">Личный кабинет</h1>
               <Avatar />
             </div>
             <div className="flex flex-col gap-10 w-[433px]">
@@ -27,12 +30,12 @@ const App = () => {
               <Referral />
 
               <div className="flex justify-between">
-                <button>выйти из аккаунта</button>
-                <button>деактивировать аккаунт</button>
+                <Button appearence="text">выйти из аккаунта</Button>
+                <Button appearence="text">деактивировать аккаунт</Button>
               </div>
             </div>
           </div>
-            <Tabs />
+          <Tabs />
         </main>
       </div>
     </div>

@@ -4,15 +4,15 @@
 
 @layer components {
   .typography-head {
-    @apply text-[22px] leading-[22px] tracking-[3%] font-semibold;
+    @apply text-[22px] leading-[22px] tracking-[0.03em] font-semibold;
   }
 
   .typography-semi-head {
-    @apply text-lg -tracking-[1%] font-semibold;
+    @apply text-lg -tracking-[0.01em] font-semibold;
   }
 
   .typography-text-0 {
-    @apply text-sm -tracking-[1%] font-normal;
+    @apply text-sm -tracking-[0.01em] font-normal;
   }
 
   .typography-text-1 {
@@ -28,7 +28,11 @@
   }
 
   .typography-balance {
-    @apply text-[8px] leading-[140%] tracking-[1%] font-medium;
+    @apply text-sm font-semibold;
+  }
+
+  .typography-tip {
+    @apply text-[8px] leading-[140%] tracking-[0.01em] font-medium;
   }
 
   .typography-btn-big {
@@ -40,6 +44,6 @@
   }
 
   .typography-btn-additional {
-    @apply text-[10px] leading-[140%] tracking-[5%] font-medium;
+    @apply text-[10px] leading-[140%] tracking-[0.05em] font-medium;
   }
 }

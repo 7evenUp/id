@@ -1,13 +1,15 @@
+import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
 
 const Referral = () => {
   return (
     <div>
-      <h2 className="mb-4">Реферальная система</h2>
+      <Subheading className="mb-4">Реферальная система</Subheading>
       <div className="flex flex-col border-t border-gray-4">
         <div className="flex justify-between items-center py-2 border-b border-gray-4">
-          <span>
-            реферальная система: <span className="text-res-bot-blue">15%</span>
+          <span className="typography-text-0">
+            реферальная система:{" "}
+            <span className="text-res-bot-blue typography-balance">15%</span>
           </span>
           <div className="flex gap-3">
             <Button>промокод</Button>
@@ -15,13 +17,14 @@ const Referral = () => {
           </div>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4">
-          <span>
-            реферальный баланс: <span className="text-res-bot-blue">$250</span>
+          <span className="typography-text-0">
+            реферальный баланс:{" "}
+            <span className="text-res-bot-blue typography-balance">$250</span>
           </span>
           <Button>вывести</Button>
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4">
-          <span>статистика</span>
+          <span className="typography-text-0">статистика</span>
           <Button>посмотреть</Button>
         </div>
       </div>

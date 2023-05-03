@@ -1,12 +1,15 @@
 import ProjectsSettings from "./ProjectsSettings"
+import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
 
 const ResearchBotTab = () => {
   return (
     <>
       <div className="flex items-center gap-5 border-b border-gray-4 pb-4">
-        <h2>Research Bot</h2>
-        <a href="#">на сайт</a>
+        <Subheading>Research Bot</Subheading>
+        <a className="typography-btn-big" href="#">
+          на сайт
+        </a>
         <Button className="ml-auto">сохранить изменения</Button>
       </div>
       <div className="flex justify-between items-center py-2 border-b border-gray-4">
