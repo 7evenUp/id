@@ -2,6 +2,7 @@ import React from "react"
 import * as RadixTabs from "@radix-ui/react-tabs"
 import { ReactComponent as ResearchBot } from "../assets/Res-bot.svg"
 import { ReactComponent as Prime } from "../assets/Prime.svg"
+import ResearchBotTab from "./ResearchBotTab"
 
 const Tabs = () => {
   return (
@@ -15,16 +16,12 @@ const Tabs = () => {
         </RadixTabs.Trigger>
       </RadixTabs.List>
       <RadixTabs.Content value="res-bot">
-        <div className="flex gap-5 border-b border-gray-4">
-          <h2>Research Bot</h2>
-          <span>на сайт</span>
-          <button className="ml-auto">сохранить изменения</button>
-        </div>
+        <ResearchBotTab />
       </RadixTabs.Content>
       <RadixTabs.Content value="prime">
         <div className="flex gap-5 border-b border-gray-4">
           <h2>Prime</h2>
-          <span>на сайт</span>
+          <a href="#">на сайт</a>
           <button className="ml-auto">сохранить изменения</button>
         </div>
       </RadixTabs.Content>
