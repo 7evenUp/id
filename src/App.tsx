@@ -1,23 +1,17 @@
 import Avatar from "./components/Avatar"
+import Header from "./components/Header"
 import Profile from "./components/Profile"
 import Referral from "./components/Referral"
 import Subscription from "./components/Subscription"
 import Tabs from "./components/Tabs"
+
 import Button from "./components/ui/Button"
 
 const App = () => {
   return (
     <div className="w-full min-h-screen text-gray-1 bg-white bg-background-texture font-montserrat">
-      <div className="px-9">
-        <header className="flex justify-between items-center">
-          <a className="typography-btn-big" href="#">
-            Назад к сайту
-          </a>
-          <div>
-            <span>изменить язык</span>
-            <span>изменить тему</span>
-          </div>
-        </header>
+      <div className="px-9 py-8">
+        <Header />
         <main className="flex justify-between gap-20">
           <div>
             <div className="flex justify-between">

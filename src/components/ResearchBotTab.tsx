@@ -1,6 +1,7 @@
 import ProjectsSettings from "./ProjectsSettings"
 import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
+import { Switch } from "./ui/Switch"
 
 const ResearchBotTab = () => {
   return (
@@ -15,15 +16,27 @@ const ResearchBotTab = () => {
       <div className="flex justify-between items-center py-2 border-b border-gray-4">
         <span>Уведомления в браузере</span>
         <div className="flex gap-10 items-center px-4 py-[6px] bg-white rounded-xl">
-          <span>Research</span>
-          <span>Агрегатор</span>
+          <div className="flex items-center gap-2">
+            <Switch id="resNotif" />
+            <label htmlFor="resNotif">Research</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch id="agrNotif" />
+            <label htmlFor="agrNotif">Агрегатор</label>
+          </div>
         </div>
       </div>
       <div className="flex justify-between items-center py-2 border-b border-gray-4">
         <span>Отображение режимов</span>
         <div className="flex gap-10 items-center px-4 py-[6px] bg-white rounded-xl">
-          <span>Research</span>
-          <span>Агрегатор</span>
+          <div className="flex items-center gap-2">
+            <Switch id="resView" />
+            <label htmlFor="resView">Research</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch id="agrView" />
+            <label htmlFor="agrView">Агрегатор</label>
+          </div>
         </div>
       </div>
       <div className="flex justify-between py-2 border-b border-gray-4">
@@ -31,16 +44,28 @@ const ResearchBotTab = () => {
         <div className="flex flex-col gap-[5px]">
           <div className="flex items-center justify-between gap-2">
             <span>Research</span>
-            <div className="flex gap-10 items-center px-4 py-[6px] bg-white rounded-xl">
-              <span>Русский</span>
-              <span>Английский</span>
+            <div className="w-[318px] gap-3 flex items-center px-4 py-[6px] bg-white rounded-xl">
+              <div className="flex-1 flex items-center gap-2">
+                <Switch id="resRu" />
+                <label htmlFor="resRu">Русский</label>
+              </div>
+              <div className="flex-1 flex items-center gap-2">
+                <Switch id="resEn" />
+                <label htmlFor="resEn">Английский</label>
+              </div>
             </div>
           </div>
           <div className="flex items-center justify-between gap-2">
             <span>Агрегатор</span>
-            <div className="flex gap-10 items-center px-4 py-[6px] bg-white rounded-xl">
-              <span>Русский</span>
-              <span>Английский</span>
+            <div className="w-[318px] gap-3 flex items-center px-4 py-[6px] bg-white rounded-xl">
+              <div className="flex-1 flex items-center gap-2">
+                <Switch id="agrEn" />
+                <label htmlFor="agrEn">Английский</label>
+              </div>
+              <div className="flex-1 flex items-center gap-2">
+                <Switch id="agrEs" />
+                <label htmlFor="agrEs">Испанский</label>
+              </div>
             </div>
           </div>
         </div>
