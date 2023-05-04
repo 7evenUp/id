@@ -1,5 +1,6 @@
 import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
+import ExternalLink from "./ui/ExternalLink"
 
 const PrimeTab = () => {
   return (
@@ -13,27 +14,17 @@ const PrimeTab = () => {
       </div>
       <div className="flex justify-between py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
         <span>Каналы и чаты Prime</span>
-        <div className="flex items-center gap-[10px]">
-          <a className="typography-btn-big" href="#">
-            канал Prime
-          </a>
-          <a className="typography-btn-big" href="#">
-            основной чат
-          </a>
-          <a className="typography-btn-big" href="#">
-            NFT-чат
-          </a>
-          <a className="typography-btn-big" href="#">
-            чат по нодам
-          </a>
+        <div className="flex items-center justify-end gap-[10px] flex-wrap max-w-[360px]">
+          <ExternalLink withTgIcon href="#">канал Prime</ExternalLink>
+          <ExternalLink withTgIcon href="#">основной чат</ExternalLink>
+          <ExternalLink withTgIcon href="#">NFT-чат</ExternalLink>
+          <ExternalLink withTgIcon href="#">чат по нодам</ExternalLink>
         </div>
       </div>
       <div className="flex flex-col gap-6 py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
         <div className="flex justify-between items-center">
           <span>Сервисы и навигация</span>
-          <div className="flex">
-            <a href="#">навигация Prime</a>
-          </div>
+          <ExternalLink href="#">навигация Prime</ExternalLink>
         </div>
         <div className="flex justify-between gap-5">
           <div className="min-w-[340px] h-[150px] bg-white dark:bg-gray-1 rounded-xl"></div>
@@ -68,29 +59,29 @@ const PrimeTab = () => {
               касаемо заработка в криптовалюте, то Вы всегда можете задать их
               Наставнику.
             </p>
-            <a href="#">наставник</a>
+            <ExternalLink withTgIcon href="#">наставник</ExternalLink>
           </div>
           <div className="flex justify-between items-center">
             <p className="max-w-prose typography-text-1">
               Впервые в Prime? Рекомендуем подробно ознакомиться с каждым
               сервисом, чтобы изпользовать возможности подписки на максимум!
             </p>
-            <a href="#">возможности Prime</a>
+            <ExternalLink href="#">возможности Prime</ExternalLink>
           </div>
           <div className="flex justify-between items-center">
             <p className="max-w-prose typography-text-1">
               Не знаете с чего начать? Мы подготовили для Вас конкретный план
               действий.
             </p>
-            <a href="#">план действий</a>
+            <ExternalLink href="#">план действий</ExternalLink>
           </div>
         </div>
       </div>
       <div className="flex justify-between py-2 dark:text-gray-4">
         <span>Обратная связь и отзывы</span>
         <div className="flex gap-[10px]">
-          <a href="#">оставить отзыв</a>
-          <a href="#">оставить обратную связь</a>
+        <ExternalLink href="#">оставить отзыв</ExternalLink>
+        <ExternalLink href="#">оставить обратную связь</ExternalLink>
         </div>
       </div>
     </>

@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "../../lib/classNames"
 
-const buttonVariants = cva("transition-colors", {
+export const buttonVariants = cva("transition-colors", {
   variants: {
     appearence: {
       outlined:
