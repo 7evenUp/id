@@ -1,17 +1,53 @@
+import { Switch } from "./ui/Switch"
+import { SwitchWithText } from "./ui/SwitchWithText"
+
 const ProjectsSettings = () => {
   return (
-    <div className="flex flex-col gap-1 px-4 py-3 rounded-xl bg-white typography-text-1">
-      <div className="flex justify-between mb-6">
-        <input
-          className="w-[130px] outline-none bg-transparent border-b border-gray-1 py-1"
-          placeholder="поиск"
-        />
-        <span>проекты</span>
-        <span>подписки</span>
-        <span>соцсети</span>
-      </div>
-      <div className="py-1">заглушка</div>
-    </div>
+    <table className="w-full block px-4 py-3 rounded-xl bg-white typography-text-1">
+      <thead className="mb-6 block">
+        <tr className="flex items-baseline gap-6 text-left">
+          <th className="w-[130px]">
+            <input
+              className="outline-none bg-transparent border-b border-gray-1 py-1"
+              placeholder="поиск"
+            />
+          </th>
+          <th className="w-[65px] typography-text-1 text-gray-3">проекты</th>
+          <th className="w-[90px] typography-text-1 text-gray-3">подписки</th>
+          <th className="flex-grow-[2] typography-text-1 text-gray-3">
+            соцсети
+          </th>
+        </tr>
+      </thead>
+      <tbody className="flex flex-col">
+        <tr className="py-1 flex gap-6">
+          <td className="w-[130px] flex-shrink-0">AirNFTs</td>
+          <td className="w-[65px] flex-shrink-0">
+            <Switch />
+          </td>
+          <td className="w-[90px] flex-shrink-0">все</td> {/* select */}
+          <td className="flex-grow-[2] flex gap-[10px] flex-wrap">
+            <SwitchWithText>medium</SwitchWithText>
+            <SwitchWithText>twitter</SwitchWithText>
+            <SwitchWithText>discord</SwitchWithText>
+            <SwitchWithText>telegram</SwitchWithText>
+          </td>
+        </tr>
+        <tr className="py-1 flex gap-6">
+          <td className="w-[130px] flex-shrink-0">Binance</td>
+          <td className="w-[65px] flex-shrink-0">
+            <Switch />
+          </td>
+          <td className="w-[90px] flex-shrink-0">важные</td> {/* select */}
+          <td className="flex-grow-[2] flex-shrink flex gap-[10px] flex-wrap">
+            <SwitchWithText>medium</SwitchWithText>
+            <SwitchWithText>twitter</SwitchWithText>
+            <SwitchWithText>discord</SwitchWithText>
+            <SwitchWithText>telegram</SwitchWithText>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
