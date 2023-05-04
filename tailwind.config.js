@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,7 +8,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'background-texture': "url('/images/background-texture.png')"
+        'background-texture': "url('/images/background-texture.png')",
+        'background-texture-dark': "url('/images/background-texture-dark.png')",
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],

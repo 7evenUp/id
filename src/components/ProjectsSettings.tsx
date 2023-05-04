@@ -3,12 +3,12 @@ import { SwitchWithText } from "./ui/SwitchWithText"
 
 const ProjectsSettings = () => {
   return (
-    <table className="w-full block px-4 py-3 rounded-xl bg-white typography-text-1">
+    <table className="w-full block px-4 py-3 rounded-xl bg-white dark:bg-gray-1 typography-text-1">
       <thead className="mb-6 block">
         <tr className="flex items-baseline gap-6 text-left">
           <th className="w-[130px]">
             <input
-              className="outline-none bg-transparent border-b border-gray-1 py-1"
+              className="outline-none bg-transparent border-b border-gray-1 dark:border-gray-4 py-1 dark:placeholder:text-gray-3"
               placeholder="поиск"
             />
           </th>

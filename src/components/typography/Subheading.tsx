@@ -8,7 +8,10 @@ const Subheading: React.FC<HTMLAttributes<HTMLHeadingElement>> = ({
   ...props
 }) => {
   return (
-    <h2 className={cn("typography-head", className)} {...props}>
+    <h2
+      className={cn("typography-head dark:text-gray-5", className)}
+      {...props}
+    >
       {children}
     </h2>
   )
