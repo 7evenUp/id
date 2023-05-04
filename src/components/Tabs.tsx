@@ -8,14 +8,17 @@ const Tabs = () => {
   return (
     <RadixTabs.Root defaultValue="res-bot" className="flex-1">
       <RadixTabs.List className="flex items-center gap-[72px] border-b border-gray-2 py-4 px-5 mb-9">
-        <RadixTabs.Trigger value="res-bot">
-          <ResearchBot
-            fill="#333333"
-            className="fill-slate-800 text-slate-900"
-          />
+        <RadixTabs.Trigger value="res-bot" className="group relative">
+          <>
+            <ResearchBot />
+            <span className="absolute hidden group-data-[state=active]:block w-[68px] h-[3px] rounded-full left-0 bottom-0 translate-y-[18px] -translate-x-5 bg-gray-1" />
+          </>
         </RadixTabs.Trigger>
-        <RadixTabs.Trigger value="prime">
-          <Prime />
+        <RadixTabs.Trigger value="prime" className="group relative">
+          <>
+            <Prime />
+            <span className="absolute hidden group-data-[state=active]:block w-[68px] h-[5px] rounded-full left-0 bottom-0 translate-y-[19px] -translate-x-5 bg-gray-1" />
+          </>
         </RadixTabs.Trigger>
       </RadixTabs.List>
       <RadixTabs.Content value="res-bot" className="typography-text-0">
