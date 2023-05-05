@@ -1,19 +1,30 @@
 import { BsSnow } from "react-icons/bs"
+
 import TxHistoryModal from "./modals/TxHistoryModal"
+import FreezeSubsModal from "./modals/FreezeSubsModal"
+
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
-import Button from "./ui/Button"
+
 import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
 import IconButton from "./ui/IconButton"
+import Button from "./ui/Button"
 
 const Subscription = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
         <Subheading>Подписка</Subheading>
-        <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
-          <BsSnow className="w-3 h-3" />
-        </IconButton>
+        <Dialog>
+          <DialogTrigger>
+            <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
+              <BsSnow className="w-3 h-3" />
+            </IconButton>
+          </DialogTrigger>
+          <DialogContent>
+            <FreezeSubsModal />
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1">

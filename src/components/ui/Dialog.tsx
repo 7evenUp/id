@@ -45,7 +45,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed z-50 grid w-full gap-4 rounded-xl border border-gray-1 dark:border-gray-3 bg-white dark:bg-gray-1 p-10 shadow-lg max-w-[900px] font-montserrat dark:text-gray-4",
+        "fixed z-50 grid w-full gap-4 rounded-xl border border-gray-1 dark:border-gray-3 bg-white dark:bg-gray-1 p-10 shadow-lg max-w-[900px] font-montserrat text-gray-1 dark:text-gray-4",
         className
       )}
       {...props}
@@ -63,13 +63,7 @@ const DialogHeader = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "flex justify-between",
-      className
-    )}
-    {...props}
-  />
+  <div className={cn("flex justify-between", className)} {...props} />
 )
 DialogHeader.displayName = "DialogHeader"
 
@@ -79,7 +73,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "bg-res-bot-blue rounded-b-xl absolute left-0 bottom-0 w-full typography-text-1 text-white px-10 py-1.5",
       className
     )}
     {...props}
