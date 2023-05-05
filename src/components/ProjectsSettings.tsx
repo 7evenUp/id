@@ -25,7 +25,7 @@ const ProjectsSettings = () => {
           <td className="w-[65px] flex-shrink-0">
             <Switch />
           </td>
-          <td className="w-[90px] flex-shrink-0">все</td> {/* select */}
+          <td className="w-[90px] flex-shrink-0">все</td>
           <td className="flex-grow-[2] flex gap-[10px] flex-wrap">
             <SwitchWithText>medium</SwitchWithText>
             <SwitchWithText>twitter</SwitchWithText>
@@ -38,7 +38,7 @@ const ProjectsSettings = () => {
           <td className="w-[65px] flex-shrink-0">
             <Switch />
           </td>
-          <td className="w-[90px] flex-shrink-0">важные</td> {/* select */}
+          <td className="w-[90px] flex-shrink-0">важные</td>
           <td className="flex-grow-[2] flex-shrink flex gap-[10px] flex-wrap">
             <SwitchWithText>medium</SwitchWithText>
             <SwitchWithText>twitter</SwitchWithText>

@@ -3,7 +3,7 @@ import Header from "./components/Header"
 import Profile from "./components/Profile"
 import Referral from "./components/Referral"
 import Subscription from "./components/Subscription"
-import Tabs from "./components/Tabs"
+import Tabs from "./components/Products"
 
 import Button from "./components/ui/Button"
 

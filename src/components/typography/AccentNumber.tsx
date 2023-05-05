@@ -1,0 +1,18 @@
+import React from "react"
+import { useAppSelector } from "../../redux/hooks"
+import { cn } from "../../lib/classNames"
+import { productToColor } from "../../utils/productToColor"
+
+const AccentNumber = ({ children }: { children: React.ReactNode }) => {
+  const activeProduct = useAppSelector((state) => state.tabs.value)
+
+  const color = productToColor[activeProduct]
+
+  return (
+    <span className={cn("typography-balance", `text-${color}`)}>
+      {children}
+    </span>
+  )
+}
+
+export default AccentNumber

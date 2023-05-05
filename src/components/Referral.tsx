@@ -1,3 +1,4 @@
+import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
 
@@ -8,8 +9,7 @@ const Referral = () => {
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1">
           <span className="typography-text-0 dark:text-gray-4">
-            реферальная система:{" "}
-            <span className="text-res-bot-blue typography-balance">15%</span>
+            реферальная система: <AccentNumber>15%</AccentNumber>
           </span>
           <div className="flex gap-3">
             <Button>промокод</Button>
@@ -18,8 +18,7 @@ const Referral = () => {
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1">
           <span className="typography-text-0 dark:text-gray-4">
-            реферальный баланс:{" "}
-            <span className="text-res-bot-blue typography-balance">$250</span>
+            реферальный баланс: <AccentNumber>$250</AccentNumber>
           </span>
           <Button>вывести</Button>
         </div>
