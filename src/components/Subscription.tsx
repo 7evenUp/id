@@ -1,6 +1,8 @@
+import TxHistoryModal from "./modals/TxHistoryModal"
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
+import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
 
 const Subscription = () => {
   return (
@@ -12,7 +14,14 @@ const Subscription = () => {
             мой баланс: <AccentNumber>$100</AccentNumber>
           </span>
           <div className="flex gap-3">
-            <Button>история</Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>история</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <TxHistoryModal />
+              </DialogContent>
+            </Dialog>
             <Button>пополнить баланс</Button>
           </div>
         </div>

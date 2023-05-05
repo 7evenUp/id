@@ -1,6 +1,8 @@
+import ReferralStatsModal from "./modals/ReferralStatsModal"
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
 import Button from "./ui/Button"
+import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
 
 const Referral = () => {
   return (
@@ -24,7 +26,14 @@ const Referral = () => {
         </div>
         <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1">
           <span className="typography-text-0 dark:text-gray-4">статистика</span>
-          <Button>посмотреть</Button>
+          <Dialog>
+            <DialogTrigger>
+              <Button>посмотреть</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <ReferralStatsModal />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>
