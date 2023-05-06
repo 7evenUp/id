@@ -1,3 +1,4 @@
+import ModalTrigger from "./ModalTrigger"
 import RowItem from "./RowItem"
 
 import ReferralStatsModal from "./modals/ReferralStatsModal"
@@ -5,7 +6,6 @@ import ReferralStatsModal from "./modals/ReferralStatsModal"
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
 
-import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
 import Button from "./ui/Button"
 
 const Referral = () => {
@@ -30,14 +30,9 @@ const Referral = () => {
         </RowItem>
         <RowItem>
           <span className="typography-text-0 dark:text-gray-4">статистика</span>
-          <Dialog>
-            <DialogTrigger>
-              <Button>посмотреть</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <ReferralStatsModal />
-            </DialogContent>
-          </Dialog>
+          <ModalTrigger content={<ReferralStatsModal />}>
+            <Button>посмотреть</Button>
+          </ModalTrigger>
         </RowItem>
       </div>
     </div>

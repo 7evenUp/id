@@ -1,31 +1,27 @@
 import { BsSnow } from "react-icons/bs"
 
+import ModalTrigger from "./ModalTrigger"
+import RowItem from "./RowItem"
+
 import TxHistoryModal from "./modals/TxHistoryModal"
 import FreezeSubsModal from "./modals/FreezeSubsModal"
 
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
 
-import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
 import IconButton from "./ui/IconButton"
 import Button from "./ui/Button"
-import RowItem from "./RowItem"
 
 const Subscription = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
         <Subheading>Подписка</Subheading>
-        <Dialog>
-          <DialogTrigger>
-            <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
-              <BsSnow className="w-3 h-3" />
-            </IconButton>
-          </DialogTrigger>
-          <DialogContent>
-            <FreezeSubsModal />
-          </DialogContent>
-        </Dialog>
+        <ModalTrigger content={<FreezeSubsModal />}>
+          <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
+            <BsSnow className="w-3 h-3" />
+          </IconButton>
+        </ModalTrigger>
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem>
@@ -33,14 +29,9 @@ const Subscription = () => {
             мой баланс: <AccentNumber>$100</AccentNumber>
           </span>
           <div className="flex gap-3">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>история</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <TxHistoryModal />
-              </DialogContent>
-            </Dialog>
+            <ModalTrigger content={<TxHistoryModal />}>
+              <Button>история</Button>
+            </ModalTrigger>
             <Button>пополнить баланс</Button>
           </div>
         </RowItem>
