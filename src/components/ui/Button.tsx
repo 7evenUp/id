@@ -7,7 +7,7 @@ export const buttonVariants = cva("transition-colors", {
   variants: {
     appearence: {
       outlined:
-        "typography-btn-big px-[10px] py-[3px] text-gray-1 hover:text-white border border-gray-1 rounded-full hover:bg-gray-1 active:bg-opacity-80 dark:text-gray-4 dark:border-gray-4 dark:hover:bg-gray-2",
+        "typography-btn-big px-2.5 py-[3px] text-gray-1 hover:text-white border border-gray-1 rounded-full hover:bg-gray-1 active:bg-opacity-80 dark:text-gray-4 dark:border-gray-4 dark:hover:bg-gray-2",
       text: "typography-btn-additional text-gray-3 hover:text-gray-4",
     },
   },

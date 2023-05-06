@@ -1,4 +1,5 @@
 import { DialogHeader, DialogTitle } from "../ui/Dialog"
+import RowItem from "../RowItem"
 
 const ReferralStatsModal = () => {
   return (
@@ -6,33 +7,33 @@ const ReferralStatsModal = () => {
       <DialogHeader>
         <DialogTitle>Статистика</DialogTitle>
       </DialogHeader>
-      <div className="flex flex-col divide-y divide-gray-4 dark:divide-gray-2">
-        <div className="flex justify-between items-center py-2 typography-accent">
+      <div className="flex flex-col">
+        <RowItem className="typography-accent dark:border-gray-2">
           <span>Количество приглашённых пользователей</span>
           <span className="typography-balance">5</span>
-        </div>
-        <div className="flex justify-between items-center py-2 typography-accent">
+        </RowItem>
+        <RowItem className="typography-accent dark:border-gray-2">
           <span>Участников, сделавших платёж</span>
           <span className="typography-balance">3</span>
-        </div>
-        <div className="flex justify-between items-center py-2 typography-accent">
+        </RowItem>
+        <RowItem className="typography-accent dark:border-gray-2">
           <span>Уникальных участников приглашено в этом месяце</span>
           <span className="typography-balance">5</span>
-        </div>
-        <div className="flex justify-between items-center py-2 typography-accent">
+        </RowItem>
+        <RowItem className="typography-accent dark:border-gray-2">
           <span>
             Уникальных участников в текущем месяце, совершивших платёж
           </span>
           <span className="typography-balance">5</span>
-        </div>
-        <div className="flex justify-between items-center py-2 typography-accent">
+        </RowItem>
+        <RowItem className="typography-accent dark:border-gray-2">
           <span>Суммарно заработано</span>
           <span className="typography-balance">$3.4</span>
-        </div>
-        <div className="flex justify-between items-center py-2 typography-accent">
+        </RowItem>
+        <RowItem className="typography-accent dark:border-gray-2">
           <span>Выведено с реферальной системы</span>
           <span className="typography-balance">$2.00</span>
-        </div>
+        </RowItem>
       </div>
     </>
   )

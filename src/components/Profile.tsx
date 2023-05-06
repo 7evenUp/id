@@ -1,3 +1,4 @@
+import RowItem from "./RowItem"
 import Subheading from "./typography/Subheading"
 
 const Profile = () => {
@@ -5,27 +6,27 @@ const Profile = () => {
     <div>
       <Subheading className="mb-4">Профиль</Subheading>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
-        <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1  typography-text-0 dark:text-gray-4">
+        <RowItem>
           <span>ник</span>
           <span>Joshua Frost</span>
-        </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1  typography-text-0 dark:text-gray-4">
+        </RowItem>
+        <RowItem>
           <span>почта</span>
           <span>Jofrost@gmail.com</span>
-        </div>
-        <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1  typography-text-0 text-gray-3">
+        </RowItem>
+        <RowItem>
           <span>кошелёк</span>
           <span>+</span>
-        </div>
+        </RowItem>
         <div className="flex justify-between items-center gap-10">
-          <div className="flex-1 flex justify-between py-2 border-b border-gray-4 dark:border-gray-1  typography-text-0 text-gray-3">
+          <RowItem className="flex-1">
             <span>discord</span>
             <span>+</span>
-          </div>
-          <div className="flex-1 flex justify-between py-2 border-b border-gray-4 dark:border-gray-1  typography-text-0 text-gray-3">
+          </RowItem>
+          <RowItem className="flex-1">
             <span>telegram</span>
             <span>+</span>
-          </div>
+          </RowItem>
         </div>
       </div>
     </div>

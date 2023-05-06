@@ -1,5 +1,5 @@
-import { Switch } from "./ui/Switch"
-import { SwitchWithText } from "./ui/SwitchWithText"
+import Switch from "./ui/Switch"
+import SwitchWithText from "./ui/SwitchWithText"
 
 const ProjectsSettings = () => {
   return (
@@ -26,7 +26,7 @@ const ProjectsSettings = () => {
             <Switch />
           </td>
           <td className="w-[90px] flex-shrink-0">все</td>
-          <td className="flex-grow-[2] flex gap-[10px] flex-wrap">
+          <td className="flex-grow-[2] flex gap-2.5 flex-wrap">
             <SwitchWithText>medium</SwitchWithText>
             <SwitchWithText>twitter</SwitchWithText>
             <SwitchWithText>discord</SwitchWithText>
@@ -39,7 +39,7 @@ const ProjectsSettings = () => {
             <Switch />
           </td>
           <td className="w-[90px] flex-shrink-0">важные</td>
-          <td className="flex-grow-[2] flex-shrink flex gap-[10px] flex-wrap">
+          <td className="flex-grow-[2] flex-shrink flex gap-2.5 flex-wrap">
             <SwitchWithText>medium</SwitchWithText>
             <SwitchWithText>twitter</SwitchWithText>
             <SwitchWithText>discord</SwitchWithText>

@@ -24,7 +24,7 @@
   }
 
   .typography-accent {
-    @apply text-sm font-medium;
+    @apply text-sm font-medium tracking-normal;
   }
 
   .typography-balance {

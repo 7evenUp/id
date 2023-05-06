@@ -19,7 +19,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
   return (
     <a
       className={cn(
-        "flex items-center gap-[6px] ",
+        "flex items-center gap-1.5 ",
         buttonVariants({ appearence: "outlined" }),
         className
       )}

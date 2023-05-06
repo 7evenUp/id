@@ -1,21 +1,23 @@
 import ProjectsSettings from "./ProjectsSettings"
+import RowItem from "./RowItem"
+import TabHeader from "./TabHeader"
 
 import Subheading from "./typography/Subheading"
 
 import Button from "./ui/Button"
-import { Switch } from "./ui/Switch"
+import Switch from "./ui/Switch"
 
 const ResearchBotTab = () => {
   return (
     <>
-      <div className="flex items-center gap-5 border-b border-gray-4 dark:border-gray-1 pb-4">
+      <TabHeader>
         <Subheading>Research Bot</Subheading>
         <a className="typography-btn-big dark:text-gray-5" href="#">
           на сайт
         </a>
         <Button className="ml-auto">сохранить изменения</Button>
-      </div>
-      <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
+      </TabHeader>
+      <RowItem>
         <span>Уведомления в браузере</span>
         <div className="flex gap-10 items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
@@ -27,8 +29,8 @@ const ResearchBotTab = () => {
             <label htmlFor="agrNotif">Агрегатор</label>
           </div>
         </div>
-      </div>
-      <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
+      </RowItem>
+      <RowItem>
         <span>Отображение режимов</span>
         <div className="flex gap-10 items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
@@ -40,8 +42,8 @@ const ResearchBotTab = () => {
             <label htmlFor="agrView">Агрегатор</label>
           </div>
         </div>
-      </div>
-      <div className="flex justify-between py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
+      </RowItem>
+      <RowItem className="items-baseline">
         <span>Автопереводчик</span>
         <div className="flex flex-col gap-[5px]">
           <div className="flex items-center justify-between gap-2">
@@ -71,16 +73,16 @@ const ResearchBotTab = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
+      </RowItem>
+      <RowItem>
         <span>Размер текста в новостях</span>
         <span className="text-xs text-gray-2">заглушка для слайдера</span>
-      </div>
-      <div className="flex justify-between items-center py-2 border-b border-gray-4 dark:border-gray-1 dark:text-gray-4">
+      </RowItem>
+      <RowItem>
         <span>Выбор фона</span>
         <span className="text-xs text-gray-2">заглушка для картинок</span>
-      </div>
-      <div className="flex flex-col gap-[6px] py-2 dark:text-gray-4">
+      </RowItem>
+      <div className="flex flex-col gap-1.5 py-2 dark:text-gray-4">
         <span>Настройки проектов</span>
         <ProjectsSettings />
       </div>

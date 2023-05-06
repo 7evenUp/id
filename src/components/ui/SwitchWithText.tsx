@@ -27,4 +27,4 @@ const SwitchWithText = React.forwardRef<
 ))
 SwitchWithText.displayName = "SwitchWithText"
 
-export { SwitchWithText }
+export default SwitchWithText

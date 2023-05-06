@@ -9,7 +9,7 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <RadixSwitch.Root
     className={cn(
-      "inline-flex h-[18px] w-[36px] shrink-0 cursor-pointer items-center rounded-full border border-gray-1 dark:border-gray-4 transition-colors focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "inline-flex h-[18px] w-[36px] shrink-0 cursor-pointer items-center rounded-full border border-gray-1 dark:border-gray-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       className
     )}
     {...props}
@@ -24,4 +24,4 @@ const Switch = React.forwardRef<
 ))
 Switch.displayName = "Switch"
 
-export { Switch }
+export default Switch
