@@ -1,7 +1,7 @@
 import React from "react"
 import * as RadixSwitch from "@radix-ui/react-switch"
 
-import { cn } from "../../lib/classNames"
+import { cn } from "@/lib/classNames"
 
 const SwitchWithText = React.forwardRef<
   React.ElementRef<typeof RadixSwitch.Root>,

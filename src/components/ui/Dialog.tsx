@@ -2,7 +2,7 @@ import React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { IoCloseOutline } from "react-icons/io5"
 
-import { cn } from "../../lib/classNames"
+import { cn } from "@/lib/classNames"
 
 const Dialog = DialogPrimitive.Root
 

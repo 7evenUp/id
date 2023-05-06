@@ -1,13 +1,13 @@
-import { ReactComponent as ResearchBot } from "../assets/Res-bot.svg"
-import { ReactComponent as Prime } from "../assets/Prime.svg"
+import { ReactComponent as ResearchBot } from "@/assets/Res-bot.svg"
+import { ReactComponent as Prime } from "@/assets/Prime.svg"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/Tabs"
 
 import ResearchBotTab from "./ResearchBotTab"
 import PrimeTab from "./PrimeTab"
 
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { TABS_VALUES, TabsValuesType, change } from "../redux/tabs/slice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { TABS_VALUES, TabsValuesType, change } from "@/redux/tabs/slice"
 
 const Products = () => {
   const activeProduct = useAppSelector((state) => state.tabs.value)

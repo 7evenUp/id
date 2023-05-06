@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from "react"
 
-import { cn } from "../../lib/classNames"
+import { cn } from "@/lib/classNames"
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 

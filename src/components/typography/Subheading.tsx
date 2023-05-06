@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react"
 
-import { cn } from "../../lib/classNames"
+import { cn } from "@/lib/classNames"
 
 const Subheading: React.FC<HTMLAttributes<HTMLHeadingElement>> = ({
   children,

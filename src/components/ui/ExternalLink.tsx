@@ -2,7 +2,8 @@ import React, { AnchorHTMLAttributes } from "react"
 
 import { TbArrowUpRight, SiTelegram } from "react-icons/all"
 
-import { cn } from "../../lib/classNames"
+import { cn } from "@/lib/classNames"
+
 import { buttonVariants } from "./Button"
 
 interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {

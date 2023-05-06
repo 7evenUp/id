@@ -1,5 +1,5 @@
 import React from "react"
-import { ReactComponent as BearIcon } from "../assets/Bear.svg"
+import { ReactComponent as BearIcon } from "@/assets/Bear.svg"
 
 const Avatar = ({ children }: { children?: React.ReactNode }) => {
   return (

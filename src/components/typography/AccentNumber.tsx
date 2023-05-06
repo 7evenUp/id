@@ -1,7 +1,10 @@
 import React from "react"
-import { useAppSelector } from "../../redux/hooks"
-import { cn } from "../../lib/classNames"
-import { productToColor } from "../../utils/productToColor"
+
+import { cn } from "@/lib/classNames"
+
+import { useAppSelector } from "@/redux/hooks"
+
+import { productToColor } from "@/utils/productToColor"
 
 const AccentNumber = ({ children }: { children: React.ReactNode }) => {
   const activeProduct = useAppSelector((state) => state.tabs.value)

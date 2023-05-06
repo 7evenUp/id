@@ -1,8 +1,10 @@
 import ReferralStatsModal from "./modals/ReferralStatsModal"
+
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
-import Button from "./ui/Button"
+
 import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
+import Button from "./ui/Button"
 
 const Referral = () => {
   return (

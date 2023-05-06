@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "../../lib/classNames"
+import { cn } from "@/lib/classNames"
 
 export const buttonVariants = cva("transition-colors", {
   variants: {
