@@ -1,3 +1,5 @@
+import { HiOutlineArrowNarrowRight } from "react-icons/hi"
+
 import RowItem from "./RowItem"
 import TabHeader from "./TabHeader"
 
@@ -13,7 +15,11 @@ const PrimeTab = () => {
     <>
       <TabHeader>
         <Subheading>Prime</Subheading>
-        <a className="typography-btn-big dark:text-gray-5" href="#">
+        <a
+          className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
+          href="#"
+        >
+          <HiOutlineArrowNarrowRight />
           на сайт
         </a>
         <Button className="ml-auto">сохранить изменения</Button>
