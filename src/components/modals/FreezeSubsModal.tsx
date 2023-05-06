@@ -1,9 +1,9 @@
-import { DialogFooter, DialogHeader } from "../ui/Dialog"
+import { DialogContent, DialogFooter, DialogHeader } from "../ui/Dialog"
 import Button from "../ui/Button"
 
 const FreezeSubsModal = () => {
   return (
-    <>
+    <DialogContent className="pb-16 max-w-[700px]">
       <DialogHeader className="items-center mb-6">
         <div className="flex flex-col typography-text-1">
           <span className="flex items-center gap-2">
@@ -39,7 +39,7 @@ const FreezeSubsModal = () => {
       <DialogFooter>
         Обратите внимание, что заморозить подписку можно лишь один раз в году!
       </DialogFooter>
-    </>
+    </DialogContent>
   )
 }
 

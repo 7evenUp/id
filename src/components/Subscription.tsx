@@ -5,6 +5,7 @@ import RowItem from "./RowItem"
 
 import TxHistoryModal from "./modals/TxHistoryModal"
 import FreezeSubsModal from "./modals/FreezeSubsModal"
+import BalanceModal from "./modals/BalanceModal"
 
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
@@ -32,7 +33,9 @@ const Subscription = () => {
             <ModalTrigger content={<TxHistoryModal />}>
               <Button>история</Button>
             </ModalTrigger>
-            <Button>пополнить баланс</Button>
+            <ModalTrigger content={<BalanceModal />}>
+              <Button>пополнить баланс</Button>
+            </ModalTrigger>
           </div>
         </RowItem>
         <RowItem>

@@ -1,9 +1,9 @@
-import { DialogHeader, DialogTitle } from "../ui/Dialog"
+import { DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
 import Button from "../ui/Button"
 
 const TxHistoryModal = () => {
   return (
-    <>
+    <DialogContent>
       <DialogHeader>
         <DialogTitle>История транзакций</DialogTitle>
         <Button>выгрузить в pdf</Button>
@@ -77,7 +77,7 @@ const TxHistoryModal = () => {
           </tr>
         </tbody>
       </table>
-    </>
+    </DialogContent>
   )
 }
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { Dialog, DialogContent, DialogTrigger } from "./ui/Dialog"
+import { Dialog, DialogTrigger } from "./ui/Dialog"
 
 const ModalTrigger = ({
   children,
@@ -11,7 +11,7 @@ const ModalTrigger = ({
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent>{content}</DialogContent>
+      {content}
     </Dialog>
   )
 }

@@ -1,9 +1,9 @@
-import { DialogHeader, DialogTitle } from "../ui/Dialog"
+import { DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
 import RowItem from "../RowItem"
 
 const ReferralStatsModal = () => {
   return (
-    <>
+    <DialogContent className="max-w-[630px]">
       <DialogHeader>
         <DialogTitle>Статистика</DialogTitle>
       </DialogHeader>
@@ -35,7 +35,7 @@ const ReferralStatsModal = () => {
           <span className="typography-balance">$2.00</span>
         </RowItem>
       </div>
-    </>
+    </DialogContent>
   )
 }
 

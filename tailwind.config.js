@@ -23,6 +23,7 @@ export default {
         'gray-3': '#828282',
         'gray-4': '#BDBDBD',
         'gray-5': '#D1CDC9',
+        'gray-6': '#F2F2F2',
         success: '#20CD69',
         process: '#F59641',
         error: '#F14848',
