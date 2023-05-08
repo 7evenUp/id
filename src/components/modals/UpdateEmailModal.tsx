@@ -1,12 +1,34 @@
 import { useState } from "react"
-import Button from "../ui/Button"
+
+import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
+
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
+import Button from "../ui/Button"
 
 const UpdateEmailModal = () => {
   const [oldEmail, setOldEmail] = useState("")
   const [newEmail, setNewEmail] = useState("")
+  
+  const { data: userProfileData, error } = useUserProfileQuery()
+  const [updateEmail, { data: updatedData }] = useUpdateEmailMutation()
 
-  const onButtonClick = () => {}
+  const onButtonClick = () => {
+    if (userProfileData) {
+      updateEmail({
+        id: userProfileData.id,
+        username: userProfileData.username,
+        email: newEmail,
+      })
+    }
+  }
+
+  if (error) {
+    console.error("Error with fetching user profile data: ", error)
+  }
+
+  if (updatedData) {
+    console.log("New data: ", updatedData)
+  }
 
   return (
     <DialogContent className="max-w-[370px]">
@@ -26,7 +48,11 @@ const UpdateEmailModal = () => {
           value={newEmail}
           onChange={(evt) => setNewEmail(evt.currentTarget.value)}
         />
-        <Button className="w-fit mt-7" onClick={onButtonClick}>
+        <Button
+          className="w-fit mt-7"
+          onClick={onButtonClick}
+          disabled={!newEmail.length}
+        >
           подтвердить
         </Button>
       </div>

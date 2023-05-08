@@ -1,18 +1,25 @@
-import { useMeQuery, useUpdateNicknameMutation } from "@/redux/api/core"
-
-import RowItem from "./RowItem"
-
-import Subheading from "./typography/Subheading"
-import IconButton from "./ui/IconButton"
-
-import { MdEdit } from "react-icons/md"
 import { useRef } from "react"
 import { TbCheck } from "react-icons/tb"
 
+import {
+  useUserProfileQuery,
+  useUpdateNicknameMutation,
+} from "@/redux/api/core"
+
+import UpdateEmailModal from "./modals/UpdateEmailModal"
+
+import RowItem from "./RowItem"
+import EditButton from "./EditButton"
+import ModalTrigger from "./ModalTrigger"
+
+import IconButton from "./ui/IconButton"
+
+import Subheading from "./typography/Subheading"
+
 const Profile = () => {
   const textRef = useRef<HTMLInputElement>(null)
-  const { isLoading, data, error } = useMeQuery()
-  const [updateNickname, {data: dataMutation}] = useUpdateNicknameMutation()
+  const { isLoading, data, error } = useUserProfileQuery()
+  const [updateNickname, { data: dataMutation }] = useUpdateNicknameMutation()
 
   if (error) return <h2 className="text-5xl text-error">Error happened</h2>
 
@@ -20,7 +27,25 @@ const Profile = () => {
     return <h2 className="text-5xl text-process">Data loading...</h2>
 
   if (dataMutation) {
-    console.log('dataMutation: ', dataMutation)
+    console.log("dataMutation: ", dataMutation)
+  }
+
+  const changeNickname = () => {
+    if (data && textRef.current) {
+      if (data.username === textRef.current.value) {
+        console.log("Error, apply changes!")
+      } else {
+        console.log("New username!", {
+          ...data,
+          username: textRef.current.value,
+        })
+        updateNickname({
+          id: data.id,
+          username: textRef.current.value,
+        })
+        console.log("Value: ", textRef.current?.value)
+      }
+    }
   }
 
   return (
@@ -34,31 +59,29 @@ const Profile = () => {
             defaultValue={data ? data.username : "Loading..."}
             ref={textRef}
           />
-          <IconButton
-            className="opacity-0 group-hover:opacity-100 absolute right-0 translate-x-6 bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-            onClick={() => {
-              textRef.current?.focus()
-            }}
-          >
-            <MdEdit className="w-3 h-3 fill-gray-5" />
-          </IconButton>
-          <IconButton
-            className="opacity-0 group-hover:opacity-100 absolute right-0 translate-x-12 bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-            onClick={() => {
-              if (data && textRef.current) {
-                const newObj = {...data, username: textRef.current.value}
-                // console.log(newObj)
-                updateNickname(newObj)
-                // console.log('Value: ', textRef.current?.value)
-              }
-            }}
-          >
-            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-          </IconButton>
+          <div className="absolute right-0 translate-x-[60px] w-[60px] h-full flex items-center gap-2.5 pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+            <EditButton
+              className=""
+              onClick={() => {
+                textRef.current?.focus()
+              }}
+            />
+            <IconButton
+              className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
+              onClick={changeNickname}
+            >
+              <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
+            </IconButton>
+          </div>
         </RowItem>
-        <RowItem>
+        <RowItem className="relative group">
           <span>почта</span>
           <span>{data?.email}</span>
+          <div className="absolute right-0 translate-x-[60px] w-[60px] h-full flex items-center gap-2.5 pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+            <ModalTrigger content={<UpdateEmailModal />}>
+              <EditButton />
+            </ModalTrigger>
+          </div>
         </RowItem>
         <RowItem>
           <span>кошелёк</span>
