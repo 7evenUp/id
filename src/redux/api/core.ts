@@ -1,7 +1,7 @@
 import { User } from '@/types/types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0MzE4OTc0LCJpYXQiOjE2ODM0NTQ5NzQsImp0aSI6IjcwYmU0M2NlODM3NDQ0NzNhNjFkN2JiYmVlMGQwMDU2IiwidXNlcl9pZCI6NH0.dacFcwWI0liZvnFh8O3q07WQNYaBCKpbocahd8qmaDE'
+const accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NDEzNjg2LCJpYXQiOjE2ODM1NDk2ODYsImp0aSI6ImYzODcwNjgzODUwNTQ1NThhYzE3ODcwZDJmMmMxZjVhIiwidXNlcl9pZCI6NH0.plgg6TjknEbePrMJJRms8F3HhdtTzPlERhdSDnsstpo'
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -16,8 +16,15 @@ export const api = createApi({
         url: 'users/me',
         method: 'GET'
       })
+    }),
+    updateNickname: build.mutation<User, User>({
+      query: ({id, ...patch}) => ({
+        url: `users/${id}/`,
+        method: 'PATCH',
+        body: patch
+      })
     })
   }),
 })
 
-export const { useMeQuery } = api
+export const { useMeQuery, useUpdateNicknameMutation } = api
