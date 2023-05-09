@@ -9,7 +9,7 @@ const SwitchWithText = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <RadixSwitch.Root
     className={cn(
-      "group relative inline-flex h-[18px] w-[74px] shrink-0 cursor-pointer items-center rounded-full border border-gray-1 dark:border-gray-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "group relative inline-flex h-[18px] w-[74px] shrink-0 cursor-pointer items-center rounded-full border border-gray-4 dark:border-gray-3 data-[state=checked]:border-gray-1 dark:data-[state=checked]:border-gray-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       className
     )}
     {...props}
