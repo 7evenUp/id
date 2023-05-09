@@ -1,6 +1,7 @@
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 
 import ThemeToggle from "./ThemeToggle"
+import LanguageToggle from "./LanguageToggle"
 
 const Header = () => {
   return (
@@ -13,7 +14,7 @@ const Header = () => {
         Назад к сайту
       </a>
       <div className="flex items-center gap-3">
-        <span>изменить язык</span>
+        <LanguageToggle />
         <ThemeToggle />
       </div>
     </header>
