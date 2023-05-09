@@ -9,3 +9,11 @@ export interface User {
   email: string
   file?: string
 }
+
+export interface Transaction {
+  description: string
+  date: string
+  price: string
+  status: 'в процессе' | 'успешно' | 'отклонено'
+  id: string
+}

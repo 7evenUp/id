@@ -3,8 +3,8 @@ import Button from "../ui/Button"
 
 const FreezeSubsModal = () => {
   return (
-    <DialogContent className="pb-16 max-w-[700px]">
-      <DialogHeader className="items-center mb-6">
+    <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px]">
+      <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
         <div className="flex flex-col typography-text-1">
           <span className="flex items-center gap-2">
             Статус подписки:{" "}
@@ -17,7 +17,7 @@ const FreezeSubsModal = () => {
             <span className="typography-balance">есть</span>
           </span>
         </div>
-        <Button>подтвердить заморозку</Button>
+        <Button className="w-fit">подтвердить заморозку</Button>
       </DialogHeader>
       <div>
         <h3 className="typography-semi-head mb-2.5">Заморозка подписки</h3>

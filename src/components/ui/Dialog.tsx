@@ -14,7 +14,7 @@ const DialogPortal = ({
   ...props
 }: DialogPrimitive.DialogPortalProps) => (
   <DialogPrimitive.Portal className={cn(className)} {...props}>
-    <div className="fixed inset-0 z-50 flex items-start justify-center sm:items-center">
+    <div className="fixed inset-0 z-50 flex justify-center items-center">
       {children}
     </div>
   </DialogPrimitive.Portal>
@@ -28,7 +28,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-all duration-100",
+      "fixed inset-0 z-50 backdrop-blur-sm transition-all duration-100",
       className
     )}
     {...props}
@@ -45,13 +45,13 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed z-50 grid w-full gap-4 rounded-xl border border-gray-1 dark:border-gray-3 bg-white dark:bg-gray-1 p-10 shadow-lg max-w-[900px] font-montserrat text-gray-1 dark:text-gray-4",
+        "grid gap-4 fixed z-50 w-11/12 sm:w-fit max-w-[900px] p-4 sm:p-10 pt-10 rounded-xl shadow-lg font-montserrat border border-gray-1 dark:border-gray-3 bg-white dark:bg-gray-1 text-gray-1 dark:text-gray-4",
         className
       )}
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute border border-gray-1 dark:border-white dark:text-white right-0 top-0 translate-x-9 rounded-full opacity-70 transition-opacity hover:opacity-100">
+      <DialogPrimitive.Close className="absolute border border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-70 transition-opacity hover:opacity-100">
         <IoCloseOutline className="h-[26px] w-[26px]" />
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
@@ -73,7 +73,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "bg-res-bot-blue rounded-b-xl absolute left-0 bottom-0 w-full typography-text-1 text-white px-10 py-1.5",
+      "bg-res-bot-blue rounded-b-xl absolute left-0 bottom-0 w-full typography-text-1 text-white px-4 sm:px-10 py-1.5",
       className
     )}
     {...props}

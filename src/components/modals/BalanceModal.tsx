@@ -8,13 +8,13 @@ const BalanceModal = () => {
   const [amount, setAmount] = useState("")
 
   return (
-    <DialogContent className="max-w-[710px]">
+    <DialogContent className="lg:max-w-[710px]">
       <div>
-        <div className="flex justify-between items-end bg-gray-6 dark:bg-gray-2 rounded-xl p-4 mb-6">
+        <div className="flex justify-between items-baseline gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6">
           <span className="typography-text-0 text-gray-3 dark:text-gray-4">
             текущий баланс счёта
           </span>
-          <span className="font-semibold text-[54px] dark:text-gray-5">
+          <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] dark:text-gray-5">
             $ 100
           </span>
         </div>
