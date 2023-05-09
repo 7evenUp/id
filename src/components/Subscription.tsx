@@ -25,11 +25,11 @@ const Subscription = () => {
         </ModalTrigger>
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
-        <RowItem>
-          <span>
+        <RowItem className="items-start">
+          <span className="flex-shrink-0">
             мой баланс: <AccentNumber>$100</AccentNumber>
           </span>
-          <div className="flex gap-3">
+          <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end">
             <ModalTrigger content={<TxHistoryModal />}>
               <Button>история</Button>
             </ModalTrigger>
@@ -38,11 +38,11 @@ const Subscription = () => {
             </ModalTrigger>
           </div>
         </RowItem>
-        <RowItem>
-          <span className="typography-text-0 dark:text-gray-4">
+        <RowItem className="gap-6">
+          <span className="typography-text-0 dark:text-gray-4 w-fit block">
             дней до конца подписки: <AccentNumber>13</AccentNumber>
           </span>
-          <Button>продлить подписку</Button>
+          <Button>продлить</Button>
         </RowItem>
       </div>
     </div>

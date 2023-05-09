@@ -13,11 +13,11 @@ const Referral = () => {
     <div>
       <Subheading className="mb-4">Реферальная система</Subheading>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
-        <RowItem>
-          <span>
+        <RowItem className="items-start">
+          <span className="w-full xl:w-auto">
             реферальная система: <AccentNumber>15%</AccentNumber>
           </span>
-          <div className="flex gap-3">
+          <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink">
             <Button>промокод</Button>
             <Button>ссылка</Button>
           </div>

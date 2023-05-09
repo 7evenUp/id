@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        mobile: '480px',
+        xlg: '1080px'
+      },
       backgroundImage: {
         'background-texture': "url('/images/background-texture.png')",
         'background-texture-dark': "url('/images/background-texture-dark.png')",

@@ -13,17 +13,19 @@ const ResearchBotTab = () => {
   return (
     <>
       <TabHeader>
-        <Subheading>Research Bot</Subheading>
-        <a
-          className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
-          href="#"
-        >
-          <HiOutlineArrowNarrowRight />
-          на сайт
-        </a>
-        <Button className="ml-auto">сохранить изменения</Button>
+        <div className="flex gap-5">
+          <Subheading>Research Bot</Subheading>
+          <a
+            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
+            href="#"
+          >
+            <HiOutlineArrowNarrowRight />
+            на сайт
+          </a>
+        </div>
+        <Button className="sm:ml-auto w-fit">сохранить изменения</Button>
       </TabHeader>
-      <RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Уведомления в браузере</span>
         <div className="flex gap-10 items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
@@ -36,7 +38,7 @@ const ResearchBotTab = () => {
           </div>
         </div>
       </RowItem>
-      <RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Отображение режимов</span>
         <div className="flex gap-10 items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
@@ -49,10 +51,10 @@ const ResearchBotTab = () => {
           </div>
         </div>
       </RowItem>
-      <RowItem className="items-baseline">
+      <RowItem className="flex-col sm:flex-row lg:flex-col xlg:flex-row gap-3 items-baseline">
         <span>Автопереводчик</span>
-        <div className="flex flex-col gap-[5px]">
-          <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col gap-[5px] sm:self-end">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span>Research</span>
             <div className="w-[318px] gap-3 flex items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
               <div className="flex-1 flex items-center gap-2">
@@ -65,7 +67,7 @@ const ResearchBotTab = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between gap-2 dark:text-gray-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 dark:text-gray-4">
             <span>Агрегатор</span>
             <div className="w-[318px] gap-3 flex items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
               <div className="flex-1 flex items-center gap-2">
@@ -80,11 +82,11 @@ const ResearchBotTab = () => {
           </div>
         </div>
       </RowItem>
-      <RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Размер текста в новостях</span>
         <span className="text-xs text-gray-2">заглушка для слайдера</span>
       </RowItem>
-      <RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Выбор фона</span>
         <span className="text-xs text-gray-2">заглушка для картинок</span>
       </RowItem>

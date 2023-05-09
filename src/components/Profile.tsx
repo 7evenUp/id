@@ -59,7 +59,7 @@ const Profile = () => {
             defaultValue={data ? data.username : "Loading..."}
             ref={textRef}
           />
-          <div className="absolute right-0 translate-x-[60px] w-[60px] h-full flex items-center gap-2.5 pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[48px] xl:w-[48px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
             <EditButton
               className=""
               onClick={() => {
@@ -77,7 +77,7 @@ const Profile = () => {
         <RowItem className="relative group">
           <span>почта</span>
           <span>{data?.email}</span>
-          <div className="absolute right-0 translate-x-[60px] w-[60px] h-full flex items-center gap-2.5 pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[48px] xl:w-[48px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
             <ModalTrigger content={<UpdateEmailModal />}>
               <EditButton />
             </ModalTrigger>
@@ -87,7 +87,7 @@ const Profile = () => {
           <span>кошелёк</span>
           <span>{data ? data.wallet : "+"}</span>
         </RowItem>
-        <div className="flex justify-between items-center gap-10">
+        <div className="flex flex-col xl:flex-row xl:justify-between xl:items-center xl:gap-10">
           <RowItem className="flex-1">
             <span>discord</span>
             <span>{data ? data.discordUsername : "+"}</span>

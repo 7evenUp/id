@@ -2,6 +2,7 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 
 import ThemeToggle from "./ThemeToggle"
 import LanguageToggle from "./LanguageToggle"
+import AvatarMobile from "./AvatarMobile"
 
 const Header = () => {
   return (
@@ -13,9 +14,18 @@ const Header = () => {
         <HiOutlineArrowNarrowLeft />
         Назад к сайту
       </a>
-      <div className="flex items-center gap-3">
+      
+      <div className="hidden sm:flex items-center gap-3">
         <LanguageToggle />
         <ThemeToggle />
+      </div>
+
+      <div className="sm:hidden flex gap-6">
+        <div className="flex items-center gap-3">
+          <LanguageToggle />
+          <ThemeToggle />
+        </div>
+        <AvatarMobile />
       </div>
     </header>
   )

@@ -5,9 +5,9 @@ import Products from "./components/Products"
 const App = () => {
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
-      <div className="px-9 py-8">
+      <div className="px-7 xl:px-9 py-8">
         <Header />
-        <main className="flex justify-between gap-20">
+        <main className="flex flex-col lg:flex-row justify-between gap-20">
           <PersonalAccount />
           <Products />
         </main>
