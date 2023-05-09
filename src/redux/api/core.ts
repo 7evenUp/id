@@ -33,6 +33,14 @@ export const api = createApi({
       }),
       invalidatesTags: ["UserProfile"],
     }),
+    updateWallet: build.mutation<User, Pick<User, "id" | "username" | "wallet">>({
+      query: ({ id, ...patch }) => ({
+        url: `users/${id}/`,
+        method: "PATCH",
+        body: patch,
+      }),
+      invalidatesTags: ["UserProfile"],
+    }),
   }),
 })
 
@@ -40,4 +48,5 @@ export const {
   useUserProfileQuery,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
+  useUpdateWalletMutation
 } = api
