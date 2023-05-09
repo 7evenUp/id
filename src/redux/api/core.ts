@@ -2,7 +2,7 @@ import { User } from "@/types/types"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 const accessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg0NDEzNjg2LCJpYXQiOjE2ODM1NDk2ODYsImp0aSI6ImYzODcwNjgzODUwNTQ1NThhYzE3ODcwZDJmMmMxZjVhIiwidXNlcl9pZCI6NH0.plgg6TjknEbePrMJJRms8F3HhdtTzPlERhdSDnsstpo"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE1MTYxOTU3LCJpYXQiOjE2ODM2MjU5NTcsImp0aSI6IjE5ZmU2NjY0MjcxMTRiY2NiODhhMjg2ZTA4ODI0YzIxIiwidXNlcl9pZCI6NH0.39-VO5mxxw4hflQCQpfEaQMBRdyrBNm9MsM6-zDaCKY"
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -15,7 +15,7 @@ export const api = createApi({
   endpoints: (build) => ({
     userProfile: build.query<User, void>({
       query: () => ({
-        url: "users/me",
+        url: "users/profile",
         method: "GET",
       }),
       providesTags: ["UserProfile"],
