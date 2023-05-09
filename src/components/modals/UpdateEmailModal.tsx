@@ -4,11 +4,12 @@ import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
 
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
 import Button from "../ui/Button"
+import { DialogClose } from "@radix-ui/react-dialog"
 
 const UpdateEmailModal = () => {
   const [oldEmail, setOldEmail] = useState("")
   const [newEmail, setNewEmail] = useState("")
-  
+
   const { data: userProfileData, error } = useUserProfileQuery()
   const [updateEmail, { data: updatedData }] = useUpdateEmailMutation()
 
@@ -48,13 +49,15 @@ const UpdateEmailModal = () => {
           value={newEmail}
           onChange={(evt) => setNewEmail(evt.currentTarget.value)}
         />
-        <Button
-          className="w-fit mt-7"
-          onClick={onButtonClick}
-          disabled={!newEmail.length}
-        >
-          подтвердить
-        </Button>
+        <DialogClose asChild>
+          <Button
+            className="w-fit mt-7"
+            onClick={onButtonClick}
+            disabled={!newEmail.length}
+          >
+            подтвердить
+          </Button>
+        </DialogClose>
       </div>
     </DialogContent>
   )
