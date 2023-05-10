@@ -26,7 +26,7 @@ const PrimeTab = () => {
         </div>
         <Button className="sm:ml-auto w-fit">сохранить изменения</Button>
       </TabHeader>
-      <RowItem className="items-baseline flex-col sm:flex-row sm:items-center gap-2">
+      <RowItem className="items-baseline flex-col sm:flex-row gap-2">
         <span>Каналы и чаты Prime</span>
         <div className="flex items-center sm:justify-end gap-[10px] flex-wrap max-w-[360px]">
           <ExternalLink withTgIcon href="#">

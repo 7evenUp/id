@@ -8,6 +8,7 @@ export default {
   theme: {
     extend: {
       screens: {
+        "mobile-sm": '380px',
         mobile: '480px',
         xlg: '1080px'
       },
