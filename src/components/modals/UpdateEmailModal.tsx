@@ -1,10 +1,10 @@
 import { useState } from "react"
+import { DialogClose } from "@radix-ui/react-dialog"
 
 import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
 
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
 import Button from "../ui/Button"
-import { DialogClose } from "@radix-ui/react-dialog"
 
 const UpdateEmailModal = () => {
   const [oldEmail, setOldEmail] = useState("")
@@ -32,7 +32,7 @@ const UpdateEmailModal = () => {
   }
 
   return (
-    <DialogContent className="max-w-[370px]">
+    <DialogContent className="mobile:w-[370px] sm:w-[370px]">
       <DialogHeader>
         <DialogTitle>Изменить почту</DialogTitle>
       </DialogHeader>

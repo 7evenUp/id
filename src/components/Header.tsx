@@ -14,7 +14,7 @@ const Header = () => {
         <HiOutlineArrowNarrowLeft />
         Назад к сайту
       </a>
-      
+
       <div className="hidden sm:flex items-center gap-3">
         <LanguageToggle />
         <ThemeToggle />

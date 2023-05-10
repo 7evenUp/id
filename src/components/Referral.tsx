@@ -1,7 +1,7 @@
+import ReferralStatsModal from "./modals/ReferralStatsModal"
+
 import ModalTrigger from "./ModalTrigger"
 import RowItem from "./RowItem"
-
-import ReferralStatsModal from "./modals/ReferralStatsModal"
 
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"

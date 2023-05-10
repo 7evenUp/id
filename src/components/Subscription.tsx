@@ -1,11 +1,11 @@
 import { BsSnow } from "react-icons/bs"
 
-import ModalTrigger from "./ModalTrigger"
-import RowItem from "./RowItem"
-
 import TxHistoryModal from "./modals/TxHistoryModal"
 import FreezeSubsModal from "./modals/FreezeSubsModal"
 import BalanceModal from "./modals/BalanceModal"
+
+import ModalTrigger from "./ModalTrigger"
+import RowItem from "./RowItem"
 
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"

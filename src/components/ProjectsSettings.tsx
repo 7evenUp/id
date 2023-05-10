@@ -28,7 +28,9 @@ const ProjectsSettings = () => {
       </thead>
       <tbody className="flex flex-col divide-y divide-gray-4 dark:divide-gray-2">
         <tr className="py-3 flex gap-6">
-          <td className="w-[60px] sm:w-[100px] xlg:w-[130px] flex-shrink-0">AirNFTs</td>
+          <td className="w-[60px] sm:w-[100px] xlg:w-[130px] flex-shrink-0">
+            AirNFTs
+          </td>
           <td className="w-[65px] flex flex-col gap-1 sm:hidden">
             <Switch />
             <span>все</span>
@@ -45,7 +47,9 @@ const ProjectsSettings = () => {
           </td>
         </tr>
         <tr className="py-3 flex gap-6">
-          <td className="w-[60px] sm:w-[100px] xlg:w-[130px] flex-shrink-0">Binance</td>
+          <td className="w-[60px] sm:w-[100px] xlg:w-[130px] flex-shrink-0">
+            Binance
+          </td>
           <td className="w-[65px] flex flex-col gap-1 sm:hidden">
             <Switch />
             <span>важные</span>

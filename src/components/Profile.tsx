@@ -78,7 +78,7 @@ const Profile = () => {
             defaultValue={userProfile ? userProfile.username : "Loading..."}
             ref={nickNameRef}
           />
-          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[48px] xl:w-[48px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
             <EditButton
               onClick={() => {
                 nickNameRef.current?.focus()
@@ -95,7 +95,7 @@ const Profile = () => {
         <RowItem className="relative group">
           <span>почта</span>
           <span>{userProfile?.email}</span>
-          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[48px] xl:w-[48px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
             <ModalTrigger content={<UpdateEmailModal />}>
               <EditButton />
             </ModalTrigger>
@@ -108,7 +108,7 @@ const Profile = () => {
             defaultValue={userProfile && userProfile.wallet ? userProfile.wallet : "+"}
             ref={walletRef}
           />
-          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[48px] xl:w-[48px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+          <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
             <EditButton
               onClick={() => {
                 walletRef.current?.focus()

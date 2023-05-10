@@ -1,7 +1,8 @@
 import React, { ButtonHTMLAttributes } from "react"
 
-import { cn } from "@/lib/classNames"
 import { buttonVariants } from "./Button"
+
+import { cn } from "@/lib/classNames"
 
 const Chip = React.forwardRef<
   HTMLButtonElement,

@@ -1,5 +1,6 @@
-import { cn } from "@/lib/classNames"
 import React, { HTMLAttributes } from "react"
+
+import { cn } from "@/lib/classNames"
 
 const RowItem: React.FC<HTMLAttributes<HTMLDivElement>> = ({
   children,
