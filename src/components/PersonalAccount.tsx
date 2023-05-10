@@ -1,5 +1,5 @@
 import Avatar from "./Avatar"
-import Profile from "./Profile"
+import Profile from "./profile/Profile"
 import Subscription from "./Subscription"
 import Referral from "./Referral"
 
