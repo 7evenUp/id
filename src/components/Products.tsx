@@ -1,4 +1,6 @@
-import { ReactComponent as ResearchBotIcon } from "@/assets/Res-bot.svg"
+import { ReactComponent as ResearchBotActiveIcon } from "@/assets/ResBot_Active.svg"
+import { ReactComponent as ResearchBotIcon } from "@/assets/ResBot.svg"
+import { ReactComponent as PrimeActiveIcon } from "@/assets/Prime_Active.svg"
 import { ReactComponent as PrimeIcon } from "@/assets/Prime.svg"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/Tabs"
@@ -25,10 +27,12 @@ const Products = () => {
     >
       <TabsList>
         <TabsTrigger value={TABS_VALUES.RESEARCH_BOT}>
-          <ResearchBotIcon />
+          <ResearchBotActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
+          <ResearchBotIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
         </TabsTrigger>
         <TabsTrigger value={TABS_VALUES.PRIME}>
-          <PrimeIcon />
+          <PrimeActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
+          <PrimeIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
         </TabsTrigger>
       </TabsList>
       <TabsContent value={TABS_VALUES.RESEARCH_BOT}>
