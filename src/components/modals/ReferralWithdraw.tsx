@@ -9,8 +9,9 @@ import Input from "../ui/Input"
 type WithdrawType = "USDC (ERC-20)" | "USDT (ERC-20)" | "USDT (TRC-20)"
 
 const ReferralWithdraw = () => {
-  const [m1Opened, setM1Opened] = useState(false)
-  const [m2Opened, setM2Opened] = useState(false)
+  const [mainModalOpened, setMainModalOpened] = useState(false)
+  const [withdrawToWalletModalOpened, setWithdrawToWalletModalOpened] =
+    useState(false)
   const [wallet, setWallet] = useState("")
   const [withdrawAmount, setWithdrawAmount] = useState("")
   const [withdrawType, setWithdrawType] =
@@ -18,8 +19,9 @@ const ReferralWithdraw = () => {
 
   return (
     <>
-      <Button onClick={() => setM1Opened(true)}>вывести</Button>
-      <Dialog open={m1Opened} onOpenChange={setM1Opened}>
+      <Button onClick={() => setMainModalOpened(true)}>вывести</Button>
+      
+      <Dialog open={mainModalOpened} onOpenChange={setMainModalOpened}>
         <DialogContent className="max-w-[540px]">
           <DialogHeader className="mb-2 mobile:mb-0 sm:mb-6">
             <DialogTitle>Вывести средства</DialogTitle>
@@ -29,8 +31,8 @@ const ReferralWithdraw = () => {
             <Button
               className="w-fit"
               onClick={() => {
-                setM1Opened(false)
-                setM2Opened(true)
+                setMainModalOpened(false)
+                setWithdrawToWalletModalOpened(true)
               }}
             >
               на кошелёк
@@ -39,14 +41,17 @@ const ReferralWithdraw = () => {
           </div>
         </DialogContent>
       </Dialog>
-      <Dialog open={m2Opened} onOpenChange={setM2Opened}>
+      <Dialog
+        open={withdrawToWalletModalOpened}
+        onOpenChange={setWithdrawToWalletModalOpened}
+      >
         <DialogContent className="max-w-[550px]">
           <DialogHeader>
             <button
               className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
               onClick={() => {
-                setM1Opened(true)
-                setM2Opened(false)
+                setMainModalOpened(true)
+                setWithdrawToWalletModalOpened(false)
               }}
             >
               <HiOutlineArrowNarrowLeft /> назад
