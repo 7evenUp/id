@@ -37,7 +37,7 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
     <RowItem className="relative group">
       <span>discord</span>
       <input
-        className="peer bg-transparent outline-none text-right"
+        className="peer bg-transparent outline-none text-right w-full"
         defaultValue={discordUsername ? discordUsername : "+"}
         ref={inputRef}
       />

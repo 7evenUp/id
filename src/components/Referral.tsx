@@ -2,6 +2,7 @@ import { FaInfo } from "react-icons/fa"
 
 import ReferralStatsModal from "./modals/ReferralStatsModal"
 import ReferralInfoModal from "./modals/ReferralInfoModal"
+import ReferralWithdraw from "./modals/ReferralWithdraw"
 
 import ModalTrigger from "./ModalTrigger"
 import RowItem from "./RowItem"
@@ -9,8 +10,8 @@ import RowItem from "./RowItem"
 import AccentNumber from "./typography/AccentNumber"
 import Subheading from "./typography/Subheading"
 
-import Button from "./ui/Button"
 import IconButton from "./ui/IconButton"
+import Button from "./ui/Button"
 
 const Referral = () => {
   return (
@@ -37,7 +38,7 @@ const Referral = () => {
           <span className="typography-text-0 dark:text-gray-4">
             реферальный баланс: <AccentNumber>$250</AccentNumber>
           </span>
-          <Button>вывести</Button>
+          <ReferralWithdraw />
         </RowItem>
         <RowItem>
           <span className="typography-text-0 dark:text-gray-4">статистика</span>

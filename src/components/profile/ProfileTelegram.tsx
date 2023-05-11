@@ -38,7 +38,7 @@ const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
     <RowItem className="relative group">
       <span>telegram</span>
       <input
-        className="peer bg-transparent outline-none text-right"
+        className="peer bg-transparent outline-none text-right w-full"
         defaultValue={telegramId ? telegramId : "+"}
         ref={inputRef}
       />
