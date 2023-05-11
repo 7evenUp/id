@@ -4,6 +4,7 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
 import Button from "../ui/Button"
 import Chip from "../ui/Chip"
+import Input from "../ui/Input"
 
 type WithdrawType = "USDC (ERC-20)" | "USDT (ERC-20)" | "USDT (TRC-20)"
 
@@ -52,8 +53,8 @@ const ReferralWithdraw = () => {
             </button>
           </DialogHeader>
           <div className="flex flex-col">
-            <input
-              className="outline-none bg-transparent border-b border-gray-1 dark:border-gray-3 py-1 dark:placeholder:text-gray-3 mb-5 typography-text-1 w-[260px]"
+            <Input
+              className="mb-5 w-[260px]"
               placeholder="Адрес кошелька"
               value={wallet}
               onChange={(evt) => setWallet(evt.currentTarget.value)}
@@ -71,8 +72,8 @@ const ReferralWithdraw = () => {
             </div>
             <div className="mb-5">
               <div className="relative w-[260px]">
-                <input
-                  className="outline-none bg-transparent border-b border-gray-1 dark:border-gray-3 py-1 dark:placeholder:text-gray-3 mb-2 typography-text-1 w-[260px]"
+                <Input
+                  className="mb-2 w-[260px]"
                   placeholder="Сумма вывода"
                   value={withdrawAmount}
                   onChange={(evt) => setWithdrawAmount(evt.currentTarget.value)}

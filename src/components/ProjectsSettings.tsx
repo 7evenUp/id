@@ -1,3 +1,4 @@
+import Input from "./ui/Input"
 import Switch from "./ui/Switch"
 import SwitchWithText from "./ui/SwitchWithText"
 
@@ -7,10 +8,7 @@ const ProjectsSettings = () => {
       <thead className="mb-6 block">
         <tr className="flex items-baseline gap-6 text-left">
           <th className="w-[60px] sm:w-[100px] xlg:w-[130px]">
-            <input
-              className="w-full xlg:w-auto outline-none bg-transparent border-b border-gray-1 dark:border-gray-4 py-1 dark:placeholder:text-gray-3"
-              placeholder="поиск"
-            />
+            <Input placeholder="поиск" className="w-full xlg:w-auto" />
           </th>
           <th className="w-[65px] typography-text-1 text-gray-3 sm:hidden">
             проекты/подписки

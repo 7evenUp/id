@@ -5,6 +5,7 @@ import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
 
 import { DialogContent, DialogHeader, DialogTitle } from "../ui/Dialog"
 import Button from "../ui/Button"
+import Input from "../ui/Input"
 
 const UpdateEmailModal = () => {
   const [oldEmail, setOldEmail] = useState("")
@@ -37,18 +38,16 @@ const UpdateEmailModal = () => {
         <DialogTitle>Изменить почту</DialogTitle>
       </DialogHeader>
       <div className="flex flex-col gap-[18px]">
-        <input
-          className="outline-none bg-transparent border-b border-gray-1 dark:border-gray-4 dark:placeholder:text-gray-3 py-1"
-          placeholder="старая почта"
-          value={oldEmail}
-          onChange={(evt) => setOldEmail(evt.currentTarget.value)}
-        />
-        <input
-          className="outline-none bg-transparent border-b border-gray-1 dark:border-gray-4 dark:placeholder:text-gray-3 py-1"
-          placeholder="новая почта"
-          value={newEmail}
-          onChange={(evt) => setNewEmail(evt.currentTarget.value)}
-        />
+        <Input
+        placeholder="Старая почта"
+        value={oldEmail}
+        onChange={(evt) => setOldEmail(evt.currentTarget.value)}
+         />
+        <Input
+        placeholder="Новая почта"
+        value={newEmail}
+        onChange={(evt) => setNewEmail(evt.currentTarget.value)}
+         />
         <DialogClose asChild>
           <Button
             className="w-fit mt-7"

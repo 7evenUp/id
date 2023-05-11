@@ -3,6 +3,7 @@ import { useState } from "react"
 import { DialogContent } from "../ui/Dialog"
 import Button from "../ui/Button"
 import Chip from "../ui/Chip"
+import Input from "../ui/Input"
 
 const BalanceModal = () => {
   const [amount, setAmount] = useState("")
@@ -22,8 +23,8 @@ const BalanceModal = () => {
           <span>Выберите способ пополнения:</span>
           <span>банковская карта</span>
         </div>
-        <input
-          className="outline-none bg-transparent border-b border-gray-1 dark:border-gray-4 py-1 dark:placeholder:text-gray-2 mb-4 typography-text-1"
+        <Input
+          className="mb-4"
           placeholder="Сумма пополнения"
           value={amount}
           onChange={(evt) => setAmount(evt.currentTarget.value)}
