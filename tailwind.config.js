@@ -10,6 +10,7 @@ export default {
       screens: {
         "mobile-sm": '380px',
         mobile: '480px',
+        xmd: '900px',
         xlg: '1080px'
       },
       backgroundImage: {
@@ -40,6 +41,10 @@ export default {
         'university-velvet': '#8A67F3',
         'calendar-red': '#FD4A55',
         'prime-pink': '#F076E4',
+
+        // linear gradients
+        corral: '#FF6275',
+        purple: '#CC5DA7'
       }
     },
   },
