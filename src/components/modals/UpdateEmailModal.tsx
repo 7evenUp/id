@@ -38,19 +38,39 @@ const UpdateEmailModal = () => {
         <DialogTitle>Изменить почту</DialogTitle>
       </DialogHeader>
       <div className="flex flex-col gap-[18px]">
-        <Input
-        placeholder="Старая почта"
-        value={oldEmail}
-        onChange={(evt) => setOldEmail(evt.currentTarget.value)}
-         />
-        <Input
-        placeholder="Новая почта"
-        value={newEmail}
-        onChange={(evt) => setNewEmail(evt.currentTarget.value)}
-         />
+        <div className="group flex flex-col gap-1">
+          <label
+            htmlFor="oldEmail"
+            className="typography-text-1 text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5"
+          >
+            Старая почта
+          </label>
+          <Input
+            id="oldEmail"
+            type="email"
+            placeholder="Введите вашу старую почту"
+            value={oldEmail}
+            onChange={(evt) => setOldEmail(evt.currentTarget.value)}
+          />
+        </div>
+        <div className="group flex flex-col gap-1">
+          <label
+            htmlFor="newEmail"
+            className="typography-text-1 text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5"
+          >
+            Новая почта
+          </label>
+          <Input
+            id="newEmail"
+            type="email"
+            placeholder="Введите вашу новую почту"
+            value={newEmail}
+            onChange={(evt) => setNewEmail(evt.currentTarget.value)}
+          />
+        </div>
         <DialogClose asChild>
           <Button
-            className="w-fit mt-7"
+            className="w-fit mt-2"
             onClick={onButtonClick}
             disabled={!newEmail.length}
           >
