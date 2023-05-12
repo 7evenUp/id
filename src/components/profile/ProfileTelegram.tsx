@@ -15,7 +15,7 @@ const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
   const [updateTelegram, { data: telegramMutation }] =
     useUpdateTelegramMutation()
 
-  const changeTelegram = () => {
+  const onSubmit = () => {
     if (inputRef.current) {
       if (telegramId === parseInt(inputRef.current.value)) {
         console.log("Error, apply some changes!")
@@ -50,7 +50,7 @@ const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
         />
         <IconButton
           className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-          onClick={changeTelegram}
+          onClick={onSubmit}
         >
           <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
         </IconButton>

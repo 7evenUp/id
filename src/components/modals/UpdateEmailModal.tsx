@@ -14,7 +14,7 @@ const UpdateEmailModal = () => {
   const { data: userProfileData, error } = useUserProfileQuery()
   const [updateEmail, { data: updatedData }] = useUpdateEmailMutation()
 
-  const onButtonClick = () => {
+  const onSubmit = () => {
     if (userProfileData) {
       updateEmail({
         id: userProfileData.id,
@@ -71,7 +71,7 @@ const UpdateEmailModal = () => {
         <DialogClose asChild>
           <Button
             className="w-fit mt-2"
-            onClick={onButtonClick}
+            onClick={onSubmit}
             disabled={!newEmail.length}
           >
             подтвердить

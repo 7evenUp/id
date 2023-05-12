@@ -3,7 +3,7 @@ import { BsSnow } from "react-icons/bs"
 import TxHistoryModal from "./modals/TxHistoryModal"
 import FreezeSubsModal from "./modals/FreezeSubsModal"
 import BalanceModal from "./modals/BalanceModal"
-import SubscriptionExtend from "./modals/subscription/SubscriptionExtend"
+import SubscriptionMainModal from "./modals/subscription"
 
 import ModalTrigger from "./ModalTrigger"
 import RowItem from "./RowItem"
@@ -48,7 +48,7 @@ const Subscription = () => {
           <span className="typography-text-0 dark:text-gray-4 w-fit block">
             дней до конца подписки: <AccentNumber>13</AccentNumber>
           </span>
-          <SubscriptionExtend />
+          <SubscriptionMainModal />
         </RowItem>
       </div>
     </div>

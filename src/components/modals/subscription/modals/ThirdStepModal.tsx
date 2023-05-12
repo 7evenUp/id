@@ -1,7 +1,7 @@
 import { DialogClose } from "@radix-ui/react-dialog"
 
-import SubscriptionModalHeader from "./components/SubscriptionModalHeader"
-import SubscriptionModalFooter from "./components/SubscriptionModalFooter"
+import SubscriptionModalHeader from "../components/SubscriptionModalHeader"
+import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
 
 import { Dialog, DialogContent } from "@/components/ui/Dialog"
 import ExternalLink from "@/components/ui/ExternalLink"

@@ -1,8 +1,8 @@
 import { ReactComponent as PrimeIcon } from "@/assets/Prime.svg"
 
-import SubscriptionModalHeader from "./components/SubscriptionModalHeader"
-import SubscriptionModalFooter from "./components/SubscriptionModalFooter"
-import SubscriptionCard from "./components/SubscriptionCard"
+import SubscriptionModalHeader from "../components/SubscriptionModalHeader"
+import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
+import SubscriptionCard from "../components/SubscriptionCard"
 
 import { Dialog, DialogContent } from "@/components/ui/Dialog"
 import Input from "@/components/ui/Input"

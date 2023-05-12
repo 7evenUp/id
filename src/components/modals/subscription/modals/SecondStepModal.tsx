@@ -1,5 +1,5 @@
-import ModalHeader from "./components/SubscriptionModalHeader"
-import SubscriptionModalFooter from "./components/SubscriptionModalFooter"
+import ModalHeader from "../components/SubscriptionModalHeader"
+import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
 
 import { Dialog, DialogContent } from "@/components/ui/Dialog"
 import Input from "@/components/ui/Input"

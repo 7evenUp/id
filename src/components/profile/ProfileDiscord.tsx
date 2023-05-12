@@ -14,7 +14,7 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [updateDiscord, { data: discordMutation }] = useUpdateDiscordMutation()
 
-  const changeDiscord = () => {
+  const onSubmit = () => {
     if (inputRef.current) {
       if (discordUsername === inputRef.current.value) {
         console.log("Error, apply some changes!")
@@ -49,7 +49,7 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
         />
         <IconButton
           className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-          onClick={changeDiscord}
+          onClick={onSubmit}
         >
           <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
         </IconButton>

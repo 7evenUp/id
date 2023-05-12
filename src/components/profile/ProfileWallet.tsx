@@ -14,7 +14,7 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [updateWallet, { data: walletMutation }] = useUpdateWalletMutation()
 
-  const changeWallet = () => {
+  const onSubmit = () => {
     if (inputRef.current) {
       if (wallet === inputRef.current.value) {
         console.log("Error, apply some changes!")
@@ -49,7 +49,7 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
         />
         <IconButton
           className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-          onClick={changeWallet}
+          onClick={onSubmit}
         >
           <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
         </IconButton>

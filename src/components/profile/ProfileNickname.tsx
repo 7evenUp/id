@@ -15,7 +15,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
   const [updateNickname, { data: nickNameMutation }] =
     useUpdateNicknameMutation()
 
-  const changeNickname = () => {
+  const onSubmit = () => {
     if (inputRef.current) {
       if (username === inputRef.current.value) {
         console.log("Error, apply some changes!")
@@ -49,7 +49,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
         />
         <IconButton
           className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-          onClick={changeNickname}
+          onClick={onSubmit}
         >
           <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
         </IconButton>

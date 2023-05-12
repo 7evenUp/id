@@ -1,14 +1,12 @@
 import { useState } from "react"
 
-import FirstStepModal from "./FirstStepModal"
-import SecondStepModal from "./SecondStepModal"
-import ThirdStepModal from "./ThirsStepModal"
+import { FirstStepModal, SecondStepModal, ThirdStepModal } from "./modals"
 import BalanceModal from "../BalanceModal"
 
 import { Dialog } from "@/components/ui/Dialog"
 import Button from "@/components/ui/Button"
 
-const SubscriptionExtend = () => {
+const SubscriptionMainModal = () => {
   const [firstStepOpened, setFirstStepOpened] = useState(false)
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
@@ -62,4 +60,4 @@ const SubscriptionExtend = () => {
   )
 }
 
-export default SubscriptionExtend
+export default SubscriptionMainModal
