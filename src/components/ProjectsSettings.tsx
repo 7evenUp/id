@@ -1,4 +1,5 @@
 import Input from "./ui/Input"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/Select"
 import Switch from "./ui/Switch"
 import SwitchWithText from "./ui/SwitchWithText"
 
@@ -31,12 +32,26 @@ const ProjectsSettings = () => {
           </td>
           <td className="w-[65px] flex flex-col gap-1 sm:hidden">
             <Switch />
-            <span>все</span>
+            <Select defaultValue="all">
+              <SelectTrigger />
+              <SelectContent>
+                <SelectItem value="all">все</SelectItem>
+                <SelectItem value="main">важные</SelectItem>
+              </SelectContent>
+            </Select>
           </td>
           <td className="w-[65px] flex-shrink-0 hidden sm:block">
             <Switch />
           </td>
-          <td className="w-[90px] flex-shrink-0 hidden sm:block">все</td>
+          <td className="w-[90px] flex-shrink-0 hidden sm:block">
+            <Select defaultValue="all">
+              <SelectTrigger />
+              <SelectContent>
+                <SelectItem value="all">все</SelectItem>
+                <SelectItem value="main">важные</SelectItem>
+              </SelectContent>
+            </Select>
+          </td>
           <td className="flex-grow-[2] flex gap-2.5 flex-wrap">
             <SwitchWithText>medium</SwitchWithText>
             <SwitchWithText>twitter</SwitchWithText>
@@ -50,12 +65,26 @@ const ProjectsSettings = () => {
           </td>
           <td className="w-[65px] flex flex-col gap-1 sm:hidden">
             <Switch />
-            <span>важные</span>
+            <Select defaultValue="main">
+              <SelectTrigger />
+              <SelectContent>
+                <SelectItem value="all">все</SelectItem>
+                <SelectItem value="main">важные</SelectItem>
+              </SelectContent>
+            </Select>
           </td>
           <td className="w-[65px] flex-shrink-0 hidden sm:block">
             <Switch />
           </td>
-          <td className="w-[90px] flex-shrink-0 hidden sm:block">важные</td>
+          <td className="w-[90px] flex-shrink-0 hidden sm:block">
+            <Select defaultValue="main">
+              <SelectTrigger />
+              <SelectContent>
+                <SelectItem value="all">все</SelectItem>
+                <SelectItem value="main">важные</SelectItem>
+              </SelectContent>
+            </Select>
+          </td>
           <td className="flex-grow-[2] flex-shrink flex gap-2.5 flex-wrap">
             <SwitchWithText>medium</SwitchWithText>
             <SwitchWithText>twitter</SwitchWithText>

@@ -4,6 +4,7 @@ import { DialogContent } from "../ui/Dialog"
 import Button from "../ui/Button"
 import Chip from "../ui/Chip"
 import Input from "../ui/Input"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/Select"
 
 const BalanceModal = () => {
   const [amount, setAmount] = useState("")
@@ -21,7 +22,13 @@ const BalanceModal = () => {
         </div>
         <div className="flex items-center gap-2 mb-5 typography-text-1">
           <span>Выберите способ пополнения:</span>
-          <span>банковская карта</span>
+          <Select defaultValue="card">
+            <SelectTrigger />
+            <SelectContent className="z-[999]">
+              <SelectItem value="crypto">криптовалюта</SelectItem>
+              <SelectItem value="card">банковская карта</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         <Input
           className="mb-4"
