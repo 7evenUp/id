@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { HiOutlineArrowNarrowRight } from "react-icons/hi"
 
 import TabHeader from "../components/TabHeader"
@@ -10,7 +11,79 @@ import Switch from "@/shared/ui/Switch"
 
 import RowItem from "@/shared/components/RowItem"
 
+type ResOrAgg = "research" | "aggregator"
+type Language = "ru" | "en"
+
 const ResearchBotTab = () => {
+  const [notifications, setNotifications] = useState<ResOrAgg>("research")
+  const [view, setView] = useState<ResOrAgg>("research")
+  const [resLanguage, setResLanguage] = useState<Language>("ru")
+  const [aggLanguage, setAggLanguage] = useState<Language>("ru")
+
+  const toggleNotifications = (target: ResOrAgg) => {
+    if (target === "research") {
+      if (notifications === "research") {
+        setNotifications("aggregator")
+      } else {
+        setNotifications("research")
+      }
+    } else {
+      if (notifications === "aggregator") {
+        setNotifications("research")
+      } else {
+        setNotifications("aggregator")
+      }
+    }
+  }
+
+  const toggleView = (target: ResOrAgg) => {
+    if (target === "research") {
+      if (view === "research") {
+        setView("aggregator")
+      } else {
+        setView("research")
+      }
+    } else {
+      if (view === "aggregator") {
+        setView("research")
+      } else {
+        setView("aggregator")
+      }
+    }
+  }
+
+  const toggleResLanguage = (target: Language) => {
+    if (target === "ru") {
+      if (resLanguage === "ru") {
+        setResLanguage("en")
+      } else {
+        setResLanguage("ru")
+      }
+    } else {
+      if (resLanguage === "en") {
+        setResLanguage("ru")
+      } else {
+        setResLanguage("en")
+      }
+    }
+  }
+
+  const toggleAggLanguage = (target: Language) => {
+    if (target === "ru") {
+      if (aggLanguage === "ru") {
+        setAggLanguage("en")
+      } else {
+        setAggLanguage("ru")
+      }
+    } else {
+      if (aggLanguage === "en") {
+        setAggLanguage("ru")
+      } else {
+        setAggLanguage("en")
+      }
+    }
+  }
+
   return (
     <>
       <TabHeader>
@@ -30,11 +103,19 @@ const ResearchBotTab = () => {
         <span>Уведомления в браузере</span>
         <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
-            <Switch id="resNotif" />
+            <Switch
+              id="resNotif"
+              checked={notifications === "research"}
+              onCheckedChange={() => toggleNotifications("research")}
+            />
             <label htmlFor="resNotif">Research</label>
           </div>
           <div className="flex items-center gap-2">
-            <Switch id="agrNotif" />
+            <Switch
+              id="agrNotif"
+              checked={notifications === "aggregator"}
+              onCheckedChange={() => toggleNotifications("aggregator")}
+            />
             <label htmlFor="agrNotif">Агрегатор</label>
           </div>
         </div>
@@ -43,11 +124,19 @@ const ResearchBotTab = () => {
         <span>Отображение режимов</span>
         <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
-            <Switch id="resView" />
+            <Switch
+              id="resView"
+              checked={view === "research"}
+              onCheckedChange={() => toggleView("research")}
+            />
             <label htmlFor="resView">Research</label>
           </div>
           <div className="flex items-center gap-2">
-            <Switch id="agrView" />
+            <Switch
+              id="agrView"
+              checked={view === "aggregator"}
+              onCheckedChange={() => toggleView("aggregator")}
+            />
             <label htmlFor="agrView">Агрегатор</label>
           </div>
         </div>
@@ -59,11 +148,19 @@ const ResearchBotTab = () => {
             <span>Research</span>
             <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
               <div className="flex-1 flex items-center gap-2">
-                <Switch id="resRu" />
+                <Switch
+                  id="resRu"
+                  checked={resLanguage === "ru"}
+                  onCheckedChange={() => toggleResLanguage("ru")}
+                />
                 <label htmlFor="resRu">Русский</label>
               </div>
               <div className="flex-1 flex items-center gap-2">
-                <Switch id="resEn" />
+                <Switch
+                  id="resEn"
+                  checked={resLanguage === "en"}
+                  onCheckedChange={() => toggleResLanguage("en")}
+                />
                 <label htmlFor="resEn">Английский</label>
               </div>
             </div>
@@ -72,12 +169,20 @@ const ResearchBotTab = () => {
             <span>Агрегатор</span>
             <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
               <div className="flex-1 flex items-center gap-2">
-                <Switch id="agrEn" />
-                <label htmlFor="agrEn">Английский</label>
+                <Switch
+                  id="agrEn"
+                  checked={aggLanguage === "ru"}
+                  onCheckedChange={() => toggleAggLanguage("ru")}
+                />
+                <label htmlFor="agrEn">Русский</label>
               </div>
               <div className="flex-1 flex items-center gap-2">
-                <Switch id="agrEs" />
-                <label htmlFor="agrEs">Испанский</label>
+                <Switch
+                  id="agrEs"
+                  checked={aggLanguage === "en"}
+                  onCheckedChange={() => toggleAggLanguage("en")}
+                />
+                <label htmlFor="agrEs">Английский</label>
               </div>
             </div>
           </div>
