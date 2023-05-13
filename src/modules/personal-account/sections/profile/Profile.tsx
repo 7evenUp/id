@@ -9,16 +9,11 @@ import ProfileDiscord from "./ProfileDiscord"
 import ProfileTelegram from "./ProfileTelegram"
 
 const Profile = () => {
-  const { isLoading, data: userProfile, error } = useUserProfileQuery()
+  const { data: userProfile } = useUserProfileQuery()
 
   if (userProfile) {
     console.log("Fetched user data: ", userProfile)
   }
-
-  if (error) return <h2 className="text-5xl text-error">Error happened</h2>
-
-  if (isLoading)
-    return <h2 className="text-5xl text-process">Data loading...</h2>
 
   return (
     <div>
