@@ -1,6 +1,6 @@
-import Header from "./components/Header"
-import PersonalAccount from "./components/PersonalAccount"
-import Products from "./components/Products"
+import Header from "./modules/header/Header"
+import PersonalAccount from "./modules/personal-account/PersonalAccount"
+import Products from "./modules/products/Products"
 
 const App = () => {
   return (

@@ -1,11 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-export type TabsValuesType = "research-bot" | "prime"
+export type TabsValuesType =
+  | "research-bot"
+  | "prime"
+  | "tools"
+  | "calendar"
+  | "universe"
+  | "academy"
 
 export const TABS_VALUES: Record<string, TabsValuesType> = {
   RESEARCH_BOT: "research-bot",
   PRIME: "prime",
+  TOOLS: "tools",
+  CALENDAR: "calendar",
+  UNIVERCE: "universe",
+  ACADEMY: "academy",
 }
 
 export interface TabsState {
