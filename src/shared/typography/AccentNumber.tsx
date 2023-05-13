@@ -14,7 +14,7 @@ const AccentNumber = ({ children }: { children: React.ReactNode }) => {
   return (
     <span
       className={cn(
-        "typography-balance text-res-bot-blue text-prime-pink",
+        "typography-balance text-res-bot-blue text-prime-pink text-tools-green text-calendar-red text-university-velvet text-academy-gold",
         `text-${color}`
       )}
     >
