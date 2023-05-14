@@ -10,6 +10,7 @@ export const api = createApi({
         `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
       )
     },
+    // credentials: 'include'
   }),
   tagTypes: ["UserProfile"],
   endpoints: (build) => ({
@@ -73,6 +74,7 @@ export const api = createApi({
 })
 
 export const {
+  useLazyUserProfileQuery,
   useUserProfileQuery,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,

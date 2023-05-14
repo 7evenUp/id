@@ -23,7 +23,7 @@ export interface TabsState {
 }
 
 const initialState: TabsState = {
-  value: "prime",
+  value: "research-bot",
 }
 
 export const tabsSlice = createSlice({
