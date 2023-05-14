@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { TbCheck } from "react-icons/tb"
 
 import EditButton from "../../components/EditButton"
@@ -12,23 +12,27 @@ import { useUpdateTelegramMutation } from "@/redux/api/core"
 import { User } from "@/types/types"
 
 const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
+  const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const [updateTelegram, { data: telegramMutation }] =
     useUpdateTelegramMutation()
 
   const onSubmit = () => {
     if (inputRef.current) {
-      if (telegramId === parseInt(inputRef.current.value)) {
-        console.log("Error, apply some changes!")
-      } else {
-        console.log("New telegram!", inputRef.current.value)
-        updateTelegram({
-          id: id,
-          username: username,
-          telegramId: parseInt(inputRef.current.value),
-        })
+      const inputId = parseInt(inputRef.current.value)
+
+      if (telegramId === inputId) {
+        setIsEditingMode(false)
+        return
       }
+
+      updateTelegram({
+        id: id,
+        username: username,
+        telegramId: inputId,
+      })
     }
+    setIsEditingMode(false)
   }
 
   if (telegramMutation) {
@@ -43,18 +47,22 @@ const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
         defaultValue={telegramId ? telegramId : "+"}
         ref={inputRef}
       />
-      <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
-        <EditButton
-          onClick={() => {
-            inputRef.current?.focus()
-          }}
-        />
-        <IconButton
-          className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-          onClick={onSubmit}
-        >
-          <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-        </IconButton>
+      <div className="absolute right-0 translate-x-[30px] w-[30px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+        {isEditingMode ? (
+          <IconButton
+            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
+            onClick={onSubmit}
+          >
+            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
+          </IconButton>
+        ) : (
+          <EditButton
+            onClick={() => {
+              inputRef.current?.focus()
+              setIsEditingMode(true)
+            }}
+          />
+        )}
       </div>
     </RowItem>
   )
