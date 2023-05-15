@@ -4,6 +4,7 @@ import UpdateEmail from "../../modals/UpdateEmail"
 
 import ModalTrigger from "../../components/ModalTrigger"
 import EditButton from "../../components/EditButton"
+import EditContainer from "../../components/EditContainer"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -14,11 +15,11 @@ const ProfileEmail: React.FC<User> = ({ email }) => {
     <RowItem className="relative group">
       <span>почта</span>
       <span>{email}</span>
-      <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+      <EditContainer>
         <ModalTrigger content={<UpdateEmail />}>
           <EditButton />
         </ModalTrigger>
-      </div>
+      </EditContainer>
     </RowItem>
   )
 }

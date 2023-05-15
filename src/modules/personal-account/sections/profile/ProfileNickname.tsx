@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { TbCheck } from "react-icons/tb"
 
 import EditButton from "../../components/EditButton"
+import EditContainer from "../../components/EditContainer"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -14,26 +15,27 @@ import { User } from "@/types/types"
 const ProfileNickname: React.FC<User> = ({ id, username }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [updateNickname, { data: nickNameMutation }] =
-    useUpdateNicknameMutation()
+  const [updateNickname] = useUpdateNicknameMutation()
 
   const onSubmit = () => {
-    if (inputRef.current) {
-      const inputValue = inputRef.current.value
-      if (username === inputValue) {
-        setIsEditingMode(false)
-        return
-      }
-      updateNickname({
-        id: id,
-        username: inputValue,
-      })
-    }
+    console.log("clicked")
     setIsEditingMode(false)
-  }
 
-  if (nickNameMutation) {
-    console.log("nickNameMutation: ", nickNameMutation)
+    if (!inputRef.current) return
+
+    const inputValue = inputRef.current.value
+
+    if (!inputValue.length) {
+      if (username) inputRef.current.value = username
+      return
+    }
+
+    if (username === inputValue) return
+
+    updateNickname({
+      id: id,
+      username: inputValue,
+    })
   }
 
   return (
@@ -41,10 +43,11 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
       <span>ник</span>
       <input
         className="peer bg-transparent outline-none text-right"
-        defaultValue={username ? username : "Loading..."}
+        defaultValue={username}
         ref={inputRef}
+        onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
       />
-      <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
+      <EditContainer>
         {isEditingMode ? (
           <IconButton
             className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
@@ -60,7 +63,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
             }}
           />
         )}
-      </div>
+      </EditContainer>
     </RowItem>
   )
 }

@@ -1,9 +1,8 @@
 import React from "react"
-import { AiOutlinePlus } from "react-icons/ai"
+
+import AddButton from "../../components/AddButton"
 
 import RowItem from "@/shared/components/RowItem"
-
-import IconButton from "@/shared/ui/IconButton"
 
 import { useMetamask } from "@/hooks/useMetamask"
 
@@ -14,7 +13,7 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 import { User } from "@/types/types"
 
 const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
-  const [updateWallet, { data: walletMutation }] = useUpdateWalletMutation()
+  const [updateWallet] = useUpdateWalletMutation()
   const {
     dispatch,
     state: { status, isMetamaskInstalled, walletAddress },
@@ -43,10 +42,6 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
     }
   }
 
-  if (walletMutation) {
-    console.log("walletMutation: ", walletMutation)
-  }
-
   return (
     <RowItem className="relative group">
       <span>кошелёк</span>
@@ -54,38 +49,13 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
         <span>{cutWalletAddr(walletAddress)}</span>
       ) : showInstallMetamask ? (
         <a href="https://metamask.io/" target="_blank">
-          <IconButton className="hover:border border-gray-1 dark:border-gray-5 transition-all">
-            <AiOutlinePlus className="fill-gray-1 dark:fill-gray-5 transition-all" />
-          </IconButton>
+          <AddButton />
         </a>
       ) : (
-        showConnectButton && (
-          <IconButton
-            onClick={handleConnect}
-            className="hover:border border-gray-1 dark:border-gray-5 transition-all"
-          >
-            <AiOutlinePlus className="fill-gray-1 dark:fill-gray-5 transition-all" />
-          </IconButton>
-        )
+        showConnectButton && <AddButton onClick={handleConnect} />
       )}
     </RowItem>
   )
 }
 
 export default ProfileWallet
-
-{
-  /* <div className="absolute right-0 translate-x-[48px] w-[48px] xl:translate-x-[60px] xl:w-[60px] h-full flex items-center gap-1 xl:gap-2.5 pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity">
-  <EditButton
-    onClick={() => {
-      inputRef.current?.focus()
-    }}
-  />
-  <IconButton
-    className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-    onClick={onSubmit}
-  >
-    <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-  </IconButton>
-</div> */
-}
