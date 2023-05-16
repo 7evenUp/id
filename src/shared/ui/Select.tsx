@@ -57,7 +57,7 @@ const SelectItem = React.forwardRef<
   return (
     <RadixSelect.Item
       className={cn(
-        "typography-text-1 text-gray-1 dark:text-gray-5 bg-transparent h-5 px-2 leading-none rounded-sm flex items-center select-none data-[highlighted]:outline-none data-[highlighted]:bg-gray-1 data-[highlighted]:bg-opacity-10 dark:data-[highlighted]:bg-gray-5 dark:data-[highlighted]:bg-opacity-10",
+        "typography-text-1 text-gray-1 dark:text-gray-5 bg-transparent h-5 px-2 leading-none rounded-sm flex items-center select-none data-[highlighted]:outline-none data-[highlighted]:bg-gray-1 data-[highlighted]:bg-opacity-10 dark:data-[highlighted]:bg-gray-5 dark:data-[highlighted]:bg-opacity-10 cursor-pointer",
         className
       )}
       {...props}
