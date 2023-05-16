@@ -45,8 +45,8 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
   return (
     <RowItem className="relative group">
       <span>кошелёк</span>
-      {walletAddress ? (
-        <span>{cutWalletAddr(walletAddress)}</span>
+      {wallet ? (
+        <span>{cutWalletAddr(wallet)}</span>
       ) : showInstallMetamask ? (
         <a href="https://metamask.io/" target="_blank">
           <AddButton />
