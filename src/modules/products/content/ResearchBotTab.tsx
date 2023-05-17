@@ -10,6 +10,7 @@ import Button from "@/shared/ui/Button"
 import Switch from "@/shared/ui/Switch"
 
 import RowItem from "@/shared/components/RowItem"
+import TextSizeSlider from "../components/TextSizeSlider"
 
 type Language = "ru" | "en"
 
@@ -139,7 +140,7 @@ const ResearchBotTab = () => {
       </RowItem>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Размер текста в новостях</span>
-        <span className="text-xs text-gray-2">заглушка для слайдера</span>
+        <TextSizeSlider />
       </RowItem>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Выбор фона</span>
