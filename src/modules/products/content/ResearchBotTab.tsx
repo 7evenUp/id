@@ -2,6 +2,8 @@ import { useState } from "react"
 import { HiOutlineArrowNarrowRight } from "react-icons/hi"
 
 import TabHeader from "../components/TabHeader"
+import TextSizeSlider from "../components/TextSizeSlider"
+import BackgroundPicker from "../components/BackgroundPicker"
 import ProjectsSettings from "../components/ProjectsSettings"
 
 import Subheading from "@/shared/typography/Subheading"
@@ -10,7 +12,6 @@ import Button from "@/shared/ui/Button"
 import Switch from "@/shared/ui/Switch"
 
 import RowItem from "@/shared/components/RowItem"
-import TextSizeSlider from "../components/TextSizeSlider"
 
 type Language = "ru" | "en"
 
@@ -144,7 +145,7 @@ const ResearchBotTab = () => {
       </RowItem>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
         <span>Выбор фона</span>
-        <span className="text-xs text-gray-2">заглушка для картинок</span>
+        <BackgroundPicker />
       </RowItem>
       <div className="flex flex-col gap-1.5 py-2 dark:text-gray-4">
         <span>Настройки проектов</span>
