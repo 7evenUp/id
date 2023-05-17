@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react"
+import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
 import SyncButton from "../../components/SyncButton"
-import AddButton from "../../components/AddButton"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -38,6 +38,13 @@ const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
     })
   }
 
+  const onEdit = () => {
+    setIsEditingMode(true)
+    setTimeout(() => {
+      inputRef.current?.focus()
+    }, 0)
+  }
+
   return (
     <RowItem className="relative group">
       <span
@@ -49,34 +56,16 @@ const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
         className="peer bg-transparent outline-none text-right w-full"
         defaultValue={telegramId}
         ref={inputRef}
+        disabled={!isEditingMode}
         onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
       />
-      {telegramId ? (
-        <EditContainer>
-          {isEditingMode ? (
-            <SyncButton onClick={onSubmit} />
-          ) : (
-            <EditButton
-              onClick={() => {
-                inputRef.current?.focus()
-                setIsEditingMode(true)
-              }}
-            />
-          )}
-        </EditContainer>
-      ) : !isEditingMode ? (
-        <AddButton
-          className="absolute right-0"
-          onClick={() => {
-            inputRef.current?.focus()
-            setIsEditingMode(true)
-          }}
-        />
-      ) : (
-        <EditContainer>
-          <SyncButton onClick={onSubmit} />
-        </EditContainer>
+      {!telegramId && !isEditingMode && !inputRef.current?.value.length && (
+        <AiOutlinePlus className="absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
       )}
+      <EditContainer className="w-[48px] translate-x-[48px] xl:w-[60px] xl:translate-x-[60px] gap-1">
+        <EditButton onClick={onEdit} />
+        <SyncButton onClick={onSubmit} />
+      </EditContainer>
     </RowItem>
   )
 }

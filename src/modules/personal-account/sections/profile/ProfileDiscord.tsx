@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
+import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
-import AddButton from "../../components/AddButton"
 import EditButton from "../../components/EditButton"
 import SyncButton from "../../components/SyncButton"
 
@@ -38,6 +38,13 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
     })
   }
 
+  const onEdit = () => {
+    setIsEditingMode(true)
+    setTimeout(() => {
+      inputRef.current?.focus()
+    }, 0)
+  }
+
   return (
     <RowItem className="relative group">
       <span
@@ -51,34 +58,21 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
         className="peer bg-transparent outline-none text-right w-full"
         defaultValue={discordUsername}
         ref={inputRef}
+        disabled={!isEditingMode}
         onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
       />
-      {discordUsername ? (
-        <EditContainer>
-          {isEditingMode ? (
-            <SyncButton onClick={onSubmit} />
-          ) : (
-            <EditButton
-              onClick={() => {
-                inputRef.current?.focus()
-                setIsEditingMode(true)
-              }}
-            />
-          )}
-        </EditContainer>
-      ) : !isEditingMode ? (
-        <AddButton
-          className="absolute right-0"
-          onClick={() => {
-            inputRef.current?.focus()
-            setIsEditingMode(true)
-          }}
-        />
-      ) : (
-        <EditContainer>
+      {!discordUsername &&
+        !isEditingMode &&
+        !inputRef.current?.value.length && (
+          <AiOutlinePlus className="absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
+        )}
+      <EditContainer>
+        {isEditingMode ? (
           <SyncButton onClick={onSubmit} />
-        </EditContainer>
-      )}
+        ) : (
+          <EditButton onClick={onEdit} />
+        )}
+      </EditContainer>
     </RowItem>
   )
 }

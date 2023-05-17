@@ -38,6 +38,13 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
     })
   }
 
+  const onEdit = () => {
+    setIsEditingMode(true)
+    setTimeout(() => {
+      inputRef.current?.focus()
+    }, 0)
+  }
+
   return (
     <RowItem className="relative group">
       <span>ник</span>
@@ -45,6 +52,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
         className="peer bg-transparent outline-none text-right"
         defaultValue={username}
         ref={inputRef}
+        disabled={!isEditingMode}
         onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
       />
       <EditContainer>
@@ -56,12 +64,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
             <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
           </IconButton>
         ) : (
-          <EditButton
-            onClick={() => {
-              inputRef.current?.focus()
-              setIsEditingMode(true)
-            }}
-          />
+          <EditButton onClick={onEdit} />
         )}
       </EditContainer>
     </RowItem>

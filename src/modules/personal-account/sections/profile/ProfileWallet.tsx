@@ -1,6 +1,8 @@
 import React from "react"
+import { AiOutlinePlus } from "react-icons/ai"
 
-import AddButton from "../../components/AddButton"
+import EditContainer from "../../components/EditContainer"
+import EditButton from "../../components/EditButton"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -44,16 +46,22 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
 
   return (
     <RowItem className="relative group">
-      <span>кошелёк</span>
+      <span className={wallet ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}>
+        кошелёк
+      </span>
       {wallet ? (
         <span>{cutWalletAddr(wallet)}</span>
-      ) : showInstallMetamask ? (
-        <a href="https://metamask.io/" target="_blank">
-          <AddButton />
-        </a>
       ) : (
-        showConnectButton && <AddButton onClick={handleConnect} />
+        <AiOutlinePlus className="absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
       )}
+      <EditContainer>
+        {showInstallMetamask && (
+          <a href="https://metamask.io/" target="_blank">
+            <EditButton />
+          </a>
+        )}
+        {showConnectButton && <EditButton onClick={handleConnect} />}
+      </EditContainer>
     </RowItem>
   )
 }

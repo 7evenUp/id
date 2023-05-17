@@ -11,46 +11,11 @@ import Switch from "@/shared/ui/Switch"
 
 import RowItem from "@/shared/components/RowItem"
 
-type ResOrAgg = "research" | "aggregator"
 type Language = "ru" | "en"
 
 const ResearchBotTab = () => {
-  const [notifications, setNotifications] = useState<ResOrAgg>("research")
-  const [view, setView] = useState<ResOrAgg>("research")
   const [resLanguage, setResLanguage] = useState<Language>("ru")
-  const [aggLanguage, setAggLanguage] = useState<Language>("ru")
-
-  const toggleNotifications = (target: ResOrAgg) => {
-    if (target === "research") {
-      if (notifications === "research") {
-        setNotifications("aggregator")
-      } else {
-        setNotifications("research")
-      }
-    } else {
-      if (notifications === "aggregator") {
-        setNotifications("research")
-      } else {
-        setNotifications("aggregator")
-      }
-    }
-  }
-
-  const toggleView = (target: ResOrAgg) => {
-    if (target === "research") {
-      if (view === "research") {
-        setView("aggregator")
-      } else {
-        setView("research")
-      }
-    } else {
-      if (view === "aggregator") {
-        setView("research")
-      } else {
-        setView("aggregator")
-      }
-    }
-  }
+  const [aggLanguage, setAggLanguage] = useState<Language>("en")
 
   const toggleResLanguage = (target: Language) => {
     if (target === "ru") {
@@ -103,19 +68,11 @@ const ResearchBotTab = () => {
         <span>Уведомления в браузере</span>
         <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
-            <Switch
-              id="resNotif"
-              checked={notifications === "research"}
-              onCheckedChange={() => toggleNotifications("research")}
-            />
+            <Switch id="resNotif" defaultChecked={true} />
             <label htmlFor="resNotif">Research</label>
           </div>
           <div className="flex items-center gap-2">
-            <Switch
-              id="agrNotif"
-              checked={notifications === "aggregator"}
-              onCheckedChange={() => toggleNotifications("aggregator")}
-            />
+            <Switch id="agrNotif" />
             <label htmlFor="agrNotif">Агрегатор</label>
           </div>
         </div>
@@ -124,19 +81,11 @@ const ResearchBotTab = () => {
         <span>Отображение режимов</span>
         <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
-            <Switch
-              id="resView"
-              checked={view === "research"}
-              onCheckedChange={() => toggleView("research")}
-            />
+            <Switch id="resView" defaultChecked={true} />
             <label htmlFor="resView">Research</label>
           </div>
           <div className="flex items-center gap-2">
-            <Switch
-              id="agrView"
-              checked={view === "aggregator"}
-              onCheckedChange={() => toggleView("aggregator")}
-            />
+            <Switch id="agrView" />
             <label htmlFor="agrView">Агрегатор</label>
           </div>
         </div>
