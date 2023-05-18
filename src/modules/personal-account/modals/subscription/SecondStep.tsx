@@ -43,9 +43,11 @@ const SecondStep = ({
               Изменить данные можно будет позже в Личном кабинете, в разделе
               «Профиль»
             </p>
+
+            {/* Vissible on Mobile */}
             <Button
               className="md:hidden mt-6 w-fit self-end"
-              onClick={() => openThirdStep()}
+              onClick={openThirdStep}
             >
               продолжить
             </Button>
@@ -60,7 +62,7 @@ const SecondStep = ({
             </p>
             <Button
               className="mt-auto w-fit hidden md:flex"
-              onClick={() => openThirdStep()}
+              onClick={openThirdStep}
             >
               продолжить
             </Button>

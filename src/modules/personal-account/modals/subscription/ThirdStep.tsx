@@ -95,6 +95,8 @@ const ThirdStep = ({
             </div>
           </div>
         </div>
+
+        {/* Vissible on Mobile */}
         <div className="pb-2 text-right block md:hidden">
           <DialogClose asChild className="w-fit">
             <Button>готово</Button>

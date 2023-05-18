@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { ReactComponent as PrimeIcon } from "@/assets/icons/products/Prime.svg"
 
 import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
@@ -7,6 +8,12 @@ import SubscriptionCard from "../../components/SubscriptionCard"
 import { Dialog, DialogContent } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
+
+import { subscriptions } from "@/utils/subscriptions"
+
+import { cn } from "@/lib/classNames"
+
+const FAKE_BALANCE = 220
 
 const FirstStep = ({
   open,
@@ -19,65 +26,91 @@ const FirstStep = ({
   openSecondStep: () => void
   openBalanceModal: () => void
 }) => {
+  const [activeSub, setActiveSub] = useState(1)
+  const [promo, setPromo] = useState("")
+  const [isPromoInvalid, setIsPromoInvalid] = useState(false)
+  const [isPromoApplied, setIsPromoApplied] = useState(false)
+  const [totalPrice, setTotalPrice] = useState(subscriptions[1].price)
+
+  const applyPromo = () => {
+    if (!promo) {
+      return
+    }
+
+    if (isPromoApplied) return
+
+    if (promo !== "PROMO") {
+      setIsPromoInvalid(true)
+      return
+    }
+
+    setIsPromoApplied(true)
+    setIsPromoInvalid(false)
+    setTotalPrice(totalPrice - totalPrice * 0.1)
+  }
+
+  const onSelect = (subID: number) => {
+    setActiveSub(subID)
+    if (isPromoApplied) {
+      setTotalPrice(
+        subscriptions[subID].price - subscriptions[subID].price * 0.1
+      )
+    } else {
+      setTotalPrice(subscriptions[subID].price)
+    }
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px]">
         <SubscriptionModalHeader label="шаг 1/3: Выбор тарифа" />
 
         <div className="h-[400px] lg:h-auto overflow-y-auto pr-2 pb-1">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-6">
-            <div className="flex items-center gap-3">
-              <PrimeIcon className="dark:fill-gray-5" />
-              <span className="typography-head">Prime</span>
-            </div>
-            <p className="typography-text-1 max-w-[464px]">
-              Эффективные стратегии по увеличению заработка при ощутимой
-              экономии личного времени. Команда Prime тщательно отбирает самые
-              знаковые события и формирует способы заработка как для новичков,
-              так и для продвинутых пользователей.
-            </p>
+          <PrimeInfo />
+
+          <div className="flex flex-col items-center flex-wrap mobile:flex-row gap-3 sm:gap-5 mb-6">
+            {subscriptions.map((sub, i) => (
+              <SubscriptionCard
+                key={i}
+                {...sub}
+                selected={activeSub === i}
+                onSelect={() => onSelect(i)}
+              />
+            ))}
           </div>
-          <div className="flex flex-col flex-wrap mobile:flex-row gap-3 sm:gap-5 mb-6">
-            <SubscriptionCard duration="1 месяц" price={45} />
-            <SubscriptionCard
-              duration="3 месяца"
-              price={128}
-              discount={{ percent: 5, amount: 7 }}
+
+          <div className="relative flex items-center gap-2 mb-5">
+            <Input
+              placeholder="введите промокод"
+              value={promo}
+              onChange={(evt) => setPromo(evt.currentTarget.value)}
+              className={cn(
+                isPromoInvalid &&
+                  "text-error border-error dark:text-error dark:border-error focus:border-error dark:focus:border-error"
+              )}
             />
-            <SubscriptionCard
-              duration="6 месяцев"
-              price={243}
-              discount={{ percent: 10, amount: 27 }}
-            />
-            <SubscriptionCard
-              duration="12 месяцев"
-              price={459}
-              discount={{ percent: 15, amount: 99 }}
-            />
+            {isPromoInvalid && (
+              <span className="absolute bottom-0 translate-y-4 typography-text-1 text-error">
+                Такого промокода не существует
+              </span>
+            )}
+            {promo && <Button onClick={applyPromo}>готово</Button>}
           </div>
-          <div className="flex items-center gap-2 mb-5">
-            <Input placeholder="введите промокод" />
-            <Button>готово</Button>
-          </div>
+
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex flex-col gap-0.5">
-              <span className="typography-head">Итого: $116</span>
+              <span className="typography-head">
+                Итого: ${totalPrice.toFixed(2)}
+              </span>
               <span className="typography-tip text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
                 Убедитесь в наличии средств на балансе
               </span>
             </div>
             <div className="flex flex-wrap gap-2 sm:gap-5">
+              <Button onClick={openBalanceModal}>пополнить баланс</Button>
               <Button
-                onClick={() => {
-                  openBalanceModal()
-                }}
-              >
-                пополнить баланс
-              </Button>
-              <Button
-                onClick={() => {
-                  openSecondStep()
-                }}
+                onClick={openSecondStep}
+                disabled={totalPrice > FAKE_BALANCE}
               >
                 оплатить
               </Button>
@@ -90,5 +123,20 @@ const FirstStep = ({
     </Dialog>
   )
 }
+
+const PrimeInfo = () => (
+  <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-6">
+    <div className="flex items-center gap-3">
+      <PrimeIcon className="dark:fill-gray-5" />
+      <span className="typography-head">Prime</span>
+    </div>
+    <p className="typography-text-1 max-w-[464px]">
+      Эффективные стратегии по увеличению заработка при ощутимой экономии
+      личного времени. Команда Prime тщательно отбирает самые знаковые события и
+      формирует способы заработка как для новичков, так и для продвинутых
+      пользователей.
+    </p>
+  </div>
+)
 
 export default FirstStep

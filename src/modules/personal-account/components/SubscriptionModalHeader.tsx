@@ -1,12 +1,15 @@
 import { DialogHeader } from "@/shared/ui/Dialog"
 
+const FAKE_BALANCE = 220
+
 const SubscriptionModalHeader = ({ label }: { label: string }) => {
   return (
     <DialogHeader className="typography-text-1">
       <span>{label}</span>
       <div className="flex flex-col items-end gap-1">
         <span className="flex items-center gap-1">
-          Мой баланс: <span className="typography-balance">$22</span>
+          Мой баланс:{" "}
+          <span className="typography-balance">${FAKE_BALANCE}</span>
         </span>
         <span className="flex items-center gap-1">
           Текущий статус:{" "}
