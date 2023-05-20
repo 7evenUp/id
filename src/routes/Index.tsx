@@ -8,6 +8,20 @@ import { useUserProfileQuery } from "@/redux/api/core"
 const Index = () => {
   const { isLoading, data, error } = useUserProfileQuery()
 
+  if (error) {
+    return (
+      <button
+        onClick={() =>
+          fetch("https://union-api.crypton.xyz/api/v1/users/profile", {
+            credentials: "include",
+          })
+        }
+      >
+        fetch
+      </button>
+    )
+  }
+
   if (error) console.log("Error while fetching profile data: ", error)
 
   return (
