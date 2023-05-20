@@ -13,8 +13,38 @@ import Subheading from "@/shared/typography/Subheading"
 
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
+import { toast } from "@/shared/ui/Toast"
+import { useUserProfileQuery } from "@/redux/api/core"
 
 const Referral = () => {
+  const { data: profileData } = useUserProfileQuery()
+
+  const onPromoClick = () => {
+    if (profileData) {
+      navigator.clipboard.writeText(profileData.referralInfo.refCode)
+
+      toast({
+        providedId: "promo",
+        title: "Скопированно",
+        message: "Промокод успешно скопирован в буфер обмена",
+        type: "default",
+      })
+    }
+  }
+
+  const onRefLinkClick = () => {
+    if (profileData) {
+      navigator.clipboard.writeText(profileData.referralInfo.refLink)
+
+      toast({
+        title: "Скопированно",
+        message: "Реферальная ссылка успешно скопирована в буфер обмена",
+        type: "default",
+        withProgress: true,
+      })
+    }
+  }
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -31,8 +61,8 @@ const Referral = () => {
             реферальная система: <AccentNumber>15%</AccentNumber>
           </span>
           <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink">
-            <Button>промокод</Button>
-            <Button>ссылка</Button>
+            <Button onClick={onPromoClick}>промокод</Button>
+            <Button onClick={onRefLinkClick}>ссылка</Button>
           </div>
         </RowItem>
         <RowItem>

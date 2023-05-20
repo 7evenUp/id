@@ -9,7 +9,7 @@ const Auth = () => {
   const onSubmit = async () => {
     try {
       const res = await fetch(
-        `https://union-api.crypton.xyz/api/v1/users/login?email=${email}&redirect_url=https://crypton.xyz/profile`
+        `https://union-api.crypton.xyz/api/v1/users/login?email=${email}&redirect_url=https://localhost:5173`
       )
     } catch (error) {
       console.error("Error happened: ")
