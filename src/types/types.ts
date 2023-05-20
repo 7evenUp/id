@@ -7,8 +7,16 @@ export interface User {
   telegramId: number
   discordUsername: string
   email: string
-  file?: string
+  avatars: string[]
+  balance: number
+  capital: number
+  isBanned: boolean
+  isDarkTheme: boolean
+  isPaid: boolean
+  knowledge: string
+  languageCode: string
   referralInfo: ReferralInfo
+  subscriptionInfo: SubscriptionInfo
 }
 
 export interface Transaction {
@@ -17,6 +25,13 @@ export interface Transaction {
   price: string
   status: "в процессе" | "успешно" | "отклонено"
   id: string
+}
+
+export interface SubscriptionInfo {
+  currentBalance: number
+  remainingDays: number | null
+  status: string | null
+  subscriptionType: string | null
 }
 
 export interface ReferralInfo {

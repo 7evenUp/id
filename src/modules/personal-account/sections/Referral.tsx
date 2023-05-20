@@ -14,35 +14,38 @@ import Subheading from "@/shared/typography/Subheading"
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
 import { toast } from "@/shared/ui/Toast"
+
 import { useUserProfileQuery } from "@/redux/api/core"
 
 const Referral = () => {
   const { data: profileData } = useUserProfileQuery()
 
-  const onPromoClick = () => {
-    if (profileData) {
-      navigator.clipboard.writeText(profileData.referralInfo.refCode)
+  if (!profileData) return null
 
-      toast({
-        providedId: "promo",
-        title: "Скопированно",
-        message: "Промокод успешно скопирован в буфер обмена",
-        type: "default",
-      })
-    }
+  const {
+    referralInfo: { refCode, refLink, refBalance, refCashBack },
+  } = profileData
+
+  const onPromoClick = () => {
+    navigator.clipboard.writeText(refCode)
+
+    toast({
+      providedId: "promo",
+      title: "Скопированно",
+      message: "Промокод успешно скопирован в буфер обмена",
+      type: "default",
+    })
   }
 
   const onRefLinkClick = () => {
-    if (profileData) {
-      navigator.clipboard.writeText(profileData.referralInfo.refLink)
+    navigator.clipboard.writeText(refLink)
 
-      toast({
-        title: "Скопированно",
-        message: "Реферальная ссылка успешно скопирована в буфер обмена",
-        type: "default",
-        withProgress: true,
-      })
-    }
+    toast({
+      title: "Скопированно",
+      message: "Реферальная ссылка успешно скопирована в буфер обмена",
+      type: "default",
+      withProgress: true,
+    })
   }
 
   return (
@@ -58,7 +61,7 @@ const Referral = () => {
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
           <span className="w-full xl:w-auto">
-            реферальная система: <AccentNumber>15%</AccentNumber>
+            реферальная система: <AccentNumber>{refCashBack}%</AccentNumber>
           </span>
           <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink">
             <Button onClick={onPromoClick}>промокод</Button>
@@ -67,7 +70,7 @@ const Referral = () => {
         </RowItem>
         <RowItem>
           <span className="typography-text-0 dark:text-gray-4">
-            реферальный баланс: <AccentNumber>$250</AccentNumber>
+            реферальный баланс: <AccentNumber>${refBalance}</AccentNumber>
           </span>
           <ReferralWithdraw />
         </RowItem>

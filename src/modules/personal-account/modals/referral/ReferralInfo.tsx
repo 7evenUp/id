@@ -1,7 +1,17 @@
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import ExternalLink from "@/shared/ui/ExternalLink"
 
+import { useUserProfileQuery } from "@/redux/api/core"
+
 const ReferralInfo = () => {
+  const { data: profileData } = useUserProfileQuery()
+
+  if (!profileData) return null
+
+  const {
+    referralInfo: { refProgramLevel, toNextLevelRemained, refCashBack },
+  } = profileData
+
   return (
     <DialogContent className="sm:max-w-[550px] md:max-w-[680px]">
       <DialogHeader>
@@ -19,9 +29,11 @@ const ReferralInfo = () => {
             платежа реферала!
           </p>
           <div className="flex flex-col gap-1 bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl mt-auto typography-text-1 w-fit">
-            <span>Ваш уровень реферальной программы: 0</span>
-            <span>Пользователей до следующего уровня: 5</span>
-            <span>Процент с платежей рефералов: 10.00%</span>
+            <span>Ваш уровень реферальной программы: {refProgramLevel}</span>
+            <span>
+              Пользователей до следующего уровня: {toNextLevelRemained}
+            </span>
+            <span>Процент с платежей рефералов: {refCashBack}%</span>
           </div>
         </div>
         <div className="w-full mobile:w-[210px] flex flex-col gap-5">
