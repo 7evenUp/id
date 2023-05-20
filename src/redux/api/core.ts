@@ -3,14 +3,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://union-api.crypton.xyz/api/v1/",
-    prepareHeaders: (headers) => {
-      headers.set(
-        "authorization",
-        `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-      )
-    },
-    // credentials: 'include'
+    baseUrl: import.meta.env.VITE_API_BASE_URL,
+    credentials: 'include'
+    // prepareHeaders: (headers) => {
+    //   headers.set(
+    //     "authorization",
+    //     `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
+    //   )
+    // },
   }),
   tagTypes: ["UserProfile"],
   endpoints: (build) => ({
@@ -18,6 +18,7 @@ export const api = createApi({
       query: () => ({
         url: "users/profile",
         method: "GET",
+        credentials: 'include'
       }),
       providesTags: ["UserProfile"],
     }),
