@@ -9,7 +9,7 @@ import ThirdStep from "./ThirdStep"
 import { Dialog } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
-const SubscriptionMain = () => {
+const SubscriptionMain = ({ buttonText }: { buttonText: string }) => {
   const [firstStepOpened, setFirstStepOpened] = useState(false)
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
@@ -36,7 +36,7 @@ const SubscriptionMain = () => {
 
   return (
     <>
-      <Button onClick={openFirstStep}>продлить</Button>
+      <Button onClick={openFirstStep}>{buttonText}</Button>
 
       <FirstStep
         open={firstStepOpened}
@@ -51,10 +51,7 @@ const SubscriptionMain = () => {
         openThirdStep={openThirdStep}
       />
 
-      <ThirdStep
-        open={thirdStepOpened}
-        onOpenChange={setThirdStepOpened}
-      />
+      <ThirdStep open={thirdStepOpened} onOpenChange={setThirdStepOpened} />
 
       <Dialog open={balanceOpened} onOpenChange={setBalanceOpened}>
         <BalanceModal />

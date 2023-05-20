@@ -15,7 +15,17 @@ import Subheading from "@/shared/typography/Subheading"
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
 
+import { useUserProfileQuery } from "@/redux/api/core"
+
 const Subscription = () => {
+  const { data: profileData } = useUserProfileQuery()
+
+  if (!profileData) return null
+
+  const {
+    subscriptionInfo: { currentBalance, remainingDays },
+  } = profileData
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -34,7 +44,7 @@ const Subscription = () => {
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
           <span className="flex-shrink-0">
-            мой баланс: <AccentNumber>$100</AccentNumber>
+            мой баланс: <AccentNumber>${currentBalance}</AccentNumber>
           </span>
           <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end">
             <ModalTrigger content={<TxHistory />}>
@@ -46,10 +56,22 @@ const Subscription = () => {
           </div>
         </RowItem>
         <RowItem className="gap-6">
-          <span className="typography-text-0 dark:text-gray-4 w-fit block">
-            дней до конца подписки: <AccentNumber>13</AccentNumber>
-          </span>
-          <SubscriptionMain />
+          {remainingDays ? (
+            <>
+              <span className="typography-text-0 dark:text-gray-4 w-fit block">
+                дней до конца подписки:{" "}
+                <AccentNumber>{remainingDays}</AccentNumber>
+              </span>
+              <SubscriptionMain buttonText="продлить" />
+            </>
+          ) : (
+            <>
+              <span className="typography-text-0 dark:text-gray-4 w-fit block">
+                подписка не активна
+              </span>
+              <SubscriptionMain buttonText="купить подписку" />
+            </>
+          )}
         </RowItem>
       </div>
     </div>
