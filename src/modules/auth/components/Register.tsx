@@ -6,9 +6,20 @@ import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg
 
 import AuthButton from "./AuthButton"
 import ActionButton from "./ActionButton"
+import { AuthInput, AuthLabel } from "./AuthInput"
+
+import { useRegisterMutation } from "@/redux/api/core"
 
 const Register = () => {
   const [isMailMode, setIsMailMode] = useState(false)
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+
+  const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
+
+  const onSubmit = async () => {
+    register({ email, username })
+  }
 
   if (isMailMode)
     return (
@@ -22,17 +33,23 @@ const Register = () => {
         </button>
         <div className="flex flex-col gap-3">
           <div className="group flex flex-col gap-1">
-            <label
-              htmlFor="email"
-              className="group-focus-within:text-res-bot-blue text-sm"
-            >
-              Почта
-            </label>
-            <input
+            <AuthLabel htmlFor="email">Почта</AuthLabel>
+            <AuthInput
               id="email"
               type="email"
-              className="bg-transparent border border-gray-1 rounded-md py-2 px-3 outline-none focus:border-res-bot-blue"
               placeholder="Введите вашу почту"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
+            />
+          </div>
+          <div className="group flex flex-col gap-1">
+            <AuthLabel htmlFor="username">Имя пользователя</AuthLabel>
+            <AuthInput
+              id="username"
+              type="text"
+              placeholder="Введите ваше имя пользователя"
+              value={username}
+              onChange={(evt) => setUsername(evt.currentTarget.value)}
             />
           </div>
           <p className="text-xs w-full">
@@ -44,7 +61,21 @@ const Register = () => {
               Политикой конфиденциальности
             </a>
           </p>
-          <ActionButton>Зарегистрироваться</ActionButton>
+          <ActionButton onClick={onSubmit} isLoading={isLoading}>
+            Зарегистрироваться
+          </ActionButton>
+          {isSuccess && (
+            <span className="text-success text-xs font-medium tracking-wide">
+              Вы успешно зарегистрированны! Перейдите по ссылке, которую мы
+              отправили вам на почту
+            </span>
+          )}
+          {error && (
+            <span className="text-error text-xs font-medium tracking-wide">
+              {/* @ts-ignore */}
+              {error.message}
+            </span>
+          )}
         </div>
       </>
     )

@@ -33,6 +33,17 @@ export const api = createApi({
         message: response.data.detail,
       }),
     }),
+    register: build.mutation<void, { email: string; username: string }>({
+      query: ({ email, username }) => ({
+        url: "users/register-web/",
+        method: "POST",
+        body: { email, username },
+      }),
+      transformErrorResponse: (response) => ({
+        // @ts-ignore
+        message: response.data.detail,
+      }),
+    }),
     updateNickname: build.mutation<User, Pick<User, "id" | "username">>({
       query: ({ id, ...patch }) => ({
         url: `users/${id}/`,
@@ -89,6 +100,7 @@ export const {
   useLazyUserProfileQuery,
   useUserProfileQuery,
   useLoginMutation,
+  useRegisterMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
   useUpdateWalletMutation,
