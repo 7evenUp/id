@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
-    credentials: 'include'
+    credentials: "include",
     // prepareHeaders: (headers) => {
     //   headers.set(
     //     "authorization",
@@ -18,9 +18,20 @@ export const api = createApi({
       query: () => ({
         url: "users/profile",
         method: "GET",
-        credentials: 'include'
+        credentials: "include",
       }),
       providesTags: ["UserProfile"],
+    }),
+    login: build.mutation<void, { email: string; redirect_url: string }>({
+      query: ({ email, redirect_url }) => ({
+        url: "users/login/",
+        method: "POST",
+        body: { email, redirect_url },
+      }),
+      transformErrorResponse: (response) => ({
+        // @ts-ignore
+        message: response.data.detail,
+      }),
     }),
     updateNickname: build.mutation<User, Pick<User, "id" | "username">>({
       query: ({ id, ...patch }) => ({
@@ -77,6 +88,7 @@ export const api = createApi({
 export const {
   useLazyUserProfileQuery,
   useUserProfileQuery,
+  useLoginMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
   useUpdateWalletMutation,

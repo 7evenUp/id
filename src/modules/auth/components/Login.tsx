@@ -6,9 +6,19 @@ import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg
 
 import AuthButton from "./AuthButton"
 import ActionButton from "./ActionButton"
+import { AuthInput, AuthLabel } from "./AuthInput"
+
+import { useLoginMutation } from "@/redux/api/core"
 
 const Login = () => {
   const [isMailMode, setIsMailMode] = useState(false)
+  const [email, setEmail] = useState("")
+
+  const [trigger, { isLoading, isSuccess, error }] = useLoginMutation()
+
+  const onSubmit = async () => {
+    trigger({ email, redirect_url: "https://crypton.xyz/profile" })
+  }
 
   if (isMailMode)
     return (
@@ -22,20 +32,29 @@ const Login = () => {
         </button>
         <div className="flex flex-col gap-3">
           <div className="group flex flex-col gap-1">
-            <label
-              htmlFor="email"
-              className="group-focus-within:text-res-bot-blue text-sm"
-            >
-              Почта
-            </label>
-            <input
+            <AuthLabel htmlFor="email">Почта</AuthLabel>
+            <AuthInput
               id="email"
               type="email"
-              className="bg-transparent border border-gray-1 rounded-md py-2 px-3 outline-none focus:border-res-bot-blue"
               placeholder="Введите вашу почту"
+              value={email}
+              onChange={(evt) => setEmail(evt.currentTarget.value)}
             />
           </div>
-          <ActionButton>Войти</ActionButton>
+          <ActionButton onClick={onSubmit} isLoading={isLoading}>
+            Войти
+          </ActionButton>
+          {isSuccess && (
+            <span className="text-success text-xs font-medium tracking-wide">
+              Ссылка для входа успешно отправлена вам на почту
+            </span>
+          )}
+          {error && (
+            <span className="text-error text-xs font-medium tracking-wide">
+              {/* @ts-ignore */}
+              {error.message}
+            </span>
+          )}
         </div>
       </>
     )
