@@ -1,16 +1,16 @@
-import { User } from "@/types/types"
+import { User } from "@/types/user"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
     credentials: "include",
-    // prepareHeaders: (headers) => {
-    //   headers.set(
-    //     "authorization",
-    //     `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-    //   )
-    // },
+    prepareHeaders: (headers) => {
+      // headers.set(
+      //   "authorization",
+      //   `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
+      // )
+    },
   }),
   tagTypes: ["UserProfile"],
   endpoints: (build) => ({
@@ -29,7 +29,7 @@ export const api = createApi({
         body: { email, redirect_url },
       }),
       transformErrorResponse: (response) => ({
-        // @ts-ignore
+        // @ts-expect-error No-Error-Types
         message: response.data.detail,
       }),
     }),
@@ -40,7 +40,7 @@ export const api = createApi({
         body: { email, username },
       }),
       transformErrorResponse: (response) => ({
-        // @ts-ignore
+        // @ts-expect-error No-Error-Types
         message: response.data.detail,
       }),
     }),
@@ -52,11 +52,11 @@ export const api = createApi({
       }),
       invalidatesTags: ["UserProfile"],
     }),
-    updateEmail: build.mutation<User, Pick<User, "id" | "username" | "email">>({
-      query: ({ id, ...patch }) => ({
-        url: `users/${id}/`,
-        method: "PATCH",
-        body: patch,
+    updateEmail: build.mutation<User, Pick<User, "email">>({
+      query: (body) => ({
+        url: `users/change-email/`,
+        method: "POST",
+        body,
       }),
       invalidatesTags: ["UserProfile"],
     }),
@@ -73,15 +73,26 @@ export const api = createApi({
     }),
     updateDiscord: build.mutation<
       User,
-      Pick<User, "id" | "username" | "discordUsername">
+      Pick<User, "discordUsername">
     >({
-      query: ({ id, ...patch }) => ({
-        url: `users/${id}/`,
-        method: "PATCH",
-        body: patch,
+      query: (body) => ({
+        url: `users/change-discord/`,
+        method: "POST",
+        body,
       }),
       invalidatesTags: ["UserProfile"],
     }),
+    // updateDiscord: build.mutation<
+    //   User,
+    //   Pick<User, "id" | "username" | "discordUsername">
+    // >({
+    //   query: ({ id, ...patch }) => ({
+    //     url: `users/${id}/`,
+    //     method: "PATCH",
+    //     body: patch,
+    //   }),
+    //   invalidatesTags: ["UserProfile"],
+    // }),
     updateTelegram: build.mutation<
       User,
       Pick<User, "id" | "username" | "telegramId">
