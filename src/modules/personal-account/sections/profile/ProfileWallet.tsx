@@ -12,7 +12,7 @@ import { useUpdateWalletMutation } from "@/redux/api/core"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
-import { User } from "@/types/types"
+import { User } from "@/types/user"
 
 const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
   const [updateWallet] = useUpdateWalletMutation()

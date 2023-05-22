@@ -9,7 +9,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { useUpdateDiscordMutation } from "@/redux/api/core"
 
-import { User } from "@/types/types"
+import { User } from "@/types/user"
 
 const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)

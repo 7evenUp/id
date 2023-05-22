@@ -8,7 +8,7 @@ import EditContainer from "../../components/EditContainer"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { User } from "@/types/types"
+import { User } from "@/types/user"
 
 const ProfileEmail: React.FC<User> = ({ email }) => {
   return (

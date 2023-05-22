@@ -72,7 +72,7 @@ const Register = () => {
           )}
           {error && (
             <span className="text-error text-xs font-medium tracking-wide">
-              {/* @ts-ignore */}
+              {/* @ts-expect-error No-Error-Types */}
               {error.message}
             </span>
           )}

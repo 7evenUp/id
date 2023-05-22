@@ -9,7 +9,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { useUpdateTelegramMutation } from "@/redux/api/core"
 
-import { User } from "@/types/types"
+import { User } from "@/types/user"
 
 const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)

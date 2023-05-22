@@ -5,7 +5,7 @@ import { cn } from "@/lib/classNames"
 const AuthInput = React.forwardRef<
   HTMLInputElement,
   React.ComponentPropsWithoutRef<"input">
->(({ className, children, ...props }, forwardedRef) => (
+>(({ className, ...props }, forwardedRef) => (
   <input
     className={cn(
       "bg-transparent border border-gray-1 rounded-md py-2 px-3 outline-none focus:border-res-bot-blue placeholder:text-xs",

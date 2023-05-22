@@ -10,7 +10,7 @@ import IconButton from "@/shared/ui/IconButton"
 
 import { useUpdateNicknameMutation } from "@/redux/api/core"
 
-import { User } from "@/types/types"
+import { User } from "@/types/user"
 
 const ProfileNickname: React.FC<User> = ({ id, username }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)
