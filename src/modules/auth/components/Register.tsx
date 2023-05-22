@@ -29,7 +29,7 @@ const Register = () => {
           onClick={() => setIsMailMode(false)}
         >
           <HiOutlineArrowNarrowLeft />
-          Другой метод регистрации
+          <span className="text-left">Другой метод регистрации</span>
         </button>
         <div className="flex flex-col gap-3">
           <div className="group flex flex-col gap-1">

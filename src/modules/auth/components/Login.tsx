@@ -28,7 +28,7 @@ const Login = () => {
           onClick={() => setIsMailMode(false)}
         >
           <HiOutlineArrowNarrowLeft />
-          Другой метод авторизации
+          <span className="text-left">Другой метод авторизации</span>
         </button>
         <div className="flex flex-col gap-3">
           <div className="group flex flex-col gap-1">
