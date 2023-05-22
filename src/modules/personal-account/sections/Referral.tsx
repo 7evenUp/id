@@ -44,7 +44,6 @@ const Referral = () => {
       title: "Скопированно",
       message: "Реферальная ссылка успешно скопирована в буфер обмена",
       type: "default",
-      withProgress: true,
     })
   }
 
