@@ -1,4 +1,7 @@
+import Deactivation from "./modals/Deactivation"
+
 import Avatar from "./components/Avatar"
+import ModalTrigger from "./components/ModalTrigger"
 
 import Profile from "./sections/profile/Profile"
 import Subscription from "./sections/Subscription"
@@ -24,7 +27,9 @@ const PersonalAccount = () => {
 
         <div className="flex justify-between">
           <Button appearence="text">выйти из аккаунта</Button>
-          <Button appearence="text">деактивировать аккаунт</Button>
+          <ModalTrigger content={<Deactivation />}>
+            <Button appearence="text">деактивировать аккаунт</Button>
+          </ModalTrigger>
         </div>
       </div>
     </div>
