@@ -12,7 +12,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "flex items-center gap-[72px] py-4 px-5 mb-9 border-b border-gray-2 dark:border-gray-2",
+      "flex items-center justify-between sm:justify-start w-full sm:gap-[72px] py-4 px-2 mobile-sm:px-5 mb-9 border-b border-gray-2 dark:border-gray-2",
       className
     )}
     {...props}
@@ -30,7 +30,7 @@ const TabsTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <span className="absolute hidden group-data-[state=active]:block w-[68px] h-[3px] rounded-full left-0 bottom-0 translate-y-[18px] -translate-x-5 bg-gray-1 dark:bg-gray-5" />
+    <span className="absolute hidden group-data-[state=active]:block w-10 mobile-sm:w-[68px] h-[3px] rounded-full left-0 bottom-0 translate-y-[18px] -translate-x-[7px] mobile-sm:-translate-x-5 bg-gray-1 dark:bg-gray-5" />
   </TabsPrimitive.Trigger>
 ))
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
