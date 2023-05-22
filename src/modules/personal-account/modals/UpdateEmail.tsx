@@ -6,31 +6,67 @@ import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
 
 import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
+import { useMetamask } from "@/hooks/useMetamask"
 
 const UpdateEmail = () => {
   const [oldEmail, setOldEmail] = useState("")
   const [newEmail, setNewEmail] = useState("")
+  const [error, setError] = useState("")
 
-  const { data: userProfileData, error } = useUserProfileQuery()
-  const [updateEmail, { data: updatedData }] = useUpdateEmailMutation()
+  const { data: userProfileData } = useUserProfileQuery()
+  const [updateEmail] = useUpdateEmailMutation()
+
+  // const {
+  //   dispatch,
+  //   state: { status, isMetamaskInstalled, walletAddress },
+  // } = useMetamask()
+
+  // const showConnectButton =
+  //   status !== "pageNotLoaded" && isMetamaskInstalled && !walletAddress
+  // const isConnected =
+  //   status !== "pageNotLoaded" && typeof walletAddress === "string"
+
+  // const isOldEmailCorrect = oldEmail === userProfileData?.email
 
   const onSubmit = () => {
+    if (!/.+@.+\..+/.test(newEmail)) {
+      console.log("email is not valid")
+      return
+    }
+
     if (userProfileData) {
       updateEmail({
-        id: userProfileData.id,
-        username: userProfileData.username,
         email: newEmail,
       })
     }
   }
 
-  if (error) {
-    console.error("Error with fetching user profile data: ", error)
-  }
+  // const handleConnect = async () => {
+  //   dispatch({ type: "loading" })
+  //   const accounts = await window.ethereum.request({
+  //     method: "eth_requestAccounts",
+  //   })
 
-  if (updatedData) {
-    console.log("New data: ", updatedData)
-  }
+  //   if (accounts.length > 0) {
+  //     dispatch({ type: "connect", walletAddress: accounts[0] })
+
+  //     // const exampleMessage = 'Example `personal_sign` message.';
+
+  //     // try {
+  //     //   const from = accounts[0];
+  //     //   // For historical reasons, you must submit the message to sign in hex-encoded UTF-8.
+  //     //   // This uses a Node.js-style buffer shim in the browser.
+  //     //   const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
+  //     //   const sign = await window.ethereum.request({
+  //     //     method: 'personal_sign',
+  //     //     params: [msg, from, 'Example password'],
+  //     //   });
+  //     //   console.log(sign)
+  //     // } catch (err) {
+  //     //   console.error(err);
+  //     // }
+  //   }
+  // }
 
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[370px]">
@@ -68,15 +104,33 @@ const UpdateEmail = () => {
             onChange={(evt) => setNewEmail(evt.currentTarget.value)}
           />
         </div>
-        <DialogClose asChild>
+        {/* {showConnectButton && (
           <Button
             className="w-fit mt-2"
-            onClick={onSubmit}
-            disabled={!newEmail.length}
+            onClick={handleConnect}
+            disabled={!isOldEmailCorrect || !newEmail.length}
           >
-            подтвердить
+            подключить Metamask
           </Button>
-        </DialogClose>
+        )}
+        {isConnected && (
+          <DialogClose asChild>
+            <Button
+              className="w-fit mt-2"
+              onClick={onSubmit}
+              disabled={!isOldEmailCorrect || !newEmail.length}
+            >
+              подтвердить
+            </Button>
+          </DialogClose>
+        )} */}
+        <Button
+              className="w-fit mt-2"
+              onClick={onSubmit}
+              // disabled={!isOldEmailCorrect || !newEmail.length}
+            >
+              подтвердить
+            </Button>
       </div>
     </DialogContent>
   )

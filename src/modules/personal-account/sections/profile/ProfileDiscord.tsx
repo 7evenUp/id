@@ -47,8 +47,6 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
     // }
 
     updateDiscord({
-      id: id,
-      username: username,
       discordUsername: inputValue,
     })
 
@@ -85,6 +83,7 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
         !inputRef.current?.value.length && (
           <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
         )}
+
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
         {isEditingMode ? (

@@ -31,7 +31,9 @@ const Balance = () => {
             <SelectTrigger />
             <SelectContent className="z-[999]">
               <SelectItem value="crypto">криптовалюта</SelectItem>
-              <SelectItem value="card" disabled>банковская карта</SelectItem>
+              <SelectItem value="card" disabled>
+                банковская карта
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>

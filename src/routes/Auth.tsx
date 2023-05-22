@@ -7,9 +7,14 @@ const Auth = () => {
   const [email, setEmail] = useState("")
 
   const onSubmit = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "email":email, "redirect_url":"https://crypton.xyz/profile"})
+  };
     try {
       const res = await fetch(
-        `https://union-api.crypton.xyz/api/v1/users/login?email=${email}&redirect_url=https://localhost:5173`
+        'https://union-api.crypton.xyz/api/v1/users/login/', requestOptions
       )
     } catch (error) {
       console.error("Error happened: ")
