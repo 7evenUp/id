@@ -52,9 +52,21 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
       {wallet ? (
         <span>{cutWalletAddr(wallet)}</span>
       ) : (
-        <AiOutlinePlus className="absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
+        <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
       )}
-      <EditContainer>
+
+      {/* Mobile editing */}
+      <div className="sm:hidden ml-6">
+        {showInstallMetamask && (
+          <a href="https://metamask.io/" target="_blank">
+            <EditButton />
+          </a>
+        )}
+        {showConnectButton && <EditButton onClick={handleConnect} />}
+      </div>
+
+      {/* Desktop editing */}
+      <EditContainer className="hidden sm:flex">
         {showInstallMetamask && (
           <a href="https://metamask.io/" target="_blank">
             <EditButton />

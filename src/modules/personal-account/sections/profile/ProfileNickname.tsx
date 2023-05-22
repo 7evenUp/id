@@ -46,8 +46,8 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
   }
 
   return (
-    <RowItem className="relative group">
-      <span>ник</span>
+    <RowItem className="relative group justify-end">
+      <span className="mr-auto">ник</span>
       <input
         className="peer bg-transparent outline-none text-right"
         defaultValue={username}
@@ -55,7 +55,23 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
         disabled={!isEditingMode}
         onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
       />
-      <EditContainer>
+
+      {/* Mobile editing */}
+      <div className="sm:hidden ml-6">
+        {isEditingMode ? (
+          <IconButton
+            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
+            onClick={onSubmit}
+          >
+            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
+          </IconButton>
+        ) : (
+          <EditButton onClick={onEdit} />
+        )}
+      </div>
+
+      {/* Desktop editing */}
+      <EditContainer className="hidden sm:flex">
         {isEditingMode ? (
           <IconButton
             className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"

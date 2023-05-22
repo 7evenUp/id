@@ -10,13 +10,15 @@ import RowItem from "@/shared/components/RowItem"
 import { useUpdateDiscordMutation } from "@/redux/api/core"
 
 import { User } from "@/types/user"
+import IconButton from "@/shared/ui/IconButton"
+import { TbCheck } from "react-icons/tb"
 
 const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const [updateDiscord] = useUpdateDiscordMutation()
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log("clicked")
     setIsEditingMode(false)
 
@@ -31,11 +33,28 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
 
     if (discordUsername === inputValue) return
 
+    // try {
+    //   const res = await fetch(
+    //     "https://union-api.crypton.xyz/api/v1/users/change-discord/", {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ "discord_username":inputValue}),
+    //       credentials: 'include'
+    //   }
+    //   )
+    // } catch (error) {
+    //   console.error("Error happened: ")
+    // }
+
     updateDiscord({
       id: id,
       username: username,
       discordUsername: inputValue,
     })
+
+    // updateDiscord({
+    //   discordUsername: inputValue,
+    // })
   }
 
   const onEdit = () => {
@@ -64,11 +83,31 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
       {!discordUsername &&
         !isEditingMode &&
         !inputRef.current?.value.length && (
-          <AiOutlinePlus className="absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
+          <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
         )}
-      <EditContainer>
+      {/* Mobile editing */}
+      <div className="sm:hidden ml-6">
         {isEditingMode ? (
-          <SyncButton onClick={onSubmit} />
+          <IconButton
+            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
+            onClick={onSubmit}
+          >
+            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
+          </IconButton>
+        ) : (
+          <EditButton onClick={onEdit} />
+        )}
+      </div>
+
+      {/* Desktop editing */}
+      <EditContainer className="hidden sm:flex">
+        {isEditingMode ? (
+          <IconButton
+            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
+            onClick={onSubmit}
+          >
+            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
+          </IconButton>
         ) : (
           <EditButton onClick={onEdit} />
         )}

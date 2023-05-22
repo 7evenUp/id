@@ -12,10 +12,19 @@ import { User } from "@/types/user"
 
 const ProfileEmail: React.FC<User> = ({ email }) => {
   return (
-    <RowItem className="relative group">
-      <span>почта</span>
+    <RowItem className="relative group justify-end">
+      <span className="mr-auto">почта</span>
       <span>{email}</span>
-      <EditContainer>
+
+      {/* Mobile editing */}
+      <div className="sm:hidden ml-6">
+        <ModalTrigger content={<UpdateEmail />}>
+          <EditButton />
+        </ModalTrigger>
+      </div>
+
+      {/* Desktop editing */}
+      <EditContainer className="hidden sm:flex">
         <ModalTrigger content={<UpdateEmail />}>
           <EditButton />
         </ModalTrigger>
