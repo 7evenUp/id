@@ -7,7 +7,7 @@ export interface User {
   telegramId: number
   discordUsername: string
   email: string
-  avatars: string[]
+  avatars: Avatar[]
   balance: number
   capital: number
   isBanned: boolean
@@ -17,6 +17,15 @@ export interface User {
   languageCode: string
   referralInfo: ReferralInfo
   subscriptionInfo: SubscriptionInfo
+}
+
+export interface Avatar {
+  createdDatetime: string
+  file: string
+  id: number
+  isActive: boolean
+  order: number
+  user: number
 }
 
 export interface Transaction {
