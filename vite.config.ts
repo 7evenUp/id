@@ -3,12 +3,14 @@ import path from "path"
 
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
+import mkcert from'vite-plugin-mkcert'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [react(), svgr(), mkcert()],
   server: {
-    https: true
+    https: true,
+    host: true
   },
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
