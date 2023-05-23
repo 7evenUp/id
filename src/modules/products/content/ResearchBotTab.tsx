@@ -1,0 +1,158 @@
+import { useState } from "react"
+import { HiOutlineArrowNarrowRight } from "react-icons/hi"
+
+import TabHeader from "../components/TabHeader"
+import TextSizeSlider from "../components/TextSizeSlider"
+import BackgroundPicker from "../components/BackgroundPicker"
+import ProjectsSettings from "../components/ProjectsSettings"
+
+import Subheading from "@/shared/typography/Subheading"
+
+import Button from "@/shared/ui/Button"
+import Switch from "@/shared/ui/Switch"
+
+import RowItem from "@/shared/components/RowItem"
+
+type Language = "ru" | "en"
+
+const ResearchBotTab = () => {
+  const [resLanguage, setResLanguage] = useState<Language>("ru")
+  const [aggLanguage, setAggLanguage] = useState<Language>("en")
+
+  const toggleResLanguage = (target: Language) => {
+    if (target === "ru") {
+      if (resLanguage === "ru") {
+        setResLanguage("en")
+      } else {
+        setResLanguage("ru")
+      }
+    } else {
+      if (resLanguage === "en") {
+        setResLanguage("ru")
+      } else {
+        setResLanguage("en")
+      }
+    }
+  }
+
+  const toggleAggLanguage = (target: Language) => {
+    if (target === "ru") {
+      if (aggLanguage === "ru") {
+        setAggLanguage("en")
+      } else {
+        setAggLanguage("ru")
+      }
+    } else {
+      if (aggLanguage === "en") {
+        setAggLanguage("ru")
+      } else {
+        setAggLanguage("en")
+      }
+    }
+  }
+
+  return (
+    <>
+      <TabHeader>
+        <div className="flex gap-5">
+          <Subheading>Research Bot</Subheading>
+          <a
+            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
+            href="#"
+          >
+            <HiOutlineArrowNarrowRight />
+            на сайт
+          </a>
+        </div>
+        <Button className="sm:ml-auto w-fit">сохранить изменения</Button>
+      </TabHeader>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
+        <span>Уведомления в браузере</span>
+        <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
+          <div className="flex items-center gap-2">
+            <Switch id="resNotif" defaultChecked={true} />
+            <label htmlFor="resNotif">Research</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch id="agrNotif" />
+            <label htmlFor="agrNotif">Агрегатор</label>
+          </div>
+        </div>
+      </RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
+        <span>Отображение режимов</span>
+        <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
+          <div className="flex items-center gap-2">
+            <Switch id="resView" defaultChecked={true} />
+            <label htmlFor="resView">Research</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Switch id="agrView" />
+            <label htmlFor="agrView">Агрегатор</label>
+          </div>
+        </div>
+      </RowItem>
+      <RowItem className="flex-col sm:flex-row lg:flex-col xlg:flex-row gap-3 items-baseline">
+        <span>Автопереводчик</span>
+        <div className="flex flex-col gap-[5px] sm:self-end">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <span>Research</span>
+            <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
+              <div className="flex-1 flex items-center gap-2">
+                <Switch
+                  id="resRu"
+                  checked={resLanguage === "ru"}
+                  onCheckedChange={() => toggleResLanguage("ru")}
+                />
+                <label htmlFor="resRu">Русский</label>
+              </div>
+              <div className="flex-1 flex items-center gap-2">
+                <Switch
+                  id="resEn"
+                  checked={resLanguage === "en"}
+                  onCheckedChange={() => toggleResLanguage("en")}
+                />
+                <label htmlFor="resEn">Английский</label>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 dark:text-gray-4">
+            <span>Агрегатор</span>
+            <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
+              <div className="flex-1 flex items-center gap-2">
+                <Switch
+                  id="agrEn"
+                  checked={aggLanguage === "ru"}
+                  onCheckedChange={() => toggleAggLanguage("ru")}
+                />
+                <label htmlFor="agrEn">Русский</label>
+              </div>
+              <div className="flex-1 flex items-center gap-2">
+                <Switch
+                  id="agrEs"
+                  checked={aggLanguage === "en"}
+                  onCheckedChange={() => toggleAggLanguage("en")}
+                />
+                <label htmlFor="agrEs">Английский</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
+        <span>Размер текста в новостях</span>
+        <TextSizeSlider />
+      </RowItem>
+      <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
+        <span>Выбор фона</span>
+        <BackgroundPicker />
+      </RowItem>
+      <div className="flex flex-col gap-1.5 py-2 dark:text-gray-4">
+        <span>Настройки проектов</span>
+        <ProjectsSettings />
+      </div>
+    </>
+  )
+}
+
+export default ResearchBotTab
