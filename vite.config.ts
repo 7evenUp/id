@@ -9,7 +9,7 @@ import mkcert from'vite-plugin-mkcert'
 export default defineConfig({
   plugins: [react(), svgr(), mkcert()],
   server: {
-    https: true,
+    // https: true,
     host: true
   },
   resolve: {
