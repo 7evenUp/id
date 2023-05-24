@@ -52,7 +52,14 @@ const Login = () => {
           {error && (
             <span className="text-error text-xs font-medium tracking-wide">
               {/* @ts-expect-error No-Error-Types */}
-              {error.message}
+              {error.message ? (
+                <span>
+                  {/* @ts-expect-error No-Error-Types */}
+                  {error.message}
+                </span>
+              ) : (
+                <span>На стороне сервера произошла ошибка</span>
+              )}
             </span>
           )}
         </div>
