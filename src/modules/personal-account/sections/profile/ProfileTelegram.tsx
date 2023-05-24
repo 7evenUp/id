@@ -11,7 +11,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { User } from "@/types/user"
 
-const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
+const ProfileTelegram: React.FC<User> = ({ telegramId }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   

@@ -3,7 +3,6 @@ import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
-import SyncButton from "../../components/SyncButton"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -13,7 +12,7 @@ import { User } from "@/types/user"
 import IconButton from "@/shared/ui/IconButton"
 import { TbCheck } from "react-icons/tb"
 
-const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
+const ProfileDiscord: React.FC<User> = ({ discordUsername }) => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const [updateDiscord] = useUpdateDiscordMutation()

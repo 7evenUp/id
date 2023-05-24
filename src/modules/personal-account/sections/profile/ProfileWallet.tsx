@@ -14,7 +14,7 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { User } from "@/types/user"
 
-const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
+const ProfileWallet: React.FC<User> = ({ wallet }) => {
   const [updateWallet] = useUpdateWalletMutation()
   const {
     dispatch,
@@ -25,8 +25,8 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
   const showConnectButton =
     status !== "pageNotLoaded" && isMetamaskInstalled && !walletAddress
 
-  const isConnected =
-    status !== "pageNotLoaded" && typeof walletAddress === "string"
+  // const isConnected =
+  //   status !== "pageNotLoaded" && typeof walletAddress === "string"
 
   const handleConnect = async () => {
     dispatch({ type: "loading" })
@@ -37,8 +37,6 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
     if (accounts.length > 0) {
       dispatch({ type: "connect", walletAddress: accounts[0] })
       updateWallet({
-        id: id,
-        username: username,
         wallet: accounts[0],
       })
     }

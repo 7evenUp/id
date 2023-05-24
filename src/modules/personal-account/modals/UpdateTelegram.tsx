@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -31,9 +31,9 @@ const UpdateTelegram = () => {
 
     if (telegramId === parseInt(inputValue)) return
 
-    // trigger({
-    //   telegramId: parseInt(inputValue),
-    // })
+    trigger({
+      telegramId: parseInt(inputValue),
+    })
   }
 
   return (
