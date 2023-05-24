@@ -24,10 +24,8 @@ const App = () => {
               <PersonalAccount />
               <Products />
             </>
-          ) : error && error.status === 401 ? (
-            <Auth />
           ) : (
-            <h1>Неизвестная ошибка. Зайдите позже:)</h1>
+            error && <Auth />
           )}
         </main>
       </div>
