@@ -7,7 +7,7 @@ import Input from "@/shared/ui/Input"
 import {
   useUpdateTelegramMutation,
   useUserProfileQuery,
-} from "@/redux/api/core"
+} from "@/redux/api/profile"
 
 const UpdateTelegram = () => {
   const inputRef = useRef<HTMLInputElement>(null)

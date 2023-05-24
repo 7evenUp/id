@@ -4,7 +4,7 @@ import ChangeAvatar from "../modals/ChangeAvatar"
 
 import ModalTrigger from "./ModalTrigger"
 
-// import { useUserProfileQuery } from "@/redux/api/core"
+// import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Avatar = () => {
   // const { data: profileData } = useUserProfileQuery()

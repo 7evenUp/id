@@ -8,7 +8,7 @@ import AuthButton from "./AuthButton"
 import ActionButton from "./ActionButton"
 import { AuthInput, AuthLabel } from "./AuthInput"
 
-import { useLoginMutation } from "@/redux/api/core"
+import { useLoginMutation } from "@/redux/api/auth"
 
 const Login = () => {
   const [isMailMode, setIsMailMode] = useState(false)

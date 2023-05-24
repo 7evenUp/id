@@ -15,7 +15,7 @@ import Subheading from "@/shared/typography/Subheading"
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Subscription = () => {
   const { data: profileData } = useUserProfileQuery()

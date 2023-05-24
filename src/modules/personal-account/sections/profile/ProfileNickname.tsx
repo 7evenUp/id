@@ -9,7 +9,7 @@ import RowItem from "@/shared/components/RowItem"
 import {
   useUpdateNicknameMutation,
   useUserProfileQuery,
-} from "@/redux/api/core"
+} from "@/redux/api/profile"
 
 const ProfileNickname = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)

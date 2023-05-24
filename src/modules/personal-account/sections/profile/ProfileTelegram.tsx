@@ -9,7 +9,7 @@ import ModalTrigger from "../../components/ModalTrigger"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ProfileTelegram = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)

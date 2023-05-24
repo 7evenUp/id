@@ -5,7 +5,7 @@ import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
 
-import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
+import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/profile"
 // import { useMetamask } from "@/hooks/useMetamask"
 
 const UpdateEmail = () => {

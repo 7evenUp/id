@@ -7,7 +7,7 @@ import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { useUpdateDiscordMutation, useUserProfileQuery } from "@/redux/api/core"
+import { useUpdateDiscordMutation, useUserProfileQuery } from "@/redux/api/profile"
 
 const ProfileDiscord = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)

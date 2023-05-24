@@ -5,7 +5,7 @@ import Auth from "./modules/auth/Auth"
 
 import SkeletonLayout from "./components/SkeletonLayout"
 
-import { useUserProfileQuery } from "./redux/api/core"
+import { useUserProfileQuery } from "./redux/api/profile"
 
 const App = () => {
   const { isLoading, data, error } = useUserProfileQuery()

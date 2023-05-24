@@ -6,7 +6,7 @@ import EditContainer from "../../components/EditContainer"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ProfileEmail = () => {
   const { data: userProfile } = useUserProfileQuery()

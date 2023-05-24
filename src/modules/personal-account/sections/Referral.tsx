@@ -15,7 +15,7 @@ import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
 import { toast } from "@/shared/ui/Toast"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Referral = () => {
   const { data: profileData } = useUserProfileQuery()
