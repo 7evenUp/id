@@ -1,5 +1,3 @@
-import React from "react"
-
 import UpdateEmail from "../../modals/UpdateEmail"
 
 import ModalTrigger from "../../components/ModalTrigger"
@@ -8,13 +6,17 @@ import EditContainer from "../../components/EditContainer"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { User } from "@/types/user"
+import { useUserProfileQuery } from "@/redux/api/core"
 
-const ProfileEmail: React.FC<User> = ({ email }) => {
+const ProfileEmail = () => {
+  const { data: userProfile } = useUserProfileQuery()
+
+  if (!userProfile) return null
+
   return (
     <RowItem className="relative group justify-end">
       <span className="mr-auto">почта</span>
-      <span>{email}</span>
+      <span>{userProfile.email}</span>
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">

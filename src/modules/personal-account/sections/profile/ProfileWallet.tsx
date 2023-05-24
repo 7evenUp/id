@@ -1,4 +1,3 @@
-import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
@@ -8,18 +7,22 @@ import RowItem from "@/shared/components/RowItem"
 
 import { useMetamask } from "@/hooks/useMetamask"
 
-import { useUpdateWalletMutation } from "@/redux/api/core"
+import { useUpdateWalletMutation, useUserProfileQuery } from "@/redux/api/core"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
-import { User } from "@/types/user"
+const ProfileWallet = () => {
+  const { data: userProfile } = useUserProfileQuery()
 
-const ProfileWallet: React.FC<User> = ({ wallet }) => {
   const [updateWallet] = useUpdateWalletMutation()
   const {
     dispatch,
     state: { status, isMetamaskInstalled, walletAddress },
   } = useMetamask()
+
+  if (!userProfile) return null
+
+  const { wallet } = userProfile
 
   const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled
   const showConnectButton =
