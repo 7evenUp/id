@@ -1,4 +1,3 @@
-import React from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
@@ -8,25 +7,29 @@ import RowItem from "@/shared/components/RowItem"
 
 import { useMetamask } from "@/hooks/useMetamask"
 
-import { useUpdateWalletMutation } from "@/redux/api/core"
+import { useUpdateWalletMutation, useUserProfileQuery } from "@/redux/api/core"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
-import { User } from "@/types/user"
+const ProfileWallet = () => {
+  const { data: userProfile } = useUserProfileQuery()
 
-const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
   const [updateWallet] = useUpdateWalletMutation()
   const {
     dispatch,
     state: { status, isMetamaskInstalled, walletAddress },
   } = useMetamask()
 
+  if (!userProfile) return null
+
+  const { wallet } = userProfile
+
   const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled
   const showConnectButton =
     status !== "pageNotLoaded" && isMetamaskInstalled && !walletAddress
 
-  const isConnected =
-    status !== "pageNotLoaded" && typeof walletAddress === "string"
+  // const isConnected =
+  //   status !== "pageNotLoaded" && typeof walletAddress === "string"
 
   const handleConnect = async () => {
     dispatch({ type: "loading" })
@@ -37,8 +40,6 @@ const ProfileWallet: React.FC<User> = ({ id, username, wallet }) => {
     if (accounts.length > 0) {
       dispatch({ type: "connect", walletAddress: accounts[0] })
       updateWallet({
-        id: id,
-        username: username,
         wallet: accounts[0],
       })
     }

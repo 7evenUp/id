@@ -1,21 +1,26 @@
-import React, { useRef, useState } from "react"
-import { TbCheck } from "react-icons/tb"
+import { useRef, useState } from "react"
 
 import EditButton from "../../components/EditButton"
 import EditContainer from "../../components/EditContainer"
+import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
 
-import IconButton from "@/shared/ui/IconButton"
+import {
+  useUpdateNicknameMutation,
+  useUserProfileQuery,
+} from "@/redux/api/core"
 
-import { useUpdateNicknameMutation } from "@/redux/api/core"
-
-import { User } from "@/types/user"
-
-const ProfileNickname: React.FC<User> = ({ id, username }) => {
+const ProfileNickname = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { data: userProfile } = useUserProfileQuery()
   const [updateNickname] = useUpdateNicknameMutation()
+
+  if (!userProfile) return null
+
+  const { username, id } = userProfile
 
   const onSubmit = () => {
     console.log("clicked")
@@ -59,12 +64,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
         {isEditingMode ? (
-          <IconButton
-            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-            onClick={onSubmit}
-          >
-            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-          </IconButton>
+          <ConfirmButton onClick={onSubmit} />
         ) : (
           <EditButton onClick={onEdit} />
         )}
@@ -73,12 +73,7 @@ const ProfileNickname: React.FC<User> = ({ id, username }) => {
       {/* Desktop editing */}
       <EditContainer className="hidden sm:flex">
         {isEditingMode ? (
-          <IconButton
-            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-            onClick={onSubmit}
-          >
-            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-          </IconButton>
+          <ConfirmButton onClick={onSubmit} />
         ) : (
           <EditButton onClick={onEdit} />
         )}

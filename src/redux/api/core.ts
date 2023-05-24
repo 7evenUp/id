@@ -6,12 +6,12 @@ export const api = createApi({
     // baseUrl: import.meta.env.VITE_API_BASE_URL,
     baseUrl: 'https://union-api.crypton.xyz/api/v1/',
     credentials: "include",
-    prepareHeaders: (headers) => {
-      // headers.set(
-      //   "authorization",
-      //   `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-      // )
-    },
+    // prepareHeaders: (headers) => {
+    //   headers.set(
+    //     "authorization",
+    //     `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
+    //   )
+    // },
   }),
   tagTypes: ["UserProfile"],
   endpoints: (build) => ({
@@ -63,12 +63,12 @@ export const api = createApi({
     }),
     updateWallet: build.mutation<
       User,
-      Pick<User, "id" | "username" | "wallet">
+      Pick<User, "wallet">
     >({
-      query: ({ id, ...patch }) => ({
-        url: `users/${id}/`,
+      query: (body) => ({
+        url: 'users/change-wallet',
         method: "PATCH",
-        body: patch,
+        body,
       }),
       invalidatesTags: ["UserProfile"],
     }),
@@ -77,7 +77,7 @@ export const api = createApi({
       Pick<User, "discordUsername">
     >({
       query: (body) => ({
-        url: `users/change-discord/`,
+        url: 'users/change-discord/',
         method: "POST",
         body,
       }),
@@ -96,12 +96,12 @@ export const api = createApi({
     // }),
     updateTelegram: build.mutation<
       User,
-      Pick<User, "id" | "username" | "telegramId">
+      Pick<User, "telegramId">
     >({
-      query: ({ id, ...patch }) => ({
-        url: `users/${id}/`,
-        method: "PATCH",
-        body: patch,
+      query: (body) => ({
+        url: 'users/change-telegram/',
+        method: "POST",
+        body,
       }),
       invalidatesTags: ["UserProfile"],
     }),

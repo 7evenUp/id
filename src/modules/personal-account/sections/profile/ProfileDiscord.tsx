@@ -1,22 +1,24 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
-import SyncButton from "../../components/SyncButton"
+import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { useUpdateDiscordMutation } from "@/redux/api/core"
+import { useUpdateDiscordMutation, useUserProfileQuery } from "@/redux/api/core"
 
-import { User } from "@/types/user"
-import IconButton from "@/shared/ui/IconButton"
-import { TbCheck } from "react-icons/tb"
-
-const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
+const ProfileDiscord = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { data: userProfile } = useUserProfileQuery()
   const [updateDiscord] = useUpdateDiscordMutation()
+
+  if (!userProfile) return null
+
+  const { discordUsername } = userProfile
 
   const onSubmit = async () => {
     console.log("clicked")
@@ -33,26 +35,10 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
 
     if (discordUsername === inputValue) return
 
-    // try {
-    //   const res = await fetch(
-    //     "https://union-api.crypton.xyz/api/v1/users/change-discord/", {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify({ "discord_username":inputValue}),
-    //       credentials: 'include'
-    //   }
-    //   )
-    // } catch (error) {
-    //   console.error("Error happened: ")
-    // }
-
+    console.log("Discord changed with new value: ", inputValue)
     updateDiscord({
       discordUsername: inputValue,
     })
-
-    // updateDiscord({
-    //   discordUsername: inputValue,
-    // })
   }
 
   const onEdit = () => {
@@ -87,12 +73,7 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
         {isEditingMode ? (
-          <IconButton
-            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-            onClick={onSubmit}
-          >
-            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-          </IconButton>
+          <ConfirmButton onClick={onSubmit} />
         ) : (
           <EditButton onClick={onEdit} />
         )}
@@ -101,12 +82,7 @@ const ProfileDiscord: React.FC<User> = ({ id, username, discordUsername }) => {
       {/* Desktop editing */}
       <EditContainer className="hidden sm:flex">
         {isEditingMode ? (
-          <IconButton
-            className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full"
-            onClick={onSubmit}
-          >
-            <TbCheck className="w-3.5 h-3.5 stroke-gray-5" />
-          </IconButton>
+          <ConfirmButton onClick={onSubmit} />
         ) : (
           <EditButton onClick={onEdit} />
         )}

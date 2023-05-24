@@ -1,17 +1,17 @@
 import { useState } from "react"
-import { DialogClose } from "@radix-ui/react-dialog"
+// import { DialogClose } from "@radix-ui/react-dialog"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
 
 import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
-import { useMetamask } from "@/hooks/useMetamask"
+// import { useMetamask } from "@/hooks/useMetamask"
 
 const UpdateEmail = () => {
   const [oldEmail, setOldEmail] = useState("")
   const [newEmail, setNewEmail] = useState("")
-  const [error, setError] = useState("")
+  // const [error, setError] = useState("")
 
   const { data: userProfileData } = useUserProfileQuery()
   const [updateEmail] = useUpdateEmailMutation()
@@ -125,12 +125,12 @@ const UpdateEmail = () => {
           </DialogClose>
         )} */}
         <Button
-              className="w-fit mt-2"
-              onClick={onSubmit}
-              // disabled={!isOldEmailCorrect || !newEmail.length}
-            >
-              подтвердить
-            </Button>
+          className="w-fit mt-2"
+          onClick={onSubmit}
+          // disabled={!isOldEmailCorrect || !newEmail.length}
+        >
+          подтвердить
+        </Button>
       </div>
     </DialogContent>
   )

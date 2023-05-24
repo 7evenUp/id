@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 
 import UpdateTelegram from "../../modals/UpdateTelegram"
@@ -9,12 +9,17 @@ import ModalTrigger from "../../components/ModalTrigger"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { User } from "@/types/user"
+import { useUserProfileQuery } from "@/redux/api/core"
 
-const ProfileTelegram: React.FC<User> = ({ id, username, telegramId }) => {
+const ProfileTelegram = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  
+
+  const { data: userProfile } = useUserProfileQuery()
+
+  if (!userProfile) return null
+
+  const { telegramId } = userProfile
 
   return (
     <RowItem className="relative group">

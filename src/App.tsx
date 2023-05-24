@@ -10,7 +10,13 @@ import { useUserProfileQuery } from "./redux/api/core"
 const App = () => {
   const { isLoading, data, error } = useUserProfileQuery()
 
-  if (error) console.log(error)
+  if (data) {
+    console.log("Fetched user data: ", data)
+  }
+
+  if (error) {
+    console.error("Error happened while fetching GET users/profile: ", error)
+  }
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">

@@ -13,7 +13,7 @@ const Auth = () => {
       body: JSON.stringify({ "email":email, "redirect_url":"https://crypton.xyz/profile"})
   };
     try {
-      const res = await fetch(
+      await fetch(
         'https://union-api.crypton.xyz/api/v1/users/login/', requestOptions
       )
     } catch (error) {
