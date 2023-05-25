@@ -28,8 +28,8 @@ const Balance = () => {
         <div className="flex items-center gap-2 mb-5 typography-text-1">
           <span>Выберите способ пополнения:</span>
           <Select defaultValue="crypto">
-            <SelectTrigger />
-            <SelectContent className="z-[999]">
+            <SelectTrigger className="w-[130px]" />
+            <SelectContent className="z-[999] w-[130px]">
               <SelectItem value="crypto">криптовалюта</SelectItem>
               <SelectItem value="card" disabled>
                 банковская карта
