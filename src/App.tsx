@@ -6,9 +6,38 @@ import Auth from "./modules/auth/Auth"
 import SkeletonLayout from "./components/SkeletonLayout"
 
 import { useUserProfileQuery } from "./redux/api/profile"
+import { useMetamask } from "./hooks/useMetamask"
+import { useEffect } from "react"
 
 const App = () => {
   const { isLoading, data, error } = useUserProfileQuery()
+
+  const { dispatch } = useMetamask()
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      // start by checking if window.ethereum is present, indicating a wallet extension
+      const ethereumProviderInjected = typeof window.ethereum !== "undefined"
+      // this could be other wallets so we can verify if we are dealing with metamask
+      // using the boolean constructor to be explecit and not let this be used as a falsy value (optional)
+      const isMetamaskInstalled =
+        ethereumProviderInjected && Boolean(window.ethereum.isMetaMask)
+
+      const local = window.localStorage.getItem("metamaskState")
+
+      // user was previously connected, start listening to MM
+      if (local) {
+      }
+
+      // local could be null if not present in LocalStorage
+      const { walletAddress } = local
+        ? JSON.parse(local)
+        : // backup if local storage is empty
+          { walletAddress: null }
+
+      dispatch({ type: "pageLoaded", isMetamaskInstalled, walletAddress })
+    }
+  }, [])
 
   if (data) {
     console.log("Fetched user data: ", data)

@@ -30,7 +30,7 @@ const profileApi = api.injectEndpoints({
     }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({
-        url: "users/change-wallet",
+        url: "users/change-wallet/",
         method: "POST",
         body,
       }),
