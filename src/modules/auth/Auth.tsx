@@ -4,11 +4,12 @@ import ResearchAuthImage from "@/assets/images/auth_research.png"
 
 import Login from "./components/Login"
 import Register from "./components/Register"
+import ToggleMode from "./components/ToggleMode"
 
 const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true)
 
-  const toggleLoginMode = () => {
+  const toggleMode = () => {
     setIsLoginMode(!isLoginMode)
   }
 
@@ -23,28 +24,10 @@ const Auth = () => {
           <h2 className="text-lg font-medium text-black mb-10 max-w-[260px]">
             {headingText}
           </h2>
-
           {isLoginMode ? <Login /> : <Register />}
         </div>
 
-        {isLoginMode ? (
-          <button
-            className="typography-text-0 font-medium w-fit text-res-bot-blue hover:underline underline-offset-2"
-            onClick={toggleLoginMode}
-          >
-            Создать аккаунт
-          </button>
-        ) : (
-          <div className="typography-text-0">
-            <span>Уже есть аккаунт?</span>
-            <button
-              className="typography-text-0 font-medium w-fit text-res-bot-blue hover:underline underline-offset-2 ml-2"
-              onClick={toggleLoginMode}
-            >
-              Войти
-            </button>
-          </div>
-        )}
+        <ToggleMode isLoginMode={isLoginMode} toggleMode={toggleMode} />
       </div>
       <div className="hidden md:block w-[350px] border-l border-gray-1">
         <img

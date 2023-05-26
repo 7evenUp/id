@@ -1,24 +1,54 @@
 import { useState } from "react"
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
 
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
 
 import AuthButton from "./AuthButton"
 import ActionButton from "./ActionButton"
-import { AuthInput, AuthLabel } from "./AuthInput"
+import { AuthInput } from "./AuthInput"
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/shared/ui/Form"
 
 import { useRegisterMutation } from "@/redux/api/auth"
 
+const formSchema = z.object({
+  username: z.string().min(1, {
+    message: "Поле обязательно для заполнения.",
+  }),
+  email: z
+    .string()
+    .min(1, {
+      message: "Поле обязательно для заполнения.",
+    })
+    .email("Неверный формат почты."),
+})
+
 const Register = () => {
   const [isMailMode, setIsMailMode] = useState(false)
-  const [email, setEmail] = useState("")
-  const [username, setUsername] = useState("")
 
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
 
-  const onSubmit = async () => {
-    register({ email, username })
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+    },
+  })
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    register(values)
   }
 
   if (isMailMode)
@@ -31,39 +61,55 @@ const Register = () => {
           <HiOutlineArrowNarrowLeft />
           <span className="text-left">Другой метод регистрации</span>
         </button>
-        <div className="flex flex-col gap-3">
-          <div className="group flex flex-col gap-1">
-            <AuthLabel htmlFor="email">Почта</AuthLabel>
-            <AuthInput
-              id="email"
-              type="email"
-              placeholder="Введите вашу почту"
-              value={email}
-              onChange={(evt) => setEmail(evt.currentTarget.value)}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-3"
+          >
+            <FormField
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Почта</FormLabel>
+                  <FormControl>
+                    <AuthInput placeholder="Введите вашу почту" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <div className="group flex flex-col gap-1">
-            <AuthLabel htmlFor="username">Имя пользователя</AuthLabel>
-            <AuthInput
-              id="username"
-              type="text"
-              placeholder="Введите ваше имя пользователя"
-              value={username}
-              onChange={(evt) => setUsername(evt.currentTarget.value)}
+            <FormField
+              name="username"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Имя пользователя</FormLabel>
+                  <FormControl>
+                    <AuthInput
+                      placeholder="Введите ваше имя пользователя"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <p className="text-xs w-full">
-            Создавая учетную запись, я соглашаюсь с{" "}
-            <a
-              href="#"
-              className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
-            >
-              Политикой конфиденциальности
-            </a>
-          </p>
-          <ActionButton onClick={onSubmit} isLoading={isLoading}>
-            Зарегистрироваться
-          </ActionButton>
+            <p className="text-xs w-full">
+              Создавая учетную запись, я соглашаюсь с{" "}
+              <a
+                href="#"
+                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+              >
+                Политикой конфиденциальности
+              </a>
+            </p>
+            <ActionButton type="submit" isLoading={isLoading}>
+              Зарегистрироваться
+            </ActionButton>
+          </form>
+        </Form>
+        <div className="flex mt-3">
           {isSuccess && (
             <span className="text-success text-xs font-medium tracking-wide">
               Вы успешно зарегистрированны! Перейдите по ссылке, которую мы

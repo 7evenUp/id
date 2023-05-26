@@ -1,23 +1,50 @@
 import { useState } from "react"
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
 
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
 
 import AuthButton from "./AuthButton"
 import ActionButton from "./ActionButton"
-import { AuthInput, AuthLabel } from "./AuthInput"
+import { AuthInput } from "./AuthInput"
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/shared/ui/Form"
 
 import { useLoginMutation } from "@/redux/api/auth"
 
+const formSchema = z.object({
+  email: z
+    .string()
+    .min(1, {
+      message: "Поле обязательно для заполнения.",
+    })
+    .email("Неверный формат почты."),
+})
+
 const Login = () => {
   const [isMailMode, setIsMailMode] = useState(false)
-  const [email, setEmail] = useState("")
 
   const [trigger, { isLoading, isSuccess, error }] = useLoginMutation()
 
-  const onSubmit = async () => {
-    trigger({ email, redirect_url: "https://crypton.xyz/profile" })
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+    },
+  })
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    trigger({ ...values, redirect_url: "https://crypton.xyz/profile" })
   }
 
   if (isMailMode)
@@ -30,20 +57,30 @@ const Login = () => {
           <HiOutlineArrowNarrowLeft />
           <span className="text-left">Другой метод авторизации</span>
         </button>
-        <div className="flex flex-col gap-3">
-          <div className="group flex flex-col gap-1">
-            <AuthLabel htmlFor="email">Почта</AuthLabel>
-            <AuthInput
-              id="email"
-              type="email"
-              placeholder="Введите вашу почту"
-              value={email}
-              onChange={(evt) => setEmail(evt.currentTarget.value)}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-3"
+          >
+            <FormField
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Почта</FormLabel>
+                  <FormControl>
+                    <AuthInput placeholder="Введите вашу почту" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <ActionButton onClick={onSubmit} isLoading={isLoading}>
-            Войти
-          </ActionButton>
+            <ActionButton type="submit" isLoading={isLoading}>
+              Войти
+            </ActionButton>
+          </form>
+        </Form>
+        <div className="flex mt-3">
           {isSuccess && (
             <span className="text-success text-xs font-medium tracking-wide">
               Ссылка для входа успешно отправлена вам на почту
