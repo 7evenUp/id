@@ -1,9 +1,19 @@
-import { useState } from "react"
-import { DialogClose } from "@radix-ui/react-dialog"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { BiLoaderAlt } from "react-icons/bi"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/shared/ui/Form"
 
 import {
   useUpdateEmailMutation,
@@ -11,96 +21,110 @@ import {
 } from "@/redux/api/profile"
 
 const UpdateEmail = () => {
-  const [oldEmail, setOldEmail] = useState("")
-  const [newEmail, setNewEmail] = useState("")
-
   const { data: userProfileData } = useUserProfileQuery()
-  const [updateEmail, { isSuccess, error }] = useUpdateEmailMutation()
+  const [updateEmail, { isSuccess, error, isLoading }] =
+    useUpdateEmailMutation()
 
-  const isOldEmailCorrect = oldEmail === userProfileData?.email
+  const { email } = userProfileData!
 
-  const onSubmit = () => {
-    if (!/.+@.+\..+/.test(newEmail)) {
-      console.log("email is not valid")
-      return
-    }
-
-    if (userProfileData) {
-      updateEmail({
-        email: newEmail,
+  const formSchema = z.object({
+    oldEmail: z
+      .string()
+      .min(1, {
+        message: "Поле обязательно для заполнения.",
       })
-    }
-  }
+      .email("Неверный формат почты.")
+      .refine((val) => val === email, {
+        message: "Неверно введена старая почта",
+      }),
+    newEmail: z
+      .string()
+      .min(1, { message: "Поле обязательно для заполнения." })
+      .email("Неверный формат почты."),
+  })
 
-  if (error) console.log("ERROR: ", error)
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      oldEmail: "",
+      newEmail: "",
+    },
+  })
+
+  const onSubmit = ({ newEmail }: z.infer<typeof formSchema>) => {
+    updateEmail({
+      email: newEmail,
+    })
+  }
 
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[370px]">
       <DialogHeader>
         <DialogTitle>Изменить почту</DialogTitle>
       </DialogHeader>
-      <div className="flex flex-col gap-[18px]">
-        <div className="group flex flex-col gap-1">
-          <label
-            htmlFor="oldEmail"
-            className="typography-text-1 text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5"
-          >
-            Старая почта
-          </label>
-          <Input
-            id="oldEmail"
-            type="email"
-            placeholder="Введите вашу старую почту"
-            value={oldEmail}
-            onChange={(evt) => setOldEmail(evt.currentTarget.value)}
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-[18px]"
+        >
+          <FormField
+            name="oldEmail"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                  Старая почта
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-sm"
+                    placeholder="Введите вашу старую почту"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="group flex flex-col gap-1">
-          <label
-            htmlFor="newEmail"
-            className="typography-text-1 text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5"
-          >
-            Новая почта
-          </label>
-          <Input
-            id="newEmail"
-            type="email"
-            placeholder="Введите вашу новую почту"
-            value={newEmail}
-            onChange={(evt) => setNewEmail(evt.currentTarget.value)}
+          <FormField
+            name="newEmail"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                  Новая почта
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-sm"
+                    placeholder="Введите вашу новую почту"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        {isSuccess && (
-          <span className="typography-text-2 text-success">
-            Ваша почта успешно изменена
-          </span>
-        )}
-        {error && (
-          <span className="typography-text-2 text-error">
-            {/* @ts-expect-error No-Error-Types */}
-            {error.data.detail}
-          </span>
-        )}
-        <div className="flex items-center gap-4 mt-2">
-          {isSuccess ? (
-            <DialogClose>
-              <Button>закрыть</Button>
-            </DialogClose>
-          ) : (
-            <Button
-              onClick={onSubmit}
-              disabled={!isOldEmailCorrect || !newEmail.length || !!error}
-            >
-              подтвердить
-            </Button>
+          {isSuccess && (
+            <span className="typography-text-2 text-success">
+              Ваша почта успешно изменена
+            </span>
           )}
           {error && (
-            <DialogClose asChild>
-              <Button>закрыть</Button>
-            </DialogClose>
+            <span className="typography-text-2 text-error">
+              {/* @ts-expect-error No-Error-Types */}
+              {error.data.detail}
+            </span>
           )}
-        </div>
-      </div>
+          <div className="flex gap-2 items-center">
+            {isLoading && <BiLoaderAlt className="animate-spin" />}
+            <Button type="submit" className="w-fit">
+              подтвердить
+            </Button>
+          </div>
+        </form>
+      </Form>
     </DialogContent>
   )
 }

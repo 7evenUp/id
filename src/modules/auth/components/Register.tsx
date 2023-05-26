@@ -71,7 +71,7 @@ const Register = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Почта</FormLabel>
+                  <FormLabel className="group-focus-within:text-res-bot-blue">Почта</FormLabel>
                   <FormControl>
                     <AuthInput placeholder="Введите вашу почту" {...field} />
                   </FormControl>
@@ -84,7 +84,7 @@ const Register = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Имя пользователя</FormLabel>
+                  <FormLabel className="group-focus-within:text-res-bot-blue">Имя пользователя</FormLabel>
                   <FormControl>
                     <AuthInput
                       placeholder="Введите ваше имя пользователя"

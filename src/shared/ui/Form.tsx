@@ -95,9 +95,9 @@ const FormLabel = React.forwardRef<
     <label
       ref={ref}
       className={cn(
-        "group-focus-within:text-res-bot-blue text-sm",
-        error && "text-error",
-        className
+        "text-sm",
+        className,
+        error && "text-error dark:text-error",
       )}
       htmlFor={formItemId}
       {...props}

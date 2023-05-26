@@ -55,7 +55,7 @@ const PrimeTab = () => {
           <div className="flex flex-wrap w-full mobile:w-auto mobile:min-w-[340px] mobile:max-w-[340px] mobile:h-[150px] py-3 px-6 bg-white dark:bg-gray-1 rounded-xl">
             {primeServices.map((service, i) =>
               service.isExpandable ? (
-                <Popover>
+                <Popover key={i}>
                   <PopoverTrigger className="group flex items-center gap-2 typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink p-1 mobile:p-0 text-left">
                     {service.name}
                     <MdOutlineExpandMore className="w-3.5 h-3.5 transition-transform will-change-transform group-data-[state=open]:rotate-180" />
@@ -65,6 +65,7 @@ const PrimeTab = () => {
                       <a
                         key={i}
                         href={link.href}
+                        target="_blank"
                         className="typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink"
                       >
                         {link.name}
@@ -75,6 +76,7 @@ const PrimeTab = () => {
               ) : (
                 <a
                   href={service.href}
+                  target="_blank"
                   key={i}
                   className="flex items-center typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink p-1 mobile:p-0"
                 >

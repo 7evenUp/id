@@ -67,7 +67,7 @@ const Login = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Почта</FormLabel>
+                  <FormLabel className="group-focus-within:text-res-bot-blue">Почта</FormLabel>
                   <FormControl>
                     <AuthInput placeholder="Введите вашу почту" {...field} />
                   </FormControl>
