@@ -1,17 +1,65 @@
+import { useState, useCallback } from "react"
+import { useDropzone } from "react-dropzone"
+
 import { ReactComponent as BearIcon } from "@/assets/icons/avatars/Star.svg"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 
 import Button from "@/shared/ui/Button"
 
-// TODO https://www.npmjs.com/package/react-dropzone
+import { cn } from "@/lib/classNames"
+
+import { useChangeAvatarMutation } from "@/redux/api/avatar"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ChangeAvatar = () => {
+  const [file, setFile] = useState<File>()
+  const [base64, setBase64] = useState("")
+
+  const { data } = useUserProfileQuery()
+  const [trigger, { isSuccess, isError }] = useChangeAvatarMutation()
+
+  const { id } = data!
+
+  if (isSuccess) console.log("SUCCESS!!!")
+
+  if (isError) console.log("ERROR!!!")
+
+  const onSubmit = () => {
+    trigger({ file_base64: base64, is_active: true, user: id })
+  }
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    acceptedFiles.forEach((file) => {
+      setFile(file)
+      console.log(file)
+      const reader = new FileReader()
+
+      reader.onabort = () => console.log("file reading was aborted")
+      reader.onerror = () => console.log("file reading has failed")
+      reader.onload = () => {
+        const base64file = reader.result as string
+        setBase64(base64file)
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/jpeg": [],
+      "image/png": [],
+    },
+  })
+
   return (
     <DialogContent className="sm:w-[704px]">
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
         <DialogTitle>Установить аватар профиля</DialogTitle>
-        <Button disabled>сохранить изменения</Button>
+        <Button disabled={!file} onClick={onSubmit}>
+          сохранить изменения
+        </Button>
       </DialogHeader>
       <div className="flex flex-col">
         <div className="flex gap-8">
@@ -20,8 +68,20 @@ const ChangeAvatar = () => {
               <BearIcon className="w-10" />
             </div>
           </div>
-          <div className="h-[60px] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg">
-            <span className="typography-tip text-gray-3 select-none">
+          <div
+            className={cn(
+              "group h-[60px] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg cursor-pointer outline-none hover:bg-gray-6 dark:hover:bg-gray-2 dark:hover:bg-opacity-20",
+              isDragActive && "border-res-bot-blue dark:border-res-bot-blue"
+            )}
+            {...getRootProps()}
+          >
+            <input
+              {...getInputProps()}
+              multiple={false}
+              accept="image/png, image/jpeg"
+              className="outline-none"
+            />
+            <span className="typography-tip text-gray-3 select-none group-hover:text-gray-2 dark:group-hover:text-gray-4">
               область для загрузки изображения
             </span>
           </div>
