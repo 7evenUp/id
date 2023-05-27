@@ -1,12 +1,10 @@
 import { useState } from "react"
-import { HiOutlineArrowNarrowRight } from "react-icons/hi"
 
 import TabHeader from "../components/TabHeader"
 import TextSizeSlider from "../components/TextSizeSlider"
 import BackgroundPicker from "../components/BackgroundPicker"
 import ProjectsSettings from "../components/ProjectsSettings"
-
-import Subheading from "@/shared/typography/Subheading"
+import TabTitle from "../components/TabTitle"
 
 import Button from "@/shared/ui/Button"
 import Switch from "@/shared/ui/Switch"
@@ -54,16 +52,10 @@ const ResearchBotTab = () => {
   return (
     <>
       <TabHeader>
-        <div className="flex gap-5">
-          <Subheading>Research Bot</Subheading>
-          <a
-            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
-            href="#"
-          >
-            <HiOutlineArrowNarrowRight />
-            на сайт
-          </a>
-        </div>
+        <TabTitle
+          title="Research Bot"
+          link="https://t.me/crypton_research_bot"
+        />
         <Button className="sm:ml-auto w-fit">сохранить изменения</Button>
       </TabHeader>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">

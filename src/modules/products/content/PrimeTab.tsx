@@ -1,9 +1,7 @@
-import { HiOutlineArrowNarrowRight } from "react-icons/hi"
 import { MdOutlineExpandMore } from "react-icons/md"
 
 import TabHeader from "../components/TabHeader"
-
-import Subheading from "@/shared/typography/Subheading"
+import TabTitle from "../components/TabTitle"
 
 import ExternalLink from "@/shared/ui/ExternalLink"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
@@ -16,16 +14,7 @@ const PrimeTab = () => {
   return (
     <>
       <TabHeader>
-        <div className="flex gap-5">
-          <Subheading>Prime</Subheading>
-          <a
-            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
-            href="#"
-          >
-            <HiOutlineArrowNarrowRight />
-            на сайт
-          </a>
-        </div>
+        <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
       <RowItem className="items-baseline flex-col sm:flex-row gap-2">
         <span>Каналы и чаты Prime</span>
