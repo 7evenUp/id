@@ -78,7 +78,7 @@ const UpdateEmail = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm"
+                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                     placeholder="Введите вашу старую почту"
                     {...field}
                   />
@@ -97,7 +97,7 @@ const UpdateEmail = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm"
+                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                     placeholder="Введите вашу новую почту"
                     {...field}
                   />
