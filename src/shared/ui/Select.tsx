@@ -13,7 +13,7 @@ const SelectTrigger = React.forwardRef<
   return (
     <RadixSelect.Trigger
       className={cn(
-        "flex items-center justify-between gap-0.5 text-gray-1 border border-gray-1 dark:text-gray-4 dark:border-gray-4 rounded-full typography-btn-standart py-1 px-2.5 min-w-[75px]",
+        "flex items-center justify-between gap-0.5 text-gray-1 border border-gray-1 dark:text-gray-4 dark:border-gray-4 rounded-full typography-btn-standart py-1 px-2.5 min-w-[75px] aria-expanded:rounded-b-none aria-expanded:rounded-t-xl",
         className
       )}
       {...props}
@@ -36,7 +36,7 @@ const SelectContent = React.forwardRef<
     <RadixSelect.Portal>
       <RadixSelect.Content
         className={cn(
-          "bg-white dark:bg-gray-1 border border-gray-3 rounded-md px-2 py-1 min-w-[75px]",
+          "bg-white dark:bg-gray-1 border border-gray-1 dark:border-gray-4 rounded-b-xl border-t-0 px-2 py-1 min-w-[75px]",
           className
         )}
         position="popper"
@@ -57,7 +57,7 @@ const SelectItem = React.forwardRef<
   return (
     <RadixSelect.Item
       className={cn(
-        "typography-text-1 text-gray-1 dark:text-gray-5 bg-transparent h-5 px-2 leading-none rounded-sm flex items-center select-none data-[highlighted]:outline-none data-[highlighted]:bg-gray-1 data-[highlighted]:bg-opacity-10 dark:data-[highlighted]:bg-gray-5 dark:data-[highlighted]:bg-opacity-10 cursor-pointer aria-disabled:text-gray-4 aria-disabled:cursor-auto dark:aria-disabled:text-gray-3",
+        "typography-text-1 text-gray-1 dark:text-gray-5 bg-transparent h-5 px-2 leading-none rounded-sm flex items-center select-none data-[highlighted]:outline-none data-[highlighted]:bg-gray-2 data-[highlighted]:bg-opacity-10 dark:data-[highlighted]:bg-gray-5 dark:data-[highlighted]:bg-opacity-10 cursor-pointer aria-disabled:text-gray-4 aria-disabled:cursor-auto dark:aria-disabled:text-gray-3",
         className
       )}
       {...props}

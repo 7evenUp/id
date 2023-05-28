@@ -1,7 +1,7 @@
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import ExternalLink from "@/shared/ui/ExternalLink"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ReferralInfo = () => {
   const { data: profileData } = useUserProfileQuery()

@@ -7,7 +7,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { useMetamask } from "@/hooks/useMetamask"
 
-import { useUpdateWalletMutation, useUserProfileQuery } from "@/redux/api/core"
+import { useUpdateWalletMutation, useUserProfileQuery } from "@/redux/api/profile"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 

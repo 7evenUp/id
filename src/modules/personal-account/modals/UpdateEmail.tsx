@@ -1,137 +1,130 @@
-import { useState } from "react"
-// import { DialogClose } from "@radix-ui/react-dialog"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { BiLoaderAlt } from "react-icons/bi"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/shared/ui/Form"
 
-import { useUpdateEmailMutation, useUserProfileQuery } from "@/redux/api/core"
-// import { useMetamask } from "@/hooks/useMetamask"
+import {
+  useUpdateEmailMutation,
+  useUserProfileQuery,
+} from "@/redux/api/profile"
 
 const UpdateEmail = () => {
-  const [oldEmail, setOldEmail] = useState("")
-  const [newEmail, setNewEmail] = useState("")
-  // const [error, setError] = useState("")
-
   const { data: userProfileData } = useUserProfileQuery()
-  const [updateEmail] = useUpdateEmailMutation()
+  const [updateEmail, { isSuccess, error, isLoading }] =
+    useUpdateEmailMutation()
 
-  // const {
-  //   dispatch,
-  //   state: { status, isMetamaskInstalled, walletAddress },
-  // } = useMetamask()
+  const { email } = userProfileData!
 
-  // const showConnectButton =
-  //   status !== "pageNotLoaded" && isMetamaskInstalled && !walletAddress
-  // const isConnected =
-  //   status !== "pageNotLoaded" && typeof walletAddress === "string"
-
-  // const isOldEmailCorrect = oldEmail === userProfileData?.email
-
-  const onSubmit = () => {
-    if (!/.+@.+\..+/.test(newEmail)) {
-      console.log("email is not valid")
-      return
-    }
-
-    if (userProfileData) {
-      updateEmail({
-        email: newEmail,
+  const formSchema = z.object({
+    oldEmail: z
+      .string()
+      .min(1, {
+        message: "Поле обязательно для заполнения.",
       })
-    }
+      .email("Неверный формат почты.")
+      .refine((val) => val === email, {
+        message: "Неверно введена старая почта",
+      }),
+    newEmail: z
+      .string()
+      .min(1, { message: "Поле обязательно для заполнения." })
+      .email("Неверный формат почты."),
+  })
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      oldEmail: "",
+      newEmail: "",
+    },
+  })
+
+  const onSubmit = ({ newEmail }: z.infer<typeof formSchema>) => {
+    updateEmail({
+      email: newEmail,
+    })
   }
-
-  // const handleConnect = async () => {
-  //   dispatch({ type: "loading" })
-  //   const accounts = await window.ethereum.request({
-  //     method: "eth_requestAccounts",
-  //   })
-
-  //   if (accounts.length > 0) {
-  //     dispatch({ type: "connect", walletAddress: accounts[0] })
-
-  //     // const exampleMessage = 'Example `personal_sign` message.';
-
-  //     // try {
-  //     //   const from = accounts[0];
-  //     //   // For historical reasons, you must submit the message to sign in hex-encoded UTF-8.
-  //     //   // This uses a Node.js-style buffer shim in the browser.
-  //     //   const msg = `0x${Buffer.from(exampleMessage, 'utf8').toString('hex')}`;
-  //     //   const sign = await window.ethereum.request({
-  //     //     method: 'personal_sign',
-  //     //     params: [msg, from, 'Example password'],
-  //     //   });
-  //     //   console.log(sign)
-  //     // } catch (err) {
-  //     //   console.error(err);
-  //     // }
-  //   }
-  // }
 
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[370px]">
       <DialogHeader>
         <DialogTitle>Изменить почту</DialogTitle>
       </DialogHeader>
-      <div className="flex flex-col gap-[18px]">
-        <div className="group flex flex-col gap-1">
-          <label
-            htmlFor="oldEmail"
-            className="typography-text-1 text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5"
-          >
-            Старая почта
-          </label>
-          <Input
-            id="oldEmail"
-            type="email"
-            placeholder="Введите вашу старую почту"
-            value={oldEmail}
-            onChange={(evt) => setOldEmail(evt.currentTarget.value)}
+
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-[18px]"
+        >
+          <FormField
+            name="oldEmail"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                  Старая почта
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    placeholder="Введите вашу старую почту"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="group flex flex-col gap-1">
-          <label
-            htmlFor="newEmail"
-            className="typography-text-1 text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5"
-          >
-            Новая почта
-          </label>
-          <Input
-            id="newEmail"
-            type="email"
-            placeholder="Введите вашу новую почту"
-            value={newEmail}
-            onChange={(evt) => setNewEmail(evt.currentTarget.value)}
+          <FormField
+            name="newEmail"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                  Новая почта
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    placeholder="Введите вашу новую почту"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        {/* {showConnectButton && (
-          <Button
-            className="w-fit mt-2"
-            onClick={handleConnect}
-            disabled={!isOldEmailCorrect || !newEmail.length}
-          >
-            подключить Metamask
-          </Button>
-        )}
-        {isConnected && (
-          <DialogClose asChild>
-            <Button
-              className="w-fit mt-2"
-              onClick={onSubmit}
-              disabled={!isOldEmailCorrect || !newEmail.length}
-            >
+          {isSuccess && (
+            <span className="typography-text-2 text-success">
+              Ваша почта успешно изменена
+            </span>
+          )}
+          {error && (
+            <span className="typography-text-2 text-error">
+              {/* @ts-expect-error No-Error-Types */}
+              {error.data.detail}
+            </span>
+          )}
+          <div className="flex gap-2 items-center">
+            {isLoading && <BiLoaderAlt className="animate-spin" />}
+            <Button type="submit" className="w-fit">
               подтвердить
             </Button>
-          </DialogClose>
-        )} */}
-        <Button
-          className="w-fit mt-2"
-          onClick={onSubmit}
-          // disabled={!isOldEmailCorrect || !newEmail.length}
-        >
-          подтвердить
-        </Button>
-      </div>
+          </div>
+        </form>
+      </Form>
     </DialogContent>
   )
 }

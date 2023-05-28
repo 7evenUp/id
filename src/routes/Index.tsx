@@ -3,7 +3,7 @@ import Products from "@/modules/products/Products"
 
 import SkeletonLayout from "@/components/SkeletonLayout"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Index = () => {
   const { isLoading, data, error } = useUserProfileQuery()

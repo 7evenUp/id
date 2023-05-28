@@ -2,7 +2,7 @@ import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { useUserProfileQuery } from "@/redux/api/core"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ReferralStats = () => {
   const { data: profileData } = useUserProfileQuery()
