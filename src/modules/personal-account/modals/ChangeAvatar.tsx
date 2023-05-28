@@ -19,7 +19,9 @@ const ChangeAvatar = () => {
   const { data } = useUserProfileQuery()
   const [trigger, { isSuccess, isError }] = useChangeAvatarMutation()
 
-  const { id } = data!
+  const { id, avatars } = data!
+
+  const activeAvatar = avatars.find((avatar) => avatar.isActive)
 
   if (isSuccess) console.log("SUCCESS!!!")
 
@@ -65,7 +67,15 @@ const ChangeAvatar = () => {
         <div className="flex gap-8">
           <div className="shrink-0 w-[60px] h-[60px] flex items-center justify-center bg-gray-1 dark:bg-gray-2 rounded-lg">
             <div className="w-[52px] h-[52px] rounded-full flex items-center justify-center bg-res-bot-blue">
-              <BearIcon className="w-10" />
+              {activeAvatar ? (
+                <img
+                  src={activeAvatar?.file}
+                  alt="User Avatar"
+                  className="w-full h-full object-cover rounded-full"
+                />
+              ) : (
+                <BearIcon className="w-10" />
+              )}
             </div>
           </div>
           <div
@@ -84,6 +94,14 @@ const ChangeAvatar = () => {
             <span className="typography-tip text-gray-3 select-none group-hover:text-gray-2 dark:group-hover:text-gray-4">
               область для загрузки изображения
             </span>
+          </div>
+        </div>
+        <div className="flex gap-4 mt-6">
+          <span className="typography-text-1">Предыдущие изображения</span>
+          <div className="flex items-center gap-2">
+            {avatars.map((avatar, i) => (
+                <img key={i} className={cn("w-[60px] h-[60px] rounded-lg object-cover", avatar.isActive && "ring-1 ring-res-bot-blue ring-offset-2 ring-offset-res-bot-blue")} src={avatar.file} alt="previous avatar"  />
+            ))}
           </div>
         </div>
         <span className="typography-semi-head mt-6">Выбрать NFT</span>
