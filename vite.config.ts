@@ -4,7 +4,6 @@ import path from "path"
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 
-
 // PROD CONFIG
 export default defineConfig({
   plugins: [react(), svgr()],
@@ -15,7 +14,6 @@ export default defineConfig({
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   }
 })
-
 
 // DEV CONFIG
 // import mkcert from 'vite-plugin-mkcert'
