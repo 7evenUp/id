@@ -1,0 +1,52 @@
+import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { IoCloseOutline } from "react-icons/io5"
+
+import { DialogContent } from "@/shared/ui/Dialog"
+
+import ModalTrigger from "./ModalTrigger"
+
+import { Avatar } from "@/types/user"
+
+const PrevAvatars = ({ avatars }: { avatars: Avatar[] }) => {
+  return (
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-6">
+      <span className="typography-text-1">
+        Предыдущие
+        <br /> изображения
+      </span>
+      <div className="flex items-center flex-wrap gap-2">
+        {avatars.map((avatar, i) => (
+          <ModalTrigger
+            key={i}
+            content={
+              <DialogContent
+                className="p-0 sm:p-0"
+                customClose={<CustomDialogClose />}
+              >
+                <img
+                  src={avatar.file}
+                  alt="previous avatar"
+                  className="rounded-xl w-full sm:max-w-[550px] md:max-w-[640px] max-h-[500px] object-cover"
+                />
+              </DialogContent>
+            }
+          >
+            <img
+              className="w-[60px] h-[60px] rounded-lg object-cover cursor-pointer hover:scale-105 transition-transform will-change-transform"
+              src={avatar.file}
+              alt="previous avatar"
+            />
+          </ModalTrigger>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default PrevAvatars
+
+const CustomDialogClose = () => (
+  <DialogPrimitive.Close className="absolute border bg-white dark:bg-gray-1 border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-100 transition-opacity hover:opacity-80">
+    <IoCloseOutline className="h-[26px] w-[26px]" />
+  </DialogPrimitive.Close>
+)

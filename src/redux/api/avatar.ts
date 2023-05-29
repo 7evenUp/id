@@ -14,6 +14,7 @@ const avatarApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["UserProfile"],
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
