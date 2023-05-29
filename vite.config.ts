@@ -7,9 +7,9 @@ import svgr from 'vite-plugin-svgr'
 // PROD CONFIG
 export default defineConfig({
   plugins: [react(), svgr()],
-  // server: {
-  //   host: true
-  // },
+  server: {
+    host: true
+  },
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   }
