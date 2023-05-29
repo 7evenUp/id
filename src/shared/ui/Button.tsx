@@ -1,9 +1,10 @@
 import React, { ButtonHTMLAttributes } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { BiLoaderAlt } from "react-icons/bi"
 
 import { cn } from "@/lib/classNames"
 
-export const buttonVariants = cva("transition-colors", {
+export const buttonVariants = cva("transition-colors flex items-center gap-1", {
   variants: {
     appearence: {
       outlined:
@@ -20,16 +21,19 @@ export const buttonVariants = cva("transition-colors", {
 
 interface ButtonProps
   extends VariantProps<typeof buttonVariants>,
-    ButtonHTMLAttributes<HTMLButtonElement> {}
+    ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean
+}
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, className, appearence, ...props }, forwardedRef) => {
+  ({ children, className, appearence, isLoading, ...props }, forwardedRef) => {
     return (
       <button
         className={cn(buttonVariants({ appearence }), className)}
         {...props}
         ref={forwardedRef}
       >
+        {isLoading && <BiLoaderAlt className="animate-spin" />}
         {children}
       </button>
     )

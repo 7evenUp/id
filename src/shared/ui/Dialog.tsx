@@ -27,10 +27,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 backdrop-blur-sm",
-      className
-    )}
+    className={cn("fixed inset-0 z-50 backdrop-blur-sm", className)}
     {...props}
   />
 ))
@@ -38,8 +35,10 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+    customClose?: React.ReactNode
+  }
+>(({ className, children, customClose, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -51,9 +50,13 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute border border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-70 transition-opacity hover:opacity-100">
-        <IoCloseOutline className="h-[26px] w-[26px]" />
-      </DialogPrimitive.Close>
+      {customClose ? (
+        customClose
+      ) : (
+        <DialogPrimitive.Close className="absolute border border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-70 transition-opacity hover:opacity-100">
+          <IoCloseOutline className="h-[26px] w-[26px]" />
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </DialogPortal>
 ))
