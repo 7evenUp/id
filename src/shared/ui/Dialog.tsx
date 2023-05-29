@@ -28,6 +28,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn("fixed inset-0 z-50 backdrop-blur-sm", className)}
+
     {...props}
   />
 ))
@@ -44,7 +45,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "grid gap-4 fixed z-50 w-11/12 sm:w-fit max-w-[900px] p-4 sm:p-10 pt-10 rounded-xl shadow-lg font-montserrat border border-gray-1 dark:border-gray-3 bg-white dark:bg-gray-1 text-gray-1 dark:text-gray-4 animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0",
+        "grid gap-4 fixed z-50 w-11/12 sm:w-fit max-w-[900px] p-4 sm:p-10 pt-10 rounded-xl shadow-lg font-montserrat border border-gray-1 dark:border-gray-3 bg-white dark:bg-gray-1 text-gray-1 dark:text-gray-4",
         className
       )}
       {...props}

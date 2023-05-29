@@ -7,7 +7,8 @@ const profileApi = api.injectEndpoints({
     userProfile: build.query<User, void>({
       query: () => ({
         url: "users/profile",
-        method: "GET"
+        method: "GET",
+        credentials: "include",
       }),
       providesTags: ["UserProfile"],
     }),

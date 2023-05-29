@@ -24,14 +24,8 @@ const authApi = api.injectEndpoints({
         message: response.data.detail,
       }),
     }),
-    logout: build.query<void, void>({
-      query: () => ({
-        url: "users/logout/",
-        method: "GET"
-      })
-    })
   }),
   overrideExisting: false,
 })
 
-export const { useLoginMutation, useRegisterMutation, useLazyLogoutQuery } = authApi
+export const { useLoginMutation, useRegisterMutation } = authApi
