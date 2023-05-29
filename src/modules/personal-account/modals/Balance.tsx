@@ -11,18 +11,18 @@ import {
   SelectTrigger,
 } from "@/shared/ui/Select"
 
-import { useTopUpBalanceMutation } from "@/redux/api/balance"
+// import { useTopUpBalanceMutation } from "@/redux/api/balance"
 
 const Balance = () => {
   const [amount, setAmount] = useState("")
 
-  const [trigger, { error }] = useTopUpBalanceMutation()
+  // const [trigger, { error }] = useTopUpBalanceMutation()
 
-  const onSubmit = async () => {
-    trigger({ amount: 50 })
-  }
+  // const onSubmit = async () => {
+  //   trigger({amount: "50"})
+  // }
 
-  if (error) console.log(error)
+  // if (error) console.log(error)
 
   return (
     <DialogContent className="lg:max-w-[710px]">
@@ -66,7 +66,7 @@ const Balance = () => {
             прислать чек на почту
           </label>
         </div>
-        <Button onClick={onSubmit}>пополнить</Button>
+        <Button>пополнить</Button>
       </div>
     </DialogContent>
   )
