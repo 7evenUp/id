@@ -3,7 +3,7 @@ import { MdOutlineExpandMore } from "react-icons/md"
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
 
-import ExternalLink from "@/shared/ui/ExternalLink"
+// import ExternalLink from "@/shared/ui/ExternalLink"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
 
 import RowItem from "@/shared/components/RowItem"
@@ -19,7 +19,7 @@ const PrimeTab = () => {
       <RowItem className="items-baseline flex-col sm:flex-row gap-2">
         <span>Каналы и чаты Prime</span>
         <div className="flex items-center sm:justify-end gap-[10px] flex-wrap max-w-[360px]">
-          <ExternalLink withTgIcon href="#">
+          {/* <ExternalLink withTgIcon href="#">
             канал Prime
           </ExternalLink>
           <ExternalLink withTgIcon href="#">
@@ -30,15 +30,15 @@ const PrimeTab = () => {
           </ExternalLink>
           <ExternalLink withTgIcon href="#">
             чат по нодам
-          </ExternalLink>
+          </ExternalLink> */}
         </div>
       </RowItem>
       <RowItem className="flex-col items-stretch gap-6">
         <div className="flex justify-between items-center">
           <span>Сервисы и навигация</span>
-          <ExternalLink href="https://member.crypton.xyz/">
+          {/* <ExternalLink href="https://member.crypton.xyz/">
             навигация Prime
-          </ExternalLink>
+          </ExternalLink> */}
         </div>
         <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row xl:justify-between gap-5">
           <div className="flex flex-wrap w-full mobile:w-auto mobile:min-w-[340px] mobile:max-w-[340px] mobile:h-[150px] py-3 px-6 bg-white dark:bg-gray-1 rounded-xl">
@@ -105,38 +105,38 @@ const PrimeTab = () => {
               касаемо заработка в криптовалюте, то Вы всегда можете задать их
               Наставнику.
             </p>
-            <ExternalLink
+            {/* <ExternalLink
               withTgIcon
               href="https://t.me/crypton_support"
               className="w-fit"
             >
               наставник
-            </ExternalLink>
+            </ExternalLink> */}
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
             <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
               Впервые в Prime? Рекомендуем подробно ознакомиться с каждым
               сервисом, чтобы изпользовать возможности подписки на максимум!
             </p>
-            <ExternalLink href="#" className="w-fit">
+            {/* <ExternalLink href="#" className="w-fit">
               возможности Prime
-            </ExternalLink>
+            </ExternalLink> */}
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
             <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
               Не знаете с чего начать? Мы подготовили для Вас конкретный план
               действий.
             </p>
-            <ExternalLink href="#" className="w-fit">
+            {/* <ExternalLink href="#" className="w-fit">
               план действий
-            </ExternalLink>
+            </ExternalLink> */}
           </div>
         </div>
       </RowItem>
       <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row justify-between gap-3 py-2 dark:text-gray-4">
         <span>Обратная связь и отзывы</span>
         <div className="flex gap-2.5 flex-col sm:flex-row">
-          <ExternalLink
+          {/* <ExternalLink
             href="https://t.me/reviews_prime"
             className="w-fit sm:w-auto"
           >
@@ -147,7 +147,7 @@ const PrimeTab = () => {
             className="w-fit sm:w-auto"
           >
             оставить обратную связь
-          </ExternalLink>
+          </ExternalLink> */}
         </div>
       </div>
     </>
