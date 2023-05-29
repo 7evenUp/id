@@ -8,8 +8,23 @@ import Subscription from "./sections/Subscription"
 import Referral from "./sections/Referral"
 
 import Button from "@/shared/ui/Button"
+import { useLazyLogoutQuery } from "@/redux/api/auth"
 
 const PersonalAccount = () => {
+
+  const [trigger, {isSuccess, isError, data}] = useLazyLogoutQuery()
+
+  if (isSuccess) console.log('SUCCESS!')
+  if (isError) console.log('Error!')
+  if (data) console.log(data)
+
+  const onLogout = async () => {
+    const res = await fetch("https://union-api.crypton.xyz/api/v1/users/logout/", {credentials: 'include'})
+
+    const json = await res.json()
+    console.log(json)
+  }
+
   return (
     <div>
       <div className="flex justify-between">
@@ -26,7 +41,7 @@ const PersonalAccount = () => {
         <Referral />
 
         <div className="flex justify-between">
-          <Button appearence="text">выйти из аккаунта</Button>
+          <Button appearence="text" onClick={onLogout}>выйти из аккаунта</Button>
           <ModalTrigger content={<Deactivation />}>
             <Button appearence="text">деактивировать аккаунт</Button>
           </ModalTrigger>
