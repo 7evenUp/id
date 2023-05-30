@@ -4,7 +4,7 @@ import { BiLoaderAlt } from "react-icons/bi"
 
 import { cn } from "@/lib/classNames"
 
-export const buttonVariants = cva("transition-colors flex items-center gap-1", {
+export const buttonVariants = cva("transition-colors flex items-center justify-center gap-1", {
   variants: {
     appearence: {
       outlined:
