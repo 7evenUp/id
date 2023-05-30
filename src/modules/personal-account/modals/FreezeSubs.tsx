@@ -1,44 +1,44 @@
+import { useTranslation } from "react-i18next"
+
 import { DialogContent, DialogFooter, DialogHeader } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
 const FreezeSubs = () => {
+  const { t } = useTranslation("modals")
   return (
-    <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px]">
+    <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px] sm:pb-16">
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
         <div className="flex flex-col typography-text-1">
           <span className="flex items-center gap-2">
-            Статус подписки:{" "}
+            {t("freeze.status")}:{" "}
             <span className="bg-success text-white rounded-full px-1.5">
               Активна
             </span>
           </span>
-          <span className="flex items-center gap-2">
-            Возможность подписки:{" "}
+          <span className="flex items-baseline gap-2">
+            {t("freeze.freeze-available")}:{" "}
             <span className="typography-balance">есть</span>
           </span>
         </div>
-        <Button className="w-fit">подтвердить заморозку</Button>
+        <Button className="w-fit">{t("freeze.confirm-btn")}</Button>
       </DialogHeader>
       <div>
-        <h3 className="typography-semi-head mb-2.5">Заморозка подписки</h3>
+        <h3 className="typography-semi-head mb-2.5">
+          {t("freeze.sub-freeze-title")}
+        </h3>
         <p className="typography-text-0 text-black dark:text-gray-4">
-          Если у Вас не будет возможности следить за Prime и пользоваться всеми
-          преимуществами подписки продолжительное время, Вы можете
-          воспользоваться функцией заморозки.
+          {t("freeze.sub-freeze-desc")}
         </p>
       </div>
       <div>
-        <h3 className="typography-semi-head mb-2.5">Как это работает?</h3>
+        <h3 className="typography-semi-head mb-2.5">
+          {t("freeze.how-works-title")}
+        </h3>
         <p className="typography-text-0 text-black dark:text-gray-4">
-          Как только Вы заморозите подписку, Вы сразу же утратите доступ ко всем
-          сервисам Prime, но на вашем аккаунте останутся дни подписки, которыми
-          Вы ещё не воспользовались. Разморозить подписку и вернуть все доступы
-          можно в любое время в этом же разделе.
+          {t("freeze.how-works-desc")}
         </p>
       </div>
-      <DialogFooter>
-        Обратите внимание, что заморозить подписку можно лишь один раз в году!
-      </DialogFooter>
+      <DialogFooter>{t("freeze.footer")}</DialogFooter>
     </DialogContent>
   )
 }
