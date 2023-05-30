@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { ReactComponent as BearIcon } from "@/assets/icons/avatars/Star.svg"
 
@@ -14,6 +15,8 @@ import { useChangeAvatarMutation } from "@/redux/api/avatar"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ChangeAvatar = () => {
+  const { t } = useTranslation("modals")
+
   const [file, setFile] = useState<File | null>(null)
   const [base64, setBase64] = useState("")
 
@@ -35,7 +38,7 @@ const ChangeAvatar = () => {
   return (
     <DialogContent className="sm:w-[85%] md:w-[640px]">
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
-        <DialogTitle>Установить аватар профиля</DialogTitle>
+        <DialogTitle>{t("change-avatar.heading")}</DialogTitle>
         <Button
           disabled={!file}
           onClick={onSubmit}
@@ -43,7 +46,9 @@ const ChangeAvatar = () => {
           className="w-fit"
           isLoading={isLoading}
         >
-          {isSuccess && !file ? "сохранено" : "сохранить"}
+          {isSuccess && !file
+            ? t("change-avatar.save-success")
+            : t("change-avatar.save-button")}
         </Button>
       </DialogHeader>
       <div className="flex flex-col">
@@ -69,9 +74,11 @@ const ChangeAvatar = () => {
 
         {Boolean(prevAvatars.length) && <PrevAvatars avatars={prevAvatars} />}
 
-        <span className="typography-semi-head mt-6">Выбрать NFT</span>
+        <span className="typography-semi-head mt-6">
+          {t("change-avatar.choose-nft")}
+        </span>
         <p className="typography-text-1 mt-2">
-          Чтобы выбрать NFT-изображение, необходимо привязать Web 3.0 кошелёк.
+          {t("change-avatar.nft-description")}
         </p>
       </div>
     </DialogContent>

@@ -1,5 +1,6 @@
 import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
+import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
 
@@ -12,6 +13,8 @@ const UploadDropzone = ({
   setFile: React.Dispatch<React.SetStateAction<File | null>>
   setBase64: React.Dispatch<React.SetStateAction<string>>
 }) => {
+  const { t } = useTranslation("modals")
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach((file) => {
       setFile(file)
@@ -57,7 +60,7 @@ const UploadDropzone = ({
       >
         {file
           ? `${file.name} - ${(file.size / 1024).toFixed(2)} kB`
-          : "область для загрузки изображения"}
+          : t("change-avatar.uploading-area")}
       </span>
     </div>
   )

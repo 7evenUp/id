@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { ReactComponent as BearIcon } from "@/assets/icons/avatars/Star.svg"
 
 import ChangeAvatar from "../modals/ChangeAvatar"
@@ -7,6 +9,8 @@ import ModalTrigger from "./ModalTrigger"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Avatar = () => {
+  const { t } = useTranslation()
+
   const { data: profileData } = useUserProfileQuery()
 
   const { avatars } = profileData!
@@ -27,7 +31,7 @@ const Avatar = () => {
         )}
 
         <div className="absolute bottom-0 flex justify-center pt-1 w-full h-[30px] translate-y-[30px] group-hover:translate-y-0 will-change-transform transition-transform bg-white dark:bg-gray-2 text-gray-1 dark:text-gray-5">
-          <span className="typography-text-2 select-none">Изменить</span>
+          <span className="typography-text-2 select-none">{t("change")}</span>
         </div>
       </div>
     </ModalTrigger>
