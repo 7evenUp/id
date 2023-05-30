@@ -1,13 +1,14 @@
-import React, { AnchorHTMLAttributes } from "react"
+import React, { AnchorHTMLAttributes } from "react";
 
-import { TbArrowUpRight, SiTelegram } from "react-icons/all"
+import { TbArrowUpRight } from "react-icons/tb";
+import { SiTelegram } from "react-icons/si";
 
-import { buttonVariants } from "./Button"
+import { buttonVariants } from "./Button";
 
-import { cn } from "@/lib/classNames"
+import { cn } from "@/lib/classNames";
 
 interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  withTgIcon?: boolean
+  withTgIcon?: boolean;
 }
 
 const ExternalLink: React.FC<ExternalLinkProps> = ({
@@ -30,7 +31,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
       {children}
       <TbArrowUpRight />
     </a>
-  )
-}
+  );
+};
 
-export default ExternalLink
+export default ExternalLink;
