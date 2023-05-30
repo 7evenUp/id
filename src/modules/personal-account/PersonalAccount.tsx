@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import Deactivation from "./modals/Deactivation"
 
 import Avatar from "./components/Avatar"
@@ -9,7 +11,21 @@ import Referral from "./sections/Referral"
 
 import Button from "@/shared/ui/Button"
 
+import { useLazyLogoutQuery } from "@/redux/api/auth"
+
 const PersonalAccount = () => {
+  const [logout, { isSuccess, isError }] = useLazyLogoutQuery()
+
+  useEffect(() => {
+    if (isSuccess) location.reload()
+  }, [isSuccess])
+
+  if (isError) console.error("Error!")
+
+  const onLogout = () => {
+    logout()
+  }
+
   return (
     <div>
       <div className="flex justify-between">
@@ -26,7 +42,9 @@ const PersonalAccount = () => {
         <Referral />
 
         <div className="flex justify-between">
-          <Button appearence="text">выйти из аккаунта</Button>
+          <Button appearence="text" onClick={onLogout}>
+            выйти из аккаунта
+          </Button>
           <ModalTrigger content={<Deactivation />}>
             <Button appearence="text">деактивировать аккаунт</Button>
           </ModalTrigger>
