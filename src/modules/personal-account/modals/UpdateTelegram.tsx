@@ -17,9 +17,23 @@ import {
 } from "@/shared/ui/Form"
 
 const nicknameFormSchema = z.object({
-  nickname: z.string().min(1, {
-    message: "Поле обязательно для заполнения.",
-  }),
+  nickname: z
+    .string()
+    .min(5, {
+      message: "Минимальная длина - 5 символов",
+    })
+    .max(32, {
+      message: "Максимальная длина - 32 символа",
+    })
+    .regex(new RegExp("^[a-zA-Z0-9_]+$", "g"), {
+      message: "Формат допускает использование символов a-z, 0-9 и underscores",
+    })
+    .regex(new RegExp("^[a-zA-Z]"), {
+      message: "Никнейм не может начинаться с цифры или underscore",
+    })
+    .regex(new RegExp("[a-zA-Z0-9]$"), {
+      message: "Никнейм не может заканчиваться символом underscore",
+    }),
 })
 
 const codeFormSchema = z.object({
@@ -44,17 +58,17 @@ const UpdateTelegram = () => {
 
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[370px]">
+      {isSecondStep && (
+        <button
+          className="typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit"
+          onClick={() => setIsSecondStep(false)}
+        >
+          <HiOutlineArrowNarrowLeft />
+          <span className="text-left">Назад</span>
+        </button>
+      )}
       <DialogHeader className="mb-4">
         <div className="flex flex-col">
-          {isSecondStep && (
-            <button
-              className="typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit"
-              onClick={() => setIsSecondStep(false)}
-            >
-              <HiOutlineArrowNarrowLeft />
-              <span className="text-left">Назад</span>
-            </button>
-          )}
           <DialogTitle>Синхронизация Telegram</DialogTitle>
         </div>
         <span className="flex items-center typography-text-0">
@@ -102,13 +116,16 @@ const NicknameForm = ({
               <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
                 Telegram никнейм
               </FormLabel>
-              <FormControl>
-                <Input
-                  className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
-                  placeholder="Введите ваш никнейм"
-                  {...field}
-                />
-              </FormControl>
+              <div className="relative">
+                <span className="absolute left-0 top-1 text-sm">@</span>
+                <FormControl>
+                  <Input
+                    className="w-full text-sm pl-4 aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    placeholder="username"
+                    {...field}
+                  />
+                </FormControl>
+              </div>
               <FormMessage />
             </FormItem>
           )}
