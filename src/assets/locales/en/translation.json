@@ -1,5 +1,6 @@
 {
   "heading": "Personal account",
   "logout": "logout",
-  "deactivate": "deactivate account"
+  "deactivate": "deactivate account",
+  "change": "Change"
 }

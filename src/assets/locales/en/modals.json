@@ -1,0 +1,40 @@
+{
+  "change-email": {
+    "heading": "Change email",
+    "old-label": "Current email",
+    "old-placeholder": "Enter your current email",
+    "new-label": "New email",
+    "new-placeholder": "Enter your new email",
+    "button": "confirm"
+  },
+  "change-tg": {
+    "heading": "Synchronize Telegram",
+    "username-label": "Telegram username",
+    "username-placeholder": "username",
+    "sync-button": "synchronize",
+    "back-button": "back",
+    "description": "Enter below the code received from the bot in Telegram",
+    "code-label": "Code",
+    "code-placeholder": "Enter your code",
+    "confirm-button": "confirm"
+  },
+  "change-avatar": {
+    "heading": "Set profile avatar",
+    "save-button": "save",
+    "save-success": "saved",
+    "prev-images": "Previous images",
+    "uploading-area": "image uploading area",
+    "choose-nft": "Choose NFT",
+    "nft-description": "To select an NFT image, you need to link a Web 3.0 wallet"
+  },
+  "freeze": {
+    "status": "Subscription status",
+    "freeze-available": "Freeze available",
+    "confirm-btn": "confirm freezing",
+    "sub-freeze-title": "Subscription freeze",
+    "sub-freeze-desc": "If you will not be able to follow Prime and enjoy all the benefits of a subscription for a long time, you can use the freeze function.",
+    "how-works-title": "How it works?",
+    "how-works-desc": "As soon as you freeze your subscription, you will immediately lose access to all Prime services, but there will be subscription days on your account that you have not used yet. You can unfreeze your subscription and return all accesses at any time in the same section.",
+    "footer": "Please note that you can only freeze your subscription once a year!"
+  }
+}

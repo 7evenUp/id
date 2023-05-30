@@ -1,6 +1,30 @@
 {
-  "heading": "Profile",
-  "nickname": "nickname",
-  "email": "email",
-  "wallet": "wallet"
+  "profile": {
+    "heading": "Profile",
+    "nickname": "nickname",
+    "email": "email",
+    "wallet": "wallet"
+  },
+  "subs": {
+    "heading": "Subscription",
+    "balance": "my balance",
+    "remaining": "remaining days",
+    "inactive-subs": "subscription is inactive",
+    "history-btn": "history",
+    "replenish-btn": "replenish",
+    "buy-btn": "buy subscription"
+  },
+  "referral": {
+    "heading": "Referral system",
+    "cashback": "cashback",
+    "balance": "referral balance",
+    "stats": "statistics",
+    "promo-btn": "promo code",
+    "link-btn": "link",
+    "withdraw-btn": "withdraw",
+    "view-btn": "view statistics",
+    "toast-title": "Copied",
+    "promo-copied": "Promo code copied to clipboard",
+    "link-copied": "The referral link has been copied to the clipboard"
+  }
 }
