@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import Deactivation from "./modals/Deactivation"
 
@@ -14,6 +15,8 @@ import Button from "@/shared/ui/Button"
 import { useLazyLogoutQuery } from "@/redux/api/auth"
 
 const PersonalAccount = () => {
+  const { t } = useTranslation()
+
   const [logout, { isSuccess, isError }] = useLazyLogoutQuery()
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const PersonalAccount = () => {
     <div>
       <div className="flex justify-between">
         <h1 className="typography-head uppercase dark:text-gray-5 text-center w-full sm:text-left mb-10 sm:mb-0">
-          Личный кабинет
+          {t("heading")}
         </h1>
         <div className="hidden sm:block">
           <Avatar />
@@ -43,10 +46,10 @@ const PersonalAccount = () => {
 
         <div className="flex justify-between">
           <Button appearence="text" onClick={onLogout}>
-            выйти из аккаунта
+            {t("logout")}
           </Button>
           <ModalTrigger content={<Deactivation />}>
-            <Button appearence="text">деактивировать аккаунт</Button>
+            <Button appearence="text">{t("deactivate")}</Button>
           </ModalTrigger>
         </div>
       </div>

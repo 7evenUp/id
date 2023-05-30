@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import UpdateEmail from "../../modals/UpdateEmail"
 
 import ModalTrigger from "../../components/ModalTrigger"
@@ -9,13 +11,15 @@ import RowItem from "@/shared/components/RowItem"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ProfileEmail = () => {
+  const { t } = useTranslation("profile")
+
   const { data: userProfile } = useUserProfileQuery()
 
   if (!userProfile) return null
 
   return (
     <RowItem className="relative group justify-end">
-      <span className="mr-auto">почта</span>
+      <span className="mr-auto">{t("email")}</span>
       <span>{userProfile.email}</span>
 
       {/* Mobile editing */}

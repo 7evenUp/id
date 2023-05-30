@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
@@ -7,11 +8,16 @@ import RowItem from "@/shared/components/RowItem"
 
 import { useMetamask } from "@/hooks/useMetamask"
 
-import { useUpdateWalletMutation, useUserProfileQuery } from "@/redux/api/profile"
+import {
+  useUpdateWalletMutation,
+  useUserProfileQuery,
+} from "@/redux/api/profile"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const ProfileWallet = () => {
+  const { t } = useTranslation("profile")
+
   const { data: userProfile } = useUserProfileQuery()
 
   const [updateWallet] = useUpdateWalletMutation()
@@ -48,7 +54,7 @@ const ProfileWallet = () => {
   return (
     <RowItem className="relative group">
       <span className={wallet ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}>
-        кошелёк
+        {t("wallet")}
       </span>
       {wallet ? (
         <span>{cutWalletAddr(wallet)}</span>
