@@ -19,7 +19,7 @@ const ProfileEmail = () => {
 
   return (
     <RowItem className="relative group justify-end">
-      <span className="mr-auto">{t("email")}</span>
+      <span className="mr-auto">{t("profile.email")}</span>
       <span>{userProfile.email}</span>
 
       {/* Mobile editing */}

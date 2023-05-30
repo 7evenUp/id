@@ -55,7 +55,7 @@ const ProfileNickname = () => {
 
   return (
     <RowItem className="relative group justify-end">
-      <span className="mr-auto">{t("nickname")}</span>
+      <span className="mr-auto">{t("profile.nickname")}</span>
       <input
         className="peer bg-transparent outline-none text-right"
         defaultValue={username}

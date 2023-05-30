@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
-import { BiLoaderAlt } from "react-icons/bi"
+import { useTranslation } from "react-i18next"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -21,6 +21,7 @@ import {
 } from "@/redux/api/profile"
 
 const UpdateEmail = () => {
+  const { t } = useTranslation("modals")
   const { data: userProfileData } = useUserProfileQuery()
   const [updateEmail, { isSuccess, error, isLoading }] =
     useUpdateEmailMutation()
@@ -60,7 +61,7 @@ const UpdateEmail = () => {
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[370px]">
       <DialogHeader>
-        <DialogTitle>Изменить почту</DialogTitle>
+        <DialogTitle>{t("change-email.heading")}</DialogTitle>
       </DialogHeader>
 
       <Form {...form}>
@@ -74,12 +75,12 @@ const UpdateEmail = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                  Старая почта
+                  {t("change-email.old-label")}
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
-                    placeholder="Введите вашу старую почту"
+                    placeholder={t("change-email.old-placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -93,12 +94,12 @@ const UpdateEmail = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                  Новая почта
+                  {t("change-email.new-label")}
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
-                    placeholder="Введите вашу новую почту"
+                    placeholder={t("change-email.new-placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -118,9 +119,8 @@ const UpdateEmail = () => {
             </span>
           )}
           <div className="flex gap-2 items-center">
-            {isLoading && <BiLoaderAlt className="animate-spin" />}
-            <Button type="submit" className="w-fit">
-              подтвердить
+            <Button type="submit" className="w-fit" isLoading={isLoading}>
+              {t("change-email.button")}
             </Button>
           </div>
         </form>
