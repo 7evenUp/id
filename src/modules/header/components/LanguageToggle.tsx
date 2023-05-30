@@ -1,16 +1,19 @@
 import { useState } from "react"
 import * as Switch from "@radix-ui/react-switch"
+import { useTranslation } from "react-i18next";
 
 const LanguageToggle = () => {
   const [language, setLanguage] = useState<"ru" | "en">("ru")
+  const { i18n } = useTranslation();
 
   const toggleLanguage = () => {
     setLanguage(language === "ru" ? "en" : "ru")
+    i18n.changeLanguage(language === "ru" ? "en" : "ru")
   }
 
   return (
     <Switch.Root
-      checked={language === "ru" ? true : false}
+      checked={language === "en" ? true : false}
       onCheckedChange={toggleLanguage}
       className="group w-[40px] h-[18px] bg-transparent rounded-full relative border border-gray-1 dark:border-gray-5 outline-none cursor-pointer"
     >

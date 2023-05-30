@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import EditButton from "../../components/EditButton"
 import EditContainer from "../../components/EditContainer"
@@ -12,6 +13,8 @@ import {
 } from "@/redux/api/profile"
 
 const ProfileNickname = () => {
+  const { t } = useTranslation("profile")
+
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -52,7 +55,7 @@ const ProfileNickname = () => {
 
   return (
     <RowItem className="relative group justify-end">
-      <span className="mr-auto">ник</span>
+      <span className="mr-auto">{t("nickname")}</span>
       <input
         className="peer bg-transparent outline-none text-right"
         defaultValue={username}
