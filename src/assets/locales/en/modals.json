@@ -90,5 +90,39 @@
     "third-step": {
       "step": "step 3/3: Prime services"
     }
+  },
+  "ref-info": {
+    "heading": "How the referral system works?",
+    "text-1": "Invite new users to Prime and receive up to 20% of their every payment on a regular basis. Your referrals get a discount $5 for the first purchase.",
+    "text-2": "The more users are invited, the higher the percentage of each referral payment!",
+    "level": "Your referral program level",
+    "to-next-level": "Users to the next level",
+    "cashback": "Percentage of referral payments",
+    "table-heading": "Reward table",
+    "th-lvl": "level",
+    "th-refs": "referrals",
+    "th-profit": "profit",
+    "after-10": "After reaching level 10, you can receive up to 30% of each referral purchase. To do this, contact your Mentor.",
+    "link": "mentor"
+  },
+  "ref-withdraw": {
+    "heading": "Withdraw funds",
+    "personal-account-btn": "to PA balance",
+    "wallet-btn": "to wallet",
+    "shares-btn": "to SHARES",
+    "back-btn": "back",
+    "address-placeholder": "Wallet address",
+    "amount-placeholder": "Withdraw amount",
+    "available": "Available amount",
+    "confirm-btn": "confirm"
+  },
+  "ref-stats": {
+    "heading": "Statistics",
+    "total-refs": "Number of invited users",
+    "total-paid-refs": "Number of users who made the payment",
+    "current-month-refs": "Number of current month invited users",
+    "current-month-paid-refs": "Number of current month users who made the payment",
+    "total-profit": "Total profit",
+    "total-withdraw": "Withdrawn from the referral system"
   }
 }

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { FaInfo } from "react-icons/fa"
 
 import ReferralStats from "../modals/referral/ReferralStats"
@@ -18,21 +20,21 @@ import { toast } from "@/shared/ui/Toast"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Referral = () => {
-  const { data: profileData } = useUserProfileQuery()
+  const { t } = useTranslation("profile")
 
-  if (!profileData) return null
+  const { data: profileData } = useUserProfileQuery()
 
   const {
     referralInfo: { refCode, refLink, refBalance, refCashBack },
-  } = profileData
+  } = profileData!
 
   const onPromoClick = () => {
     navigator.clipboard.writeText(refCode)
 
     toast({
       providedId: "promo",
-      title: "Скопированно",
-      message: "Промокод успешно скопирован в буфер обмена",
+      title: t("referral.toast-title"),
+      message: t("referral.promo-copied"),
       type: "default",
     })
   }
@@ -41,8 +43,9 @@ const Referral = () => {
     navigator.clipboard.writeText(refLink)
 
     toast({
-      title: "Скопированно",
-      message: "Реферальная ссылка успешно скопирована в буфер обмена",
+      providedId: "link",
+      title: t("referral.toast-title"),
+      message: t("referral.link-copied"),
       type: "default",
     })
   }
@@ -50,7 +53,7 @@ const Referral = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
-        <Subheading>Реферальная система</Subheading>
+        <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
           <IconButton className="bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full">
             <FaInfo className="w-3 h-3 fill-gray-5" />
@@ -60,23 +63,26 @@ const Referral = () => {
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
           <span className="w-full xl:w-auto">
-            реферальная система: <AccentNumber>{refCashBack}%</AccentNumber>
+            {t("referral.cashback")}:{" "}
+            <AccentNumber>{refCashBack}%</AccentNumber>
           </span>
           <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink">
-            <Button onClick={onPromoClick}>промокод</Button>
-            <Button onClick={onRefLinkClick}>ссылка</Button>
+            <Button onClick={onPromoClick}>{t("referral.promo-btn")}</Button>
+            <Button onClick={onRefLinkClick}>{t("referral.link-btn")}</Button>
           </div>
         </RowItem>
         <RowItem>
           <span className="typography-text-0 dark:text-gray-4">
-            реферальный баланс: <AccentNumber>${refBalance}</AccentNumber>
+            {t("referral.balance")}: <AccentNumber>${refBalance}</AccentNumber>
           </span>
-          <ReferralWithdraw />
+          <ReferralWithdraw triggerText={t("referral.withdraw-btn")} />
         </RowItem>
         <RowItem>
-          <span className="typography-text-0 dark:text-gray-4">статистика</span>
+          <span className="typography-text-0 dark:text-gray-4">
+            {t("referral.stats")}
+          </span>
           <ModalTrigger content={<ReferralStats />}>
-            <Button>посмотреть</Button>
+            <Button>{t("referral.view-btn")}</Button>
           </ModalTrigger>
         </RowItem>
       </div>
