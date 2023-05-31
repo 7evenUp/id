@@ -124,5 +124,12 @@
     "current-month-paid-refs": "Number of current month users who made the payment",
     "total-profit": "Total profit",
     "total-withdraw": "Withdrawn from the referral system"
+  },
+  "deactivation": {
+    "heading": "Account deactivation",
+    "text-1": "If you are sure that you want to deactivate your account, enter the code below that you received in telegram (or in the mail)",
+    "text-2": "Please note that all your data and funds will be lost!",
+    "code-placeholder": "Enter code",
+    "deactivate-btn": "deactivate"
   }
 }
