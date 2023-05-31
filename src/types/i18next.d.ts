@@ -4,6 +4,7 @@ import enTranslate from "@/assets/locales/en/translation.json"
 import enProfile from "@/assets/locales/en/profile.json"
 import enModals from "@/assets/locales/en/modals.json"
 import enProducts from "@/assets/locales/en/products.json"
+import enAuth from "@/assets/locales/en/auth.json"
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -13,6 +14,7 @@ declare module "i18next" {
       profile: typeof enProfile
       modals: typeof enModals
       products: typeof enProducts
+      auth: typeof enAuth
     }
   }
 }

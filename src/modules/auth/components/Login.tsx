@@ -3,6 +3,7 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
@@ -32,6 +33,8 @@ const formSchema = z.object({
 })
 
 const Login = () => {
+  const { t } = useTranslation("auth")
+
   const [isMailMode, setIsMailMode] = useState(false)
 
   const [trigger, { isLoading, isSuccess, error }] = useLoginMutation()
@@ -55,7 +58,7 @@ const Login = () => {
           onClick={() => setIsMailMode(false)}
         >
           <HiOutlineArrowNarrowLeft />
-          <span className="text-left">Другой метод авторизации</span>
+          <span className="text-left">{t("login.another-method")}</span>
         </button>
         <Form {...form}>
           <form
@@ -67,16 +70,21 @@ const Login = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="group-focus-within:text-res-bot-blue">Почта</FormLabel>
+                  <FormLabel className="group-focus-within:text-res-bot-blue">
+                    {t("email-label")}
+                  </FormLabel>
                   <FormControl>
-                    <AuthInput placeholder="Введите вашу почту" {...field} />
+                    <AuthInput
+                      placeholder={t("email-placeholder")}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <ActionButton type="submit" isLoading={isLoading}>
-              Войти
+              {t("login.login-btn")}
             </ActionButton>
           </form>
         </Form>
@@ -107,11 +115,11 @@ const Login = () => {
     <div className="flex gap-3 flex-wrap items-center my-3.5">
       <AuthButton>
         <Web3Logo />
-        <span>Кошелёк</span>
+        <span>{t("web3-btn")}</span>
       </AuthButton>
       <AuthButton onClick={() => setIsMailMode(true)}>
         <MailLogo />
-        <span>Почта</span>
+        <span>{t("email-btn")}</span>
       </AuthButton>
     </div>
   )

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 const ToggleMode = ({
   isLoginMode,
   toggleMode,
@@ -5,24 +7,27 @@ const ToggleMode = ({
   isLoginMode: boolean
   toggleMode: () => void
 }) => {
+  const { t } = useTranslation("auth")
+
   if (isLoginMode) {
     return (
       <button
         className="typography-text-0 font-medium w-fit text-res-bot-blue hover:underline underline-offset-2"
         onClick={toggleMode}
       >
-        Создать аккаунт
+        {t("login.switch-mode-btn")}
       </button>
     )
   }
+
   return (
     <div className="typography-text-0">
-      <span>Уже есть аккаунт?</span>
+      <span>{t("register.switch-mode-text")}</span>
       <button
         className="typography-text-0 font-medium w-fit text-res-bot-blue hover:underline underline-offset-2 ml-2"
         onClick={toggleMode}
       >
-        Войти
+        {t("register.switch-mode-btn")}
       </button>
     </div>
   )
