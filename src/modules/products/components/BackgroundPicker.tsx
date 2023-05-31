@@ -1,10 +1,13 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/RadioGroup"
 
 type Modes = "research" | "aggregator"
 
 const BackgroundPicker = () => {
+  const { t } = useTranslation("products")
+
   const [mode, setMode] = useState<Modes>("research")
   const [activeResearchPhoto, setActiveResearchPhoto] = useState(0)
   const [activeAggregatorPhoto, setActiveAggregatorPhoto] = useState(0)
@@ -22,7 +25,7 @@ const BackgroundPicker = () => {
           Research
         </RadioGroupItem>
         <RadioGroupItem value={"aggregator"} id="aggregator">
-          Агрегатор
+          {t("res-bot.aggregator")}
         </RadioGroupItem>
       </RadioGroup>
       <div className="relative flex items-center gap-2 py-[5px] px-1.5 bg-white dark:bg-gray-1 rounded-xl">

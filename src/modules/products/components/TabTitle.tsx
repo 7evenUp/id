@@ -1,8 +1,12 @@
+import { useTranslation } from "react-i18next"
+
 import { HiOutlineArrowNarrowRight } from "react-icons/hi"
 
 import Subheading from "@/shared/typography/Subheading"
 
 const TabTitle = ({ title, link }: { title: string; link: string }) => {
+  const { t } = useTranslation("products")
+
   return (
     <div className="flex gap-5">
       <Subheading>{title}</Subheading>
@@ -12,7 +16,7 @@ const TabTitle = ({ title, link }: { title: string; link: string }) => {
         target="_blank"
       >
         <HiOutlineArrowNarrowRight />
-        на сайт
+        {t("website")}
       </a>
     </div>
   )

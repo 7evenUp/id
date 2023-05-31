@@ -3,6 +3,7 @@ import "i18next"
 import enTranslate from "@/assets/locales/en/translation.json"
 import enProfile from "@/assets/locales/en/profile.json"
 import enModals from "@/assets/locales/en/modals.json"
+import enProducts from "@/assets/locales/en/products.json"
 
 declare module "i18next" {
   interface CustomTypeOptions {
@@ -11,6 +12,7 @@ declare module "i18next" {
       translate: typeof enTranslate
       profile: typeof enProfile
       modals: typeof enModals
+      products: typeof enProducts
     }
   }
 }

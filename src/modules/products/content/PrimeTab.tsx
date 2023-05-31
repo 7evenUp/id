@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { MdOutlineExpandMore } from "react-icons/md"
 
 import TabHeader from "../components/TabHeader"
@@ -11,13 +13,15 @@ import RowItem from "@/shared/components/RowItem"
 import { primeServices } from "@/utils/primeServices"
 
 const PrimeTab = () => {
+  const { t } = useTranslation("products")
+
   return (
     <>
       <TabHeader>
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
       <RowItem className="items-baseline flex-col sm:flex-row gap-2">
-        <span>Каналы и чаты Prime</span>
+        <span>{t("prime.channels-and-chats")}</span>
         <div className="flex items-center sm:justify-end gap-[10px] flex-wrap max-w-[360px]">
           <ExternalLink withTgIcon href="#">
             канал Prime
@@ -35,9 +39,9 @@ const PrimeTab = () => {
       </RowItem>
       <RowItem className="flex-col items-stretch gap-6">
         <div className="flex justify-between items-center">
-          <span>Сервисы и навигация</span>
+          <span>{t("prime.services-and-nav")}</span>
           <ExternalLink href="https://member.crypton.xyz/">
-            навигация Prime
+            {t("prime.prime-nav")}
           </ExternalLink>
         </div>
         <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row xl:justify-between gap-5">
@@ -75,48 +79,30 @@ const PrimeTab = () => {
             )}
           </div>
           <div className="flex flex-col gap-[14px] py-3 px-6 bg-white dark:bg-gray-1 rounded-xl typography-text-1 w-fit">
-            <p className="lg:max-w-prose">
-              Если у Вас возникают любые вопросы по сервисам Prime или заработку
-              в криптовалюте, то Вы всегда можете задать их Наставнику (никнейм
-              в Telegram — @crypton_support) Впервые в Prime? Рекомендуем
-              подробно ознакомиться с каждым сервисом Prime, чтобы использовать
-              подписку на максимум! Не знаете, с чего начать? Мы подготовили для
-              Вас конкретный план действий.
-            </p>
-            <p className="lg:max-w-prose">
-              Если у Вас возникают любые вопросы по сервисам Prime или заработку
-              в криптовалюте, то Вы всегда можете задать их Наставнику (никнейм
-              в Telegram — @crypton_support) Впервые в Prime? Рекомендуем
-              подробно ознакомиться с каждым сервисом Prime, чтобы использовать
-              подписку на максимум! Не знаете, с чего начать? Мы подготовили для
-              Вас конкретный план действий.
-            </p>
+            <p className="lg:max-w-prose">{t("prime.nav-text")}</p>
           </div>
         </div>
       </RowItem>
       <RowItem className="flex-col items-stretch gap-3">
         <div className="flex justify-between items-center">
-          <span>Помощь</span>
+          <span>{t("prime.help")}</span>
         </div>
         <div className="flex flex-col gap-6 sm:gap-4">
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
             <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
-              Нужна помощь? Если у Вас есть вопросы по сервисам Prime или
-              касаемо заработка в криптовалюте, то Вы всегда можете задать их
-              Наставнику.
+              {t("prime.help-text-1")}
             </p>
             <ExternalLink
               withTgIcon
               href="https://t.me/crypton_support"
               className="w-fit"
             >
-              наставник
+              {t("prime.mentor")}
             </ExternalLink>
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
             <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
-              Впервые в Prime? Рекомендуем подробно ознакомиться с каждым
-              сервисом, чтобы изпользовать возможности подписки на максимум!
+              {t("prime.help-text-2")}
             </p>
             <ExternalLink href="#" className="w-fit">
               возможности Prime
@@ -124,8 +110,7 @@ const PrimeTab = () => {
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
             <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
-              Не знаете с чего начать? Мы подготовили для Вас конкретный план
-              действий.
+              {t("prime.help-text-3")}
             </p>
             <ExternalLink href="#" className="w-fit">
               план действий
@@ -134,19 +119,19 @@ const PrimeTab = () => {
         </div>
       </RowItem>
       <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row justify-between gap-3 py-2 dark:text-gray-4">
-        <span>Обратная связь и отзывы</span>
+        <span>{t("prime.feedback")}</span>
         <div className="flex gap-2.5 flex-col sm:flex-row">
           <ExternalLink
             href="https://t.me/reviews_prime"
             className="w-fit sm:w-auto"
           >
-            оставить отзыв
+            {t("prime.leave-review")}
           </ExternalLink>
           <ExternalLink
             href="https://t.me/crypton_support"
             className="w-fit sm:w-auto"
           >
-            оставить обратную связь
+            {t("prime.leave-feedback")}
           </ExternalLink>
         </div>
       </div>
