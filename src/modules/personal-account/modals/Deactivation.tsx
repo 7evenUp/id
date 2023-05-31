@@ -1,10 +1,13 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
 
 const Deactivation = () => {
+  const { t } = useTranslation("modals")
+
   const [deactivationCode, setDeactivationCode] = useState("")
 
   const onSubmit = () => {
@@ -14,19 +17,16 @@ const Deactivation = () => {
   return (
     <DialogContent className="max-w-[500px]">
       <DialogHeader>
-        <DialogTitle>Деактивация аккаунта</DialogTitle>
+        <DialogTitle>{t("deactivation.heading")}</DialogTitle>
       </DialogHeader>
       <div>
         <p className="typography-text-0 mb-6 max-w-prose">
-          Если вы уверены, что хотите деактивировать аккаунт, введите ниже код,
-          который вы получили в телеграм (или в почте)
+          {t("deactivation.text-1")}
         </p>
-        <p className="typography-text-1 mb-2">
-          Учтите, что все ваши данные и средства будут потеряны!
-        </p>
+        <p className="typography-text-1 mb-2">{t("deactivation.text-2")}</p>
         <Input
           className="block mb-3"
-          placeholder="Введите код"
+          placeholder={t("deactivation.code-placeholder")}
           value={deactivationCode}
           onChange={(evt) => setDeactivationCode(evt.currentTarget.value)}
         />
@@ -34,7 +34,7 @@ const Deactivation = () => {
           onClick={onSubmit}
           className="w-fit bg-error hover:bg-red-600 dark:hover:bg-red-600 text-white dark:text-white"
         >
-          деактивировать
+          {t("deactivation.deactivate-btn")}
         </Button>
       </div>
     </DialogContent>

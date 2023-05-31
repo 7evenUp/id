@@ -3,6 +3,7 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
@@ -35,6 +36,8 @@ const formSchema = z.object({
 })
 
 const Register = () => {
+  const { t } = useTranslation("auth")
+
   const [isMailMode, setIsMailMode] = useState(false)
 
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
@@ -59,7 +62,7 @@ const Register = () => {
           onClick={() => setIsMailMode(false)}
         >
           <HiOutlineArrowNarrowLeft />
-          <span className="text-left">Другой метод регистрации</span>
+          <span className="text-left">{t("register.another-method")}</span>
         </button>
         <Form {...form}>
           <form
@@ -71,9 +74,14 @@ const Register = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="group-focus-within:text-res-bot-blue">Почта</FormLabel>
+                  <FormLabel className="group-focus-within:text-res-bot-blue">
+                    {t("email-label")}
+                  </FormLabel>
                   <FormControl>
-                    <AuthInput placeholder="Введите вашу почту" {...field} />
+                    <AuthInput
+                      placeholder={t("email-placeholder")}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -84,10 +92,12 @@ const Register = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="group-focus-within:text-res-bot-blue">Имя пользователя</FormLabel>
+                  <FormLabel className="group-focus-within:text-res-bot-blue">
+                    {t("register.username-label")}
+                  </FormLabel>
                   <FormControl>
                     <AuthInput
-                      placeholder="Введите ваше имя пользователя"
+                      placeholder={t("register.username-placeholder")}
                       {...field}
                     />
                   </FormControl>
@@ -96,16 +106,16 @@ const Register = () => {
               )}
             />
             <p className="text-xs w-full">
-              Создавая учетную запись, я соглашаюсь с{" "}
+              {t("register.privacy-policy.text")}{" "}
               <a
                 href="#"
                 className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
               >
-                Политикой конфиденциальности
+                {t("register.privacy-policy.link")}
               </a>
             </p>
             <ActionButton type="submit" isLoading={isLoading}>
-              Зарегистрироваться
+              {t("register.register-btn")}
             </ActionButton>
           </form>
         </Form>
@@ -137,11 +147,11 @@ const Register = () => {
     <div className="flex gap-3 flex-wrap items-center my-3.5">
       <AuthButton>
         <Web3Logo />
-        <span>Кошелёк</span>
+        <span>{t("web3-btn")}</span>
       </AuthButton>
       <AuthButton onClick={() => setIsMailMode(true)}>
         <MailLogo />
-        <span>Почта</span>
+        <span>{t("email-btn")}</span>
       </AuthButton>
     </div>
   )

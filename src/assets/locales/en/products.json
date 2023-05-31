@@ -1,0 +1,37 @@
+{
+  "website": "website",
+  "save-btn": "save settings",
+  "res-bot": {
+    "ru": "Russian",
+    "en": "English",
+    "aggregator": "Aggregator",
+    "notifications": "Notifications in the browser",
+    "modes": "Display of modes",
+    "auto-translator": "Auto-translator",
+    "text-size": "The size of the text in the news",
+    "bg-selection": "Background selection",
+    "project-settings": "Project settings",
+    "th-search": "search",
+    "th-projects": "projects",
+    "th-subs": "subscriptions",
+    "th-socials": "socials",
+    "subs-options": {
+      "all": "all",
+      "important": "important"
+    }
+  },
+  "prime": {
+    "channels-and-chats": "Prime channels and chats",
+    "services-and-nav": "Services and navigation",
+    "prime-nav": "Prime navigation",
+    "nav-text": "If you have any questions about Prime services or earnings in cryptocurrency, then you can always ask their Mentor (nickname in Telegram — @crypton_support) For the first time in Prime? We recommend that you familiarize yourself with each Prime service in detail in order to use your subscription to the maximum! Don't know where to start? We have prepared a specific action plan for you.",
+    "help": "Help",
+    "help-text-1": "Need help? If you have any questions about Prime services or about earning money in cryptocurrency, then you can always ask your Mentor.",
+    "help-text-2": "For the first time in Prime? We recommend that you familiarize yourself with each service in detail in order to use the subscription features to the maximum!",
+    "help-text-3": "Don't know where to start? We have prepared a specific action plan for you.",
+    "feedback": "Feedback and reviews",
+    "leave-review": "leave a review",
+    "leave-feedback": "leave feedback",
+    "mentor": "mentor"
+  }
+}

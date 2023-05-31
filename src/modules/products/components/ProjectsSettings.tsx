@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import Input from "@/shared/ui/Input"
 import {
   Select,
@@ -9,24 +11,29 @@ import Switch from "@/shared/ui/Switch"
 import SwitchWithText from "@/shared/ui/SwitchWithText"
 
 const ProjectsSettings = () => {
+  const { t } = useTranslation("products")
+
   return (
     <table className="w-full block px-4 py-3 rounded-xl bg-white dark:bg-gray-1 typography-text-1">
       <thead className="mb-6 block">
         <tr className="flex items-baseline gap-6 text-left">
           <th className="w-[60px] sm:w-[100px] xlg:w-[130px]">
-            <Input placeholder="поиск" className="w-full xlg:w-auto" />
+            <Input
+              placeholder={t("res-bot.th-search")}
+              className="w-full xlg:w-auto"
+            />
           </th>
           <th className="w-[65px] typography-text-1 text-gray-3 sm:hidden">
-            проекты/подписки
+            {t("res-bot.th-projects")}/{t("res-bot.th-subs")}
           </th>
           <th className="w-[65px] typography-text-1 text-gray-3 hidden sm:block">
-            проекты
+            {t("res-bot.th-projects")}
           </th>
           <th className="w-[90px] typography-text-1 text-gray-3 hidden sm:block">
-            подписки
+            {t("res-bot.th-subs")}
           </th>
           <th className="flex-grow-[2] typography-text-1 text-gray-3">
-            соцсети
+            {t("res-bot.th-socials")}
           </th>
         </tr>
       </thead>
@@ -40,8 +47,12 @@ const ProjectsSettings = () => {
             <Select defaultValue="all">
               <SelectTrigger />
               <SelectContent>
-                <SelectItem value="all">все</SelectItem>
-                <SelectItem value="main">важные</SelectItem>
+                <SelectItem value="all">
+                  {t("res-bot.subs-options.all")}
+                </SelectItem>
+                <SelectItem value="main">
+                  {t("res-bot.subs-options.important")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </td>
@@ -52,8 +63,12 @@ const ProjectsSettings = () => {
             <Select defaultValue="all">
               <SelectTrigger />
               <SelectContent>
-                <SelectItem value="all">все</SelectItem>
-                <SelectItem value="main">важные</SelectItem>
+                <SelectItem value="all">
+                  {t("res-bot.subs-options.all")}
+                </SelectItem>
+                <SelectItem value="main">
+                  {t("res-bot.subs-options.important")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </td>
@@ -73,8 +88,12 @@ const ProjectsSettings = () => {
             <Select defaultValue="main">
               <SelectTrigger />
               <SelectContent>
-                <SelectItem value="all">все</SelectItem>
-                <SelectItem value="main">важные</SelectItem>
+                <SelectItem value="all">
+                  {t("res-bot.subs-options.all")}
+                </SelectItem>
+                <SelectItem value="main">
+                  {t("res-bot.subs-options.important")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </td>
@@ -85,8 +104,12 @@ const ProjectsSettings = () => {
             <Select defaultValue="main">
               <SelectTrigger />
               <SelectContent>
-                <SelectItem value="all">все</SelectItem>
-                <SelectItem value="main">важные</SelectItem>
+                <SelectItem value="all">
+                  {t("res-bot.subs-options.all")}
+                </SelectItem>
+                <SelectItem value="main">
+                  {t("res-bot.subs-options.important")}
+                </SelectItem>
               </SelectContent>
             </Select>
           </td>

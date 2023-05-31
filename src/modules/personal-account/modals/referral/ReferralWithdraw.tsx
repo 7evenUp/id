@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
+
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 
 import {
@@ -13,7 +15,9 @@ import Input from "@/shared/ui/Input"
 
 type WithdrawType = "USDC (ERC-20)" | "USDT (ERC-20)" | "USDT (TRC-20)"
 
-const ReferralWithdraw = () => {
+const ReferralWithdraw = ({ triggerText }: { triggerText: string }) => {
+  const { t } = useTranslation("modals")
+
   const [mainModalOpened, setMainModalOpened] = useState(false)
   const [withdrawToWalletModalOpened, setWithdrawToWalletModalOpened] =
     useState(false)
@@ -24,15 +28,17 @@ const ReferralWithdraw = () => {
 
   return (
     <>
-      <Button onClick={() => setMainModalOpened(true)}>вывести</Button>
+      <Button onClick={() => setMainModalOpened(true)}>{triggerText}</Button>
 
       <Dialog open={mainModalOpened} onOpenChange={setMainModalOpened}>
         <DialogContent className="max-w-[540px]">
           <DialogHeader className="mb-2 mobile:mb-0 sm:mb-6">
-            <DialogTitle>Вывести средства</DialogTitle>
+            <DialogTitle>{t("ref-withdraw.heading")}</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col items-center mobile:flex-row gap-5">
-            <Button className="w-fit">на баланс ЛК</Button>
+            <Button className="w-fit">
+              {t("ref-withdraw.personal-account-btn")}
+            </Button>
             <Button
               className="w-fit"
               onClick={() => {
@@ -40,9 +46,9 @@ const ReferralWithdraw = () => {
                 setWithdrawToWalletModalOpened(true)
               }}
             >
-              на кошелёк
+              {t("ref-withdraw.wallet-btn")}
             </Button>
-            <Button className="w-fit">в SHARES</Button>
+            <Button className="w-fit">{t("ref-withdraw.shares-btn")}</Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -59,13 +65,13 @@ const ReferralWithdraw = () => {
                 setWithdrawToWalletModalOpened(false)
               }}
             >
-              <HiOutlineArrowNarrowLeft /> назад
+              <HiOutlineArrowNarrowLeft /> {t("ref-withdraw.back-btn")}
             </button>
           </DialogHeader>
           <div className="flex flex-col">
             <Input
               className="mb-5 w-[260px]"
-              placeholder="Адрес кошелька"
+              placeholder={t("ref-withdraw.address-placeholder")}
               value={wallet}
               onChange={(evt) => setWallet(evt.currentTarget.value)}
             />
@@ -84,7 +90,7 @@ const ReferralWithdraw = () => {
               <div className="relative w-[260px]">
                 <Input
                   className="mb-2 w-[260px]"
-                  placeholder="Сумма вывода"
+                  placeholder={t("ref-withdraw.amount-placeholder")}
                   value={withdrawAmount}
                   onChange={(evt) => setWithdrawAmount(evt.currentTarget.value)}
                 />
@@ -92,13 +98,15 @@ const ReferralWithdraw = () => {
                   {withdrawType}
                 </span>
               </div>
-              <span className="typography-tip block">Доступная сумма: $62</span>
+              <span className="typography-tip block">
+                {t("ref-withdraw.available")}: $62
+              </span>
             </div>
             <Button
               className="w-fit"
               disabled={!wallet.length || !withdrawAmount.length}
             >
-              подтвердить
+              {t("ref-withdraw.confirm-btn")}
             </Button>
           </div>
         </DialogContent>

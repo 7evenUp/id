@@ -12,7 +12,7 @@ const Profile = () => {
   const { t } = useTranslation("profile")
   return (
     <div>
-      <Subheading className="mb-4">{t("heading")}</Subheading>
+      <Subheading className="mb-4">{t("profile.heading")}</Subheading>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <ProfileNickname />
         <ProfileEmail />

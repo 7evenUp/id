@@ -2,6 +2,7 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
@@ -43,6 +44,7 @@ const codeFormSchema = z.object({
 })
 
 const UpdateTelegram = () => {
+  const { t } = useTranslation("modals")
   const [nickInputValue, setNickInputValue] = useState("")
   const [isSecondStep, setIsSecondStep] = useState(false)
 
@@ -64,12 +66,12 @@ const UpdateTelegram = () => {
           onClick={() => setIsSecondStep(false)}
         >
           <HiOutlineArrowNarrowLeft />
-          <span className="text-left">Назад</span>
+          <span className="text-left">{t("change-tg.back-button")}</span>
         </button>
       )}
       <DialogHeader className="mb-4">
         <div className="flex flex-col">
-          <DialogTitle>Синхронизация Telegram</DialogTitle>
+          <DialogTitle>{t("change-tg.heading")}</DialogTitle>
         </div>
         <span className="flex items-center typography-text-0">
           {isSecondStep ? "2" : "1"}/2
@@ -97,6 +99,8 @@ const NicknameForm = ({
   onSubmit: ({ nickname }: z.infer<typeof nicknameFormSchema>) => void
   defaultInputValue: string
 }) => {
+  const { t } = useTranslation("modals")
+
   const form = useForm<z.infer<typeof nicknameFormSchema>>({
     resolver: zodResolver(nicknameFormSchema),
     defaultValues: { nickname: defaultInputValue ? defaultInputValue : "" },
@@ -114,14 +118,14 @@ const NicknameForm = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                Telegram никнейм
+                {t("change-tg.username-label")}
               </FormLabel>
               <div className="relative">
                 <span className="absolute left-0 top-1 text-sm">@</span>
                 <FormControl>
                   <Input
                     className="w-full text-sm pl-4 aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
-                    placeholder="username"
+                    placeholder={t("change-tg.username-placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -131,7 +135,7 @@ const NicknameForm = ({
           )}
         />
         <Button className="w-fit mt-2" type="submit">
-          Синхронизировать
+          {t("change-tg.sync-button")}
         </Button>
       </form>
     </Form>
@@ -143,6 +147,8 @@ const CodeForm = ({
 }: {
   onSubmit: ({ code }: z.infer<typeof codeFormSchema>) => void
 }) => {
+  const { t } = useTranslation("modals")
+
   const form = useForm<z.infer<typeof codeFormSchema>>({
     resolver: zodResolver(codeFormSchema),
     defaultValues: { code: "" },
@@ -150,9 +156,7 @@ const CodeForm = ({
 
   return (
     <>
-      <p className="typography-text-1">
-        Введите ниже код, полученный от бота в Telegram
-      </p>
+      <p className="typography-text-1">{t("change-tg.description")}</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -164,12 +168,12 @@ const CodeForm = ({
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                  Код
+                  {t("change-tg.code-label")}
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
-                    placeholder="Введите код"
+                    placeholder={t("change-tg.code-placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -178,7 +182,7 @@ const CodeForm = ({
             )}
           />
           <Button className="w-fit mt-2" type="submit">
-            Подтвердить
+            {t("change-tg.confirm-button")}
           </Button>
         </form>
       </Form>

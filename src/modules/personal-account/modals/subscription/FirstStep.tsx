@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
+
 import { ReactComponent as PrimeIcon } from "@/assets/icons/products/Prime.svg"
 
 import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
@@ -13,7 +15,7 @@ import { subscriptions } from "@/utils/subscriptions"
 
 import { cn } from "@/lib/classNames"
 
-const FAKE_BALANCE = 220
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const FirstStep = ({
   open,
@@ -26,6 +28,12 @@ const FirstStep = ({
   openSecondStep: () => void
   openBalanceModal: () => void
 }) => {
+  const { t } = useTranslation("modals")
+
+  const { data } = useUserProfileQuery()
+
+  const { balance } = data!
+
   const [activeSub, setActiveSub] = useState(1)
   const [promo, setPromo] = useState("")
   const [isPromoInvalid, setIsPromoInvalid] = useState(false)
@@ -63,7 +71,7 @@ const FirstStep = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px]">
-        <SubscriptionModalHeader label="шаг 1/3: Выбор тарифа" />
+        <SubscriptionModalHeader step={t("buy-subs.first-step.step")} />
 
         <div className="h-[400px] lg:h-auto overflow-y-auto pr-2 pb-1">
           <PrimeInfo />
@@ -81,7 +89,7 @@ const FirstStep = ({
 
           <div className="relative flex items-center gap-2 mb-5">
             <Input
-              placeholder="введите промокод"
+              placeholder={t("buy-subs.first-step.promo-placeholder")}
               value={promo}
               onChange={(evt) => setPromo(evt.currentTarget.value)}
               className={cn(
@@ -100,19 +108,18 @@ const FirstStep = ({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex flex-col gap-0.5">
               <span className="typography-head">
-                Итого: ${totalPrice.toFixed(2)}
+                {t("buy-subs.first-step.total")}: ${totalPrice.toFixed(2)}
               </span>
               <span className="typography-tip text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
-                Убедитесь в наличии средств на балансе
+                {t("buy-subs.first-step.make-sure")}
               </span>
             </div>
             <div className="flex flex-wrap gap-2 sm:gap-5">
-              <Button onClick={openBalanceModal}>пополнить баланс</Button>
-              <Button
-                onClick={openSecondStep}
-                disabled={totalPrice > FAKE_BALANCE}
-              >
-                оплатить
+              <Button onClick={openBalanceModal}>
+                {t("buy-subs.first-step.replenish-btn")}
+              </Button>
+              <Button onClick={openSecondStep} disabled={totalPrice > balance}>
+                {t("buy-subs.first-step.buy")}
               </Button>
             </div>
           </div>
@@ -124,19 +131,20 @@ const FirstStep = ({
   )
 }
 
-const PrimeInfo = () => (
-  <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-6">
-    <div className="flex items-center gap-3">
-      <PrimeIcon className="dark:fill-gray-5" />
-      <span className="typography-head">Prime</span>
+const PrimeInfo = () => {
+  const { t } = useTranslation("modals")
+
+  return (
+    <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-6">
+      <div className="flex items-center gap-3">
+        <PrimeIcon className="dark:fill-gray-5" />
+        <span className="typography-head">Prime</span>
+      </div>
+      <p className="typography-text-1 max-w-[464px]">
+        {t("buy-subs.first-step.prime-desc")}
+      </p>
     </div>
-    <p className="typography-text-1 max-w-[464px]">
-      Эффективные стратегии по увеличению заработка при ощутимой экономии
-      личного времени. Команда Prime тщательно отбирает самые знаковые события и
-      формирует способы заработка как для новичков, так и для продвинутых
-      пользователей.
-    </p>
-  </div>
-)
+  )
+}
 
 export default FirstStep

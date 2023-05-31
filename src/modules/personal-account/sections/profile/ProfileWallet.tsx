@@ -54,7 +54,7 @@ const ProfileWallet = () => {
   return (
     <RowItem className="relative group">
       <span className={wallet ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}>
-        {t("wallet")}
+        {t("profile.wallet")}
       </span>
       {wallet ? (
         <span>{cutWalletAddr(wallet)}</span>

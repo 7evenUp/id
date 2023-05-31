@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import ResearchAuthImage from "@/assets/images/auth_research.png"
 
@@ -7,22 +8,20 @@ import Register from "./components/Register"
 import ToggleMode from "./components/ToggleMode"
 
 const Auth = () => {
+  const { t } = useTranslation("auth")
+
   const [isLoginMode, setIsLoginMode] = useState(true)
 
   const toggleMode = () => {
     setIsLoginMode(!isLoginMode)
   }
 
-  const headingText = isLoginMode
-    ? "Вход в Личный Кабинет"
-    : "Добро пожаловать в Личный Кабинет Crypton!"
-
   return (
     <div className="flex border border-gray-1 rounded-xl w-full mobile:w-auto ms-auto me-auto">
       <div className="flex flex-col justify-between gap-6 py-8 px-9 bg-white rounded-xl md:rounded-none md:rounded-l-xl text-gray-1 w-full mobile:w-[370px] min-h-[340px]">
         <div className="flex flex-col">
           <h2 className="text-lg font-medium text-black mb-10 max-w-[260px]">
-            {headingText}
+            {isLoginMode ? t("login.heading") : t("register.heading")}
           </h2>
           {isLoginMode ? <Login /> : <Register />}
         </div>

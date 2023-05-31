@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import TabHeader from "../components/TabHeader"
 import TextSizeSlider from "../components/TextSizeSlider"
@@ -14,6 +15,8 @@ import RowItem from "@/shared/components/RowItem"
 type Language = "ru" | "en"
 
 const ResearchBotTab = () => {
+  const { t } = useTranslation("products")
+
   const [resLanguage, setResLanguage] = useState<Language>("ru")
   const [aggLanguage, setAggLanguage] = useState<Language>("en")
 
@@ -56,10 +59,10 @@ const ResearchBotTab = () => {
           title="Research Bot"
           link="https://t.me/crypton_research_bot"
         />
-        <Button className="sm:ml-auto w-fit">сохранить изменения</Button>
+        <Button className="sm:ml-auto w-fit">{t("save-btn")}</Button>
       </TabHeader>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
-        <span>Уведомления в браузере</span>
+        <span>{t("res-bot.notifications")}</span>
         <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
             <Switch id="resNotif" defaultChecked={true} />
@@ -67,12 +70,12 @@ const ResearchBotTab = () => {
           </div>
           <div className="flex items-center gap-2">
             <Switch id="agrNotif" />
-            <label htmlFor="agrNotif">Агрегатор</label>
+            <label htmlFor="agrNotif">{t("res-bot.aggregator")}</label>
           </div>
         </div>
       </RowItem>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
-        <span>Отображение режимов</span>
+        <span>{t("res-bot.modes")}</span>
         <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
           <div className="flex items-center gap-2">
             <Switch id="resView" defaultChecked={true} />
@@ -80,12 +83,12 @@ const ResearchBotTab = () => {
           </div>
           <div className="flex items-center gap-2">
             <Switch id="agrView" />
-            <label htmlFor="agrView">Агрегатор</label>
+            <label htmlFor="agrView">{t("res-bot.aggregator")}</label>
           </div>
         </div>
       </RowItem>
       <RowItem className="flex-col sm:flex-row lg:flex-col xlg:flex-row gap-3 items-baseline">
-        <span>Автопереводчик</span>
+        <span>{t("res-bot.auto-translator")}</span>
         <div className="flex flex-col gap-[5px] sm:self-end">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span>Research</span>
@@ -96,7 +99,7 @@ const ResearchBotTab = () => {
                   checked={resLanguage === "ru"}
                   onCheckedChange={() => toggleResLanguage("ru")}
                 />
-                <label htmlFor="resRu">Русский</label>
+                <label htmlFor="resRu">{t("res-bot.ru")}</label>
               </div>
               <div className="flex-1 flex items-center gap-2">
                 <Switch
@@ -104,12 +107,12 @@ const ResearchBotTab = () => {
                   checked={resLanguage === "en"}
                   onCheckedChange={() => toggleResLanguage("en")}
                 />
-                <label htmlFor="resEn">Английский</label>
+                <label htmlFor="resEn">{t("res-bot.en")}</label>
               </div>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 dark:text-gray-4">
-            <span>Агрегатор</span>
+            <span>{t("res-bot.aggregator")}</span>
             <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
               <div className="flex-1 flex items-center gap-2">
                 <Switch
@@ -117,7 +120,7 @@ const ResearchBotTab = () => {
                   checked={aggLanguage === "ru"}
                   onCheckedChange={() => toggleAggLanguage("ru")}
                 />
-                <label htmlFor="agrEn">Русский</label>
+                <label htmlFor="agrEn">{t("res-bot.ru")}</label>
               </div>
               <div className="flex-1 flex items-center gap-2">
                 <Switch
@@ -125,22 +128,22 @@ const ResearchBotTab = () => {
                   checked={aggLanguage === "en"}
                   onCheckedChange={() => toggleAggLanguage("en")}
                 />
-                <label htmlFor="agrEs">Английский</label>
+                <label htmlFor="agrEs">{t("res-bot.en")}</label>
               </div>
             </div>
           </div>
         </div>
       </RowItem>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
-        <span>Размер текста в новостях</span>
+        <span>{t("res-bot.text-size")}</span>
         <TextSizeSlider />
       </RowItem>
       <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2">
-        <span>Выбор фона</span>
+        <span>{t("res-bot.bg-selection")}</span>
         <BackgroundPicker />
       </RowItem>
       <div className="flex flex-col gap-1.5 py-2 dark:text-gray-4">
-        <span>Настройки проектов</span>
+        <span>{t("res-bot.project-settings")}</span>
         <ProjectsSettings />
       </div>
     </>

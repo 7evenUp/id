@@ -1,0 +1,135 @@
+{
+  "change-email": {
+    "heading": "Change email",
+    "old-label": "Current email",
+    "old-placeholder": "Enter your current email",
+    "new-label": "New email",
+    "new-placeholder": "Enter your new email",
+    "button": "confirm"
+  },
+  "change-tg": {
+    "heading": "Synchronize Telegram",
+    "username-label": "Telegram username",
+    "username-placeholder": "username",
+    "sync-button": "synchronize",
+    "back-button": "back",
+    "description": "Enter below the code received from the bot in Telegram",
+    "code-label": "Code",
+    "code-placeholder": "Enter your code",
+    "confirm-button": "confirm"
+  },
+  "change-avatar": {
+    "heading": "Set profile avatar",
+    "save-button": "save",
+    "save-success": "saved",
+    "prev-images": "Previous images",
+    "uploading-area": "image uploading area",
+    "choose-nft": "Choose NFT",
+    "nft-description": "To select an NFT image, you need to link a Web 3.0 wallet"
+  },
+  "freeze": {
+    "status": "Subscription status",
+    "freeze-available": "Freeze available",
+    "confirm-btn": "confirm freezing",
+    "sub-freeze-title": "Subscription freeze",
+    "sub-freeze-desc": "If you will not be able to follow Prime and enjoy all the benefits of a subscription for a long time, you can use the freeze function.",
+    "how-works-title": "How it works?",
+    "how-works-desc": "As soon as you freeze your subscription, you will immediately lose access to all Prime services, but there will be subscription days on your account that you have not used yet. You can unfreeze your subscription and return all accesses at any time in the same section.",
+    "footer": "Please note that you can only freeze your subscription once a year!"
+  },
+  "history": {
+    "heading": "Transaction history",
+    "export-btn": "export to pdf",
+    "th-desc": "transaction description",
+    "th-date": "date",
+    "th-price": "amount",
+    "th-status": "status",
+    "th-txid": "tx id"
+  },
+  "balance": {
+    "current": "current account balance",
+    "choose-deposit": "Choose a deposit method",
+    "deposit-options": {
+      "crypto": "crypto",
+      "fiat": "by card"
+    },
+    "amount-label": "Deposit amount",
+    "amount-placeholder": "Enter the amount",
+    "send-check": "send a receipt by email",
+    "replenish-btn": "replenish"
+  },
+  "buy-subs": {
+    "balance": "My balance",
+    "current-status": "Current status",
+    "footer": {
+      "need-help": "Need help? Contact your Prime mentor",
+      "link": "contact the mentor"
+    },
+    "first-step": {
+      "step": "step 1/3: Choosing a plan",
+      "prime-desc": "Effective strategies to increase earnings with tangible savings personal time. The Prime team carefully selects the most significant events and forms ways of earning for both beginners and advanced users.",
+      "promo-placeholder": "enter promo code",
+      "total": "Total",
+      "make-sure": "Make sure that there are funds on your balance",
+      "replenish-btn": "replenish",
+      "buy": "purchase"
+    },
+    "second-step": {
+      "step": "step 2/3: Data entry",
+      "email-label": "Email",
+      "email-placeholder": "Enter your email",
+      "tg-placeholder": "Enter your @telegram",
+      "ds-placeholder": "Enter your @discord",
+      "wallet": "EVM-wallet",
+      "connect-btn": "connect",
+      "later": "You can change the data later in your Personal Account, in the «Profile» section",
+      "congrats": "CONGRATULATIONS",
+      "congrays-message": "A 1-month Prime subscription has been purchased! Please provide the following details to get access to all Prime services.",
+      "continue-btn": "continue"
+    },
+    "third-step": {
+      "step": "step 3/3: Prime services"
+    }
+  },
+  "ref-info": {
+    "heading": "How the referral system works?",
+    "text-1": "Invite new users to Prime and receive up to 20% of their every payment on a regular basis. Your referrals get a discount $5 for the first purchase.",
+    "text-2": "The more users are invited, the higher the percentage of each referral payment!",
+    "level": "Your referral program level",
+    "to-next-level": "Users to the next level",
+    "cashback": "Percentage of referral payments",
+    "table-heading": "Reward table",
+    "th-lvl": "level",
+    "th-refs": "referrals",
+    "th-profit": "profit",
+    "after-10": "After reaching level 10, you can receive up to 30% of each referral purchase. To do this, contact your Mentor.",
+    "link": "mentor"
+  },
+  "ref-withdraw": {
+    "heading": "Withdraw funds",
+    "personal-account-btn": "to PA balance",
+    "wallet-btn": "to wallet",
+    "shares-btn": "to SHARES",
+    "back-btn": "back",
+    "address-placeholder": "Wallet address",
+    "amount-placeholder": "Withdraw amount",
+    "available": "Available amount",
+    "confirm-btn": "confirm"
+  },
+  "ref-stats": {
+    "heading": "Statistics",
+    "total-refs": "Number of invited users",
+    "total-paid-refs": "Number of users who made the payment",
+    "current-month-refs": "Number of current month invited users",
+    "current-month-paid-refs": "Number of current month users who made the payment",
+    "total-profit": "Total profit",
+    "total-withdraw": "Withdrawn from the referral system"
+  },
+  "deactivation": {
+    "heading": "Account deactivation",
+    "text-1": "If you are sure that you want to deactivate your account, enter the code below that you received in telegram (or in the mail)",
+    "text-2": "Please note that all your data and funds will be lost!",
+    "code-placeholder": "Enter code",
+    "deactivate-btn": "deactivate"
+  }
+}

@@ -1,4 +1,5 @@
 import { DialogClose } from "@radix-ui/react-dialog"
+import { useTranslation } from "react-i18next"
 
 import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
 import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"
@@ -14,10 +15,12 @@ const ThirdStep = ({
   open: boolean
   onOpenChange: (open: boolean) => void
 }) => {
+  const { t } = useTranslation("modals")
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="pb-14 sm:pb-14 sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[820px] lg:max-w-[940px]">
-        <SubscriptionModalHeader label="шаг 3/3: Ресурсы Prime" />
+        <SubscriptionModalHeader step={t("buy-subs.third-step.step")} />
         <div className="flex flex-col h-[400px] lg:h-auto overflow-auto pr-2 divide-y divide-gray-4 dark:divide-gray-2">
           <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5">
             <div className="md:w-[350px]">

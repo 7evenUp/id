@@ -1,4 +1,5 @@
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
 
@@ -9,15 +10,16 @@ interface Props {
 }
 
 const TxHistoryTable: React.FC<Props> = ({ data }) => {
+  const { t } = useTranslation("modals")
   return (
     <table className="hidden sm:table">
       <thead className="text-left text-gray-3">
         <tr>
-          <THead>описание транзакции</THead>
-          <THead>дата</THead>
-          <THead>стоимость</THead>
-          <THead>статус</THead>
-          <THead>tx id</THead>
+          <THead>{t("history.th-desc")}</THead>
+          <THead>{t("history.th-date")}</THead>
+          <THead>{t("history.th-price")}</THead>
+          <THead>{t("history.th-status")}</THead>
+          <THead>{t("history.th-txid")}</THead>
         </tr>
       </thead>
       <tbody className="typography-text-1 divide-y divide-gray-4 dark:divide-gray-2">
