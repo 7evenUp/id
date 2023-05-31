@@ -9,7 +9,7 @@ import ThirdStep from "./ThirdStep"
 import { Dialog } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
-const SubscriptionMain = ({ buttonText }: { buttonText: string }) => {
+const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
   const [firstStepOpened, setFirstStepOpened] = useState(false)
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
@@ -36,7 +36,7 @@ const SubscriptionMain = ({ buttonText }: { buttonText: string }) => {
 
   return (
     <>
-      <Button onClick={openFirstStep}>{buttonText}</Button>
+      <Button onClick={openFirstStep}>{triggerText}</Button>
 
       <FirstStep
         open={firstStepOpened}

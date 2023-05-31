@@ -1,18 +1,26 @@
+import { useTranslation } from "react-i18next"
+
 import { DialogHeader } from "@/shared/ui/Dialog"
 
-const FAKE_BALANCE = 220
+import { useUserProfileQuery } from "@/redux/api/profile"
 
-const SubscriptionModalHeader = ({ label }: { label: string }) => {
+const SubscriptionModalHeader = ({ step }: { step: string }) => {
+  const { t } = useTranslation("modals")
+
+  const { data } = useUserProfileQuery()
+
+  const { balance } = data!
+
   return (
     <DialogHeader className="typography-text-1">
-      <span>{label}</span>
+      <span>{step}</span>
       <div className="flex flex-col items-end gap-1">
         <span className="flex items-center gap-1">
-          Мой баланс:{" "}
-          <span className="typography-balance">${FAKE_BALANCE}</span>
+          {t("buy-subs.balance")}:{" "}
+          <span className="typography-balance">${balance}</span>
         </span>
         <span className="flex items-center gap-1">
-          Текущий статус:{" "}
+          {t("buy-subs.current-status")}:{" "}
           <span className="typography-text-1 italic px-1.5 py-0.5 text-gray-6 rounded-full select-none bg-gradient-to-r from-corral to-purple">
             Prime
           </span>
