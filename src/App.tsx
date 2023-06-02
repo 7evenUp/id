@@ -55,7 +55,7 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
-      <div className="px-7 xl:px-9 py-8">
+      <div className="px-7 xl:px-9 py-8 max-w-[1400px] mx-auto">
         <Header />
         <main className="flex flex-col lg:flex-row justify-between gap-20">
           {isLoading || isDelayed ? (

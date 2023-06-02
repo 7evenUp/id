@@ -92,8 +92,8 @@ const ResearchBotTab = () => {
         <div className="flex flex-col gap-[5px] sm:self-end">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span>Research</span>
-            <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
-              <div className="flex-1 flex items-center gap-2">
+            <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
+              <div className="flex items-center gap-2">
                 <Switch
                   id="resRu"
                   checked={resLanguage === "ru"}
@@ -101,7 +101,7 @@ const ResearchBotTab = () => {
                 />
                 <label htmlFor="resRu">{t("res-bot.ru")}</label>
               </div>
-              <div className="flex-1 flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <Switch
                   id="resEn"
                   checked={resLanguage === "en"}
@@ -113,8 +113,8 @@ const ResearchBotTab = () => {
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 dark:text-gray-4">
             <span>{t("res-bot.aggregator")}</span>
-            <div className="w-fit mobile-sm:w-[318px] gap-2 mobile-sm:gap-3 flex flex-col mobile-sm:flex-row mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
-              <div className="flex-1 flex items-center gap-2">
+            <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:gap-10 mobile-sm:items-center px-4 py-[6px] bg-white dark:bg-gray-1 rounded-xl">
+              <div className="flex items-center gap-2">
                 <Switch
                   id="agrEn"
                   checked={aggLanguage === "ru"}
@@ -122,7 +122,7 @@ const ResearchBotTab = () => {
                 />
                 <label htmlFor="agrEn">{t("res-bot.ru")}</label>
               </div>
-              <div className="flex-1 flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <Switch
                   id="agrEs"
                   checked={aggLanguage === "en"}
