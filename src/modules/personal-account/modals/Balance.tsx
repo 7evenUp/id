@@ -24,7 +24,7 @@ import {
 } from "@/shared/ui/Form"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
-// import { useTopUpBalanceMutation } from "@/redux/api/balance"
+import { useTopUpBalanceMutation } from "@/redux/api/balance"
 
 const PREDEFINED_AMOUNT_VALUES = ["5", "10", "20", "50", "100"]
 
@@ -40,20 +40,15 @@ const formSchema = z.object({
 const Balance = () => {
   const { t } = useTranslation("modals")
 
-  const [amount, setAmount] = useState("")
   const { data: profileData } = useUserProfileQuery()
 
   const {
     subscriptionInfo: { currentBalance },
   } = profileData!
 
-  // const [trigger, { error }] = useTopUpBalanceMutation()
+  const [trigger, { error }] = useTopUpBalanceMutation()
 
-  // const onSubmit = async () => {
-  //   trigger({amount: "50"})
-  // }
-
-  // if (error) console.log(error)
+  if (error) console.log(error)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,7 +56,7 @@ const Balance = () => {
   })
 
   const onSubmit = ({ amount }: z.infer<typeof formSchema>) => {
-    console.log(amount)
+    trigger({ amount: parseInt(amount) })
   }
 
   return (
@@ -119,7 +114,11 @@ const Balance = () => {
             <div>
               <div className="flex items-center gap-2.5 mb-6">
                 {PREDEFINED_AMOUNT_VALUES.map((amount, i) => (
-                  <Chip key={i} onClick={() => form.setValue("amount", amount)}>
+                  <Chip
+                    key={i}
+                    onClick={() => form.setValue("amount", amount)}
+                    type="button"
+                  >
                     ${amount}
                   </Chip>
                 ))}
