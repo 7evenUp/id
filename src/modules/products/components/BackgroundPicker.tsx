@@ -38,7 +38,7 @@ const BackgroundPicker = () => {
         />
         {/* Aggregator photo active indicator */}
         <div
-          className="absolute left-[11px] -bottom-2 w-8 h-1 bg-res-bot-blue rounded-full will-change-transform transition-transform"
+          className="absolute left-[11px] -bottom-2 w-8 h-1 bg-res-bot-blue rounded-full will-change-transform transition-transform ease-in-out"
           style={{
             transform: `translateX(${activeAggregatorPhoto * 50}px)`,
           }}

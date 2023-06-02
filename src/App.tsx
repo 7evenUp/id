@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react"
+
 import PersonalAccount from "./modules/personal-account/PersonalAccount"
 import Products from "./modules/products/Products"
 import Header from "./modules/header/Header"
@@ -7,14 +9,18 @@ import SkeletonLayout from "./components/SkeletonLayout"
 
 import { useUserProfileQuery } from "./redux/api/profile"
 import { useMetamask } from "./hooks/useMetamask"
-import { useEffect } from "react"
 
 const App = () => {
+  const [isDelayed, setIsDelayed] = useState(true)
+  const delay = useRef({ time: 1000 })
+
   const { isLoading, data, error } = useUserProfileQuery()
 
   const { dispatch } = useMetamask()
 
   useEffect(() => {
+    setTimeout(() => setIsDelayed(false), delay.current.time)
+
     if (typeof window !== undefined) {
       // start by checking if window.ethereum is present, indicating a wallet extension
       const ethereumProviderInjected = typeof window.ethereum !== "undefined"
@@ -49,10 +55,10 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
-      <div className="px-7 xl:px-9 py-8">
+      <div className="px-7 xl:px-9 py-8 max-w-[1400px] mx-auto">
         <Header />
         <main className="flex flex-col lg:flex-row justify-between gap-20">
-          {isLoading ? (
+          {isLoading || isDelayed ? (
             <SkeletonLayout />
           ) : data ? (
             <>

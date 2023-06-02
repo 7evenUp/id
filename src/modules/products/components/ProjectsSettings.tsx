@@ -45,8 +45,8 @@ const ProjectsSettings = () => {
           <td className="w-[65px] flex flex-col gap-1 sm:hidden">
             <Switch />
             <Select defaultValue="all">
-              <SelectTrigger />
-              <SelectContent>
+              <SelectTrigger className="w-[90px]" />
+              <SelectContent className="w-[90px]">
                 <SelectItem value="all">
                   {t("res-bot.subs-options.all")}
                 </SelectItem>
@@ -61,8 +61,8 @@ const ProjectsSettings = () => {
           </td>
           <td className="w-[90px] flex-shrink-0 hidden sm:block">
             <Select defaultValue="all">
-              <SelectTrigger />
-              <SelectContent>
+              <SelectTrigger className="w-[90px]" />
+              <SelectContent className="w-[90px]">
                 <SelectItem value="all">
                   {t("res-bot.subs-options.all")}
                 </SelectItem>
@@ -86,8 +86,8 @@ const ProjectsSettings = () => {
           <td className="w-[65px] flex flex-col gap-1 sm:hidden">
             <Switch />
             <Select defaultValue="main">
-              <SelectTrigger />
-              <SelectContent>
+              <SelectTrigger className="w-[90px]" />
+              <SelectContent className="w-[90px]">
                 <SelectItem value="all">
                   {t("res-bot.subs-options.all")}
                 </SelectItem>
@@ -102,8 +102,8 @@ const ProjectsSettings = () => {
           </td>
           <td className="w-[90px] flex-shrink-0 hidden sm:block">
             <Select defaultValue="main">
-              <SelectTrigger />
-              <SelectContent>
+              <SelectTrigger className="w-[90px]" />
+              <SelectContent className="w-[90px]">
                 <SelectItem value="all">
                   {t("res-bot.subs-options.all")}
                 </SelectItem>
