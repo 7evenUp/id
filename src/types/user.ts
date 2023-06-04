@@ -1,22 +1,21 @@
 export interface User {
-  id: number
-  firstName: string
-  lastName: string
-  username: string
-  wallet: string
-  telegramId: number
-  discordUsername: string
-  email: string
   avatars: Avatar[]
   balance: number
   capital: number
+  discordUsername: string
+  email: string
+  id: number
   isBanned: boolean
   isDarkTheme: boolean
   isPaid: boolean
   knowledge: string
   languageCode: string
+  profileUsername: string
   referralInfo: ReferralInfo
   subscriptionInfo: SubscriptionInfo
+  telegramId: number
+  username: string
+  wallet: string
 }
 
 export interface Avatar {
