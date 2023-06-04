@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -41,22 +40,24 @@ const Balance = () => {
   const { t } = useTranslation("modals")
 
   const { data: profileData } = useUserProfileQuery()
+  const [trigger, { isLoading }] = useTopUpBalanceMutation()
 
   const {
     subscriptionInfo: { currentBalance },
   } = profileData!
-
-  const [trigger, { error }] = useTopUpBalanceMutation()
-
-  if (error) console.log(error)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { amount: "" },
   })
 
-  const onSubmit = ({ amount }: z.infer<typeof formSchema>) => {
-    trigger({ amount: parseInt(amount) })
+  const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
+    try {
+      const paymentUrl = await trigger({ amount: parseInt(amount) }).unwrap()
+      window.open(paymentUrl, "_blank")
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -132,7 +133,7 @@ const Balance = () => {
                   {t("balance.send-check")}
                 </label>
               </div>
-              <Button className="w-fit" type="submit">
+              <Button className="w-fit" type="submit" isLoading={isLoading}>
                 {t("balance.replenish-btn")}
               </Button>
             </div>

@@ -1,13 +1,18 @@
 import { api } from "./core"
 
+type Response = string
+
 const balanceApi = api.injectEndpoints({
   endpoints: (build) => ({
-    topUpBalance: build.mutation<void, { amount: number }>({
+    topUpBalance: build.mutation<Response, { amount: number }>({
       query: (body) => ({
         url: "top-up-balance/",
         method: "POST",
         body,
       }),
+      transformResponse: (response: { paymentUrl: Response }) => {
+        return response.paymentUrl
+      },
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
