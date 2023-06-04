@@ -47,7 +47,7 @@ const Login = () => {
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    trigger({ ...values, redirect_url: "https://crypton.xyz/profile" })
+    trigger({ ...values, redirect_url: "https://id.crypton.xyz" })
   }
 
   if (isMailMode)
