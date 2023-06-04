@@ -39,6 +39,7 @@ const SelectContent = React.forwardRef<
           "bg-white dark:bg-gray-1 border border-gray-1 dark:border-gray-4 rounded-b-xl border-t-0 px-2 py-1 min-w-[75px]",
           className
         )}
+        avoidCollisions={false}
         position="popper"
         {...props}
         ref={forwardedRef}

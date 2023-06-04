@@ -12,7 +12,7 @@ const profileApi = api.injectEndpoints({
       }),
       providesTags: ["UserProfile"],
     }),
-    updateNickname: build.mutation<User, Pick<User, "id" | "username">>({
+    updateNickname: build.mutation<User, Pick<User, "id" | "username"> & { profile_username: string }>({
       query: ({ id, ...patch }) => ({
         url: `users/${id}/`,
         method: "PATCH",

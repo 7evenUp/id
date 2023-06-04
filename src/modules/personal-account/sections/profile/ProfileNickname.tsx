@@ -21,9 +21,7 @@ const ProfileNickname = () => {
   const { data: userProfile } = useUserProfileQuery()
   const [updateNickname] = useUpdateNicknameMutation()
 
-  if (!userProfile) return null
-
-  const { username, id } = userProfile
+  const { username, profileUsername, id } = userProfile!
 
   const onSubmit = () => {
     console.log("clicked")
@@ -34,15 +32,16 @@ const ProfileNickname = () => {
     const inputValue = inputRef.current.value
 
     if (!inputValue.length) {
-      if (username) inputRef.current.value = username
+      if (profileUsername) inputRef.current.value = profileUsername
       return
     }
 
-    if (username === inputValue) return
+    if (profileUsername === inputValue) return
 
     updateNickname({
-      id: id,
-      username: inputValue,
+      id,
+      username,
+      profile_username: inputValue
     })
   }
 
@@ -58,7 +57,7 @@ const ProfileNickname = () => {
       <span className="mr-auto">{t("profile.nickname")}</span>
       <input
         className="peer bg-transparent outline-none text-right"
-        defaultValue={username}
+        defaultValue={profileUsername}
         ref={inputRef}
         disabled={!isEditingMode}
         onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
