@@ -1,121 +1,95 @@
-import { useState } from "react"
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useForm } from "react-hook-form"
+import { useEffect, useState } from "react"
+import { useAccount, useConnect, useSignMessage } from "wagmi"
+import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
 
+import { toast } from "@/shared/ui/Toast"
+
 import AuthButton from "./AuthButton"
-import ActionButton from "./ActionButton"
-import { AuthInput } from "./AuthInput"
+import MailForm from "./MailForm"
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/shared/ui/Form"
+import { useAuthByWalletMutation } from "@/redux/api/auth"
 
-import { useLoginMutation } from "@/redux/api/auth"
-
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, {
-      message: "Поле обязательно для заполнения.",
-    })
-    .email("Неверный формат почты."),
-})
+const AUTH_MESSAGE = "Authorization"
 
 const Login = () => {
   const { t } = useTranslation("auth")
 
   const [isMailMode, setIsMailMode] = useState(false)
 
-  const [trigger, { isLoading, isSuccess, error }] = useLoginMutation()
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-    },
+  const { address, isConnected } = useAccount()
+  const {
+    connectAsync,
+    isLoading: isLoadingConnect
+  } = useConnect({
+    connector: new InjectedConnector(),
   })
+  const {
+    isError: isSignError,
+    isLoading: isLoadingSign,
+    signMessageAsync,
+  } = useSignMessage()
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    trigger({ ...values, redirect_url: "https://id.crypton.xyz" })
+  const [authenticate, { error, isSuccess, data }] = useAuthByWalletMutation()
+
+  useEffect(() => {
+    if (isSignError)
+      toast({
+        title: "Signature rejected",
+        message: "You denied message signature",
+        providedId: "SignError",
+        type: "error",
+        duration: 1500,
+      })
+  }, [isSignError])
+
+  const handleConnect = async () => {
+    if (!isConnected) {
+      const res = await connectAsync()
+      console.log("Handle auth: ", res)
+    }
+    try {
+      console.log("Before sign message")
+      const signature = await signMessageAsync({ message: AUTH_MESSAGE })
+      console.log("Signature: ", signature)
+      if (address) {
+        console.log("BEFORE REQUEST")
+        const res = await authenticate({
+          address: address.toLowerCase(),
+          message: AUTH_MESSAGE,
+          signature,
+        })
+        console.log("RESPONSE: ", res)
+      }
+    } catch (error) {
+      console.log("Catch error: ", error)
+    }
   }
 
-  if (isMailMode)
-    return (
-      <>
-        <button
-          className="typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit"
-          onClick={() => setIsMailMode(false)}
-        >
-          <HiOutlineArrowNarrowLeft />
-          <span className="text-left">{t("login.another-method")}</span>
-        </button>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-3"
-          >
-            <FormField
-              name="email"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="group-focus-within:text-res-bot-blue">
-                    {t("email-label")}
-                  </FormLabel>
-                  <FormControl>
-                    <AuthInput
-                      placeholder={t("email-placeholder")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <ActionButton type="submit" isLoading={isLoading}>
-              {t("login.login-btn")}
-            </ActionButton>
-          </form>
-        </Form>
-        <div className="flex mt-3">
-          {isSuccess && (
-            <span className="text-success text-xs font-medium tracking-wide">
-              Ссылка для входа успешно отправлена вам на почту
-            </span>
-          )}
-          {error && (
-            <span className="text-error text-xs font-medium tracking-wide">
-              {/* @ts-expect-error No-Error-Types */}
-              {error.message ? (
-                <span>
-                  {/* @ts-expect-error No-Error-Types */}
-                  {error.message}
-                </span>
-              ) : (
-                <span>На стороне сервера произошла ошибка</span>
-              )}
-            </span>
-          )}
-        </div>
-      </>
-    )
+  if (error) console.log("ERROR:", error)
+
+  if (isSuccess) {
+    console.log("success")
+  }
+
+  if (data) console.log("DATA: ", data)
+
+  if (isMailMode) return <MailForm back={() => setIsMailMode(false)} />
 
   return (
     <div className="flex gap-3 flex-wrap items-center my-3.5">
-      <AuthButton>
+      <AuthButton onClick={handleConnect}>
         <Web3Logo />
-        <span>{t("web3-btn")}</span>
+        <span>
+          {isLoadingConnect
+            ? "Connecting"
+            : isLoadingSign
+            ? "Signing"
+            : t("web3-btn")}
+        </span>
       </AuthButton>
       <AuthButton onClick={() => setIsMailMode(true)}>
         <MailLogo />
