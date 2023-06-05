@@ -91,7 +91,7 @@ const ChangeAvatar = () => {
           <UploadDropzone file={file} setFile={setFile} setBase64={setBase64} />
         </div>
 
-        {Boolean(prevAvatars.length) && (
+        {Boolean(prevAvatars.length) ? (
           <PrevAvatars
             SaveBtn={
               <Button
@@ -108,6 +108,18 @@ const ChangeAvatar = () => {
             }
             avatars={prevAvatars}
           />
+        ) : (
+          <Button
+            disabled={!file}
+            onClick={onSubmit}
+            appearence={isSuccess && !file ? "success" : "outlined"}
+            className="w-fit flex mobile:hidden mt-6 ml-auto"
+            isLoading={isLoading}
+          >
+            {isSuccess && !file
+              ? t("change-avatar.save-success")
+              : t("change-avatar.save-button")}
+          </Button>
         )}
 
         <span className="typography-semi-head mt-6">
