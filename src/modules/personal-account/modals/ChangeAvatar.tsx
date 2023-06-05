@@ -1,10 +1,14 @@
 import { useState } from "react"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
+
+import { IoCloseOutline } from "react-icons/io5"
 
 import { ReactComponent as BearIcon } from "@/assets/icons/avatars/Star.svg"
 
 import UploadDropzone from "../components/UploadDropzone"
 import PrevAvatars from "../components/PrevAvatars"
+import ModalTrigger from "../components/ModalTrigger"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -43,7 +47,7 @@ const ChangeAvatar = () => {
           disabled={!file}
           onClick={onSubmit}
           appearence={isSuccess && !file ? "success" : "outlined"}
-          className="w-fit"
+          className="w-fit hidden mobile:flex"
           isLoading={isLoading}
         >
           {isSuccess && !file
@@ -59,20 +63,52 @@ const ChangeAvatar = () => {
               !activeAvatar && "bg-res-bot-blue"
             )}
           >
-            {activeAvatar ? (
-              <img
-                src={base64 ? base64 : activeAvatar?.file}
-                alt="User Avatar"
-                className="w-full h-full object-cover rounded-lg"
-              />
-            ) : (
-              <BearIcon className="w-10" />
-            )}
+            <ModalTrigger
+              content={
+                <DialogContent
+                  className="p-0 sm:p-0"
+                  customClose={<CustomDialogClose />}
+                >
+                  <img
+                    src={base64 ? base64 : activeAvatar?.file}
+                    alt="previous avatar"
+                    className="rounded-xl w-full sm:max-w-[550px] md:max-w-[640px] max-h-[500px] object-cover"
+                  />
+                </DialogContent>
+              }
+            >
+              {activeAvatar ? (
+                <img
+                  src={base64 ? base64 : activeAvatar?.file}
+                  alt="User Avatar"
+                  className="w-full h-full object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform will-change-transform"
+                />
+              ) : (
+                <BearIcon className="w-10" />
+              )}
+            </ModalTrigger>
           </div>
           <UploadDropzone file={file} setFile={setFile} setBase64={setBase64} />
         </div>
 
-        {Boolean(prevAvatars.length) && <PrevAvatars avatars={prevAvatars} />}
+        {Boolean(prevAvatars.length) && (
+          <PrevAvatars
+            SaveBtn={
+              <Button
+                disabled={!file}
+                onClick={onSubmit}
+                appearence={isSuccess && !file ? "success" : "outlined"}
+                className="w-fit flex mobile:hidden"
+                isLoading={isLoading}
+              >
+                {isSuccess && !file
+                  ? t("change-avatar.save-success")
+                  : t("change-avatar.save-button")}
+              </Button>
+            }
+            avatars={prevAvatars}
+          />
+        )}
 
         <span className="typography-semi-head mt-6">
           {t("change-avatar.choose-nft")}
@@ -86,3 +122,9 @@ const ChangeAvatar = () => {
 }
 
 export default ChangeAvatar
+
+const CustomDialogClose = () => (
+  <DialogPrimitive.Close className="absolute border bg-white dark:bg-gray-1 border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-100 transition-opacity hover:opacity-80">
+    <IoCloseOutline className="h-[26px] w-[26px]" />
+  </DialogPrimitive.Close>
+)
