@@ -12,7 +12,7 @@ const profileApi = api.injectEndpoints({
       }),
       providesTags: ["UserProfile"],
     }),
-    updateNickname: build.mutation<User, Pick<User, "id" | "username"> & { profile_username: string }>({
+    updateNickname: build.mutation<User, Pick<User, "id" | "profileUsername">>({
       query: ({ id, ...patch }) => ({
         url: `users/${id}/`,
         method: "PATCH",
@@ -44,17 +44,6 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
-    // updateDiscord: build.mutation<
-    //   User,
-    //   Pick<User, "id" | "username" | "discordUsername">
-    // >({
-    //   query: ({ id, ...patch }) => ({
-    //     url: `users/${id}/`,
-    //     method: "PATCH",
-    //     body: patch,
-    //   }),
-    //   invalidatesTags: ["UserProfile"],
-    // }),
     updateTelegram: build.mutation<User, Pick<User, "telegramId">>({
       query: (body) => ({
         url: "users/change-telegram/",
