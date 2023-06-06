@@ -11,6 +11,8 @@ import { toast } from "@/shared/ui/Toast"
 import AuthButton from "./AuthButton"
 import MailForm from "./MailForm"
 
+import { useMetamask } from "@/hooks/useMetamask"
+
 import { useAuthByWalletMutation } from "@/redux/api/auth"
 
 const AUTH_MESSAGE = "Authorization"
@@ -21,10 +23,7 @@ const Login = () => {
   const [isMailMode, setIsMailMode] = useState(false)
 
   const { address, isConnected } = useAccount()
-  const {
-    connectAsync,
-    isLoading: isLoadingConnect
-  } = useConnect({
+  const { connectAsync, isLoading: isLoadingConnect } = useConnect({
     connector: new InjectedConnector(),
   })
   const {
@@ -34,6 +33,10 @@ const Login = () => {
   } = useSignMessage()
 
   const [authenticate, { error, isSuccess, data }] = useAuthByWalletMutation()
+
+  const {
+    state: { isMetamaskInstalled },
+  } = useMetamask()
 
   useEffect(() => {
     if (isSignError)
@@ -47,11 +50,11 @@ const Login = () => {
   }, [isSignError])
 
   const handleConnect = async () => {
-    if (!isConnected) {
-      const res = await connectAsync()
-      console.log("Handle auth: ", res)
-    }
     try {
+      if (!isConnected) {
+        const res = await connectAsync()
+        console.log("Handle auth: ", res)
+      }
       console.log("Before sign message")
       const signature = await signMessageAsync({ message: AUTH_MESSAGE })
       console.log("Signature: ", signature)
@@ -81,16 +84,25 @@ const Login = () => {
 
   return (
     <div className="flex gap-3 flex-wrap items-center my-3.5">
-      <AuthButton onClick={handleConnect}>
-        <Web3Logo />
-        <span>
-          {isLoadingConnect
-            ? "Connecting"
-            : isLoadingSign
-            ? "Signing"
-            : t("web3-btn")}
-        </span>
-      </AuthButton>
+      {isMetamaskInstalled ? (
+        <AuthButton onClick={handleConnect}>
+          <Web3Logo />
+          <span>
+            {isLoadingConnect
+              ? "Connecting"
+              : isLoadingSign
+              ? "Signing"
+              : t("web3-btn")}
+          </span>
+        </AuthButton>
+      ) : (
+        <a href="https://metamask.io/" target="_blank">
+          <AuthButton>
+            <Web3Logo />
+            <span>{t("web3-btn")}</span>
+          </AuthButton>
+        </a>
+      )}
       <AuthButton onClick={() => setIsMailMode(true)}>
         <MailLogo />
         <span>{t("email-btn")}</span>

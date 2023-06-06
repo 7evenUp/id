@@ -22,26 +22,11 @@ const App = () => {
     setTimeout(() => setIsDelayed(false), delay.current.time)
 
     if (typeof window !== undefined) {
-      // start by checking if window.ethereum is present, indicating a wallet extension
-      const ethereumProviderInjected = typeof window.ethereum !== "undefined"
-      // this could be other wallets so we can verify if we are dealing with metamask
-      // using the boolean constructor to be explecit and not let this be used as a falsy value (optional)
+      const ethProviderInjected = typeof window.ethereum !== "undefined"
       const isMetamaskInstalled =
-        ethereumProviderInjected && Boolean(window.ethereum.isMetaMask)
+        ethProviderInjected && Boolean(window.ethereum.isMetaMask)
 
-      const local = window.localStorage.getItem("metamaskState")
-
-      // user was previously connected, start listening to MM
-      if (local) {
-      }
-
-      // local could be null if not present in LocalStorage
-      const { walletAddress } = local
-        ? JSON.parse(local)
-        : // backup if local storage is empty
-          { walletAddress: null }
-
-      dispatch({ type: "pageLoaded", isMetamaskInstalled, walletAddress })
+      dispatch({ type: "pageLoaded", isMetamaskInstalled })
     }
   }, [])
 

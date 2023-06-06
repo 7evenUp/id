@@ -15,7 +15,7 @@ export interface User {
   subscriptionInfo: SubscriptionInfo
   telegramId: number
   username: string
-  wallet: string
+  wallet: string | null
 }
 
 export interface Avatar {
