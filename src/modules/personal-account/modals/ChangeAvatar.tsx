@@ -9,9 +9,9 @@ import { ReactComponent as BearIcon } from "@/assets/icons/avatars/Star.svg"
 import UploadDropzone from "../components/UploadDropzone"
 import PrevAvatars from "../components/PrevAvatars"
 import ModalTrigger from "../components/ModalTrigger"
+import UploadButton from "../components/UploadButton"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
-import Button from "@/shared/ui/Button"
 
 import { cn } from "@/lib/classNames"
 
@@ -43,17 +43,13 @@ const ChangeAvatar = () => {
     <DialogContent className="sm:w-[85%] md:w-[640px]">
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
         <DialogTitle>{t("change-avatar.heading")}</DialogTitle>
-        <Button
-          disabled={!file}
-          onClick={onSubmit}
-          appearence={isSuccess && !file ? "success" : "outlined"}
-          className="w-fit hidden mobile:flex"
+        <UploadButton
+          className="hidden mobile:flex"
+          file={file}
           isLoading={isLoading}
-        >
-          {isSuccess && !file
-            ? t("change-avatar.save-success")
-            : t("change-avatar.save-button")}
-        </Button>
+          isSuccess={isSuccess}
+          onClick={onSubmit}
+        />
       </DialogHeader>
       <div className="flex flex-col">
         <div className="flex gap-8">
@@ -93,33 +89,25 @@ const ChangeAvatar = () => {
 
         {Boolean(prevAvatars.length) ? (
           <PrevAvatars
-            SaveBtn={
-              <Button
-                disabled={!file}
-                onClick={onSubmit}
-                appearence={isSuccess && !file ? "success" : "outlined"}
-                className="w-fit flex mobile:hidden"
-                isLoading={isLoading}
-              >
-                {isSuccess && !file
-                  ? t("change-avatar.save-success")
-                  : t("change-avatar.save-button")}
-              </Button>
-            }
             avatars={prevAvatars}
+            SaveBtn={
+              <UploadButton
+                className="flex mobile:hidden"
+                file={file}
+                isLoading={isLoading}
+                isSuccess={isSuccess}
+                onClick={onSubmit}
+              />
+            }
           />
         ) : (
-          <Button
-            disabled={!file}
-            onClick={onSubmit}
-            appearence={isSuccess && !file ? "success" : "outlined"}
-            className="w-fit flex mobile:hidden mt-6 ml-auto"
+          <UploadButton
+            className="flex mobile:hidden mt-6 ml-auto"
+            file={file}
             isLoading={isLoading}
-          >
-            {isSuccess && !file
-              ? t("change-avatar.save-success")
-              : t("change-avatar.save-button")}
-          </Button>
+            isSuccess={isSuccess}
+            onClick={onSubmit}
+          />
         )}
 
         <span className="typography-semi-head mt-6">
