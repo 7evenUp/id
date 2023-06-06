@@ -21,10 +21,9 @@ const ProfileNickname = () => {
   const { data: userProfile } = useUserProfileQuery()
   const [updateNickname] = useUpdateNicknameMutation()
 
-  const { username, profileUsername, id } = userProfile!
+  const { id, profileUsername } = userProfile!
 
   const onSubmit = () => {
-    console.log("clicked")
     setIsEditingMode(false)
 
     if (!inputRef.current) return
@@ -40,8 +39,7 @@ const ProfileNickname = () => {
 
     updateNickname({
       id,
-      username,
-      profile_username: inputValue
+      profileUsername: inputValue,
     })
   }
 

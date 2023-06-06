@@ -1,7 +1,20 @@
 import { api } from "./core"
 
+interface WalletReqParams {
+  address: string
+  signature: string
+  message: string
+}
+
 const authApi = api.injectEndpoints({
   endpoints: (build) => ({
+    authByWallet: build.mutation<void, WalletReqParams>({
+      query: (body) => ({
+        url: "users/authenticate-by-wallet/",
+        method: "POST",
+        body,
+      }),
+    }),
     login: build.mutation<void, { email: string; redirect_url: string }>({
       query: ({ email, redirect_url }) => ({
         url: "users/login/",
@@ -27,11 +40,16 @@ const authApi = api.injectEndpoints({
     logout: build.query<void, void>({
       query: () => ({
         url: "users/logout/",
-        method: "GET"
-      })
-    })
+        method: "GET",
+      }),
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useLoginMutation, useRegisterMutation, useLazyLogoutQuery } = authApi
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLazyLogoutQuery,
+  useAuthByWalletMutation,
+} = authApi

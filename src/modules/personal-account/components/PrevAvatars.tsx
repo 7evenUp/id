@@ -1,5 +1,6 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
+
 import { IoCloseOutline } from "react-icons/io5"
 
 import { DialogContent } from "@/shared/ui/Dialog"
@@ -8,13 +9,22 @@ import ModalTrigger from "./ModalTrigger"
 
 import { Avatar } from "@/types/user"
 
-const PrevAvatars = ({ avatars }: { avatars: Avatar[] }) => {
+const PrevAvatars = ({
+  avatars,
+  SaveBtn,
+}: {
+  avatars: Avatar[]
+  SaveBtn: React.ReactNode
+}) => {
   const { t } = useTranslation("modals")
   return (
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-6">
-      <span className="typography-text-1 w-[75px]">
-        {t("change-avatar.prev-images")}
-      </span>
+      <div className="flex justify-between items-center">
+        <span className="typography-text-1 w-[75px]">
+          {t("change-avatar.prev-images")}
+        </span>
+        {SaveBtn}
+      </div>
       <div className="flex items-center flex-wrap gap-2">
         {avatars.map((avatar, i) => (
           <ModalTrigger

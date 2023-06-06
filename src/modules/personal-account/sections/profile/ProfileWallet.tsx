@@ -1,4 +1,7 @@
+import { useAccount, useConnect } from "wagmi"
+import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
+
 import { AiOutlinePlus } from "react-icons/ai"
 
 import EditContainer from "../../components/EditContainer"
@@ -18,37 +21,26 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 const ProfileWallet = () => {
   const { t } = useTranslation("profile")
 
-  const { data: userProfile } = useUserProfileQuery()
+  // const { address, isConnected } = useAccount()
+  const { connectAsync, isLoading: isLoadingConnect } = useConnect({
+    connector: new InjectedConnector(),
+  })
 
+  const { data: userProfile } = useUserProfileQuery()
   const [updateWallet] = useUpdateWalletMutation()
+
   const {
-    dispatch,
-    state: { status, isMetamaskInstalled, walletAddress },
+    state: { isMetamaskInstalled },
   } = useMetamask()
 
   if (!userProfile) return null
 
   const { wallet } = userProfile
 
-  const showInstallMetamask = status !== "pageNotLoaded" && !isMetamaskInstalled
-  const showConnectButton =
-    status !== "pageNotLoaded" && isMetamaskInstalled && !walletAddress
-
-  // const isConnected =
-  //   status !== "pageNotLoaded" && typeof walletAddress === "string"
-
   const handleConnect = async () => {
-    dispatch({ type: "loading" })
-    const accounts = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    })
-
-    if (accounts.length > 0) {
-      dispatch({ type: "connect", walletAddress: accounts[0] })
-      updateWallet({
-        wallet: accounts[0],
-      })
-    }
+    const res = await connectAsync()
+    console.log(res.account)
+    updateWallet({ wallet: res.account })
   }
 
   return (
@@ -57,30 +49,36 @@ const ProfileWallet = () => {
         {t("profile.wallet")}
       </span>
       {wallet ? (
-        <span>{cutWalletAddr(wallet)}</span>
+        <span className="ml-auto">{cutWalletAddr(wallet)}</span>
       ) : (
         <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
       )}
 
-      {/* Mobile editing */}
-      <div className="sm:hidden ml-6">
-        {showInstallMetamask && (
-          <a href="https://metamask.io/" target="_blank">
-            <EditButton />
-          </a>
-        )}
-        {showConnectButton && <EditButton onClick={handleConnect} />}
-      </div>
+      {!Boolean(wallet) && (
+        <>
+          {/* Mobile editing */}
+          <div className="sm:hidden">
+            {!isMetamaskInstalled ? (
+              <a href="https://metamask.io/" target="_blank">
+                <EditButton />
+              </a>
+            ) : (
+              <EditButton onClick={handleConnect} />
+            )}
+          </div>
 
-      {/* Desktop editing */}
-      <EditContainer className="hidden sm:flex">
-        {showInstallMetamask && (
-          <a href="https://metamask.io/" target="_blank">
-            <EditButton />
-          </a>
-        )}
-        {showConnectButton && <EditButton onClick={handleConnect} />}
-      </EditContainer>
+          {/* Desktop editing */}
+          <EditContainer className="hidden sm:flex">
+            {!isMetamaskInstalled ? (
+              <a href="https://metamask.io/" target="_blank">
+                <EditButton />
+              </a>
+            ) : (
+              <EditButton onClick={handleConnect} />
+            )}
+          </EditContainer>
+        </>
+      )}
     </RowItem>
   )
 }
