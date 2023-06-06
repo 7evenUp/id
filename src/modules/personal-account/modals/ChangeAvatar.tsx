@@ -44,7 +44,7 @@ const ChangeAvatar = () => {
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
         <DialogTitle>{t("change-avatar.heading")}</DialogTitle>
         <UploadButton
-          className="hidden mobile:flex"
+          className="hidden sm:flex"
           file={file}
           isLoading={isLoading}
           isSuccess={isSuccess}
@@ -92,7 +92,7 @@ const ChangeAvatar = () => {
             avatars={prevAvatars}
             SaveBtn={
               <UploadButton
-                className="flex mobile:hidden"
+                className="flex sm:hidden"
                 file={file}
                 isLoading={isLoading}
                 isSuccess={isSuccess}
@@ -102,7 +102,7 @@ const ChangeAvatar = () => {
           />
         ) : (
           <UploadButton
-            className="flex mobile:hidden mt-6 ml-auto"
+            className="flex sm:hidden mt-6 ml-auto"
             file={file}
             isLoading={isLoading}
             isSuccess={isSuccess}
