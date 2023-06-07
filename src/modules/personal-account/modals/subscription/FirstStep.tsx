@@ -11,34 +11,41 @@ import { Dialog, DialogContent } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
 
-import { subscriptions } from "@/utils/subscriptions"
-
 import { cn } from "@/lib/classNames"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+
+import { Subscription } from "@/types/subscriptions"
+import { useBuyMutation } from "@/redux/api/subscription"
 
 const FirstStep = ({
   open,
   onOpenChange,
   openSecondStep,
   openBalanceModal,
+  subscriptions,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   openSecondStep: () => void
   openBalanceModal: () => void
+  subscriptions: Subscription[]
 }) => {
   const { t } = useTranslation("modals")
-
-  const { data } = useUserProfileQuery()
-
-  const { balance } = data!
-
-  const [activeSub, setActiveSub] = useState(1)
+  
+  const [activeSub, setActiveSub] = useState<number | null>(null)
   const [promo, setPromo] = useState("")
   const [isPromoInvalid, setIsPromoInvalid] = useState(false)
   const [isPromoApplied, setIsPromoApplied] = useState(false)
-  const [totalPrice, setTotalPrice] = useState(subscriptions[1].price)
+  const [totalPrice, setTotalPrice] = useState(0)
+  
+  const { data: userProfile } = useUserProfileQuery()
+  const [buy, {error, data}] = useBuyMutation()
+
+  if (error) console.log("ERROR: ", error)
+  if (data) console.log("DATA: ", data)
+
+  const { balance } = userProfile!
 
   const applyPromo = () => {
     if (!promo) {
@@ -68,6 +75,12 @@ const FirstStep = ({
     }
   }
 
+  const buySubscription = () => {
+    if (activeSub === null) return
+    // openSecondStep()
+    buy({id: subscriptions[activeSub].id, promocode: promo})
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px]">
@@ -79,8 +92,13 @@ const FirstStep = ({
           <div className="flex flex-col items-center flex-wrap mobile:flex-row gap-3 sm:gap-5 mb-6">
             {subscriptions.map((sub, i) => (
               <SubscriptionCard
-                key={i}
-                {...sub}
+                key={sub.id}
+                duration={sub.name}
+                discount={{
+                  percent: sub.baseDiscount,
+                  amount: (sub.price * sub.baseDiscount) / 100,
+                }}
+                price={sub.price}
                 selected={activeSub === i}
                 onSelect={() => onSelect(i)}
               />
@@ -118,7 +136,7 @@ const FirstStep = ({
               <Button onClick={openBalanceModal}>
                 {t("buy-subs.first-step.replenish-btn")}
               </Button>
-              <Button onClick={openSecondStep} disabled={totalPrice > balance}>
+              <Button onClick={buySubscription} disabled={totalPrice > balance}>
                 {t("buy-subs.first-step.buy")}
               </Button>
             </div>
