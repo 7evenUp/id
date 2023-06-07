@@ -1,4 +1,4 @@
-import { useAccount, useConnect } from "wagmi"
+import { useConnect } from "wagmi"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
 
@@ -21,7 +21,6 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 const ProfileWallet = () => {
   const { t } = useTranslation("profile")
 
-  // const { address, isConnected } = useAccount()
   const { connectAsync, isLoading: isLoadingConnect } = useConnect({
     connector: new InjectedConnector(),
   })
@@ -39,8 +38,7 @@ const ProfileWallet = () => {
 
   const handleConnect = async () => {
     const res = await connectAsync()
-    console.log(res.account)
-    updateWallet({ wallet: res.account })
+    updateWallet({ wallet: res.account.toLowerCase() })
   }
 
   return (

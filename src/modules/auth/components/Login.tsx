@@ -32,7 +32,10 @@ const Login = () => {
     signMessageAsync,
   } = useSignMessage()
 
-  const [authenticate, { error, isSuccess, data }] = useAuthByWalletMutation()
+  const [
+    authenticate,
+    { error, isError: isAuthError, isSuccess: isAuthSuccess },
+  ] = useAuthByWalletMutation()
 
   const {
     state: { isMetamaskInstalled },
@@ -49,36 +52,44 @@ const Login = () => {
       })
   }, [isSignError])
 
+  useEffect(() => {
+    if (isAuthSuccess) location.reload()
+  }, [isAuthSuccess])
+
+  useEffect(() => {
+    if (isAuthError)
+      toast({
+        title: "Auth error",
+        message: "User doesn't exist",
+        providedId: "AuthError",
+        type: "error",
+        duration: 1500,
+      })
+  }, [isAuthError])
+
   const handleConnect = async () => {
     try {
-      if (!isConnected) {
-        const res = await connectAsync()
-        console.log("Handle auth: ", res)
+      let connectedAddress = ""
+      if (!isConnected && address === undefined) {
+        const connection = await connectAsync()
+        connectedAddress = connection.account
       }
-      console.log("Before sign message")
       const signature = await signMessageAsync({ message: AUTH_MESSAGE })
-      console.log("Signature: ", signature)
-      if (address) {
-        console.log("BEFORE REQUEST")
-        const res = await authenticate({
-          address: address.toLowerCase(),
-          message: AUTH_MESSAGE,
-          signature,
-        })
-        console.log("RESPONSE: ", res)
-      }
+      const lowerAddress =
+        isConnected && address
+          ? address.toLowerCase()
+          : connectedAddress.toLowerCase()
+      await authenticate({
+        address: lowerAddress,
+        message: AUTH_MESSAGE,
+        signature,
+      })
     } catch (error) {
       console.log("Catch error: ", error)
     }
   }
 
   if (error) console.log("ERROR:", error)
-
-  if (isSuccess) {
-    console.log("success")
-  }
-
-  if (data) console.log("DATA: ", data)
 
   if (isMailMode) return <MailForm back={() => setIsMailMode(false)} />
 

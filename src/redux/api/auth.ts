@@ -4,6 +4,7 @@ interface WalletReqParams {
   address: string
   signature: string
   message: string
+  email?: string
 }
 
 const authApi = api.injectEndpoints({
@@ -13,6 +14,17 @@ const authApi = api.injectEndpoints({
         url: "users/authenticate-by-wallet/",
         method: "POST",
         body,
+      })
+    }),
+    registerByWallet: build.mutation<void, WalletReqParams>({
+      query: (body) => ({
+        url: "users/register-web-wallet/",
+        method: "POST",
+        body
+      }),
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
       }),
     }),
     login: build.mutation<void, { email: string; redirect_url: string }>({
@@ -52,4 +64,5 @@ export const {
   useRegisterMutation,
   useLazyLogoutQuery,
   useAuthByWalletMutation,
+  useRegisterByWalletMutation
 } = authApi
