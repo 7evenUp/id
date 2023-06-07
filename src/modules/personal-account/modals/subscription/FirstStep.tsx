@@ -32,15 +32,15 @@ const FirstStep = ({
   subscriptions: Subscription[]
 }) => {
   const { t } = useTranslation("modals")
-  
+
   const [activeSub, setActiveSub] = useState<number | null>(null)
   const [promo, setPromo] = useState("")
   const [isPromoInvalid, setIsPromoInvalid] = useState(false)
   const [isPromoApplied, setIsPromoApplied] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
-  
+
   const { data: userProfile } = useUserProfileQuery()
-  const [buy, {error, data}] = useBuyMutation()
+  const [buy, { error, data, isLoading }] = useBuyMutation()
 
   if (error) console.log("ERROR: ", error)
   if (data) console.log("DATA: ", data)
@@ -75,10 +75,15 @@ const FirstStep = ({
     }
   }
 
-  const buySubscription = () => {
+  const buySubscription = async () => {
     if (activeSub === null) return
-    // openSecondStep()
-    buy({id: subscriptions[activeSub].id, promocode: promo})
+    
+    try {
+      await buy({ id: subscriptions[activeSub].id, promocode: promo }).unwrap()
+      openSecondStep()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -136,7 +141,11 @@ const FirstStep = ({
               <Button onClick={openBalanceModal}>
                 {t("buy-subs.first-step.replenish-btn")}
               </Button>
-              <Button onClick={buySubscription} disabled={totalPrice > balance}>
+              <Button
+                onClick={buySubscription}
+                disabled={totalPrice > balance}
+                isLoading={isLoading}
+              >
                 {t("buy-subs.first-step.buy")}
               </Button>
             </div>
