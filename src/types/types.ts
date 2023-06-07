@@ -1,7 +1,7 @@
 export interface Transaction {
-  description: string
-  date: string
-  price: string
-  status: "в процессе" | "успешно" | "отклонено"
-  id: string
+  description: string | null
+  totalAmount: number | null
+  status: "COMPLETED" | "PENDING" | null
+  txId: string | null
+  createdDatetime: string
 }

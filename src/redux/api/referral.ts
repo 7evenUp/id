@@ -16,7 +16,7 @@ const referralApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["UserProfile"]
+      invalidatesTags: ["UserProfile", "TxHistory"]
     }),
   }),
   overrideExisting: false,

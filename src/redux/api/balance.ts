@@ -10,6 +10,7 @@ const balanceApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["TxHistory"],
       transformResponse: (response: { paymentUrl: Response }) => {
         return response.paymentUrl
       },

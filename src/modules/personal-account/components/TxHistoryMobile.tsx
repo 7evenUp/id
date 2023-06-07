@@ -1,50 +1,55 @@
-import React from "react"
 import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
 
-import { Transaction } from "@/types/types"
+import { useTransactionHistoryQuery } from "@/redux/api/profile"
 
-interface Props {
-  data: Transaction[]
-}
+import { formatDate } from "@/lib/date-fns"
 
-const TxHistoryMobile: React.FC<Props> = ({ data }) => {
-  const { t } = useTranslation("modals")
+const TxHistoryMobile = () => {
+  const { t, i18n } = useTranslation("modals")
+
+  const { data } = useTransactionHistoryQuery()
+
+  if (!data) return <span className="sm:hidden">No history data yet</span>
+
   return (
     <div className="flex sm:hidden flex-col divide-y divide-gray-4 dark:divide-gray-2 max-h-[400px] overflow-y-auto pr-0.5">
       {data.map((tx, i) => (
         <div key={i} className="flex flex-col gap-0.5 typography-text-1 py-2.5">
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-desc")}</span>
-            <span>{tx.description}</span>
+            <span className="text-right">{tx.description}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-date")}</span>
-            <span>{tx.date}</span>
+            <span>
+              {formatDate(tx.createdDatetime, i18n.language as "ru" | "en") ||
+                "no date"}
+            </span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-price")}</span>
-            <span>{tx.price}</span>
+            <span>{tx.totalAmount || "no amount"}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-status")}</span>
             <span
               className={cn(
                 "typography-text-2",
-                tx.status === "в процессе"
+                tx.status !== null && tx.status === "PENDING"
                   ? "text-process"
-                  : tx.status === "отклонено"
-                  ? "text-error"
-                  : "text-success"
+                  : tx.status === "COMPLETED"
+                  ? "text-success"
+                  : "text-error"
               )}
             >
-              {tx.status}
+              {tx.status || "no status"}
             </span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-txid")}</span>
-            <span>{tx.id}</span>
+            <span>{tx.txId || "no tx id"}</span>
           </div>
         </div>
       ))}
