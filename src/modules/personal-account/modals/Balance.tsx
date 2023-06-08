@@ -42,9 +42,7 @@ const Balance = () => {
   const { data: profileData } = useUserProfileQuery()
   const [trigger, { isLoading }] = useTopUpBalanceMutation()
 
-  const {
-    subscriptionInfo: { currentBalance },
-  } = profileData!
+  const { balance } = profileData!
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,6 +52,7 @@ const Balance = () => {
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
     try {
       const paymentUrl = await trigger({ amount: parseInt(amount) }).unwrap()
+      form.reset()
       window.open(paymentUrl, "_blank")
     } catch (error) {
       console.error(error)
@@ -68,7 +67,7 @@ const Balance = () => {
             {t("balance.current")}
           </span>
           <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] dark:text-gray-5">
-            $ {currentBalance}
+            $ {balance}
           </span>
         </div>
         <div className="flex items-center gap-2 mb-5 typography-text-1">
