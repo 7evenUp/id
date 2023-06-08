@@ -31,13 +31,13 @@ const PrevAvatars = ({
             key={i}
             content={
               <DialogContent
-                className="p-0 sm:p-0"
+                className="p-0 sm:p-0 rounded-none border-none bg-transparent dark:bg-transparent shadow-none"
                 customClose={<CustomDialogClose />}
               >
                 <img
                   src={avatar.file}
                   alt="previous avatar"
-                  className="rounded-xl w-full sm:max-w-[550px] md:max-w-[640px] max-h-[500px] object-cover"
+                  className="rounded-xl w-full min-w-[150px] sm:max-w-[550px] md:max-w-[640px] max-h-[500px] object-cover"
                 />
               </DialogContent>
             }
