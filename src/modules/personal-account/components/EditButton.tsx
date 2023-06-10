@@ -12,13 +12,13 @@ const EditButton = React.forwardRef<
   return (
     <IconButton
       className={cn(
-        "bg-gray-1 hover:bg-gray-2 active:bg-opacity-80 rounded-full",
+        "bg-gray-3 hover:bg-gray-2 dark:bg-gray-1 dark:hover:bg-gray-2 active:bg-opacity-80 rounded-full",
         className
       )}
       ref={forwardedRef}
       {...props}
     >
-      <MdEdit className="w-3 h-3 fill-gray-5" />
+      <MdEdit className="w-3 h-3 fill-white dark:fill-gray-5" />
     </IconButton>
   )
 })

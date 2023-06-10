@@ -1,3 +1,4 @@
+import { Transaction } from "@/types/types"
 import { api } from "./core"
 
 import { User } from "@/types/user"
@@ -8,9 +9,22 @@ const profileApi = api.injectEndpoints({
       query: () => ({
         url: "users/profile",
         method: "GET",
-        credentials: "include",
       }),
       providesTags: ["UserProfile"],
+    }),
+    transactionHistory: build.query<Transaction[], void>({
+      query: () => ({
+        url: "users/transaction-history/",
+        method: "GET",
+      }),
+      providesTags: ["TxHistory"],
+    }),
+    freezeSubs: build.mutation<void, void>({
+      query: () => ({
+        url: "users/freeze-subscription/",
+        method: "GET",
+      }),
+      invalidatesTags: ["UserProfile"],
     }),
     updateNickname: build.mutation<User, Pick<User, "id" | "profileUsername">>({
       query: ({ id, ...patch }) => ({
@@ -57,8 +71,9 @@ const profileApi = api.injectEndpoints({
 })
 
 export const {
-  useLazyUserProfileQuery,
   useUserProfileQuery,
+  useTransactionHistoryQuery,
+  useFreezeSubsMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
   useUpdateWalletMutation,

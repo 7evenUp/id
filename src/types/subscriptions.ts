@@ -1,8 +1,8 @@
 export interface SubscriptionsResponse {
   count: number
   pageCount: number
-  next: string
-  previous: string
+  next: string | null
+  previous: string | null
   results: Subscription[]
 }
 

@@ -8,6 +8,7 @@ import Balance from "../modals/Balance"
 import SubscriptionMain from "../modals/subscription/SubscriptionMain"
 
 import ModalTrigger from "../components/ModalTrigger"
+import SubscriptionType from "../components/SubscriptionType"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -25,7 +26,8 @@ const Subscription = () => {
   const { data: profileData } = useUserProfileQuery()
 
   const {
-    subscriptionInfo: { currentBalance, remainingDays },
+    subscriptionInfo: { remainingDays, status },
+    balance,
   } = profileData!
 
   return (
@@ -33,20 +35,20 @@ const Subscription = () => {
       <div className="flex justify-between items-center mb-4">
         <div className="relative">
           <Subheading>{t("subs.heading")}</Subheading>
-          <span className="absolute right-0 top-0 translate-x-10 -translate-y-1/2 typography-text-1 italic bg-gray-1 px-1.5 py-0.5 text-gray-6 rounded-full select-none hover:bg-gradient-to-r from-gray-2 to-gray-4">
-            Free
-          </span>
+          <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
         </div>
-        <ModalTrigger content={<FreezeSubs />}>
-          <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
-            <BsSnow className="w-3 h-3" />
-          </IconButton>
-        </ModalTrigger>
+        {status !== null && (
+          <ModalTrigger content={<FreezeSubs />}>
+            <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
+              <BsSnow className="w-3 h-3" />
+            </IconButton>
+          </ModalTrigger>
+        )}
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
           <span className="flex-shrink-0">
-            {t("subs.balance")}: <AccentNumber>${currentBalance}</AccentNumber>
+            {t("subs.balance")}: <AccentNumber>${balance}</AccentNumber>
           </span>
           <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end">
             <ModalTrigger content={<TxHistory />}>

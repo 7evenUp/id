@@ -3,14 +3,17 @@ import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
 
-import { Transaction } from "@/types/types"
+import { useTransactionHistoryQuery } from "@/redux/api/profile"
 
-interface Props {
-  data: Transaction[]
-}
+import { formatDate } from "@/lib/date-fns"
 
-const TxHistoryTable: React.FC<Props> = ({ data }) => {
-  const { t } = useTranslation("modals")
+const TxHistoryTable = () => {
+  const { t, i18n } = useTranslation("modals")
+
+  const { data } = useTransactionHistoryQuery()
+
+  if (!data) return <span className="hidden sm:block">No history data yet</span>
+
   return (
     <table className="hidden sm:table">
       <thead className="text-left text-gray-3">
@@ -25,22 +28,25 @@ const TxHistoryTable: React.FC<Props> = ({ data }) => {
       <tbody className="typography-text-1 divide-y divide-gray-4 dark:divide-gray-2">
         {data.map((tx, i) => (
           <tr key={i}>
-            <TData>{tx.description}</TData>
-            <TData>{tx.date}</TData>
-            <TData>{tx.price}</TData>
+            <TData>{tx.description || "no description"}</TData>
+            <TData>
+              {formatDate(tx.createdDatetime, i18n.language as "ru" | "en") ||
+                "no date"}
+            </TData>
+            <TData>{tx.totalAmount || "no amount"}</TData>
             <TData
               className={cn(
                 "typography-text-2",
-                tx.status === "в процессе"
+                tx.status !== null && tx.status === "PENDING"
                   ? "text-process"
-                  : tx.status === "отклонено"
-                  ? "text-error"
-                  : "text-success"
+                  : tx.status === "COMPLETED"
+                  ? "text-success"
+                  : "text-error"
               )}
             >
-              {tx.status}
+              {tx.status || "no status"}
             </TData>
-            <TData>{tx.id}</TData>
+            <TData>{tx.txId || "no tx id"}</TData>
           </tr>
         ))}
       </tbody>

@@ -30,8 +30,8 @@ export interface Avatar {
 export interface SubscriptionInfo {
   currentBalance: number
   remainingDays: number | null
-  status: string | null
-  subscriptionType: string | null
+  status: "FROZEN" | null
+  subscriptionType: "Prime" | null
 }
 
 export interface ReferralInfo {

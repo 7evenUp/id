@@ -1,26 +1,47 @@
 import { useTranslation } from "react-i18next"
 
+import SubscriptionStatus from "../components/SubscriptionStatus"
+
 import { DialogContent, DialogFooter, DialogHeader } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
+import { useFreezeSubsMutation, useUserProfileQuery } from "@/redux/api/profile"
+
 const FreezeSubs = () => {
   const { t } = useTranslation("modals")
+
+  const { data } = useUserProfileQuery()
+  const [freeze, { isLoading, isSuccess }] = useFreezeSubsMutation()
+
+  const {
+    subscriptionInfo: { status },
+  } = data!
+
+  const isFrozen = status === "FROZEN"
+
   return (
     <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px] sm:pb-16">
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
         <div className="flex flex-col typography-text-1">
           <span className="flex items-center gap-2">
-            {t("freeze.status")}:{" "}
-            <span className="bg-success text-white rounded-full px-1.5">
-              Активна
-            </span>
+            {t("freeze.status")}: <SubscriptionStatus />
           </span>
           <span className="flex items-baseline gap-2">
             {t("freeze.freeze-available")}:{" "}
-            <span className="typography-balance">есть</span>
+            <span className="typography-balance">
+              {isFrozen ? "нет" : "есть"}
+            </span>
           </span>
         </div>
-        <Button className="w-fit">{t("freeze.confirm-btn")}</Button>
+        <Button
+          className="w-fit"
+          disabled={isFrozen}
+          isLoading={isLoading}
+          appearence={isSuccess ? "success" : "outlined"}
+          onClick={() => freeze()}
+        >
+          {isSuccess ? "Успешно" : t("freeze.confirm-btn")}
+        </Button>
       </DialogHeader>
       <div>
         <h3 className="typography-semi-head mb-2.5">

@@ -12,6 +12,6 @@ export const api = createApi({
     //   )
     // },
   }),
-  tagTypes: ["UserProfile"],
+  tagTypes: ["UserProfile", "TxHistory"],
   endpoints: () => ({}),
 })

@@ -44,7 +44,11 @@ export default {
 
         // linear gradients
         corral: '#FF6275',
-        purple: '#CC5DA7'
+        purple: '#CC5DA7',
+        green: '#18C762',
+        mint: '#05DFA0',
+        'frozen-start': '#5496FA',
+        'frozen-end': '#7EC1FF'
       }
     },
   },
