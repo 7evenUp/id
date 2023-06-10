@@ -26,6 +26,13 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
+    deactivate: build.mutation<void, Pick<User, "id">>({
+      query: ({id}) => ({
+        url: `users/${id}/delete/`,
+        method: "GET"
+      }),
+      invalidatesTags: ["UserProfile"],
+    }),
     updateNickname: build.mutation<User, Pick<User, "id" | "profileUsername">>({
       query: ({ id, ...patch }) => ({
         url: `users/${id}/`,
@@ -74,6 +81,7 @@ export const {
   useUserProfileQuery,
   useTransactionHistoryQuery,
   useFreezeSubsMutation,
+  useDeactivateMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
   useUpdateWalletMutation,

@@ -5,14 +5,23 @@ import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
 
+import { useDeactivateMutation, useUserProfileQuery } from "@/redux/api/profile"
+
 const Deactivation = () => {
   const { t } = useTranslation("modals")
 
   const [deactivationCode, setDeactivationCode] = useState("")
 
+  const { data: userProfile } = useUserProfileQuery()
+  const [deactivate, { isLoading, error }] = useDeactivateMutation()
+
+  const { id } = userProfile!
+
   const onSubmit = () => {
-    console.log("Deactivated!")
+    deactivate({id})
   }
+
+  if (error) console.error(error)
 
   return (
     <DialogContent className="max-w-[500px]">
@@ -31,8 +40,9 @@ const Deactivation = () => {
           onChange={(evt) => setDeactivationCode(evt.currentTarget.value)}
         />
         <Button
-          onClick={onSubmit}
           className="w-fit bg-error hover:bg-red-600 dark:hover:bg-red-600 text-white dark:text-white"
+          onClick={onSubmit}
+          isLoading={isLoading}
         >
           {t("deactivation.deactivate-btn")}
         </Button>
