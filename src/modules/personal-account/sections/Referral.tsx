@@ -55,8 +55,8 @@ const Referral = () => {
       <div className="flex justify-between items-center pb-4 group">
         <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
-          <IconButton className="sm:opacity-0 group-hover:opacity-100 transition-all bg-gray-3 hover:bg-gray-2 dark:bg-gray-1 dark:hover:bg-gray-2 active:bg-opacity-80 rounded-full">
-            <FaInfo className="w-3 h-3 fill-white dark:fill-gray-5" />
+          <IconButton className="sm:opacity-0 group-hover:opacity-100 transition-all bg-gray-3 hover:bg-gray-2 sm:bg-gray-1 sm:hover:bg-gray-2 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80 dark:active:bg-opacity-80 rounded-full">
+            <FaInfo className="w-3 h-3 fill-white dark:fill-gray-1" />
           </IconButton>
         </ModalTrigger>
       </div>
