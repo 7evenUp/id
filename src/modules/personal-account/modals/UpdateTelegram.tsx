@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
@@ -16,6 +17,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
+
+import {
+  useUpdateTelegramMutation,
+  useVerifyTelegramMutation,
+} from "@/redux/api/profile"
 
 const nicknameFormSchema = z.object({
   nickname: z
@@ -38,23 +44,40 @@ const nicknameFormSchema = z.object({
 })
 
 const codeFormSchema = z.object({
-  code: z.string().min(1, {
-    message: "Поле обязательно для заполнения.",
-  }),
+  code: z
+    .string()
+    .min(1, {
+      message: "Поле обязательно для заполнения.",
+    })
+    .regex(new RegExp("^[0-9]+$", "g"), { message: "Только цифры" }),
 })
 
 const UpdateTelegram = () => {
   const { t } = useTranslation("modals")
+
   const [nickInputValue, setNickInputValue] = useState("")
   const [isSecondStep, setIsSecondStep] = useState(false)
 
-  const submitNickname = ({ nickname }: z.infer<typeof nicknameFormSchema>) => {
+  const [changeTelegram, { isLoading: isChangeLoading }] =
+    useUpdateTelegramMutation()
+  const [verifyTelegram, { isLoading: isVerifyLoading, data, error }] =
+    useVerifyTelegramMutation()
+
+  if (error) console.log(error)
+
+  if (data) console.log(data)
+
+  const submitNickname = async ({
+    nickname,
+  }: z.infer<typeof nicknameFormSchema>) => {
+    await changeTelegram({ telegram: nickname }).unwrap()
     setIsSecondStep(true)
     setNickInputValue(nickname)
     console.log(nickname)
   }
 
   const submitCode = ({ code }: z.infer<typeof codeFormSchema>) => {
+    verifyTelegram({ code: parseInt(code) })
     console.log(code)
   }
 
@@ -82,9 +105,10 @@ const UpdateTelegram = () => {
         <NicknameForm
           onSubmit={submitNickname}
           defaultInputValue={nickInputValue}
+          isLoading={isChangeLoading}
         />
       ) : (
-        <CodeForm onSubmit={submitCode} />
+        <CodeForm onSubmit={submitCode} isLoading={isVerifyLoading} />
       )}
     </DialogContent>
   )
@@ -95,9 +119,11 @@ export default UpdateTelegram
 const NicknameForm = ({
   onSubmit,
   defaultInputValue,
+  isLoading,
 }: {
   onSubmit: ({ nickname }: z.infer<typeof nicknameFormSchema>) => void
   defaultInputValue: string
+  isLoading: boolean
 }) => {
   const { t } = useTranslation("modals")
 
@@ -134,7 +160,7 @@ const NicknameForm = ({
             </FormItem>
           )}
         />
-        <Button className="w-fit mt-2" type="submit">
+        <Button className="w-fit mt-2" type="submit" isLoading={isLoading}>
           {t("change-tg.sync-button")}
         </Button>
       </form>
@@ -144,8 +170,10 @@ const NicknameForm = ({
 
 const CodeForm = ({
   onSubmit,
+  isLoading,
 }: {
   onSubmit: ({ code }: z.infer<typeof codeFormSchema>) => void
+  isLoading: boolean
 }) => {
   const { t } = useTranslation("modals")
 
@@ -181,7 +209,7 @@ const CodeForm = ({
               </FormItem>
             )}
           />
-          <Button className="w-fit mt-2" type="submit">
+          <Button className="w-fit mt-2" type="submit" isLoading={isLoading}>
             {t("change-tg.confirm-button")}
           </Button>
         </form>

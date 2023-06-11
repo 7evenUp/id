@@ -30,13 +30,17 @@ const App = () => {
     }
   }, [])
 
-  if (data) {
-    console.log("Fetched user data: ", data)
-  }
+  useEffect(() => {
+    if (data) {
+      console.log("Fetched user data: ", data)
+    }
+  }, [data])
 
-  if (error) {
-    console.error("Error happened while fetching GET users/profile: ", error)
-  }
+  useEffect(() => {
+    if (error) {
+      console.error("Error happened while fetching GET users/profile: ", error)
+    }
+  }, [error])
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">

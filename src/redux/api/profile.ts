@@ -26,6 +26,13 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
+    deactivate: build.mutation<void, Pick<User, "id">>({
+      query: ({ id }) => ({
+        url: `users/${id}/delete/`,
+        method: "GET",
+      }),
+      invalidatesTags: ["UserProfile"],
+    }),
     updateNickname: build.mutation<User, Pick<User, "id" | "profileUsername">>({
       query: ({ id, ...patch }) => ({
         url: `users/${id}/`,
@@ -58,9 +65,16 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
-    updateTelegram: build.mutation<User, Pick<User, "telegramId">>({
+    updateTelegram: build.mutation<User, { telegram: string }>({
       query: (body) => ({
         url: "users/change-telegram/",
+        method: "POST",
+        body,
+      }),
+    }),
+    verifyTelegram: build.mutation<User, { code: number }>({
+      query: (body) => ({
+        url: "users/verify-telegram/",
         method: "POST",
         body,
       }),
@@ -74,9 +88,11 @@ export const {
   useUserProfileQuery,
   useTransactionHistoryQuery,
   useFreezeSubsMutation,
+  useDeactivateMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
   useUpdateWalletMutation,
   useUpdateDiscordMutation,
   useUpdateTelegramMutation,
+  useVerifyTelegramMutation,
 } = profileApi

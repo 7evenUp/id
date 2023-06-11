@@ -33,7 +33,7 @@ const TxHistoryTable = () => {
               {formatDate(tx.createdDatetime, i18n.language as "ru" | "en") ||
                 "no date"}
             </TData>
-            <TData>{tx.totalAmount || "no amount"}</TData>
+            <TData>{tx.totalAmount ? `$${tx.totalAmount}` : "no amount"}</TData>
             <TData
               className={cn(
                 "typography-text-2",

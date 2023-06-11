@@ -1,4 +1,3 @@
-import { useRef, useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 
 import UpdateTelegram from "../../modals/UpdateTelegram"
@@ -12,32 +11,26 @@ import RowItem from "@/shared/components/RowItem"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ProfileTelegram = () => {
-  const [isEditingMode, setIsEditingMode] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
-
   const { data: userProfile } = useUserProfileQuery()
 
   if (!userProfile) return null
 
-  const { telegramId } = userProfile
+  const { telegramUsername } = userProfile
 
   return (
-    <RowItem className="relative group">
+    <RowItem className="flex-1 relative group">
       <span
-        className={telegramId ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}
+        className={
+          telegramUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}
       >
         telegram
       </span>
-      <input
-        className="peer bg-transparent outline-none text-right w-full"
-        defaultValue={telegramId}
-        ref={inputRef}
-        disabled={!isEditingMode}
-        onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
-      />
-      {!telegramId && !isEditingMode && !inputRef.current?.value.length && (
+      {telegramUsername ? (
+        <span className="text-right w-full">{telegramUsername}</span>
+      ) : (
         <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
       )}
+
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
         <ModalTrigger content={<UpdateTelegram />}>

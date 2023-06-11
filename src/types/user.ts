@@ -13,6 +13,7 @@ export interface User {
   profileUsername: string
   referralInfo: ReferralInfo
   subscriptionInfo: SubscriptionInfo
+  telegramUsername: string
   telegramId: number
   username: string
   wallet: string | null
