@@ -8,8 +8,6 @@ import ModalTrigger from "../../components/ModalTrigger"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { cn } from "@/lib/classNames"
-
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ProfileTelegram = () => {
@@ -20,17 +18,15 @@ const ProfileTelegram = () => {
   const { telegramUsername } = userProfile
 
   return (
-    <RowItem className="relative group">
+    <RowItem className="flex-1 relative group">
       <span
-        className={cn(
-          "mr-auto",
-          telegramUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"
-        )}
+        className={
+          telegramUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}
       >
         telegram
       </span>
       {telegramUsername ? (
-        <span>{telegramUsername}</span>
+        <span className="text-right w-full">{telegramUsername}</span>
       ) : (
         <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
       )}

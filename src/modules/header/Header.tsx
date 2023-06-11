@@ -6,14 +6,14 @@ import AvatarMobile from "./components/AvatarMobile"
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center mb-10">
-      <a
+    <header className="flex justify-end items-center mb-10">
+      {/* <a
         className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
         href="#"
       >
         <HiOutlineArrowNarrowLeft />
         Назад к сайту
-      </a>
+      </a> */}
 
       <div className="hidden sm:flex items-center gap-3">
         <LanguageToggle />
