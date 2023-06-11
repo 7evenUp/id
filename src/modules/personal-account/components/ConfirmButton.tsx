@@ -12,7 +12,7 @@ const ConfirmButton = React.forwardRef<
   return (
     <IconButton
       className={cn(
-        "bg-gray-3 hover:bg-gray-2 sm:bg-gray-1 sm:hover:bg-gray-2 dark:bg-gray-4 active:bg-opacity-80  dark:active:bg-opacity-80 rounded-full",
+        "bg-gray-3 hover:bg-gray-2 sm:bg-gray-1 sm:hover:bg-gray-2 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80  dark:active:bg-opacity-80 rounded-full",
         className
       )}
       ref={forwardedRef}

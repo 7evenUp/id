@@ -17,11 +17,14 @@ const Deactivation = () => {
 
   const { id } = userProfile!
 
-  const onSubmit = () => {
-    deactivate({id})
+  const onSubmit = async () => {
+    try {
+      await deactivate({ id })
+      location.reload()
+    } catch (error) {
+      console.error(error)
+    }
   }
-
-  if (error) console.error(error)
 
   return (
     <DialogContent className="max-w-[500px]">
