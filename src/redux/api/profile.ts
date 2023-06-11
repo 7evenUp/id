@@ -27,9 +27,9 @@ const profileApi = api.injectEndpoints({
       invalidatesTags: ["UserProfile"],
     }),
     deactivate: build.mutation<void, Pick<User, "id">>({
-      query: ({id}) => ({
+      query: ({ id }) => ({
         url: `users/${id}/delete/`,
-        method: "GET"
+        method: "GET",
       }),
       invalidatesTags: ["UserProfile"],
     }),
@@ -65,9 +65,16 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
-    updateTelegram: build.mutation<User, Pick<User, "telegramId">>({
+    updateTelegram: build.mutation<User, { telegram: string }>({
       query: (body) => ({
         url: "users/change-telegram/",
+        method: "POST",
+        body,
+      }),
+    }),
+    verifyTelegram: build.mutation<User, { code: number }>({
+      query: (body) => ({
+        url: "users/verify-telegram/",
         method: "POST",
         body,
       }),
@@ -87,4 +94,5 @@ export const {
   useUpdateWalletMutation,
   useUpdateDiscordMutation,
   useUpdateTelegramMutation,
+  useVerifyTelegramMutation,
 } = profileApi
