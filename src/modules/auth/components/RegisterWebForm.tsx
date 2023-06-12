@@ -49,9 +49,9 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
   const [regWallet, { isSuccess, isLoading, error }] =
     useRegisterByWalletMutation()
 
-  useEffect(() => {
-    if (isSuccess) location.reload()
-  }, [isSuccess])
+  // useEffect(() => {
+  //   if (isSuccess) location.reload()
+  // }, [isSuccess])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

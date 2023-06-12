@@ -56,6 +56,10 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
     }),
     updateDiscord: build.mutation<User, Pick<User, "discordUsername">>({
       query: (body) => ({
