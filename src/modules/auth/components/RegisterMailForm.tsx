@@ -42,8 +42,8 @@ const RegisterMailForm = ({ back }: { back: () => void }) => {
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    register(values)
+  const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
+    register({ email, profile_username: username })
   }
   return (
     <>

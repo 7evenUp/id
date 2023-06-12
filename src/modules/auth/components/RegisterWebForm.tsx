@@ -49,7 +49,6 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
   const [regWallet, { isSuccess, isLoading, error }] =
     useRegisterByWalletMutation()
 
-
   useEffect(() => {
     if (isSuccess) location.reload()
   }, [isSuccess])
@@ -62,7 +61,7 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
     try {
       let connectedAddress = ""
       if (!isConnected && address === undefined) {
@@ -79,7 +78,8 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
         address: lowerAddress,
         message: AUTH_MESSAGE,
         signature,
-        ...values,
+        email,
+        profile_username: username,
       })
     } catch (error) {
       console.log("Catch error: ", error)
@@ -141,7 +141,10 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
               {t("register.privacy-policy.link")}
             </a>
           </p>
-          <ActionButton type="submit" isLoading={isLoading || isLoadingConnect || isLoadingSign}>
+          <ActionButton
+            type="submit"
+            isLoading={isLoading || isLoadingConnect || isLoadingSign}
+          >
             {t("register.register-btn")}
           </ActionButton>
         </form>

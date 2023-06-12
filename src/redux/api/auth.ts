@@ -5,6 +5,7 @@ interface WalletReqParams {
   signature: string
   message: string
   email?: string
+  profile_username?: string
 }
 
 const authApi = api.injectEndpoints({
@@ -14,13 +15,13 @@ const authApi = api.injectEndpoints({
         url: "users/authenticate-by-wallet/",
         method: "POST",
         body,
-      })
+      }),
     }),
     registerByWallet: build.mutation<void, WalletReqParams>({
       query: (body) => ({
         url: "users/register-web-wallet/",
         method: "POST",
-        body
+        body,
       }),
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
@@ -28,27 +29,29 @@ const authApi = api.injectEndpoints({
       }),
     }),
     login: build.mutation<void, { email: string; redirect_url: string }>({
-      query: ({ email, redirect_url }) => ({
+      query: (body) => ({
         url: "users/login/",
         method: "POST",
-        body: { email, redirect_url },
+        body,
       }),
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
       }),
     }),
-    register: build.mutation<void, { email: string; username: string }>({
-      query: ({ email, username }) => ({
-        url: "users/register-web/",
-        method: "POST",
-        body: { email, username },
-      }),
-      transformErrorResponse: (response) => ({
-        // @ts-expect-error No-Error-Types
-        message: response.data.detail,
-      }),
-    }),
+    register: build.mutation<void, { email: string; profile_username: string }>(
+      {
+        query: (body) => ({
+          url: "users/register-web/",
+          method: "POST",
+          body,
+        }),
+        transformErrorResponse: (response) => ({
+          // @ts-expect-error No-Error-Types
+          message: response.data.detail,
+        }),
+      }
+    ),
     logout: build.query<void, void>({
       query: () => ({
         url: "users/logout/",
@@ -64,5 +67,5 @@ export const {
   useRegisterMutation,
   useLazyLogoutQuery,
   useAuthByWalletMutation,
-  useRegisterByWalletMutation
+  useRegisterByWalletMutation,
 } = authApi
