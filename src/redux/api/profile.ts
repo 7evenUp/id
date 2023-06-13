@@ -48,6 +48,10 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
     }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({

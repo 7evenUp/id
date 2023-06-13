@@ -2,9 +2,14 @@ import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
+import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
 
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+
+import ResponseErrorText from "@/components/ResponseErrorText"
+import ResponseSuccessText from "@/components/ResponseSuccessText"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -22,8 +27,6 @@ import {
   useUpdateTelegramMutation,
   useVerifyTelegramMutation,
 } from "@/redux/api/profile"
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
-import { SerializedError } from "@reduxjs/toolkit"
 
 const nicknameFormSchema = z.object({
   nickname: z
@@ -35,13 +38,13 @@ const nicknameFormSchema = z.object({
       message: "Максимальная длина - 32 символа",
     })
     .regex(new RegExp("^[a-zA-Z0-9_]+$", "g"), {
-      message: "Формат допускает использование символов a-z, 0-9 и underscores",
+      message: "Формат допускает использование символов a-z, 0-9 и _",
     })
     .regex(new RegExp("^[a-zA-Z]"), {
-      message: "Никнейм не может начинаться с цифры или underscore",
+      message: "Никнейм не может начинаться с цифры или _",
     })
     .regex(new RegExp("[a-zA-Z0-9]$"), {
-      message: "Никнейм не может заканчиваться символом underscore",
+      message: "Никнейм не может заканчиваться символом _",
     }),
 })
 
@@ -164,12 +167,8 @@ const NicknameForm = ({
             </FormItem>
           )}
         />
-        {error && (
-          <span className="text-error text-xs font-medium tracking-wide">
-            {/* @ts-expect-error No-Error-Types */}
-            {error.message ? error.message : "На стороне сервера произошла ошибка" }
-          </span>
-        )}
+        {error && <ResponseErrorText error={error} />}
+
         <Button className="w-fit mt-2" type="submit" isLoading={isLoading}>
           {t("change-tg.sync-button")}
         </Button>
@@ -229,9 +228,9 @@ const CodeForm = ({
             )}
           />
           {isSuccess && (
-            <span className="text-success text-xs font-medium tracking-wide">
+            <ResponseSuccessText>
               Telegram успешно синхронизирован
-            </span>
+            </ResponseSuccessText>
           )}
 
           <Button

@@ -1,3 +1,18 @@
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { useAccount, useConnect, useSignMessage } from "wagmi"
+import { InjectedConnector } from "wagmi/connectors/injected"
+import { useTranslation } from "react-i18next"
+
+import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+
+import { AuthInput } from "./AuthInput"
+import ActionButton from "./ActionButton"
+
+import ResponseErrorText from "@/components/ResponseErrorText"
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+
 import {
   Form,
   FormControl,
@@ -6,18 +21,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
-import { AuthInput } from "./AuthInput"
-import ActionButton from "./ActionButton"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useForm } from "react-hook-form"
 import { useRegisterByWalletMutation } from "@/redux/api/auth"
-import { useTranslation } from "react-i18next"
-import { useAccount, useConnect, useSignMessage } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
-import { useEffect } from "react"
 
 const formSchema = z.object({
   username: z.string().min(1, {
@@ -151,24 +156,12 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
       </Form>
       <div className="flex mt-3">
         {isSuccess && (
-          <span className="text-success text-xs font-medium tracking-wide">
+          <ResponseSuccessText>
             Вы успешно зарегистрированны! Перейдите по ссылке, которую мы
             отправили вам на почту
-          </span>
+          </ResponseSuccessText>
         )}
-        {error && (
-          <span className="text-error text-xs font-medium tracking-wide">
-            {/* @ts-expect-error No-Error-Types */}
-            {error.message ? (
-              <span>
-                {/* @ts-expect-error No-Error-Types */}
-                {error.message}
-              </span>
-            ) : (
-              <span>На стороне сервера произошла ошибка</span>
-            )}
-          </span>
-        )}
+        {error && <ResponseErrorText error={error} />}
       </div>
     </>
   )

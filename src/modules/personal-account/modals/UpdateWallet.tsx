@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next"
 
 import { useMetamask } from "@/hooks/useMetamask"
 
+import ResponseErrorText from "@/components/ResponseErrorText"
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
@@ -112,26 +115,14 @@ const UpdateWallet = () => {
       )}
 
       {isSuccess && (
-        <span className="text-success text-xs font-medium tracking-wide">
+        <ResponseSuccessText>
           {wallet
             ? "Кошелёк успешно привязан к вашему аккаунту"
             : "Кошелёк успешно изменён"}
-        </span>
+        </ResponseSuccessText>
       )}
 
-      {error && (
-        <span className="text-error text-xs font-medium tracking-wide">
-          {/* @ts-expect-error No-Error-Types */}
-          {error.message ? (
-            <span>
-              {/* @ts-expect-error No-Error-Types */}
-              {error.message}
-            </span>
-          ) : (
-            <span>На стороне сервера произошла ошибка</span>
-          )}
-        </span>
-      )}
+      {error && <ResponseErrorText error={error} />}
 
       {isConnected && address ? (
         <Button
