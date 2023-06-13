@@ -75,6 +75,10 @@ const profileApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
     }),
     verifyTelegram: build.mutation<User, { code: number }>({
       query: (body) => ({
