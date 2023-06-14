@@ -4,8 +4,6 @@ import { useTranslation } from "react-i18next"
 
 import { IoCloseOutline } from "react-icons/io5"
 
-import { ReactComponent as BearIcon } from "@/assets/icons/avatars/Star.svg"
-
 import UploadDropzone from "../components/UploadDropzone"
 import PrevAvatars from "../components/PrevAvatars"
 import ModalTrigger from "../components/ModalTrigger"
@@ -73,14 +71,12 @@ const ChangeAvatar = () => {
                 </DialogContent>
               }
             >
-              {activeAvatar ? (
+              {activeAvatar && (
                 <img
                   src={base64 ? base64 : activeAvatar?.file}
                   alt="User Avatar"
                   className="w-full h-full object-cover rounded-lg cursor-pointer hover:scale-105 transition-transform will-change-transform"
                 />
-              ) : (
-                <BearIcon className="w-10" />
               )}
             </ModalTrigger>
           </div>
