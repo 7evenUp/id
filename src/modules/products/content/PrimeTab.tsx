@@ -12,31 +12,35 @@ import RowItem from "@/shared/components/RowItem"
 
 import { primeServices } from "@/utils/primeServices"
 
+import { useChannelsQuery } from "@/redux/api/channels"
+
 const PrimeTab = () => {
   const { t } = useTranslation("products")
+
+  const { data: channels, isLoading } = useChannelsQuery()
 
   return (
     <>
       <TabHeader>
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
-      <RowItem className="items-baseline flex-col sm:flex-row gap-2">
-        <span>{t("prime.channels-and-chats")}</span>
-        <div className="flex items-center sm:justify-end gap-[10px] flex-wrap max-w-[360px]">
-          <ExternalLink withTgIcon href="#">
-            канал Prime
-          </ExternalLink>
-          <ExternalLink withTgIcon href="#">
-            основной чат
-          </ExternalLink>
-          <ExternalLink withTgIcon href="#">
-            NFT-чат
-          </ExternalLink>
-          <ExternalLink withTgIcon href="#">
-            чат по нодам
-          </ExternalLink>
-        </div>
-      </RowItem>
+      {channels && (
+        <RowItem className="items-baseline flex-col sm:flex-row gap-2">
+          <span>{t("prime.channels-and-chats")}</span>
+          <div className="flex items-center sm:justify-end gap-[10px] flex-wrap max-w-[360px]">
+            {channels.map((channel) => (
+              <ExternalLink
+                key={channel.id}
+                href={channel.mainLink || ""}
+                withTgIcon
+              >
+                {channel.name}
+              </ExternalLink>
+            ))}
+          </div>
+        </RowItem>
+      )}
+
       <RowItem className="flex-col items-stretch gap-6">
         <div className="flex justify-between items-center">
           <span>{t("prime.services-and-nav")}</span>
