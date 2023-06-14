@@ -31,7 +31,7 @@ const PersonalAccount = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between sm:px-12">
         <h1 className="typography-head uppercase dark:text-gray-5 text-center w-full sm:text-left mb-10 sm:mb-0">
           {t("heading")}
         </h1>

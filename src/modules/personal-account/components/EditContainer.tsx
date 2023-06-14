@@ -12,7 +12,7 @@ const EditContainer = ({
   return (
     <div
       className={cn(
-        "absolute right-0 translate-x-[30px] w-[30px] h-full flex items-center pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 peer-focus:opacity-100 transition-opacity",
+        "absolute right-0 translate-x-[30px] w-[30px] h-full flex items-center pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity",
         className
       )}
     >
