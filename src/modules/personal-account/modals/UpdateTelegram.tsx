@@ -1,10 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
+import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
 
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+
+import ResponseErrorText from "@/components/ResponseErrorText"
+import ResponseSuccessText from "@/components/ResponseSuccessText"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -33,13 +38,13 @@ const nicknameFormSchema = z.object({
       message: "Максимальная длина - 32 символа",
     })
     .regex(new RegExp("^[a-zA-Z0-9_]+$", "g"), {
-      message: "Формат допускает использование символов a-z, 0-9 и underscores",
+      message: "Формат допускает использование символов a-z, 0-9 и _",
     })
     .regex(new RegExp("^[a-zA-Z]"), {
-      message: "Никнейм не может начинаться с цифры или underscore",
+      message: "Никнейм не может начинаться с цифры или _",
     })
     .regex(new RegExp("[a-zA-Z0-9]$"), {
-      message: "Никнейм не может заканчиваться символом underscore",
+      message: "Никнейм не может заканчиваться символом _",
     }),
 })
 
@@ -58,14 +63,10 @@ const UpdateTelegram = () => {
   const [nickInputValue, setNickInputValue] = useState("")
   const [isSecondStep, setIsSecondStep] = useState(false)
 
-  const [changeTelegram, { isLoading: isChangeLoading }] =
+  const [changeTelegram, { isLoading: isChangeLoading, error }] =
     useUpdateTelegramMutation()
-  const [verifyTelegram, { isLoading: isVerifyLoading, data, error }] =
+  const [verifyTelegram, { isLoading: isVerifyLoading, isError, isSuccess }] =
     useVerifyTelegramMutation()
-
-  if (error) console.log(error)
-
-  if (data) console.log(data)
 
   const submitNickname = async ({
     nickname,
@@ -73,12 +74,10 @@ const UpdateTelegram = () => {
     await changeTelegram({ telegram: nickname }).unwrap()
     setIsSecondStep(true)
     setNickInputValue(nickname)
-    console.log(nickname)
   }
 
   const submitCode = ({ code }: z.infer<typeof codeFormSchema>) => {
     verifyTelegram({ code: parseInt(code) })
-    console.log(code)
   }
 
   return (
@@ -106,9 +105,15 @@ const UpdateTelegram = () => {
           onSubmit={submitNickname}
           defaultInputValue={nickInputValue}
           isLoading={isChangeLoading}
+          error={error}
         />
       ) : (
-        <CodeForm onSubmit={submitCode} isLoading={isVerifyLoading} />
+        <CodeForm
+          onSubmit={submitCode}
+          isLoading={isVerifyLoading}
+          isSuccess={isSuccess}
+          isError={isError}
+        />
       )}
     </DialogContent>
   )
@@ -120,10 +125,12 @@ const NicknameForm = ({
   onSubmit,
   defaultInputValue,
   isLoading,
+  error,
 }: {
   onSubmit: ({ nickname }: z.infer<typeof nicknameFormSchema>) => void
   defaultInputValue: string
   isLoading: boolean
+  error: FetchBaseQueryError | SerializedError | undefined
 }) => {
   const { t } = useTranslation("modals")
 
@@ -160,6 +167,8 @@ const NicknameForm = ({
             </FormItem>
           )}
         />
+        {error && <ResponseErrorText error={error} />}
+
         <Button className="w-fit mt-2" type="submit" isLoading={isLoading}>
           {t("change-tg.sync-button")}
         </Button>
@@ -171,9 +180,13 @@ const NicknameForm = ({
 const CodeForm = ({
   onSubmit,
   isLoading,
+  isSuccess,
+  isError,
 }: {
   onSubmit: ({ code }: z.infer<typeof codeFormSchema>) => void
   isLoading: boolean
+  isSuccess: boolean
+  isError: boolean
 }) => {
   const { t } = useTranslation("modals")
 
@@ -181,6 +194,11 @@ const CodeForm = ({
     resolver: zodResolver(codeFormSchema),
     defaultValues: { code: "" },
   })
+
+  useEffect(() => {
+    if (isError)
+      form.setError("code", { message: "Неверный код" }, { shouldFocus: true })
+  }, [isError])
 
   return (
     <>
@@ -209,8 +227,20 @@ const CodeForm = ({
               </FormItem>
             )}
           />
-          <Button className="w-fit mt-2" type="submit" isLoading={isLoading}>
-            {t("change-tg.confirm-button")}
+          {isSuccess && (
+            <ResponseSuccessText>
+              Telegram успешно синхронизирован
+            </ResponseSuccessText>
+          )}
+
+          <Button
+            className="w-fit mt-2"
+            type="submit"
+            isLoading={isLoading}
+            disabled={isSuccess}
+            appearence={isSuccess ? "success" : "outlined"}
+          >
+            {isSuccess ? "Успешно" : t("change-tg.confirm-button")}
           </Button>
         </form>
       </Form>

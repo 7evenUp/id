@@ -8,6 +8,9 @@ import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
 import ActionButton from "./ActionButton"
 import { AuthInput } from "./AuthInput"
 
+import ResponseErrorText from "@/components/ResponseErrorText"
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+
 import {
   Form,
   FormControl,
@@ -80,23 +83,11 @@ const MailForm = ({ back }: { back: () => void }) => {
       </Form>
       <div className="flex mt-3">
         {isSuccess && (
-          <span className="text-success text-xs font-medium tracking-wide">
+          <ResponseSuccessText>
             Ссылка для входа успешно отправлена вам на почту
-          </span>
+          </ResponseSuccessText>
         )}
-        {error && (
-          <span className="text-error text-xs font-medium tracking-wide">
-            {/* @ts-expect-error No-Error-Types */}
-            {error.message ? (
-              <span>
-                {/* @ts-expect-error No-Error-Types */}
-                {error.message}
-              </span>
-            ) : (
-              <span>На стороне сервера произошла ошибка</span>
-            )}
-          </span>
-        )}
+        {error && <ResponseErrorText error={error} />}
       </div>
     </>
   )

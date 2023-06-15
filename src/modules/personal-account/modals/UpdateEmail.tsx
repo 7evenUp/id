@@ -3,6 +3,9 @@ import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+import ResponseErrorText from "@/components/ResponseErrorText"
+
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
@@ -22,6 +25,7 @@ import {
 
 const UpdateEmail = () => {
   const { t } = useTranslation("modals")
+
   const { data: userProfileData } = useUserProfileQuery()
   const [updateEmail, { isSuccess, error, isLoading }] =
     useUpdateEmailMutation()
@@ -108,16 +112,13 @@ const UpdateEmail = () => {
             )}
           />
           {isSuccess && (
-            <span className="typography-text-2 text-success">
+            <ResponseSuccessText>
               Ваша почта успешно изменена
-            </span>
+            </ResponseSuccessText>
           )}
-          {error && (
-            <span className="typography-text-2 text-error">
-              {/* @ts-expect-error No-Error-Types */}
-              {error.data.detail}
-            </span>
-          )}
+
+          {error && <ResponseErrorText error={error} />}
+
           <div className="flex gap-2 items-center">
             <Button type="submit" className="w-fit" isLoading={isLoading}>
               {t("change-email.button")}

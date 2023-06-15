@@ -31,7 +31,7 @@ const PersonalAccount = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between sm:max-lg:px-12">
         <h1 className="typography-head uppercase dark:text-gray-5 text-center w-full sm:text-left mb-10 sm:mb-0">
           {t("heading")}
         </h1>
@@ -44,7 +44,7 @@ const PersonalAccount = () => {
         <Subscription />
         <Referral />
 
-        <div className="flex justify-between">
+        <div className="hidden sm:flex justify-between">
           <Button appearence="text" onClick={onLogout}>
             {t("logout")}
           </Button>

@@ -48,6 +48,10 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
     }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({
@@ -56,6 +60,10 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
     }),
     updateDiscord: build.mutation<User, Pick<User, "discordUsername">>({
       query: (body) => ({
@@ -70,6 +78,10 @@ const profileApi = api.injectEndpoints({
         url: "users/change-telegram/",
         method: "POST",
         body,
+      }),
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
       }),
     }),
     verifyTelegram: build.mutation<User, { code: number }>({

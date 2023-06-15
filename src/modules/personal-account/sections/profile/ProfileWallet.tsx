@@ -1,53 +1,26 @@
-import { useAccount, useConnect } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
 
 import { AiOutlinePlus } from "react-icons/ai"
 
+import UpdateWallet from "../../modals/UpdateWallet"
+
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
+import ModalTrigger from "../../components/ModalTrigger"
 
 import RowItem from "@/shared/components/RowItem"
-
-import { useMetamask } from "@/hooks/useMetamask"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
 
-import {
-  useUpdateWalletMutation,
-  useUserProfileQuery,
-} from "@/redux/api/profile"
+import { useUserProfileQuery } from "@/redux/api/profile"
+
 const ProfileWallet = () => {
   const { t } = useTranslation("profile")
 
-  const { address, isConnected } = useAccount()
-  const { connectAsync, isLoading: isLoadingConnect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-
   const { data: userProfile } = useUserProfileQuery()
-  const [updateWallet] = useUpdateWalletMutation()
-
-  const {
-    state: { isMetamaskInstalled },
-  } = useMetamask()
-
-  if (!userProfile) return null
-
-  const { wallet } = userProfile
-
-  const handleConnect = async () => {
-    if (isConnected && address) {
-      console.log(address)
-      updateWallet({ wallet: address.toLowerCase() })
-    } else {
-      const res = await connectAsync()
-      console.log(res)
-      updateWallet({ wallet: res.account.toLowerCase() })
-    }
-  }
+  const { wallet } = userProfile!
 
   return (
     <RowItem className="relative group justify-end">
@@ -67,24 +40,16 @@ const ProfileWallet = () => {
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
-        {!isMetamaskInstalled ? (
-          <a href="https://metamask.io/" target="_blank">
-            <EditButton />
-          </a>
-        ) : (
-          <EditButton onClick={handleConnect} />
-        )}
+        <ModalTrigger content={<UpdateWallet />}>
+          <EditButton />
+        </ModalTrigger>
       </div>
 
       {/* Desktop editing */}
       <EditContainer className="hidden sm:flex">
-        {!isMetamaskInstalled ? (
-          <a href="https://metamask.io/" target="_blank">
-            <EditButton />
-          </a>
-        ) : (
-          <EditButton onClick={handleConnect} />
-        )}
+        <ModalTrigger content={<UpdateWallet />}>
+          <EditButton />
+        </ModalTrigger>
       </EditContainer>
     </RowItem>
   )

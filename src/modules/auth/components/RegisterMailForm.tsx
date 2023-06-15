@@ -1,3 +1,16 @@
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { useForm } from "react-hook-form"
+import { useTranslation } from "react-i18next"
+
+import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+
+import { AuthInput } from "./AuthInput"
+import ActionButton from "./ActionButton"
+
+import ResponseErrorText from "@/components/ResponseErrorText"
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+
 import {
   Form,
   FormControl,
@@ -6,16 +19,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
-import React from "react"
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
-import { AuthInput } from "./AuthInput"
-import ActionButton from "./ActionButton"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useForm } from "react-hook-form"
 import { useRegisterMutation } from "@/redux/api/auth"
-import { useTranslation } from "react-i18next"
 
 const formSchema = z.object({
   username: z.string().min(1, {
@@ -42,8 +47,8 @@ const RegisterMailForm = ({ back }: { back: () => void }) => {
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    register(values)
+  const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
+    register({ email, profile_username: username })
   }
   return (
     <>
@@ -108,24 +113,12 @@ const RegisterMailForm = ({ back }: { back: () => void }) => {
       </Form>
       <div className="flex mt-3">
         {isSuccess && (
-          <span className="text-success text-xs font-medium tracking-wide">
+          <ResponseSuccessText>
             Вы успешно зарегистрированны! Перейдите по ссылке, которую мы
             отправили вам на почту
-          </span>
+          </ResponseSuccessText>
         )}
-        {error && (
-          <span className="text-error text-xs font-medium tracking-wide">
-            {/* @ts-expect-error No-Error-Types */}
-            {error.message ? (
-              <span>
-                {/* @ts-expect-error No-Error-Types */}
-                {error.message}
-              </span>
-            ) : (
-              <span>На стороне сервера произошла ошибка</span>
-            )}
-          </span>
-        )}
+        {error && <ResponseErrorText error={error} />}
       </div>
     </>
   )
