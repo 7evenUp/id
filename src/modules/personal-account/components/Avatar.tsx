@@ -1,32 +1,46 @@
+import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as TrashIcon } from "@/assets/icons/trash.svg"
 import { ReactComponent as EditIcon } from "@/assets/icons/edit.svg"
 
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/shared/ui/HoverCard"
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import { toast } from "@/shared/ui/Toast"
 
 import ChangeAvatar from "../modals/ChangeAvatar"
 
 import ModalTrigger from "./ModalTrigger"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useDeleteAvatarMutation } from "@/redux/api/avatar"
 
 const Avatar = () => {
   const { t } = useTranslation()
 
   const { data: profileData } = useUserProfileQuery()
+  const [deleteAvatar, { isSuccess, isError }] = useDeleteAvatarMutation()
+
+  useEffect(() => {
+    if (isSuccess)
+      toast({ message: "Текущее фото успешно удалено", type: "success" })
+  }, [isSuccess])
+
+  useEffect(() => {
+    if (isError)
+      toast({ message: "Не удалось удалить текущее фото", type: "error" })
+  }, [isError])
 
   const { avatars } = profileData!
 
   const activeAvatar = avatars.find((avatar) => avatar.isActive)
 
+  const onDelete = () => {
+    if (activeAvatar) deleteAvatar({ avatar_id: activeAvatar.id })
+  }
+
   return (
-    <HoverCard openDelay={200}>
-      <HoverCardTrigger
+    <Popover>
+      <PopoverTrigger
         className="rounded-full overflow-hidden hover:scale-105 will-change-transform transition-transform"
         asChild
         role="button"
@@ -40,20 +54,23 @@ const Avatar = () => {
             />
           )}
         </div>
-      </HoverCardTrigger>
-      <HoverCardContent className="flex flex-col gap-1 typography-text-0 font-montserrat">
+      </PopoverTrigger>
+      <PopoverContent className="flex flex-col gap-1 typography-text-0 font-montserrat">
         <ModalTrigger content={<ChangeAvatar />}>
           <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-2 rounded-md cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
             <EditIcon className="w-5 h-5" />
             <span className="py-1.5">Изменить</span>
           </button>
         </ModalTrigger>
-        <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-2 rounded-md cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
+        <button
+          className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-2 rounded-md cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors"
+          onClick={onDelete}
+        >
           <TrashIcon className="w-5 h-5 text-error" />{" "}
           <span className="py-1.5">Удалить</span>
         </button>
-      </HoverCardContent>
-    </HoverCard>
+      </PopoverContent>
+    </Popover>
   )
 }
 

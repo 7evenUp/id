@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import { ReactComponent as TrashIcon } from "@/assets/icons/trash.svg"
 import { ReactComponent as EditIcon } from "@/assets/icons/edit.svg"
 import { ReactComponent as LogoutIcon } from "@/assets/icons/logout.svg"
@@ -5,19 +7,44 @@ import { ReactComponent as DeactivateIcon } from "@/assets/icons/deactivate.svg"
 
 import ModalTrigger from "@/modules/personal-account/components/ModalTrigger"
 import ChangeAvatar from "@/modules/personal-account/modals/ChangeAvatar"
+import Deactivation from "@/modules/personal-account/modals/Deactivation"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import { toast } from "@/shared/ui/Toast"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useLazyLogoutQuery } from "@/redux/api/auth"
+import { useDeleteAvatarMutation } from "@/redux/api/avatar"
 
 const AvatarMobile = () => {
   const { data: profileData } = useUserProfileQuery()
+  const [logout] = useLazyLogoutQuery()
+  const [deleteAvatar, { isSuccess, isError }] = useDeleteAvatarMutation()
+
+  useEffect(() => {
+    if (isSuccess)
+      toast({ message: "Текущее фото успешно удалено", type: "success" })
+  }, [isSuccess])
+
+  useEffect(() => {
+    if (isError)
+      toast({ message: "Не удалось удалить текущее фото", type: "error" })
+  }, [isError])
 
   if (!profileData) return null
 
   const { avatars } = profileData
 
   const activeAvatar = avatars.find((avatar) => avatar.isActive)
+
+  const onDelete = () => {
+    if (activeAvatar) deleteAvatar({ avatar_id: activeAvatar.id })
+  }
+
+  const onLogout = () => {
+    logout()
+    location.reload()
+  }
 
   return (
     <Popover>
@@ -42,19 +69,27 @@ const AvatarMobile = () => {
             <span className="py-1.5">Изменить фото</span>
           </button>
         </ModalTrigger>
-        <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
+        <button
+          className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors"
+          onClick={onDelete}
+        >
           <TrashIcon className="w-5 h-5" />{" "}
           <span className="py-1.5">Удалить фото</span>
         </button>
         <div className="h-px bg-gray-5 dark:bg-gray-2" />
-        <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
+        <button
+          className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors"
+          onClick={onLogout}
+        >
           <LogoutIcon className="w-5 h-5" />{" "}
           <span className="py-1.5">Выход</span>
         </button>
-        <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
-          <DeactivateIcon className="w-5 h-5" />{" "}
-          <span className="py-1.5">Деактивация</span>
-        </button>
+        <ModalTrigger content={<Deactivation />}>
+          <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
+            <DeactivateIcon className="w-5 h-5" />{" "}
+            <span className="py-1.5">Деактивация</span>
+          </button>
+        </ModalTrigger>
       </PopoverContent>
     </Popover>
   )

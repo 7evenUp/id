@@ -20,8 +20,16 @@ const avatarApi = api.injectEndpoints({
         message: response.data.detail,
       }),
     }),
+    deleteAvatar: build.mutation<void, { avatar_id: number }>({
+      query: ({ avatar_id }) => ({
+        url: "users/delete-avatar/",
+        method: "GET",
+        params: { avatar_id },
+      }),
+      invalidatesTags: ["UserProfile"],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useChangeAvatarMutation } = avatarApi
+export const { useChangeAvatarMutation, useDeleteAvatarMutation } = avatarApi

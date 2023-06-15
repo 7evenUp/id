@@ -44,7 +44,7 @@ const PersonalAccount = () => {
         <Subscription />
         <Referral />
 
-        <div className="flex justify-between">
+        <div className="hidden sm:flex justify-between">
           <Button appearence="text" onClick={onLogout}>
             {t("logout")}
           </Button>
