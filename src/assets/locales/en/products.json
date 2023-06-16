@@ -18,7 +18,8 @@
     "subs-options": {
       "all": "all",
       "important": "important"
-    }
+    },
+    "page-of": "Page {{current}} of {{total}}"
   },
   "prime": {
     "channels-and-chats": "Prime channels and chats",
