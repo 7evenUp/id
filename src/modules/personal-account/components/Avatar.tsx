@@ -22,12 +22,11 @@ const Avatar = () => {
 
   useEffect(() => {
     if (isSuccess)
-      toast({ message: "Текущее фото успешно удалено", type: "success" })
+      toast({ message: t("photo-response-success"), type: "success" })
   }, [isSuccess])
 
   useEffect(() => {
-    if (isError)
-      toast({ message: "Не удалось удалить текущее фото", type: "error" })
+    if (isError) toast({ message: t("photo-response-error"), type: "error" })
   }, [isError])
 
   const { avatars } = profileData!
@@ -59,7 +58,7 @@ const Avatar = () => {
         <ModalTrigger content={<ChangeAvatar />}>
           <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-2 rounded-md cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
             <EditIcon className="w-5 h-5" />
-            <span className="py-1.5">Изменить</span>
+            <span className="py-1.5">{t("avatar-change")}</span>
           </button>
         </ModalTrigger>
         <button
@@ -67,7 +66,7 @@ const Avatar = () => {
           onClick={onDelete}
         >
           <TrashIcon className="w-5 h-5 text-error" />{" "}
-          <span className="py-1.5">Удалить</span>
+          <span className="py-1.5">{t("avatar-delete")}</span>
         </button>
       </PopoverContent>
     </Popover>

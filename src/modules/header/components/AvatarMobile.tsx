@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 
 import { ReactComponent as TrashIcon } from "@/assets/icons/trash.svg"
 import { ReactComponent as EditIcon } from "@/assets/icons/edit.svg"
@@ -17,18 +18,19 @@ import { useLazyLogoutQuery } from "@/redux/api/auth"
 import { useDeleteAvatarMutation } from "@/redux/api/avatar"
 
 const AvatarMobile = () => {
+  const { t } = useTranslation()
+
   const { data: profileData } = useUserProfileQuery()
   const [logout] = useLazyLogoutQuery()
   const [deleteAvatar, { isSuccess, isError }] = useDeleteAvatarMutation()
 
   useEffect(() => {
     if (isSuccess)
-      toast({ message: "Текущее фото успешно удалено", type: "success" })
+      toast({ message: t("photo-response-success"), type: "success" })
   }, [isSuccess])
 
   useEffect(() => {
-    if (isError)
-      toast({ message: "Не удалось удалить текущее фото", type: "error" })
+    if (isError) toast({ message: t("photo-response-error"), type: "error" })
   }, [isError])
 
   if (!profileData) return null
@@ -66,7 +68,7 @@ const AvatarMobile = () => {
         <ModalTrigger content={<ChangeAvatar />}>
           <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
             <EditIcon className="w-5 h-5" />
-            <span className="py-1.5">Изменить фото</span>
+            <span className="py-1.5">{t("avatar-mobile-change")}</span>
           </button>
         </ModalTrigger>
         <button
@@ -74,7 +76,7 @@ const AvatarMobile = () => {
           onClick={onDelete}
         >
           <TrashIcon className="w-5 h-5" />{" "}
-          <span className="py-1.5">Удалить фото</span>
+          <span className="py-1.5">{t("avatar-mobile-delete")}</span>
         </button>
         <div className="h-px bg-gray-5 dark:bg-gray-2" />
         <button
@@ -82,12 +84,12 @@ const AvatarMobile = () => {
           onClick={onLogout}
         >
           <LogoutIcon className="w-5 h-5" />{" "}
-          <span className="py-1.5">Выход</span>
+          <span className="py-1.5">{t("mobile-logout")}</span>
         </button>
         <ModalTrigger content={<Deactivation />}>
           <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
             <DeactivateIcon className="w-5 h-5" />{" "}
-            <span className="py-1.5">Деактивация</span>
+            <span className="py-1.5">{t("mobile-deactivate")}</span>
           </button>
         </ModalTrigger>
       </PopoverContent>

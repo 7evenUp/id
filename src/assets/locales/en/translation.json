@@ -1,6 +1,13 @@
 {
   "heading": "Personal account",
   "logout": "logout",
+  "mobile-logout": "Log Out",
   "deactivate": "deactivate account",
-  "change": "Change"
+  "mobile-deactivate": "Deactivate",
+  "avatar-change": "Change",
+  "avatar-delete": "Delete",
+  "avatar-mobile-change": "Change photo",
+  "avatar-mobile-delete": "Delete photo",
+  "photo-response-success": "Your photo was successfully deleted",
+  "photo-response-error": "Unable to delete your photo"
 }
