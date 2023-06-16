@@ -47,16 +47,14 @@ const App = () => {
       <div className="px-7 xl:px-9 py-8 max-w-[1400px] mx-auto">
         <Header />
         <main className="flex flex-col lg:flex-row justify-between gap-20">
-          {isLoading || isDelayed ? (
+          {error ? <Auth /> : isLoading || isDelayed ? (
             <SkeletonLayout />
           ) : data ? (
             <>
               <PersonalAccount />
               <Products />
             </>
-          ) : (
-            error && <Auth />
-          )}
+          ) : null}
         </main>
       </div>
     </div>
