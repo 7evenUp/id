@@ -14,16 +14,18 @@ import { useTransactionHistoryQuery } from "@/redux/api/profile"
 const TxHistory = () => {
   const { t } = useTranslation("modals")
 
-  const { data } = useTransactionHistoryQuery()
+  const { data: transactions } = useTransactionHistoryQuery()
+
+  if (!transactions) return null
 
   return (
     <DialogContent className="max-w-[800px] sm:px-6">
       <DialogHeader>
         <DialogTitle>{t("history.heading")}</DialogTitle>
-        <Button disabled={data === undefined}>
-          {data !== undefined ? (
+        {transactions.length !== 0 && (
+          <Button>
             <PDFDownloadLink
-              document={<HistoryPDF data={data} />}
+              document={<HistoryPDF data={transactions} />}
               fileName="history.pdf"
             >
               {({ loading, error }) =>
@@ -34,13 +36,17 @@ const TxHistory = () => {
                   : t("history.export-btn")
               }
             </PDFDownloadLink>
-          ) : (
-            t("history.export-btn")
-          )}
-        </Button>
+          </Button>
+        )}
       </DialogHeader>
-      <TxHistoryTable />
-      <TxHistoryMobile />
+      {transactions.length !== 0 ? (
+        <>
+          <TxHistoryTable />
+          <TxHistoryMobile />
+        </>
+      ) : (
+        <p>Пока что вы не совершили ни одной транзакции</p>
+      )}
     </DialogContent>
   )
 }

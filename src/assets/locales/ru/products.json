@@ -18,7 +18,8 @@
     "subs-options": {
       "all": "все",
       "important": "важные"
-    }
+    },
+    "page-of": "Страница {{current}} из {{total}}"
   },
   "prime": {
     "channels-and-chats": "Каналы и чаты Prime",

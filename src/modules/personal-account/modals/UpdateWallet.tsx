@@ -31,39 +31,37 @@ const UpdateWallet = () => {
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[500px]">
       <DialogHeader>
-        <DialogTitle>Синхронизация кошелька</DialogTitle>
+        <DialogTitle>{t("change-wallet.heading")}</DialogTitle>
       </DialogHeader>
 
       {!wallet ? (
         <>
           <p className="typography-text-0">
-            К вашей учётной записи не привязан кошелёк
+            {t("change-wallet.wallet-acc-unpresent.status")}
           </p>
 
           {isConnected && address ? (
             <>
               <p className="typography-text-0">
-                Вы подключили кошелёк с адресом{" "}
+                {t("change-wallet.wallet-acc-unpresent.metamask-connected")}{" "}
                 <span className="typography-accent">
                   {address.toLowerCase()}
                 </span>
               </p>
               <p className="typography-text-1">
-                При подтверждении данный адрес будет привязан к вашей учётной
-                записи. В будущем вы сможете входить в аккаунт с помощью
-                кошелька с данным адресом.
+                {t("change-wallet.wallet-acc-unpresent.confirm-text")}
               </p>
             </>
           ) : (
             <p className="typography-text-0">
-              Чтобы привязать, подключите Metamask кошелёк к сайту.
+              {t("change-wallet.wallet-acc-unpresent.metamask-disconnected")}
             </p>
           )}
         </>
       ) : (
         <>
           <div className="flex flex-col typography-text-0">
-            <p>К вашей учётной записи привязан кошелёк:</p>
+            <p>{t("change-wallet.wallet-acc-present.status")}</p>{" "}
             <span className="text-base font-mono text-black dark:text-gray-5">
               {wallet}
             </span>
@@ -72,7 +70,9 @@ const UpdateWallet = () => {
           {isConnected && address ? (
             <>
               <div className="flex flex-col typography-text-0">
-                <p>Сайт подключен к кошельку с адресом:</p>
+                <p>
+                  {t("change-wallet.wallet-acc-present.metamask-connected")}
+                </p>{" "}
                 <span className="text-base font-mono text-black dark:text-gray-5">
                   {address.toLowerCase()}
                 </span>
@@ -80,35 +80,35 @@ const UpdateWallet = () => {
               {address.toLowerCase() === wallet ? (
                 <>
                   <p className="typography-text-1">
-                    Чтобы изменить кошелёк, смените аккаунт кошелька через
-                    Metamask
+                    {t("change-wallet.wallet-acc-present.wallets-equal")}
                   </p>
                 </>
               ) : (
                 <>
                   <p className="typography-text-1">
-                    {" "}
-                    При подтверждении текущий адрес{" "}
+                    {t(
+                      "change-wallet.wallet-acc-present.confirm-text-1-part-1"
+                    )}{" "}
                     <span className="font-mono text-black dark:text-gray-5">
                       {cutWalletAddr(wallet)}
-                    </span>{" "}
-                    будет изменён на{" "}
+                    </span>
+                    {t(
+                      "change-wallet.wallet-acc-present.confirm-text-1-part-2"
+                    )}
                     <span className="font-mono text-black dark:text-gray-5">
                       {cutWalletAddr(address.toLowerCase())}
                     </span>
                   </p>
 
                   <p className="typography-text-1">
-                    В будущем вы сможете входить в аккаунт с помощью нового
-                    адреса.
+                    {t("change-wallet.wallet-acc-present.confirm-text-2")}
                   </p>
                 </>
               )}
             </>
           ) : (
             <p className="typography-text-0">
-              Для изменения, подключите к сайту Metamask кошелёк с другим
-              адресом.
+              {t("change-wallet.wallet-acc-present.metamask-disconnected")}
             </p>
           )}
         </>
@@ -131,7 +131,7 @@ const UpdateWallet = () => {
           isLoading={isUpdateLoading}
           disabled={Boolean(wallet) && wallet === address.toLowerCase()}
         >
-          подтвердить
+          {t("change-wallet.confirm-btn")}
         </Button>
       ) : (
         <ConnectWallet />
@@ -143,6 +143,8 @@ const UpdateWallet = () => {
 export default UpdateWallet
 
 const ConnectWallet = () => {
+  const { t } = useTranslation("modals")
+
   const {
     state: { isMetamaskInstalled },
   } = useMetamask()
@@ -162,13 +164,13 @@ const ConnectWallet = () => {
         onClick={handleConnect}
         isLoading={isLoadingConnect}
       >
-        подключить
+        {t("change-wallet.connect-btn")}
       </Button>
     )
 
   return (
     <a href="https://metamask.io/" target="_blank">
-      <Button className="w-fit">подключить</Button>
+      <Button className="w-fit">{t("change-wallet.connect-btn")}</Button>
     </a>
   )
 }

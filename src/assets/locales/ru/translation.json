@@ -1,6 +1,13 @@
 {
   "heading": "Личный кабинет",
   "logout": "выйти из аккаунта",
+  "mobile-logout": "Выход",
   "deactivate": "деактивировать аккаунт",
-  "change": "Изменить"
+  "mobile-deactivate": "Деактивация",
+  "avatar-change": "Изменить",
+  "avatar-delete": "Удалить",
+  "avatar-mobile-change": "Изменить фото",
+  "avatar-mobile-delete": "Удалить фото",
+  "photo-response-success": "Текущее фото успешно удалено",
+  "photo-response-error": "Не удалось удалить текущее фото"
 }

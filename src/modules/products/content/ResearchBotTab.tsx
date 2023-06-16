@@ -2,10 +2,10 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import TabHeader from "../components/TabHeader"
+import TabTitle from "../components/TabTitle"
 import TextSizeSlider from "../components/TextSizeSlider"
 import BackgroundPicker from "../components/BackgroundPicker"
-import ProjectsSettings from "../components/ProjectsSettings"
-import TabTitle from "../components/TabTitle"
+import ProjectsTable from "../components/ProjectsTable"
 
 import Button from "@/shared/ui/Button"
 import Switch from "@/shared/ui/Switch"
@@ -144,7 +144,7 @@ const ResearchBotTab = () => {
       </RowItem>
       <div className="flex flex-col gap-1.5 py-2 dark:text-gray-4">
         <span>{t("res-bot.project-settings")}</span>
-        <ProjectsSettings />
+        <ProjectsTable />
       </div>
     </>
   )
