@@ -16,13 +16,13 @@ import { TabsTrigger } from "@/shared/ui/Tabs"
 const TabsTriggers = () => {
   return (
     <>
-      <TabsTrigger value={TABS_VALUES.RESEARCH_BOT}>
-        <ResearchBotActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
-        <ResearchBotIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
-      </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.PRIME}>
         <PrimeActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
         <PrimeIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
+      </TabsTrigger>
+      <TabsTrigger value={TABS_VALUES.RESEARCH_BOT}>
+        <ResearchBotActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
+        <ResearchBotIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.TOOLS}>
         <ToolsActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
