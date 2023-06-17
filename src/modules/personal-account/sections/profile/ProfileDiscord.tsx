@@ -58,7 +58,7 @@ const ProfileDiscord = () => {
         discord
       </span>
       <input
-        className="peer bg-transparent outline-none text-right w-full"
+        className="peer bg-transparent outline-none text-right w-full text-gray-1 dark:text-gray-4"
         defaultValue={discordUsername}
         ref={inputRef}
         disabled={!isEditingMode}
