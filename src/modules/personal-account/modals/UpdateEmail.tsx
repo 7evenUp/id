@@ -83,7 +83,7 @@ const UpdateEmail = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error appearance-none"
                     placeholder={t("change-email.old-placeholder")}
                     {...field}
                   />
@@ -102,7 +102,7 @@ const UpdateEmail = () => {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error rounded-none"
                     placeholder={t("change-email.new-placeholder")}
                     {...field}
                   />
