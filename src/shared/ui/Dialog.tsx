@@ -1,6 +1,7 @@
 import React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { IoCloseOutline } from "react-icons/io5"
+
+import { ReactComponent as Close } from "@/assets/icons/close.svg"
 
 import { cn } from "@/lib/classNames"
 
@@ -28,7 +29,6 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn("fixed inset-0 z-50 backdrop-blur-sm", className)}
-
     {...props}
   />
 ))
@@ -54,8 +54,8 @@ const DialogContent = React.forwardRef<
       {customClose ? (
         customClose
       ) : (
-        <DialogPrimitive.Close className="absolute border border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-70 transition-opacity hover:opacity-100">
-          <IoCloseOutline className="h-[26px] w-[26px]" />
+        <DialogPrimitive.Close className="absolute border border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full p-0.5 opacity-70 transition-opacity hover:opacity-100">
+          <Close className="w-5 h-5" />
         </DialogPrimitive.Close>
       )}
     </DialogPrimitive.Content>

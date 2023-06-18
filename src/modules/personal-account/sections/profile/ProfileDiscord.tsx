@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
-import { AiOutlinePlus } from "react-icons/ai"
+
+import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
@@ -7,7 +8,10 @@ import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
 
-import { useUpdateDiscordMutation, useUserProfileQuery } from "@/redux/api/profile"
+import {
+  useUpdateDiscordMutation,
+  useUserProfileQuery,
+} from "@/redux/api/profile"
 
 const ProfileDiscord = () => {
   const [isEditingMode, setIsEditingMode] = useState(false)
@@ -67,7 +71,7 @@ const ProfileDiscord = () => {
       {!discordUsername &&
         !isEditingMode &&
         !inputRef.current?.value.length && (
-          <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
+          <Plus className="hidden sm:block absolute right-0 w-5 h-5" />
         )}
 
       {/* Mobile editing */}

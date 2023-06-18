@@ -1,5 +1,6 @@
 import React from "react"
-import { TbCheck } from "react-icons/tb"
+
+import { ReactComponent as Check } from "@/assets/icons/check.svg"
 
 import IconButton from "@/shared/ui/IconButton"
 
@@ -18,7 +19,7 @@ const ConfirmButton = React.forwardRef<
       ref={forwardedRef}
       {...props}
     >
-      <TbCheck className="w-3.5 h-3.5 stroke-white dark:stroke-gray-1" />
+      <Check className="w-3.5 h-3.5 text-white dark:text-gray-1" />
     </IconButton>
   )
 })

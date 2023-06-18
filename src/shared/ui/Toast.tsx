@@ -1,6 +1,7 @@
 import React from "react"
 import hotToast, { Toaster as HotToaster } from "react-hot-toast"
-import { IoMdClose } from "react-icons/io"
+
+import { ReactComponent as Close } from "@/assets/icons/close.svg"
 
 import { cn } from "@/lib/classNames"
 
@@ -32,8 +33,8 @@ Toast.Description = ({ className, ...props }: React.ComponentProps<"p">) => (
 )
 
 Toast.Close = ({ onClose }: { onClose: () => void }) => (
-  <button onClick={onClose} className="absolute right-4 top-4 w-4 h-4">
-    <IoMdClose className="w-4 h-4 fill-gray-1 dark:fill-gray-6" />
+  <button onClick={onClose} className="absolute right-4 top-4 w-5 h-5">
+    <Close className="w-5 h-5" />
   </button>
 )
 

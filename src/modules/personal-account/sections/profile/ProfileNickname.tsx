@@ -62,13 +62,11 @@ const ProfileNickname = () => {
       />
 
       {/* Mobile editing */}
-      <div className="sm:hidden ml-6">
-        {isEditingMode ? (
-          <ConfirmButton onClick={onSubmit} />
-        ) : (
-          <EditButton onClick={onEdit} />
-        )}
-      </div>
+      {isEditingMode ? (
+        <ConfirmButton className="sm:hidden ml-6" onClick={onSubmit} />
+      ) : (
+        <EditButton className="sm:hidden ml-6" onClick={onEdit} />
+      )}
 
       {/* Desktop editing */}
       <EditContainer className="hidden sm:flex">

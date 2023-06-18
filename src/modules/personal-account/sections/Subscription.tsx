@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { BsSnow } from "react-icons/bs"
+import { ReactComponent as Snow } from "@/assets/icons/snow.svg"
 
 import TxHistory from "../modals/TxHistory"
 import FreezeSubs from "../modals/FreezeSubs"
@@ -39,8 +39,8 @@ const Subscription = () => {
         </div>
         {status !== null && (
           <ModalTrigger content={<FreezeSubs />}>
-            <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue">
-              <BsSnow className="w-3 h-3" />
+            <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue active:bg-opacity-80">
+              <Snow />
             </IconButton>
           </ModalTrigger>
         )}
@@ -66,7 +66,7 @@ const Subscription = () => {
                 {t("subs.remaining")}:{" "}
                 <AccentNumber>{remainingDays}</AccentNumber>
               </span>
-              <SubscriptionMain triggerText="продлить" />
+              <SubscriptionMain triggerText={t("subs.renew-btn")} />
             </>
           ) : (
             <>

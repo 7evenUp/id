@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
 import { Dialog, DialogContent, DialogHeader } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
@@ -41,7 +41,7 @@ const WithdrawWallet = ({
             className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
             onClick={openMain}
           >
-            <HiOutlineArrowNarrowLeft /> {t("ref-withdraw.back-btn")}
+            <MoveLeft className="w-3.5 h-3.5" /> {t("ref-withdraw.back-btn")}
           </button>
         </DialogHeader>
         <div className="flex flex-col">

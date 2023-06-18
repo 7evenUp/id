@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { MdOutlineExpandMore } from "react-icons/md"
+import { ReactComponent as ArrowDown } from "@/assets/icons/nav-arrow-down.svg"
 
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
@@ -55,7 +55,7 @@ const PrimeTab = () => {
                 <Popover key={i}>
                   <PopoverTrigger className="group flex items-center gap-2 typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink p-1 mobile:p-0 text-left">
                     {service.name}
-                    <MdOutlineExpandMore className="w-3.5 h-3.5 transition-transform will-change-transform group-data-[state=open]:rotate-180" />
+                    <ArrowDown className="w-3.5 h-3.5 transition-transform will-change-transform group-data-[state=open]:rotate-180" />
                   </PopoverTrigger>
                   <PopoverContent className="flex flex-col gap-1.5">
                     {service.links.map((link, i) => (

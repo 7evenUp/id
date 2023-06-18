@@ -1,14 +1,14 @@
-import React, { AnchorHTMLAttributes } from "react";
+import React, { AnchorHTMLAttributes } from "react"
 
-import { TbArrowUpRight } from "react-icons/tb";
-import { SiTelegram } from "react-icons/si";
+import { ReactComponent as ArrowTr } from "@/assets/icons/arrow-tr.svg"
+import { ReactComponent as Telegram } from "@/assets/icons/telegram.svg"
 
-import { buttonVariants } from "./Button";
+import { buttonVariants } from "./Button"
 
-import { cn } from "@/lib/classNames";
+import { cn } from "@/lib/classNames"
 
 interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  withTgIcon?: boolean;
+  withTgIcon?: boolean
 }
 
 const ExternalLink: React.FC<ExternalLinkProps> = ({
@@ -20,18 +20,18 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
   return (
     <a
       className={cn(
-        "flex items-center gap-1.5 ",
+        "flex items-center gap-1.5",
         buttonVariants({ appearence: "outlined" }),
         className
       )}
       target="_blank"
       {...props}
     >
-      {withTgIcon && <SiTelegram className="w-[18px] h-[18px]" />}
+      {withTgIcon && <Telegram className="w-[18px] h-[18px]" />}
       {children}
-      <TbArrowUpRight />
+      <ArrowTr className="w-3.5 h-3.5" />
     </a>
-  );
-};
+  )
+}
 
-export default ExternalLink;
+export default ExternalLink

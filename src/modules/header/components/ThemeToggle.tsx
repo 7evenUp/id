@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import * as Switch from "@radix-ui/react-switch"
 
-import { ReactComponent as SunIcon } from "@/assets/icons/theme/Sun.svg"
-import { ReactComponent as MoonIcon } from "@/assets/icons/theme/Moon.svg"
+import SunImage from "@/assets/icons/theme/Sun.svg"
+import MoonImage from "@/assets/icons/theme/Moon.svg"
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light")
@@ -34,8 +34,14 @@ const ThemeToggle = () => {
       className="group w-[36px] h-[18px] bg-transparent rounded-full relative border border-gray-1 dark:border-gray-5 data-[state=checked]:bg-black outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       <Switch.Thumb className="absolute left-0 top-[2px] block w-3 h-3 bg-gray-1 dark:bg-gray-5 rounded-full transition-transform duration-100 will-change-transform data-[state=unchecked]:translate-x-[2px] data-[state=checked]:translate-x-[20px]" />
-      <SunIcon className="w-3 h-3 absolute top-[2px] right-[3px] rotate-0 scale-100 group-data-[state=checked]:scale-0 group-data-[state=checked]:rotate-180 will-change-transform transition-transform" />
-      <MoonIcon className="w-3 h-3 absolute top-[2px] left-[3px] -rotate-180 scale-0 group-data-[state=checked]:scale-100 group-data-[state=checked]:rotate-0 will-change-transform transition-transform" />
+      <img
+        src={SunImage}
+        className="w-3 h-3 absolute top-[2px] right-[3px] rotate-0 scale-100 group-data-[state=checked]:scale-0 group-data-[state=checked]:rotate-180 will-change-transform transition-transform"
+      />
+      <img
+        src={MoonImage}
+        className="w-3 h-3 absolute top-[3px] left-[3px] -rotate-180 scale-0 group-data-[state=checked]:scale-100 group-data-[state=checked]:rotate-0 will-change-transform transition-transform"
+      />
     </Switch.Root>
   )
 }

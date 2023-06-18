@@ -6,7 +6,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
 import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
 
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
@@ -87,7 +87,7 @@ const UpdateTelegram = () => {
           className="typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit"
           onClick={() => setIsSecondStep(false)}
         >
-          <HiOutlineArrowNarrowLeft />
+          <MoveLeft className="w-3.5 h-3.5" />
           <span className="text-left">{t("change-tg.back-button")}</span>
         </button>
       )}

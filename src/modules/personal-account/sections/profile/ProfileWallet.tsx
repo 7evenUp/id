@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { AiOutlinePlus } from "react-icons/ai"
+import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
 
 import UpdateWallet from "../../modals/UpdateWallet"
 
@@ -35,7 +35,7 @@ const ProfileWallet = () => {
       {wallet ? (
         <span>{cutWalletAddr(wallet)}</span>
       ) : (
-        <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
+        <Plus className="hidden sm:block absolute right-0 w-5 h-5" />
       )}
 
       {/* Mobile editing */}

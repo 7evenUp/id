@@ -1,6 +1,7 @@
 import React from "react"
 import * as RadixSelect from "@radix-ui/react-select"
-import { HiSelector } from "react-icons/hi"
+
+import { ReactComponent as ArrowsSelect } from "@/assets/icons/arrows-select.svg"
 
 import { cn } from "@/lib/classNames"
 
@@ -21,7 +22,7 @@ const SelectTrigger = React.forwardRef<
     >
       <RadixSelect.Value placeholder="Select" />
       <RadixSelect.Icon>
-        <HiSelector />
+        <ArrowsSelect className="w-2.5 h-2.5" />
       </RadixSelect.Icon>
     </RadixSelect.Trigger>
   )
