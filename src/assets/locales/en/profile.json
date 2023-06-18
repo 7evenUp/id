@@ -12,7 +12,8 @@
     "inactive-subs": "subscription is inactive",
     "history-btn": "history",
     "replenish-btn": "replenish",
-    "buy-btn": "buy subscription"
+    "buy-btn": "buy subscription",
+    "renew-btn": "renew"
   },
   "referral": {
     "heading": "Referral system",

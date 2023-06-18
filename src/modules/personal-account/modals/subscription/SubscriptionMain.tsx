@@ -16,6 +16,8 @@ const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
   const [balanceOpened, setBalanceOpened] = useState(false)
 
+  const [boughtSubDuration, setBoughtSubDuration] = useState(0)
+
   const { data: subsData } = useSubscriptionsQuery()
 
   if (!subsData) return null
@@ -49,12 +51,14 @@ const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
         openBalanceModal={openBalanceModal}
         openSecondStep={openSecondStep}
         subscriptions={subsData.results}
+        setBoughtSubDuration={setBoughtSubDuration}
       />
 
       <SecondStep
         open={secondStepOpened}
         onOpenChange={setSecondStepOpened}
         openThirdStep={openThirdStep}
+        boughtSubDuration={boughtSubDuration}
       />
 
       <ThirdStep open={thirdStepOpened} onOpenChange={setThirdStepOpened} />
