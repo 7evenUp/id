@@ -16,7 +16,11 @@ const referralApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["UserProfile", "TxHistory"]
+      invalidatesTags: ["UserProfile", "TxHistory"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
     }),
   }),
   overrideExisting: false,

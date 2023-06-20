@@ -1,5 +1,8 @@
 import { useTranslation } from "react-i18next"
 
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+import ResponseErrorText from "@/components/ResponseErrorText"
+
 import Button from "@/shared/ui/Button"
 import {
   Dialog,
@@ -23,41 +26,91 @@ const WithdrawMain = ({
   const { t } = useTranslation("modals")
 
   const { data: userProfile } = useUserProfileQuery()
-  const [trigger, { isLoading, isError, error, isSuccess }] =
-    useWithdrawMutation()
+  const [
+    requestWithdraw,
+    { isLoading, isError, error, isSuccess, reset, originalArgs },
+  ] = useWithdrawMutation()
 
   const {
     referralInfo: { refBalance },
   } = userProfile!
 
+  const withdrawToCrypton = () => {
+    requestWithdraw({
+      amount: refBalance,
+      kind: "TO_CRYPTON_BALANCE",
+      wallet_address: "",
+    })
+  }
+
+  const withdrawToShares = () => {
+    requestWithdraw({
+      amount: refBalance,
+      kind: "TO_SHARES",
+      wallet_address: "",
+    })
+  }
+
   if (isError) console.log(error)
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(open) => {
+        onOpenChange(open)
+        reset()
+      }}
+    >
       <DialogContent className="max-w-[540px]">
         <DialogHeader className="mb-2 mobile:mb-0 sm:mb-6">
           <DialogTitle>{t("ref-withdraw.heading")}</DialogTitle>
         </DialogHeader>
+        {isSuccess && originalArgs?.kind === "TO_SHARES" && (
+          <ResponseSuccessText className="max-w-[320px]">
+            {t("ref-withdraw.shares-success")}
+          </ResponseSuccessText>
+        )}
+        {error && <ResponseErrorText error={error} />}
         <div className="flex flex-col items-center mobile:flex-row gap-5">
           <Button
-            disabled={isSuccess || refBalance === 0.0}
-            appearence={isSuccess ? "success" : "outlined"}
-            isLoading={isLoading}
+            disabled={
+              (isSuccess && originalArgs?.kind === "TO_CRYPTON_BALANCE") ||
+              refBalance <= 0.0
+            }
+            appearence={
+              isSuccess && originalArgs?.kind === "TO_CRYPTON_BALANCE"
+                ? "success"
+                : "outlined"
+            }
+            isLoading={isLoading && originalArgs?.kind === "TO_CRYPTON_BALANCE"}
             className="w-fit"
-            onClick={() => {
-              trigger({
-                amount: refBalance,
-                kind: "TO_CRYPTON_BALANCE",
-                wallet_address: "0x123",
-              })
-            }}
+            onClick={withdrawToCrypton}
           >
-            {isSuccess ? "Выведено" : t("ref-withdraw.personal-account-btn")}
+            {isSuccess && originalArgs?.kind === "TO_CRYPTON_BALANCE"
+              ? "Выведено"
+              : t("ref-withdraw.personal-account-btn")}
           </Button>
+
           <Button className="w-fit" onClick={openWallet}>
             {t("ref-withdraw.wallet-btn")}
           </Button>
-          <Button className="w-fit">{t("ref-withdraw.shares-btn")}</Button>
+
+          <Button
+            disabled={
+              (isSuccess && originalArgs?.kind === "TO_SHARES") ||
+              refBalance <= 0.0
+            }
+            appearence={
+              isSuccess && originalArgs?.kind === "TO_SHARES"
+                ? "success"
+                : "outlined"
+            }
+            isLoading={isLoading && originalArgs?.kind === "TO_SHARES"}
+            className="w-fit"
+            onClick={withdrawToShares}
+          >
+            {t("ref-withdraw.shares-btn")}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

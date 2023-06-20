@@ -1,8 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
-import { useAccount, useConnect, useSignMessage } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
+import { useAccount } from "wagmi"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
@@ -23,6 +22,7 @@ import {
 } from "@/shared/ui/Form"
 
 import { useRegisterByWalletMutation } from "@/redux/api/auth"
+import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const formSchema = z.object({
   username: z.string().min(1, {
@@ -38,25 +38,19 @@ const formSchema = z.object({
 
 const AUTH_MESSAGE = "Authorization"
 
-const RegisterWebForm = ({ back }: { back: () => void }) => {
+const RegisterWalletForm = ({
+  back,
+  signature,
+}: {
+  signature: string
+  back: () => void
+}) => {
   const { t } = useTranslation("auth")
 
-  const { address, isConnected } = useAccount()
-  const { connectAsync, isLoading: isLoadingConnect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-  const {
-    isError: isSignError,
-    isLoading: isLoadingSign,
-    signMessageAsync,
-  } = useSignMessage()
+  const { address } = useAccount()
 
   const [regWallet, { isSuccess, isLoading, error }] =
     useRegisterByWalletMutation()
-
-  // useEffect(() => {
-  //   if (isSuccess) location.reload()
-  // }, [isSuccess])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -67,29 +61,27 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
   })
 
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
+    if (!address) return
+
     try {
-      let connectedAddress = ""
-      if (!isConnected && address === undefined) {
-        console.log("use connect")
-        const connection = await connectAsync()
-        connectedAddress = connection.account
-      }
-      const signature = await signMessageAsync({ message: AUTH_MESSAGE })
-      const lowerAddress =
-        isConnected && address
-          ? address.toLowerCase()
-          : connectedAddress.toLowerCase()
+      const url = new URL(location.href)
+      const refCode = url.searchParams.get("ref_code")
+
       await regWallet({
-        address: lowerAddress,
+        address: address,
         message: AUTH_MESSAGE,
         signature,
         email,
         profile_username: username,
+        referral_code: refCode || "",
       })
     } catch (error) {
       console.log("Catch error: ", error)
     }
   }
+
+  if (!address) return null
+
   return (
     <>
       <button
@@ -97,8 +89,11 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
         onClick={back}
       >
         <MoveLeft className="w-3.5 h-3.5" />
-        <span className="text-left">{t("register.another-method")}</span>
+        <span className="text-left">{t("login.another-method")}</span>
       </button>
+      <p className="text-xs w-full mb-3">
+        Создание аккаунта c кошельком: {cutWalletAddr(address)}
+      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -146,10 +141,7 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
               {t("register.privacy-policy.link")}
             </a>
           </p>
-          <ActionButton
-            type="submit"
-            isLoading={isLoading || isLoadingConnect || isLoadingSign}
-          >
+          <ActionButton type="submit" isLoading={isLoading}>
             {t("register.register-btn")}
           </ActionButton>
         </form>
@@ -167,4 +159,4 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
   )
 }
 
-export default RegisterWebForm
+export default RegisterWalletForm

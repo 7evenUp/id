@@ -34,7 +34,7 @@ const formSchema = z.object({
     .email("Неверный формат почты."),
 })
 
-const RegisterMailForm = ({ back }: { back: () => void }) => {
+const NewRegisterMailForm = ({ email }: { email: string }) => {
   const { t } = useTranslation("auth")
 
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
@@ -43,22 +43,19 @@ const RegisterMailForm = ({ back }: { back: () => void }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: "",
+      email: email || "",
     },
   })
 
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
-    register({ email, profile_username: username })
+    const url = new URL(location.href)
+    const refCode = url.searchParams.get("ref_code")
+
+    // register({ email, profile_username: username, referral_code: refCode || "" })
+    register({ email, profile_username: username, referral_code: "NBBXRQXX" })
   }
   return (
     <>
-      <button
-        className="typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit"
-        onClick={back}
-      >
-        <MoveLeft className="w-3.5 h-3.5" />
-        <span className="text-left">{t("register.another-method")}</span>
-      </button>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -124,4 +121,4 @@ const RegisterMailForm = ({ back }: { back: () => void }) => {
   )
 }
 
-export default RegisterMailForm
+export default NewRegisterMailForm

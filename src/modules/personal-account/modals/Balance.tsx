@@ -3,6 +3,13 @@ import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
+import ResponseSuccessText from "@/components/ResponseSuccessText"
+import ResponseErrorText from "@/components/ResponseErrorText"
+
+import ModalTrigger from "../components/ModalTrigger"
+
+import TxHistory from "./TxHistory"
+
 import { DialogContent } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Chip from "@/shared/ui/Chip"
@@ -40,7 +47,7 @@ const Balance = () => {
   const { t } = useTranslation("modals")
 
   const { data: profileData } = useUserProfileQuery()
-  const [trigger, { isLoading }] = useTopUpBalanceMutation()
+  const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
 
   const { balance } = profileData!
 
@@ -132,9 +139,26 @@ const Balance = () => {
                   {t("balance.send-check")}
                 </label>
               </div>
-              <Button className="w-fit" type="submit" isLoading={isLoading}>
-                {t("balance.replenish-btn")}
-              </Button>
+
+              {isSuccess && (
+                <ResponseSuccessText className="mb-6 block">
+                  {t("balance.request-success")}
+                </ResponseSuccessText>
+              )}
+              {error && (
+                <ResponseErrorText className="mb-6 block" error={error} />
+              )}
+
+              <div className="flex items-center flex-wrap gap-3">
+                <Button className="w-fit" type="submit" isLoading={isLoading}>
+                  {t("balance.replenish-btn")}
+                </Button>
+                {isSuccess && (
+                  <ModalTrigger content={<TxHistory />}>
+                    <Button>{t("balance.tx-history-btn")}</Button>
+                  </ModalTrigger>
+                )}
+              </div>
             </div>
           </form>
         </Form>

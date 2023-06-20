@@ -49,8 +49,14 @@
   },
   "freeze": {
     "status": "Статус подписки",
+    "status-active": "Активна",
+    "status-frozen": "Заморожена",
     "freeze-available": "Возможность заморозки",
+    "freeze-available-true": "Да",
+    "freeze-available-false": "Нет",
     "confirm-btn": "подтвердить заморозку",
+    "unfreeze-btn": "разморозить подписку",
+    "request-success": "успешно",
     "sub-freeze-title": "Заморозка подписки",
     "sub-freeze-desc": "Если у Вас не будет возможности следить за Prime и пользоваться всеми преимуществами подписки продолжительное время, Вы можете воспользоваться функцией заморозки.",
     "how-works-title": "Как это работает?",
@@ -64,7 +70,10 @@
     "th-date": "дата",
     "th-price": "стоимость",
     "th-status": "статус",
-    "th-txid": "tx id"
+    "th-txid": "tx id",
+    "tx-status-success": "успешно",
+    "tx-status-pending": "в процессе",
+    "tx-status-reject": "отклонено"
   },
   "balance": {
     "current": "текущий баланс счёта",
@@ -76,7 +85,9 @@
     "amount-label": "Сумма пополнения",
     "amount-placeholder": "Введите сумму",
     "send-check": "прислать чек на почту",
-    "replenish-btn": "пополнить"
+    "replenish-btn": "пополнить",
+    "tx-history-btn": "история транзакций",
+    "request-success": "Запрос на пополнение успешно отправлен. Ваш баланс пополнится сразу после подтверждения оплаты."
   },
   "buy-subs": {
     "balance": "Мой баланс",
@@ -129,11 +140,15 @@
     "personal-account-btn": "на баланс ЛК",
     "wallet-btn": "на кошелёк",
     "shares-btn": "в SHARES",
+    "shares-success": "Ваш запрос на вывод средств в SHARES успешно создан. Мы обработаем его в скором времени.",
     "back-btn": "назад",
     "address-placeholder": "Адрес кошелька",
-    "amount-placeholder": "Сумма вывода",
+    "amount-label": "Сумма вывода",
+    "amount-placeholder": "Введите сумму",
     "available": "Доступная сумма",
-    "confirm-btn": "подтвердить"
+    "confirm-btn": "подтвердить",
+    "close-btn": "закрыть",
+    "personal-wallet-success": "Ваш запрос на вывод средств на персональный кошелёк создан. Мы обработаем его в скором времени."
   },
   "ref-stats": {
     "heading": "Статистика",

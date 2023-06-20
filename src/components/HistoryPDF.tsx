@@ -43,21 +43,19 @@ const HistoryPDF = ({ data }: { data: Transaction[] }) => {
           {data.map((tx, i) => (
             <View key={i} style={styles.tableRow}>
               <View style={[styles.tableCol, { width: "35%" }]}>
-                <Text style={styles.tableCell}>
-                  {tx.description || "no description"}
-                </Text>
+                <Text style={styles.tableCell}>{tx.description || "-"}</Text>
               </View>
               <View style={[styles.tableCol, { width: "15%" }]}>
                 <Text style={styles.tableCell}>
                   {formatDate(
                     tx.createdDatetime,
                     i18n.language as "ru" | "en"
-                  ) || "no date"}
+                  ) || "-"}
                 </Text>
               </View>
               <View style={[styles.tableCol, { width: "15%" }]}>
                 <Text style={styles.tableCell}>
-                  {tx.totalAmount ? `$${tx.totalAmount}` : "no amount"}
+                  {tx.totalAmount ? `$${tx.totalAmount}` : "-"}
                 </Text>
               </View>
               <View style={[styles.tableCol, { width: "15%" }]}>
@@ -67,18 +65,24 @@ const HistoryPDF = ({ data }: { data: Transaction[] }) => {
                     {
                       color:
                         tx.status !== null && tx.status === "PENDING"
-                          ? "orange"
+                          ? "darkorange"
                           : tx.status === "COMPLETED"
                           ? "green"
                           : "red",
                     },
                   ]}
                 >
-                  {tx.status || "no status"}
+                  {tx.status === null
+                    ? "-"
+                    : tx.status === "COMPLETED"
+                    ? t("history.tx-status-success")
+                    : tx.status === "PENDING"
+                    ? t("history.tx-status-pending")
+                    : t("history.tx-status-reject")}
                 </Text>
               </View>
               <View style={[styles.tableCol, { width: "20%" }]}>
-                <Text style={styles.tableCell}>{tx.txId || "no tx id"}</Text>
+                <Text style={styles.tableCell}>{tx.txId || "-"}</Text>
               </View>
             </View>
           ))}
