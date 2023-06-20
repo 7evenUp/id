@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
-
 import ActionButton from "./ActionButton"
 import { AuthInput } from "./AuthInput"
 
@@ -21,8 +19,10 @@ import {
 } from "@/shared/ui/Form"
 
 import { useLoginMutation } from "@/redux/api/auth"
+import { Dispatch, SetStateAction } from "react"
 
 const formSchema = z.object({
+  username: z.string(),
   email: z
     .string()
     .min(1, {
@@ -31,31 +31,32 @@ const formSchema = z.object({
     .email("Неверный формат почты."),
 })
 
-const MailForm = ({ back }: { back: () => void }) => {
+const LoginMailForm = ({
+  setEmail,
+}: {
+  setEmail: Dispatch<SetStateAction<string>>
+}) => {
   const { t } = useTranslation("auth")
 
-  const [trigger, { isLoading, isSuccess, error }] = useLoginMutation()
+  const [trigger, { isLoading, isSuccess, error }] = useLoginMutation({
+    fixedCacheKey: "login-by-mail",
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      username: "",
     },
   })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setEmail(values.email)
     trigger({ ...values, redirect_url: "https://id.crypton.xyz" })
   }
 
   return (
     <>
-      <button
-        className="typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit"
-        onClick={back}
-      >
-        <MoveLeft className="w-3.5 h-3.5" />
-        <span className="text-left">{t("login.another-method")}</span>
-      </button>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -93,4 +94,4 @@ const MailForm = ({ back }: { back: () => void }) => {
   )
 }
 
-export default MailForm
+export default LoginMailForm

@@ -6,6 +6,7 @@ interface WalletReqParams {
   message: string
   email?: string
   profile_username?: string
+  referral_code?: string
 }
 
 const authApi = api.injectEndpoints({
@@ -16,6 +17,7 @@ const authApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["UserProfile"]
     }),
     registerByWallet: build.mutation<void, WalletReqParams>({
       query: (body) => ({
@@ -39,7 +41,7 @@ const authApi = api.injectEndpoints({
         message: response.data.detail,
       }),
     }),
-    register: build.mutation<void, { email: string; profile_username: string }>(
+    register: build.mutation<void, { email: string; profile_username: string, referral_code: string }>(
       {
         query: (body) => ({
           url: "users/register-web/",

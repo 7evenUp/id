@@ -1,19 +1,65 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useAccount, useSignMessage } from "wagmi"
+import { useWeb3Modal } from "@web3modal/react"
 import { useTranslation } from "react-i18next"
 
+import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
+import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
 import ResearchAuthImage from "@/assets/images/auth_research.png"
 
-import Login from "./components/Login"
-import Register from "./components/Register"
-import ToggleMode from "./components/ToggleMode"
+import AuthButton from "./components/AuthButton"
+import MailMode from "./components/MailMode"
+import RegisterWalletForm from "./components/RegisterWalletForm"
+
+import { useAuthByWalletMutation } from "@/redux/api/auth"
+
+const AUTH_MESSAGE = "Authorization"
 
 const Auth = () => {
   const { t } = useTranslation("auth")
 
-  const [isLoginMode, setIsLoginMode] = useState(true)
+  const [isAuthStarted, setIsAuthStarted] = useState(false)
+  const [isMailMode, setIsMailMode] = useState(false)
+  const [signature, setSignature] = useState("")
 
-  const toggleMode = () => {
-    setIsLoginMode(!isLoginMode)
+  const { address, isConnected } = useAccount()
+  const {
+    isError: isSignError,
+    isLoading: isLoadingSign,
+    signMessageAsync,
+  } = useSignMessage()
+  const { open, isOpen } = useWeb3Modal()
+
+  const [
+    authenticate,
+    {
+      error,
+      isError: isAuthError,
+      isSuccess: isAuthSuccess,
+      isLoading: isAuthenticating,
+      reset,
+    },
+  ] = useAuthByWalletMutation()
+
+  useEffect(() => {
+    const login = async () => {
+      const signature = await signMessageAsync({ message: AUTH_MESSAGE })
+      setSignature(signature)
+      const lowerAddress = isConnected && address ? address.toLowerCase() : ""
+      await authenticate({
+        address: lowerAddress,
+        message: AUTH_MESSAGE,
+        signature,
+      })
+
+      setIsAuthStarted(false)
+    }
+    if (isAuthStarted && isConnected && !isOpen) login()
+  }, [isAuthStarted, isOpen, isConnected])
+
+  const handleConnect = async () => {
+    setIsAuthStarted(true)
+    if (!isConnected) await open()
   }
 
   return (
@@ -21,12 +67,28 @@ const Auth = () => {
       <div className="flex flex-col justify-between gap-6 py-8 px-9 bg-white rounded-xl md:rounded-none md:rounded-l-xl text-gray-1 w-full mobile:w-[370px] min-h-[340px]">
         <div className="flex flex-col">
           <h2 className="text-lg font-medium text-black mb-10 max-w-[260px]">
-            {isLoginMode ? t("login.heading") : t("register.heading")}
+            {t("login.heading")}
           </h2>
-          {isLoginMode ? <Login /> : <Register />}
-        </div>
 
-        <ToggleMode isLoginMode={isLoginMode} toggleMode={toggleMode} />
+          {!isMailMode && !isAuthError && (
+            <div className="flex gap-3 flex-wrap items-center my-3.5">
+              <AuthButton onClick={handleConnect}>
+                <Web3Logo />
+                <span>{t("web3-btn")}</span>
+              </AuthButton>
+              <AuthButton onClick={() => setIsMailMode(true)}>
+                <MailLogo />
+                <span>{t("email-btn")}</span>
+              </AuthButton>
+            </div>
+          )}
+
+          {isAuthError && (
+            <RegisterWalletForm signature={signature} back={() => reset()} />
+          )}
+
+          {isMailMode && <MailMode back={() => setIsMailMode(false)} />}
+        </div>
       </div>
       <div className="hidden md:block w-[350px] border-l border-gray-1">
         <img
