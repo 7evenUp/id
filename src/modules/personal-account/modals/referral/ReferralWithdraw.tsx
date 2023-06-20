@@ -18,6 +18,11 @@ const ReferralWithdraw = ({ triggerText }: { triggerText: string }) => {
     setIsMainOpened(false)
     setIsWalletOpened(true)
   }
+
+  const closeWalletModal = () => {
+    setIsWalletOpened(false)
+  }
+
   return (
     <>
       <Button onClick={() => setIsMainOpened(true)}>{triggerText}</Button>
@@ -32,6 +37,7 @@ const ReferralWithdraw = ({ triggerText }: { triggerText: string }) => {
         open={isWalletOpened}
         onOpenChange={setIsWalletOpened}
         openMain={openMain}
+        close={closeWalletModal}
       />
     </>
   )

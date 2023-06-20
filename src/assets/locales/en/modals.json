@@ -128,11 +128,15 @@
     "personal-account-btn": "to PA balance",
     "wallet-btn": "to wallet",
     "shares-btn": "to SHARES",
+    "shares-success": "Your withdrawal request to SHARES has been successfully created. We will process it soon.",
     "back-btn": "back",
     "address-placeholder": "Wallet address",
-    "amount-placeholder": "Withdraw amount",
+    "amount-label": "Withdraw amount",
+    "amount-placeholder": "Enter the amount",
     "available": "Available amount",
-    "confirm-btn": "confirm"
+    "confirm-btn": "confirm",
+    "close-btn": "close",
+    "personal-wallet-success": "Your request to withdraw funds to a personal wallet has been created. We will process it soon."
   },
   "ref-stats": {
     "heading": "Statistics",

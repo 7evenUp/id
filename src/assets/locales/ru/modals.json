@@ -129,11 +129,15 @@
     "personal-account-btn": "на баланс ЛК",
     "wallet-btn": "на кошелёк",
     "shares-btn": "в SHARES",
+    "shares-success": "Ваш запрос на вывод средств в SHARES успешно создан. Мы обработаем его в скором времени.",
     "back-btn": "назад",
     "address-placeholder": "Адрес кошелька",
-    "amount-placeholder": "Сумма вывода",
+    "amount-label": "Сумма вывода",
+    "amount-placeholder": "Введите сумму",
     "available": "Доступная сумма",
-    "confirm-btn": "подтвердить"
+    "confirm-btn": "подтвердить",
+    "close-btn": "закрыть",
+    "personal-wallet-success": "Ваш запрос на вывод средств на персональный кошелёк создан. Мы обработаем его в скором времени."
   },
   "ref-stats": {
     "heading": "Статистика",
