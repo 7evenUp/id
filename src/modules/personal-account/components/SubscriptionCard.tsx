@@ -13,7 +13,7 @@ const SubscriptionCard = ({
   price: number
   selected: boolean
   onSelect: () => void
-  discount?: { percent: number; amount: number }
+  discount: { percent: number; amount: number } | null
 }) => {
   return (
     <div
@@ -27,7 +27,7 @@ const SubscriptionCard = ({
       </span>
       <span
         className={cn(
-          "font-semibold text-[40px] sm:text-[54px] dark:text-gray-5 mt-5 mb-8",
+          "font-semibold text-[40px] sm:text-[48px] dark:text-gray-5 mt-5 mb-8",
           selected && "mt-7 mb-10"
         )}
       >

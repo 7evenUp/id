@@ -1,14 +1,17 @@
 import { api } from "./core"
 
-import { SubscriptionsResponse } from "@/types/subscriptions"
+import { Subscription } from "@/types/subscriptions"
 
 const subscriptionApi = api.injectEndpoints({
   endpoints: (build) => ({
-    subscriptions: build.query<SubscriptionsResponse, void>({
+    subscriptions: build.query<Subscription[], void>({
       query: () => ({
         url: "subscriptions/",
         method: "GET",
       }),
+      transformResponse: (response: { results: Subscription[] }) => {
+        return response.results.sort((a, b) => a.duration.id - b.duration.id)
+      },
     }),
     buy: build.mutation<void, { id: number; promocode: string }>({
       query: ({ id, promocode }) => ({

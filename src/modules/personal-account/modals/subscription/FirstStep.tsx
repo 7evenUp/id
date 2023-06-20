@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as PrimeIcon } from "@/assets/icons/products/Prime.svg"
@@ -14,9 +14,10 @@ import Button from "@/shared/ui/Button"
 import { cn } from "@/lib/classNames"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useBuyMutation } from "@/redux/api/subscription"
+import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 
 import { Subscription } from "@/types/subscriptions"
-import { useBuyMutation } from "@/redux/api/subscription"
 
 const FirstStep = ({
   open,
@@ -24,7 +25,7 @@ const FirstStep = ({
   openSecondStep,
   openBalanceModal,
   subscriptions,
-  setBoughtSubDuration
+  setBoughtSubDuration,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
@@ -36,44 +37,63 @@ const FirstStep = ({
   const { t } = useTranslation("modals")
 
   const [activeSub, setActiveSub] = useState<number | null>(null)
-  const [promo, setPromo] = useState("")
-  const [isPromoInvalid, setIsPromoInvalid] = useState(false)
-  const [isPromoApplied, setIsPromoApplied] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [promo, setPromo] = useState("")
 
   const { data: userProfile } = useUserProfileQuery()
-  const [buy, { error, data, isLoading }] = useBuyMutation()
-
-  if (error) console.log("ERROR: ", error)
-  if (data) console.log("DATA: ", data)
+  const [buy, { isLoading }] = useBuyMutation()
+  const [
+    validatePromocode,
+    {
+      isError,
+      reset: resetRequest,
+      isLoading: isValidateLoading,
+      isSuccess: isValidateSuccess,
+    },
+  ] = useValidatePromocodeMutation()
 
   const { balance } = userProfile!
 
-  const applyPromo = () => {
-    if (!promo) {
-      return
-    }
+  const getSubscriptionPrice = (subID: number) => {
+    const selectedSub = subscriptions[subID]
+    const discount = selectedSub.baseDiscount
+    const price =
+      discount === null
+        ? selectedSub.price
+        : selectedSub.price - (selectedSub.price * discount) / 100
+    return price
+  }
 
-    if (isPromoApplied) return
+  const onPromoInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if (activeSub === null) return
 
-    if (promo !== "PROMO") {
-      setIsPromoInvalid(true)
-      return
-    }
+    if (isError || isValidateSuccess) resetRequest()
 
-    setIsPromoApplied(true)
-    setIsPromoInvalid(false)
-    setTotalPrice(totalPrice - totalPrice * 0.1)
+    const price = getSubscriptionPrice(activeSub)
+    setTotalPrice(price)
+    setPromo(evt.currentTarget.value)
   }
 
   const onSelect = (subID: number) => {
+    if (isError || isValidateSuccess) resetRequest()
+
+    const price = getSubscriptionPrice(subID)
     setActiveSub(subID)
-    if (isPromoApplied) {
-      setTotalPrice(
-        subscriptions[subID].price - subscriptions[subID].price * 0.1
-      )
-    } else {
-      setTotalPrice(subscriptions[subID].price)
+    setTotalPrice(price)
+  }
+
+  const applyPromo = async () => {
+    if (activeSub !== null) {
+      const { discountAmount, discountKind } = await validatePromocode({
+        promocode: promo,
+        subscription: subscriptions[activeSub].id,
+      }).unwrap()
+
+      if (discountKind.id === "MONEY") {
+        setTotalPrice((prev) => prev - discountAmount)
+      } else {
+        setTotalPrice((prev) => prev - (prev * discountAmount) / 100)
+      }
     }
   }
 
@@ -102,34 +122,55 @@ const FirstStep = ({
               <SubscriptionCard
                 key={sub.id}
                 duration={sub.name}
-                discount={{
-                  percent: sub.baseDiscount,
-                  amount: (sub.price * sub.baseDiscount) / 100,
-                }}
-                price={sub.price}
+                discount={
+                  sub.baseDiscount === null
+                    ? null
+                    : {
+                        percent: sub.baseDiscount,
+                        amount: (sub.price * sub.baseDiscount) / 100,
+                      }
+                }
+                price={
+                  sub.baseDiscount === null
+                    ? sub.price
+                    : sub.price - (sub.price * sub.baseDiscount) / 100
+                }
                 selected={activeSub === i}
                 onSelect={() => onSelect(i)}
               />
             ))}
           </div>
 
-          <div className="relative flex items-center gap-2 mb-5">
-            <Input
-              placeholder={t("buy-subs.first-step.promo-placeholder")}
-              value={promo}
-              onChange={(evt) => setPromo(evt.currentTarget.value)}
-              className={cn(
-                isPromoInvalid &&
-                  "text-error border-error dark:text-error dark:border-error focus:border-error dark:focus:border-error"
+          {activeSub !== null && (
+            <div className="relative flex items-center gap-2 mb-5">
+              <Input
+                placeholder={t("buy-subs.first-step.promo-placeholder")}
+                value={promo}
+                onChange={onPromoInputChange}
+                className={cn(
+                  isError &&
+                    "text-error border-error dark:text-error dark:border-error focus:border-error dark:focus:border-error"
+                )}
+              />
+              {isError && (
+                <span className="absolute bottom-0 translate-y-4 typography-text-1 text-error">
+                  {t("buy-subs.first-step.promo-error")}
+                </span>
               )}
-            />
-            {isPromoInvalid && (
-              <span className="absolute bottom-0 translate-y-4 typography-text-1 text-error">
-                Такого промокода не существует
-              </span>
-            )}
-            {promo && <Button onClick={applyPromo}>готово</Button>}
-          </div>
+              {promo && !isError && (
+                <Button
+                  disabled={isValidateSuccess}
+                  onClick={applyPromo}
+                  isLoading={isValidateLoading}
+                  appearence={isValidateSuccess ? "success" : "outlined"}
+                >
+                  {isValidateSuccess
+                    ? t("buy-subs.first-step.promo-applied")
+                    : t("buy-subs.first-step.promo-apply-btn")}
+                </Button>
+              )}
+            </div>
+          )}
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex flex-col gap-0.5">
