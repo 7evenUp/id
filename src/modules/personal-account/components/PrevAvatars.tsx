@@ -1,7 +1,7 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 
-import { IoCloseOutline } from "react-icons/io5"
+import { ReactComponent as Close } from "@/assets/icons/close.svg"
 
 import { DialogContent } from "@/shared/ui/Dialog"
 
@@ -57,7 +57,7 @@ const PrevAvatars = ({
 export default PrevAvatars
 
 const CustomDialogClose = () => (
-  <DialogPrimitive.Close className="absolute border bg-white dark:bg-gray-1 border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-100 transition-opacity hover:opacity-80">
-    <IoCloseOutline className="h-[26px] w-[26px]" />
+  <DialogPrimitive.Close className="absolute border bg-white dark:bg-gray-1 border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-100 hover:opacity-80 p-0.5">
+    <Close className="w-5 h-5" />
   </DialogPrimitive.Close>
 )

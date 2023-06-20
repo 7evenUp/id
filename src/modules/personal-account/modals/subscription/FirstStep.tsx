@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as PrimeIcon } from "@/assets/icons/products/Prime.svg"
@@ -24,12 +24,14 @@ const FirstStep = ({
   openSecondStep,
   openBalanceModal,
   subscriptions,
+  setBoughtSubDuration
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   openSecondStep: () => void
   openBalanceModal: () => void
   subscriptions: Subscription[]
+  setBoughtSubDuration: Dispatch<SetStateAction<number>>
 }) => {
   const { t } = useTranslation("modals")
 
@@ -77,9 +79,10 @@ const FirstStep = ({
 
   const buySubscription = async () => {
     if (activeSub === null) return
-    
+
     try {
       await buy({ id: subscriptions[activeSub].id, promocode: promo }).unwrap()
+      setBoughtSubDuration(subscriptions[activeSub].duration.id)
       openSecondStep()
     } catch (error) {
       console.error(error)

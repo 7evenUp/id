@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
 import ActionButton from "./ActionButton"
 import { AuthInput } from "./AuthInput"
@@ -53,7 +53,7 @@ const MailForm = ({ back }: { back: () => void }) => {
         className="typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit"
         onClick={back}
       >
-        <HiOutlineArrowNarrowLeft />
+        <MoveLeft className="w-3.5 h-3.5" />
         <span className="text-left">{t("login.another-method")}</span>
       </button>
       <Form {...form}>

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { HiOutlineArrowNarrowRight } from "react-icons/hi"
+import { ReactComponent as MoveRight } from "@/assets/icons/move-right.svg"
 
 import Subheading from "@/shared/typography/Subheading"
 
@@ -15,7 +15,7 @@ const TabTitle = ({ title, link }: { title: string; link: string }) => {
         href={link}
         target="_blank"
       >
-        <HiOutlineArrowNarrowRight />
+        <MoveRight className="w-3.5 h-3.5" />
         {t("website")}
       </a>
     </div>

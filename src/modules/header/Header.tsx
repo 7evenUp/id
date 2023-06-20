@@ -1,4 +1,4 @@
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
 import ThemeToggle from "./components/ThemeToggle"
 import LanguageToggle from "./components/LanguageToggle"
@@ -11,7 +11,7 @@ const Header = () => {
         className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
         href="#"
       >
-        <HiOutlineArrowNarrowLeft />
+        <MoveLeft className="w-3.5 h-3.5" />
         Назад к сайту
       </a> */}
 

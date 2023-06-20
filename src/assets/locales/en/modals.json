@@ -96,15 +96,13 @@
     },
     "second-step": {
       "step": "step 2/3: Data entry",
-      "email-label": "Email",
-      "email-placeholder": "Enter your email",
-      "tg-placeholder": "Enter your @telegram",
       "ds-placeholder": "Enter your @discord",
       "wallet": "EVM-wallet",
       "connect-btn": "connect",
       "later": "You can change the data later in your Personal Account, in the «Profile» section",
       "congrats": "CONGRATULATIONS",
-      "congrays-message": "A 1-month Prime subscription has been purchased! Please provide the following details to get access to all Prime services.",
+      "congrats-message_one": "{{count}} month Prime subscription has been purchased! Please provide the following details to get access to all Prime services.",
+      "congrats-message_other": "{{count}} months Prime subscription has been purchased! Please provide the following details to get access to all Prime services.",
       "continue-btn": "continue"
     },
     "third-step": {

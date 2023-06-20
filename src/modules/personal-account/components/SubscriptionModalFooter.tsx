@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { HiOutlineArrowNarrowRight } from "react-icons/hi"
+import { ReactComponent as MoveRight} from "@/assets/icons/move-right.svg"
 
 import { DialogFooter } from "@/shared/ui/Dialog"
 
@@ -13,10 +13,11 @@ const SubscriptionModalFooter = () => {
         <span>{t("buy-subs.footer.need-help")}</span>
         <a
           href="https://t.me/crypton_support"
+          target="_blank"
           className="typography-btn-big flex gap-2"
         >
           {t("buy-subs.footer.link")}
-          <HiOutlineArrowNarrowRight className="w-4 h-4" />
+          <MoveRight className="w-4 h-4" />
         </a>
       </div>
     </DialogFooter>

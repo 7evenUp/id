@@ -1,4 +1,4 @@
-import { AiOutlinePlus } from "react-icons/ai"
+import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
 
 import UpdateTelegram from "../../modals/UpdateTelegram"
 
@@ -21,14 +21,15 @@ const ProfileTelegram = () => {
     <RowItem className="flex-1 relative group">
       <span
         className={
-          telegramUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"}
+          telegramUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"
+        }
       >
         telegram
       </span>
       {telegramUsername ? (
         <span className="text-right w-full">{telegramUsername}</span>
       ) : (
-        <AiOutlinePlus className="hidden sm:block absolute right-0 w-5 h-5 fill-gray-1 dark:fill-gray-5" />
+        <Plus className="hidden sm:block absolute right-0 w-5 h-5" />
       )}
 
       {/* Mobile editing */}

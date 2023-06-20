@@ -5,7 +5,7 @@ import { useAccount, useConnect, useSignMessage } from "wagmi"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
 
-import { HiOutlineArrowNarrowLeft } from "react-icons/hi"
+import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
 import { AuthInput } from "./AuthInput"
 import ActionButton from "./ActionButton"
@@ -96,7 +96,7 @@ const RegisterWebForm = ({ back }: { back: () => void }) => {
         className="typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit"
         onClick={back}
       >
-        <HiOutlineArrowNarrowLeft />
+        <MoveLeft className="w-3.5 h-3.5" />
         <span className="text-left">{t("register.another-method")}</span>
       </button>
       <Form {...form}>

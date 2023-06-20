@@ -35,9 +35,6 @@ const ThirdStep = ({
                   NFT чат
                 </ExternalLink>
                 <ExternalLink href="#">сервер в Discord</ExternalLink>
-                <ExternalLink withTgIcon href="#">
-                  чат технической взаимопомощи
-                </ExternalLink>
               </div>
               <p className="typography-tip mt-5">
                 Найти ссылки на вступление можно также в Личном кабинете, в

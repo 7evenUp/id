@@ -1,5 +1,6 @@
 import React from "react"
-import { BiLoaderAlt } from "react-icons/bi"
+
+import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 
 import { cn } from "@/lib/classNames"
 
@@ -17,7 +18,7 @@ const ActionButton = ({
       )}
       {...props}
     >
-      {isLoading && <BiLoaderAlt className="animate-spin" />}
+      {isLoading && <Loader className="animate-spin w-3.5 h-3.5" />}
       {children}
     </button>
   )
