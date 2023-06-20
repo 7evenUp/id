@@ -64,7 +64,10 @@
     "th-date": "дата",
     "th-price": "стоимость",
     "th-status": "статус",
-    "th-txid": "tx id"
+    "th-txid": "tx id",
+    "tx-status-success": "успешно",
+    "tx-status-pending": "в процессе",
+    "tx-status-reject": "отклонено"
   },
   "balance": {
     "current": "текущий баланс счёта",

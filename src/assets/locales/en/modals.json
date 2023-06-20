@@ -64,7 +64,10 @@
     "th-date": "date",
     "th-price": "amount",
     "th-status": "status",
-    "th-txid": "tx id"
+    "th-txid": "tx id",
+    "tx-status-success": "successfully",
+    "tx-status-pending": "in progress",
+    "tx-status-reject": "rejected"
   },
   "balance": {
     "current": "current account balance",

@@ -25,12 +25,12 @@ const TxHistoryMobile = () => {
             <span className="text-gray-3">{t("history.th-date")}</span>
             <span>
               {formatDate(tx.createdDatetime, i18n.language as "ru" | "en") ||
-                "no date"}
+                "-"}
             </span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-price")}</span>
-            <span>{tx.totalAmount || "no amount"}</span>
+            <span>{tx.totalAmount || "-"}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-status")}</span>
@@ -44,7 +44,13 @@ const TxHistoryMobile = () => {
                   : "text-error"
               )}
             >
-              {tx.status || "no status"}
+              {tx.status === null
+                ? "-"
+                : tx.status === "COMPLETED"
+                ? t("history.tx-status-success")
+                : tx.status === "PENDING"
+                ? t("history.tx-status-pending")
+                : t("history.tx-status-reject")}
             </span>
           </div>
           <div className="flex justify-between">
