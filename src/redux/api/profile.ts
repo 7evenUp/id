@@ -26,6 +26,13 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
+    unfreezeSubs: build.mutation<void, void>({
+      query: () => ({
+        url: "users/unfreeze-subscription/",
+        method: "GET",
+      }),
+      invalidatesTags: ["UserProfile"],
+    }),
     deactivate: build.mutation<void, Pick<User, "id">>({
       query: ({ id }) => ({
         url: `users/${id}/delete/`,
@@ -33,11 +40,14 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
-    verifyDeactivation: build.mutation<void, Pick<User, "id"> & { code: number }>({
+    verifyDeactivation: build.mutation<
+      void,
+      Pick<User, "id"> & { code: number }
+    >({
       query: ({ id, code }) => ({
         url: `users/${id}/verify-delete/`,
         method: "POST",
-        body: {code}
+        body: { code },
       }),
       invalidatesTags: ["UserProfile"],
     }),
@@ -108,6 +118,7 @@ export const {
   useUserProfileQuery,
   useTransactionHistoryQuery,
   useFreezeSubsMutation,
+  useUnfreezeSubsMutation,
   useDeactivateMutation,
   useVerifyDeactivationMutation,
   useUpdateNicknameMutation,
