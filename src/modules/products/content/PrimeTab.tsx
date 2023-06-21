@@ -83,7 +83,9 @@ const PrimeTab = () => {
             )}
           </div>
           <div className="flex flex-col gap-[14px] py-3 px-6 bg-white dark:bg-gray-1 rounded-xl typography-text-1 w-fit">
-            <p className="lg:max-w-prose">{t("prime.nav-text")}</p>
+            <p className="lg:max-w-prose">{t("prime.nav-text-1")}</p>
+            <p className="lg:max-w-prose">{t("prime.nav-text-2")}</p>
+            <p className="lg:max-w-prose">{t("prime.nav-text-3")}</p>
           </div>
         </div>
       </RowItem>
