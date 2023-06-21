@@ -22,7 +22,6 @@ import { useLoginMutation } from "@/redux/api/auth"
 import { Dispatch, SetStateAction } from "react"
 
 const formSchema = z.object({
-  username: z.string(),
   email: z
     .string()
     .min(1, {
@@ -46,13 +45,15 @@ const LoginMailForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      username: "",
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setEmail(values.email)
-    trigger({ ...values, redirect_url: "https://id.crypton.xyz" })
+  const onSubmit = async ({ email }: z.infer<typeof formSchema>) => {
+    setEmail(email)
+    trigger({
+      email: email.toLowerCase().trim(),
+      redirect_url: "https://id.crypton.xyz",
+    })
   }
 
   return (

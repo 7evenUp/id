@@ -52,7 +52,11 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
     const refCode = url.searchParams.get("ref_code")
 
     // register({ email, profile_username: username, referral_code: refCode || "" })
-    register({ email, profile_username: username, referral_code: "NBBXRQXX" })
+    register({
+      email: email.toLowerCase().trim(),
+      profile_username: username,
+      referral_code: "NBBXRQXX",
+    })
   }
   return (
     <>

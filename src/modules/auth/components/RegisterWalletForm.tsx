@@ -71,7 +71,7 @@ const RegisterWalletForm = ({
         address: address,
         message: AUTH_MESSAGE,
         signature,
-        email,
+        email: email.toLowerCase().trim(),
         profile_username: username,
         referral_code: refCode || "",
       })

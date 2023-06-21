@@ -8,6 +8,7 @@ import ThirdStep from "./ThirdStep"
 
 import { Dialog } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
+
 import { useSubscriptionsQuery } from "@/redux/api/subscription"
 
 const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {

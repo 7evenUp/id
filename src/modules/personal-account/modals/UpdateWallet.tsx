@@ -45,7 +45,7 @@ const UpdateWallet = () => {
               <p className="typography-text-0">
                 {t("change-wallet.wallet-acc-unpresent.metamask-connected")}{" "}
                 <span className="typography-accent">
-                  {address.toLowerCase()}
+                  {cutWalletAddr(address.toLowerCase())}
                 </span>
               </p>
               <p className="typography-text-1">
@@ -63,7 +63,7 @@ const UpdateWallet = () => {
           <div className="flex flex-col typography-text-0">
             <p>{t("change-wallet.wallet-acc-present.status")}</p>{" "}
             <span className="text-base font-mono text-black dark:text-gray-5">
-              {wallet}
+              {cutWalletAddr(wallet)}
             </span>
           </div>
 
@@ -74,7 +74,7 @@ const UpdateWallet = () => {
                   {t("change-wallet.wallet-acc-present.metamask-connected")}
                 </p>{" "}
                 <span className="text-base font-mono text-black dark:text-gray-5">
-                  {address.toLowerCase()}
+                  {cutWalletAddr(address.toLowerCase())}
                 </span>
               </div>
               {address.toLowerCase() === wallet ? (
