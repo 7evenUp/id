@@ -21,12 +21,12 @@ import { TrustWalletConnector } from "@/lib/TrustWalletConnector"
 const ConnectWalletModal = ({
   open,
   onOpenChange,
-  closeConnectModal,
+  close,
   setIsAuthStarted,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
-  closeConnectModal: () => void
+  close: () => void
   setIsAuthStarted?: Dispatch<SetStateAction<boolean>>
 }) => {
   const { address, isConnected } = useAccount()
@@ -43,7 +43,7 @@ const ConnectWalletModal = ({
 
   useEffect(() => {
     console.log("Rerender")
-    if (isConnected) closeConnectModal()
+    if (isConnected) close()
   }, [isConnected])
 
   const onMetamaskClick = async () => {
@@ -79,7 +79,7 @@ const ConnectWalletModal = ({
 
     // if (!isConnected) web3open()
     web3open()
-    // else closeConnectModal()
+    // else close()
   }
 
   return (

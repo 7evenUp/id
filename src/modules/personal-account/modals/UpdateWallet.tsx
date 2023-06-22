@@ -1,11 +1,11 @@
-import { useAccount, useConnect } from "wagmi"
-import { InjectedConnector } from "wagmi/connectors/injected"
+import { useState } from "react"
+import { useAccount } from "wagmi"
+import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
-
-import { useMetamask } from "@/hooks/useMetamask"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
+import ConnectWalletModal from "@/components/ConnectWalletModal"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -20,6 +20,8 @@ import {
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
 
+  const [connectModalOpened, setConnectModalOpened] = useState(false)
+
   const { data: userProfileData } = useUserProfileQuery()
   const [updateWallet, { isLoading: isUpdateLoading, error, isSuccess }] =
     useUpdateWalletMutation()
@@ -28,11 +30,29 @@ const UpdateWallet = () => {
 
   const { wallet } = userProfileData!
 
+  const openConnectModal = () => {
+    setConnectModalOpened(true)
+  }
+
+  const closeConnectWalletModal = () => {
+    setConnectModalOpened(false)
+  }
+
+  const handleConnect = async () => {
+    if (!isConnected) open()
+  }
+
   return (
     <DialogContent className="mobile:w-[370px] sm:w-[500px]">
       <DialogHeader>
         <DialogTitle>{t("change-wallet.heading")}</DialogTitle>
       </DialogHeader>
+
+      <ConnectWalletModal
+        open={connectModalOpened}
+        onOpenChange={setConnectModalOpened}
+        close={closeConnectWalletModal}
+      />
 
       {!wallet ? (
         <>
@@ -43,7 +63,7 @@ const UpdateWallet = () => {
           {isConnected && address ? (
             <>
               <p className="typography-text-0">
-                {t("change-wallet.wallet-acc-unpresent.metamask-connected")}{" "}
+                {t("change-wallet.wallet-acc-unpresent.wallet-connected")}{" "}
                 <span className="typography-accent">
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
@@ -54,7 +74,7 @@ const UpdateWallet = () => {
             </>
           ) : (
             <p className="typography-text-0">
-              {t("change-wallet.wallet-acc-unpresent.metamask-disconnected")}
+              {t("change-wallet.wallet-acc-unpresent.wallet-disconnected")}
             </p>
           )}
         </>
@@ -70,9 +90,7 @@ const UpdateWallet = () => {
           {isConnected && address ? (
             <>
               <div className="flex flex-col typography-text-0">
-                <p>
-                  {t("change-wallet.wallet-acc-present.metamask-connected")}
-                </p>{" "}
+                <p>{t("change-wallet.wallet-acc-present.wallet-connected")}</p>{" "}
                 <span className="text-base font-mono text-black dark:text-gray-5">
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
@@ -108,7 +126,7 @@ const UpdateWallet = () => {
             </>
           ) : (
             <p className="typography-text-0">
-              {t("change-wallet.wallet-acc-present.metamask-disconnected")}
+              {t("change-wallet.wallet-acc-present.wallet-disconnected")}
             </p>
           )}
         </>
@@ -133,44 +151,17 @@ const UpdateWallet = () => {
         >
           {t("change-wallet.confirm-btn")}
         </Button>
+      ) : isMobile ? (
+        <Button className="w-fit" onClick={handleConnect}>
+          {t("change-wallet.connect-btn")}
+        </Button>
       ) : (
-        <ConnectWallet />
+        <Button className="w-fit" onClick={openConnectModal}>
+          {t("change-wallet.connect-btn")}
+        </Button>
       )}
     </DialogContent>
   )
 }
 
 export default UpdateWallet
-
-const ConnectWallet = () => {
-  const { t } = useTranslation("modals")
-
-  const {
-    state: { isMetamaskInstalled },
-  } = useMetamask()
-
-  const { connect, isLoading: isLoadingConnect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-
-  const handleConnect = () => {
-    connect()
-  }
-
-  if (isMetamaskInstalled)
-    return (
-      <Button
-        className="w-fit"
-        onClick={handleConnect}
-        isLoading={isLoadingConnect}
-      >
-        {t("change-wallet.connect-btn")}
-      </Button>
-    )
-
-  return (
-    <a href="https://metamask.io/" target="_blank">
-      <Button className="w-fit">{t("change-wallet.connect-btn")}</Button>
-    </a>
-  )
-}

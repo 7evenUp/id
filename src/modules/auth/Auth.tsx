@@ -129,7 +129,7 @@ const Auth = () => {
       <ConnectWalletModal
         open={connectModalOpened}
         onOpenChange={setConnectModalOpened}
-        closeConnectModal={closeConnectModal}
+        close={closeConnectModal}
         setIsAuthStarted={setIsAuthStarted}
       />
     </>
