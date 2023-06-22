@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next"
 import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
-import ResearchAuthImage from "@/assets/images/auth_research.png"
 
 import ConnectWalletModal from "@/components/ConnectWalletModal"
 
@@ -15,9 +14,13 @@ import AuthButton from "./components/AuthButton"
 import MailMode from "./components/MailMode"
 import RegisterWalletForm from "./components/RegisterWalletForm"
 
+import { Skeleton } from "@/shared/ui/Skeleton"
+
 import { useAuthByWalletMutation } from "@/redux/api/auth"
+import { useBannerByIdQuery } from "@/redux/api/banners"
 
 const AUTH_MESSAGE = "Authorization"
+const RES_BANNER_ID = 3
 
 const Auth = () => {
   const { t } = useTranslation("auth")
@@ -28,22 +31,16 @@ const Auth = () => {
   const [signature, setSignature] = useState("")
 
   const { address, isConnected } = useAccount()
-  const {
-    isError: isSignError,
-    isLoading: isLoadingSign,
-    signMessageAsync,
-  } = useSignMessage()
-  const { open, isOpen } = useWeb3Modal()
+  const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
+  const { open } = useWeb3Modal()
 
-  const [
-    authenticate,
-    {
-      isError: isAuthError,
-      isSuccess: isAuthSuccess,
-      isLoading: isAuthenticating,
-      reset,
-    },
-  ] = useAuthByWalletMutation()
+  const [authenticate, { isError: isAuthError, reset }] =
+    useAuthByWalletMutation()
+  const { data: banner, isLoading: isBannerLoading } = useBannerByIdQuery({
+    id: RES_BANNER_ID,
+  })
+
+  console.log(banner)
 
   useEffect(() => {
     const login = async () => {
@@ -118,11 +115,17 @@ const Auth = () => {
           )}
         </div>
         <div className="hidden md:block w-[350px] border-l border-gray-1">
-          <img
-            src={ResearchAuthImage}
-            alt="research auth intro"
-            className="w-[350px] min-h-[400px] h-full object-cover rounded-r-xl"
-          />
+          {isBannerLoading ? (
+            <Skeleton className="w-[350px] min-h-[400px] h-full rounded-r-xl" />
+          ) : banner ? (
+            <a href={banner.url} target="_blank">
+              <img
+                src={banner.file}
+                alt="research auth intro"
+                className="w-[350px] min-h-[400px] h-full object-cover rounded-r-xl"
+              />
+            </a>
+          ) : null}
         </div>
       </div>
 
