@@ -61,7 +61,7 @@ const LoginMailForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3 2xl:gap-[0.781vw]"
         >
           <FormField
             name="email"
@@ -83,7 +83,7 @@ const LoginMailForm = ({
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3">
+      <div className="flex mt-3 2xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
             Ссылка для входа успешно отправлена вам на почту

@@ -37,16 +37,16 @@ const ThemeToggle = () => {
     <Switch.Root
       checked={theme === "dark" ? true : false}
       onCheckedChange={toggleTheme}
-      className="group w-[36px] h-[18px] bg-transparent rounded-full relative border border-gray-1 dark:border-gray-5 data-[state=checked]:bg-black outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="group w-[36px] h-[18px] 2xl:w-[2.34vw] 2xl:h-[1.17vw] bg-transparent rounded-full relative border border-gray-1 dark:border-gray-5 data-[state=checked]:bg-black outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     >
-      <Switch.Thumb className="absolute left-0 top-[2px] block w-3 h-3 bg-gray-1 dark:bg-gray-5 rounded-full transition-transform duration-100 will-change-transform data-[state=unchecked]:translate-x-[2px] data-[state=checked]:translate-x-[20px]" />
+      <Switch.Thumb className="absolute left-0 top-[2px] 2xl:top-[0.13vw] block w-3 h-3 2xl:w-[0.78vw] 2xl:h-[0.78vw] bg-gray-1 dark:bg-gray-5 rounded-full transition-transform duration-100 will-change-transform data-[state=unchecked]:translate-x-[2px] 2xl:data-[state=unchecked]:translate-x-[0.13vw] data-[state=checked]:translate-x-[20px] 2xl:data-[state=checked]:translate-x-[1.3vw]" />
       <img
         src={SunIcon}
-        className="w-3 h-3 absolute top-[2px] right-[3px] rotate-0 scale-100 group-data-[state=checked]:scale-0 group-data-[state=checked]:rotate-180 will-change-transform transition-transform"
+        className="w-3 h-3 2xl:w-[0.78vw] 2xl:h-[0.78vw] absolute top-[2px] 2xl:top-[0.13vw] right-[3px] 2xl:right-[0.195vw] rotate-0 scale-100 group-data-[state=checked]:scale-0 group-data-[state=checked]:rotate-180 will-change-transform transition-transform"
       />
       <img
         src={MoonIcon}
-        className="w-3 h-3 absolute top-[3px] left-[3px] -rotate-180 scale-0 group-data-[state=checked]:scale-100 group-data-[state=checked]:rotate-0 will-change-transform transition-transform"
+        className="w-3 h-3 2xl:w-[0.78vw] 2xl:h-[0.78vw] absolute top-[3px] 2xl:top-[0.195vw] left-[3px] 2xl:left-[0.195vw] -rotate-180 scale-0 group-data-[state=checked]:scale-100 group-data-[state=checked]:rotate-0 will-change-transform transition-transform"
       />
     </Switch.Root>
   )

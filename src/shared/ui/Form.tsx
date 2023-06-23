@@ -77,7 +77,7 @@ const FormItem = React.forwardRef<
     <FormItemContext.Provider value={{ id }}>
       <div
         ref={ref}
-        className={cn("group flex flex-col gap-1", className)}
+        className={cn("group flex flex-col gap-1 2xl:gap-[0.260vw]", className)}
         {...props}
       />
     </FormItemContext.Provider>
@@ -95,7 +95,7 @@ const FormLabel = React.forwardRef<
     <label
       ref={ref}
       className={cn(
-        "text-sm",
+        "text-sm 2xl:text-[0.911vw] 2xl:leading-[1.302vw]",
         className,
         error && "text-error dark:text-error",
       )}
@@ -160,7 +160,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-xs font-medium text-error", className)}
+      className={cn("text-xs 2xl:text-[0.781vw]/[1.042vw] font-medium text-error", className)}
       {...props}
     >
       {body}

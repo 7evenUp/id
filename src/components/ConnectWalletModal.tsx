@@ -82,34 +82,34 @@ const ConnectWalletModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:w-[400px]">
-        <DialogHeader className="typography-text-1 mb-6">
+      <DialogContent className="sm:w-[400px] 2xl:w-[26.041vw]">
+        <DialogHeader className="mb-6 2xl:mb-[1.563vw]">
           <DialogTitle>Подключение кошелька</DialogTitle>
         </DialogHeader>
 
         {isMMLoading && (
-          <div className="flex items-center gap-2 typography-text-0">
-            <Loader className="animate-spin" />
+          <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
+            <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
             <p>Подключение кошелька MetaMask</p>
           </div>
         )}
 
         {isTWLoading && (
-          <div className="flex items-center gap-2 typography-text-0">
-            <Loader className="animate-spin" />
+          <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
+            <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
             <p>Подключение кошелька Trust Wallet</p>
           </div>
         )}
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
           <ConnectButton onClick={onMetamaskClick}>
-            <MetaMask className="w-6 h-6" /> MetaMask
+            <MetaMask className="w-6 h-6 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> MetaMask
           </ConnectButton>
           <ConnectButton onClick={onTrustWalletClick}>
-            <TrustWallet className="w-6 h-6" /> Trust Wallet
+            <TrustWallet className="w-6 h-6 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> Trust Wallet
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
-            <WalletConnect className="w-6 h-6" /> WalletConnect
+            <WalletConnect className="w-6 h-6 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> WalletConnect
           </ConnectButton>
         </div>
       </DialogContent>
@@ -127,7 +127,7 @@ const ConnectButton = ({
   return (
     <button
       className={cn(
-        "flex items-center gap-4 text-base py-2 px-4 rounded-md text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
+        "flex items-center gap-4 2xl:gap-[1.042vw] text-base 2xl:text-[1.042vw]/[1.563vw] py-2 2xl:py-[0.521vw] px-4 2xl:px-[1.042vw] rounded-md 2xl:rounded-[0.391vw] text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
         className
       )}
       {...props}

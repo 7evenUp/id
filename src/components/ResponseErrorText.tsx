@@ -14,7 +14,10 @@ const ResponseErrorText = ({
 }) => {
   return (
     <span
-      className={cn("text-error text-xs font-medium tracking-wide", className)}
+      className={cn(
+        "text-error text-xs 2xl:text-[0.781vw]/[1.042vw] font-medium tracking-wide",
+        className
+      )}
     >
       {/* @ts-expect-error No-Error-Types */}
       {error.message ? error.message : customMessage}

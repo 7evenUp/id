@@ -61,7 +61,7 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3 2xl:gap-[0.781vw]"
         >
           <FormField
             name="email"
@@ -96,7 +96,7 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
               </FormItem>
             )}
           />
-          <p className="text-xs w-full">
+          <p className="text-xs 2xl:text-[0.781vw]/[1.042vw] w-full">
             {t("register.privacy-policy.text")}{" "}
             <a
               href="#"
@@ -110,7 +110,7 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3">
+      <div className="flex mt-3 2xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
             Вы успешно зарегистрированны! Перейдите по ссылке, которую мы
