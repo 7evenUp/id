@@ -19,7 +19,7 @@ const EditButton = React.forwardRef<
       ref={forwardedRef}
       {...props}
     >
-      <Edit className="w-3.5 h-3.5 text-gray-4 group-hover/icon:text-gray-3 sm:text-gray-1 sm:group-hover/icon:text-gray-2 dark:text-gray-4 dark:group-hover/icon:text-gray-5 fill-white dark:fill-gray-1" />
+      <Edit className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw] text-gray-4 group-hover/icon:text-gray-3 sm:text-gray-1 sm:group-hover/icon:text-gray-2 dark:text-gray-4 dark:group-hover/icon:text-gray-5 fill-white dark:fill-gray-1" />
     </IconButton>
   )
 })

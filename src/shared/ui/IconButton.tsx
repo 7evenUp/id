@@ -9,7 +9,7 @@ const IconButton = React.forwardRef<
   return (
     <button
       className={cn(
-        "rounded-full w-5 h-5 flex justify-center items-center",
+        "rounded-full w-5 h-5 2xl:w-[1.302vw] 2xl:h-[1.302vw] flex justify-center items-center",
         className
       )}
       {...props}

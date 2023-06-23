@@ -77,9 +77,9 @@ const columns: ColumnDef<Project>[] = [
         >
           {t("res-bot.th-projects")}
           {column.getIsSorted() === "asc" ? (
-            <SortDown className="w-4 h-4" />
+            <SortDown className="w-4 h-4 2xl:w-[1.042vw] 2xl:h-[1.042vw]" />
           ) : (
-            <SortUp className="w-4 h-4" />
+            <SortUp className="w-4 h-4 2xl:w-[1.042vw] 2xl:h-[1.042vw]" />
           )}
         </Button>
       )
@@ -100,8 +100,8 @@ const columns: ColumnDef<Project>[] = [
       const { t } = table.options.meta
       return (
         <Select defaultValue={row.getValue("options")}>
-          <SelectTrigger className="w-[90px]" />
-          <SelectContent className="w-[90px]">
+          <SelectTrigger className="w-[90px] 2xl:w-[5.859vw]" />
+          <SelectContent className="w-[90px] 2xl:w-[5.859vw]">
             <SelectItem value="all">{t("res-bot.subs-options.all")}</SelectItem>
             <SelectItem value="main">
               {t("res-bot.subs-options.important")}
@@ -127,7 +127,7 @@ const columns: ColumnDef<Project>[] = [
       }
 
       return (
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 2xl:gap-[0.521vw] flex-wrap">
           <SwitchWithText defaultChecked={socials.medium}>
             medium
           </SwitchWithText>
@@ -178,7 +178,7 @@ function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-xl bg-white dark:bg-gray-1">
+    <div className="rounded-xl 2xl:rounded-[0.781vw] bg-white dark:bg-gray-1">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -221,7 +221,7 @@ function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="w-full flex justify-center py-3">
+      <div className="w-full flex justify-center py-3 2xl:py-[0.781vw]">
         <ProjectsTablePagination table={table} />
       </div>
     </div>

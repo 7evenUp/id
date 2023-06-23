@@ -9,7 +9,7 @@ const Table = React.forwardRef<
   <div className="w-full overflow-auto">
     <table
       ref={ref}
-      className={cn("w-full text-sm", className)}
+      className={cn("w-full text-sm 2xl:text-[0.911vw]/[1.302vw]", className)}
       {...props}
     />
   </div>
@@ -62,7 +62,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-12 pl-2 sm:pl-4 pr-2 text-left align-middle typography-text-1 text-gray-3",
+      "h-12 2xl:h-[3.125vw] pl-2 sm:pl-4 pr-2 2xl:pl-[1.042vw] 2xl:pr-[0.521vw] text-left align-middle typography-text-1 text-gray-3",
       className
     )}
     {...props}
@@ -76,17 +76,13 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn("pl-2 sm:pl-4 pr-2 py-4 align-middle", className)}
+    className={cn(
+      "pl-2 sm:pl-4 pr-2 py-4 2xl:pl-[1.042vw] 2xl:pr-[0.521vw] 2xl:py-[1.042vw] align-middle",
+      className
+    )}
     {...props}
   />
 ))
 TableCell.displayName = "TableCell"
 
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-}
+export { Table, TableHeader, TableBody, TableHead, TableRow, TableCell }

@@ -12,7 +12,7 @@ const Chip = React.forwardRef<
     <button
       className={cn(
         buttonVariants({ appearence: "outlined" }),
-        "rounded-md py-1 px-2.5",
+        "rounded-md py-1 px-2.5 2xl:rounded-[0.391vw] 2xl:py-[0.26vw] 2xl:px-[0.651vw]",
         className
       )}
       {...props}

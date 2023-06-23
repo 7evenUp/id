@@ -17,26 +17,26 @@ const TabsTriggers = () => {
   return (
     <>
       <TabsTrigger value={TABS_VALUES.PRIME}>
-        <PrimeActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
-        <PrimeIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <PrimeActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
+        <PrimeIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.RESEARCH_BOT}>
-        <ResearchBotActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
-        <ResearchBotIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <ResearchBotActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
+        <ResearchBotIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.TOOLS}>
-        <ToolsActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
-        <ToolsIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <ToolsActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
+        <ToolsIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.CALENDAR}>
-        <CalendarActiveIcon className="w-[26px] h-[26px] hidden group-data-[state=active]:inline-block" />
-        <CalendarIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <CalendarActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
+        <CalendarIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.UNIVERSE} disabled>
-        <UniverseIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-2" />
+        <UniverseIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-2" />
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.ACADEMY} disabled>
-        <AcademyIcon className="w-[26px] h-[26px] group-data-[state=active]:hidden dark:fill-gray-2" />
+        <AcademyIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-2" />
       </TabsTrigger>
     </>
   )
