@@ -198,7 +198,7 @@ const CodeForm = ({
   useEffect(() => {
     if (isError)
       form.setError("code", { message: "Неверный код" }, { shouldFocus: true })
-  }, [isError])
+  }, [isError, form])
 
   return (
     <>

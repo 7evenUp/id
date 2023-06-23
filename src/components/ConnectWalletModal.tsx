@@ -29,7 +29,7 @@ const ConnectWalletModal = ({
   close: () => void
   setIsAuthStarted?: Dispatch<SetStateAction<boolean>>
 }) => {
-  const { address, isConnected } = useAccount()
+  const { isConnected } = useAccount()
 
   const { connectAsync: connectMMAsync, isLoading: isMMLoading } = useConnect({
     connector: new MetaMaskConnector(),
@@ -39,12 +39,12 @@ const ConnectWalletModal = ({
     connector: new TrustWalletConnector(),
   })
 
-  const { open: web3open, isOpen } = useWeb3Modal()
+  const { open: web3open } = useWeb3Modal()
 
   useEffect(() => {
     console.log("Rerender")
     if (isConnected) close()
-  }, [isConnected])
+  }, [isConnected, close])
 
   const onMetamaskClick = async () => {
     if (setIsAuthStarted) setIsAuthStarted(true)
@@ -77,9 +77,7 @@ const ConnectWalletModal = ({
   const onWalletConnectClick = () => {
     if (setIsAuthStarted) setIsAuthStarted(true)
 
-    // if (!isConnected) web3open()
     web3open()
-    // else close()
   }
 
   return (

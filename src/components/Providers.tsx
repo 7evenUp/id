@@ -21,7 +21,7 @@ const wagmiConfig = createConfig({
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
-let persistor = persistStore(store)
+const persistor = persistStore(store)
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (

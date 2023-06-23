@@ -40,8 +40,6 @@ const Auth = () => {
     id: RES_BANNER_ID,
   })
 
-  console.log(banner)
-
   useEffect(() => {
     const login = async () => {
       const signature = await signMessageAsync({ message: AUTH_MESSAGE })

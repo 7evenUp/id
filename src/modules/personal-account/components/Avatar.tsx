@@ -23,11 +23,11 @@ const Avatar = () => {
   useEffect(() => {
     if (isSuccess)
       toast({ message: t("photo-response-success"), type: "success" })
-  }, [isSuccess])
+  }, [isSuccess, t])
 
   useEffect(() => {
     if (isError) toast({ message: t("photo-response-error"), type: "error" })
-  }, [isError])
+  }, [isError, t])
 
   const { avatars } = profileData!
 

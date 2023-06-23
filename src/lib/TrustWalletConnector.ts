@@ -1,6 +1,3 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable consistent-return */
-/* eslint-disable class-methods-use-this */
 import { Chain, ConnectorNotFoundError, WindowProvider } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { Address, getConfig } from '@wagmi/core'

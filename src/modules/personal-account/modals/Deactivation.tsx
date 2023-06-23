@@ -35,7 +35,7 @@ const Deactivation = () => {
   const { t } = useTranslation("modals")
 
   const { data: userProfile } = useUserProfileQuery()
-  const [deactivate, { isLoading, error, isSuccess }] = useDeactivateMutation()
+  const [deactivate, { isLoading, isSuccess }] = useDeactivateMutation()
   const [
     verifyDeactivate,
     { isLoading: isVerifyLoading, isError: isVerifyError },
@@ -51,7 +51,7 @@ const Deactivation = () => {
   useEffect(() => {
     if (isVerifyError)
       form.setError("code", { message: "Неверный код" }, { shouldFocus: true })
-  }, [isVerifyError])
+  }, [isVerifyError, form])
 
   const onDeactivationStart = () => {
     deactivate({ id })

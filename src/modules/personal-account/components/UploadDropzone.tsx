@@ -28,7 +28,7 @@ const UploadDropzone = ({
       }
       reader.readAsDataURL(file)
     })
-  }, [])
+  }, [setFile, setBase64])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

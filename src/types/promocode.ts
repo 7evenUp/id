@@ -4,10 +4,10 @@ export interface Promocode {
   discountKind: { id: "MONEY" | "PERCENT"; label: "Money" | "%" }
   expirationDate: string
   invalidForSubscriptions: number[]
-  invalidForUsers: {}
+  invalidForUsers: unknown
   isActive: boolean
   isReusable: boolean
   usageLimit: number
   validForSubscriptions: number[]
-  validForUsers: {}
+  validForUsers: unknown
 }

@@ -17,7 +17,7 @@ import { useChannelsQuery } from "@/redux/api/channels"
 const PrimeTab = () => {
   const { t } = useTranslation("products")
 
-  const { data: channels, isLoading } = useChannelsQuery()
+  const { data: channels } = useChannelsQuery()
 
   return (
     <>

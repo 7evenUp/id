@@ -3,8 +3,6 @@ import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
-
 import { AuthInput } from "./AuthInput"
 import ActionButton from "./ActionButton"
 

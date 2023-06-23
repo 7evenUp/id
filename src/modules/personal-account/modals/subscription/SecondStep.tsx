@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Telegram } from "@/assets/icons/telegram.svg"
@@ -43,7 +43,7 @@ const SecondStep = ({
   const [inputValue, setInputValue] = useState("")
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateDiscord, { isSuccess, isLoading, isError }] =
+  const [updateDiscord, { isSuccess, isLoading }] =
     useUpdateDiscordMutation()
 
   const { telegramUsername, discordUsername, wallet } = userProfile!
