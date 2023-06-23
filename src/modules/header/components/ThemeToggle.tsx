@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import * as Switch from "@radix-ui/react-switch"
 
-import SunImage from "@/assets/icons/theme/Sun.svg"
-import MoonImage from "@/assets/icons/theme/Moon.svg"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { changeTheme } from "@/redux/theme/slice"
+
+import SunIcon from "@/assets/icons/theme/Sun.svg"
+import MoonIcon from "@/assets/icons/theme/Moon.svg"
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
+  const theme = useAppSelector((state) => state.theme.value)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
+    if (theme !== null) return
+
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark")
+      dispatch(changeTheme("dark"))
     } else {
-      setTheme("light")
+      dispatch(changeTheme("light"))
     }
   }, [])
 
@@ -24,7 +30,7 @@ const ThemeToggle = () => {
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
+    dispatch(changeTheme(theme === "dark" ? "light" : "dark"))
   }
 
   return (
@@ -35,11 +41,11 @@ const ThemeToggle = () => {
     >
       <Switch.Thumb className="absolute left-0 top-[2px] block w-3 h-3 bg-gray-1 dark:bg-gray-5 rounded-full transition-transform duration-100 will-change-transform data-[state=unchecked]:translate-x-[2px] data-[state=checked]:translate-x-[20px]" />
       <img
-        src={SunImage}
+        src={SunIcon}
         className="w-3 h-3 absolute top-[2px] right-[3px] rotate-0 scale-100 group-data-[state=checked]:scale-0 group-data-[state=checked]:rotate-180 will-change-transform transition-transform"
       />
       <img
-        src={MoonImage}
+        src={MoonIcon}
         className="w-3 h-3 absolute top-[3px] left-[3px] -rotate-180 scale-0 group-data-[state=checked]:scale-100 group-data-[state=checked]:rotate-0 will-change-transform transition-transform"
       />
     </Switch.Root>
