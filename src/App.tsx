@@ -8,7 +8,6 @@ import Auth from "./modules/auth/Auth"
 import SkeletonLayout from "./components/SkeletonLayout"
 
 import { useUserProfileQuery } from "./redux/api/profile"
-import { useMetamask } from "./hooks/useMetamask"
 
 const App = () => {
   const [isDelayed, setIsDelayed] = useState(true)
@@ -16,18 +15,8 @@ const App = () => {
 
   const { isLoading, data, error } = useUserProfileQuery()
 
-  const { dispatch } = useMetamask()
-
   useEffect(() => {
     setTimeout(() => setIsDelayed(false), delay.current.time)
-
-    if (typeof window !== undefined) {
-      const ethProviderInjected = typeof window.ethereum !== "undefined"
-      const isMetamaskInstalled =
-        ethProviderInjected && Boolean(window.ethereum.isMetaMask)
-
-      dispatch({ type: "pageLoaded", isMetamaskInstalled })
-    }
   }, [])
 
   useEffect(() => {
@@ -44,7 +33,7 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
-      <div className="px-7 xl:px-9 py-8 max-w-[1400px] mx-auto">
+      <div className="px-7 xl:px-9 py-8 max-w-[1400px] 2xl:max-w-[90%] mx-auto">
         <Header />
         <main className="flex flex-col lg:flex-row justify-between gap-20">
           {error ? <Auth /> : isLoading || isDelayed ? (
