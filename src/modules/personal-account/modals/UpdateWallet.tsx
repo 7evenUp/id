@@ -43,7 +43,7 @@ const UpdateWallet = () => {
   }
 
   return (
-    <DialogContent className="mobile:w-[370px] sm:w-[500px]">
+    <DialogContent className="mobile:w-[370px] sm:w-[500px] 2xl:w-[32.552vw]">
       <DialogHeader>
         <DialogTitle>{t("change-wallet.heading")}</DialogTitle>
       </DialogHeader>

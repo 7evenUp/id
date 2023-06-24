@@ -73,7 +73,8 @@
     "th-txid": "tx id",
     "tx-status-success": "successfully",
     "tx-status-pending": "in progress",
-    "tx-status-reject": "rejected"
+    "tx-status-reject": "rejected",
+    "no-data": "So far, you have not made a single transaction"
   },
   "balance": {
     "current": "current account balance",
@@ -106,7 +107,13 @@
       "total": "Total",
       "make-sure": "Make sure that there are funds on your balance",
       "replenish-btn": "replenish",
-      "buy": "purchase"
+      "buy": "purchase",
+      "duration_one": "{{count}} month",
+      "duration_other": "{{count}} months",
+      "savings": "savings",
+      "choose-btn": "choose",
+      "chosen-btn": "chosen",
+      "automatic-debiting": "automatic debiting"
     },
     "second-step": {
       "step": "step 2/3: Data entry",
@@ -120,7 +127,16 @@
       "continue-btn": "continue"
     },
     "third-step": {
-      "step": "step 3/3: Prime services"
+      "step": "step 3/3: Prime services",
+      "find-links": "You can also find links to the entry in your Personal Account, in the Prime Settings.",
+      "part-1-heading": "COMMUNICATE",
+      "part-1-text-1": "All Prime content is concentrated in the Prime Telegram channel and chat rooms, so join, develop together with like-minded people, monetize your knowledge.",
+      "part-1-text-2": "You can also familiarize yourself with all the services and features of Prime or navigate to Prime.",
+      "part-2-heading": "GET BONUSES",
+      "part-2-text": "Activate the Crypton Lobby subscription management bot in Telegram and synchronize with the web cabinet to receive special offers, a monthly share from the SHARES investment fund and other notifications about the Prime service.",
+      "part-3-heading": "FOLLOW THE EVENTS",
+      "part-3-text": "Use the Calendar to prove yourself in the relevant and profitable events of the world of cryptocurrencies. The calendar will significantly save time and significantly increase your productivity.",
+      "okay-btn": "okay"
     }
   },
   "ref-info": {

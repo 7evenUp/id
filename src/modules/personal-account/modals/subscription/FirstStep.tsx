@@ -111,17 +111,19 @@ const FirstStep = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px]">
+      <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] lg:max-w-[910px] 2xl:max-w-[59.244vw]">
         <SubscriptionModalHeader step={t("buy-subs.first-step.step")} />
 
-        <div className="h-[400px] lg:h-auto overflow-y-auto pr-2 pb-1">
+        <div className="h-[400px] lg:h-auto overflow-y-auto pr-2 pb-1 2xl:pr-[0.521vw] 2xl:pb-[0.26vw]">
           <PrimeInfo />
 
-          <div className="flex flex-col items-center flex-wrap mobile:flex-row gap-3 sm:gap-5 mb-6">
+          <div className="flex flex-col items-center flex-wrap mobile:flex-row gap-3 sm:gap-5 mb-6 2xl:gap-[1.302vw] 2xl:mb-[1.563vw]">
             {subscriptions.map((sub, i) => (
               <SubscriptionCard
                 key={sub.id}
-                duration={sub.name}
+                duration={t("buy-subs.first-step.duration", {
+                  count: sub.duration.id,
+                })}
                 discount={
                   sub.baseDiscount === null
                     ? null
@@ -142,7 +144,7 @@ const FirstStep = ({
           </div>
 
           {activeSub !== null && (
-            <div className="relative flex items-center gap-2 mb-5">
+            <div className="relative flex items-center gap-2 mb-5 2xl:gap-[0.521vw] 2xl:mb-[1.302vw]">
               <Input
                 placeholder={t("buy-subs.first-step.promo-placeholder")}
                 value={promo}
@@ -153,7 +155,7 @@ const FirstStep = ({
                 )}
               />
               {isError && (
-                <span className="absolute bottom-0 translate-y-4 typography-text-1 text-error">
+                <span className="absolute bottom-0 translate-y-4 2xl:translate-y-[1.042vw] typography-text-1 text-error">
                   {t("buy-subs.first-step.promo-error")}
                 </span>
               )}
@@ -172,8 +174,8 @@ const FirstStep = ({
             </div>
           )}
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 2xl:gap-[0.521vw]">
+            <div className="flex flex-col gap-0.5 2xl:gap-[0.13vw]">
               <span className="typography-head">
                 {t("buy-subs.first-step.total")}: ${totalPrice.toFixed(2)}
               </span>
@@ -181,7 +183,7 @@ const FirstStep = ({
                 {t("buy-subs.first-step.make-sure")}
               </span>
             </div>
-            <div className="flex flex-wrap gap-2 sm:gap-5">
+            <div className="flex flex-wrap gap-2 sm:gap-5 2xl:gap-[1.302vw]">
               <Button onClick={openBalanceModal}>
                 {t("buy-subs.first-step.replenish-btn")}
               </Button>
@@ -206,12 +208,12 @@ const PrimeInfo = () => {
   const { t } = useTranslation("modals")
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-6">
-      <div className="flex items-center gap-3">
-        <PrimeIcon className="dark:fill-gray-5" />
+    <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-6 2xl:gap-[1.563vw] 2xl:mb-[1.563vw]">
+      <div className="flex items-center gap-3 2xl:gap-[0.781vw]">
+        <PrimeIcon className="dark:fill-gray-5 w-[27px] h-[30px] 2xl:w-[1.757vw] 2xl:h-[1.953vw]" />
         <span className="typography-head">Prime</span>
       </div>
-      <p className="typography-text-1 max-w-[464px]">
+      <p className="typography-text-1 max-w-[464px] 2xl:max-w-[30.208vw]">
         {t("buy-subs.first-step.prime-desc")}
       </p>
     </div>

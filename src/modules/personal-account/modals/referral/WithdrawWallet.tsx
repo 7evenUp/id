@@ -96,20 +96,21 @@ const WithdrawWallet = ({
         resetMutation()
       }}
     >
-      <DialogContent className="max-w-[550px]">
+      <DialogContent className="max-w-[550px] 2xl:max-w-[35.807vw]">
         <DialogHeader>
           <button
-            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
+            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 2xl:gap-[0.521vw] hover:text-gray-3 dark:hover:text-gray-3"
             onClick={openMain}
           >
-            <MoveLeft className="w-3.5 h-3.5" /> {t("ref-withdraw.back-btn")}
+            <MoveLeft className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw]" />{" "}
+            {t("ref-withdraw.back-btn")}
           </button>
         </DialogHeader>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-[18px]"
+            className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
           >
             <FormField
               name="wallet"
@@ -130,7 +131,7 @@ const WithdrawWallet = ({
                 </FormItem>
               )}
             />
-            <div className="flex gap-2 flex-wrap mb-2">
+            <div className="flex flex-wrap gap-2 2xl:gap-[0.521vw] mb-2 2xl:mb-[0.521vw]">
               <Chip
                 onClick={() => setWithdrawType("USDC (ERC-20)")}
                 type="button"
@@ -158,16 +159,18 @@ const WithdrawWallet = ({
                   <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
                     {t("ref-withdraw.amount-label")}
                   </FormLabel>
-                  <div className="relative w-[260px]">
-                    <span className="absolute left-0 top-1 text-sm">$</span>
+                  <div className="relative w-[260px] 2xl:w-[16.927vw]">
+                    <span className="absolute left-0 top-1 2xl:top-[0.26vw] text-sm 2xl:text-[0.911vw]/[1.302vw]">
+                      $
+                    </span>
                     <FormControl>
                       <Input
-                        className="w-[260px] pl-4 mb-2 text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className="w-[260px] 2xl:w-[16.927vw] pl-4 mb-2 2xl:pl-[1.042vw] 2xl:mb-[0.521vw] text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                         placeholder={t("ref-withdraw.amount-placeholder")}
                         {...field}
                       />
                     </FormControl>
-                    <span className="typography-text-1 absolute right-0 top-2">
+                    <span className="typography-text-1 absolute right-0 top-2 2xl:top-[0.521vw]">
                       {withdrawType}
                     </span>
                   </div>
@@ -179,7 +182,7 @@ const WithdrawWallet = ({
               )}
             />
             {isSuccess && (
-              <ResponseSuccessText className="max-w-[320px]">
+              <ResponseSuccessText className="max-w-[320px] 2xl:max-w-[20.833vw]">
                 {t("ref-withdraw.personal-wallet-success")}
               </ResponseSuccessText>
             )}

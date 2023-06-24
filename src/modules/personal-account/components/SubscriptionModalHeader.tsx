@@ -16,12 +16,12 @@ const SubscriptionModalHeader = ({ step }: { step: string }) => {
   return (
     <DialogHeader className="typography-text-1">
       <span>{step}</span>
-      <div className="flex flex-col items-end gap-1">
-        <span className="flex items-center gap-1">
+      <div className="flex flex-col items-end gap-1 2xl:gap-[0.26vw]">
+        <span className="flex items-center gap-1 2xl:gap-[0.26vw]">
           {t("buy-subs.balance")}:{" "}
           <span className="typography-balance">${balance}</span>
         </span>
-        <span className="flex items-center gap-1">
+        <span className="flex items-center gap-1 2xl:gap-[0.26vw]">
           {t("buy-subs.current-status")}:<SubscriptionType />
         </span>
       </div>

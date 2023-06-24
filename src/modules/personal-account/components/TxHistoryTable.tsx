@@ -63,7 +63,7 @@ const TxHistoryTable = () => {
 export default TxHistoryTable
 
 const THead = ({ children }: { children: React.ReactNode }) => (
-  <th className="typography-tip pb-4 pr-2 md:pr-6">{children}</th>
+  <th className="typography-tip pb-4 2xl:pb-[1.042vw] pr-2 md:pr-6 2xl:pr-[1.563vw]">{children}</th>
 )
 
 const TData = ({
@@ -73,5 +73,5 @@ const TData = ({
   children: React.ReactNode
   className?: string
 }) => (
-  <th className={cn("py-1 pr-2 md:pr-6 text-left", className)}>{children}</th>
+  <th className={cn("py-1 2xl:py-[0.26vw] pr-2 md:pr-6 2xl:pr-[1.563vw] text-left", className)}>{children}</th>
 )

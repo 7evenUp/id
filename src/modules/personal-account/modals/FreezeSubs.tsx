@@ -29,14 +29,14 @@ const FreezeSubs = () => {
   const isFrozen = status === "FROZEN"
 
   return (
-    <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px] sm:pb-16">
-      <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2">
+    <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px] 2xl:max-w-[45.572vw] sm:pb-16 2xl:pb-[4.166vw]">
+      <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 2xl:mb-[1.563vw] gap-2 2xl:gap-[0.521vw]">
         <div className="flex flex-col typography-text-1">
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-2 2xl:gap-[0.521vw]">
             {t("freeze.status")}:{" "}
             <span
               className={cn(
-                "typography-text-1 italic px-1.5 py-0.5 text-gray-6 select-none bg-gradient-to-r rounded-full",
+                "typography-text-1 italic px-1.5 py-0.5 2xl:px-[0.391vw] 2xl:py-[0.13vw] text-gray-6 select-none bg-gradient-to-r rounded-full",
                 isFrozen
                   ? "from-frozen-start to-frozen-end"
                   : "from-green to-mint"
@@ -45,7 +45,7 @@ const FreezeSubs = () => {
               {isFrozen ? t("freeze.status-frozen") : t("freeze.status-active")}
             </span>
           </span>
-          <span className="flex items-baseline gap-2">
+          <span className="flex items-baseline gap-2 2xl:gap-[0.521vw]">
             {t("freeze.freeze-available")}:{" "}
             <span className="typography-balance">
               {isFrozen
@@ -80,7 +80,7 @@ const FreezeSubs = () => {
         )}
       </DialogHeader>
       <div>
-        <h3 className="typography-semi-head mb-2.5">
+        <h3 className="typography-semi-head mb-2.5 2xl:mb-[0.651vw]">
           {t("freeze.sub-freeze-title")}
         </h3>
         <p className="typography-text-0 text-black dark:text-gray-4">
@@ -88,7 +88,7 @@ const FreezeSubs = () => {
         </p>
       </div>
       <div>
-        <h3 className="typography-semi-head mb-2.5">
+        <h3 className="typography-semi-head mb-2.5 2xl:mb-[0.651vw]">
           {t("freeze.how-works-title")}
         </h3>
         <p className="typography-text-0 text-black dark:text-gray-4">

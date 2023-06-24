@@ -81,17 +81,17 @@ const UpdateTelegram = () => {
   }
 
   return (
-    <DialogContent className="mobile:w-[370px] sm:w-[370px]">
+    <DialogContent className="mobile:w-[370px] sm:w-[370px] 2xl:w-[24.088vw]">
       {isSecondStep && (
         <button
-          className="typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit"
+          className="typography-btn-big flex items-center gap-2 2xl:gap-[0.521vw] hover:text-gray-3 w-fit"
           onClick={() => setIsSecondStep(false)}
         >
-          <MoveLeft className="w-3.5 h-3.5" />
+          <MoveLeft className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw]" />
           <span className="text-left">{t("change-tg.back-button")}</span>
         </button>
       )}
-      <DialogHeader className="mb-4">
+      <DialogHeader className="mb-4 2xl:mb-[1.042vw]">
         <div className="flex flex-col">
           <DialogTitle>{t("change-tg.heading")}</DialogTitle>
         </div>
@@ -143,7 +143,7 @@ const NicknameForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-[18px]"
+        className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
       >
         <FormField
           name="nickname"
@@ -154,10 +154,10 @@ const NicknameForm = ({
                 {t("change-tg.username-label")}
               </FormLabel>
               <div className="relative">
-                <span className="absolute left-0 top-1 text-sm">@</span>
+                <span className="absolute left-0 top-1 2xl:top-[0.26vw] text-sm 2xl:text-[0.911vw]/[1.302vw]">@</span>
                 <FormControl>
                   <Input
-                    className="w-full text-sm pl-4 aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className="w-full text-sm 2xl:text-[0.911vw]/[1.302vw] pl-4 2xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                     placeholder={t("change-tg.username-placeholder")}
                     {...field}
                   />
@@ -169,7 +169,7 @@ const NicknameForm = ({
         />
         {error && <ResponseErrorText error={error} />}
 
-        <Button className="w-fit mt-2" type="submit" isLoading={isLoading}>
+        <Button className="w-fit mt-2 2xl:mt-[0.521vw]" type="submit" isLoading={isLoading}>
           {t("change-tg.sync-button")}
         </Button>
       </form>
@@ -206,7 +206,7 @@ const CodeForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-[18px]"
+          className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
         >
           <FormField
             name="code"
@@ -218,7 +218,7 @@ const CodeForm = ({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className="text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                     placeholder={t("change-tg.code-placeholder")}
                     {...field}
                   />
@@ -234,7 +234,7 @@ const CodeForm = ({
           )}
 
           <Button
-            className="w-fit mt-2"
+            className="w-fit mt-2 2xl:mt-[0.521vw]"
             type="submit"
             isLoading={isLoading}
             disabled={isSuccess}
