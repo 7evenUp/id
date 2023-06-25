@@ -39,6 +39,7 @@ const WithdrawWallet = ({
   close: () => void
 }) => {
   const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
 
   const [withdrawType, setWithdrawType] =
     useState<WithdrawType>("USDC (ERC-20)")
@@ -55,13 +56,13 @@ const WithdrawWallet = ({
 
   const formSchema = z.object({
     wallet: z.string().min(1, {
-      message: "Поле обязательно для заполнения.",
+      message: tSchema("required"),
     }),
     amount: z
       .string()
-      .min(1, { message: "Поле обязательно для заполнения." })
+      .min(1, { message: tSchema("required") })
       .refine((val) => parseFloat(val) <= refBalance, {
-        message: "На балансе недостаточно средств",
+        message: tSchema("balance-not-enough"),
       }),
   })
 

@@ -35,22 +35,23 @@ import { useTopUpBalanceMutation } from "@/redux/api/balance"
 
 const PREDEFINED_AMOUNT_VALUES = ["5", "10", "20", "50", "100"]
 
-const formSchema = z.object({
-  amount: z
-    .string()
-    .min(1, { message: "Поле не может быть пустым" })
-    .regex(new RegExp("^[0-9]+$", "g"), {
-      message: "Допустимы только цифровые значения",
-    }),
-})
-
 const Balance = () => {
   const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
 
   const { data: profileData } = useUserProfileQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
 
   const { balance } = profileData!
+
+  const formSchema = z.object({
+    amount: z
+      .string()
+      .min(1, { message: tSchema("required") })
+      .regex(new RegExp("^[0-9]+$", "g"), {
+        message: tSchema("digits-only"),
+      }),
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -135,7 +136,9 @@ const Balance = () => {
               </div>
               <div className="flex items-center gap-2 mb-6 2xl:gap-[0.521vw] 2xl:mb-[1.563vw]">
                 <Checkbox id="email_bill" />
-                <CheckboxLabel htmlFor="email_bill">{t("balance.send-check")}</CheckboxLabel>
+                <CheckboxLabel htmlFor="email_bill">
+                  {t("balance.send-check")}
+                </CheckboxLabel>
               </div>
 
               {isSuccess && (

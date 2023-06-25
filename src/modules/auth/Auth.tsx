@@ -18,6 +18,7 @@ import { Skeleton } from "@/shared/ui/Skeleton"
 
 import { useAuthByWalletMutation } from "@/redux/api/auth"
 import { useBannerByIdQuery } from "@/redux/api/banners"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const AUTH_MESSAGE = "Authorization"
 const RES_BANNER_ID = 3
@@ -34,11 +35,16 @@ const Auth = () => {
   const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
   const { open } = useWeb3Modal()
 
-  const [authenticate, { isError: isAuthError, reset }] =
+  const { refetch } = useUserProfileQuery()
+  const [authenticate, { isError: isAuthError, reset, isSuccess: isAuthSuccess }] =
     useAuthByWalletMutation()
   const { data: banner, isLoading: isBannerLoading } = useBannerByIdQuery({
     id: RES_BANNER_ID,
   })
+
+  useEffect(() => {
+    if (isAuthSuccess) setTimeout(() => refetch(), 100)
+  }, [isAuthSuccess])
 
   useEffect(() => {
     const login = async () => {
@@ -108,7 +114,7 @@ const Auth = () => {
           {isLoadingSign && (
             <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw] mt-auto">
               <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
-              <p>Подтвердите подпись транзакции в кошельке</p>
+              <p>{t("login.confirm-wallet-sign")}</p>
             </div>
           )}
         </div>

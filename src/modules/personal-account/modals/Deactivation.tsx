@@ -22,17 +22,9 @@ import {
   useVerifyDeactivationMutation,
 } from "@/redux/api/profile"
 
-const codeFormSchema = z.object({
-  code: z
-    .string()
-    .min(1, {
-      message: "Поле обязательно для заполнения.",
-    })
-    .regex(new RegExp("^[0-9]+$", "g"), { message: "Только цифры" }),
-})
-
 const Deactivation = () => {
   const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
 
   const { data: userProfile } = useUserProfileQuery()
   const [deactivate, { isLoading, isSuccess }] = useDeactivateMutation()
@@ -42,6 +34,15 @@ const Deactivation = () => {
   ] = useVerifyDeactivationMutation()
 
   const { id } = userProfile!
+
+  const codeFormSchema = z.object({
+    code: z
+      .string()
+      .min(1, {
+        message: tSchema("required"),
+      })
+      .regex(new RegExp("^[0-9]+$", "g"), { message: tSchema("digits-only") }),
+  })
 
   const form = useForm<z.infer<typeof codeFormSchema>>({
     resolver: zodResolver(codeFormSchema),

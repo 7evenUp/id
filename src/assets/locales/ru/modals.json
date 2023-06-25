@@ -36,7 +36,10 @@
     "description": "Введите ниже код, полученный от бота в Telegram",
     "code-label": "Код",
     "code-placeholder": "Введите ваш код",
-    "confirm-button": "подтвердить"
+    "incorrect-code": "Неверный код",
+    "confirm-button": "подтвердить",
+    "request-success": "Telegram успешно синхронизирован",
+    "confirm-button-success": "успешно"
   },
   "change-avatar": {
     "heading": "Установить аватар профиля",

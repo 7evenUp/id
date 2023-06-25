@@ -29,32 +29,11 @@ import {
 } from "@/redux/api/profile"
 
 const nicknameFormSchema = z.object({
-  nickname: z
-    .string()
-    .min(5, {
-      message: "Минимальная длина - 5 символов",
-    })
-    .max(32, {
-      message: "Максимальная длина - 32 символа",
-    })
-    .regex(new RegExp("^[a-zA-Z0-9_]+$", "g"), {
-      message: "Формат допускает использование символов a-z, 0-9 и _",
-    })
-    .regex(new RegExp("^[a-zA-Z]"), {
-      message: "Никнейм не может начинаться с цифры или _",
-    })
-    .regex(new RegExp("[a-zA-Z0-9]$"), {
-      message: "Никнейм не может заканчиваться символом _",
-    }),
+  nickname: z.string(),
 })
 
 const codeFormSchema = z.object({
-  code: z
-    .string()
-    .min(1, {
-      message: "Поле обязательно для заполнения.",
-    })
-    .regex(new RegExp("^[0-9]+$", "g"), { message: "Только цифры" }),
+  code: z.string(),
 })
 
 const UpdateTelegram = () => {
@@ -133,6 +112,27 @@ const NicknameForm = ({
   error: FetchBaseQueryError | SerializedError | undefined
 }) => {
   const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
+
+  const nicknameFormSchema = z.object({
+    nickname: z
+      .string()
+      .min(5, {
+        message: tSchema("tg-username-min"),
+      })
+      .max(32, {
+        message: tSchema("tg-username-max"),
+      })
+      .regex(new RegExp("^[a-zA-Z0-9_]+$", "g"), {
+        message: tSchema("tg-username-incorrect-format"),
+      })
+      .regex(new RegExp("^[a-zA-Z]"), {
+        message: tSchema("tg-username-starts-error"),
+      })
+      .regex(new RegExp("[a-zA-Z0-9]$"), {
+        message: tSchema("tg-username-ends-error"),
+      }),
+  })
 
   const form = useForm<z.infer<typeof nicknameFormSchema>>({
     resolver: zodResolver(nicknameFormSchema),
@@ -154,7 +154,9 @@ const NicknameForm = ({
                 {t("change-tg.username-label")}
               </FormLabel>
               <div className="relative">
-                <span className="absolute left-0 top-1 2xl:top-[0.26vw] text-sm 2xl:text-[0.911vw]/[1.302vw]">@</span>
+                <span className="absolute left-0 top-1 2xl:top-[0.26vw] text-sm 2xl:text-[0.911vw]/[1.302vw]">
+                  @
+                </span>
                 <FormControl>
                   <Input
                     className="w-full text-sm 2xl:text-[0.911vw]/[1.302vw] pl-4 2xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
@@ -169,7 +171,11 @@ const NicknameForm = ({
         />
         {error && <ResponseErrorText error={error} />}
 
-        <Button className="w-fit mt-2 2xl:mt-[0.521vw]" type="submit" isLoading={isLoading}>
+        <Button
+          className="w-fit mt-2 2xl:mt-[0.521vw]"
+          type="submit"
+          isLoading={isLoading}
+        >
           {t("change-tg.sync-button")}
         </Button>
       </form>
@@ -189,6 +195,16 @@ const CodeForm = ({
   isError: boolean
 }) => {
   const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
+
+  const codeFormSchema = z.object({
+    code: z
+      .string()
+      .min(1, {
+        message: tSchema("required"),
+      })
+      .regex(new RegExp("^[0-9]+$", "g"), { message: tSchema("digits-only") }),
+  })
 
   const form = useForm<z.infer<typeof codeFormSchema>>({
     resolver: zodResolver(codeFormSchema),
@@ -197,7 +213,11 @@ const CodeForm = ({
 
   useEffect(() => {
     if (isError)
-      form.setError("code", { message: "Неверный код" }, { shouldFocus: true })
+      form.setError(
+        "code",
+        { message: t("change-tg.incorrect-code") },
+        { shouldFocus: true }
+      )
   }, [isError, form])
 
   return (
@@ -229,7 +249,7 @@ const CodeForm = ({
           />
           {isSuccess && (
             <ResponseSuccessText>
-              Telegram успешно синхронизирован
+              {t("change-tg.request-success")}
             </ResponseSuccessText>
           )}
 
@@ -240,7 +260,9 @@ const CodeForm = ({
             disabled={isSuccess}
             appearence={isSuccess ? "success" : "outlined"}
           >
-            {isSuccess ? "Успешно" : t("change-tg.confirm-button")}
+            {isSuccess
+              ? t("change-tg.confirm-button-success")
+              : t("change-tg.confirm-button")}
           </Button>
         </form>
       </Form>

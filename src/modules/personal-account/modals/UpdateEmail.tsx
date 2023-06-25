@@ -25,6 +25,7 @@ import {
 
 const UpdateEmail = () => {
   const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
 
   const { data: userProfileData } = useUserProfileQuery()
   const [updateEmail, { isSuccess, error, isLoading }] =
@@ -36,16 +37,16 @@ const UpdateEmail = () => {
     oldEmail: z
       .string()
       .min(1, {
-        message: "Поле обязательно для заполнения.",
+        message: tSchema("required"),
       })
-      .email("Неверный формат почты.")
+      .email(tSchema("email-incorrect-format"))
       .refine((val) => val === email, {
-        message: "Неверно введена старая почта",
+        message: tSchema("email-incorrect-old"),
       }),
     newEmail: z
       .string()
-      .min(1, { message: "Поле обязательно для заполнения." })
-      .email("Неверный формат почты."),
+      .min(1, { message: tSchema("required") })
+      .email(tSchema("email-incorrect-format")),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
