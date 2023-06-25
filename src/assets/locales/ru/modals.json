@@ -190,5 +190,10 @@
     "code-placeholder": "Введите код",
     "send-code-btn": "отправить код",
     "deactivate-btn": "деактивировать"
+  },
+  "connect-wallet": {
+    "title": "Подключение кошелька",
+    "connecting-metamask": "Подключение кошелька MetaMask",
+    "connecting-trustwallet": "Подключение кошелька Trust Wallet"
   }
 }

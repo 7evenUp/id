@@ -188,5 +188,10 @@
     "code-placeholder": "Enter code",
     "send-code-btn": "send code",
     "deactivate-btn": "deactivate"
+  },
+  "connect-wallet": {
+    "title": "Connecting a wallet",
+    "connecting-metamask": "Connecting a MetaMask wallet",
+    "connecting-trustwallet": "Connecting a Trust Wallet"
   }
 }
