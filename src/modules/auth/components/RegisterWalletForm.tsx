@@ -68,7 +68,7 @@ const RegisterWalletForm = ({
       const refCode = url.searchParams.get("ref_code")
 
       let payload: WalletReqParams = {
-        address: address,
+        address: address.toLowerCase(),
         message: AUTH_MESSAGE,
         signature,
         email: email.toLowerCase().trim(),
