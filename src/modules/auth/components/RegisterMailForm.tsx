@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
-import { useRegisterMutation } from "@/redux/api/auth"
+import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
 
 const formSchema = z.object({
   username: z.string().min(1, {
@@ -49,12 +49,19 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
     const url = new URL(location.href)
     const refCode = url.searchParams.get("ref_code")
 
-    // register({ email, profile_username: username, referral_code: refCode || "" })
-    register({
+    let payload: MailRegParams = {
       email: email.toLowerCase().trim(),
       profile_username: username,
-      referral_code: "NBBXRQXX",
-    })
+    }
+
+    if (refCode) {
+      payload = {
+        ...payload,
+        referral_code: refCode,
+      }
+    }
+
+    register(payload)
   }
   return (
     <>

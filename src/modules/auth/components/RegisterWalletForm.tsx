@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
-import { useRegisterByWalletMutation } from "@/redux/api/auth"
+import { WalletReqParams, useRegisterByWalletMutation } from "@/redux/api/auth"
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const formSchema = z.object({
@@ -67,14 +67,22 @@ const RegisterWalletForm = ({
       const url = new URL(location.href)
       const refCode = url.searchParams.get("ref_code")
 
-      await regWallet({
+      let payload: WalletReqParams = {
         address: address,
         message: AUTH_MESSAGE,
         signature,
         email: email.toLowerCase().trim(),
         profile_username: username,
-        referral_code: refCode || "",
-      })
+      }
+
+      if (refCode) {
+        payload = {
+          ...payload,
+          referral_code: refCode,
+        }
+      }
+
+      await regWallet(payload)
     } catch (error) {
       console.log("Catch error: ", error)
     }
