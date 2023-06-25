@@ -18,14 +18,14 @@ const PrevAvatars = ({
 }) => {
   const { t } = useTranslation("modals")
   return (
-    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-6">
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 2xl:gap-[1.042vw] mt-6 2xl:mt-[1.563vw]">
       <div className="flex justify-between items-center">
-        <span className="typography-text-1 w-[75px]">
+        <span className="typography-text-1 w-[75px] 2xl:w-[4.882vw]">
           {t("change-avatar.prev-images")}
         </span>
         {SaveBtn}
       </div>
-      <div className="flex items-center flex-wrap gap-2">
+      <div className="flex items-center flex-wrap gap-2 2xl:gap-[0.521vw]">
         {avatars.map((avatar, i) => (
           <ModalTrigger
             key={i}
@@ -37,13 +37,13 @@ const PrevAvatars = ({
                 <img
                   src={avatar.file}
                   alt="previous avatar"
-                  className="rounded-xl w-full min-w-[150px] sm:max-w-[550px] md:max-w-[640px] max-h-[500px] object-cover"
+                  className="rounded-xl 2xl:rounded-[0.781vw] w-full min-w-[150px] sm:max-w-[550px] md:max-w-[640px] 2xl:max-w-[41.666vw] max-h-[500px] 2xl:max-h-[32.552vw] object-cover"
                 />
               </DialogContent>
             }
           >
             <img
-              className="w-[60px] h-[60px] rounded-lg object-cover cursor-pointer hover:scale-105 transition-transform will-change-transform"
+              className="w-[60px] h-[60px] 2xl:w-[3.906vw] 2xl:h-[3.906vw] rounded-lg 2xl:rounded-[0.521vw] object-cover cursor-pointer hover:scale-105 transition-transform will-change-transform"
               src={avatar.file}
               alt="previous avatar"
             />
@@ -57,7 +57,7 @@ const PrevAvatars = ({
 export default PrevAvatars
 
 const CustomDialogClose = () => (
-  <DialogPrimitive.Close className="absolute border bg-white dark:bg-gray-1 border-gray-1 dark:border-white dark:text-white right-2 top-2 sm:right-0 sm:top-0 sm:translate-x-9 rounded-full opacity-100 hover:opacity-80 p-0.5">
-    <Close className="w-5 h-5" />
+  <DialogPrimitive.Close className="absolute border bg-white dark:bg-gray-1 border-gray-1 dark:border-white dark:text-white right-2 top-2 2xl:right-[1.302vw] 2xl:top-[1.302vw] sm:right-0 sm:top-0 sm:translate-x-9 2xl:translate-x-[2.344vw] rounded-full opacity-100 hover:opacity-80 p-0.5 2xl:p-[0.13vw]">
+    <Close className="w-5 h-5 2xl:w-[1.302vw] 2xl:h-[1.302vw]" />
   </DialogPrimitive.Close>
 )

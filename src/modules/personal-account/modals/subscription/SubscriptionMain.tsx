@@ -8,6 +8,7 @@ import ThirdStep from "./ThirdStep"
 
 import { Dialog } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
+
 import { useSubscriptionsQuery } from "@/redux/api/subscription"
 
 const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
@@ -18,9 +19,9 @@ const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
 
   const [boughtSubDuration, setBoughtSubDuration] = useState(0)
 
-  const { data: subsData } = useSubscriptionsQuery()
+  const { data: subscriptions } = useSubscriptionsQuery()
 
-  if (!subsData) return null
+  if (!subscriptions) return null
 
   const openFirstStep = () => {
     setFirstStepOpened(true)
@@ -50,7 +51,7 @@ const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
         onOpenChange={setFirstStepOpened}
         openBalanceModal={openBalanceModal}
         openSecondStep={openSecondStep}
-        subscriptions={subsData.results}
+        subscriptions={subscriptions}
         setBoughtSubDuration={setBoughtSubDuration}
       />
 

@@ -1,11 +1,17 @@
 import { api } from "./core"
 
-interface WalletReqParams {
+export interface WalletReqParams {
   address: string
   signature: string
   message: string
   email?: string
   profile_username?: string
+  referral_code?: string
+}
+
+export interface MailRegParams {
+  email: string
+  profile_username: string
   referral_code?: string
 }
 
@@ -17,7 +23,7 @@ const authApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["UserProfile"]
+      invalidatesTags: ["UserProfile"],
     }),
     registerByWallet: build.mutation<void, WalletReqParams>({
       query: (body) => ({
@@ -41,19 +47,17 @@ const authApi = api.injectEndpoints({
         message: response.data.detail,
       }),
     }),
-    register: build.mutation<void, { email: string; profile_username: string, referral_code: string }>(
-      {
-        query: (body) => ({
-          url: "users/register-web/",
-          method: "POST",
-          body,
-        }),
-        transformErrorResponse: (response) => ({
-          // @ts-expect-error No-Error-Types
-          message: response.data.detail,
-        }),
-      }
-    ),
+    register: build.mutation<void, MailRegParams>({
+      query: (body) => ({
+        url: "users/register-web/",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
+    }),
     logout: build.query<void, void>({
       query: () => ({
         url: "users/logout/",

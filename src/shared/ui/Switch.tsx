@@ -9,7 +9,7 @@ const Switch = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <RadixSwitch.Root
     className={cn(
-      "inline-flex h-[18px] w-[36px] shrink-0 cursor-pointer items-center rounded-full border border-gray-4 dark:border-gray-3 data-[state=checked]:border-gray-1 dark:data-[state=checked]:border-gray-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "inline-flex h-[18px] w-[36px] 2xl:h-[1.172vw] 2xl:w-[2.344vw] shrink-0 cursor-pointer items-center rounded-full border border-gray-4 dark:border-gray-3 data-[state=checked]:border-gray-1 dark:data-[state=checked]:border-gray-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       className
     )}
     {...props}
@@ -17,7 +17,7 @@ const Switch = React.forwardRef<
   >
     <RadixSwitch.Thumb
       className={cn(
-        "pointer-events-none block h-3 w-3 rounded-full bg-gray-4 dark:bg-gray-3 transition-transform data-[state=checked]:translate-x-5 data-[state=checked]:bg-gray-1 dark:data-[state=checked]:bg-gray-4 data-[state=unchecked]:translate-x-[3px]"
+        "pointer-events-none block h-3 w-3 2xl:h-[0.781vw] 2xl:w-[0.781vw] rounded-full bg-gray-4 dark:bg-gray-3 transition-transform data-[state=checked]:translate-x-5 2xl:data-[state=checked]:translate-x-[1.302vw] data-[state=checked]:bg-gray-1 dark:data-[state=checked]:bg-gray-4 data-[state=unchecked]:translate-x-[3px] 2xl:data-[state=unchecked]:translate-x-[0.195vw]"
       )}
     />
   </RadixSwitch.Root>

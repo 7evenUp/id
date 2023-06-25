@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Telegram } from "@/assets/icons/telegram.svg"
@@ -43,8 +43,7 @@ const SecondStep = ({
   const [inputValue, setInputValue] = useState("")
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateDiscord, { isSuccess, isLoading, isError }] =
-    useUpdateDiscordMutation()
+  const [updateDiscord, { isSuccess, isLoading }] = useUpdateDiscordMutation()
 
   const { telegramUsername, discordUsername, wallet } = userProfile!
 
@@ -54,15 +53,17 @@ const SecondStep = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="pb-14 sm:pb-14 sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px]">
+      <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px] 2xl:max-w-[52.083vw]">
         <ModalHeader step={t("buy-subs.second-step.step")} />
 
-        <div className="flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px]">
+        <div className="flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px] 2xl:gap-[9.114vw]">
           <div className="flex flex-col">
-            <div className="flex flex-col gap-4 w-[270px]">
+            <div className="flex flex-col gap-4 w-[270px] 2xl:gap-[1.042vw] 2xl:w-[17.578vw]">
               <div className="flex items-center">
-                <Telegram />
-                <span className="ml-2.5 typography-text-0">Telegram</span>
+                <Telegram className="w-[18px] h-[18px] 2xl:w-[1.172vw] 2xl:h-[1.172vw]" />
+                <span className="ml-2.5 2xl:ml-[0.651vw] typography-text-0">
+                  Telegram
+                </span>
                 {telegramUsername ? (
                   <span className="ml-auto typography-text-0">
                     @{telegramUsername}
@@ -76,8 +77,10 @@ const SecondStep = ({
                 )}
               </div>
               <div className="flex items-center">
-                <Discord />
-                <span className="ml-2.5 typography-text-0">Discord</span>
+                <Discord className="w-[18px] h-[20px] 2xl:w-[1.172vw] 2xl:h-[1.302vw]" />
+                <span className="ml-2.5 2xl:ml-[0.651vw] typography-text-0">
+                  Discord
+                </span>
                 {discordUsername ? (
                   <span className="ml-auto typography-text-0">
                     @{discordUsername}
@@ -92,12 +95,12 @@ const SecondStep = ({
                     />
                     <div
                       className={cn(
-                        "opacity-0 absolute -right-6 top-1 transition-opacity",
+                        "opacity-0 absolute -right-6 top-1 2xl:-right-[1.563vw] 2xl:top-[0.26vw] transition-opacity",
                         inputValue.length && "opacity-100"
                       )}
                     >
                       {isLoading ? (
-                        <Loader className="animate-spin w-5 h-5" />
+                        <Loader className="animate-spin w-5 h-5 2xl:w-[1.302vw] 2xl:h-[1.302vw]" />
                       ) : (
                         <ConfirmButton
                           onClick={onUpdateDiscord}
@@ -111,8 +114,8 @@ const SecondStep = ({
                 )}
               </div>
               <div className="flex items-center">
-                <Ethereum className="w-[18px]" />
-                <span className="ml-2.5 typography-text-0">
+                <Ethereum className="w-[18px] h-[21px] 2xl:w-[1.172vw] 2xl:h-[1.367vw]" />
+                <span className="ml-2.5 2xl:ml-[0.651vw] typography-text-0">
                   {t("buy-subs.second-step.wallet")}
                 </span>
                 {wallet ? (
@@ -128,19 +131,19 @@ const SecondStep = ({
                 )}
               </div>
             </div>
-            <p className="typography-tip mt-4">
+            <p className="typography-tip mt-4 2xl:mt-[0.911vw]">
               {t("buy-subs.second-step.later")}
             </p>
 
             {/* Vissible on Mobile */}
             <Button
-              className="md:hidden mt-6 w-fit self-end"
+              className="md:hidden mt-6 2xl:mt-[1.563vw] w-fit self-end"
               onClick={openThirdStep}
             >
               {t("buy-subs.second-step.continue-btn")}
             </Button>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
             <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
               {t("buy-subs.second-step.congrats")}
             </h3>

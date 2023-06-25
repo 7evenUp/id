@@ -8,14 +8,14 @@ const TabTitle = ({ title, link }: { title: string; link: string }) => {
   const { t } = useTranslation("products")
 
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 2xl:gap-[1.302vw]">
       <Subheading>{title}</Subheading>
       <a
-        className="typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3"
+        className="typography-btn-big dark:text-gray-5 flex items-center gap-2 2xl:gap-[0.521vw] hover:text-gray-3 dark:hover:text-gray-3"
         href={link}
         target="_blank"
       >
-        <MoveRight className="w-3.5 h-3.5" />
+        <MoveRight className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw]" />
         {t("website")}
       </a>
     </div>

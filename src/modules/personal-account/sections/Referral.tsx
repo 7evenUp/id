@@ -52,11 +52,11 @@ const Referral = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center pb-4 group">
+      <div className="flex justify-between items-center pb-4 2xl:pb-[1.042vw] group">
         <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
           <IconButton className="sm:opacity-0 group-hover:opacity-100 transition-all bg-gray-1 hover:bg-gray-2 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80 dark:active:bg-opacity-80 rounded-full focus:opacity-100">
-            <Info className="w-3 h-3 fill-white dark:fill-gray-1" />
+            <Info className="w-3 h-3 2xl:w-[0.781vw] 2xl:h-[0.781vw] fill-white dark:fill-gray-1" />
           </IconButton>
         </ModalTrigger>
       </div>
@@ -66,7 +66,7 @@ const Referral = () => {
             {t("referral.cashback")}:{" "}
             <AccentNumber>{refCashBack}%</AccentNumber>
           </span>
-          <div className="flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink">
+          <div className="flex gap-1.5 xl:gap-3 2xl:gap-[0.781vw] flex-wrap justify-end flex-shrink">
             <Button onClick={onPromoClick}>{t("referral.promo-btn")}</Button>
             <Button onClick={onRefLinkClick}>{t("referral.link-btn")}</Button>
           </div>

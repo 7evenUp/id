@@ -17,5 +17,5 @@ export interface Subscription {
   price: number
   isActive: boolean
   kind: number
-  baseDiscount: number
+  baseDiscount: number | null
 }

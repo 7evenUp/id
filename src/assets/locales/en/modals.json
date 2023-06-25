@@ -11,15 +11,15 @@
     "heading": "Synchronize wallet",
     "wallet-acc-unpresent": {
       "status": "There is no wallet linked to your account",
-      "metamask-disconnected": "To link, connect the Metamask wallet to the site",
-      "metamask-connected": "You have connected a wallet with the address:",
+      "wallet-disconnected": "To link, connect the wallet to the site",
+      "wallet-connected": "You have connected a wallet with the address:",
       "confirm-text": "Upon confirmation, this address will be linked to your account. In the future, you will be able to log in to your account using a wallet with this address."
     },
     "wallet-acc-present": {
       "status": "A wallet is linked to your account:",
-      "metamask-disconnected": "To change it, connect a wallet with a different address to the Meta mask website.",
-      "metamask-connected": "The site is connected to a wallet with the address:",
-      "wallets-equal": "To change the wallet, change the wallet account via Metamask",
+      "wallet-disconnected": "To change it, connect a wallet with a different address to the Meta mask website.",
+      "wallet-connected": "The site is connected to a wallet with the address:",
+      "wallets-equal": "To change the address, disconnect the current wallet from the site through its interface and connect a new one",
       "confirm-text-1-part-1": "Upon confirmation, the current address",
       "confirm-text-1-part-2": "will be changed to",
       "confirm-text-2": "In the future, you will be able to log in to your account using a new address."
@@ -73,7 +73,8 @@
     "th-txid": "tx id",
     "tx-status-success": "successfully",
     "tx-status-pending": "in progress",
-    "tx-status-reject": "rejected"
+    "tx-status-reject": "rejected",
+    "no-data": "So far, you have not made a single transaction"
   },
   "balance": {
     "current": "current account balance",
@@ -100,10 +101,19 @@
       "step": "step 1/3: Choosing a plan",
       "prime-desc": "Effective strategies to increase earnings with tangible savings personal time. The Prime team carefully selects the most significant events and forms ways of earning for both beginners and advanced users.",
       "promo-placeholder": "enter promo code",
+      "promo-apply-btn": "apply",
+      "promo-applied": "applied",
+      "promo-error": "There is no such promo code",
       "total": "Total",
       "make-sure": "Make sure that there are funds on your balance",
       "replenish-btn": "replenish",
-      "buy": "purchase"
+      "buy": "purchase",
+      "duration_one": "{{count}} month",
+      "duration_other": "{{count}} months",
+      "savings": "savings",
+      "choose-btn": "choose",
+      "chosen-btn": "chosen",
+      "automatic-debiting": "automatic debiting"
     },
     "second-step": {
       "step": "step 2/3: Data entry",
@@ -117,7 +127,16 @@
       "continue-btn": "continue"
     },
     "third-step": {
-      "step": "step 3/3: Prime services"
+      "step": "step 3/3: Prime services",
+      "find-links": "You can also find links to the entry in your Personal Account, in the Prime Settings.",
+      "part-1-heading": "COMMUNICATE",
+      "part-1-text-1": "All Prime content is concentrated in the Prime Telegram channel and chat rooms, so join, develop together with like-minded people, monetize your knowledge.",
+      "part-1-text-2": "You can also familiarize yourself with all the services and features of Prime or navigate to Prime.",
+      "part-2-heading": "GET BONUSES",
+      "part-2-text": "Activate the Crypton Lobby subscription management bot in Telegram and synchronize with the web cabinet to receive special offers, a monthly share from the SHARES investment fund and other notifications about the Prime service.",
+      "part-3-heading": "FOLLOW THE EVENTS",
+      "part-3-text": "Use the Calendar to prove yourself in the relevant and profitable events of the world of cryptocurrencies. The calendar will significantly save time and significantly increase your productivity.",
+      "okay-btn": "okay"
     }
   },
   "ref-info": {

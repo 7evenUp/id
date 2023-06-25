@@ -22,7 +22,6 @@ import { useLoginMutation } from "@/redux/api/auth"
 import { Dispatch, SetStateAction } from "react"
 
 const formSchema = z.object({
-  username: z.string(),
   email: z
     .string()
     .min(1, {
@@ -46,13 +45,15 @@ const LoginMailForm = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      username: "",
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setEmail(values.email)
-    trigger({ ...values, redirect_url: "https://id.crypton.xyz" })
+  const onSubmit = async ({ email }: z.infer<typeof formSchema>) => {
+    setEmail(email)
+    trigger({
+      email: email.toLowerCase().trim(),
+      redirect_url: "https://id.crypton.xyz",
+    })
   }
 
   return (
@@ -60,7 +61,7 @@ const LoginMailForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3"
+          className="flex flex-col gap-3 2xl:gap-[0.781vw]"
         >
           <FormField
             name="email"
@@ -82,7 +83,7 @@ const LoginMailForm = ({
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3">
+      <div className="flex mt-3 2xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
             Ссылка для входа успешно отправлена вам на почту

@@ -9,7 +9,7 @@ const ToolsTab = () => {
       <TabHeader>
         <TabTitle title="Tools" link="https://tools.crypton.xyz/ru/T0" />
       </TabHeader>
-      <Subheading className="mt-10">Coming soon</Subheading>
+      <Subheading className="mt-10 2xl:mt-[2.604vw]">Coming soon</Subheading>
     </>
   )
 }
