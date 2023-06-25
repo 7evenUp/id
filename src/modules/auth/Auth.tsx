@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAccount, useSignMessage } from "wagmi"
+import { useAccount, useDisconnect, useSignMessage } from "wagmi"
 import { useWeb3Modal } from "@web3modal/react"
 import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
@@ -32,12 +32,15 @@ const Auth = () => {
   const [signature, setSignature] = useState("")
 
   const { address, isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
   const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
   const { open } = useWeb3Modal()
 
   const { refetch } = useUserProfileQuery()
-  const [authenticate, { isError: isAuthError, reset, isSuccess: isAuthSuccess }] =
-    useAuthByWalletMutation()
+  const [
+    authenticate,
+    { isError: isAuthError, reset, isSuccess: isAuthSuccess },
+  ] = useAuthByWalletMutation()
   const { data: banner, isLoading: isBannerLoading } = useBannerByIdQuery({
     id: RES_BANNER_ID,
   })
@@ -48,7 +51,15 @@ const Auth = () => {
 
   useEffect(() => {
     const login = async () => {
-      const signature = await signMessageAsync({ message: AUTH_MESSAGE })
+      let signature
+
+      try {
+        signature = await signMessageAsync({ message: AUTH_MESSAGE })
+      } catch {
+        disconnect()
+        return
+      }
+
       setSignature(signature)
       const lowerAddress = isConnected && address ? address.toLowerCase() : ""
       await authenticate({
