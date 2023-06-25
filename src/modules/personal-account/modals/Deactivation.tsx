@@ -50,7 +50,11 @@ const Deactivation = () => {
 
   useEffect(() => {
     if (isVerifyError)
-      form.setError("code", { message: "Неверный код" }, { shouldFocus: true })
+      form.setError(
+        "code",
+        { message: t("deactivation.error-incorrect-code") },
+        { shouldFocus: true }
+      )
   }, [isVerifyError, form])
 
   const onDeactivationStart = () => {
@@ -76,49 +80,47 @@ const Deactivation = () => {
 
         {!isSuccess ? (
           <Button
-            className="w-fit bg-error hover:bg-red-600 dark:hover:bg-red-600 text-white dark:text-white"
+            className="w-fit mt-2 2xl:mt-[0.521vw]"
             onClick={onDeactivationStart}
             isLoading={isLoading}
           >
-            {t("deactivation.deactivate-btn")}
+            {t("deactivation.send-code-btn")}
           </Button>
         ) : (
-          <>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onDelete)}
-                className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
-              >
-                <FormField
-                  name="code"
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                        {t("change-tg.code-label")}
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
-                          placeholder={t("change-tg.code-placeholder")}
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onDelete)}
+              className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
+            >
+              <FormField
+                name="code"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                      {t("change-tg.code-label")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        placeholder={t("change-tg.code-placeholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                <Button
-                  className="w-fit mt-2 2xl:mt-[0.521vw]"
-                  type="submit"
-                  isLoading={isVerifyLoading}
-                >
-                  {t("change-tg.confirm-button")}
-                </Button>
-              </form>
-            </Form>
-          </>
+              <Button
+                className="bg-error hover:bg-red-600 dark:hover:bg-red-600 text-white dark:text-white w-fit mt-2 2xl:mt-[0.521vw]"
+                type="submit"
+                isLoading={isVerifyLoading}
+              >
+                {t("deactivation.deactivate-btn")}
+              </Button>
+            </form>
+          </Form>
         )}
       </div>
     </DialogContent>

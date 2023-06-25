@@ -103,13 +103,13 @@ const ConnectWalletModal = ({
 
         <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
           <ConnectButton onClick={onMetamaskClick}>
-            <MetaMask className="w-6 h-6 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> MetaMask
+            <MetaMask className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> MetaMask
           </ConnectButton>
           <ConnectButton onClick={onTrustWalletClick}>
-            <TrustWallet className="w-6 h-6 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> Trust Wallet
+            <TrustWallet className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> Trust Wallet
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
-            <WalletConnect className="w-6 h-6 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> WalletConnect
+            <WalletConnect className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> WalletConnect
           </ConnectButton>
         </div>
       </DialogContent>

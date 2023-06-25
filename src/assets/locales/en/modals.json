@@ -179,9 +179,11 @@
   },
   "deactivation": {
     "heading": "Account deactivation",
-    "text-1": "If you are sure that you want to deactivate your account, enter the code below that you received in telegram (or in the mail)",
+    "text-1": "To deactivate your account, you need to receive a code to your email and then enter it in the input field",
     "text-2": "Please note that all your data and funds will be lost!",
+    "error-incorrect-code": "Incorrect code",
     "code-placeholder": "Enter code",
+    "send-code-btn": "send code",
     "deactivate-btn": "deactivate"
   }
 }
