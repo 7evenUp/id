@@ -27,7 +27,7 @@ const ProfileWallet = () => {
       <span
         className={cn(
           "mr-auto",
-          wallet ? "text-gray-1 dark:text-gray-5" : "text-gray-3"
+          wallet ? "text-gray-1 dark:text-gray-4" : "text-gray-3"
         )}
       >
         {t("profile.wallet")}

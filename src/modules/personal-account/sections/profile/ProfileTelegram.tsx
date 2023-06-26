@@ -21,7 +21,7 @@ const ProfileTelegram = () => {
     <RowItem className="flex-1 relative group">
       <span
         className={
-          telegramUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"
+          telegramUsername ? "text-gray-1 dark:text-gray-4" : "text-gray-3"
         }
       >
         telegram
