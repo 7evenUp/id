@@ -1,3 +1,4 @@
+import { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -39,6 +40,8 @@ const Balance = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
 
+  const checkboxRef = useRef<HTMLButtonElement>(null)
+
   const { data: profileData } = useUserProfileQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
 
@@ -59,8 +62,13 @@ const Balance = () => {
   })
 
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
+    if (!checkboxRef.current) return
     try {
-      const paymentUrl = await trigger({ amount: parseInt(amount) }).unwrap()
+      const paymentUrl = await trigger({
+        amount: parseInt(amount),
+        is_receipt_needed:
+          checkboxRef.current.ariaChecked === "false" ? false : true,
+      }).unwrap()
       form.reset()
       window.open(paymentUrl, "_blank")
     } catch (error) {
@@ -135,7 +143,7 @@ const Balance = () => {
                 ))}
               </div>
               <div className="flex items-center gap-2 mb-6 2xl:gap-[0.521vw] 2xl:mb-[1.563vw]">
-                <Checkbox id="email_bill" />
+                <Checkbox id="email_bill" ref={checkboxRef} />
                 <CheckboxLabel htmlFor="email_bill">
                   {t("balance.send-check")}
                 </CheckboxLabel>
