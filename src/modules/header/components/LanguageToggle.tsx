@@ -8,10 +8,15 @@ import { changeLang } from "@/redux/language/slice"
 const LanguageToggle = () => {
   const language = useAppSelector((state) => state.language.value)
   const dispatch = useAppDispatch()
-  
+
   const { i18n } = useTranslation()
 
   useEffect(() => {
+    if (language !== null) {
+      i18n.changeLanguage(language === "ru" ? "ru" : "en")
+      return
+    }
+
     const lang = window.navigator.language
     const langFistTwo = lang.substring(0, 2)
 

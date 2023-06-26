@@ -1,8 +1,6 @@
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 
-import { store } from "@/redux/store"
-
 import enTranslate from "@/assets/locales/en/translation.json"
 import ruTranslate from "@/assets/locales/ru/translation.json"
 
@@ -45,21 +43,19 @@ export const resources = {
   },
 } as const
 
-store.subscribe(() => {
-  i18n.use(initReactI18next).init({
-    lng: store.getState().language.value,
-    resources,
-    ns: [
-      "translation",
-      "profile",
-      "modals",
-      "products",
-      "auth",
-      "schema",
-      "reqResponses",
-    ],
-    fallbackLng: "ru",
-  })
+i18n.use(initReactI18next).init({
+  lng: "ru",
+  resources,
+  ns: [
+    "translation",
+    "profile",
+    "modals",
+    "products",
+    "auth",
+    "schema",
+    "reqResponses",
+  ],
+  fallbackLng: "ru",
 })
 
 export default i18n

@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
 export interface LanguageState {
-  value: "ru" | "en"
+  value: "ru" | "en" | null
 }
 
 const initialState: LanguageState = {
-  value: "ru",
+  value: null,
 }
 
 export const languageSlice = createSlice({
