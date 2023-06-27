@@ -16,6 +16,12 @@ import ruProducts from "@/assets/locales/ru/products.json"
 import enAuth from "@/assets/locales/en/auth.json"
 import ruAuth from "@/assets/locales/ru/auth.json"
 
+import enSchema from "@/assets/locales/en/schema.json"
+import ruSchema from "@/assets/locales/ru/schema.json"
+
+import enReqResponses from "@/assets/locales/en/reqResponses.json"
+import ruReqResponses from "@/assets/locales/ru/reqResponses.json"
+
 export const resources = {
   en: {
     translation: { ...enTranslate },
@@ -23,6 +29,8 @@ export const resources = {
     modals: { ...enModals },
     products: { ...enProducts },
     auth: { ...enAuth },
+    schema: { ...enSchema },
+    reqResponses: { ...enReqResponses },
   },
   ru: {
     translation: { ...ruTranslate },
@@ -30,13 +38,23 @@ export const resources = {
     modals: { ...ruModals },
     products: { ...ruProducts },
     auth: { ...ruAuth },
-  }
+    schema: { ...ruSchema },
+    reqResponses: { ...ruReqResponses },
+  },
 } as const
 
 i18n.use(initReactI18next).init({
   lng: "ru",
   resources,
-  ns: ["translation", "profile", "modals", "products", "auth"],
+  ns: [
+    "translation",
+    "profile",
+    "modals",
+    "products",
+    "auth",
+    "schema",
+    "reqResponses",
+  ],
   fallbackLng: "ru",
 })
 

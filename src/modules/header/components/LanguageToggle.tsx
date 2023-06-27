@@ -1,13 +1,36 @@
-import { useState } from "react"
+import { useEffect } from "react"
 import * as Switch from "@radix-ui/react-switch"
 import { useTranslation } from "react-i18next"
 
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { changeLang } from "@/redux/language/slice"
+
 const LanguageToggle = () => {
-  const [language, setLanguage] = useState<"ru" | "en">("ru")
+  const language = useAppSelector((state) => state.language.value)
+  const dispatch = useAppDispatch()
+
   const { i18n } = useTranslation()
 
+  useEffect(() => {
+    if (language !== null) {
+      i18n.changeLanguage(language === "ru" ? "ru" : "en")
+      return
+    }
+
+    const lang = window.navigator.language
+    const langFistTwo = lang.substring(0, 2)
+
+    if (langFistTwo !== "ru") {
+      dispatch(changeLang("en"))
+      i18n.changeLanguage("en")
+    } else {
+      dispatch(changeLang("ru"))
+      i18n.changeLanguage("ru")
+    }
+  }, [])
+
   const toggleLanguage = () => {
-    setLanguage(language === "ru" ? "en" : "ru")
+    dispatch(changeLang(language === "ru" ? "en" : "ru"))
     i18n.changeLanguage(language === "ru" ? "en" : "ru")
   }
 

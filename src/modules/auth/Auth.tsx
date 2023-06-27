@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAccount, useSignMessage } from "wagmi"
+import { useAccount, useDisconnect, useSignMessage } from "wagmi"
 import { useWeb3Modal } from "@web3modal/react"
 import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
@@ -18,6 +18,7 @@ import { Skeleton } from "@/shared/ui/Skeleton"
 
 import { useAuthByWalletMutation } from "@/redux/api/auth"
 import { useBannerByIdQuery } from "@/redux/api/banners"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const AUTH_MESSAGE = "Authorization"
 const RES_BANNER_ID = 3
@@ -31,18 +32,34 @@ const Auth = () => {
   const [signature, setSignature] = useState("")
 
   const { address, isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
   const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
   const { open } = useWeb3Modal()
 
-  const [authenticate, { isError: isAuthError, reset }] =
-    useAuthByWalletMutation()
+  const { refetch } = useUserProfileQuery()
+  const [
+    authenticate,
+    { isError: isAuthError, reset, isSuccess: isAuthSuccess },
+  ] = useAuthByWalletMutation()
   const { data: banner, isLoading: isBannerLoading } = useBannerByIdQuery({
     id: RES_BANNER_ID,
   })
 
   useEffect(() => {
+    if (isAuthSuccess) setTimeout(() => refetch(), 100)
+  }, [isAuthSuccess])
+
+  useEffect(() => {
     const login = async () => {
-      const signature = await signMessageAsync({ message: AUTH_MESSAGE })
+      let signature
+
+      try {
+        signature = await signMessageAsync({ message: AUTH_MESSAGE })
+      } catch {
+        disconnect()
+        return
+      }
+
       setSignature(signature)
       const lowerAddress = isConnected && address ? address.toLowerCase() : ""
       await authenticate({
@@ -108,7 +125,7 @@ const Auth = () => {
           {isLoadingSign && (
             <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw] mt-auto">
               <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
-              <p>Подтвердите подпись транзакции в кошельке</p>
+              <p>{t("login.confirm-wallet-sign")}</p>
             </div>
           )}
         </div>

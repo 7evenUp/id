@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect } from "react"
 import { useWeb3Modal } from "@web3modal/react"
 import { ConnectorNotFoundError, useAccount, useConnect } from "wagmi"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
+import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 import { ReactComponent as MetaMask } from "@/assets/icons/wallets/metamask-icon.svg"
@@ -18,6 +19,11 @@ import {
 import { cn } from "@/lib/classNames"
 import { TrustWalletConnector } from "@/lib/TrustWalletConnector"
 
+const METAMASK_INSTALL_LINK =
+  "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
+const TRUSTWALLET_INSTALL_LINK =
+  "https://chrome.google.com/webstore/detail/trust-wallet/egjidjbpglichdcondbcbdnbeeppgdph"
+
 const ConnectWalletModal = ({
   open,
   onOpenChange,
@@ -29,6 +35,8 @@ const ConnectWalletModal = ({
   close: () => void
   setIsAuthStarted?: Dispatch<SetStateAction<boolean>>
 }) => {
+  const { t } = useTranslation("modals")
+
   const { isConnected } = useAccount()
 
   const { connectAsync: connectMMAsync, isLoading: isMMLoading } = useConnect({
@@ -42,7 +50,6 @@ const ConnectWalletModal = ({
   const { open: web3open } = useWeb3Modal()
 
   useEffect(() => {
-    console.log("Rerender")
     if (isConnected) close()
   }, [isConnected, close])
 
@@ -52,10 +59,7 @@ const ConnectWalletModal = ({
       if (!isConnected) await connectMMAsync()
     } catch (error) {
       if (error instanceof ConnectorNotFoundError) {
-        window.open(
-          "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn",
-          "_blank"
-        )
+        window.open(METAMASK_INSTALL_LINK, "_blank")
       }
     }
   }
@@ -66,10 +70,7 @@ const ConnectWalletModal = ({
       if (!isConnected) await connectTWAsync()
     } catch (error) {
       if (error instanceof ConnectorNotFoundError) {
-        window.open(
-          "https://chrome.google.com/webstore/detail/trust-wallet/egjidjbpglichdcondbcbdnbeeppgdph",
-          "_blank"
-        )
+        window.open(TRUSTWALLET_INSTALL_LINK, "_blank")
       }
     }
   }
@@ -84,32 +85,35 @@ const ConnectWalletModal = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:w-[400px] 2xl:w-[26.041vw]">
         <DialogHeader className="mb-6 2xl:mb-[1.563vw]">
-          <DialogTitle>Подключение кошелька</DialogTitle>
+          <DialogTitle>{t("connect-wallet.title")}</DialogTitle>
         </DialogHeader>
 
         {isMMLoading && (
           <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
             <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
-            <p>Подключение кошелька MetaMask</p>
+            <p>{t("connect-wallet.connecting-metamask")}</p>
           </div>
         )}
 
         {isTWLoading && (
           <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
             <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
-            <p>Подключение кошелька Trust Wallet</p>
+            <p>{t("connect-wallet.connecting-trustwallet")}</p>
           </div>
         )}
 
         <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
           <ConnectButton onClick={onMetamaskClick}>
-            <MetaMask className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> MetaMask
+            <MetaMask className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
+            MetaMask
           </ConnectButton>
           <ConnectButton onClick={onTrustWalletClick}>
-            <TrustWallet className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> Trust Wallet
+            <TrustWallet className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
+            Trust Wallet
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
-            <WalletConnect className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" /> WalletConnect
+            <WalletConnect className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
+            WalletConnect
           </ConnectButton>
         </div>
       </DialogContent>

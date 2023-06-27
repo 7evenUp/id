@@ -56,7 +56,7 @@ const ProfileDiscord = () => {
     <RowItem className="flex-1 relative group">
       <span
         className={
-          discordUsername ? "text-gray-1 dark:text-gray-5" : "text-gray-3"
+          discordUsername ? "text-gray-1 dark:text-gray-4" : "text-gray-3"
         }
       >
         discord

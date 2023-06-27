@@ -15,12 +15,14 @@ import Subheading from "@/shared/typography/Subheading"
 
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
-import { toast } from "@/shared/ui/Toast"
+import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const Referral = () => {
   const { t } = useTranslation("profile")
+
+  const { toast } = useToast()
 
   const { data: profileData } = useUserProfileQuery()
 
@@ -32,10 +34,8 @@ const Referral = () => {
     navigator.clipboard.writeText(refCode)
 
     toast({
-      providedId: "promo",
       title: t("referral.toast-title"),
-      message: t("referral.promo-copied"),
-      type: "default",
+      description: t("referral.promo-copied"),
     })
   }
 
@@ -43,10 +43,8 @@ const Referral = () => {
     navigator.clipboard.writeText(refLink)
 
     toast({
-      providedId: "link",
       title: t("referral.toast-title"),
-      message: t("referral.link-copied"),
-      type: "default",
+      description: t("referral.link-copied"),
     })
   }
 

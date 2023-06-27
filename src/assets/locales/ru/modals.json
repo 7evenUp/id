@@ -36,7 +36,10 @@
     "description": "Введите ниже код, полученный от бота в Telegram",
     "code-label": "Код",
     "code-placeholder": "Введите ваш код",
-    "confirm-button": "подтвердить"
+    "incorrect-code": "Неверный код",
+    "confirm-button": "подтвердить",
+    "request-success": "Telegram успешно синхронизирован",
+    "confirm-button-success": "успешно"
   },
   "change-avatar": {
     "heading": "Установить аватар профиля",
@@ -187,5 +190,10 @@
     "code-placeholder": "Введите код",
     "send-code-btn": "отправить код",
     "deactivate-btn": "деактивировать"
+  },
+  "connect-wallet": {
+    "title": "Подключение кошелька",
+    "connecting-metamask": "Подключение кошелька MetaMask",
+    "connecting-trustwallet": "Подключение кошелька Trust Wallet"
   }
 }

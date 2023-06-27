@@ -23,7 +23,6 @@ const authApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["UserProfile"],
     }),
     registerByWallet: build.mutation<void, WalletReqParams>({
       query: (body) => ({

@@ -100,7 +100,7 @@ const RegisterWalletForm = ({
         <span className="text-left">{t("login.another-method")}</span>
       </button>
       <p className="text-xs w-full mb-3">
-        Создание аккаунта c кошельком: {cutWalletAddr(address)}
+        {t("register.creation-with-wallet")}: {cutWalletAddr(address)}
       </p>
       <Form {...form}>
         <form
@@ -157,8 +157,7 @@ const RegisterWalletForm = ({
       <div className="flex mt-3">
         {isSuccess && (
           <ResponseSuccessText>
-            Вы успешно зарегистрированны! Перейдите по ссылке, которую мы
-            отправили вам на почту
+            {t("register.request-success")}
           </ResponseSuccessText>
         )}
         {error && <ResponseErrorText error={error} />}

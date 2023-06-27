@@ -1,17 +1,22 @@
 import { api } from "./core"
 
-type Response = string
+type ReqResponse = string
+
+interface ReqParams {
+  amount: number
+  is_receipt_needed: boolean
+}
 
 const balanceApi = api.injectEndpoints({
   endpoints: (build) => ({
-    topUpBalance: build.mutation<Response, { amount: number }>({
+    topUpBalance: build.mutation<ReqResponse, ReqParams>({
       query: (body) => ({
         url: "top-up-balance/",
         method: "POST",
         body,
       }),
       invalidatesTags: ["TxHistory"],
-      transformResponse: (response: { paymentUrl: Response }) => {
+      transformResponse: (response: { paymentUrl: ReqResponse }) => {
         return response.paymentUrl
       },
       transformErrorResponse: (response) => ({

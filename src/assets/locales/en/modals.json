@@ -36,7 +36,10 @@
     "description": "Enter below the code received from the bot in Telegram",
     "code-label": "Code",
     "code-placeholder": "Enter your code",
-    "confirm-button": "confirm"
+    "incorrect-code": "Incorrect code",
+    "confirm-button": "confirm",
+    "request-success": "Telegram successfully synchronized",
+    "confirm-button-success": "success"
   },
   "change-avatar": {
     "heading": "Set profile avatar",
@@ -185,5 +188,10 @@
     "code-placeholder": "Enter code",
     "send-code-btn": "send code",
     "deactivate-btn": "deactivate"
+  },
+  "connect-wallet": {
+    "title": "Connecting a wallet",
+    "connecting-metamask": "Connecting a MetaMask wallet",
+    "connecting-trustwallet": "Connecting a Trust Wallet"
   }
 }

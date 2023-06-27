@@ -7,7 +7,7 @@ const SkeletonLayout = () => {
       <div className="flex flex-col">
         <div className="flex justify-between">
           <Skeleton className="w-[238px] h-[22px] mb-10 2xl:w-[15.494vw] 2xl:h-[1.432vw] 2xl:mb-[2.604vw]" />
-          <Skeleton className="hidden sm:block w-[87px] h-[87px] 2xl:w-[5.664vw] 2xl:h-[5.664vw] rounded-full" />
+          <Skeleton className="hidden sm:block w-[87px] h-[87px] 2xl:w-[5.664vw] 2xl:h-[5.664vw] rounded-full 2xl:rounded-full" />
         </div>
         <div className="flex flex-col gap-10 2xl:gap-[2.604vw] w-full sm:px-12 lg:px-0 lg:w-[350px] xl:w-[433px] 2xl:w-[28.19vw]">
           {/* Профиль */}

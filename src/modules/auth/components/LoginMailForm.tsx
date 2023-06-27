@@ -1,7 +1,8 @@
+import { Dispatch, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
-import { useTranslation } from "react-i18next"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { useTranslation } from "react-i18next"
 
 import ActionButton from "./ActionButton"
 import { AuthInput } from "./AuthInput"
@@ -19,16 +20,6 @@ import {
 } from "@/shared/ui/Form"
 
 import { useLoginMutation } from "@/redux/api/auth"
-import { Dispatch, SetStateAction } from "react"
-
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, {
-      message: "Поле обязательно для заполнения.",
-    })
-    .email("Неверный формат почты."),
-})
 
 const LoginMailForm = ({
   setEmail,
@@ -36,6 +27,16 @@ const LoginMailForm = ({
   setEmail: Dispatch<SetStateAction<string>>
 }) => {
   const { t } = useTranslation("auth")
+  const { t: tSchema } = useTranslation("schema")
+
+  const formSchema = z.object({
+    email: z
+      .string()
+      .min(1, {
+        message: tSchema("required"),
+      })
+      .email(tSchema("email-incorrect-format")),
+  })
 
   const [trigger, { isLoading, isSuccess, error }] = useLoginMutation({
     fixedCacheKey: "login-by-mail",
@@ -86,7 +87,7 @@ const LoginMailForm = ({
       <div className="flex mt-3 2xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
-            Ссылка для входа успешно отправлена вам на почту
+            {t("login.request-success")}
           </ResponseSuccessText>
         )}
         {error && <ResponseErrorText error={error} />}

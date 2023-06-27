@@ -20,22 +20,23 @@ import {
 
 import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
 
-const formSchema = z.object({
-  username: z.string().min(1, {
-    message: "Поле обязательно для заполнения.",
-  }),
-  email: z
-    .string()
-    .min(1, {
-      message: "Поле обязательно для заполнения.",
-    })
-    .email("Неверный формат почты."),
-})
-
 const NewRegisterMailForm = ({ email }: { email: string }) => {
   const { t } = useTranslation("auth")
+  const { t: tSchema } = useTranslation("schema")
 
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
+
+  const formSchema = z.object({
+    username: z.string().min(1, {
+      message: tSchema("required"),
+    }),
+    email: z
+      .string()
+      .min(1, {
+        message: tSchema("required"),
+      })
+      .email(tSchema("email-incorrect-format")),
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -120,8 +121,7 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
       <div className="flex mt-3 2xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
-            Вы успешно зарегистрированны! Перейдите по ссылке, которую мы
-            отправили вам на почту
+            {t("register.request-success")}
           </ResponseSuccessText>
         )}
         {error && <ResponseErrorText error={error} />}

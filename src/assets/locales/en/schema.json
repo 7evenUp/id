@@ -1,0 +1,12 @@
+{
+  "required": "The field is required",
+  "email-incorrect-format": "Invalid mail format",
+  "email-incorrect-old": "The old mail was entered incorrectly",
+  "digits-only": "Only numeric values are allowed",
+  "tg-username-min": "The minimum length is 5 characters",
+  "tg-username-max": "The maximum length is 32 characters",
+  "tg-username-incorrect-format": "The format allows the use of the characters a-z, 0-9 and _",
+  "tg-username-starts-error": "A username cannot start with a number or _",
+  "tg-username-ends-error": "A username cannot end with a character _",
+  "balance-not-enough": "There are not enough funds on the balance"
+}
