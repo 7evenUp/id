@@ -11,7 +11,7 @@ import ChangeAvatar from "@/modules/personal-account/modals/ChangeAvatar"
 import Deactivation from "@/modules/personal-account/modals/Deactivation"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
-import { toast } from "@/shared/ui/Toast"
+import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useLazyLogoutQuery } from "@/redux/api/auth"
@@ -20,18 +20,23 @@ import { useDeleteAvatarMutation } from "@/redux/api/avatar"
 const AvatarMobile = () => {
   const { t } = useTranslation()
 
+  const { toast } = useToast()
+
   const { data: profileData } = useUserProfileQuery()
   const [logout] = useLazyLogoutQuery()
   const [deleteAvatar, { isSuccess, isError }] = useDeleteAvatarMutation()
 
   useEffect(() => {
-    if (isSuccess)
-      toast({ message: t("photo-response-success"), type: "success" })
-  }, [isSuccess, t])
+    if (isSuccess) {
+      toast({ variant: "success", description: t("photo-response-success") })
+    }
+  }, [isSuccess])
 
   useEffect(() => {
-    if (isError) toast({ message: t("photo-response-error"), type: "error" })
-  }, [isError, t])
+    if (isError) {
+      toast({ variant: "error", description: t("photo-response-error") })
+    }
+  }, [isError])
 
   if (!profileData) return null
 
