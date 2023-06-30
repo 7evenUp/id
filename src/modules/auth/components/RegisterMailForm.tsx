@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -20,7 +21,15 @@ import {
 
 import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
 
-const NewRegisterMailForm = ({ email }: { email: string }) => {
+const RegisterMailForm = ({
+  emailInput,
+  setEmailInput,
+  resetLoginError,
+}: {
+  emailInput: string
+  setEmailInput: Dispatch<SetStateAction<string>>
+  resetLoginError: () => void
+}) => {
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
 
@@ -42,7 +51,7 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: email || "",
+      email: emailInput || "",
     },
   })
 
@@ -80,7 +89,14 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
                   {t("email-label")}
                 </FormLabel>
                 <FormControl>
-                  <AuthInput placeholder={t("email-placeholder")} {...field} />
+                  <AuthInput
+                    placeholder={t("email-placeholder")}
+                    {...field}
+                    onChange={(evt) => {
+                      setEmailInput(evt.currentTarget.value)
+                      resetLoginError()
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -130,4 +146,4 @@ const NewRegisterMailForm = ({ email }: { email: string }) => {
   )
 }
 
-export default NewRegisterMailForm
+export default RegisterMailForm

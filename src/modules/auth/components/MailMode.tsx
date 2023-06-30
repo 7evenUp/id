@@ -3,16 +3,17 @@ import { useTranslation } from "react-i18next"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
-import { useLoginMutation } from "@/redux/api/auth"
 import LoginMailForm from "./LoginMailForm"
 import RegisterMailForm from "./RegisterMailForm"
+
+import { useLoginMutation } from "@/redux/api/auth"
 
 const MailMode = ({ back }: { back: () => void }) => {
   const { t } = useTranslation("auth")
 
   const [usedEmail, setUsedEmail] = useState("")
 
-  const [_, { isError }] = useLoginMutation({
+  const [_, { isError, reset }] = useLoginMutation({
     fixedCacheKey: "login-by-mail",
   })
 
@@ -26,9 +27,13 @@ const MailMode = ({ back }: { back: () => void }) => {
         <span className="text-left">{t("login.another-method")}</span>
       </button>
       {isError ? (
-        <RegisterMailForm email={usedEmail} />
+        <RegisterMailForm
+          emailInput={usedEmail}
+          setEmailInput={setUsedEmail}
+          resetLoginError={reset}
+        />
       ) : (
-        <LoginMailForm setEmail={setUsedEmail} />
+        <LoginMailForm emailInput={usedEmail} setEmailInput={setUsedEmail} />
       )}
     </>
   )

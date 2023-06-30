@@ -22,9 +22,11 @@ import {
 import { useLoginMutation } from "@/redux/api/auth"
 
 const LoginMailForm = ({
-  setEmail,
+  emailInput,
+  setEmailInput,
 }: {
-  setEmail: Dispatch<SetStateAction<string>>
+  emailInput: string
+  setEmailInput: Dispatch<SetStateAction<string>>
 }) => {
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
@@ -45,12 +47,12 @@ const LoginMailForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      email: emailInput || "",
     },
   })
 
   const onSubmit = async ({ email }: z.infer<typeof formSchema>) => {
-    setEmail(email)
+    setEmailInput(email)
     trigger({
       email: email.toLowerCase().trim(),
       redirect_url: "https://id.crypton.xyz",
