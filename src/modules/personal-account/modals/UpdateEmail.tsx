@@ -114,7 +114,7 @@ const UpdateEmail = () => {
           />
           {isSuccess && (
             <ResponseSuccessText>
-              Ваша почта успешно изменена
+              {t("change-email.request-success")}
             </ResponseSuccessText>
           )}
 

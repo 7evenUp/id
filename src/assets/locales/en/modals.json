@@ -5,7 +5,8 @@
     "old-placeholder": "Enter your current email",
     "new-label": "New email",
     "new-placeholder": "Enter your new email",
-    "button": "confirm"
+    "button": "confirm",
+    "request-success": "Your email has been successfully changed"
   },
   "change-wallet": {
     "heading": "Synchronize wallet",
@@ -25,7 +26,9 @@
       "confirm-text-2": "In the future, you will be able to log in to your account using a new address."
     },
     "connect-btn": "connect",
-    "confirm-btn": "confirm"
+    "confirm-btn": "confirm",
+    "wallet-connected-successfully": "The wallet has been successfully linked to your account",
+    "wallet-changed-successfully": "Wallet successfully changed"
   },
   "change-tg": {
     "heading": "Synchronize Telegram",
@@ -169,7 +172,8 @@
     "available": "Available amount",
     "confirm-btn": "confirm",
     "close-btn": "close",
-    "personal-wallet-success": "Your request to withdraw funds to a personal wallet has been created. We will process it soon."
+    "personal-wallet-success": "Your request to withdraw funds to a personal wallet has been created. We will process it soon.",
+    "withdraw-success": "success"
   },
   "ref-stats": {
     "heading": "Statistics",
