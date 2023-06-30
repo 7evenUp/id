@@ -135,8 +135,8 @@ const UpdateWallet = () => {
       {isSuccess && (
         <ResponseSuccessText>
           {wallet
-            ? "Кошелёк успешно привязан к вашему аккаунту"
-            : "Кошелёк успешно изменён"}
+            ? t("change-wallet.wallet-connected-successfully")
+            : t("change-wallet.wallet-changed-successfully")}
         </ResponseSuccessText>
       )}
 

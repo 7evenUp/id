@@ -84,15 +84,19 @@ const FirstStep = ({
 
   const applyPromo = async () => {
     if (activeSub !== null) {
-      const { discountAmount, discountKind } = await validatePromocode({
-        promocode: promo,
-        subscription: subscriptions[activeSub].id,
-      }).unwrap()
+      try {
+        const { discountAmount, discountKind } = await validatePromocode({
+          promocode: promo,
+          subscription: subscriptions[activeSub].id,
+        }).unwrap()
 
-      if (discountKind.id === "MONEY") {
-        setTotalPrice((prev) => prev - discountAmount)
-      } else {
-        setTotalPrice((prev) => prev - (prev * discountAmount) / 100)
+        if (discountKind.id === "MONEY") {
+          setTotalPrice((prev) => prev - discountAmount)
+        } else {
+          setTotalPrice((prev) => prev - (prev * discountAmount) / 100)
+        }
+      } catch {
+        setPromo("")
       }
     }
   }

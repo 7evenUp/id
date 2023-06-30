@@ -24,18 +24,6 @@ import {
 import { WalletReqParams, useRegisterByWalletMutation } from "@/redux/api/auth"
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
-const formSchema = z.object({
-  username: z.string().min(1, {
-    message: "Поле обязательно для заполнения.",
-  }),
-  email: z
-    .string()
-    .min(1, {
-      message: "Поле обязательно для заполнения.",
-    })
-    .email("Неверный формат почты."),
-})
-
 const AUTH_MESSAGE = "Authorization"
 
 const RegisterWalletForm = ({
@@ -46,11 +34,24 @@ const RegisterWalletForm = ({
   back: () => void
 }) => {
   const { t } = useTranslation("auth")
+  const { t: tSchema } = useTranslation("schema")
 
   const { address } = useAccount()
 
   const [regWallet, { isSuccess, isLoading, error }] =
     useRegisterByWalletMutation()
+
+  const formSchema = z.object({
+    username: z.string().min(1, {
+      message: tSchema("required"),
+    }),
+    email: z
+      .string()
+      .min(1, {
+        message: tSchema("required"),
+      })
+      .email(tSchema("email-incorrect-format")),
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

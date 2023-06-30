@@ -87,7 +87,7 @@ const WithdrawMain = ({
             onClick={withdrawToCrypton}
           >
             {isSuccess && originalArgs?.kind === "TO_CRYPTON_BALANCE"
-              ? "Выведено"
+              ? t("ref-withdraw.withdraw-success")
               : t("ref-withdraw.personal-account-btn")}
           </Button>
 
