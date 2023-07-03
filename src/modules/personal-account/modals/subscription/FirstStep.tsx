@@ -56,11 +56,13 @@ const FirstStep = ({
 
   const getSubscriptionPrice = (subID: number) => {
     const selectedSub = subscriptions[subID]
-    const discount = selectedSub.baseDiscount
-    const price =
-      discount === null
+    const discount = selectedSub.baseDiscountAmount
+    const activePrice =
+      selectedSub.individualPrice === undefined
         ? selectedSub.price
-        : selectedSub.price - (selectedSub.price * discount) / 100
+        : selectedSub.individualPrice
+    const price = discount === null ? activePrice : activePrice - discount
+
     return price
   }
 
@@ -122,29 +124,35 @@ const FirstStep = ({
           <PrimeInfo />
 
           <div className="flex flex-col items-center flex-wrap mobile:flex-row gap-3 sm:gap-5 mb-6 2xl:gap-[1.302vw] 2xl:mb-[1.563vw]">
-            {subscriptions.map((sub, i) => (
-              <SubscriptionCard
-                key={sub.id}
-                duration={t("buy-subs.first-step.duration", {
-                  count: sub.duration.id,
-                })}
-                discount={
-                  sub.baseDiscount === null
-                    ? null
-                    : {
-                        percent: sub.baseDiscount,
-                        amount: (sub.price * sub.baseDiscount) / 100,
-                      }
+            {subscriptions.map((sub, i) => {
+              let discount, activePrice, price
+
+              if (sub.baseDiscount !== null && sub.baseDiscountAmount !== null)
+                discount = {
+                  percent: sub.baseDiscount,
+                  amount: sub.baseDiscountAmount,
                 }
-                price={
-                  sub.baseDiscount === null
-                    ? sub.price
-                    : sub.price - (sub.price * sub.baseDiscount) / 100
-                }
-                selected={activeSub === i}
-                onSelect={() => onSelect(i)}
-              />
-            ))}
+              else discount = null
+
+              if (sub.individualPrice === undefined) activePrice = sub.price
+              else activePrice = sub.individualPrice
+
+              if (discount === null) price = activePrice
+              else price = activePrice - discount.amount
+
+              return (
+                <SubscriptionCard
+                  key={sub.id}
+                  duration={t("buy-subs.first-step.duration", {
+                    count: sub.duration.id,
+                  })}
+                  discount={discount}
+                  price={price}
+                  selected={activeSub === i}
+                  onSelect={() => onSelect(i)}
+                />
+              )
+            })}
           </div>
 
           {activeSub !== null && (
