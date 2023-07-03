@@ -14,8 +14,10 @@ export interface Subscription {
     label: string
   }
   name: string
+  individualPrice?: number
   price: number
   isActive: boolean
   kind: number
   baseDiscount: number | null
+  baseDiscountAmount: number | null
 }
