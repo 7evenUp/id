@@ -23,7 +23,7 @@ const FreezeSubs = () => {
   ] = useUnfreezeSubsMutation()
 
   const {
-    subscriptionInfo: { status },
+    subscriptionInfo: { status, isFreezeAllowed },
   } = data!
 
   const isFrozen = status === "FROZEN"
@@ -48,9 +48,9 @@ const FreezeSubs = () => {
           <span className="flex items-baseline gap-2 2xl:gap-[0.521vw]">
             {t("freeze.freeze-available")}:{" "}
             <span className="typography-balance">
-              {isFrozen
-                ? t("freeze.freeze-available-false")
-                : t("freeze.freeze-available-true")}
+              {isFreezeAllowed
+                ? t("freeze.freeze-available-true")
+                : t("freeze.freeze-available-false")}
             </span>
           </span>
         </div>
@@ -68,7 +68,7 @@ const FreezeSubs = () => {
         ) : (
           <Button
             className="w-fit"
-            disabled={isFrozen}
+            disabled={!isFreezeAllowed}
             isLoading={isFreezeLoading}
             appearence={isFreezeSuccess ? "success" : "outlined"}
             onClick={() => freeze()}

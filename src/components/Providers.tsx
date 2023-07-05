@@ -11,7 +11,7 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { mainnet } from "wagmi/chains"
 
 const chains = [mainnet]
-const projectId = "9869f436bc873846db37f90c8cfc8ee9"
+const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({

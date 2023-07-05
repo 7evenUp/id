@@ -30,6 +30,7 @@ export interface Avatar {
 
 export interface SubscriptionInfo {
   currentBalance: number
+  isFreezeAllowed: boolean
   remainingDays: number | null
   status: "FROZEN" | null
   subscriptionType: "Prime" | null
