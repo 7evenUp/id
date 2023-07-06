@@ -7,7 +7,7 @@ const profileApi = api.injectEndpoints({
   endpoints: (build) => ({
     userProfile: build.query<User, void>({
       query: () => ({
-        url: "users/profile",
+        url: "users/profile/",
         method: "GET",
       }),
       providesTags: ["UserProfile"],
@@ -71,6 +71,18 @@ const profileApi = api.injectEndpoints({
         message: response.data.detail,
       }),
     }),
+    updateWax: build.mutation<User, { wax_wallet: string }>({
+      query: (body) => ({
+        url: "users/set-wax-wallet/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+      }),
+    }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({
         url: "users/change-wallet/",
@@ -123,6 +135,7 @@ export const {
   useVerifyDeactivationMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
+  useUpdateWaxMutation,
   useUpdateWalletMutation,
   useUpdateDiscordMutation,
   useUpdateTelegramMutation,
