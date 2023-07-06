@@ -9,5 +9,11 @@
   "avatar-mobile-change": "Изменить фото",
   "avatar-mobile-delete": "Удалить фото",
   "photo-response-success": "Текущее фото успешно удалено",
-  "photo-response-error": "Не удалось удалить текущее фото"
+  "photo-response-error": "Не удалось удалить текущее фото",
+  "nickname-response-success": "Ваше имя пользователя было успешно изменёно",
+  "nickname-response-error": "Не удалось изменить имя пользователя",
+  "wax-response-success": "Ваш wax кошелёк был успешно изменён",
+  "wax-response-error": "Не удалось изменить wax кошелёк. Попробуйте позже",
+  "discord-response-success": "Ваш discord был успешно изменён",
+  "discord-response-error": "Не удалось изменить discord никнейм"
 }

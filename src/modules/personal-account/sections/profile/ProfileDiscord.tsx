@@ -1,10 +1,13 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
 import ConfirmButton from "../../components/ConfirmButton"
+
+import { useToast } from "@/shared/ui/Toast/useToast"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -14,18 +17,33 @@ import {
 } from "@/redux/api/profile"
 
 const ProfileDiscord = () => {
+  const { t } = useTranslation()
+
+  const { toast } = useToast()
+
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateDiscord] = useUpdateDiscordMutation()
+  const [updateDiscord, { isError, isSuccess }] = useUpdateDiscordMutation()
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast({ variant: "success", description: t("discord-response-success") })
+    }
+  }, [isSuccess])
+
+  useEffect(() => {
+    if (isError) {
+      toast({ variant: "error", description: t("discord-response-error") })
+    }
+  }, [isError])
 
   if (!userProfile) return null
 
   const { discordUsername } = userProfile
 
   const onSubmit = async () => {
-    console.log("clicked")
     setIsEditingMode(false)
 
     if (!inputRef.current) return
@@ -39,7 +57,6 @@ const ProfileDiscord = () => {
 
     if (discordUsername === inputValue) return
 
-    console.log("Discord changed with new value: ", inputValue)
     updateDiscord({
       discordUsername: inputValue,
     })

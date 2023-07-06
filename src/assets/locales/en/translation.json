@@ -9,5 +9,11 @@
   "avatar-mobile-change": "Change photo",
   "avatar-mobile-delete": "Delete photo",
   "photo-response-success": "Your photo was successfully deleted",
-  "photo-response-error": "Unable to delete your photo"
+  "photo-response-error": "Unable to delete your photo",
+  "nickname-response-success": "Your nickname was successfully changed",
+  "nickname-response-error": "Unable to edit your nickname",
+  "wax-response-success": "Your wax wallet was successfully changed",
+  "wax-response-error": "Unable to edit your wax wallet",
+  "discord-response-success": "Your discord was successfully changed",
+  "discord-response-error": "Unable to edit your discord"
 }
