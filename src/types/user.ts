@@ -17,6 +17,7 @@ export interface User {
   telegramId: number
   username: string
   wallet: string | null
+  waxWallet: string | null
 }
 
 export interface Avatar {
