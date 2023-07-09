@@ -1,6 +1,6 @@
 import { api } from "./core"
 
-import { Channel } from "@/types/channels"
+import { Channel, LinksResponse } from "@/types/channels"
 
 const balanceApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -17,7 +17,7 @@ const balanceApi = api.injectEndpoints({
         message: response.data.detail,
       }),
     }),
-    links: build.query<void, {channels: number[], chat_id: number, lang: 'ru' | 'en'}>({
+    links: build.query<LinksResponse, {channels: number[], chat_id: number, lang?: 'ru' | 'en'}>({
       query: ({channels, chat_id, lang}) => ({
         url: "channels/get-links-for-user/",
         method: "GET",
