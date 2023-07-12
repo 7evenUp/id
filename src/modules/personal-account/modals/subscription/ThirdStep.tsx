@@ -8,6 +8,9 @@ import { Dialog, DialogContent } from "@/shared/ui/Dialog"
 import ExternalLink from "@/shared/ui/ExternalLink"
 import Button from "@/shared/ui/Button"
 
+import { useAppSelector } from "@/redux/hooks"
+import { useLinksQuery } from "@/redux/api/channels"
+
 const ThirdStep = ({
   open,
   onOpenChange,
@@ -17,6 +20,14 @@ const ThirdStep = ({
 }) => {
   const { t } = useTranslation("modals")
 
+  const language = useAppSelector((state) => state.language.value)
+
+  const { data: userLinks } = useLinksQuery({})
+
+  const filteredLinks = userLinks?.filter(
+    (link) => link.link.channel.lang === language
+  )
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[820px] lg:max-w-[940px] 2xl:max-w-[61.197vw]">
@@ -25,16 +36,12 @@ const ThirdStep = ({
           <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 2xl:gap-[2.604vw] 2xl:py-[1.302vw]">
             <div className="md:w-[350px] 2xl:w-[22.786vw]">
               <div className="flex flex-wrap gap-3 2xl:gap-[0.781vw]">
-                <ExternalLink withTgIcon href="#">
-                  канал Prime
-                </ExternalLink>
-                <ExternalLink withTgIcon href="#">
-                  основной чат
-                </ExternalLink>
-                <ExternalLink withTgIcon href="#">
-                  NFT чат
-                </ExternalLink>
-                <ExternalLink href="#">сервер в Discord</ExternalLink>
+                {filteredLinks &&
+                  filteredLinks.map((link) => (
+                    <ExternalLink key={link.id} href={link.link.url} withTgIcon>
+                      {link.link.channel.name}
+                    </ExternalLink>
+                  ))}
               </div>
               <p className="typography-tip mt-5 2xl:mt-[1.302vw]">
                 {t("buy-subs.third-step.find-links")}

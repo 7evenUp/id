@@ -1,3 +1,13 @@
+export interface Channel {
+  id: number
+  createdDatetime: string
+  channelId: number
+  kind: string | null
+  mainLink: string | null
+  name: string
+  lang: string
+}
+
 export interface ChannelsResponse {
   count: number
   pageCount: number
@@ -6,11 +16,16 @@ export interface ChannelsResponse {
   results: Channel[]
 }
 
-export interface Channel {
-  id: number
+export interface LinksResponse {
+  chatId: number
   createdDatetime: string
-  channelId: number
-  mainLink: string | null
-  name: string
-  lang: string
+  id: number
+  link: {
+    channel: Channel
+    createdDatetime: string
+    id: number
+    isUnlimited: boolean
+    remainingUsages: number
+    url: string
+  }
 }

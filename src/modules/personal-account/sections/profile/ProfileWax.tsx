@@ -13,6 +13,8 @@ import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUpdateWaxMutation, useUserProfileQuery } from "@/redux/api/profile"
 
+import { cn } from "@/lib/classNames"
+
 const ProfileWax = () => {
   const { t } = useTranslation()
 
@@ -67,14 +69,17 @@ const ProfileWax = () => {
   }
 
   return (
-    <RowItem className="flex-1 relative group">
+    <RowItem className="relative group justify-end">
       <span
-        className={waxWallet ? "text-gray-1 dark:text-gray-4" : "text-gray-3"}
+        className={cn(
+          "mr-auto",
+          waxWallet ? "text-gray-1 dark:text-gray-4" : "text-gray-3"
+        )}
       >
         wax
       </span>
       <input
-        className="peer bg-transparent outline-none text-right w-full text-gray-1 dark:text-gray-4"
+        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4"
         defaultValue={waxWallet || ""}
         ref={inputRef}
         disabled={!isEditingMode}

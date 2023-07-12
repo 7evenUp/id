@@ -12,29 +12,33 @@ import RowItem from "@/shared/components/RowItem"
 
 import { primeServices } from "@/utils/primeServices"
 
-import { useChannelsQuery } from "@/redux/api/channels"
+import { useLinksQuery } from "@/redux/api/channels"
+import { useAppSelector } from "@/redux/hooks"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
 
-  const { data: channels } = useChannelsQuery()
+  const language = useAppSelector((state) => state.language.value)
+
+  const { data: userLinks } = useLinksQuery({})
+
+  const filteredLinks = userLinks?.filter(
+    (link) => link.link.channel.lang === language
+  )
 
   return (
     <>
       <TabHeader>
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
-      {channels && (
+
+      {filteredLinks && (
         <RowItem className="items-baseline flex-col sm:flex-row gap-2 2xl:gap-[0.521vw]">
           <span>{t("prime.channels-and-chats")}</span>
           <div className="flex items-center sm:justify-end gap-2.5 2xl:gap-[0.651vw] flex-wrap max-w-[360px] 2xl:max-w-[23.437vw]">
-            {channels.map((channel) => (
-              <ExternalLink
-                key={channel.id}
-                href={channel.mainLink || ""}
-                withTgIcon
-              >
-                {channel.name}
+            {filteredLinks.map((link) => (
+              <ExternalLink key={link.id} href={link.link.url} withTgIcon>
+                {link.link.channel.name}
               </ExternalLink>
             ))}
           </div>
