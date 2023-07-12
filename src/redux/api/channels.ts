@@ -3,8 +3,8 @@ import { api } from "./core"
 import { Channel, LinksResponse } from "@/types/channels"
 
 interface ChannelLinksParams {
-  channels: number[]
-  chat_id: number
+  channels?: number[]
+  chat_id?: number
   lang?: "ru" | "en"
 }
 
