@@ -10,33 +10,73 @@ import { ReactComponent as UniverseIcon } from "@/assets/icons/products/Universe
 import { ReactComponent as AcademyIcon } from "@/assets/icons/products/Academy.svg"
 
 import { TABS_VALUES } from "@/redux/tabs/slice"
+import { useAppSelector } from "@/redux/hooks"
 
 import { TabsTrigger } from "@/shared/ui/Tabs"
+import Tooltip from "@/shared/ui/Tooltip"
 
 const TabsTriggers = () => {
+  const activeProduct = useAppSelector((state) => state.tabs.value)
+
   return (
     <>
       <TabsTrigger value={TABS_VALUES.PRIME}>
-        <PrimeActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
-        <PrimeIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <Tooltip content="Prime">
+          <div>
+            {activeProduct === "prime" ? (
+              <PrimeActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+            ) : (
+              <PrimeIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+            )}
+          </div>
+        </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.RESEARCH_BOT}>
-        <ResearchBotActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
-        <ResearchBotIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <Tooltip content="Research Bot">
+          <div>
+            {activeProduct === "research-bot" ? (
+              <ResearchBotActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+            ) : (
+              <ResearchBotIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+            )}
+          </div>
+        </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.TOOLS}>
-        <ToolsActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
-        <ToolsIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <Tooltip content="Tools">
+          <div>
+            {activeProduct === "tools" ? (
+              <ToolsActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+            ) : (
+              <ToolsIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+            )}
+          </div>
+        </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.CALENDAR}>
-        <CalendarActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] hidden group-data-[state=active]:inline-block" />
-        <CalendarIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-4" />
+        <Tooltip content="Calendar">
+          <div>
+            {activeProduct === "calendar" ? (
+              <CalendarActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+            ) : (
+              <CalendarIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+            )}
+          </div>
+        </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.UNIVERSE} disabled>
-        <UniverseIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-2" />
+        <Tooltip content="Universe">
+          <div>
+            <UniverseIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-2" />
+          </div>
+        </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.ACADEMY} disabled>
-        <AcademyIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] group-data-[state=active]:hidden dark:fill-gray-2" />
+        <Tooltip content="Academy">
+          <div>
+            <AcademyIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-2" />
+          </div>
+        </Tooltip>
       </TabsTrigger>
     </>
   )
