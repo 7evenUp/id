@@ -61,7 +61,7 @@ const WithdrawMain = ({
         reset()
       }}
     >
-      <DialogContent className="max-w-[450px] 2xl:w-[29.296vw]">
+      <DialogContent className="max-w-[480px] 2xl:w-[31.25vw]">
         <DialogHeader className="mb-2 mobile:mb-0 sm:mb-6 2xl:mb-[1.563vw]">
           <DialogTitle>{t("ref-withdraw.heading")}</DialogTitle>
         </DialogHeader>
