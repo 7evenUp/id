@@ -33,7 +33,7 @@ const ReferralInfo = () => {
               {t("ref-info.to-next-level")}: {toNextLevelRemained}
             </span>
             <span>
-              {t("ref-info.cashback")}: {refCashBack}%
+              {t("ref-info.cashback")}: {refCashBack * 100}%
             </span>
           </div>
         </div>
