@@ -83,7 +83,7 @@ const ChangeAvatar = () => {
           <UploadDropzone file={file} setFile={setFile} setBase64={setBase64} />
         </div>
 
-        {Boolean(prevAvatars.length) ? (
+        {prevAvatars.length > 0 ? (
           <PrevAvatars
             avatars={prevAvatars}
             SaveBtn={
