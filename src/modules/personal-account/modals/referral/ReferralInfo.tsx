@@ -17,7 +17,10 @@ const ReferralInfo = () => {
   } = profileData
 
   return (
-    <DialogContent className="sm:max-w-[550px] md:max-w-[680px] 2xl:w-[44.27vw]">
+    <DialogContent
+      className="sm:max-w-[550px] md:max-w-[680px] 2xl:w-[44.27vw]"
+      onCloseAutoFocus={(event) => event.preventDefault()}
+    >
       <DialogHeader>
         <DialogTitle>{t("ref-info.heading")}</DialogTitle>
       </DialogHeader>

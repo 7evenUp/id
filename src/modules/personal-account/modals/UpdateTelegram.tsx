@@ -60,7 +60,10 @@ const UpdateTelegram = () => {
   }
 
   return (
-    <DialogContent className="mobile:w-[370px] sm:w-[370px] 2xl:w-[24.088vw]">
+    <DialogContent
+      className="mobile:w-[370px] sm:w-[370px] 2xl:w-[24.088vw]"
+      onCloseAutoFocus={(event) => event.preventDefault()}
+    >
       {isSecondStep && (
         <button
           className="typography-btn-big flex items-center gap-2 2xl:gap-[0.521vw] hover:text-gray-3 w-fit"
