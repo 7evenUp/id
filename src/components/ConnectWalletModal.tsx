@@ -2,11 +2,13 @@ import React, { Dispatch, SetStateAction, useEffect } from "react"
 import { useWeb3Modal } from "@web3modal/react"
 import { ConnectorNotFoundError, useAccount, useConnect } from "wagmi"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
+import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 import { ReactComponent as MetaMask } from "@/assets/icons/wallets/metamask-icon.svg"
 import { ReactComponent as TrustWallet } from "@/assets/icons/wallets/trust-wallet-logo.svg"
+import { ReactComponent as Injected } from "@/assets/icons/wallets/injected-icon.svg"
 import { ReactComponent as WalletConnect } from "@/assets/icons/wallets/wallet-connect-logo.svg"
 
 import {
@@ -47,6 +49,11 @@ const ConnectWalletModal = ({
     connector: new TrustWalletConnector(),
   })
 
+  const { connectAsync: connectInjectedAsync, isLoading: isInjectedLoading } =
+    useConnect({
+      connector: new InjectedConnector(),
+    })
+
   const { open: web3open } = useWeb3Modal()
 
   useEffect(() => {
@@ -71,6 +78,17 @@ const ConnectWalletModal = ({
     } catch (error) {
       if (error instanceof ConnectorNotFoundError) {
         window.open(TRUSTWALLET_INSTALL_LINK, "_blank")
+      }
+    }
+  }
+
+  const onInjectedClick = async () => {
+    if (setIsAuthStarted) setIsAuthStarted(true)
+    try {
+      if (!isConnected) await connectInjectedAsync()
+    } catch (error) {
+      if (error instanceof ConnectorNotFoundError) {
+        window.open(METAMASK_INSTALL_LINK, "_blank")
       }
     }
   }
@@ -102,6 +120,13 @@ const ConnectWalletModal = ({
           </div>
         )}
 
+        {isInjectedLoading && (
+          <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
+            <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
+            <p>{t("connect-wallet.connecting-injected")}</p>
+          </div>
+        )}
+
         <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
           <ConnectButton onClick={onMetamaskClick}>
             <MetaMask className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
@@ -110,6 +135,10 @@ const ConnectWalletModal = ({
           <ConnectButton onClick={onTrustWalletClick}>
             <TrustWallet className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
             Trust Wallet
+          </ConnectButton>
+          <ConnectButton onClick={onInjectedClick}>
+            <Injected className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw] stroke-gray-1 dark:stroke-gray-6 group-hover:stroke-white dark:group-hover:stroke-gray-1 transition-colors" />{" "}
+            Injected
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
             <WalletConnect className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
@@ -131,7 +160,7 @@ const ConnectButton = ({
   return (
     <button
       className={cn(
-        "flex items-center gap-4 2xl:gap-[1.042vw] text-base 2xl:text-[1.042vw]/[1.563vw] py-2 2xl:py-[0.521vw] px-4 2xl:px-[1.042vw] rounded-md 2xl:rounded-[0.391vw] text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
+        "group flex items-center gap-4 2xl:gap-[1.042vw] text-base 2xl:text-[1.042vw]/[1.563vw] py-2 2xl:py-[0.521vw] px-4 2xl:px-[1.042vw] rounded-md 2xl:rounded-[0.391vw] text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
         className
       )}
       {...props}

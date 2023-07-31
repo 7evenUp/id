@@ -13,7 +13,7 @@ const MailMode = ({ back }: { back: () => void }) => {
 
   const [usedEmail, setUsedEmail] = useState("")
 
-  const [_, { isError, reset }] = useLoginMutation({
+  const [, { isError, reset }] = useLoginMutation({
     fixedCacheKey: "login-by-mail",
   })
 

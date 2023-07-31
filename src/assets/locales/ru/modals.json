@@ -198,6 +198,7 @@
   "connect-wallet": {
     "title": "Подключение кошелька",
     "connecting-metamask": "Подключение кошелька MetaMask",
-    "connecting-trustwallet": "Подключение кошелька Trust Wallet"
+    "connecting-trustwallet": "Подключение кошелька Trust Wallet",
+    "connecting-injected": "Подключение встроенного кошелька"
   }
 }

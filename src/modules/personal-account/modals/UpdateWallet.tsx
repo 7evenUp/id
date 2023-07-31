@@ -43,7 +43,10 @@ const UpdateWallet = () => {
   }
 
   return (
-    <DialogContent className="mobile:w-[370px] sm:w-[500px] 2xl:w-[32.552vw]">
+    <DialogContent
+      className="mobile:w-[370px] sm:w-[500px] 2xl:w-[32.552vw]"
+      onCloseAutoFocus={(event) => event.preventDefault()}
+    >
       <DialogHeader>
         <DialogTitle>{t("change-wallet.heading")}</DialogTitle>
       </DialogHeader>
