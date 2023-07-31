@@ -196,6 +196,7 @@
   "connect-wallet": {
     "title": "Connecting a wallet",
     "connecting-metamask": "Connecting a MetaMask wallet",
-    "connecting-trustwallet": "Connecting a Trust Wallet"
+    "connecting-trustwallet": "Connecting a Trust Wallet",
+    "connecting-injected": "Connecting injected wallet"
   }
 }
