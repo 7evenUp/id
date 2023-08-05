@@ -7,6 +7,7 @@ import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
+import { ReactComponent as HelpCircle } from "@/assets/icons/help-circle.svg"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
@@ -22,6 +23,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/shared/ui/HoverCard"
 
 import {
   useUpdateTelegramMutation,
@@ -167,6 +173,24 @@ const NicknameForm = ({
                     {...field}
                   />
                 </FormControl>
+                <HoverCard>
+                  <HoverCardTrigger>
+                    <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
+                  </HoverCardTrigger>
+                  <HoverCardContent>
+                    <p>
+                      {t("change-tg.help-card-first")}
+                      <a
+                        className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
+                        href="https://t.me/crypton_lobby_bot"
+                        target="_blank"
+                      >
+                        {t("change-tg.help-card-link")}
+                      </a>
+                      {t("change-tg.help-card-second")}
+                    </p>
+                  </HoverCardContent>
+                </HoverCard>
               </div>
               <FormMessage />
             </FormItem>
