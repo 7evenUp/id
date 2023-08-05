@@ -137,7 +137,7 @@ const ConnectWalletModal = ({
             Trust Wallet
           </ConnectButton>
           <ConnectButton onClick={onInjectedClick}>
-            <Injected className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw] stroke-gray-1 dark:stroke-gray-6 group-hover:stroke-white dark:group-hover:stroke-gray-1 transition-colors" />{" "}
+            <Injected className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw] text-gray-1 dark:text-gray-6 group-hover:text-white dark:group-hover:text-gray-1 transition-colors" />{" "}
             Injected
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
