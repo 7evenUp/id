@@ -33,6 +33,8 @@ import {
   useUpdateTelegramMutation,
   useVerifyTelegramMutation,
 } from "@/redux/api/profile"
+import { isMobile } from "react-device-detect"
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
 
 const nicknameFormSchema = z.object({
   nickname: z.string(),
@@ -173,24 +175,47 @@ const NicknameForm = ({
                     {...field}
                   />
                 </FormControl>
-                <HoverCard>
-                  <HoverCardTrigger>
-                    <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
-                  </HoverCardTrigger>
-                  <HoverCardContent>
-                    <p>
-                      {t("change-tg.help-card-first")}
-                      <a
-                        className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
-                        href="https://t.me/crypton_lobby_bot"
-                        target="_blank"
-                      >
-                        {t("change-tg.help-card-link")}
-                      </a>
-                      {t("change-tg.help-card-second")}
-                    </p>
-                  </HoverCardContent>
-                </HoverCard>
+                {isMobile ? (
+                  <Popover>
+                    <PopoverTrigger asChild role="button">
+                      <span>
+                        <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
+                      </span>
+                    </PopoverTrigger>
+                    <PopoverContent align="end" className="w-[300px]">
+                      <p>
+                        {t("change-tg.help-card-first")}
+                        <a
+                          className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
+                          href="https://t.me/crypton_lobby_bot"
+                          target="_blank"
+                        >
+                          {t("change-tg.help-card-link")}
+                        </a>
+                        {t("change-tg.help-card-second")}
+                      </p>
+                    </PopoverContent>
+                  </Popover>
+                ) : (
+                  <HoverCard>
+                    <HoverCardTrigger>
+                      <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
+                    </HoverCardTrigger>
+                    <HoverCardContent>
+                      <p>
+                        {t("change-tg.help-card-first")}
+                        <a
+                          className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
+                          href="https://t.me/crypton_lobby_bot"
+                          target="_blank"
+                        >
+                          {t("change-tg.help-card-link")}
+                        </a>
+                        {t("change-tg.help-card-second")}
+                      </p>
+                    </HoverCardContent>
+                  </HoverCard>
+                )}
               </div>
               <FormMessage />
             </FormItem>
