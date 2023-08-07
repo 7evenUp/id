@@ -37,6 +37,7 @@ const ThirdStep = ({
             <div className="md:w-[350px] 2xl:w-[22.786vw]">
               <div className="flex flex-wrap gap-3 2xl:gap-[0.781vw]">
                 {filteredLinks &&
+                  filteredLinks.length > 0 &&
                   filteredLinks.map((link) => (
                     <ExternalLink key={link.id} href={link.link.url} withTgIcon>
                       {link.link.channel.name}

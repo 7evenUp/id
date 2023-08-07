@@ -32,7 +32,7 @@ const PrimeTab = () => {
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
 
-      {filteredLinks && (
+      {filteredLinks && filteredLinks.length > 0 && (
         <RowItem className="items-baseline flex-col sm:flex-row gap-2 2xl:gap-[0.521vw]">
           <span>{t("prime.channels-and-chats")}</span>
           <div className="flex items-center sm:justify-end gap-2.5 2xl:gap-[0.651vw] flex-wrap max-w-[360px] 2xl:max-w-[23.437vw]">
