@@ -95,7 +95,7 @@ const FirstStep = ({
         if (discountKind.id === "MONEY") {
           setTotalPrice((prev) => prev - discountAmount)
         } else {
-          setTotalPrice((prev) => prev - (prev * discountAmount) / 100)
+          setTotalPrice((prev) => prev - (prev * discountAmount))
         }
       } catch {
         setPromo("")
