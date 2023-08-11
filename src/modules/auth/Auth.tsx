@@ -17,11 +17,10 @@ import RegisterWalletForm from "./components/RegisterWalletForm"
 import { Skeleton } from "@/shared/ui/Skeleton"
 
 import { useAuthByWalletMutation } from "@/redux/api/auth"
-import { useBannerByIdQuery } from "@/redux/api/banners"
+import { useRandomBannerQuery } from "@/redux/api/banners"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const AUTH_MESSAGE = "Authorization"
-const RES_BANNER_ID = 3
 
 const Auth = () => {
   const { t } = useTranslation("auth")
@@ -41,9 +40,7 @@ const Auth = () => {
     authenticate,
     { isError: isAuthError, reset, isSuccess: isAuthSuccess },
   ] = useAuthByWalletMutation()
-  const { data: banner, isLoading: isBannerLoading } = useBannerByIdQuery({
-    id: RES_BANNER_ID,
-  })
+  const { data: banner, isLoading: isBannerLoading } = useRandomBannerQuery()
 
   useEffect(() => {
     if (isAuthSuccess) setTimeout(() => refetch(), 100)
