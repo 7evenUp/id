@@ -133,8 +133,7 @@ const Auth = () => {
             <a href={banner.url} target="_blank">
               <img
                 src={banner.file}
-                alt="research auth intro"
-                className="w-[350px] 2xl:w-[22.78vw] min-h-[400px] 2xl:min-h-[26.04vw] h-full object-cover rounded-r-xl 2xl:rounded-r-[0.781vw]"
+                className="w-[350px] 2xl:w-[22.78vw] min-h-[400px] 2xl:min-h-[26.04vw] h-full object-cover rounded-r-xl 2xl:rounded-r-[0.781vw] bg-white"
               />
             </a>
           ) : null}
