@@ -20,6 +20,7 @@ const ProfileNickname = () => {
 
   const { toast } = useToast()
 
+  const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -68,6 +69,7 @@ const ProfileNickname = () => {
 
   const onEdit = () => {
     setIsEditingMode(true)
+    setInputValue(inputValue ? inputValue : profileUsername)
     setTimeout(() => {
       inputRef.current?.focus()
     }, 0)
@@ -76,13 +78,19 @@ const ProfileNickname = () => {
   return (
     <RowItem className="relative group justify-end">
       <span className="mr-auto">{t("profile.nickname")}</span>
-      <input
-        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
-        defaultValue={profileUsername}
-        ref={inputRef}
-        disabled={!isEditingMode}
-        onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
-      />
+      {isEditingMode ? (
+        <input
+          className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
+          value={inputValue ? inputValue : profileUsername}
+          onChange={(evt) => setInputValue(evt.currentTarget.value)}
+          ref={inputRef}
+          onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
+        />
+      ) : (
+        <span className="text-right text-gray-1 dark:text-gray-4">
+          {inputValue ? inputValue : profileUsername}
+        </span>
+      )}
 
       {/* Mobile editing */}
       {isEditingMode ? (

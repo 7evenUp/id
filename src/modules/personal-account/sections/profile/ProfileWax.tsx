@@ -20,6 +20,7 @@ const ProfileWax = () => {
 
   const { toast } = useToast()
 
+  const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -63,6 +64,8 @@ const ProfileWax = () => {
 
   const onEdit = () => {
     setIsEditingMode(true)
+    // @ts-expect-error null-check
+    setInputValue(inputValue ? inputValue : waxWallet)
     setTimeout(() => {
       inputRef.current?.focus()
     }, 0)
@@ -78,13 +81,20 @@ const ProfileWax = () => {
       >
         wax
       </span>
-      <input
-        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
-        defaultValue={waxWallet || ""}
-        ref={inputRef}
-        disabled={!isEditingMode}
-        onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
-      />
+      {isEditingMode ? (
+        <input
+          className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
+          // @ts-expect-error null-check
+          value={inputValue ? inputValue : waxWallet}
+          onChange={(evt) => setInputValue(evt.currentTarget.value)}
+          ref={inputRef}
+          onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
+        />
+      ) : (
+        <span className="text-right text-gray-1 dark:text-gray-4">
+          {inputValue ? inputValue : waxWallet}
+        </span>
+      )}
       {!waxWallet && !isEditingMode && !inputRef.current?.value.length && (
         <Plus className="hidden sm:block absolute right-0 w-5 h-5 2xl:w-[1.302vw] 2xl:h-[1.302vw]" />
       )}

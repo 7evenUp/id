@@ -21,6 +21,7 @@ const ProfileDiscord = () => {
 
   const { toast } = useToast()
 
+  const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -64,6 +65,7 @@ const ProfileDiscord = () => {
 
   const onEdit = () => {
     setIsEditingMode(true)
+    setInputValue(inputValue ? inputValue : discordUsername)
     setTimeout(() => {
       inputRef.current?.focus()
     }, 0)
@@ -78,13 +80,19 @@ const ProfileDiscord = () => {
       >
         discord
       </span>
-      <input
-        className="peer bg-transparent outline-none text-right w-full text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
-        defaultValue={discordUsername}
-        ref={inputRef}
-        disabled={!isEditingMode}
-        onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
-      />
+      {isEditingMode ? (
+        <input
+          className="peer bg-transparent outline-none text-right w-full text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
+          value={inputValue ? inputValue : discordUsername}
+          onChange={(evt) => setInputValue(evt.currentTarget.value)}
+          ref={inputRef}
+          onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
+        />
+      ) : (
+        <span className="text-right w-full text-gray-1 dark:text-gray-4">
+          {inputValue ? inputValue : discordUsername}
+        </span>
+      )}
       {!discordUsername &&
         !isEditingMode &&
         !inputRef.current?.value.length && (
