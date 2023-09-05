@@ -85,7 +85,7 @@ const UpdateWallet = () => {
         <>
           <div className="flex flex-col typography-text-0">
             <p>{t("change-wallet.wallet-acc-present.status")}</p>{" "}
-            <span className="text-base font-mono text-black dark:text-gray-5">
+            <span className="text-base 2xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
               {cutWalletAddr(wallet)}
             </span>
           </div>
@@ -94,7 +94,7 @@ const UpdateWallet = () => {
             <>
               <div className="flex flex-col typography-text-0">
                 <p>{t("change-wallet.wallet-acc-present.wallet-connected")}</p>{" "}
-                <span className="text-base font-mono text-black dark:text-gray-5">
+                <span className="text-base 2xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
               </div>

@@ -182,8 +182,8 @@ const NicknameForm = ({
                         <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
                       </span>
                     </PopoverTrigger>
-                    <PopoverContent align="end" className="w-[300px]">
-                      <p>
+                    <PopoverContent align="end" className="w-[300px] 2xl:w-[19.5313vw]">
+                      <p className="2xl:text-[1.0417vw]/[1.5625vw]">
                         {t("change-tg.help-card-first")}
                         <a
                           className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
