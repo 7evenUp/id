@@ -79,7 +79,7 @@ const ProfileWax = () => {
         wax
       </span>
       <input
-        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4"
+        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
         defaultValue={waxWallet || ""}
         ref={inputRef}
         disabled={!isEditingMode}

@@ -77,7 +77,7 @@ const ProfileNickname = () => {
     <RowItem className="relative group justify-end">
       <span className="mr-auto">{t("profile.nickname")}</span>
       <input
-        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4"
+        className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
         defaultValue={profileUsername}
         ref={inputRef}
         disabled={!isEditingMode}
