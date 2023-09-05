@@ -35,7 +35,7 @@ const PrimeTab = () => {
       {filteredLinks && filteredLinks.length > 0 && (
         <RowItem className="items-baseline flex-col sm:flex-row gap-2 2xl:gap-[0.521vw]">
           <span>{t("prime.channels-and-chats")}</span>
-          <div className="flex items-center sm:justify-end gap-2.5 2xl:gap-[0.651vw] flex-wrap max-w-[360px] 2xl:max-w-[23.437vw]">
+          <div className="flex items-center sm:justify-end gap-2.5 2xl:gap-[0.8vw] flex-wrap max-w-[360px] md:max-w-[550px] xmd:max-w-[680px] lg:max-w-[440px] xl:max-w-[500px] 2xl:max-w-[35vw]">
             {filteredLinks.map((link) => (
               <ExternalLink key={link.id} href={link.link.url} withTgIcon>
                 {link.link.channel.name}
@@ -53,7 +53,7 @@ const PrimeTab = () => {
           </ExternalLink>
         </div>
         <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row xl:justify-between gap-5 2xl:gap-[1.302vw]">
-          <div className="flex flex-wrap w-full mobile:w-auto mobile:min-w-[340px] mobile:max-w-[340px] 2xl:max-w-[22.135vw] py-3 px-4 2xl:py-[0.781vw] 2xl:px-[1.041vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
+          <div className="flex flex-wrap w-full mobile:w-auto mobile:min-w-[340px] mobile:max-w-[340px] 2xl:max-w-[25vw] py-3 px-4 2xl:py-[0.781vw] 2xl:px-[1.041vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
             {primeServices.map((service, i) =>
               service.isExpandable ? (
                 <Popover key={i}>

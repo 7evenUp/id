@@ -117,7 +117,7 @@ const FirstStep = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] lg:max-w-[910px] 2xl:max-w-[59.244vw]">
+      <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] lg:max-w-[910px] 2xl:max-w-[70vw]">
         <SubscriptionModalHeader step={t("buy-subs.first-step.step")} />
 
         <div className="h-[400px] lg:h-auto overflow-y-auto pr-2 pb-1 2xl:pr-[0.521vw] 2xl:pb-[0.26vw]">

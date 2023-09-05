@@ -77,7 +77,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "bg-res-bot-blue rounded-b-xl 2xl:rounded-b-[0.781vw] absolute left-0 bottom-0 w-full text-[10px] leading-[140%] 2xl:text-[0.651vw] font-medium text-white px-4 sm:px-10 2xl:px-[2.604vw] py-1.5 2xl:py-[0.391vw]",
+      "bg-res-bot-blue rounded-b-xl 2xl:rounded-b-[0.781vw] absolute left-0 bottom-0 w-full text-[10px] leading-[140%] 2xl:text-[0.7813vw] font-medium text-white px-4 sm:px-10 2xl:px-[2.604vw] py-1.5 2xl:py-[0.391vw]",
       className
     )}
     {...props}
