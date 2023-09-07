@@ -49,7 +49,8 @@ const HistoryPDF = ({ data }: { data: Transaction[] }) => {
                 <Text style={styles.tableCell}>
                   {formatDate(
                     tx.createdDatetime,
-                    i18n.language as "ru" | "en"
+                    i18n.language as "ru" | "en",
+                    true
                   ) || "-"}
                 </Text>
               </View>
