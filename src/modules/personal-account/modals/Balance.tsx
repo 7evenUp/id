@@ -34,7 +34,7 @@ import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useTopUpBalanceMutation } from "@/redux/api/balance"
 
-const PREDEFINED_AMOUNT_VALUES = ["5", "10", "20", "50", "100"]
+const PREDEFINED_AMOUNT_VALUES = ["74", "211", "400", "755"]
 
 const Balance = () => {
   const { t } = useTranslation("modals")

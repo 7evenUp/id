@@ -5,8 +5,8 @@ export const api = createApi({
     baseUrl: import.meta.env.VITE_API_BASE_URL,
     credentials: "include",
   }),
-  refetchOnFocus: true,
-  refetchOnReconnect: true,
+  // refetchOnFocus: true,
+  // refetchOnReconnect: true,
   tagTypes: ["UserProfile", "TxHistory"],
   endpoints: () => ({}),
 })

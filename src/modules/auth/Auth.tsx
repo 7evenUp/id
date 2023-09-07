@@ -85,10 +85,10 @@ const Auth = () => {
 
   return (
     <>
-      <div className="flex border border-gray-1 rounded-xl 2xl:rounded-[0.781vw] w-full mobile:w-auto ms-auto me-auto">
-        <div className="flex flex-col justify-between gap-6 2xl:gap-[1.563vw] py-8 2xl:py-[2.083vw] px-9 2xl:px-[2.34vw] bg-white rounded-xl md:rounded-none md:rounded-l-xl 2xl:rounded-l-[0.781vw] text-gray-1 w-full mobile:w-[370px] 2xl:w-[24.088vw] min-h-[340px] 2xl:min-h-[22.135vw]">
+      <div className="flex border border-gray-1 dark:border-gray-3 rounded-xl 2xl:rounded-[0.781vw] w-full mobile:w-auto ms-auto me-auto">
+        <div className="flex flex-col justify-between gap-6 2xl:gap-[1.563vw] py-8 2xl:py-[2.083vw] px-9 2xl:px-[2.34vw] bg-white dark:bg-gray-1 rounded-xl md:rounded-none md:rounded-l-xl 2xl:rounded-l-[0.781vw] text-gray-1 dark:text-white w-full mobile:w-[370px] 2xl:w-[24.088vw] min-h-[340px] 2xl:min-h-[22.135vw]">
           <div className="flex flex-col">
-            <h2 className="text-lg 2xl:text-[1.1718vw] font-medium text-black mb-10 2xl:mb-[2.6vw] max-w-[260px] 2xl:max-w-[16.92vw]">
+            <h2 className="text-lg 2xl:text-[1.1718vw] font-medium text-black dark:text-gray-6 mb-10 2xl:mb-[2.6vw] max-w-[260px] 2xl:max-w-[16.92vw]">
               {t("login.heading")}
             </h2>
 
@@ -126,14 +126,14 @@ const Auth = () => {
             </div>
           )}
         </div>
-        <div className="hidden md:block w-[350px] 2xl:w-[22.78vw] border-l border-gray-1">
+        <div className="hidden md:block w-[350px] 2xl:w-[22.78vw] border-l border-gray-1 dark:border-gray-3">
           {isBannerLoading ? (
             <Skeleton className="w-[350px] 2xl:w-[22.78vw] min-h-[400px] 2xl:min-h-[26.04vw] h-full rounded-r-xl 2xl:rounded-r-[0.781vw]" />
           ) : banner ? (
             <a href={banner.url} target="_blank">
               <img
                 src={banner.file}
-                className="w-[350px] 2xl:w-[22.78vw] min-h-[400px] 2xl:min-h-[26.04vw] h-full object-cover rounded-r-xl 2xl:rounded-r-[0.781vw] bg-white"
+                className="w-[350px] 2xl:w-[22.78vw] min-h-[400px] 2xl:min-h-[26.04vw] h-full object-cover rounded-r-xl 2xl:rounded-r-[0.781vw] bg-white dark:bg-gray-1"
               />
             </a>
           ) : null}

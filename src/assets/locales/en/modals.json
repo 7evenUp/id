@@ -20,7 +20,7 @@
       "status": "A wallet is linked to your account:",
       "wallet-disconnected": "To change it, connect a wallet with a different address to the Meta mask website.",
       "wallet-connected": "The site is connected to a wallet with the address:",
-      "wallets-equal": "To change the address, disconnect the current wallet from the site through its interface and connect a new one",
+      "wallets-equal": "To change the address, disconnect the current wallet from the site through its interface, switch to a new one and refresh the page",
       "confirm-text-1-part-1": "Upon confirmation, the current address",
       "confirm-text-1-part-2": "will be changed to",
       "confirm-text-2": "In the future, you will be able to log in to your account using a new address."
