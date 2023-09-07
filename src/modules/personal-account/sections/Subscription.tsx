@@ -51,9 +51,9 @@ const Subscription = () => {
             {t("subs.balance")}: <AccentNumber>${balance}</AccentNumber>
           </span>
           <div className="flex gap-1.5 xl:gap-3 2xl:gap-[0.781vw] flex-wrap justify-end">
-            <ModalTrigger content={<TxHistory />}>
+            {/* <ModalTrigger content={<TxHistory />}>
               <Button>{t("subs.history-btn")}</Button>
-            </ModalTrigger>
+            </ModalTrigger> */}
             <ModalTrigger content={<Balance />}>
               <Button>{t("subs.replenish-btn")}</Button>
             </ModalTrigger>
@@ -66,14 +66,14 @@ const Subscription = () => {
                 {t("subs.remaining")}:{" "}
                 <AccentNumber>{remainingDays}</AccentNumber>
               </span>
-              <SubscriptionMain triggerText={t("subs.renew-btn")} />
+              {/* <SubscriptionMain triggerText={t("subs.renew-btn")} /> */}
             </>
           ) : (
             <>
               <span className="typography-text-0 dark:text-gray-4 w-fit block">
                 {t("subs.inactive-subs")}
               </span>
-              <SubscriptionMain triggerText={t("subs.buy-btn")} />
+              {/* <SubscriptionMain triggerText={t("subs.buy-btn")} /> */}
             </>
           )}
         </RowItem>

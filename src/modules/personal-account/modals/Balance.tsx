@@ -165,11 +165,11 @@ const Balance = () => {
                 <Button className="w-fit" type="submit" isLoading={isLoading}>
                   {t("balance.replenish-btn")}
                 </Button>
-                {isSuccess && (
+                {/* {isSuccess && (
                   <ModalTrigger content={<TxHistory />}>
                     <Button>{t("balance.tx-history-btn")}</Button>
                   </ModalTrigger>
-                )}
+                )} */}
               </div>
             </div>
           </form>

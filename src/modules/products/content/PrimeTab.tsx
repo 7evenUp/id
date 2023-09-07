@@ -12,7 +12,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { primeServices } from "@/utils/primeServices"
 
-import { useLinksQuery } from "@/redux/api/channels"
+// import { useLinksQuery } from "@/redux/api/channels"
 import { useAppSelector } from "@/redux/hooks"
 
 const PrimeTab = () => {
@@ -20,11 +20,11 @@ const PrimeTab = () => {
 
   const language = useAppSelector((state) => state.language.value)
 
-  const { data: userLinks } = useLinksQuery({})
+  // const { data: userLinks } = useLinksQuery({})
 
-  const filteredLinks = userLinks?.filter(
-    (link) => link.link.channel.lang === language
-  )
+  // const filteredLinks = userLinks?.filter(
+  //   (link) => link.link.channel.lang === language
+  // )
 
   return (
     <>
@@ -32,7 +32,7 @@ const PrimeTab = () => {
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
 
-      {filteredLinks && filteredLinks.length > 0 && (
+      {/* {filteredLinks && filteredLinks.length > 0 && (
         <RowItem className="items-baseline flex-col sm:flex-row gap-2 2xl:gap-[0.521vw]">
           <span>{t("prime.channels-and-chats")}</span>
           <div className="flex items-center sm:justify-end gap-2.5 2xl:gap-[0.8vw] flex-wrap max-w-[360px] md:max-w-[550px] xmd:max-w-[680px] lg:max-w-[440px] xl:max-w-[500px] 2xl:max-w-[35vw]">
@@ -43,7 +43,7 @@ const PrimeTab = () => {
             ))}
           </div>
         </RowItem>
-      )}
+      )} */}
 
       <RowItem className="flex-col items-stretch gap-6 2xl:gap-[1.563vw]">
         <div className="flex justify-between items-center">
