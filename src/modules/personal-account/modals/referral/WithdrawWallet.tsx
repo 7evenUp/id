@@ -166,7 +166,7 @@ const WithdrawWallet = ({
                     </span>
                     <FormControl>
                       <Input
-                        className="w-[260px] 2xl:w-[16.927vw] pl-4 mb-2 2xl:pl-[1.042vw] 2xl:mb-[0.521vw] text-sm 2xl:text-[1.0417vw]/[1.5625vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className="w-[260px] 2xl:w-[16.927vw] pl-4 mb-2 2xl:pl-[1.042vw] 2xl:mb-[0.521vw] text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                         placeholder={t("ref-withdraw.amount-placeholder")}
                         {...field}
                       />

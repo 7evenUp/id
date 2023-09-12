@@ -12,7 +12,8 @@ export default {
         mobile: '480px',
         xmd: '900px',
         xlg: '1080px',
-        '2xl': '1537px'
+        '2xl': '1537px',
+        '3xl': '1921px'
       },
       backgroundImage: {
         'background-texture': "url('/images/background-texture.png')",

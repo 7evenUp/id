@@ -120,7 +120,7 @@ const Balance = () => {
                     </span>
                     <FormControl>
                       <Input
-                        className="text-sm 2xl:text-[1.0417vw]/[1.5625vw] pl-4 2xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className="text-sm 2xl:text-[0.911vw]/[1.302vw] pl-4 2xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                         placeholder={t("balance.amount-placeholder")}
                         {...field}
                       />
