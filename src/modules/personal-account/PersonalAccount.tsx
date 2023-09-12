@@ -13,9 +13,14 @@ import Referral from "./sections/Referral"
 import Button from "@/shared/ui/Button"
 
 import { useLazyLogoutQuery } from "@/redux/api/auth"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const PersonalAccount = () => {
   const { t } = useTranslation()
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [logout, { isSuccess, isError }] = useLazyLogoutQuery()
 
@@ -32,7 +37,12 @@ const PersonalAccount = () => {
   return (
     <div className="2xl:flex-1">
       <div className="flex justify-between sm:max-lg:px-12=">
-        <h1 className="typography-head uppercase dark:text-gray-5 text-center w-full sm:text-left mb-10 sm:mb-0">
+        <h1
+          className={cn(
+            "text-[22px]/[22px] 2xl:text-2xl tracking-[0.03em] font-semibold uppercase dark:text-gray-5 text-center w-full sm:text-left mb-10 sm:mb-0",
+            scale && "3xl:text-[1.432vw]/[1.432vw]"
+          )}
+        >
           {t("heading")}
         </h1>
         <div className="hidden sm:block">
