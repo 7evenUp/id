@@ -11,6 +11,8 @@ import Button from "@/shared/ui/Button"
 import { useAppSelector } from "@/redux/hooks"
 import { useLinksQuery } from "@/redux/api/channels"
 
+import { cn } from "@/lib/classNames"
+
 const ThirdStep = ({
   open,
   onOpenChange,
@@ -20,6 +22,7 @@ const ThirdStep = ({
 }) => {
   const { t } = useTranslation("modals")
 
+  const scale = useAppSelector((state) => state.scale.value)
   const language = useAppSelector((state) => state.language.value)
 
   const { data: userLinks } = useLinksQuery({})
@@ -49,7 +52,12 @@ const ThirdStep = ({
               </p>
             </div>
             <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
-              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 3xl:mb-[1.042vw]">
+              <h3
+                className={cn(
+                  "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4",
+                  scale && "typography-head_large 3xl:mb-[1.042vw]"
+                )}
+              >
                 {t("buy-subs.third-step.part-1-heading")}
               </h3>
               <p className="typography-text-0 mb-2 3xl:mb-[0.521vw]">
@@ -67,7 +75,12 @@ const ThirdStep = ({
               </ExternalLink>
             </div>
             <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
-              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 3xl:mb-[1.042vw]">
+              <h3
+                className={cn(
+                  "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4",
+                  scale && "typography-head_large 3xl:mb-[1.042vw]"
+                )}
+              >
                 {t("buy-subs.third-step.part-2-heading")}
               </h3>
               <p className="typography-text-0">
@@ -82,7 +95,12 @@ const ThirdStep = ({
               </ExternalLink>
             </div>
             <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
-              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 3xl:mb-[1.042vw]">
+              <h3
+                className={cn(
+                  "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4",
+                  scale && "typography-head_large 3xl:mb-[1.042vw]"
+                )}
+              >
                 {t("buy-subs.third-step.part-3-heading")}
               </h3>
               <p className="typography-text-0 md:mb-6 3xl:mb-[1.563vw]">
@@ -101,6 +119,7 @@ const ThirdStep = ({
             <Button>{t("buy-subs.third-step.okay-btn")}</Button>
           </DialogClose>
         </div>
+
         <SubscriptionModalFooter />
       </DialogContent>
     </Dialog>

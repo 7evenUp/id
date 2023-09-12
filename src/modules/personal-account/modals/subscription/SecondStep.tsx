@@ -22,6 +22,7 @@ import {
   useUpdateDiscordMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
@@ -39,6 +40,8 @@ const SecondStep = ({
   boughtSubDuration: number
 }) => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [inputValue, setInputValue] = useState("")
 
@@ -144,7 +147,12 @@ const SecondStep = ({
             </Button>
           </div>
           <div className="flex flex-col gap-4 3xl:gap-[1.042vw]">
-            <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+            <h3
+              className={cn(
+                "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text",
+                scale && "typography-head_large"
+              )}
+            >
               {t("buy-subs.second-step.congrats")}
             </h3>
             <p className="typography-text-0">
