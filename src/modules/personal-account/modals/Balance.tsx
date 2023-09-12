@@ -77,21 +77,21 @@ const Balance = () => {
   }
 
   return (
-    <DialogContent className="sm:w-[500px] 2xl:w-[32.552vw]">
+    <DialogContent className="sm:w-[500px] 3xl:w-[32.552vw]">
       <div>
-        <div className="flex justify-between items-baseline gap-4 sm:gap-6 2xl:gap-[1.563vw] bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6 2xl:rounded-[0.781vw] 2xl:p-[0.781vw] 2xl:mb-[1.563vw]">
+        <div className="flex justify-between items-baseline gap-4 sm:gap-6 3xl:gap-[1.563vw] bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]">
           <span className="typography-text-0 text-gray-3 dark:text-gray-4">
             {t("balance.current")}
           </span>
-          <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] 2xl:text-[3.515vw] dark:text-gray-5">
+          <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] 3xl:text-[3.515vw] dark:text-gray-5">
             $ {balance}
           </span>
         </div>
-        <div className="flex items-center gap-2 mb-5 2xl:gap-[0.521vw] 2xl:mb-1.302vw] typography-text-1">
+        <div className="flex items-center gap-2 mb-5 3xl:gap-[0.521vw] 3xl:mb-1.302vw] typography-text-1">
           <span>{t("balance.choose-deposit")}:</span>
           <Select defaultValue="crypto">
-            <SelectTrigger className="w-[130px] 2xl:w-[8.463vw]" />
-            <SelectContent className="z-[999] w-[130px] 2xl:w-[8.463vw]">
+            <SelectTrigger className="w-[130px] 3xl:w-[8.463vw]" />
+            <SelectContent className="z-[999] w-[130px] 3xl:w-[8.463vw]">
               <SelectItem value="crypto">
                 {t("balance.deposit-options.crypto")}
               </SelectItem>
@@ -104,7 +104,7 @@ const Balance = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
+            className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
           >
             <FormField
               name="amount"
@@ -115,12 +115,12 @@ const Balance = () => {
                     {t("balance.amount-label")}
                   </FormLabel>
                   <div className="relative">
-                    <span className="absolute left-0 top-1 2xl:top-[0.26vw] text-sm 2xl:text-[0.911vw]/[1.302vw]">
+                    <span className="absolute left-0 top-1 3xl:top-[0.26vw] text-sm 3xl:text-[0.911vw]/[1.302vw]">
                       $
                     </span>
                     <FormControl>
                       <Input
-                        className="text-sm 2xl:text-[1.0417vw]/[1.5625vw] pl-4 2xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className="text-sm 3xl:text-[0.911vw]/[1.302vw] pl-4 3xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                         placeholder={t("balance.amount-placeholder")}
                         {...field}
                       />
@@ -131,7 +131,7 @@ const Balance = () => {
               )}
             />
             <div>
-              <div className="flex items-center gap-2.5 mb-6 2xl:gap-[0.651vw] 2xl:mb-[1.563vw]">
+              <div className="flex items-center gap-2.5 mb-6 3xl:gap-[0.651vw] 3xl:mb-[1.563vw]">
                 {PREDEFINED_AMOUNT_VALUES.map((amount, i) => (
                   <Chip
                     key={i}
@@ -142,7 +142,7 @@ const Balance = () => {
                   </Chip>
                 ))}
               </div>
-              <div className="flex items-center gap-2 mb-6 2xl:gap-[0.521vw] 2xl:mb-[1.563vw]">
+              <div className="flex items-center gap-2 mb-6 3xl:gap-[0.521vw] 3xl:mb-[1.563vw]">
                 <Checkbox id="email_bill" ref={checkboxRef} />
                 <CheckboxLabel htmlFor="email_bill">
                   {t("balance.send-check")}
@@ -150,18 +150,18 @@ const Balance = () => {
               </div>
 
               {isSuccess && (
-                <ResponseSuccessText className="mb-6 2xl:mb-[1.563vw] block">
+                <ResponseSuccessText className="mb-6 3xl:mb-[1.563vw] block">
                   {t("balance.request-success")}
                 </ResponseSuccessText>
               )}
               {error && (
                 <ResponseErrorText
-                  className="mb-6 2xl:mb-[1.563vw] block"
+                  className="mb-6 3xl:mb-[1.563vw] block"
                   error={error}
                 />
               )}
 
-              <div className="flex items-center flex-wrap gap-3 2xl:gap-[0.781vw]">
+              <div className="flex items-center flex-wrap gap-3 3xl:gap-[0.781vw]">
                 <Button className="w-fit" type="submit" isLoading={isLoading}>
                   {t("balance.replenish-btn")}
                 </Button>

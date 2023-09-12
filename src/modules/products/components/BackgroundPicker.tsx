@@ -19,7 +19,7 @@ const BackgroundPicker = () => {
   }
 
   return (
-    <div className="flex flex-col mobile:flex-row mobile:items-center gap-6 2xl:gap-[1.563vw]">
+    <div className="flex flex-col mobile:flex-row mobile:items-center gap-6 3xl:gap-[1.563vw]">
       <RadioGroup value={mode} onValueChange={(val) => setMode(val as Modes)}>
         <RadioGroupItem value={"research"} id="research">
           Research
@@ -28,11 +28,11 @@ const BackgroundPicker = () => {
           {t("res-bot.aggregator")}
         </RadioGroupItem>
       </RadioGroup>
-      <div className="relative flex items-center gap-2 py-[5px] px-1.5 2xl:gap-[0.521vw] 2xl:py-[0.325vw] 2xl:px-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
+      <div className="relative flex items-center gap-2 py-[5px] px-1.5 3xl:gap-[0.521vw] 3xl:py-[0.325vw] 3xl:px-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw]">
 
         {/* Research photo active indicator */}
         <div
-          className="absolute left-[11px] 2xl:left-[0.716vw] -top-2 2xl:-top-[0.521vw] w-8 h-1 2xl:w-[2.083vw] 2xl:h-[0.26vw] bg-res-bot-blue rounded-full will-change-transform transition-transform"
+          className="absolute left-[11px] 3xl:left-[0.716vw] -top-2 3xl:-top-[0.521vw] w-8 h-1 3xl:w-[2.083vw] 3xl:h-[0.26vw] bg-res-bot-blue rounded-full will-change-transform transition-transform"
           style={{
             transform: `translateX(${activeResearchPhoto * 157}%)`,
           }}
@@ -40,7 +40,7 @@ const BackgroundPicker = () => {
 
         {/* Aggregator photo active indicator */}
         <div
-          className="absolute left-[11px] 2xl:left-[0.716vw] -bottom-2 2xl:-bottom-[0.521vw] w-8 h-1 2xl:w-[2.083vw] 2xl:h-[0.26vw] bg-res-bot-blue rounded-full will-change-transform transition-transform ease-in-out"
+          className="absolute left-[11px] 3xl:left-[0.716vw] -bottom-2 3xl:-bottom-[0.521vw] w-8 h-1 3xl:w-[2.083vw] 3xl:h-[0.26vw] bg-res-bot-blue rounded-full will-change-transform transition-transform ease-in-out"
           style={{
             transform: `translateX(${activeAggregatorPhoto * 157}%)`,
           }}
@@ -49,7 +49,7 @@ const BackgroundPicker = () => {
         {new Array(5).fill(null).map((_, i) => (
           <button
             key={i}
-            className="w-[42px] h-[42px] 2xl:w-[2.734vw] 2xl:h-[2.734vw] rounded-lg 2xl:rounded-[0.521vw] bg-gray-3"
+            className="w-[42px] h-[42px] 3xl:w-[2.734vw] 3xl:h-[2.734vw] rounded-lg 3xl:rounded-[0.521vw] bg-gray-3"
             onClick={() => changeActivePhoto(mode, i)}
           />
         ))}

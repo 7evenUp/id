@@ -35,7 +35,7 @@ const ProfileWallet = () => {
       {wallet ? (
         <span>{cutWalletAddr(wallet)}</span>
       ) : (
-        <Plus className="hidden sm:block absolute right-0 w-5 h-5 2xl:w-[1.302vw] 2xl:h-[1.302vw]" />
+        <Plus className="hidden sm:block absolute right-0 w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw]" />
       )}
 
       {/* Mobile editing */}

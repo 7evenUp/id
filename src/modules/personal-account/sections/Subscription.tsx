@@ -32,7 +32,7 @@ const Subscription = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4 2xl:mb-[1.042vw]">
+      <div className="flex justify-between items-center mb-4 3xl:mb-[1.042vw]">
         <div className="relative">
           <Subheading>{t("subs.heading")}</Subheading>
           <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
@@ -40,7 +40,7 @@ const Subscription = () => {
         {status !== null && (
           <ModalTrigger content={<FreezeSubs />}>
             <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue active:bg-opacity-80">
-              <Snow className="2xl:w-[0.781vw] 2xl:h-[0.846vw]" />
+              <Snow className="3xl:w-[0.781vw] 3xl:h-[0.846vw]" />
             </IconButton>
           </ModalTrigger>
         )}
@@ -50,7 +50,7 @@ const Subscription = () => {
           <span className="flex-shrink-0">
             {t("subs.balance")}: <AccentNumber>${balance}</AccentNumber>
           </span>
-          <div className="flex gap-1.5 xl:gap-3 2xl:gap-[0.781vw] flex-wrap justify-end">
+          <div className="flex gap-1.5 xl:gap-3 3xl:gap-[0.781vw] flex-wrap justify-end">
             <ModalTrigger content={<TxHistory />}>
               <Button>{t("subs.history-btn")}</Button>
             </ModalTrigger>
@@ -59,7 +59,7 @@ const Subscription = () => {
             </ModalTrigger>
           </div>
         </RowItem>
-        <RowItem className="gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="gap-6 3xl:gap-[1.563vw]">
           {remainingDays ? (
             <>
               <span className="typography-text-0 dark:text-gray-4 w-fit block">

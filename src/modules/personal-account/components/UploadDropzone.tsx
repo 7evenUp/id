@@ -41,7 +41,7 @@ const UploadDropzone = ({
   return (
     <div
       className={cn(
-        "group h-[60px] 2xl:h-[3.906vw] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg 2xl:rounded-[0.521vw] cursor-pointer outline-none hover:bg-gray-6 dark:hover:bg-gray-2 dark:hover:bg-opacity-20",
+        "group h-[60px] 3xl:h-[3.906vw] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg 3xl:rounded-[0.521vw] cursor-pointer outline-none hover:bg-gray-6 dark:hover:bg-gray-2 dark:hover:bg-opacity-20",
         isDragActive && "border-res-bot-blue dark:border-res-bot-blue"
       )}
       {...getRootProps()}
@@ -54,7 +54,7 @@ const UploadDropzone = ({
       />
       <span
         className={cn(
-          "typography-tip text-gray-3 select-none text-center break-all px-1.5 2xl:px-[0.391vw] group-hover:text-gray-2 dark:group-hover:text-gray-4",
+          "typography-tip text-gray-3 select-none text-center break-all px-1.5 3xl:px-[0.391vw] group-hover:text-gray-2 dark:group-hover:text-gray-4",
           isDragActive && "text-res-bot-blue dark:text-res-bot-blue"
         )}
       >

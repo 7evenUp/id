@@ -15,6 +15,7 @@ import storage from "redux-persist/lib/storage"
 import tabsReducer from "./tabs/slice"
 import themeReducer from "./theme/slice"
 import languageReducer from "./language/slice"
+import scaleReducer from "./scaleScreen/slice"
 import { api } from "./api/core"
 
 const persistConfig = {
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   tabs: tabsReducer,
   theme: themeReducer,
   language: languageReducer,
+  scale: scaleReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

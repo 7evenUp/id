@@ -24,9 +24,9 @@ const TabsTriggers = () => {
         <Tooltip content="Prime">
           <div>
             {activeProduct === "prime" ? (
-              <PrimeActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+              <PrimeActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
             ) : (
-              <PrimeIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+              <PrimeIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
             )}
           </div>
         </Tooltip>
@@ -35,9 +35,9 @@ const TabsTriggers = () => {
         <Tooltip content="Research Bot">
           <div>
             {activeProduct === "research-bot" ? (
-              <ResearchBotActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+              <ResearchBotActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
             ) : (
-              <ResearchBotIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+              <ResearchBotIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
             )}
           </div>
         </Tooltip>
@@ -46,9 +46,9 @@ const TabsTriggers = () => {
         <Tooltip content="Tools">
           <div>
             {activeProduct === "tools" ? (
-              <ToolsActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+              <ToolsActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
             ) : (
-              <ToolsIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+              <ToolsIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
             )}
           </div>
         </Tooltip>
@@ -57,9 +57,9 @@ const TabsTriggers = () => {
         <Tooltip content="Calendar">
           <div>
             {activeProduct === "calendar" ? (
-              <CalendarActiveIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw]" />
+              <CalendarActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
             ) : (
-              <CalendarIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-4" />
+              <CalendarIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
             )}
           </div>
         </Tooltip>
@@ -67,14 +67,14 @@ const TabsTriggers = () => {
       <TabsTrigger value={TABS_VALUES.UNIVERSE} disabled>
         <Tooltip content="Universe">
           <div>
-            <UniverseIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-2" />
+            <UniverseIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-2" />
           </div>
         </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.ACADEMY} disabled>
         <Tooltip content="Academy">
           <div>
-            <AcademyIcon className="w-[26px] h-[26px] 2xl:w-[1.693vw] 2xl:h-[1.693vw] dark:fill-gray-2" />
+            <AcademyIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-2" />
           </div>
         </Tooltip>
       </TabsTrigger>

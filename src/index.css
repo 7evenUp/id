@@ -4,47 +4,47 @@
 
 @layer components {
   .typography-head {
-    @apply text-[22px]/[22px] 2xl:text-[1.5625vw]/[1.5625vw] tracking-[0.03em] font-semibold;
+    @apply text-[22px]/[22px] 2xl:text-2xl 3xl:text-[1.432vw]/[1.432vw] tracking-[0.03em] font-semibold;
   }
 
   .typography-semi-head {
-    @apply text-lg 2xl:text-[1.3021vw]/[1.823vw] -tracking-[0.01em] font-semibold;
+    @apply text-lg 2xl:text-xl 3xl:text-[1.172vw]/[1.823vw] -tracking-[0.01em] font-semibold;
   }
 
   .typography-text-0 {
-    @apply text-sm 2xl:text-[1.0417vw]/[1.302vw] -tracking-[0.01em] font-normal;
+    @apply text-sm 2xl:text-base 3xl:text-[0.911vw]/[1.302vw] -tracking-[0.01em] font-normal;
   }
 
   .typography-text-1 {
-    @apply text-[10px] 2xl:text-[0.7813vw] leading-[140%] font-medium;
+    @apply text-[10px] 2xl:text-[12px] 3xl:text-[0.651vw] leading-[140%] font-medium;
   }
 
   .typography-text-2 {
-    @apply text-[10px] 2xl:text-[0.7813vw] leading-[140%] font-semibold;
+    @apply text-[10px] 2xl:text-[12px] 3xl:text-[0.651vw] leading-[140%] font-semibold;
   }
 
   .typography-accent {
-    @apply text-sm 2xl:text-[1.0417vw]/[1.302vw] font-medium tracking-normal;
+    @apply text-sm 2xl:text-base 3xl:text-[0.911vw]/[1.302vw] font-medium tracking-normal;
   }
 
   .typography-balance {
-    @apply text-sm 2xl:text-[1.0417vw]/[1.302vw] font-semibold;
+    @apply text-sm 2xl:text-base 3xl:text-[0.911vw]/[1.302vw] font-semibold;
   }
 
   .typography-tip {
-    @apply text-[8px] 2xl:text-[0.6510vw] leading-[140%] tracking-[0.01em] font-medium;
+    @apply text-[8px] 2xl:text-[12px] 3xl:text-[0.521vw] leading-[140%] tracking-[0.01em] font-medium;
   }
 
   .typography-btn-big {
-    @apply text-sm/[14px] 2xl:text-[1.0417vw]/[0.911vw] font-normal;
+    @apply text-sm/[14px] 2xl:text-base/[16px] 3xl:text-[0.911vw]/[0.911vw] font-normal;
   }
 
   .typography-btn-standart {
-    @apply text-[10px]/[10px] 2xl:text-[0.7813vw]/[0.7813vw] font-medium;
+    @apply text-[10px]/[10px] 2xl:text-xs/[12px] 3xl:text-[0.651vw]/[0.651vw] font-medium;
   }
 
   .typography-btn-additional {
-    @apply text-[10px] 2xl:text-[0.7813vw] leading-[140%] tracking-[0.05em] font-medium;
+    @apply text-[10px] 2xl:text-xs/[12px] 3xl:text-[0.651vw]/[0.6250vw] leading-[140%] tracking-[0.05em] font-medium;
   }
 }
 

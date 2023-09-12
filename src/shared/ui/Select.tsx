@@ -14,7 +14,7 @@ const SelectTrigger = React.forwardRef<
   return (
     <RadixSelect.Trigger
       className={cn(
-        "flex items-center justify-between gap-0.5 2xl:gap-[0.13vw] text-gray-1 border border-gray-1 dark:text-gray-4 dark:border-gray-4 rounded-full typography-btn-standart py-1 px-2.5 2xl:py-[0.26vw] 2xl:px-[0.651vw] min-w-[75px] 2xl:min-w-[4.882vw] aria-expanded:rounded-b-none aria-expanded:rounded-t-xl 2xl:aria-expanded:rounded-t-[0.781vw]",
+        "flex items-center justify-between gap-0.5 3xl:gap-[0.13vw] text-gray-1 border border-gray-1 dark:text-gray-4 dark:border-gray-4 rounded-full typography-btn-standart py-1 px-2.5 3xl:py-[0.26vw] 3xl:px-[0.651vw] min-w-[75px] 3xl:min-w-[4.882vw] aria-expanded:rounded-b-none aria-expanded:rounded-t-xl 3xl:aria-expanded:rounded-t-[0.781vw]",
         className
       )}
       {...props}
@@ -22,7 +22,7 @@ const SelectTrigger = React.forwardRef<
     >
       <RadixSelect.Value placeholder="Select" />
       <RadixSelect.Icon>
-        <ArrowsSelect className="w-2.5 h-2.5 2xl:w-[0.651vw] 2xl:h-[0.651vw]" />
+        <ArrowsSelect className="w-2.5 h-2.5 3xl:w-[0.651vw] 3xl:h-[0.651vw]" />
       </RadixSelect.Icon>
     </RadixSelect.Trigger>
   )
@@ -37,7 +37,7 @@ const SelectContent = React.forwardRef<
     <RadixSelect.Portal>
       <RadixSelect.Content
         className={cn(
-          "bg-white dark:bg-gray-1 border border-gray-1 dark:border-gray-4 rounded-b-xl 2xl:rounded-b-[0.781vw] border-t-0 px-2 2xl:px-[0.521vw] py-1 2xl:py-[0.26vw] min-w-[75px] 2xl:min-w-[4.882vw]",
+          "bg-white dark:bg-gray-1 border border-gray-1 dark:border-gray-4 rounded-b-xl 3xl:rounded-b-[0.781vw] border-t-0 px-2 3xl:px-[0.521vw] py-1 3xl:py-[0.26vw] min-w-[75px] 3xl:min-w-[4.882vw]",
           className
         )}
         avoidCollisions={false}
@@ -59,7 +59,7 @@ const SelectItem = React.forwardRef<
   return (
     <RadixSelect.Item
       className={cn(
-        "typography-text-1 text-gray-1 dark:text-gray-5 bg-transparent h-5 2xl:h-[1.302vw] px-2 2xl:px-[0.521vw] leading-none rounded-sm 2xl:rounded-[0.13vw] flex items-center select-none data-[highlighted]:outline-none data-[highlighted]:bg-gray-2 data-[highlighted]:bg-opacity-10 dark:data-[highlighted]:bg-gray-5 dark:data-[highlighted]:bg-opacity-10 cursor-pointer aria-disabled:text-gray-4 aria-disabled:cursor-auto dark:aria-disabled:text-gray-3",
+        "typography-text-1 text-gray-1 dark:text-gray-5 bg-transparent h-5 3xl:h-[1.302vw] px-2 3xl:px-[0.521vw] leading-none rounded-sm 3xl:rounded-[0.13vw] flex items-center select-none data-[highlighted]:outline-none data-[highlighted]:bg-gray-2 data-[highlighted]:bg-opacity-10 dark:data-[highlighted]:bg-gray-5 dark:data-[highlighted]:bg-opacity-10 cursor-pointer aria-disabled:text-gray-4 aria-disabled:cursor-auto dark:aria-disabled:text-gray-3",
         className
       )}
       {...props}

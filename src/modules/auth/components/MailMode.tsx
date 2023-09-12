@@ -20,10 +20,10 @@ const MailMode = ({ back }: { back: () => void }) => {
   return (
     <>
       <button
-        className="text-sm 2xl:text-[0.911vw] flex items-center gap-2 2xl:gap-[0.521vw] text-gray-1 hover:text-gray-3 dark:text-white dark:hover:text-gray-5 mb-6 2xl:mb-[1.56vw] w-fit"
+        className="text-sm 3xl:text-[0.911vw] flex items-center gap-2 3xl:gap-[0.521vw] text-gray-1 hover:text-gray-3 dark:text-white dark:hover:text-gray-5 mb-6 3xl:mb-[1.56vw] w-fit"
         onClick={back}
       >
-        <MoveLeft className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw]" />
+        <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />
         <span className="text-left">{t("login.another-method")}</span>
       </button>
       {isError ? (

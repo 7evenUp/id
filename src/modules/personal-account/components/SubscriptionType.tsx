@@ -5,7 +5,7 @@ import { cn } from "@/lib/classNames"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const subsTypeVariants = cva(
-  "typography-text-1 italic bg-gray-1 dark:bg-gray-2 px-1.5 py-0.5 2xl:px-[0.391vw] 2xl:py-[0.13vw] text-gray-6 rounded-full select-none",
+  "typography-text-1 italic bg-gray-1 dark:bg-gray-2 px-1.5 py-0.5 3xl:px-[0.391vw] 3xl:py-[0.13vw] text-gray-6 rounded-full select-none",
   {
     variants: {
       appearence: {

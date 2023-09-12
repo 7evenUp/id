@@ -30,12 +30,12 @@ const ThirdStep = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[820px] lg:max-w-[90vw] 2xl:max-w-[90vw]">
+      <DialogContent className="pb-14 sm:pb-14 3xl:pb-[3.645vw] sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[820px] lg:max-w-[90vw] 3xl:max-w-[90vw]">
         <SubscriptionModalHeader step={t("buy-subs.third-step.step")} />
-        <div className="flex flex-col h-[400px] lg:h-auto overflow-auto pr-2 2xl:pr-[0.521vw] divide-y divide-gray-4 dark:divide-gray-2">
-          <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 2xl:gap-[2.604vw] 2xl:py-[1.302vw]">
-            <div className="md:w-[350px] lg:w-[522px] 2xl:w-[34vw]">
-              <div className="flex flex-wrap gap-3 2xl:gap-[0.781vw]">
+        <div className="flex flex-col h-[400px] lg:h-auto overflow-auto pr-2 3xl:pr-[0.521vw] divide-y divide-gray-4 dark:divide-gray-2">
+          <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 3xl:gap-[2.604vw] 3xl:py-[1.302vw]">
+            <div className="md:w-[350px] lg:w-[522px] 3xl:w-[34vw]">
+              <div className="flex flex-wrap gap-3 3xl:gap-[0.781vw]">
                 {filteredLinks &&
                   filteredLinks.length > 0 &&
                   filteredLinks.map((link) => (
@@ -44,15 +44,15 @@ const ThirdStep = ({
                     </ExternalLink>
                   ))}
               </div>
-              <p className="typography-tip mt-5 2xl:mt-[1.302vw]">
+              <p className="typography-tip mt-5 3xl:mt-[1.302vw]">
                 {t("buy-subs.third-step.find-links")}
               </p>
             </div>
-            <div className="md:w-[450px] lg:w-[614px] 2xl:w-[40vw]">
-              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 2xl:mb-[1.042vw]">
+            <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
+              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 3xl:mb-[1.042vw]">
                 {t("buy-subs.third-step.part-1-heading")}
               </h3>
-              <p className="typography-text-0 mb-2 2xl:mb-[0.521vw]">
+              <p className="typography-text-0 mb-2 3xl:mb-[0.521vw]">
                 {t("buy-subs.third-step.part-1-text-1")}
               </p>
               <p className="typography-text-0">
@@ -60,14 +60,14 @@ const ThirdStep = ({
               </p>
             </div>
           </div>
-          <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 2xl:gap-[2.604vw] 2xl:py-[1.302vw]">
-            <div className="md:w-[350px] lg:w-[522px] 2xl:w-[34vw]">
+          <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 3xl:gap-[2.604vw] 3xl:py-[1.302vw]">
+            <div className="md:w-[350px] lg:w-[522px] 3xl:w-[34vw]">
               <ExternalLink href="#" className="w-fit">
                 Crypton Lobby
               </ExternalLink>
             </div>
-            <div className="md:w-[450px] lg:w-[614px] 2xl:w-[40vw]">
-              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 2xl:mb-[1.042vw]">
+            <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
+              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 3xl:mb-[1.042vw]">
                 {t("buy-subs.third-step.part-2-heading")}
               </h3>
               <p className="typography-text-0">
@@ -75,17 +75,17 @@ const ThirdStep = ({
               </p>
             </div>
           </div>
-          <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 2xl:gap-[2.604vw] 2xl:py-[1.302vw]">
-            <div className="md:w-[350px] lg:w-[522px] 2xl:w-[34vw]">
+          <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 3xl:gap-[2.604vw] 3xl:py-[1.302vw]">
+            <div className="md:w-[350px] lg:w-[522px] 3xl:w-[34vw]">
               <ExternalLink href="#" className="w-fit">
                 Calendar
               </ExternalLink>
             </div>
-            <div className="md:w-[450px] lg:w-[614px] 2xl:w-[40vw]">
-              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 2xl:mb-[1.042vw]">
+            <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
+              <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4 3xl:mb-[1.042vw]">
                 {t("buy-subs.third-step.part-3-heading")}
               </h3>
-              <p className="typography-text-0 md:mb-6 2xl:mb-[1.563vw]">
+              <p className="typography-text-0 md:mb-6 3xl:mb-[1.563vw]">
                 {t("buy-subs.third-step.part-3-text")}
               </p>
               <DialogClose asChild className="hidden md:flex">

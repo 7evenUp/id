@@ -19,7 +19,7 @@ const TxHistory = () => {
   if (!transactions) return null
 
   return (
-    <DialogContent className="max-w-[800px] 2xl:max-w-[52.083vw] sm:px-6 2xl:px-[1.563vw]">
+    <DialogContent className="max-w-[800px] 3xl:max-w-[52.083vw] sm:px-6 3xl:px-[1.563vw]">
       <DialogHeader>
         <DialogTitle>{t("history.heading")}</DialogTitle>
         {transactions.length !== 0 && (

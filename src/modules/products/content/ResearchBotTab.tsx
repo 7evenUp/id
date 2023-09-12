@@ -61,7 +61,7 @@ const ResearchBotTab = () => {
           link="https://t.me/crypton_research_bot"
         />
       </TabHeader>
-      <Subheading className="mt-10 2xl:mt-[2.604vw]">Coming soon</Subheading>
+      <Subheading className="mt-10 3xl:mt-[2.604vw]">Coming soon</Subheading>
     </>
   )
 
@@ -74,39 +74,39 @@ const ResearchBotTab = () => {
   //       />
   //       <Button className="sm:ml-auto w-fit">{t("save-btn")}</Button>
   //     </TabHeader>
-  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 2xl:gap-[0.521vw]">
+  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 3xl:gap-[0.521vw]">
   //       <span>{t("res-bot.notifications")}</span>
-  //       <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 2xl:gap-[2.604vw] px-4 py-1.5 2xl:px-[1.042vw] 2xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
-  //         <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //       <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 3xl:gap-[2.604vw] px-4 py-1.5 3xl:px-[1.042vw] 3xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw]">
+  //         <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //           <Switch id="resNotif" defaultChecked={true} />
   //           <label htmlFor="resNotif">Research</label>
   //         </div>
-  //         <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //         <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //           <Switch id="agrNotif" />
   //           <label htmlFor="agrNotif">{t("res-bot.aggregator")}</label>
   //         </div>
   //       </div>
   //     </RowItem>
-  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 2xl:gap-[0.521vw]">
+  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 3xl:gap-[0.521vw]">
   //       <span>{t("res-bot.modes")}</span>
-  //       <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 2xl:gap-[2.604vw] px-4 py-1.5 2xl:px-[1.042vw] 2xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
-  //         <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //       <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 3xl:gap-[2.604vw] px-4 py-1.5 3xl:px-[1.042vw] 3xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw]">
+  //         <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //           <Switch id="resView" defaultChecked={true} />
   //           <label htmlFor="resView">Research</label>
   //         </div>
-  //         <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //         <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //           <Switch id="agrView" />
   //           <label htmlFor="agrView">{t("res-bot.aggregator")}</label>
   //         </div>
   //       </div>
   //     </RowItem>
-  //     <RowItem className="flex-col sm:flex-row lg:flex-col xlg:flex-row gap-3 2xl:gap-[0.781vw] items-baseline">
+  //     <RowItem className="flex-col sm:flex-row lg:flex-col xlg:flex-row gap-3 3xl:gap-[0.781vw] items-baseline">
   //       <span>{t("res-bot.auto-translator")}</span>
-  //       <div className="flex flex-col gap-[5px] 2xl:gap-[0.325vw] sm:self-end">
-  //         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 2xl:gap-[0.521vw]">
+  //       <div className="flex flex-col gap-[5px] 3xl:gap-[0.325vw] sm:self-end">
+  //         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 3xl:gap-[0.521vw]">
   //           <span>Research</span>
-  //           <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 2xl:gap-[2.604vw] px-4 py-1.5 2xl:px-[1.042vw] 2xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
-  //             <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //           <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 3xl:gap-[2.604vw] px-4 py-1.5 3xl:px-[1.042vw] 3xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw]">
+  //             <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //               <Switch
   //                 id="resRu"
   //                 checked={resLanguage === "ru"}
@@ -114,7 +114,7 @@ const ResearchBotTab = () => {
   //               />
   //               <label htmlFor="resRu">{t("res-bot.ru")}</label>
   //             </div>
-  //             <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //             <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //               <Switch
   //                 id="resEn"
   //                 checked={resLanguage === "en"}
@@ -124,10 +124,10 @@ const ResearchBotTab = () => {
   //             </div>
   //           </div>
   //         </div>
-  //         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 2xl:gap-[0.521vw] dark:text-gray-4">
+  //         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 3xl:gap-[0.521vw] dark:text-gray-4">
   //           <span>{t("res-bot.aggregator")}</span>
-  //           <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 2xl:gap-[2.604vw] px-4 py-1.5 2xl:px-[1.042vw] 2xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 2xl:rounded-[0.781vw]">
-  //             <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //           <div className="flex flex-col mobile-sm:flex-row gap-2 mobile-sm:items-center mobile-sm:gap-10 3xl:gap-[2.604vw] px-4 py-1.5 3xl:px-[1.042vw] 3xl:py-[0.391vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw]">
+  //             <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //               <Switch
   //                 id="agrEn"
   //                 checked={aggLanguage === "ru"}
@@ -135,7 +135,7 @@ const ResearchBotTab = () => {
   //               />
   //               <label htmlFor="agrEn">{t("res-bot.ru")}</label>
   //             </div>
-  //             <div className="flex items-center gap-2 2xl:gap-[0.521vw]">
+  //             <div className="flex items-center gap-2 3xl:gap-[0.521vw]">
   //               <Switch
   //                 id="agrEs"
   //                 checked={aggLanguage === "en"}
@@ -147,15 +147,15 @@ const ResearchBotTab = () => {
   //         </div>
   //       </div>
   //     </RowItem>
-  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 2xl:gap-[0.521vw]">
+  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 3xl:gap-[0.521vw]">
   //       <span>{t("res-bot.text-size")}</span>
   //       <TextSizeSlider />
   //     </RowItem>
-  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 2xl:gap-[0.521vw]">
+  //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 3xl:gap-[0.521vw]">
   //       <span>{t("res-bot.bg-selection")}</span>
   //       <BackgroundPicker />
   //     </RowItem>
-  //     <div className="flex flex-col gap-1.5 py-2 2xl:gap-[0.391vw] 2xl:py-[0.521vw] dark:text-gray-4">
+  //     <div className="flex flex-col gap-1.5 py-2 3xl:gap-[0.391vw] 3xl:py-[0.521vw] dark:text-gray-4">
   //       <span>{t("res-bot.project-settings")}</span>
   //       <ProjectsTable />
   //     </div>

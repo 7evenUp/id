@@ -16,7 +16,7 @@ const ResponseErrorText = ({
   return (
     <span
       className={cn(
-        "text-error text-xs 2xl:text-[0.781vw]/[1.042vw] font-medium tracking-wide",
+        "text-error text-xs 3xl:text-[0.781vw]/[1.042vw] font-medium tracking-wide",
         className
       )}
     >

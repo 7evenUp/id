@@ -69,19 +69,19 @@ const UpdateTelegram = () => {
 
   return (
     <DialogContent
-      className="mobile:w-[370px] sm:w-[370px] 2xl:w-[24.088vw]"
+      className="mobile:w-[370px] sm:w-[370px] 3xl:w-[24.088vw]"
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       {isSecondStep && (
         <button
-          className="typography-btn-big flex items-center gap-2 2xl:gap-[0.521vw] hover:text-gray-3 w-fit"
+          className="typography-btn-big flex items-center gap-2 3xl:gap-[0.521vw] hover:text-gray-3 w-fit"
           onClick={() => setIsSecondStep(false)}
         >
-          <MoveLeft className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw]" />
+          <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />
           <span className="text-left">{t("change-tg.back-button")}</span>
         </button>
       )}
-      <DialogHeader className="mb-4 2xl:mb-[1.042vw]">
+      <DialogHeader className="mb-4 3xl:mb-[1.042vw]">
         <div className="flex flex-col">
           <DialogTitle>{t("change-tg.heading")}</DialogTitle>
         </div>
@@ -154,7 +154,7 @@ const NicknameForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
+        className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
       >
         <FormField
           name="nickname"
@@ -165,12 +165,12 @@ const NicknameForm = ({
                 {t("change-tg.username-label")}
               </FormLabel>
               <div className="relative">
-                <span className="absolute left-0 top-1 2xl:top-[0.26vw] text-sm 2xl:text-[0.911vw]/[1.302vw]">
+                <span className="absolute left-0 top-1 3xl:top-[0.26vw] text-sm 3xl:text-[0.911vw]/[1.302vw]">
                   @
                 </span>
                 <FormControl>
                   <Input
-                    className="w-full text-sm 2xl:text-[0.911vw]/[1.302vw] pl-4 2xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className="w-full text-sm 3xl:text-[0.911vw]/[1.302vw] pl-4 3xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                     placeholder={t("change-tg.username-placeholder")}
                     {...field}
                   />
@@ -179,14 +179,14 @@ const NicknameForm = ({
                   <Popover>
                     <PopoverTrigger asChild role="button">
                       <span>
-                        <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
+                        <HelpCircle className="absolute right-0 top-1.5 3xl:top-[0.39vw] w-4 h-4 3xl:w-[1.041vw] 3xl:h-[1.041vw] cursor-pointer" />
                       </span>
                     </PopoverTrigger>
                     <PopoverContent
                       align="end"
-                      className="w-[300px] 2xl:w-[19.5313vw]"
+                      className="w-[300px] 3xl:w-[19.5313vw]"
                     >
-                      <p className="2xl:text-[1.0417vw]/[1.5625vw]">
+                      <p className="3xl:text-[1.0417vw]/[1.5625vw]">
                         {t("change-tg.help-card-first")}
                         <a
                           className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
@@ -202,7 +202,7 @@ const NicknameForm = ({
                 ) : (
                   <HoverCard openDelay={200}>
                     <HoverCardTrigger>
-                      <HelpCircle className="absolute right-0 top-1.5 2xl:top-[0.39vw] w-4 h-4 2xl:w-[1.041vw] 2xl:h-[1.041vw] cursor-pointer" />
+                      <HelpCircle className="absolute right-0 top-1.5 3xl:top-[0.39vw] w-4 h-4 3xl:w-[1.041vw] 3xl:h-[1.041vw] cursor-pointer" />
                     </HoverCardTrigger>
                     <HoverCardContent>
                       <p>
@@ -227,7 +227,7 @@ const NicknameForm = ({
         {error && <ResponseErrorText error={error} />}
 
         <Button
-          className="w-fit mt-2 2xl:mt-[0.521vw]"
+          className="w-fit mt-2 3xl:mt-[0.521vw]"
           type="submit"
           isLoading={isLoading}
         >
@@ -281,7 +281,7 @@ const CodeForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
+          className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
         >
           <FormField
             name="code"
@@ -293,7 +293,7 @@ const CodeForm = ({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className="text-sm 3xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                     placeholder={t("change-tg.code-placeholder")}
                     {...field}
                   />
@@ -309,7 +309,7 @@ const CodeForm = ({
           )}
 
           <Button
-            className="w-fit mt-2 2xl:mt-[0.521vw]"
+            className="w-fit mt-2 3xl:mt-[0.521vw]"
             type="submit"
             isLoading={isLoading}
             disabled={isSuccess}

@@ -25,36 +25,36 @@ const ReferralStats = () => {
   } = profileData
 
   return (
-    <DialogContent className="max-w-[500px] md:max-w-[630px] 2xl:max-w-[41.015vw]">
+    <DialogContent className="max-w-[500px] md:max-w-[630px] 3xl:max-w-[41.015vw]">
       <DialogHeader>
         <DialogTitle>{t("ref-stats.heading")}</DialogTitle>
       </DialogHeader>
       <div className="flex flex-col">
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
           <span>{t("ref-stats.total-refs")}</span>
           <span className="typography-balance">{allTimeReferralCount}</span>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
           <span>{t("ref-stats.total-paid-refs")}</span>
           <span className="typography-balance">{allTimePaidReferralCount}</span>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
           <span>{t("ref-stats.current-month-refs")}</span>
           <span className="typography-balance">
             {currentMonthReferralCount}
           </span>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
           <span>{t("ref-stats.current-month-paid-refs")}</span>
           <span className="typography-balance">
             {currentMonthPaidReferralCount}
           </span>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
           <span>{t("ref-stats.total-profit")}</span>
           <span className="typography-balance">${totalProfit}</span>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 2xl:gap-[1.563vw]">
+        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
           <span>{t("ref-stats.total-withdraw")}</span>
           <span className="typography-balance">${totalWithdrawAmount}</span>
         </RowItem>

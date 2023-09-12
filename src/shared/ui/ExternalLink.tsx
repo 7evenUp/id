@@ -20,16 +20,16 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
   return (
     <a
       className={cn(
-        "flex items-center gap-1.5 2xl:gap-[0.391vw]",
+        "flex items-center gap-1.5 3xl:gap-[0.391vw]",
         buttonVariants({ appearence: "outlined" }),
         className
       )}
       target="_blank"
       {...props}
     >
-      {withTgIcon && <Telegram className="w-[18px] h-[18px] 2xl:w-[1.172vw] 2xl:h-[1.172vw]" />}
+      {withTgIcon && <Telegram className="w-[18px] h-[18px] 3xl:w-[1.172vw] 3xl:h-[1.172vw]" />}
       {children}
-      <ArrowTr className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw]" />
+      <ArrowTr className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />
     </a>
   )
 }

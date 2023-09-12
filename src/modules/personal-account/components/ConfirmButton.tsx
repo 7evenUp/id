@@ -19,7 +19,7 @@ const ConfirmButton = React.forwardRef<
       ref={forwardedRef}
       {...props}
     >
-      <Check className="w-3.5 h-3.5 2xl:w-[0.911vw] 2xl:h-[0.911vw] text-white dark:text-gray-1" />
+      <Check className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw] text-white dark:text-gray-1" />
     </IconButton>
   )
 })

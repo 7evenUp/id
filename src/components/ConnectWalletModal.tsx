@@ -101,47 +101,47 @@ const ConnectWalletModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:w-[400px] 2xl:w-[26.041vw]">
-        <DialogHeader className="mb-6 2xl:mb-[1.563vw]">
+      <DialogContent className="sm:w-[400px] 3xl:w-[26.041vw]">
+        <DialogHeader className="mb-6 3xl:mb-[1.563vw]">
           <DialogTitle>{t("connect-wallet.title")}</DialogTitle>
         </DialogHeader>
 
         {isMMLoading && (
-          <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
-            <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
+          <div className="flex items-center gap-2 3xl:gap-[0.521vw] text-sm -tracking-[0.01em] 3xl:text-[0.911vw]/[1.302vw]">
+            <Loader className="animate-spin 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />
             <p>{t("connect-wallet.connecting-metamask")}</p>
           </div>
         )}
 
         {isTWLoading && (
-          <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
-            <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
+          <div className="flex items-center gap-2 3xl:gap-[0.521vw] text-sm -tracking-[0.01em] 3xl:text-[0.911vw]/[1.302vw]">
+            <Loader className="animate-spin 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />
             <p>{t("connect-wallet.connecting-trustwallet")}</p>
           </div>
         )}
 
         {isInjectedLoading && (
-          <div className="flex items-center gap-2 2xl:gap-[0.521vw] text-sm -tracking-[0.01em] 2xl:text-[0.911vw]/[1.302vw]">
-            <Loader className="animate-spin 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />
+          <div className="flex items-center gap-2 3xl:gap-[0.521vw] text-sm -tracking-[0.01em] 3xl:text-[0.911vw]/[1.302vw]">
+            <Loader className="animate-spin 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />
             <p>{t("connect-wallet.connecting-injected")}</p>
           </div>
         )}
 
-        <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
+        <div className="flex flex-col gap-4 3xl:gap-[1.042vw]">
           <ConnectButton onClick={onMetamaskClick}>
-            <MetaMask className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
+            <MetaMask className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />{" "}
             MetaMask
           </ConnectButton>
           <ConnectButton onClick={onTrustWalletClick}>
-            <TrustWallet className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
+            <TrustWallet className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />{" "}
             Trust Wallet
           </ConnectButton>
           <ConnectButton onClick={onInjectedClick}>
-            <Injected className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw] text-gray-1 dark:text-gray-6 group-hover:text-white dark:group-hover:text-gray-1 transition-colors" />{" "}
+            <Injected className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw] text-gray-1 dark:text-gray-6 group-hover:text-white dark:group-hover:text-gray-1 transition-colors" />{" "}
             Injected
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
-            <WalletConnect className="w-[24px] h-[24px] 2xl:w-[1.563vw] 2xl:h-[1.563vw]" />{" "}
+            <WalletConnect className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />{" "}
             WalletConnect
           </ConnectButton>
         </div>
@@ -160,7 +160,7 @@ const ConnectButton = ({
   return (
     <button
       className={cn(
-        "group flex items-center gap-4 2xl:gap-[1.042vw] text-base 2xl:text-[1.042vw]/[1.563vw] py-2 2xl:py-[0.521vw] px-4 2xl:px-[1.042vw] rounded-md 2xl:rounded-[0.391vw] text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
+        "group flex items-center gap-4 3xl:gap-[1.042vw] text-base 3xl:text-[1.042vw]/[1.563vw] py-2 3xl:py-[0.521vw] px-4 3xl:px-[1.042vw] rounded-md 3xl:rounded-[0.391vw] text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
         className
       )}
       {...props}

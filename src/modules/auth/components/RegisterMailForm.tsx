@@ -78,7 +78,7 @@ const RegisterMailForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3 2xl:gap-[0.781vw]"
+          className="flex flex-col gap-3 3xl:gap-[0.781vw]"
         >
           <FormField
             name="email"
@@ -120,7 +120,7 @@ const RegisterMailForm = ({
               </FormItem>
             )}
           />
-          <p className="text-xs 2xl:text-[0.781vw]/[1.042vw] w-full">
+          <p className="text-xs 3xl:text-[0.781vw]/[1.042vw] w-full">
             {t("register.privacy-policy.text")}{" "}
             <a
               href="#"
@@ -134,7 +134,7 @@ const RegisterMailForm = ({
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3 2xl:mt-[0.781vw]">
+      <div className="flex mt-3 3xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
             {t("register.request-success")}
