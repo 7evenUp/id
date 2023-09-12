@@ -8,11 +8,14 @@ import {
   useUnfreezeSubsMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
 const FreezeSubs = () => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { data } = useUserProfileQuery()
   const [freeze, { isLoading: isFreezeLoading, isSuccess: isFreezeSuccess }] =
@@ -80,7 +83,12 @@ const FreezeSubs = () => {
         )}
       </DialogHeader>
       <div>
-        <h3 className="typography-semi-head mb-2.5 3xl:mb-[0.651vw]">
+        <h3
+          className={cn(
+            "typography-semi-head mb-2.5",
+            scale && "typography-semi-head_large 3xl:mb-[0.651vw]"
+          )}
+        >
           {t("freeze.sub-freeze-title")}
         </h3>
         <p className="typography-text-0 text-black dark:text-gray-4">
@@ -88,7 +96,12 @@ const FreezeSubs = () => {
         </p>
       </div>
       <div>
-        <h3 className="typography-semi-head mb-2.5 3xl:mb-[0.651vw]">
+        <h3
+          className={cn(
+            "typography-semi-head mb-2.5",
+            scale && "typography-semi-head_large 3xl:mb-[0.651vw]"
+          )}
+        >
           {t("freeze.how-works-title")}
         </h3>
         <p className="typography-text-0 text-black dark:text-gray-4">

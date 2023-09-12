@@ -15,9 +15,12 @@ import { cn } from "@/lib/classNames"
 
 import { useChangeAvatarMutation } from "@/redux/api/avatar"
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
 
 const ChangeAvatar = () => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [file, setFile] = useState<File | null>(null)
   const [base64, setBase64] = useState("")
@@ -106,7 +109,12 @@ const ChangeAvatar = () => {
           />
         )}
 
-        <span className="typography-semi-head mt-6 3xl:mt-[1.563vw]">
+        <span
+          className={cn(
+            "typography-semi-head mt-6",
+            scale && "typography-semi-head_large 3xl:mt-[1.563vw]"
+          )}
+        >
           {t("change-avatar.choose-nft")}
         </span>
         <p className="typography-text-1 mt-2">
