@@ -64,7 +64,7 @@ const LoginMailForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3 2xl:gap-[0.781vw]"
+          className="flex flex-col gap-3 3xl:gap-[0.781vw]"
         >
           <FormField
             name="email"
@@ -86,7 +86,7 @@ const LoginMailForm = ({
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3 2xl:mt-[0.781vw]">
+      <div className="flex mt-3 3xl:mt-[0.781vw]">
         {isSuccess && (
           <ResponseSuccessText>
             {t("login.request-success")}

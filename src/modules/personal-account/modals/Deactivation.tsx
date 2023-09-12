@@ -67,21 +67,21 @@ const Deactivation = () => {
   }
 
   return (
-    <DialogContent className="max-w-[500px] 2xl:max-w-[32.552vw]">
+    <DialogContent className="max-w-[500px] 3xl:max-w-[32.552vw]">
       <DialogHeader>
         <DialogTitle>{t("deactivation.heading")}</DialogTitle>
       </DialogHeader>
       <div>
-        <p className="typography-text-0 mb-6 2xl:mb-[1.563vw] max-w-prose">
+        <p className="typography-text-0 mb-6 3xl:mb-[1.563vw] max-w-prose">
           {t("deactivation.text-1")}
         </p>
-        <p className="typography-text-1 mb-2 2xl:mb-[0.521vw]">
+        <p className="typography-text-1 mb-2 3xl:mb-[0.521vw]">
           {t("deactivation.text-2")}
         </p>
 
         {!isSuccess ? (
           <Button
-            className="w-fit mt-2 2xl:mt-[0.521vw]"
+            className="w-fit mt-2 3xl:mt-[0.521vw]"
             onClick={onDeactivationStart}
             isLoading={isLoading}
           >
@@ -91,7 +91,7 @@ const Deactivation = () => {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onDelete)}
-              className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
+              className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
             >
               <FormField
                 name="code"
@@ -103,7 +103,7 @@ const Deactivation = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="text-sm 2xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className="text-sm 3xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
                         placeholder={t("change-tg.code-placeholder")}
                         {...field}
                       />
@@ -114,7 +114,7 @@ const Deactivation = () => {
               />
 
               <Button
-                className="bg-error hover:bg-red-600 dark:hover:bg-red-600 text-white dark:text-white w-fit mt-2 2xl:mt-[0.521vw]"
+                className="bg-error hover:bg-red-600 dark:hover:bg-red-600 text-white dark:text-white w-fit mt-2 3xl:mt-[0.521vw]"
                 type="submit"
                 isLoading={isVerifyLoading}
               >

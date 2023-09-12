@@ -12,7 +12,7 @@ const CalendarTab = () => {
           link="https://www.notion.so/6b17e625702f412f8ccda548b0f3fb0f?v=b82a825420e242fa98f47a9779dffdfe"
         />
       </TabHeader>
-      <Subheading className="mt-10 2xl:mt-[2.604vw]">Coming soon</Subheading>
+      <Subheading className="mt-10 3xl:mt-[2.604vw]">Coming soon</Subheading>
     </>
   )
 }

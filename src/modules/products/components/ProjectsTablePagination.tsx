@@ -18,16 +18,16 @@ function ProjectsTablePagination<TData>({
   const { t } = useTranslation("products")
 
   return (
-    <div className="flex items-center justify-between px-2 2xl:px-[0.521vw]">
-      <div className="flex items-center space-x-6 lg:space-x-8 2xl:space-x-[2.083vw]">
-        <div className="flex items-center space-x-2 2xl:space-x-[0.521vw]">
+    <div className="flex items-center justify-between px-2 3xl:px-[0.521vw]">
+      <div className="flex items-center space-x-6 lg:space-x-8 3xl:space-x-[2.083vw]">
+        <div className="flex items-center space-x-2 3xl:space-x-[0.521vw]">
           <IconButton
             className="bg-gray-3 hover:bg-gray-2 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80 dark:active:bg-opacity-80 disabled:bg-gray-4 dark:disabled:bg-gray-2 rounded-full"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to first page</span>
-            <FastArrowLeft className="h-4 w-4 2xl:h-[1.042vw] 2xl:w-[1.042vw] text-white dark:text-gray-1" />
+            <FastArrowLeft className="h-4 w-4 3xl:h-[1.042vw] 3xl:w-[1.042vw] text-white dark:text-gray-1" />
           </IconButton>
           <IconButton
             className="bg-gray-3 hover:bg-gray-2 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80 dark:active:bg-opacity-80 disabled:bg-gray-4 dark:disabled:bg-gray-2 rounded-full"
@@ -35,9 +35,9 @@ function ProjectsTablePagination<TData>({
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to previous page</span>
-            <NavArrowLeft className="h-4 w-4 2xl:h-[1.042vw] 2xl:w-[1.042vw] text-white dark:text-gray-1" />
+            <NavArrowLeft className="h-4 w-4 3xl:h-[1.042vw] 3xl:w-[1.042vw] text-white dark:text-gray-1" />
           </IconButton>
-          <div className="flex min-w-[100px] 2xl:min-w-[6.51vw] items-center justify-center text-sm 2xl:text-[0.911vw]/[1.302vw] font-medium">
+          <div className="flex min-w-[100px] 3xl:min-w-[6.51vw] items-center justify-center text-sm 3xl:text-[0.911vw]/[1.302vw] font-medium">
             {t("res-bot.page-of", {
               current: table.getState().pagination.pageIndex + 1,
               total: table.getPageCount(),
@@ -50,7 +50,7 @@ function ProjectsTablePagination<TData>({
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to next page</span>
-            <NavArrowRight className="h-4 w-4 2xl:h-[1.042vw] 2xl:w-[1.042vw] text-white dark:text-gray-1" />
+            <NavArrowRight className="h-4 w-4 3xl:h-[1.042vw] 3xl:w-[1.042vw] text-white dark:text-gray-1" />
           </IconButton>
 
           <IconButton
@@ -59,7 +59,7 @@ function ProjectsTablePagination<TData>({
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to last page</span>
-            <FastArrowRight className="h-4 w-4 2xl:h-[1.042vw] 2xl:w-[1.042vw] text-white dark:text-gray-1" />
+            <FastArrowRight className="h-4 w-4 3xl:h-[1.042vw] 3xl:w-[1.042vw] text-white dark:text-gray-1" />
           </IconButton>
         </div>
       </div>

@@ -33,10 +33,12 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
-      <div className="px-3 mobile-sm:px-7 xl:px-9 2xl:px-[2.344vw] py-8 2xl:py-[2.083vw] max-w-[1400px] 2xl:max-w-[90%] mx-auto">
+      <div className="px-3 mobile-sm:px-7 xl:px-9 3xl:px-[2.344vw] py-8 3xl:py-[2.083vw] max-w-[1400px] 2xl:max-w-[90%] 3xl:max-w-[90%] mx-auto">
         <Header />
-        <main className="flex flex-col lg:flex-row justify-between gap-20 2xl:gap-[5.208vw]">
-          {error ? <Auth /> : isLoading || isDelayed ? (
+        <main className="flex flex-col lg:flex-row justify-between gap-20 3xl:gap-[5.208vw]">
+          {error ? (
+            <Auth />
+          ) : isLoading || isDelayed ? (
             <SkeletonLayout />
           ) : data ? (
             <>

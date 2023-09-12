@@ -13,7 +13,7 @@ const Profile = () => {
   const { t } = useTranslation("profile")
   return (
     <div>
-      <Subheading className="mb-4 2xl:mb-[1.042vw]">
+      <Subheading className="mb-4 3xl:mb-[1.042vw]">
         {t("profile.heading")}
       </Subheading>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
@@ -21,7 +21,7 @@ const Profile = () => {
         <ProfileEmail />
         <ProfileWallet />
         <ProfileWax />
-        <div className="flex flex-col xl:flex-row xl:justify-between xl:items-center xl:gap-10 2xl:gap-[2.604vw]">
+        <div className="flex flex-col xl:flex-row xl:justify-between xl:items-center xl:gap-10 3xl:gap-[2.604vw]">
           <ProfileDiscord />
           <ProfileTelegram />
         </div>

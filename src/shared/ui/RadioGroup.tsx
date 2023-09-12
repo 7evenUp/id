@@ -8,7 +8,7 @@ export const RadioGroup = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof RadixRadioGroup.Root>
 >(({ className, children, ...props }, forwardedRef) => (
   <RadixRadioGroup.Root
-    className={cn("flex flex-col gap-2 2xl:gap-[0.521vw]", className)}
+    className={cn("flex flex-col gap-2 3xl:gap-[0.521vw]", className)}
     {...props}
     ref={forwardedRef}
   >
@@ -22,14 +22,14 @@ export const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadixRadioGroup.Item>,
   React.ComponentPropsWithoutRef<typeof RadixRadioGroup.Item>
 >(({ className, children, id, ...props }, forwardedRef) => (
-  <div className={cn("flex items-center gap-2 2xl:gap-[0.521vw]", className)}>
+  <div className={cn("flex items-center gap-2 3xl:gap-[0.521vw]", className)}>
     <RadixRadioGroup.Item
-      className="group relative flex items-center justify-center w-2.5 h-2.5 2xl:w-[0.651vw] 2xl:h-[0.651vw] rounded-full border border-gray-1 dark:border-gray-3"
+      className="group relative flex items-center justify-center w-2.5 h-2.5 3xl:w-[0.651vw] 3xl:h-[0.651vw] rounded-full border border-gray-1 dark:border-gray-3"
       ref={forwardedRef}
       id={id}
       {...props}
     >
-      <RadixRadioGroup.Indicator className="w-1 h-1 2xl:w-[0.26vw] 2xl:h-[0.26vw] bg-gray-1 dark:bg-gray-4 rounded-full" />
+      <RadixRadioGroup.Indicator className="w-1 h-1 3xl:w-[0.26vw] 3xl:h-[0.26vw] bg-gray-1 dark:bg-gray-4 rounded-full" />
     </RadixRadioGroup.Item>
     <RadioGroupLabel htmlFor={id}>{children}</RadioGroupLabel>
   </div>

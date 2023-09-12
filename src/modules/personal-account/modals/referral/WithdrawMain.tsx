@@ -61,17 +61,17 @@ const WithdrawMain = ({
         reset()
       }}
     >
-      <DialogContent className="max-w-[480px] 2xl:w-[31.25vw]">
-        <DialogHeader className="mb-2 mobile:mb-0 sm:mb-6 2xl:mb-[1.563vw]">
+      <DialogContent className="max-w-[480px] 3xl:w-[31.25vw]">
+        <DialogHeader className="mb-2 mobile:mb-0 sm:mb-6 3xl:mb-[1.563vw]">
           <DialogTitle>{t("ref-withdraw.heading")}</DialogTitle>
         </DialogHeader>
         {isSuccess && originalArgs?.kind === "TO_SHARES" && (
-          <ResponseSuccessText className="max-w-[320px] 2xl:max-w-[20.833vw]">
+          <ResponseSuccessText className="max-w-[320px] 3xl:max-w-[20.833vw]">
             {t("ref-withdraw.shares-success")}
           </ResponseSuccessText>
         )}
         {error && <ResponseErrorText error={error} />}
-        <div className="flex flex-col items-center mobile:flex-row gap-5 2xl:gap-[1.302vw]">
+        <div className="flex flex-col items-center mobile:flex-row gap-5 3xl:gap-[1.302vw]">
           <Button
             disabled={
               (isSuccess && originalArgs?.kind === "TO_CRYPTON_BALANCE") ||

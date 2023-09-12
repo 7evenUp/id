@@ -26,7 +26,7 @@ const Products = () => {
     <Tabs
       value={activeProduct}
       onValueChange={handleValueChange}
-      className="flex-1"
+      className="flex-1 2xl:flex-grow-[2]"
     >
       <TabsList>
         <TabsTriggers />

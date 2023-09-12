@@ -53,15 +53,15 @@ const SecondStep = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="pb-14 sm:pb-14 2xl:pb-[3.645vw] sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px] 2xl:max-w-[52.083vw]">
+      <DialogContent className="pb-14 sm:pb-14 3xl:pb-[3.645vw] sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px] 3xl:max-w-[52.083vw]">
         <ModalHeader step={t("buy-subs.second-step.step")} />
 
-        <div className="flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px] 2xl:gap-[9.114vw]">
+        <div className="flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px] 3xl:gap-[9.114vw]">
           <div className="flex flex-col">
-            <div className="flex flex-col gap-4 w-[270px] 2xl:gap-[1.042vw] 2xl:w-[17.578vw]">
+            <div className="flex flex-col gap-4 w-[270px] 3xl:gap-[1.042vw] 3xl:w-[17.578vw]">
               <div className="flex items-center">
-                <Telegram className="w-[18px] h-[18px] 2xl:w-[1.172vw] 2xl:h-[1.172vw]" />
-                <span className="ml-2.5 2xl:ml-[0.651vw] typography-text-0">
+                <Telegram className="w-[18px] h-[18px] 3xl:w-[1.172vw] 3xl:h-[1.172vw]" />
+                <span className="ml-2.5 3xl:ml-[0.651vw] typography-text-0">
                   Telegram
                 </span>
                 {telegramUsername ? (
@@ -77,8 +77,8 @@ const SecondStep = ({
                 )}
               </div>
               <div className="flex items-center">
-                <Discord className="w-[18px] h-[20px] 2xl:w-[1.172vw] 2xl:h-[1.302vw]" />
-                <span className="ml-2.5 2xl:ml-[0.651vw] typography-text-0">
+                <Discord className="w-[18px] h-[20px] 3xl:w-[1.172vw] 3xl:h-[1.302vw]" />
+                <span className="ml-2.5 3xl:ml-[0.651vw] typography-text-0">
                   Discord
                 </span>
                 {discordUsername ? (
@@ -95,12 +95,12 @@ const SecondStep = ({
                     />
                     <div
                       className={cn(
-                        "opacity-0 absolute -right-6 top-1 2xl:-right-[1.563vw] 2xl:top-[0.26vw] transition-opacity",
+                        "opacity-0 absolute -right-6 top-1 3xl:-right-[1.563vw] 3xl:top-[0.26vw] transition-opacity",
                         inputValue.length && "opacity-100"
                       )}
                     >
                       {isLoading ? (
-                        <Loader className="animate-spin w-5 h-5 2xl:w-[1.302vw] 2xl:h-[1.302vw]" />
+                        <Loader className="animate-spin w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw]" />
                       ) : (
                         <ConfirmButton
                           onClick={onUpdateDiscord}
@@ -114,8 +114,8 @@ const SecondStep = ({
                 )}
               </div>
               <div className="flex items-center">
-                <Ethereum className="w-[18px] h-[21px] 2xl:w-[1.172vw] 2xl:h-[1.367vw]" />
-                <span className="ml-2.5 2xl:ml-[0.651vw] typography-text-0">
+                <Ethereum className="w-[18px] h-[21px] 3xl:w-[1.172vw] 3xl:h-[1.367vw]" />
+                <span className="ml-2.5 3xl:ml-[0.651vw] typography-text-0">
                   {t("buy-subs.second-step.wallet")}
                 </span>
                 {wallet ? (
@@ -131,19 +131,19 @@ const SecondStep = ({
                 )}
               </div>
             </div>
-            <p className="typography-tip mt-4 2xl:mt-[0.911vw]">
+            <p className="typography-tip mt-4 3xl:mt-[0.911vw]">
               {t("buy-subs.second-step.later")}
             </p>
 
             {/* Vissible on Mobile */}
             <Button
-              className="md:hidden mt-6 2xl:mt-[1.563vw] w-fit self-end"
+              className="md:hidden mt-6 3xl:mt-[1.563vw] w-fit self-end"
               onClick={openThirdStep}
             >
               {t("buy-subs.second-step.continue-btn")}
             </Button>
           </div>
-          <div className="flex flex-col gap-4 2xl:gap-[1.042vw]">
+          <div className="flex flex-col gap-4 3xl:gap-[1.042vw]">
             <h3 className="typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
               {t("buy-subs.second-step.congrats")}
             </h3>

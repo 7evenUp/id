@@ -12,7 +12,7 @@ const ResponseSuccessText = ({
   return (
     <span
       className={cn(
-        "text-success text-xs 2xl:text-[0.781vw]/[1.042vw] font-medium tracking-wide",
+        "text-success text-xs 3xl:text-[0.781vw]/[1.042vw] font-medium tracking-wide",
         className
       )}
     >

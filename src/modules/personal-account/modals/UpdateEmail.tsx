@@ -65,7 +65,7 @@ const UpdateEmail = () => {
 
   return (
     <DialogContent
-      className="mobile:w-[370px] sm:w-[370px] 2xl:w-[24.088vw]"
+      className="mobile:w-[370px] sm:w-[370px] 3xl:w-[24.088vw]"
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       <DialogHeader>
@@ -75,7 +75,7 @@ const UpdateEmail = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-[18px] 2xl:gap-[1.172vw]"
+          className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
         >
           <FormField
             name="oldEmail"
@@ -123,7 +123,7 @@ const UpdateEmail = () => {
 
           {error && <ResponseErrorText error={error} />}
 
-          <div className="flex gap-2 2xl:gap-[0.521vw] items-center">
+          <div className="flex gap-2 3xl:gap-[0.521vw] items-center">
             <Button type="submit" className="w-fit" isLoading={isLoading}>
               {t("change-email.button")}
             </Button>

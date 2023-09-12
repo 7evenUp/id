@@ -10,7 +10,7 @@ const RowItem: React.FC<HTMLAttributes<HTMLDivElement>> = ({
   return (
     <div
       className={cn(
-        "flex justify-between items-center py-2 2xl:py-[0.521vw] border-b border-gray-4 dark:border-gray-1 typography-text-0 dark:text-gray-4",
+        "flex justify-between items-center py-2 3xl:py-[0.521vw] border-b border-gray-4 dark:border-gray-1 typography-text-0 dark:text-gray-4",
         className
       )}
       {...props}
