@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import ThemeToggle from "./components/ThemeToggle"
 import LanguageToggle from "./components/LanguageToggle"
 import AvatarMobile from "./components/AvatarMobile"
+import ScaleToggle from "./components/ScaleToggle"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
@@ -50,6 +51,7 @@ const Header = () => {
       <div className="hidden sm:flex items-center gap-3 3xl:gap-[0.781vw]">
         <LanguageToggle />
         <ThemeToggle />
+        <ScaleToggle />
       </div>
 
       <div className="sm:hidden flex gap-6 3xl:gap-[1.563vw]">
