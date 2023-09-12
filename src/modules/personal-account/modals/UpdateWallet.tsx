@@ -10,6 +10,8 @@ import ConnectWalletModal from "@/components/ConnectWalletModal"
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
+import Text0 from "@/shared/typography/Text0"
+
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import {
@@ -59,32 +61,32 @@ const UpdateWallet = () => {
 
       {!wallet ? (
         <>
-          <p className="typography-text-0">
+          <Text0>
             {t("change-wallet.wallet-acc-unpresent.status")}
-          </p>
+          </Text0>
 
           {isConnected && address ? (
             <>
-              <p className="typography-text-0">
+              <Text0>
                 {t("change-wallet.wallet-acc-unpresent.wallet-connected")}{" "}
                 <span className="typography-accent">
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
-              </p>
+              </Text0>
               <p className="typography-text-1">
                 {t("change-wallet.wallet-acc-unpresent.confirm-text")}
               </p>
             </>
           ) : (
-            <p className="typography-text-0">
+            <Text0>
               {t("change-wallet.wallet-acc-unpresent.wallet-disconnected")}
-            </p>
+            </Text0>
           )}
         </>
       ) : (
         <>
-          <div className="flex flex-col typography-text-0">
-            <p>{t("change-wallet.wallet-acc-present.status")}</p>{" "}
+          <div className="flex flex-col">
+            <Text0>{t("change-wallet.wallet-acc-present.status")}</Text0>{" "}
             <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
               {cutWalletAddr(wallet)}
             </span>
@@ -92,8 +94,8 @@ const UpdateWallet = () => {
 
           {isConnected && address ? (
             <>
-              <div className="flex flex-col typography-text-0">
-                <p>{t("change-wallet.wallet-acc-present.wallet-connected")}</p>{" "}
+              <div className="flex flex-col">
+                <Text0>{t("change-wallet.wallet-acc-present.wallet-connected")}</Text0>{" "}
                 <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
@@ -128,9 +130,9 @@ const UpdateWallet = () => {
               )}
             </>
           ) : (
-            <p className="typography-text-0">
+            <Text0>
               {t("change-wallet.wallet-acc-present.wallet-disconnected")}
-            </p>
+            </Text0>
           )}
         </>
       )}

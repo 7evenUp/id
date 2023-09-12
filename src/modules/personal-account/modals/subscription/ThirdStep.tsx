@@ -12,6 +12,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { useLinksQuery } from "@/redux/api/channels"
 
 import { cn } from "@/lib/classNames"
+import Text0 from "@/shared/typography/Text0"
 
 const ThirdStep = ({
   open,
@@ -60,12 +61,10 @@ const ThirdStep = ({
               >
                 {t("buy-subs.third-step.part-1-heading")}
               </h3>
-              <p className="typography-text-0 mb-2 3xl:mb-[0.521vw]">
+              <Text0 className={cn("mb-2", scale && "3xl:mb-[0.521vw]")}>
                 {t("buy-subs.third-step.part-1-text-1")}
-              </p>
-              <p className="typography-text-0">
-                {t("buy-subs.third-step.part-1-text-2")}
-              </p>
+              </Text0>
+              <Text0>{t("buy-subs.third-step.part-1-text-2")}</Text0>
             </div>
           </div>
           <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 3xl:gap-[2.604vw] 3xl:py-[1.302vw]">
@@ -83,9 +82,7 @@ const ThirdStep = ({
               >
                 {t("buy-subs.third-step.part-2-heading")}
               </h3>
-              <p className="typography-text-0">
-                {t("buy-subs.third-step.part-2-text")}
-              </p>
+              <Text0>{t("buy-subs.third-step.part-2-text")}</Text0>
             </div>
           </div>
           <div className="flex flex-col-reverse md:flex-row justify-between gap-10 py-5 3xl:gap-[2.604vw] 3xl:py-[1.302vw]">
@@ -103,9 +100,9 @@ const ThirdStep = ({
               >
                 {t("buy-subs.third-step.part-3-heading")}
               </h3>
-              <p className="typography-text-0 md:mb-6 3xl:mb-[1.563vw]">
+              <Text0 className={cn("md:mb-6", scale && "3xl:mb-[1.563vw]")}>
                 {t("buy-subs.third-step.part-3-text")}
-              </p>
+              </Text0>
               <DialogClose asChild className="hidden md:flex">
                 <Button>{t("buy-subs.third-step.okay-btn")}</Button>
               </DialogClose>

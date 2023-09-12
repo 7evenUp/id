@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
 import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
+import { isMobile } from "react-device-detect"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 import { ReactComponent as HelpCircle } from "@/assets/icons/help-circle.svg"
@@ -28,13 +29,15 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/shared/ui/HoverCard"
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
 
 import {
   useUpdateTelegramMutation,
   useVerifyTelegramMutation,
 } from "@/redux/api/profile"
-import { isMobile } from "react-device-detect"
-import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const nicknameFormSchema = z.object({
   nickname: z.string(),
@@ -46,6 +49,8 @@ const codeFormSchema = z.object({
 
 const UpdateTelegram = () => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [nickInputValue, setNickInputValue] = useState("")
   const [isSecondStep, setIsSecondStep] = useState(false)
@@ -85,7 +90,12 @@ const UpdateTelegram = () => {
         <div className="flex flex-col">
           <DialogTitle>{t("change-tg.heading")}</DialogTitle>
         </div>
-        <span className="flex items-center typography-text-0">
+        <span
+          className={cn(
+            "flex items-center typography-text-0",
+            scale && "typography-text-0_large"
+          )}
+        >
           {isSecondStep ? "2" : "1"}/2
         </span>
       </DialogHeader>

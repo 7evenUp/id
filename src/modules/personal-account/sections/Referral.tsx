@@ -12,6 +12,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import AccentNumber from "@/shared/typography/AccentNumber"
 import Subheading from "@/shared/typography/Subheading"
+import Text0 from "@/shared/typography/Text0"
 
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
@@ -60,25 +61,23 @@ const Referral = () => {
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
-          <span className="w-full xl:w-auto">
+          <Text0 className="w-full xl:w-auto">
             {t("referral.cashback")}:{" "}
             <AccentNumber>{refCashBack * 100}%</AccentNumber>
-          </span>
+          </Text0>
           <div className="flex gap-1.5 xl:gap-3 3xl:gap-[0.781vw] flex-wrap justify-end flex-shrink">
             <Button onClick={onPromoClick}>{t("referral.promo-btn")}</Button>
             <Button onClick={onRefLinkClick}>{t("referral.link-btn")}</Button>
           </div>
         </RowItem>
         <RowItem>
-          <span className="typography-text-0 dark:text-gray-4">
+          <Text0 className="dark:text-gray-4">
             {t("referral.balance")}: <AccentNumber>${refBalance}</AccentNumber>
-          </span>
+          </Text0>
           <ReferralWithdraw triggerText={t("referral.withdraw-btn")} />
         </RowItem>
         <RowItem>
-          <span className="typography-text-0 dark:text-gray-4">
-            {t("referral.stats")}
-          </span>
+          <Text0 className="dark:text-gray-4">{t("referral.stats")}</Text0>
           <ModalTrigger content={<ReferralStats />}>
             <Button>{t("referral.view-btn")}</Button>
           </ModalTrigger>

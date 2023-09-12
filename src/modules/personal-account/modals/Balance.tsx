@@ -33,12 +33,17 @@ import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useTopUpBalanceMutation } from "@/redux/api/balance"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const PREDEFINED_AMOUNT_VALUES = ["74", "211", "400", "755"]
 
 const Balance = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
 
@@ -80,7 +85,12 @@ const Balance = () => {
     <DialogContent className="sm:w-[500px] 3xl:w-[32.552vw]">
       <div>
         <div className="flex justify-between items-baseline gap-4 sm:gap-6 3xl:gap-[1.563vw] bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]">
-          <span className="typography-text-0 text-gray-3 dark:text-gray-4">
+          <span
+            className={cn(
+              "typography-text-0 text-gray-3 dark:text-gray-4",
+              scale && "typography-text-0_large"
+            )}
+          >
             {t("balance.current")}
           </span>
           <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] 3xl:text-[3.515vw] dark:text-gray-5">

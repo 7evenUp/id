@@ -13,9 +13,14 @@ import ModalTrigger from "./ModalTrigger"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useDeleteAvatarMutation } from "@/redux/api/avatar"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const Avatar = () => {
   const { t } = useTranslation()
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { toast } = useToast()
 
@@ -59,7 +64,12 @@ const Avatar = () => {
           )}
         </div>
       </PopoverTrigger>
-      <PopoverContent className="flex flex-col gap-1 3xl:gap-[0.26vw] typography-text-0 font-montserrat">
+      <PopoverContent
+        className={cn(
+          "flex flex-col gap-1 3xl:gap-[0.26vw] typography-text-0 font-montserrat",
+          scale && "typography-text-0_large"
+        )}
+      >
         <ModalTrigger content={<ChangeAvatar />}>
           <button className="flex gap-2 3xl:gap-[0.521vw] items-center text-gray-1 dark:text-gray-6 px-2 3xl:px-[0.521vw] rounded-md 3xl:rounded-[0.391vw] cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
             <EditIcon className="w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw]" />

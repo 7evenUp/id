@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next"
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import ExternalLink from "@/shared/ui/ExternalLink"
 
+import Text0 from "@/shared/typography/Text0"
+
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ReferralInfo = () => {
@@ -26,8 +28,8 @@ const ReferralInfo = () => {
       </DialogHeader>
       <div className="flex flex-col md:flex-row justify-between items-center mobile:items-start md:items-stretch h-[400px] md:h-auto overflow-auto pr-2 gap-6 3xl:pr-[0.521vw] 3xl:gap-[1.563vw]">
         <div className="flex flex-col gap-6 3xl:gap-[1.563vw] basis-1/2">
-          <p className="typography-text-0">{t("ref-info.text-1")}</p>
-          <p className="typography-text-0">{t("ref-info.text-2")}</p>
+          <Text0>{t("ref-info.text-1")}</Text0>
+          <Text0>{t("ref-info.text-2")}</Text0>
           <div className="flex flex-col gap-1 3xl:gap-[0.26vw] bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl 3xl:px-[1.563vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw] mt-auto typography-text-1 w-fit">
             <span>
               {t("ref-info.level")}: {refProgramLevel}

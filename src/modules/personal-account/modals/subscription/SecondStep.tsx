@@ -27,6 +27,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
+import Text0 from "@/shared/typography/Text0"
 
 const SecondStep = ({
   open,
@@ -64,13 +65,11 @@ const SecondStep = ({
             <div className="flex flex-col gap-4 w-[270px] 3xl:gap-[1.042vw] 3xl:w-[17.578vw]">
               <div className="flex items-center">
                 <Telegram className="w-[18px] h-[18px] 3xl:w-[1.172vw] 3xl:h-[1.172vw]" />
-                <span className="ml-2.5 3xl:ml-[0.651vw] typography-text-0">
+                <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
                   Telegram
-                </span>
+                </Text0>
                 {telegramUsername ? (
-                  <span className="ml-auto typography-text-0">
-                    @{telegramUsername}
-                  </span>
+                  <Text0 className="ml-auto">@{telegramUsername}</Text0>
                 ) : (
                   <ModalTrigger content={<UpdateTelegram />}>
                     <Button className="ml-auto">
@@ -81,13 +80,11 @@ const SecondStep = ({
               </div>
               <div className="flex items-center">
                 <Discord className="w-[18px] h-[20px] 3xl:w-[1.172vw] 3xl:h-[1.302vw]" />
-                <span className="ml-2.5 3xl:ml-[0.651vw] typography-text-0">
+                <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
                   Discord
-                </span>
+                </Text0>
                 {discordUsername ? (
-                  <span className="ml-auto typography-text-0">
-                    @{discordUsername}
-                  </span>
+                  <Text0 className="ml-auto">@{discordUsername}</Text0>
                 ) : (
                   <div className="ml-auto relative">
                     <Input
@@ -118,13 +115,11 @@ const SecondStep = ({
               </div>
               <div className="flex items-center">
                 <Ethereum className="w-[18px] h-[21px] 3xl:w-[1.172vw] 3xl:h-[1.367vw]" />
-                <span className="ml-2.5 3xl:ml-[0.651vw] typography-text-0">
+                <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
                   {t("buy-subs.second-step.wallet")}
-                </span>
+                </Text0>
                 {wallet ? (
-                  <span className="ml-auto typography-text-0">
-                    {cutWalletAddr(wallet)}
-                  </span>
+                  <Text0 className="ml-auto">{cutWalletAddr(wallet)}</Text0>
                 ) : (
                   <ModalTrigger content={<UpdateWallet />}>
                     <Button className="ml-auto">
@@ -155,11 +150,11 @@ const SecondStep = ({
             >
               {t("buy-subs.second-step.congrats")}
             </h3>
-            <p className="typography-text-0">
+            <Text0>
               {t("buy-subs.second-step.congrats-message", {
                 count: boughtSubDuration,
               })}
-            </p>
+            </Text0>
             <Button
               className="mt-auto w-fit hidden md:flex"
               onClick={openThirdStep}

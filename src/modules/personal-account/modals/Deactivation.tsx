@@ -21,10 +21,15 @@ import {
   useUserProfileQuery,
   useVerifyDeactivationMutation,
 } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const Deactivation = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfile } = useUserProfileQuery()
   const [deactivate, { isLoading, isSuccess }] = useDeactivateMutation()
@@ -72,10 +77,20 @@ const Deactivation = () => {
         <DialogTitle>{t("deactivation.heading")}</DialogTitle>
       </DialogHeader>
       <div>
-        <p className="typography-text-0 mb-6 3xl:mb-[1.563vw] max-w-prose">
+        <p
+          className={cn(
+            "typography-text-0 mb-6 max-w-prose",
+            scale && "typography-text-0_large 3xl:mb-[1.563vw]"
+          )}
+        >
           {t("deactivation.text-1")}
         </p>
-        <p className="typography-text-1 mb-2 3xl:mb-[0.521vw]">
+        <p
+          className={cn(
+            "typography-text-1 mb-2",
+            scale && "typography-text-1_large 3xl:mb-[0.521vw]"
+          )}
+        >
           {t("deactivation.text-2")}
         </p>
 

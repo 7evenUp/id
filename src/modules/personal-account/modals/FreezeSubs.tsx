@@ -91,7 +91,12 @@ const FreezeSubs = () => {
         >
           {t("freeze.sub-freeze-title")}
         </h3>
-        <p className="typography-text-0 text-black dark:text-gray-4">
+        <p
+          className={cn(
+            "typography-text-0 text-black dark:text-gray-4",
+            scale && "typography-text-0_large"
+          )}
+        >
           {t("freeze.sub-freeze-desc")}
         </p>
       </div>
@@ -104,7 +109,12 @@ const FreezeSubs = () => {
         >
           {t("freeze.how-works-title")}
         </h3>
-        <p className="typography-text-0 text-black dark:text-gray-4">
+        <p
+          className={cn(
+            "typography-text-0 text-black dark:text-gray-4",
+            scale && "typography-text-0_large"
+          )}
+        >
           {t("freeze.how-works-desc")}
         </p>
       </div>

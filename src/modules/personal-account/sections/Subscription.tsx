@@ -14,6 +14,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import AccentNumber from "@/shared/typography/AccentNumber"
 import Subheading from "@/shared/typography/Subheading"
+import Text0 from "@/shared/typography/Text0"
 
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
@@ -47,9 +48,9 @@ const Subscription = () => {
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
-          <span className="flex-shrink-0">
+          <Text0 className="flex-shrink-0">
             {t("subs.balance")}: <AccentNumber>${balance}</AccentNumber>
-          </span>
+          </Text0>
           <div className="flex gap-1.5 xl:gap-3 3xl:gap-[0.781vw] flex-wrap justify-end">
             <ModalTrigger content={<TxHistory />}>
               <Button>{t("subs.history-btn")}</Button>
@@ -62,17 +63,17 @@ const Subscription = () => {
         <RowItem className="gap-6 3xl:gap-[1.563vw]">
           {remainingDays ? (
             <>
-              <span className="typography-text-0 dark:text-gray-4 w-fit block">
+              <Text0 className="dark:text-gray-4 w-fit block">
                 {t("subs.remaining")}:{" "}
                 <AccentNumber>{remainingDays}</AccentNumber>
-              </span>
+              </Text0>
               <SubscriptionMain triggerText={t("subs.renew-btn")} />
             </>
           ) : (
             <>
-              <span className="typography-text-0 dark:text-gray-4 w-fit block">
+              <Text0 className="dark:text-gray-4 w-fit block">
                 {t("subs.inactive-subs")}
-              </span>
+              </Text0>
               <SubscriptionMain triggerText={t("subs.buy-btn")} />
             </>
           )}
