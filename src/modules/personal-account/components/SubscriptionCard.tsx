@@ -4,6 +4,8 @@ import Button from "@/shared/ui/Button"
 import Text1 from "@/shared/typography/Text1"
 
 import { cn } from "@/lib/classNames"
+import Text2 from "@/shared/typography/Text2"
+import { useAppSelector } from "@/redux/hooks"
 
 const SubscriptionCard = ({
   duration,
@@ -20,6 +22,8 @@ const SubscriptionCard = ({
 }) => {
   const { t } = useTranslation("modals")
 
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <div
       className={cn(
@@ -27,9 +31,9 @@ const SubscriptionCard = ({
         selected && "min-h-[267px] 3xl:min-h-[17.382vw]"
       )}
     >
-      <span className="typography-text-2 text-white bg-gray-1 dark:bg-gray-2 w-full py-1.5 3xl:py-[0.391vw] text-center rounded-t-xl 3xl:rounded-t-[0.781vw]">
+      <Text2 className="text-white bg-gray-1 dark:bg-gray-2 w-full py-1.5 3xl:py-[0.391vw] text-center rounded-t-xl 3xl:rounded-t-[0.781vw]">
         {duration}
-      </span>
+      </Text2>
       <span
         className={cn(
           "font-semibold text-[40px] sm:text-[48px] 3xl:text-[3.125vw] dark:text-gray-5 mt-5 mb-8 3xl:mt-[1.302vw] 3xl:mb-[2.083vw]",
@@ -40,20 +44,18 @@ const SubscriptionCard = ({
       </span>
       <div className="flex flex-col items-center gap-1 px-6 mb-2 3xl:gap-[0.26vw] 3xl:px-[1.563vw] 3xl:mb-[0.521vw] mt-auto">
         {discount && (
-          <div className="typography-text-2 flex items-center gap-1.5 3xl:gap-[0.391vw]">
-            <span className="rounded-sm 3xl:rounded-[0.13vw] p-0.5 3xl:p-[0.13vw] text-gray-1 bg-gradient-to-r from-corral to-purple">
+          <div className="flex items-center gap-1.5 3xl:gap-[0.391vw]">
+            <Text2 className="rounded-sm 3xl:rounded-[0.13vw] p-0.5 3xl:p-[0.13vw] text-gray-1 bg-gradient-to-r from-corral to-purple">
               -{discount.percent}%
-            </span>
+            </Text2>
             <div className="bg-gray-1 rounded-sm 3xl:rounded-[0.13vw] px-1 3xl:px-[0.26vw] py-0.5 3xl:py-[0.13vw] w-fit">
-              <span className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+              <Text2 className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
                 {t("buy-subs.first-step.savings")} {discount.amount}$
-              </span>
+              </Text2>
             </div>
           </div>
         )}
-        <Text1>
-          {t("buy-subs.first-step.automatic-debiting")}
-        </Text1>
+        <Text1>{t("buy-subs.first-step.automatic-debiting")}</Text1>
       </div>
       <Button
         className={cn(

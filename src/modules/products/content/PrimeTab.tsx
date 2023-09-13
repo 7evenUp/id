@@ -15,10 +15,14 @@ import { primeServices } from "@/utils/primeServices"
 import { useLinksQuery } from "@/redux/api/channels"
 import { useAppSelector } from "@/redux/hooks"
 import Text1 from "@/shared/typography/Text1"
+import Text2 from "@/shared/typography/Text2"
+
+import { cn } from "@/lib/classNames"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
 
+  const scale = useAppSelector((state) => state.scale.value)
   const language = useAppSelector((state) => state.language.value)
 
   const { data: userLinks } = useLinksQuery({})
@@ -58,8 +62,9 @@ const PrimeTab = () => {
             {primeServices.map((service, i) =>
               service.isExpandable ? (
                 <Popover key={i}>
-                  <PopoverTrigger className="group h-7 3xl:h-[1.822vw] flex items-center gap-2 3xl:gap-[0.521vw] typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left">
-                    {service.name}
+                  <PopoverTrigger className="group h-7 3xl:h-[1.822vw] flex items-center gap-2 3xl:gap-[0.521vw] basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left">
+                    <Text2>{service.name}</Text2>
+
                     <ArrowDown className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw] transition-transform will-change-transform group-data-[state=open]:rotate-180" />
                   </PopoverTrigger>
                   <PopoverContent
@@ -71,7 +76,10 @@ const PrimeTab = () => {
                         key={i}
                         href={link.href}
                         target="_blank"
-                        className="py-1 3xl:py-[0.26vw] typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink"
+                        className={cn(
+                          "py-1 typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
+                          scale && "typography-text-2_large 3xl:py-[0.26vw]"
+                        )}
                       >
                         {link.name}
                       </a>
@@ -83,7 +91,10 @@ const PrimeTab = () => {
                   href={service.href}
                   target="_blank"
                   key={i}
-                  className="h-7 3xl:h-[1.822vw] flex items-center typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink"
+                  className={cn(
+                    "h-7 flex items-center typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
+                    scale && "typography-text-2_large 3xl:h-[1.822vw]"
+                  )}
                 >
                   {service.name}
                 </a>

@@ -7,6 +7,8 @@ import Text0 from "@/shared/typography/Text0"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import Text1 from "@/shared/typography/Text1"
+import { cn } from "@/lib/classNames"
+import { useAppSelector } from "@/redux/hooks"
 
 const ReferralInfo = () => {
   const { t } = useTranslation("modals")
@@ -63,6 +65,8 @@ const ReferralInfo = () => {
 const LevelsTable = () => {
   const { t } = useTranslation("modals")
 
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <table>
       <thead className="text-gray-3 typography-tip">
@@ -76,7 +80,12 @@ const LevelsTable = () => {
           </th>
         </tr>
       </thead>
-      <tbody className="typography-text-2 divide-y divide-gray-4 dark:divide-gray-2">
+      <tbody
+        className={cn(
+          "typography-text-2 divide-y divide-gray-4 dark:divide-gray-2",
+          scale && "typography-text-2_large"
+        )}
+      >
         <tr>
           <td className="text-left py-1 3xl:py-[0.26vw]">0</td>
           <td className="text-center">0</td>
