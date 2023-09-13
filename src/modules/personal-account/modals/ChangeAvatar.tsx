@@ -11,6 +11,8 @@ import UploadButton from "../components/UploadButton"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 
+import Text1 from "@/shared/typography/Text1"
+
 import { cn } from "@/lib/classNames"
 
 import { useChangeAvatarMutation } from "@/redux/api/avatar"
@@ -117,9 +119,9 @@ const ChangeAvatar = () => {
         >
           {t("change-avatar.choose-nft")}
         </span>
-        <p className="typography-text-1 mt-2">
+        <Text1 className="mt-2">
           {t("change-avatar.nft-description")}
-        </p>
+        </Text1>
       </div>
     </DialogContent>
   )

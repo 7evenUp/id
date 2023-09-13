@@ -22,8 +22,13 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
+import Text1 from "@/shared/typography/Text1"
+
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useWithdrawMutation } from "@/redux/api/referral"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 type WithdrawType = "USDC (ERC-20)" | "USDT (ERC-20)" | "USDT (TRC-20)"
 
@@ -40,6 +45,8 @@ const WithdrawWallet = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [withdrawType, setWithdrawType] =
     useState<WithdrawType>("USDC (ERC-20)")
@@ -171,14 +178,19 @@ const WithdrawWallet = ({
                         {...field}
                       />
                     </FormControl>
-                    <span className="typography-text-1 absolute right-0 top-2 3xl:top-[0.521vw]">
+                    <Text1
+                      className={cn(
+                        "absolute right-0 top-2",
+                        scale && "3xl:top-[0.521vw]"
+                      )}
+                    >
                       {withdrawType}
-                    </span>
+                    </Text1>
                   </div>
                   <FormMessage />
-                  <span className="typography-text-1 block">
+                  <Text1 className="block">
                     {t("ref-withdraw.available")}: ${refBalance}
-                  </span>
+                  </Text1>
                 </FormItem>
               )}
             />

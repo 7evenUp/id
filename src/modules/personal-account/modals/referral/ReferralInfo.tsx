@@ -6,6 +6,7 @@ import ExternalLink from "@/shared/ui/ExternalLink"
 import Text0 from "@/shared/typography/Text0"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import Text1 from "@/shared/typography/Text1"
 
 const ReferralInfo = () => {
   const { t } = useTranslation("modals")
@@ -30,16 +31,16 @@ const ReferralInfo = () => {
         <div className="flex flex-col gap-6 3xl:gap-[1.563vw] basis-1/2">
           <Text0>{t("ref-info.text-1")}</Text0>
           <Text0>{t("ref-info.text-2")}</Text0>
-          <div className="flex flex-col gap-1 3xl:gap-[0.26vw] bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl 3xl:px-[1.563vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw] mt-auto typography-text-1 w-fit">
-            <span>
+          <div className="flex flex-col gap-1 3xl:gap-[0.26vw] bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl 3xl:px-[1.563vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw] mt-auto w-fit">
+            <Text1>
               {t("ref-info.level")}: {refProgramLevel}
-            </span>
-            <span>
+            </Text1>
+            <Text1>
               {t("ref-info.to-next-level")}: {toNextLevelRemained}
-            </span>
-            <span>
+            </Text1>
+            <Text1>
               {t("ref-info.cashback")}: {refCashBack * 100}%
-            </span>
+            </Text1>
           </div>
         </div>
         <div className="w-full mobile:w-[210px] 3xl:w-[13.671vw] flex flex-col gap-5 3xl:gap-[1.302vw]">

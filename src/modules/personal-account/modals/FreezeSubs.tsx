@@ -11,6 +11,8 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import Text1 from "@/shared/typography/Text1"
+import Text0 from "@/shared/typography/Text0"
 
 const FreezeSubs = () => {
   const { t } = useTranslation("modals")
@@ -34,12 +36,17 @@ const FreezeSubs = () => {
   return (
     <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px] 3xl:max-w-[45.572vw] sm:pb-16 3xl:pb-[4.166vw]">
       <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 3xl:mb-[1.563vw] gap-2 3xl:gap-[0.521vw]">
-        <div className="flex flex-col typography-text-1">
-          <span className="flex items-center gap-2 3xl:gap-[0.521vw]">
+        <div className="flex flex-col">
+          <Text1
+            className={cn(
+              "flex items-center gap-2",
+              scale && "3xl:gap-[0.521vw]"
+            )}
+          >
             {t("freeze.status")}:{" "}
             <span
               className={cn(
-                "typography-text-1 italic px-1.5 py-0.5 3xl:px-[0.391vw] 3xl:py-[0.13vw] text-gray-6 select-none bg-gradient-to-r rounded-full",
+                "italic px-1.5 py-0.5 3xl:px-[0.391vw] 3xl:py-[0.13vw] text-gray-6 select-none bg-gradient-to-r rounded-full",
                 isFrozen
                   ? "from-frozen-start to-frozen-end"
                   : "from-green to-mint"
@@ -47,15 +54,20 @@ const FreezeSubs = () => {
             >
               {isFrozen ? t("freeze.status-frozen") : t("freeze.status-active")}
             </span>
-          </span>
-          <span className="flex items-baseline gap-2 3xl:gap-[0.521vw]">
+          </Text1>
+          <Text1
+            className={cn(
+              "flex items-baseline gap-2",
+              scale && "3xl:gap-[0.521vw]"
+            )}
+          >
             {t("freeze.freeze-available")}:{" "}
             <span className="typography-balance">
               {isFreezeAllowed
                 ? t("freeze.freeze-available-true")
                 : t("freeze.freeze-available-false")}
             </span>
-          </span>
+          </Text1>
         </div>
         {isFrozen ? (
           <Button
@@ -91,14 +103,9 @@ const FreezeSubs = () => {
         >
           {t("freeze.sub-freeze-title")}
         </h3>
-        <p
-          className={cn(
-            "typography-text-0 text-black dark:text-gray-4",
-            scale && "typography-text-0_large"
-          )}
-        >
+        <Text0 className="text-black dark:text-gray-4">
           {t("freeze.sub-freeze-desc")}
-        </p>
+        </Text0>
       </div>
       <div>
         <h3
@@ -109,14 +116,9 @@ const FreezeSubs = () => {
         >
           {t("freeze.how-works-title")}
         </h3>
-        <p
-          className={cn(
-            "typography-text-0 text-black dark:text-gray-4",
-            scale && "typography-text-0_large"
-          )}
-        >
+        <Text0 className="text-black dark:text-gray-4">
           {t("freeze.how-works-desc")}
-        </p>
+        </Text0>
       </div>
       <DialogFooter>{t("freeze.footer")}</DialogFooter>
     </DialogContent>

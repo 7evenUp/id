@@ -36,6 +36,8 @@ import { useTopUpBalanceMutation } from "@/redux/api/balance"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import Text0 from "@/shared/typography/Text0"
+import Text1 from "@/shared/typography/Text1"
 
 const PREDEFINED_AMOUNT_VALUES = ["74", "211", "400", "755"]
 
@@ -85,20 +87,17 @@ const Balance = () => {
     <DialogContent className="sm:w-[500px] 3xl:w-[32.552vw]">
       <div>
         <div className="flex justify-between items-baseline gap-4 sm:gap-6 3xl:gap-[1.563vw] bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]">
-          <span
-            className={cn(
-              "typography-text-0 text-gray-3 dark:text-gray-4",
-              scale && "typography-text-0_large"
-            )}
+          <Text0
+            className="text-gray-3 dark:text-gray-4"
           >
             {t("balance.current")}
-          </span>
+          </Text0>
           <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] 3xl:text-[3.515vw] dark:text-gray-5">
             $ {balance}
           </span>
         </div>
-        <div className="flex items-center gap-2 mb-5 3xl:gap-[0.521vw] 3xl:mb-1.302vw] typography-text-1">
-          <span>{t("balance.choose-deposit")}:</span>
+        <div className="flex items-center gap-2 mb-5 3xl:gap-[0.521vw] 3xl:mb-1.302vw]">
+          <Text1>{t("balance.choose-deposit")}:</Text1>
           <Select defaultValue="crypto">
             <SelectTrigger className="w-[130px] 3xl:w-[8.463vw]" />
             <SelectContent className="z-[999] w-[130px] 3xl:w-[8.463vw]">

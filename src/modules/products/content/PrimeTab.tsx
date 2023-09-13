@@ -14,6 +14,7 @@ import { primeServices } from "@/utils/primeServices"
 
 import { useLinksQuery } from "@/redux/api/channels"
 import { useAppSelector } from "@/redux/hooks"
+import Text1 from "@/shared/typography/Text1"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
@@ -89,10 +90,10 @@ const PrimeTab = () => {
               )
             )}
           </div>
-          <div className="flex flex-col gap-3.5 py-3 px-4 3xl:gap-[0.911vw] 3xl:py-[0.781vw] 3xl:px-[1.041vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw] typography-text-1 w-fit">
-            <p className="lg:max-w-prose">{t("prime.nav-text-1")}</p>
-            <p className="lg:max-w-prose">{t("prime.nav-text-2")}</p>
-            <p className="lg:max-w-prose">{t("prime.nav-text-3")}</p>
+          <div className="flex flex-col gap-3.5 py-3 px-4 3xl:gap-[0.911vw] 3xl:py-[0.781vw] 3xl:px-[1.041vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw] w-fit">
+            <Text1 className="lg:max-w-prose">{t("prime.nav-text-1")}</Text1>
+            <Text1 className="lg:max-w-prose">{t("prime.nav-text-2")}</Text1>
+            <Text1 className="lg:max-w-prose">{t("prime.nav-text-3")}</Text1>
           </div>
         </div>
       </RowItem>
@@ -102,9 +103,9 @@ const PrimeTab = () => {
         </div>
         <div className="flex flex-col gap-6 sm:gap-4 3xl:gap-[1.042vw]">
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
-            <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
+            <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
               {t("prime.help-text-1")}
-            </p>
+            </Text1>
             <ExternalLink
               withTgIcon
               href="https://t.me/crypton_support"
@@ -114,17 +115,17 @@ const PrimeTab = () => {
             </ExternalLink>
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
-            <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
+            <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
               {t("prime.help-text-2")}
-            </p>
+            </Text1>
             <ExternalLink href="#" className="w-fit">
               возможности Prime
             </ExternalLink>
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
-            <p className="max-w-prose typography-text-1 w-auto sm:w-[62%] xl:w-auto">
+            <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
               {t("prime.help-text-3")}
-            </p>
+            </Text1>
             <ExternalLink href="#" className="w-fit">
               план действий
             </ExternalLink>

@@ -4,11 +4,14 @@ import { useTranslation } from "react-i18next"
 import { cn } from "@/lib/classNames"
 
 import { useTransactionHistoryQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
 
 import { formatDate } from "@/lib/date-fns"
 
 const TxHistoryTable = () => {
   const { t, i18n } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { data } = useTransactionHistoryQuery()
 
@@ -25,7 +28,7 @@ const TxHistoryTable = () => {
           <THead>{t("history.th-txid")}</THead>
         </tr>
       </thead>
-      <tbody className="typography-text-1 divide-y divide-gray-4 dark:divide-gray-2">
+      <tbody className="divide-y divide-gray-4 dark:divide-gray-2">
         {data.map((tx, i) => (
           <tr key={i}>
             <TData>{tx.description || "-"}</TData>
@@ -37,6 +40,7 @@ const TxHistoryTable = () => {
             <TData
               className={cn(
                 "typography-text-2",
+                scale && "typography-text-2_large",
                 tx.status !== null && tx.status === "PENDING"
                   ? "text-process"
                   : tx.status === "COMPLETED"
@@ -62,9 +66,20 @@ const TxHistoryTable = () => {
 
 export default TxHistoryTable
 
-const THead = ({ children }: { children: React.ReactNode }) => (
-  <th className="typography-tip pb-4 3xl:pb-[1.042vw] pr-2 md:pr-6 3xl:pr-[1.563vw]">{children}</th>
-)
+const THead = ({ children }: { children: React.ReactNode }) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
+  return (
+    <th
+      className={cn(
+        "typography-tip pb-4 pr-2 md:pr-6",
+        scale && "typography-tip_large 3xl:pb-[1.042vw] 3xl:pr-[1.563vw]"
+      )}
+    >
+      {children}
+    </th>
+  )
+}
 
 const TData = ({
   children,
@@ -72,6 +87,18 @@ const TData = ({
 }: {
   children: React.ReactNode
   className?: string
-}) => (
-  <th className={cn("py-1 3xl:py-[0.26vw] pr-2 md:pr-6 3xl:pr-[1.563vw] text-left", className)}>{children}</th>
-)
+}) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
+  return (
+    <th
+      className={cn(
+        "typography-text-1 py-1 pr-2 md:pr-6 text-left",
+        scale && "typography-text-1_large 3xl:py-[0.26vw] 3xl:pr-[1.563vw]",
+        className
+      )}
+    >
+      {children}
+    </th>
+  )
+}

@@ -19,6 +19,7 @@ import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 import { useAppSelector } from "@/redux/hooks"
 
 import { Subscription } from "@/types/subscriptions"
+import Text1 from "@/shared/typography/Text1"
 
 const FirstStep = ({
   open,
@@ -190,14 +191,14 @@ const FirstStep = ({
                 )}
               />
               {isError && (
-                <span
+                <Text1
                   className={cn(
-                    "absolute bottom-0 translate-y-4 typography-text-1 text-error",
+                    "absolute bottom-0 translate-y-4 text-error",
                     scale && "3xl:translate-y-[1.042vw]"
                   )}
                 >
                   {t("buy-subs.first-step.promo-error")}
-                </span>
+                </Text1>
               )}
               {promo && !isError && (
                 <Button
@@ -294,14 +295,9 @@ const PrimeInfo = () => {
           Prime
         </span>
       </div>
-      <p
-        className={cn(
-          "typography-text-1 max-w-[464px]",
-          scale && "3xl:max-w-[30.208vw]"
-        )}
-      >
+      <Text1 className={cn("max-w-[464px]", scale && "3xl:max-w-[30.208vw]")}>
         {t("buy-subs.first-step.prime-desc")}
-      </p>
+      </Text1>
     </div>
   )
 }

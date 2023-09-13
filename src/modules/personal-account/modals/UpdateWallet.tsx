@@ -18,6 +18,7 @@ import {
   useUpdateWalletMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
+import Text1 from "@/shared/typography/Text1"
 
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
@@ -61,9 +62,7 @@ const UpdateWallet = () => {
 
       {!wallet ? (
         <>
-          <Text0>
-            {t("change-wallet.wallet-acc-unpresent.status")}
-          </Text0>
+          <Text0>{t("change-wallet.wallet-acc-unpresent.status")}</Text0>
 
           {isConnected && address ? (
             <>
@@ -73,9 +72,9 @@ const UpdateWallet = () => {
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
               </Text0>
-              <p className="typography-text-1">
+              <Text1>
                 {t("change-wallet.wallet-acc-unpresent.confirm-text")}
-              </p>
+              </Text1>
             </>
           ) : (
             <Text0>
@@ -95,20 +94,22 @@ const UpdateWallet = () => {
           {isConnected && address ? (
             <>
               <div className="flex flex-col">
-                <Text0>{t("change-wallet.wallet-acc-present.wallet-connected")}</Text0>{" "}
+                <Text0>
+                  {t("change-wallet.wallet-acc-present.wallet-connected")}
+                </Text0>{" "}
                 <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
               </div>
               {address.toLowerCase() === wallet ? (
                 <>
-                  <p className="typography-text-1">
+                  <Text1>
                     {t("change-wallet.wallet-acc-present.wallets-equal")}
-                  </p>
+                  </Text1>
                 </>
               ) : (
                 <>
-                  <p className="typography-text-1">
+                  <Text1>
                     {t(
                       "change-wallet.wallet-acc-present.confirm-text-1-part-1"
                     )}{" "}
@@ -121,11 +122,11 @@ const UpdateWallet = () => {
                     <span className="font-mono text-black dark:text-gray-5">
                       {cutWalletAddr(address.toLowerCase())}
                     </span>
-                  </p>
+                  </Text1>
 
-                  <p className="typography-text-1">
+                  <Text1>
                     {t("change-wallet.wallet-acc-present.confirm-text-2")}
-                  </p>
+                  </Text1>
                 </>
               )}
             </>

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import Button from "@/shared/ui/Button"
+import Text1 from "@/shared/typography/Text1"
 
 import { cn } from "@/lib/classNames"
 
@@ -50,9 +51,9 @@ const SubscriptionCard = ({
             </div>
           </div>
         )}
-        <span className="typography-text-1">
+        <Text1>
           {t("buy-subs.first-step.automatic-debiting")}
-        </span>
+        </Text1>
       </div>
       <Button
         className={cn(

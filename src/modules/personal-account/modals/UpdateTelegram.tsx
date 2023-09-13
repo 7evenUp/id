@@ -38,6 +38,7 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import Text1 from "@/shared/typography/Text1"
 
 const nicknameFormSchema = z.object({
   nickname: z.string(),
@@ -287,7 +288,7 @@ const CodeForm = ({
 
   return (
     <>
-      <p className="typography-text-1">{t("change-tg.description")}</p>
+      <Text1>{t("change-tg.description")}</Text1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
