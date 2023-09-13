@@ -107,7 +107,10 @@ const WithdrawWallet = ({
       <DialogContent className="max-w-[550px] 3xl:max-w-[35.807vw]">
         <DialogHeader>
           <button
-            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 3xl:gap-[0.521vw] hover:text-gray-3 dark:hover:text-gray-3"
+            className={cn(
+              "typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3",
+              scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
+            )}
             onClick={openMain}
           >
             <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />{" "}

@@ -23,6 +23,8 @@ import {
 
 import { WalletReqParams, useRegisterByWalletMutation } from "@/redux/api/auth"
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
+import { useAppSelector } from "@/redux/hooks"
+import { cn } from "@/lib/classNames"
 
 const AUTH_MESSAGE = "Authorization"
 
@@ -35,6 +37,8 @@ const RegisterWalletForm = ({
 }) => {
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { address } = useAccount()
 
@@ -94,7 +98,10 @@ const RegisterWalletForm = ({
   return (
     <>
       <button
-        className="typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit"
+        className={cn(
+          "typography-btn-big flex items-center gap-2 hover:text-gray-3 mb-6 w-fit",
+          scale && "typography-btn-big_large"
+        )}
         onClick={back}
       >
         <MoveLeft className="w-3.5 h-3.5" />
