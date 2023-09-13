@@ -10,6 +10,7 @@ import Text1 from "@/shared/typography/Text1"
 import { cn } from "@/lib/classNames"
 import { useAppSelector } from "@/redux/hooks"
 import TextAccent from "@/shared/typography/TextAccent"
+import TextTip from "@/shared/typography/TextTip"
 
 const ReferralInfo = () => {
   const { t } = useTranslation("modals")
@@ -49,7 +50,7 @@ const ReferralInfo = () => {
         <div className="w-full mobile:w-[210px] 3xl:w-[13.671vw] flex flex-col gap-5 3xl:gap-[1.302vw]">
           <TextAccent>{t("ref-info.table-heading")}</TextAccent>
           <LevelsTable />
-          <p className="typography-tip">{t("ref-info.after-10")}</p>
+          <TextTip>{t("ref-info.after-10")}</TextTip>
           <ExternalLink
             withTgIcon
             href="https://t.me/crypton_support"
@@ -70,7 +71,12 @@ const LevelsTable = () => {
 
   return (
     <table>
-      <thead className="text-gray-3 typography-tip">
+      <thead
+        className={cn(
+          "text-gray-3 typography-tip",
+          scale && "typography-tip_large"
+        )}
+      >
         <tr>
           <th className="text-left pb-3 3xl:pb-[0.781vw]">
             {t("ref-info.th-lvl")}

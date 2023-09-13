@@ -13,6 +13,7 @@ import { useLinksQuery } from "@/redux/api/channels"
 
 import { cn } from "@/lib/classNames"
 import Text0 from "@/shared/typography/Text0"
+import TextTip from "@/shared/typography/TextTip"
 
 const ThirdStep = ({
   open,
@@ -48,9 +49,9 @@ const ThirdStep = ({
                     </ExternalLink>
                   ))}
               </div>
-              <p className="typography-tip mt-5 3xl:mt-[1.302vw]">
+              <TextTip className="mt-5 3xl:mt-[1.302vw]">
                 {t("buy-subs.third-step.find-links")}
-              </p>
+              </TextTip>
             </div>
             <div className="md:w-[450px] lg:w-[614px] 3xl:w-[40vw]">
               <h3

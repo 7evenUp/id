@@ -20,6 +20,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { Subscription } from "@/types/subscriptions"
 import Text1 from "@/shared/typography/Text1"
+import TextTip from "@/shared/typography/TextTip"
 
 const FirstStep = ({
   open,
@@ -235,9 +236,9 @@ const FirstStep = ({
               >
                 {t("buy-subs.first-step.total")}: ${totalPrice.toFixed(2)}
               </span>
-              <span className="typography-tip text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+              <TextTip className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
                 {t("buy-subs.first-step.make-sure")}
-              </span>
+              </TextTip>
             </div>
             <div
               className={cn(

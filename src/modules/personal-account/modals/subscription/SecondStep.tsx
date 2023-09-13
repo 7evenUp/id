@@ -28,6 +28,7 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
 import Text0 from "@/shared/typography/Text0"
+import TextTip from "@/shared/typography/TextTip"
 
 const SecondStep = ({
   open,
@@ -129,9 +130,9 @@ const SecondStep = ({
                 )}
               </div>
             </div>
-            <p className="typography-tip mt-4 3xl:mt-[0.911vw]">
+            <TextTip className="mt-4 3xl:mt-[0.911vw]">
               {t("buy-subs.second-step.later")}
-            </p>
+            </TextTip>
 
             {/* Vissible on Mobile */}
             <Button

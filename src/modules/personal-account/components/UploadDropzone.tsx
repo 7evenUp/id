@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone"
 import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
+import TextTip from "@/shared/typography/TextTip"
 
 const UploadDropzone = ({
   file,
@@ -52,16 +53,16 @@ const UploadDropzone = ({
         accept="image/png, image/jpeg"
         className="outline-none"
       />
-      <span
+      <TextTip
         className={cn(
-          "typography-tip text-gray-3 select-none text-center break-all px-1.5 3xl:px-[0.391vw] group-hover:text-gray-2 dark:group-hover:text-gray-4",
+          "text-gray-3 select-none text-center break-all px-1.5 3xl:px-[0.391vw] group-hover:text-gray-2 dark:group-hover:text-gray-4",
           isDragActive && "text-res-bot-blue dark:text-res-bot-blue"
         )}
       >
         {file
           ? `${file.name} - ${(file.size / 1024).toFixed(2)} kB`
           : t("change-avatar.uploading-area")}
-      </span>
+      </TextTip>
     </div>
   )
 }
