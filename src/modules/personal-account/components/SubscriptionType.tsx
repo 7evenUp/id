@@ -1,11 +1,12 @@
 import { cva } from "class-variance-authority"
 
+import { useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
-import { useUserProfileQuery } from "@/redux/api/profile"
-
 const subsTypeVariants = cva(
-  "typography-text-1 italic bg-gray-1 dark:bg-gray-2 px-1.5 py-0.5 3xl:px-[0.391vw] 3xl:py-[0.13vw] text-gray-6 rounded-full select-none",
+  "typography-text-1 italic bg-gray-1 dark:bg-gray-2 px-1.5 py-0.5 text-gray-6 rounded-full select-none",
   {
     variants: {
       appearence: {
@@ -17,6 +18,8 @@ const subsTypeVariants = cva(
 )
 
 const SubscriptionType = ({ className }: { className?: string }) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
   const { data } = useUserProfileQuery()
   const {
     subscriptionInfo: { subscriptionType },
@@ -28,6 +31,7 @@ const SubscriptionType = ({ className }: { className?: string }) => {
         subsTypeVariants({
           appearence: subscriptionType === null ? "free" : "prime",
         }),
+        scale && "typography-text-1_large 3xl:px-[0.391vw] 3xl:py-[0.13vw]",
         className
       )}
     >

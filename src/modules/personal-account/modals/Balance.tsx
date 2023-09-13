@@ -11,6 +11,9 @@ import ModalTrigger from "../components/ModalTrigger"
 
 import TxHistory from "./TxHistory"
 
+import Text0 from "@/shared/typography/Text0"
+import Text1 from "@/shared/typography/Text1"
+
 import { DialogContent } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Chip from "@/shared/ui/Chip"
@@ -33,12 +36,17 @@ import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useTopUpBalanceMutation } from "@/redux/api/balance"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const PREDEFINED_AMOUNT_VALUES = ["74", "211", "400", "755"]
 
 const Balance = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
 
@@ -77,21 +85,41 @@ const Balance = () => {
   }
 
   return (
-    <DialogContent className="sm:w-[500px] 3xl:w-[32.552vw]">
+    <DialogContent className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}>
       <div>
-        <div className="flex justify-between items-baseline gap-4 sm:gap-6 3xl:gap-[1.563vw] bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]">
-          <span className="typography-text-0 text-gray-3 dark:text-gray-4">
+        <div
+          className={cn(
+            "flex justify-between items-baseline gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6",
+            scale &&
+              "3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]"
+          )}
+        >
+          <Text0 className="text-gray-3 dark:text-gray-4">
             {t("balance.current")}
-          </span>
-          <span className="w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] 3xl:text-[3.515vw] dark:text-gray-5">
+          </Text0>
+          <span
+            className={cn(
+              "w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] dark:text-gray-5",
+              scale && "3xl:text-[3.515vw]"
+            )}
+          >
             $ {balance}
           </span>
         </div>
-        <div className="flex items-center gap-2 mb-5 3xl:gap-[0.521vw] 3xl:mb-1.302vw] typography-text-1">
-          <span>{t("balance.choose-deposit")}:</span>
+        <div
+          className={cn(
+            "flex items-center gap-2 mb-",
+            scale && "3xl:gap-[0.521vw] 3xl:mb-1.302vw]"
+          )}
+        >
+          <Text1>{t("balance.choose-deposit")}:</Text1>
           <Select defaultValue="crypto">
-            <SelectTrigger className="w-[130px] 3xl:w-[8.463vw]" />
-            <SelectContent className="z-[999] w-[130px] 3xl:w-[8.463vw]">
+            <SelectTrigger
+              className={cn("w-[130px]", scale && "3xl:w-[8.463vw]")}
+            />
+            <SelectContent
+              className={cn("z-[999] w-[130px]", scale && "3xl:w-[8.463vw]")}
+            >
               <SelectItem value="crypto">
                 {t("balance.deposit-options.crypto")}
               </SelectItem>
@@ -104,7 +132,10 @@ const Balance = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
+            className={cn(
+              "flex flex-col gap-[18px]",
+              scale && "3xl:gap-[1.172vw]"
+            )}
           >
             <FormField
               name="amount"
@@ -115,12 +146,21 @@ const Balance = () => {
                     {t("balance.amount-label")}
                   </FormLabel>
                   <div className="relative">
-                    <span className="absolute left-0 top-1 3xl:top-[0.26vw] text-sm 3xl:text-[0.911vw]/[1.302vw]">
+                    <span
+                      className={cn(
+                        "absolute left-0 top-1 3xl:top-[0.26vw] text-sm",
+                        scale && "3xl:text-[0.911vw]/[1.302vw]"
+                      )}
+                    >
                       $
                     </span>
                     <FormControl>
                       <Input
-                        className="text-sm 3xl:text-[0.911vw]/[1.302vw] pl-4 3xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className={cn(
+                          "text-sm pl-4 aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                          scale &&
+                            "3xl:text-[0.911vw]/[1.302vw] 3xl:pl-[1.042vw]"
+                        )}
                         placeholder={t("balance.amount-placeholder")}
                         {...field}
                       />
@@ -131,7 +171,12 @@ const Balance = () => {
               )}
             />
             <div>
-              <div className="flex items-center gap-2.5 mb-6 3xl:gap-[0.651vw] 3xl:mb-[1.563vw]">
+              <div
+                className={cn(
+                  "flex items-center gap-2.5 mb-6",
+                  scale && "3xl:gap-[0.651vw] 3xl:mb-[1.563vw]"
+                )}
+              >
                 {PREDEFINED_AMOUNT_VALUES.map((amount, i) => (
                   <Chip
                     key={i}
@@ -142,7 +187,12 @@ const Balance = () => {
                   </Chip>
                 ))}
               </div>
-              <div className="flex items-center gap-2 mb-6 3xl:gap-[0.521vw] 3xl:mb-[1.563vw]">
+              <div
+                className={cn(
+                  "flex items-center gap-2 mb-6",
+                  scale && "3xl:gap-[0.521vw] 3xl:mb-[1.563vw]"
+                )}
+              >
                 <Checkbox id="email_bill" ref={checkboxRef} />
                 <CheckboxLabel htmlFor="email_bill">
                   {t("balance.send-check")}
@@ -150,18 +200,25 @@ const Balance = () => {
               </div>
 
               {isSuccess && (
-                <ResponseSuccessText className="mb-6 3xl:mb-[1.563vw] block">
+                <ResponseSuccessText
+                  className={cn("mb-6 block", scale && "3xl:mb-[1.563vw]")}
+                >
                   {t("balance.request-success")}
                 </ResponseSuccessText>
               )}
               {error && (
                 <ResponseErrorText
-                  className="mb-6 3xl:mb-[1.563vw] block"
+                  className={cn("mb-6 block", scale && "3xl:mb-[1.563vw]")}
                   error={error}
                 />
               )}
 
-              <div className="flex items-center flex-wrap gap-3 3xl:gap-[0.781vw]">
+              <div
+                className={cn(
+                  "flex items-center flex-wrap gap-3",
+                  scale && "3xl:gap-[0.781vw]"
+                )}
+              >
                 <Button className="w-fit" type="submit" isLoading={isLoading}>
                   {t("balance.replenish-btn")}
                 </Button>

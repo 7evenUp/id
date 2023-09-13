@@ -20,6 +20,9 @@ import {
 } from "@/shared/ui/Form"
 
 import { useLoginMutation } from "@/redux/api/auth"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const LoginMailForm = ({
   emailInput,
@@ -30,6 +33,8 @@ const LoginMailForm = ({
 }) => {
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector(state=>state.scale.value)
 
   const formSchema = z.object({
     email: z
@@ -64,7 +69,7 @@ const LoginMailForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3 3xl:gap-[0.781vw]"
+          className={cn("flex flex-col gap-3", scale && "3xl:gap-[0.781vw]")}
         >
           <FormField
             name="email"
@@ -86,7 +91,7 @@ const LoginMailForm = ({
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3 3xl:mt-[0.781vw]">
+      <div className={cn("flex mt-3", scale && "3xl:mt-[0.781vw]")}>
         {isSuccess && (
           <ResponseSuccessText>
             {t("login.request-success")}

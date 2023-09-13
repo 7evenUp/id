@@ -10,15 +10,23 @@ import ConnectWalletModal from "@/components/ConnectWalletModal"
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
+import Text0 from "@/shared/typography/Text0"
+import Text1 from "@/shared/typography/Text1"
+
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import {
   useUpdateWalletMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [connectModalOpened, setConnectModalOpened] = useState(false)
 
@@ -44,7 +52,10 @@ const UpdateWallet = () => {
 
   return (
     <DialogContent
-      className="mobile:w-[370px] sm:w-[500px] 3xl:w-[32.552vw]"
+      className={cn(
+        "mobile:w-[370px] sm:w-[500px]",
+        scale && "3xl:w-[32.552vw]"
+      )}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       <DialogHeader>
@@ -59,54 +70,62 @@ const UpdateWallet = () => {
 
       {!wallet ? (
         <>
-          <p className="typography-text-0">
-            {t("change-wallet.wallet-acc-unpresent.status")}
-          </p>
+          <Text0>{t("change-wallet.wallet-acc-unpresent.status")}</Text0>
 
           {isConnected && address ? (
             <>
-              <p className="typography-text-0">
+              <Text0>
                 {t("change-wallet.wallet-acc-unpresent.wallet-connected")}{" "}
-                <span className="typography-accent">
-                  {cutWalletAddr(address.toLowerCase())}
-                </span>
-              </p>
-              <p className="typography-text-1">
+                <span>{cutWalletAddr(address.toLowerCase())}</span>
+              </Text0>
+              <Text1>
                 {t("change-wallet.wallet-acc-unpresent.confirm-text")}
-              </p>
+              </Text1>
             </>
           ) : (
-            <p className="typography-text-0">
+            <Text0>
               {t("change-wallet.wallet-acc-unpresent.wallet-disconnected")}
-            </p>
+            </Text0>
           )}
         </>
       ) : (
         <>
-          <div className="flex flex-col typography-text-0">
-            <p>{t("change-wallet.wallet-acc-present.status")}</p>{" "}
-            <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
+          <div className="flex flex-col">
+            <Text0>{t("change-wallet.wallet-acc-present.status")}</Text0>{" "}
+            <span
+              className={cn(
+                "text-base font-mono text-black dark:text-gray-5",
+                scale && "3xl:text-[1.0417vw]/[1.5625vw]"
+              )}
+            >
               {cutWalletAddr(wallet)}
             </span>
           </div>
 
           {isConnected && address ? (
             <>
-              <div className="flex flex-col typography-text-0">
-                <p>{t("change-wallet.wallet-acc-present.wallet-connected")}</p>{" "}
-                <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
+              <div className="flex flex-col">
+                <Text0>
+                  {t("change-wallet.wallet-acc-present.wallet-connected")}
+                </Text0>{" "}
+                <span
+                  className={cn(
+                    "text-base font-mono text-black dark:text-gray-5",
+                    scale && "3xl:text-[1.0417vw]/[1.5625vw]"
+                  )}
+                >
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
               </div>
               {address.toLowerCase() === wallet ? (
                 <>
-                  <p className="typography-text-1">
+                  <Text1>
                     {t("change-wallet.wallet-acc-present.wallets-equal")}
-                  </p>
+                  </Text1>
                 </>
               ) : (
                 <>
-                  <p className="typography-text-1">
+                  <Text1>
                     {t(
                       "change-wallet.wallet-acc-present.confirm-text-1-part-1"
                     )}{" "}
@@ -119,18 +138,18 @@ const UpdateWallet = () => {
                     <span className="font-mono text-black dark:text-gray-5">
                       {cutWalletAddr(address.toLowerCase())}
                     </span>
-                  </p>
+                  </Text1>
 
-                  <p className="typography-text-1">
+                  <Text1>
                     {t("change-wallet.wallet-acc-present.confirm-text-2")}
-                  </p>
+                  </Text1>
                 </>
               )}
             </>
           ) : (
-            <p className="typography-text-0">
+            <Text0>
               {t("change-wallet.wallet-acc-present.wallet-disconnected")}
-            </p>
+            </Text0>
           )}
         </>
       )}

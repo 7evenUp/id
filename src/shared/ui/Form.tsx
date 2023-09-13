@@ -8,7 +8,9 @@ import {
   FormProvider,
   useFormContext,
 } from "react-hook-form"
+
 import { cn } from "@/lib/classNames"
+import { useAppSelector } from "@/redux/hooks"
 
 const Form = FormProvider
 
@@ -73,11 +75,17 @@ const FormItem = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const id = React.useId()
 
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <FormItemContext.Provider value={{ id }}>
       <div
         ref={ref}
-        className={cn("group flex flex-col gap-1 3xl:gap-[0.260vw]", className)}
+        className={cn(
+          "group flex flex-col gap-1",
+          scale && "3xl:gap-[0.260vw]",
+          className
+        )}
         {...props}
       />
     </FormItemContext.Provider>
@@ -91,11 +99,14 @@ const FormLabel = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <label
       ref={ref}
       className={cn(
-        "text-sm 3xl:text-[0.911vw] 3xl:leading-[1.302vw]",
+        "text-sm",
+        scale && "3xl:text-[0.911vw]/[1.302vw]",
         className,
         error && "text-error dark:text-error"
       )}
@@ -152,6 +163,8 @@ const FormMessage = React.forwardRef<
   const { error, formMessageId } = useFormField()
   const body = error ? String(error?.message) : children
 
+  const scale = useAppSelector((state) => state.scale.value)
+
   if (!body) {
     return null
   }
@@ -161,7 +174,8 @@ const FormMessage = React.forwardRef<
       ref={ref}
       id={formMessageId}
       className={cn(
-        "text-xs 3xl:text-[0.781vw]/[1.042vw] font-medium text-error",
+        "text-xs font-medium text-error",
+        scale && "3xl:text-[0.781vw]/[1.042vw]",
         className
       )}
       {...props}

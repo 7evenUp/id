@@ -20,6 +20,8 @@ import {
 } from "@/shared/ui/Form"
 
 import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
+import { useAppSelector } from "@/redux/hooks"
+import { cn } from "@/lib/classNames"
 
 const RegisterMailForm = ({
   emailInput,
@@ -32,6 +34,8 @@ const RegisterMailForm = ({
 }) => {
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
 
@@ -78,7 +82,7 @@ const RegisterMailForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-3 3xl:gap-[0.781vw]"
+          className={cn("flex flex-col gap-3", scale && "3xl:gap-[0.781vw]")}
         >
           <FormField
             name="email"
@@ -120,7 +124,12 @@ const RegisterMailForm = ({
               </FormItem>
             )}
           />
-          <p className="text-xs 3xl:text-[0.781vw]/[1.042vw] w-full">
+          <p
+            className={cn(
+              "text-xs w-full",
+              scale && "3xl:text-[0.781vw]/[1.042vw]"
+            )}
+          >
             {t("register.privacy-policy.text")}{" "}
             <a
               href="#"
@@ -134,7 +143,7 @@ const RegisterMailForm = ({
           </ActionButton>
         </form>
       </Form>
-      <div className="flex mt-3 3xl:mt-[0.781vw]">
+      <div className={cn("flex mt-3", scale && "3xl:mt-[0.781vw]")}>
         {isSuccess && (
           <ResponseSuccessText>
             {t("register.request-success")}

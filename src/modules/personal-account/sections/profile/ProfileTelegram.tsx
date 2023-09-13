@@ -9,9 +9,14 @@ import ModalTrigger from "../../components/ModalTrigger"
 import RowItem from "@/shared/components/RowItem"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const ProfileTelegram = () => {
   const { data: userProfile } = useUserProfileQuery()
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   if (!userProfile) return null
 
@@ -29,7 +34,12 @@ const ProfileTelegram = () => {
       {telegramUsername ? (
         <span className="text-right w-full">{telegramUsername}</span>
       ) : (
-        <Plus className="hidden sm:block absolute right-0 w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw]" />
+        <Plus
+          className={cn(
+            "hidden sm:block absolute right-0 w-5 h-5",
+            scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+          )}
+        />
       )}
 
       {/* Mobile editing */}

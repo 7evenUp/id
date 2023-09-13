@@ -7,9 +7,14 @@ import AvatarMobile from "./components/AvatarMobile"
 import ScaleToggle from "./components/ScaleToggle"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const Header = () => {
   const { t } = useTranslation()
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [showBack, setShowBack] = useState(false)
   const [productName, setProductName] = useState("")
@@ -34,10 +39,25 @@ const Header = () => {
   }, [])
 
   return (
-    <header className="flex justify-end items-center mb-10 3xl:mb-[2.604vw]">
+    <header
+      className={cn(
+        "flex justify-end items-center mb-10",
+        scale && "3xl:mb-[2.604vw]"
+      )}
+    >
       {showBack && (
-        <a className="typography-btn-big flex items-center gap-2 3xl:gap-[0.521vw] hover:text-gray-3 w-fit cursor-pointer mr-auto">
-          <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />
+        <a
+          className={cn(
+            "typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit cursor-pointer mr-auto",
+            scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
+          )}
+        >
+          <MoveLeft
+            className={cn(
+              "w-3.5 h-3.5",
+              scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+            )}
+          />
           {productName ? (
             <p>
               {t("back-to")} <span className="capitalize">{productName}</span>
@@ -48,14 +68,20 @@ const Header = () => {
         </a>
       )}
 
-      <div className="hidden sm:flex items-center gap-3 3xl:gap-[0.781vw]">
+      <div
+        className={cn(
+          "hidden sm:flex items-center gap-3",
+          scale && "3xl:gap-[0.781vw]"
+        )}
+      >
         <LanguageToggle />
         <ThemeToggle />
         <ScaleToggle />
       </div>
 
-      <div className="sm:hidden flex gap-6 3xl:gap-[1.563vw]">
-        <div className="flex items-center gap-3 3xl:gap-[0.781vw]">
+      {/* Header on Mobile */}
+      <div className="sm:hidden flex gap-6">
+        <div className="flex items-center gap-3">
           <LanguageToggle />
           <ThemeToggle />
         </div>

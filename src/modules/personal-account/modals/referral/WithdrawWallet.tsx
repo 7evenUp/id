@@ -22,8 +22,13 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
+import Text1 from "@/shared/typography/Text1"
+
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useWithdrawMutation } from "@/redux/api/referral"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 type WithdrawType = "USDC (ERC-20)" | "USDT (ERC-20)" | "USDT (TRC-20)"
 
@@ -40,6 +45,8 @@ const WithdrawWallet = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [withdrawType, setWithdrawType] =
     useState<WithdrawType>("USDC (ERC-20)")
@@ -97,13 +104,23 @@ const WithdrawWallet = ({
         resetMutation()
       }}
     >
-      <DialogContent className="max-w-[550px] 3xl:max-w-[35.807vw]">
+      <DialogContent
+        className={cn("max-w-[550px]", scale && "3xl:max-w-[35.807vw]")}
+      >
         <DialogHeader>
           <button
-            className="typography-btn-big dark:text-gray-5 flex items-center gap-2 3xl:gap-[0.521vw] hover:text-gray-3 dark:hover:text-gray-3"
+            className={cn(
+              "typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3",
+              scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
+            )}
             onClick={openMain}
           >
-            <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />{" "}
+            <MoveLeft
+              className={cn(
+                "w-3.5 h-3.5",
+                scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+              )}
+            />{" "}
             {t("ref-withdraw.back-btn")}
           </button>
         </DialogHeader>
@@ -111,7 +128,10 @@ const WithdrawWallet = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
+            className={cn(
+              "flex flex-col gap-[18px]",
+              scale && "3xl:gap-[1.172vw]"
+            )}
           >
             <FormField
               name="wallet"
@@ -123,7 +143,10 @@ const WithdrawWallet = ({
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="text-sm 3xl:text-[1.0417vw]/[1.5625vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                      className={cn(
+                        "text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                        scale && "3xl:text-[1.0417vw]/[1.5625vw]"
+                      )}
                       placeholder="0x12345...abcdef"
                       {...field}
                     />
@@ -132,7 +155,12 @@ const WithdrawWallet = ({
                 </FormItem>
               )}
             />
-            <div className="flex flex-wrap gap-2 3xl:gap-[0.521vw] mb-2 3xl:mb-[0.521vw]">
+            <div
+              className={cn(
+                "flex flex-wrap gap-2 mb-2",
+                scale && "3xl:gap-[0.521vw] 3xl:mb-[0.521vw]"
+              )}
+            >
               <Chip
                 onClick={() => setWithdrawType("USDC (ERC-20)")}
                 type="button"
@@ -160,30 +188,51 @@ const WithdrawWallet = ({
                   <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
                     {t("ref-withdraw.amount-label")}
                   </FormLabel>
-                  <div className="relative w-[260px] 3xl:w-[16.927vw]">
-                    <span className="absolute left-0 top-1 3xl:top-[0.26vw] text-sm 3xl:text-[0.911vw]/[1.302vw]">
+                  <div
+                    className={cn(
+                      "relative w-[260px]",
+                      scale && "3xl:w-[16.927vw]"
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "absolute left-0 top-1 text-sm",
+                        scale && "3xl:top-[0.26vw] 3xl:text-[0.911vw]/[1.302vw]"
+                      )}
+                    >
                       $
                     </span>
                     <FormControl>
                       <Input
-                        className="w-[260px] 3xl:w-[16.927vw] pl-4 mb-2 3xl:pl-[1.042vw] 3xl:mb-[0.521vw] text-sm 3xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className={cn(
+                          "w-[260px] pl-4 mb-2 text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                          scale &&
+                            "3xl:w-[16.927vw] 3xl:pl-[1.042vw] 3xl:mb-[0.521vw] 3xl:text-[0.911vw]/[1.302vw]"
+                        )}
                         placeholder={t("ref-withdraw.amount-placeholder")}
                         {...field}
                       />
                     </FormControl>
-                    <span className="typography-text-1 absolute right-0 top-2 3xl:top-[0.521vw]">
+                    <Text1
+                      className={cn(
+                        "absolute right-0 top-2",
+                        scale && "3xl:top-[0.521vw]"
+                      )}
+                    >
                       {withdrawType}
-                    </span>
+                    </Text1>
                   </div>
                   <FormMessage />
-                  <span className="typography-text-1 block">
+                  <Text1 className="block">
                     {t("ref-withdraw.available")}: ${refBalance}
-                  </span>
+                  </Text1>
                 </FormItem>
               )}
             />
             {isSuccess && (
-              <ResponseSuccessText className="max-w-[320px] 3xl:max-w-[20.833vw]">
+              <ResponseSuccessText
+                className={cn("max-w-[320px]", scale && "3xl:max-w-[20.833vw]")}
+              >
                 {t("ref-withdraw.personal-wallet-success")}
               </ResponseSuccessText>
             )}

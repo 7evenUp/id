@@ -7,16 +7,23 @@ import TextSizeSlider from "../components/TextSizeSlider"
 import BackgroundPicker from "../components/BackgroundPicker"
 import ProjectsTable from "../components/ProjectsTable"
 
+import Subheading from "@/shared/typography/Subheading"
+
 import Button from "@/shared/ui/Button"
 import Switch from "@/shared/ui/Switch"
 
 import RowItem from "@/shared/components/RowItem"
-import Subheading from "@/shared/typography/Subheading"
+
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 type Language = "ru" | "en"
 
 const ResearchBotTab = () => {
   const { t } = useTranslation("products")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [resLanguage, setResLanguage] = useState<Language>("ru")
   const [aggLanguage, setAggLanguage] = useState<Language>("en")
@@ -61,7 +68,9 @@ const ResearchBotTab = () => {
           link="https://t.me/crypton_research_bot"
         />
       </TabHeader>
-      <Subheading className="mt-10 3xl:mt-[2.604vw]">Coming soon</Subheading>
+      <Subheading className={cn("mt-10", scale && "3xl:mt-[2.604vw]")}>
+        Coming soon
+      </Subheading>
     </>
   )
 

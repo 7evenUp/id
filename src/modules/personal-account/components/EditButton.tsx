@@ -4,12 +4,16 @@ import { ReactComponent as Edit } from "@/assets/icons/edit.svg"
 
 import IconButton from "@/shared/ui/IconButton"
 
+import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const EditButton = React.forwardRef<
   React.ElementRef<typeof IconButton>,
   React.ComponentPropsWithoutRef<typeof IconButton>
 >(({ className, ...props }, forwardedRef) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <IconButton
       className={cn(
@@ -19,7 +23,12 @@ const EditButton = React.forwardRef<
       ref={forwardedRef}
       {...props}
     >
-      <Edit className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw] text-gray-4 group-hover/icon:text-gray-3 sm:text-gray-1 sm:group-hover/icon:text-gray-2 dark:text-gray-4 dark:group-hover/icon:text-gray-5 fill-white dark:fill-gray-1" />
+      <Edit
+        className={cn(
+          "w-3.5 h-3.5 text-gray-4 group-hover/icon:text-gray-3 sm:text-gray-1 sm:group-hover/icon:text-gray-2 dark:text-gray-4 dark:group-hover/icon:text-gray-5 fill-white dark:fill-gray-1",
+          scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+        )}
+      />
     </IconButton>
   )
 })

@@ -8,10 +8,15 @@ import Auth from "./modules/auth/Auth"
 import SkeletonLayout from "./components/SkeletonLayout"
 
 import { useUserProfileQuery } from "./redux/api/profile"
+import { useAppSelector } from "./redux/hooks"
+
+import { cn } from "./lib/classNames"
 
 const App = () => {
   const [isDelayed, setIsDelayed] = useState(true)
   const delay = useRef({ time: 1000 })
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { isLoading, data, error } = useUserProfileQuery()
 
@@ -33,9 +38,19 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
-      <div className="px-3 mobile-sm:px-7 xl:px-9 3xl:px-[2.344vw] py-8 3xl:py-[2.083vw] max-w-[1400px] 2xl:max-w-[90%] 3xl:max-w-[90%] mx-auto">
+      <div
+        className={cn(
+          "px-3 mobile-sm:px-7 xl:px-9 py-8 max-w-[1400px] 2xl:w-[90%] 2xl:max-w-[1728px] mx-auto",
+          scale && "3xl:px-[2.344vw] 3xl:py-[2.083vw] 3xl:max-w-[90%]"
+        )}
+      >
         <Header />
-        <main className="flex flex-col lg:flex-row justify-between gap-20 3xl:gap-[5.208vw]">
+        <main
+          className={cn(
+            "flex flex-col lg:flex-row justify-between gap-20",
+            scale && "3xl:gap-[5.208vw]"
+          )}
+        >
           {error ? (
             <Auth />
           ) : isLoading || isDelayed ? (
