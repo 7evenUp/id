@@ -19,9 +19,14 @@ import Button from "@/shared/ui/Button"
 import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const Referral = () => {
   const { t } = useTranslation("profile")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { toast } = useToast()
 
@@ -51,11 +56,21 @@ const Referral = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center pb-4 3xl:pb-[1.042vw] group">
+      <div
+        className={cn(
+          "flex justify-between items-center pb-4 group",
+          scale && "3xl:pb-[1.042vw]"
+        )}
+      >
         <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
           <IconButton className="sm:opacity-0 group-hover:opacity-100 transition-all bg-gray-1 hover:bg-gray-2 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80 dark:active:bg-opacity-80 rounded-full focus:opacity-100">
-            <Info className="w-3 h-3 3xl:w-[0.781vw] 3xl:h-[0.781vw] fill-white dark:fill-gray-1" />
+            <Info
+              className={cn(
+                "w-3 h-3 fill-white dark:fill-gray-1",
+                scale && "3xl:w-[0.781vw] 3xl:h-[0.781vw]"
+              )}
+            />
           </IconButton>
         </ModalTrigger>
       </div>
@@ -65,7 +80,12 @@ const Referral = () => {
             {t("referral.cashback")}:{" "}
             <AccentNumber>{refCashBack * 100}%</AccentNumber>
           </Text0>
-          <div className="flex gap-1.5 xl:gap-3 3xl:gap-[0.781vw] flex-wrap justify-end flex-shrink">
+          <div
+            className={cn(
+              "flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink",
+              scale && "3xl:gap-[0.781vw]"
+            )}
+          >
             <Button onClick={onPromoClick}>{t("referral.promo-btn")}</Button>
             <Button onClick={onRefLinkClick}>{t("referral.link-btn")}</Button>
           </div>

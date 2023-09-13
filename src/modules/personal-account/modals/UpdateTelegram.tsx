@@ -75,7 +75,10 @@ const UpdateTelegram = () => {
 
   return (
     <DialogContent
-      className="mobile:w-[370px] sm:w-[370px] 3xl:w-[24.088vw]"
+      className={cn(
+        "mobile:w-[370px] sm:w-[370px]",
+        scale && "3xl:w-[24.088vw]"
+      )}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       {isSecondStep && (
@@ -86,11 +89,16 @@ const UpdateTelegram = () => {
           )}
           onClick={() => setIsSecondStep(false)}
         >
-          <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />
+          <MoveLeft
+            className={cn(
+              "w-3.5 h-3.5",
+              scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+            )}
+          />
           <span className="text-left">{t("change-tg.back-button")}</span>
         </button>
       )}
-      <DialogHeader className="mb-4 3xl:mb-[1.042vw]">
+      <DialogHeader className={cn("mb-4", scale && "3xl:mb-[1.042vw]")}>
         <div className="flex flex-col">
           <DialogTitle>{t("change-tg.heading")}</DialogTitle>
         </div>
@@ -139,6 +147,8 @@ const NicknameForm = ({
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
 
+  const scale = useAppSelector((state) => state.scale.value)
+
   const nicknameFormSchema = z.object({
     nickname: z
       .string()
@@ -168,7 +178,7 @@ const NicknameForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
+        className={cn("flex flex-col gap-[18px]", scale && "3xl:gap-[1.172vw]")}
       >
         <FormField
           name="nickname"
@@ -179,12 +189,20 @@ const NicknameForm = ({
                 {t("change-tg.username-label")}
               </FormLabel>
               <div className="relative">
-                <span className="absolute left-0 top-1 3xl:top-[0.26vw] text-sm 3xl:text-[0.911vw]/[1.302vw]">
+                <span
+                  className={cn(
+                    "absolute left-0 top-1 text-sm",
+                    scale && "3xl:top-[0.26vw] 3xl:text-[0.911vw]/[1.302vw]"
+                  )}
+                >
                   @
                 </span>
                 <FormControl>
                   <Input
-                    className="w-full text-sm 3xl:text-[0.911vw]/[1.302vw] pl-4 3xl:pl-[1.042vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className={cn(
+                      "w-full text-sm pl-4 aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                      scale && "3xl:text-[0.911vw]/[1.302vw] 3xl:pl-[1.042vw]"
+                    )}
                     placeholder={t("change-tg.username-placeholder")}
                     {...field}
                   />
@@ -193,14 +211,11 @@ const NicknameForm = ({
                   <Popover>
                     <PopoverTrigger asChild role="button">
                       <span>
-                        <HelpCircle className="absolute right-0 top-1.5 3xl:top-[0.39vw] w-4 h-4 3xl:w-[1.041vw] 3xl:h-[1.041vw] cursor-pointer" />
+                        <HelpCircle className="absolute right-0 top-1.5 w-4 h-4 cursor-pointer" />
                       </span>
                     </PopoverTrigger>
-                    <PopoverContent
-                      align="end"
-                      className="w-[300px] 3xl:w-[19.5313vw]"
-                    >
-                      <p className="3xl:text-[1.0417vw]/[1.5625vw]">
+                    <PopoverContent align="end" className="w-[300px]">
+                      <p>
                         {t("change-tg.help-card-first")}
                         <a
                           className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
@@ -216,7 +231,13 @@ const NicknameForm = ({
                 ) : (
                   <HoverCard openDelay={200}>
                     <HoverCardTrigger>
-                      <HelpCircle className="absolute right-0 top-1.5 3xl:top-[0.39vw] w-4 h-4 3xl:w-[1.041vw] 3xl:h-[1.041vw] cursor-pointer" />
+                      <HelpCircle
+                        className={cn(
+                          "absolute right-0 top-1.5 w-4 h-4 cursor-pointer",
+                          scale &&
+                            "3xl:top-[0.39vw] 3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                        )}
+                      />
                     </HoverCardTrigger>
                     <HoverCardContent>
                       <p>
@@ -241,7 +262,7 @@ const NicknameForm = ({
         {error && <ResponseErrorText error={error} />}
 
         <Button
-          className="w-fit mt-2 3xl:mt-[0.521vw]"
+          className={cn("w-fit mt-2", scale && "3xl:mt-[0.521vw]")}
           type="submit"
           isLoading={isLoading}
         >
@@ -265,6 +286,8 @@ const CodeForm = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const codeFormSchema = z.object({
     code: z
@@ -295,7 +318,10 @@ const CodeForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
+          className={cn(
+            "flex flex-col gap-[18px]",
+            scale && "3xl:gap-[1.172vw]"
+          )}
         >
           <FormField
             name="code"
@@ -307,7 +333,10 @@ const CodeForm = ({
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm 3xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                    className={cn(
+                      "text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                      scale && "3xl:text-[0.911vw]/[1.302vw]"
+                    )}
                     placeholder={t("change-tg.code-placeholder")}
                     {...field}
                   />
@@ -323,7 +352,7 @@ const CodeForm = ({
           )}
 
           <Button
-            className="w-fit mt-2 3xl:mt-[0.521vw]"
+            className={cn("w-fit mt-2", scale && "3xl:mt-[0.521vw]")}
             type="submit"
             isLoading={isLoading}
             disabled={isSuccess}

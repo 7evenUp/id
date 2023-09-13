@@ -54,7 +54,12 @@ const Avatar = () => {
         asChild
         role="button"
       >
-        <div className="w-[87px] h-[87px] 3xl:w-[5.664vw] 3xl:h-[5.664vw] border-[3px] 3xl:border-[0.195vw] border-gray-1 rounded-full flex items-center justify-center cursor-pointer">
+        <div
+          className={cn(
+            "w-[87px] h-[87px] border-[3px] border-gray-1 rounded-full flex items-center justify-center cursor-pointer",
+            scale && "3xl:w-[5.664vw] 3xl:h-[5.664vw] 3xl:border-[0.195vw]"
+          )}
+        >
           {activeAvatar && (
             <img
               src={activeAvatar?.file}
@@ -66,24 +71,45 @@ const Avatar = () => {
       </PopoverTrigger>
       <PopoverContent
         className={cn(
-          "flex flex-col gap-1 3xl:gap-[0.26vw] typography-text-0 font-montserrat",
-          scale && "typography-text-0_large"
+          "flex flex-col gap-1 typography-text-0 font-montserrat",
+          scale && "typography-text-0_large 3xl:gap-[0.26vw]"
         )}
       >
         <ModalTrigger content={<ChangeAvatar />}>
-          <button className="flex gap-2 3xl:gap-[0.521vw] items-center text-gray-1 dark:text-gray-6 px-2 3xl:px-[0.521vw] rounded-md 3xl:rounded-[0.391vw] cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
-            <EditIcon className="w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw]" />
-            <span className="py-1.5 3xl:py-[0.391vw]">
+          <button
+            className={cn(
+              "flex gap-2 items-center text-gray-1 dark:text-gray-6 px-2 rounded-md cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors",
+              scale &&
+                "3xl:gap-[0.521vw] 3xl:px-[0.521vw] 3xl:rounded-[0.391vw]"
+            )}
+          >
+            <EditIcon
+              className={cn(
+                "w-5 h-5",
+                scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+              )}
+            />
+            <span className={cn("py-1.5", scale && "3xl:py-[0.391vw]")}>
               {t("avatar-change")}
             </span>
           </button>
         </ModalTrigger>
         <button
-          className="flex gap-2 3xl:gap-[0.521vw] items-center text-gray-1 dark:text-gray-6 px-2 3xl:px-[0.521vw] rounded-md 3xl:rounded-[0.391vw] cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors"
+          className={cn(
+            "flex gap-2 items-center text-gray-1 dark:text-gray-6 px-2 rounded-md cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors",
+            scale && "3xl:gap-[0.521vw] 3xl:px-[0.521vw] 3xl:rounded-[0.391vw]"
+          )}
           onClick={onDelete}
         >
-          <TrashIcon className="w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw] text-error" />{" "}
-          <span className="py-1.5 3xl:py-[0.391vw]">{t("avatar-delete")}</span>
+          <TrashIcon
+            className={cn(
+              "w-5 h-5 text-error",
+              scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+            )}
+          />{" "}
+          <span className={cn("py-1.5", scale && "3xl:py-[0.391vw]")}>
+            {t("avatar-delete")}
+          </span>
         </button>
       </PopoverContent>
     </Popover>

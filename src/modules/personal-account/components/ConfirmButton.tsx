@@ -4,12 +4,16 @@ import { ReactComponent as Check } from "@/assets/icons/check.svg"
 
 import IconButton from "@/shared/ui/IconButton"
 
+import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const ConfirmButton = React.forwardRef<
   React.ElementRef<typeof IconButton>,
   React.ComponentPropsWithoutRef<typeof IconButton>
 >(({ className, ...props }, forwardedRef) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <IconButton
       className={cn(
@@ -19,7 +23,12 @@ const ConfirmButton = React.forwardRef<
       ref={forwardedRef}
       {...props}
     >
-      <Check className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw] text-white dark:text-gray-1" />
+      <Check
+        className={cn(
+          "w-3.5 h-3.5 text-white dark:text-gray-1",
+          scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+        )}
+      />
     </IconButton>
   )
 })

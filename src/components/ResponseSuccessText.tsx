@@ -1,5 +1,7 @@
 import React from "react"
 
+import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const ResponseSuccessText = ({
@@ -9,10 +11,12 @@ const ResponseSuccessText = ({
   children: React.ReactNode
   className?: string
 }) => {
+  const scale = useAppSelector(state=>state.scale.value)
   return (
     <span
       className={cn(
-        "text-success text-xs 3xl:text-[0.781vw]/[1.042vw] font-medium tracking-wide",
+        "text-success text-xs font-medium tracking-wide",
+        scale && "3xl:text-[0.781vw]/[1.042vw]",
         className
       )}
     >

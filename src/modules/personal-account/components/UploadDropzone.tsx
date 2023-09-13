@@ -2,8 +2,11 @@ import { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { useTranslation } from "react-i18next"
 
-import { cn } from "@/lib/classNames"
 import TextTip from "@/shared/typography/TextTip"
+
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const UploadDropzone = ({
   file,
@@ -16,20 +19,25 @@ const UploadDropzone = ({
 }) => {
   const { t } = useTranslation("modals")
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    acceptedFiles.forEach((file) => {
-      setFile(file)
-      const reader = new FileReader()
+  const scale = useAppSelector((state) => state.scale.value)
 
-      reader.onabort = () => console.log("file reading was aborted")
-      reader.onerror = () => console.log("file reading has failed")
-      reader.onload = () => {
-        const base64file = reader.result as string
-        setBase64(base64file)
-      }
-      reader.readAsDataURL(file)
-    })
-  }, [setFile, setBase64])
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      acceptedFiles.forEach((file) => {
+        setFile(file)
+        const reader = new FileReader()
+
+        reader.onabort = () => console.log("file reading was aborted")
+        reader.onerror = () => console.log("file reading has failed")
+        reader.onload = () => {
+          const base64file = reader.result as string
+          setBase64(base64file)
+        }
+        reader.readAsDataURL(file)
+      })
+    },
+    [setFile, setBase64]
+  )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -42,7 +50,8 @@ const UploadDropzone = ({
   return (
     <div
       className={cn(
-        "group h-[60px] 3xl:h-[3.906vw] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg 3xl:rounded-[0.521vw] cursor-pointer outline-none hover:bg-gray-6 dark:hover:bg-gray-2 dark:hover:bg-opacity-20",
+        "group h-[60px] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg cursor-pointer outline-none hover:bg-gray-6 dark:hover:bg-gray-2 dark:hover:bg-opacity-20",
+        scale && "3xl:h-[3.906vw] 3xl:rounded-[0.521vw]",
         isDragActive && "border-res-bot-blue dark:border-res-bot-blue"
       )}
       {...getRootProps()}
@@ -55,7 +64,8 @@ const UploadDropzone = ({
       />
       <TextTip
         className={cn(
-          "text-gray-3 select-none text-center break-all px-1.5 3xl:px-[0.391vw] group-hover:text-gray-2 dark:group-hover:text-gray-4",
+          "text-gray-3 select-none text-center break-all px-1.5 group-hover:text-gray-2 dark:group-hover:text-gray-4",
+          scale && "3xl:px-[0.391vw]",
           isDragActive && "text-res-bot-blue dark:text-res-bot-blue"
         )}
       >

@@ -15,8 +15,11 @@ import { useAppSelector } from "@/redux/hooks"
 import { TabsTrigger } from "@/shared/ui/Tabs"
 import Tooltip from "@/shared/ui/Tooltip"
 
+import { cn } from "@/lib/classNames"
+
 const TabsTriggers = () => {
   const activeProduct = useAppSelector((state) => state.tabs.value)
+  const scale = useAppSelector((state) => state.scale.value)
 
   return (
     <>
@@ -24,9 +27,19 @@ const TabsTriggers = () => {
         <Tooltip content="Prime">
           <div>
             {activeProduct === "prime" ? (
-              <PrimeActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
+              <PrimeActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px]",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             ) : (
-              <PrimeIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
+              <PrimeIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:fill-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             )}
           </div>
         </Tooltip>
@@ -35,9 +48,19 @@ const TabsTriggers = () => {
         <Tooltip content="Research Bot">
           <div>
             {activeProduct === "research-bot" ? (
-              <ResearchBotActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
+              <ResearchBotActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px]",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             ) : (
-              <ResearchBotIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
+              <ResearchBotIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:fill-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             )}
           </div>
         </Tooltip>
@@ -46,9 +69,19 @@ const TabsTriggers = () => {
         <Tooltip content="Tools">
           <div>
             {activeProduct === "tools" ? (
-              <ToolsActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
+              <ToolsActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px]",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             ) : (
-              <ToolsIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
+              <ToolsIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:fill-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             )}
           </div>
         </Tooltip>
@@ -57,9 +90,19 @@ const TabsTriggers = () => {
         <Tooltip content="Calendar">
           <div>
             {activeProduct === "calendar" ? (
-              <CalendarActiveIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw]" />
+              <CalendarActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px]",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             ) : (
-              <CalendarIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-4" />
+              <CalendarIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:fill-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
             )}
           </div>
         </Tooltip>
@@ -67,14 +110,24 @@ const TabsTriggers = () => {
       <TabsTrigger value={TABS_VALUES.UNIVERSE} disabled>
         <Tooltip content="Universe">
           <div>
-            <UniverseIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-2" />
+            <UniverseIcon
+              className={cn(
+                "w-[26px] h-[26px] dark:fill-gray-2",
+                scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+              )}
+            />
           </div>
         </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.ACADEMY} disabled>
         <Tooltip content="Academy">
           <div>
-            <AcademyIcon className="w-[26px] h-[26px] 3xl:w-[1.693vw] 3xl:h-[1.693vw] dark:fill-gray-2" />
+            <AcademyIcon
+              className={cn(
+                "w-[26px] h-[26px] dark:fill-gray-2",
+                scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+              )}
+            />
           </div>
         </Tooltip>
       </TabsTrigger>

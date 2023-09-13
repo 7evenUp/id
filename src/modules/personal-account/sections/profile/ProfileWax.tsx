@@ -12,11 +12,14 @@ import RowItem from "@/shared/components/RowItem"
 import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUpdateWaxMutation, useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
 const ProfileWax = () => {
   const { t } = useTranslation()
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { toast } = useToast()
 
@@ -96,7 +99,12 @@ const ProfileWax = () => {
         </span>
       )}
       {!waxWallet && !isEditingMode && !inputRef.current?.value.length && (
-        <Plus className="hidden sm:block absolute right-0 w-5 h-5 3xl:w-[1.302vw] 3xl:h-[1.302vw]" />
+        <Plus
+          className={cn(
+            "hidden sm:block absolute right-0 w-5 h-5",
+            scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+          )}
+        />
       )}
 
       {/* Mobile editing */}

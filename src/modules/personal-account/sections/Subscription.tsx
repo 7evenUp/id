@@ -20,9 +20,14 @@ import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const Subscription = () => {
   const { t } = useTranslation("profile")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
 
@@ -33,7 +38,12 @@ const Subscription = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4 3xl:mb-[1.042vw]">
+      <div
+        className={cn(
+          "flex justify-between items-center mb-4",
+          scale && "3xl:mb-[1.042vw]"
+        )}
+      >
         <div className="relative">
           <Subheading>{t("subs.heading")}</Subheading>
           <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
@@ -41,7 +51,9 @@ const Subscription = () => {
         {status !== null && (
           <ModalTrigger content={<FreezeSubs />}>
             <IconButton className="text-gray-1 dark:text-gray-5 hover:text-white dark:hover:text-white hover:bg-res-bot-blue active:bg-opacity-80">
-              <Snow className="3xl:w-[0.781vw] 3xl:h-[0.846vw]" />
+              <Snow
+                className={cn(scale && "3xl:w-[0.781vw] 3xl:h-[0.846vw]")}
+              />
             </IconButton>
           </ModalTrigger>
         )}
@@ -51,7 +63,12 @@ const Subscription = () => {
           <Text0 className="flex-shrink-0">
             {t("subs.balance")}: <AccentNumber>${balance}</AccentNumber>
           </Text0>
-          <div className="flex gap-1.5 xl:gap-3 3xl:gap-[0.781vw] flex-wrap justify-end">
+          <div
+            className={cn(
+              "flex gap-1.5 xl:gap-3 flex-wrap justify-end",
+              scale && "3xl:gap-[0.781vw]"
+            )}
+          >
             <ModalTrigger content={<TxHistory />}>
               <Button>{t("subs.history-btn")}</Button>
             </ModalTrigger>
@@ -60,7 +77,7 @@ const Subscription = () => {
             </ModalTrigger>
           </div>
         </RowItem>
-        <RowItem className="gap-6 3xl:gap-[1.563vw]">
+        <RowItem className="gap-6">
           {remainingDays ? (
             <>
               <Text0 className="dark:text-gray-4 w-fit block">

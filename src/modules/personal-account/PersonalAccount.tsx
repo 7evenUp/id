@@ -49,7 +49,7 @@ const PersonalAccount = () => {
           <Avatar />
         </div>
       </div>
-      <div className="flex flex-col gap-10 3xl:gap-[2.604vw] w-full sm:px-12 lg:px-0 lg:w-[350px] xl:w-[433px] 2xl:w-[100%] 3xl:w-[28.19vw]">
+      <div className={cn("flex flex-col gap-10 w-full sm:px-12 lg:px-0 lg:w-[350px] xl:w-[433px] 2xl:w-[100%]", scale && "3xl:gap-[2.604vw] 3xl:w-[28.19vw]")}>
         <Profile />
         <Subscription />
         <Referral />

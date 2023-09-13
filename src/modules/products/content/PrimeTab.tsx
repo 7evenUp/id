@@ -38,9 +38,19 @@ const PrimeTab = () => {
       </TabHeader>
 
       {filteredLinks && filteredLinks.length > 0 && (
-        <RowItem className="items-start flex-col sm:flex-row gap-8 3xl:gap-[0.521vw]">
+        <RowItem
+          className={cn(
+            "items-start flex-col sm:flex-row gap-8",
+            scale && "3xl:gap-[0.521vw]"
+          )}
+        >
           <span>{t("prime.channels-and-chats")}</span>
-          <div className="flex flex-1 flex-wrap items-center sm:justify-end gap-2.5 3xl:gap-[0.8vw]">
+          <div
+            className={cn(
+              "flex flex-1 flex-wrap items-center sm:justify-end gap-2.5",
+              scale && "3xl:gap-[0.8vw]"
+            )}
+          >
             {filteredLinks.map((link) => (
               <ExternalLink key={link.id} href={link.link.url} withTgIcon>
                 {link.link.channel.name}
@@ -50,25 +60,54 @@ const PrimeTab = () => {
         </RowItem>
       )}
 
-      <RowItem className="flex-col items-stretch gap-6 3xl:gap-[1.563vw]">
+      <RowItem
+        className={cn(
+          "flex-col items-stretch gap-6",
+          scale && "3xl:gap-[1.563vw]"
+        )}
+      >
         <div className="flex justify-between items-center">
           <span>{t("prime.services-and-nav")}</span>
           <ExternalLink href="https://member.crypton.xyz/">
             {t("prime.prime-nav")}
           </ExternalLink>
         </div>
-        <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row xl:justify-between gap-5 3xl:gap-[1.302vw]">
-          <div className="flex flex-wrap w-full mobile:w-auto mobile:min-w-[340px] mobile:max-w-[340px] 2xl:max-w-[420px] 3xl:max-w-[25vw] py-3 px-4 3xl:py-[0.781vw] 3xl:px-[1.041vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw]">
+        <div
+          className={cn(
+            "flex flex-col md:flex-row lg:flex-col xl:flex-row xl:justify-between gap-5",
+            scale && "3xl:gap-[1.302vw]"
+          )}
+        >
+          <div
+            className={cn(
+              "flex flex-wrap w-full mobile:w-auto mobile:min-w-[340px] mobile:max-w-[340px] 2xl:max-w-[420px] py-3 px-4 bg-white dark:bg-gray-1 rounded-xl",
+              scale &&
+                "3xl:max-w-[25vw] 3xl:py-[0.781vw] 3xl:px-[1.041vw] 3xl:rounded-[0.781vw]"
+            )}
+          >
             {primeServices.map((service, i) =>
               service.isExpandable ? (
                 <Popover key={i}>
-                  <PopoverTrigger className="group h-7 3xl:h-[1.822vw] flex items-center gap-2 3xl:gap-[0.521vw] basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left">
+                  <PopoverTrigger
+                    className={cn(
+                      "group h-7 flex items-center gap-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left",
+                      scale && "3xl:h-[1.822vw] 3xl:gap-[0.521vw]"
+                    )}
+                  >
                     <Text2>{service.name}</Text2>
 
-                    <ArrowDown className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw] transition-transform will-change-transform group-data-[state=open]:rotate-180" />
+                    <ArrowDown
+                      className={cn(
+                        "w-3.5 h-3.5 transition-transform will-change-transform group-data-[state=open]:rotate-180",
+                        scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+                      )}
+                    />
                   </PopoverTrigger>
                   <PopoverContent
-                    className="flex flex-col gap-1.5 3xl:gap-[0.391vw]"
+                    className={cn(
+                      "flex flex-col gap-1.5",
+                      scale && "3xl:gap-[0.391vw]"
+                    )}
                     sideOffset={-2}
                   >
                     {service.links.map((link, i) => (

@@ -1,5 +1,7 @@
 import React from "react"
 
+import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const EditContainer = ({
@@ -9,10 +11,13 @@ const EditContainer = ({
   children: React.ReactNode
   className?: string
 }) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <div
       className={cn(
-        "absolute right-0 translate-x-[30px] 3xl:translate-x-[1.953vw] w-[30px] 3xl:w-[1.953vw] h-full flex items-center pl-1 xl:pl-2.5 3xl:pl-[0.651vw] opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity group-focus-within:opacity-100",
+        "absolute right-0 translate-x-[30px] w-[30px] h-full flex items-center pl-1 xl:pl-2.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity group-focus-within:opacity-100",
+        scale && "3xl:translate-x-[1.953vw] 3xl:w-[1.953vw] 3xl:pl-[0.651vw]",
         className
       )}
     >

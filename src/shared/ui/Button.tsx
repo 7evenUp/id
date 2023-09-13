@@ -35,8 +35,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, className, appearence, isLoading, ...props }, forwardedRef) => {
     const scale = useAppSelector((state) => state.scale.value)
 
-    console.log(scale)
-
     return (
       <button
         className={cn(

@@ -22,10 +22,15 @@ import {
   useUpdateEmailMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const UpdateEmail = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfileData } = useUserProfileQuery()
   const [updateEmail, { isSuccess, error, isLoading }] =
@@ -65,7 +70,10 @@ const UpdateEmail = () => {
 
   return (
     <DialogContent
-      className="mobile:w-[370px] sm:w-[370px] 3xl:w-[24.088vw]"
+      className={cn(
+        "mobile:w-[370px] sm:w-[370px]",
+        scale && "3xl:w-[24.088vw]"
+      )}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       <DialogHeader>
@@ -75,7 +83,10 @@ const UpdateEmail = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
+          className={cn(
+            "flex flex-col gap-[18px]",
+            scale && "3xl:gap-[1.172vw]"
+          )}
         >
           <FormField
             name="oldEmail"
@@ -123,7 +134,12 @@ const UpdateEmail = () => {
 
           {error && <ResponseErrorText error={error} />}
 
-          <div className="flex gap-2 3xl:gap-[0.521vw] items-center">
+          <div
+            className={cn(
+              "flex gap-2 items-center",
+              scale && "3xl:gap-[0.521vw]"
+            )}
+          >
             <Button type="submit" className="w-fit" isLoading={isLoading}>
               {t("change-email.button")}
             </Button>

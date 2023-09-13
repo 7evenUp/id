@@ -7,6 +7,9 @@ import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
 import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"
 import SubscriptionCard from "../../components/SubscriptionCard"
 
+import Text1 from "@/shared/typography/Text1"
+import TextTip from "@/shared/typography/TextTip"
+
 import { Dialog, DialogContent } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
@@ -19,8 +22,6 @@ import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 import { useAppSelector } from "@/redux/hooks"
 
 import { Subscription } from "@/types/subscriptions"
-import Text1 from "@/shared/typography/Text1"
-import TextTip from "@/shared/typography/TextTip"
 
 const FirstStep = ({
   open,
@@ -124,7 +125,7 @@ const FirstStep = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px]",
+          "pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px] xl:max-w-[1200px]",
           scale && "3xl:pb-[3.645vw] 3xl:max-w-[70vw]"
         )}
       >

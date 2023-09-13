@@ -35,8 +35,18 @@ const FreezeSubs = () => {
   const isFrozen = status === "FROZEN"
 
   return (
-    <DialogContent className="pb-16 max-w-[560px] lg:max-w-[700px] 3xl:max-w-[45.572vw] sm:pb-16 3xl:pb-[4.166vw]">
-      <DialogHeader className="flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 3xl:mb-[1.563vw] gap-2 3xl:gap-[0.521vw]">
+    <DialogContent
+      className={cn(
+        "pb-16 max-w-[560px] lg:max-w-[700px] sm:pb-16",
+        scale && "3xl:max-w-[45.572vw] 3xl:pb-[4.166vw]"
+      )}
+    >
+      <DialogHeader
+        className={cn(
+          "flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2",
+          scale && "3xl:mb-[1.563vw] 3xl:gap-[0.521vw]"
+        )}
+      >
         <div className="flex flex-col">
           <Text1
             className={cn(
@@ -47,7 +57,8 @@ const FreezeSubs = () => {
             {t("freeze.status")}:{" "}
             <span
               className={cn(
-                "italic px-1.5 py-0.5 3xl:px-[0.391vw] 3xl:py-[0.13vw] text-gray-6 select-none bg-gradient-to-r rounded-full",
+                "italic px-1.5 py-0.5 text-gray-6 select-none bg-gradient-to-r rounded-full",
+                scale && "3xl:px-[0.391vw] 3xl:py-[0.13vw]",
                 isFrozen
                   ? "from-frozen-start to-frozen-end"
                   : "from-green to-mint"

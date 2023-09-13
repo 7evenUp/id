@@ -104,7 +104,9 @@ const WithdrawWallet = ({
         resetMutation()
       }}
     >
-      <DialogContent className="max-w-[550px] 3xl:max-w-[35.807vw]">
+      <DialogContent
+        className={cn("max-w-[550px]", scale && "3xl:max-w-[35.807vw]")}
+      >
         <DialogHeader>
           <button
             className={cn(
@@ -113,7 +115,12 @@ const WithdrawWallet = ({
             )}
             onClick={openMain}
           >
-            <MoveLeft className="w-3.5 h-3.5 3xl:w-[0.911vw] 3xl:h-[0.911vw]" />{" "}
+            <MoveLeft
+              className={cn(
+                "w-3.5 h-3.5",
+                scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+              )}
+            />{" "}
             {t("ref-withdraw.back-btn")}
           </button>
         </DialogHeader>
@@ -121,7 +128,10 @@ const WithdrawWallet = ({
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-[18px] 3xl:gap-[1.172vw]"
+            className={cn(
+              "flex flex-col gap-[18px]",
+              scale && "3xl:gap-[1.172vw]"
+            )}
           >
             <FormField
               name="wallet"
@@ -133,7 +143,10 @@ const WithdrawWallet = ({
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="text-sm 3xl:text-[1.0417vw]/[1.5625vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                      className={cn(
+                        "text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                        scale && "3xl:text-[1.0417vw]/[1.5625vw]"
+                      )}
                       placeholder="0x12345...abcdef"
                       {...field}
                     />
@@ -142,7 +155,12 @@ const WithdrawWallet = ({
                 </FormItem>
               )}
             />
-            <div className="flex flex-wrap gap-2 3xl:gap-[0.521vw] mb-2 3xl:mb-[0.521vw]">
+            <div
+              className={cn(
+                "flex flex-wrap gap-2 mb-2",
+                scale && "3xl:gap-[0.521vw] 3xl:mb-[0.521vw]"
+              )}
+            >
               <Chip
                 onClick={() => setWithdrawType("USDC (ERC-20)")}
                 type="button"
@@ -170,13 +188,27 @@ const WithdrawWallet = ({
                   <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
                     {t("ref-withdraw.amount-label")}
                   </FormLabel>
-                  <div className="relative w-[260px] 3xl:w-[16.927vw]">
-                    <span className="absolute left-0 top-1 3xl:top-[0.26vw] text-sm 3xl:text-[0.911vw]/[1.302vw]">
+                  <div
+                    className={cn(
+                      "relative w-[260px]",
+                      scale && "3xl:w-[16.927vw]"
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "absolute left-0 top-1 text-sm",
+                        scale && "3xl:top-[0.26vw] 3xl:text-[0.911vw]/[1.302vw]"
+                      )}
+                    >
                       $
                     </span>
                     <FormControl>
                       <Input
-                        className="w-[260px] 3xl:w-[16.927vw] pl-4 mb-2 3xl:pl-[1.042vw] 3xl:mb-[0.521vw] text-sm 3xl:text-[0.911vw]/[1.302vw] aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error"
+                        className={cn(
+                          "w-[260px] pl-4 mb-2 text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                          scale &&
+                            "3xl:w-[16.927vw] 3xl:pl-[1.042vw] 3xl:mb-[0.521vw] 3xl:text-[0.911vw]/[1.302vw]"
+                        )}
                         placeholder={t("ref-withdraw.amount-placeholder")}
                         {...field}
                       />
@@ -198,7 +230,9 @@ const WithdrawWallet = ({
               )}
             />
             {isSuccess && (
-              <ResponseSuccessText className="max-w-[320px] 3xl:max-w-[20.833vw]">
+              <ResponseSuccessText
+                className={cn("max-w-[320px]", scale && "3xl:max-w-[20.833vw]")}
+              >
                 {t("ref-withdraw.personal-wallet-success")}
               </ResponseSuccessText>
             )}

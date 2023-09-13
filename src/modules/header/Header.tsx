@@ -8,6 +8,7 @@ import ScaleToggle from "./components/ScaleToggle"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const Header = () => {

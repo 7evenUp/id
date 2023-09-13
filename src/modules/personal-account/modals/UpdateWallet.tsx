@@ -11,6 +11,7 @@ import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
 import Text0 from "@/shared/typography/Text0"
+import Text1 from "@/shared/typography/Text1"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
@@ -18,13 +19,14 @@ import {
   useUpdateWalletMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
-import Text1 from "@/shared/typography/Text1"
 import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
 
-  const scale = useAppSelector(state=>state.scale.value)
+  const scale = useAppSelector((state) => state.scale.value)
 
   const [connectModalOpened, setConnectModalOpened] = useState(false)
 
@@ -50,7 +52,10 @@ const UpdateWallet = () => {
 
   return (
     <DialogContent
-      className="mobile:w-[370px] sm:w-[500px] 3xl:w-[32.552vw]"
+      className={cn(
+        "mobile:w-[370px] sm:w-[500px]",
+        scale && "3xl:w-[32.552vw]"
+      )}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       <DialogHeader>
@@ -71,9 +76,7 @@ const UpdateWallet = () => {
             <>
               <Text0>
                 {t("change-wallet.wallet-acc-unpresent.wallet-connected")}{" "}
-                <span>
-                  {cutWalletAddr(address.toLowerCase())}
-                </span>
+                <span>{cutWalletAddr(address.toLowerCase())}</span>
               </Text0>
               <Text1>
                 {t("change-wallet.wallet-acc-unpresent.confirm-text")}
@@ -89,7 +92,12 @@ const UpdateWallet = () => {
         <>
           <div className="flex flex-col">
             <Text0>{t("change-wallet.wallet-acc-present.status")}</Text0>{" "}
-            <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
+            <span
+              className={cn(
+                "text-base font-mono text-black dark:text-gray-5",
+                scale && "3xl:text-[1.0417vw]/[1.5625vw]"
+              )}
+            >
               {cutWalletAddr(wallet)}
             </span>
           </div>
@@ -100,7 +108,12 @@ const UpdateWallet = () => {
                 <Text0>
                   {t("change-wallet.wallet-acc-present.wallet-connected")}
                 </Text0>{" "}
-                <span className="text-base 3xl:text-[1.0417vw]/[1.5625vw] font-mono text-black dark:text-gray-5">
+                <span
+                  className={cn(
+                    "text-base font-mono text-black dark:text-gray-5",
+                    scale && "3xl:text-[1.0417vw]/[1.5625vw]"
+                  )}
+                >
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
               </div>
