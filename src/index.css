@@ -65,13 +65,6 @@
   .typography-btn-standart_large {
     @apply 3xl:text-[0.651vw]/[0.651vw];
   }
-
-  .typography-btn-additional {
-    @apply text-[10px] 2xl:text-xs/[12px] leading-[140%] tracking-[0.05em] font-medium;
-  }
-  .typography-btn-additional_large {
-    @apply 3xl:text-[0.651vw]/[0.6250vw];
-  }
 }
 
 html {

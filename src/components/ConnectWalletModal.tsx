@@ -18,8 +18,11 @@ import {
   DialogTitle,
 } from "@/shared/ui/Dialog"
 
-import { cn } from "@/lib/classNames"
 import { TrustWalletConnector } from "@/lib/TrustWalletConnector"
+
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const METAMASK_INSTALL_LINK =
   "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
@@ -38,6 +41,8 @@ const ConnectWalletModal = ({
   setIsAuthStarted?: Dispatch<SetStateAction<boolean>>
 }) => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { isConnected } = useAccount()
 
@@ -101,47 +106,101 @@ const ConnectWalletModal = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:w-[400px] 3xl:w-[26.041vw]">
-        <DialogHeader className="mb-6 3xl:mb-[1.563vw]">
+      <DialogContent
+        className={cn("sm:w-[400px]", scale && "3xl:w-[26.041vw]")}
+      >
+        <DialogHeader className={cn("mb-6", scale && "3xl:mb-[1.563vw]")}>
           <DialogTitle>{t("connect-wallet.title")}</DialogTitle>
         </DialogHeader>
 
         {isMMLoading && (
-          <div className="flex items-center gap-2 3xl:gap-[0.521vw] text-sm -tracking-[0.01em] 3xl:text-[0.911vw]/[1.302vw]">
-            <Loader className="animate-spin 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />
+          <div
+            className={cn(
+              "flex items-center gap-2 text-sm -tracking-[0.01em]",
+              scale && "3xl:gap-[0.521vw] 3xl:text-[0.911vw]/[1.302vw]"
+            )}
+          >
+            <Loader
+              className={cn(
+                "animate-spin",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />
             <p>{t("connect-wallet.connecting-metamask")}</p>
           </div>
         )}
 
         {isTWLoading && (
-          <div className="flex items-center gap-2 3xl:gap-[0.521vw] text-sm -tracking-[0.01em] 3xl:text-[0.911vw]/[1.302vw]">
-            <Loader className="animate-spin 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />
+          <div
+            className={cn(
+              "flex items-center gap-2 text-sm -tracking-[0.01em]",
+              scale && "3xl:gap-[0.521vw] 3xl:text-[0.911vw]/[1.302vw]"
+            )}
+          >
+            <Loader
+              className={cn(
+                "animate-spin",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />
             <p>{t("connect-wallet.connecting-trustwallet")}</p>
           </div>
         )}
 
         {isInjectedLoading && (
-          <div className="flex items-center gap-2 3xl:gap-[0.521vw] text-sm -tracking-[0.01em] 3xl:text-[0.911vw]/[1.302vw]">
-            <Loader className="animate-spin 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />
+          <div
+            className={cn(
+              "flex items-center gap-2 text-sm -tracking-[0.01em]",
+              scale && "3xl:gap-[0.521vw] 3xl:text-[0.911vw]/[1.302vw]"
+            )}
+          >
+            <Loader
+              className={cn(
+                "animate-spin",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />
             <p>{t("connect-wallet.connecting-injected")}</p>
           </div>
         )}
 
-        <div className="flex flex-col gap-4 3xl:gap-[1.042vw]">
+        <div
+          className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.042vw]")}
+        >
           <ConnectButton onClick={onMetamaskClick}>
-            <MetaMask className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />{" "}
+            <MetaMask
+              className={cn(
+                "w-[24px] h-[24px]",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />{" "}
             MetaMask
           </ConnectButton>
           <ConnectButton onClick={onTrustWalletClick}>
-            <TrustWallet className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />{" "}
+            <TrustWallet
+              className={cn(
+                "w-[24px] h-[24px]",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />{" "}
             Trust Wallet
           </ConnectButton>
           <ConnectButton onClick={onInjectedClick}>
-            <Injected className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw] text-gray-1 dark:text-gray-6 group-hover:text-white dark:group-hover:text-gray-1 transition-colors" />{" "}
+            <Injected
+              className={cn(
+                "w-[24px] h-[24px] text-gray-1 dark:text-gray-6 group-hover:text-white dark:group-hover:text-gray-1 transition-colors",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />{" "}
             Injected
           </ConnectButton>
           <ConnectButton onClick={onWalletConnectClick}>
-            <WalletConnect className="w-[24px] h-[24px] 3xl:w-[1.563vw] 3xl:h-[1.563vw]" />{" "}
+            <WalletConnect
+              className={cn(
+                "w-[24px] h-[24px]",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />{" "}
             WalletConnect
           </ConnectButton>
         </div>
@@ -157,10 +216,14 @@ const ConnectButton = ({
   children,
   ...props
 }: React.ComponentProps<"button">) => {
+  const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <button
       className={cn(
-        "group flex items-center gap-4 3xl:gap-[1.042vw] text-base 3xl:text-[1.042vw]/[1.563vw] py-2 3xl:py-[0.521vw] px-4 3xl:px-[1.042vw] rounded-md 3xl:rounded-[0.391vw] text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
+        "group flex items-center gap-4 text-base py-2 px-4 rounded-md text-gray-1 hover:text-white border dark:text-gray-6 dark:hover:text-gray-1 border-gray-1 dark:border-gray-6 bg-white hover:bg-gray-1 dark:bg-gray-1 dark:hover:bg-gray-6 active:bg-opacity-80 dark:active:bg-opacity-80 transition-colors",
+        scale &&
+          "3xl:gap-[1.042vw] 3xl:text-[1.042vw]/[1.563vw] 3xl:py-[0.521vw] 3xl:px-[1.042vw] 3xl:rounded-[0.391vw]",
         className
       )}
       {...props}
