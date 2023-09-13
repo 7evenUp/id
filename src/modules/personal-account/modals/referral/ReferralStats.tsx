@@ -4,6 +4,9 @@ import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 
 import RowItem from "@/shared/components/RowItem"
 
+import Text0 from "@/shared/typography/Text0"
+import TextAccent from "@/shared/typography/TextAccent"
+
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 const ReferralStats = () => {
@@ -30,33 +33,29 @@ const ReferralStats = () => {
         <DialogTitle>{t("ref-stats.heading")}</DialogTitle>
       </DialogHeader>
       <div className="flex flex-col">
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
-          <span>{t("ref-stats.total-refs")}</span>
-          <span className="typography-balance">{allTimeReferralCount}</span>
+        <RowItem className="dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
+          <Text0>{t("ref-stats.total-refs")}</Text0>
+          <TextAccent>{allTimeReferralCount}</TextAccent>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
-          <span>{t("ref-stats.total-paid-refs")}</span>
-          <span className="typography-balance">{allTimePaidReferralCount}</span>
+        <RowItem className="dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
+          <Text0>{t("ref-stats.total-paid-refs")}</Text0>
+          <TextAccent>{allTimePaidReferralCount}</TextAccent>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
-          <span>{t("ref-stats.current-month-refs")}</span>
-          <span className="typography-balance">
-            {currentMonthReferralCount}
-          </span>
+        <RowItem className="dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
+          <Text0>{t("ref-stats.current-month-refs")}</Text0>
+          <TextAccent>{currentMonthReferralCount}</TextAccent>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
-          <span>{t("ref-stats.current-month-paid-refs")}</span>
-          <span className="typography-balance">
-            {currentMonthPaidReferralCount}
-          </span>
+        <RowItem className="dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
+          <Text0>{t("ref-stats.current-month-paid-refs")}</Text0>
+          <TextAccent>{currentMonthPaidReferralCount}</TextAccent>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
-          <span>{t("ref-stats.total-profit")}</span>
-          <span className="typography-balance">${totalProfit}</span>
+        <RowItem className="dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
+          <Text0>{t("ref-stats.total-profit")}</Text0>
+          <TextAccent>${totalProfit}</TextAccent>
         </RowItem>
-        <RowItem className="typography-accent dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
-          <span>{t("ref-stats.total-withdraw")}</span>
-          <span className="typography-balance">${totalWithdrawAmount}</span>
+        <RowItem className="dark:border-gray-2 gap-6 3xl:gap-[1.563vw]">
+          <Text0>{t("ref-stats.total-withdraw")}</Text0>
+          <TextAccent>${totalWithdrawAmount}</TextAccent>
         </RowItem>
       </div>
     </DialogContent>

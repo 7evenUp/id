@@ -19,9 +19,12 @@ import {
   useUserProfileQuery,
 } from "@/redux/api/profile"
 import Text1 from "@/shared/typography/Text1"
+import { useAppSelector } from "@/redux/hooks"
 
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
+
+  const scale = useAppSelector(state=>state.scale.value)
 
   const [connectModalOpened, setConnectModalOpened] = useState(false)
 
@@ -68,7 +71,7 @@ const UpdateWallet = () => {
             <>
               <Text0>
                 {t("change-wallet.wallet-acc-unpresent.wallet-connected")}{" "}
-                <span className="typography-accent">
+                <span>
                   {cutWalletAddr(address.toLowerCase())}
                 </span>
               </Text0>

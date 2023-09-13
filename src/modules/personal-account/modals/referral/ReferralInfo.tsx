@@ -9,6 +9,7 @@ import { useUserProfileQuery } from "@/redux/api/profile"
 import Text1 from "@/shared/typography/Text1"
 import { cn } from "@/lib/classNames"
 import { useAppSelector } from "@/redux/hooks"
+import TextAccent from "@/shared/typography/TextAccent"
 
 const ReferralInfo = () => {
   const { t } = useTranslation("modals")
@@ -46,7 +47,7 @@ const ReferralInfo = () => {
           </div>
         </div>
         <div className="w-full mobile:w-[210px] 3xl:w-[13.671vw] flex flex-col gap-5 3xl:gap-[1.302vw]">
-          <h2 className="typography-balance">{t("ref-info.table-heading")}</h2>
+          <TextAccent>{t("ref-info.table-heading")}</TextAccent>
           <LevelsTable />
           <p className="typography-tip">{t("ref-info.after-10")}</p>
           <ExternalLink

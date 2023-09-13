@@ -13,6 +13,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
+import TextAccent from "@/shared/typography/TextAccent"
 
 const FreezeSubs = () => {
   const { t } = useTranslation("modals")
@@ -62,11 +63,11 @@ const FreezeSubs = () => {
             )}
           >
             {t("freeze.freeze-available")}:{" "}
-            <span className="typography-balance">
+            <TextAccent>
               {isFreezeAllowed
                 ? t("freeze.freeze-available-true")
                 : t("freeze.freeze-available-false")}
-            </span>
+            </TextAccent>
           </Text1>
         </div>
         {isFrozen ? (

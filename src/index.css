@@ -35,20 +35,13 @@
     @apply text-[10px] 2xl:text-[12px] leading-[140%] font-semibold;
   }
   .typography-text-2_large {
-    @apply 3xl:text-[0.651vw] ;
+    @apply 3xl:text-[0.651vw];
   }
 
   .typography-accent {
-    @apply text-sm 2xl:text-base font-medium tracking-normal;
-  }
-  .typography-accent_large {
-    @apply 3xl:text-[0.911vw]/[1.302vw];
-  }
-
-  .typography-balance {
     @apply text-sm 2xl:text-base font-semibold;
   }
-  .typography-balance_large {
+  .typography-accent_large {
     @apply 3xl:text-[0.911vw]/[1.302vw];
   }
 
