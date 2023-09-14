@@ -243,20 +243,32 @@ const FirstStep = ({
             </div>
             <div
               className={cn(
-                "flex flex-wrap gap-2 sm:gap-5",
-                scale && "3xl:gap-[1.302vw]"
+                "flex flex-col items-end gap-2",
+                scale && "3xl:gap-[0.521vw]"
               )}
             >
-              <Button onClick={openBalanceModal}>
-                {t("buy-subs.first-step.replenish-btn")}
-              </Button>
-              <Button
-                onClick={buySubscription}
-                disabled={totalPrice > balance || activeSub === null}
-                isLoading={isLoading}
+              <div
+                className={cn(
+                  "flex flex-wrap gap-2 sm:gap-5",
+                  scale && "3xl:gap-[1.302vw]"
+                )}
               >
-                {t("buy-subs.first-step.buy")}
-              </Button>
+                <Button onClick={openBalanceModal}>
+                  {t("buy-subs.first-step.replenish-btn")}
+                </Button>
+                <Button
+                  onClick={buySubscription}
+                  disabled={totalPrice > balance || activeSub === null}
+                  isLoading={isLoading}
+                >
+                  {t("buy-subs.first-step.buy")}
+                </Button>
+              </div>
+              {totalPrice > balance && (
+                <Text1 className="text-error">
+                  {t("buy-subs.first-step.not-enough")}
+                </Text1>
+              )}
             </div>
           </div>
         </div>
