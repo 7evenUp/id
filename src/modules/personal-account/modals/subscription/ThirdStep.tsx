@@ -43,12 +43,7 @@ const ThirdStep = ({
         )}
       >
         <SubscriptionModalHeader step={t("buy-subs.third-step.step")} />
-        <div
-          className={cn(
-            "flex flex-col h-[400px] lg:h-auto overflow-auto pr-2 divide-y divide-gray-4 dark:divide-gray-2",
-            scale && "3xl:pr-[0.521vw]"
-          )}
-        >
+        <div className="flex flex-col h-[400px] xl:h-auto overflow-auto pr-2 xl:pr-0 divide-y divide-gray-4 dark:divide-gray-2">
           <div
             className={cn(
               "flex flex-col-reverse md:flex-row justify-between gap-10 py-5",
@@ -96,7 +91,24 @@ const ThirdStep = ({
               <Text0 className={cn("mb-2", scale && "3xl:mb-[0.521vw]")}>
                 {t("buy-subs.third-step.part-1-text-1")}
               </Text0>
-              <Text0>{t("buy-subs.third-step.part-1-text-2")}</Text0>
+              <Text0>
+                {t("buy-subs.third-step.part-1-text-2-start")}{" "}
+                <a
+                  href="#"
+                  target="_blank"
+                  className="underline underline-offset-4 hover:opacity-60"
+                >
+                  {t("buy-subs.third-step.part-1-text-2-link-1")}
+                </a>{" "}
+                {t("buy-subs.third-step.part-1-text-2-or")}{" "}
+                <a
+                  href="https://member.crypton.xyz/"
+                  target="_blank"
+                  className="underline underline-offset-4 hover:opacity-60"
+                >
+                  {t("buy-subs.third-step.part-1-text-2-link-2")}
+                </a>
+              </Text0>
             </div>
           </div>
           <div
@@ -111,7 +123,10 @@ const ThirdStep = ({
                 scale && "3xl:w-[34vw]"
               )}
             >
-              <ExternalLink href="#" className="w-fit">
+              <ExternalLink
+                href="https://t.me/crypton_lobby_bot"
+                className="w-fit"
+              >
                 Crypton Lobby
               </ExternalLink>
             </div>
