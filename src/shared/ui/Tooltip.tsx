@@ -24,7 +24,7 @@ const Tooltip = React.forwardRef<
 
     return (
       <TooltipPrimitive.Provider>
-        <TooltipPrimitive.Root>
+        <TooltipPrimitive.Root delayDuration={400}>
           <TooltipPrimitive.Trigger asChild>
             {children}
           </TooltipPrimitive.Trigger>
