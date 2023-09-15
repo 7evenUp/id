@@ -8,7 +8,7 @@ import { ReactComponent as ZoomOut } from "@/assets/icons/zoom-out.svg"
 import Tooltip from "@/shared/ui/Tooltip"
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { changeScale } from "@/redux/scaleScreen/slice"
+import { changeScale } from "@/redux/scale/slice"
 
 import { cn } from "@/lib/classNames"
 
