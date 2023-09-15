@@ -12,12 +12,10 @@ interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   withTgIcon?: boolean
 }
 
-const ExternalLink: React.FC<ExternalLinkProps> = ({
-  className,
-  children,
-  withTgIcon,
-  ...props
-}) => {
+const ExternalLink: React.FC<ExternalLinkProps> = React.forwardRef<
+  HTMLAnchorElement,
+  ExternalLinkProps
+>(({ className, children, withTgIcon, ...props }, forwardedRef) => {
   const scale = useAppSelector((state) => state.scale.value)
 
   return (
@@ -31,6 +29,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
       )}
       target="_blank"
       {...props}
+      ref={forwardedRef}
     >
       {withTgIcon && (
         <Telegram
@@ -49,6 +48,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({
       />
     </a>
   )
-}
+})
+ExternalLink.displayName = "ExternalLink"
 
 export default ExternalLink

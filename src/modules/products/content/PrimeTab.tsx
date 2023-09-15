@@ -5,17 +5,19 @@ import { ReactComponent as ArrowDown } from "@/assets/icons/nav-arrow-down.svg"
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
 
+import RowItem from "@/shared/components/RowItem"
+
+import Text1 from "@/shared/typography/Text1"
+import Text2 from "@/shared/typography/Text2"
+
 import ExternalLink from "@/shared/ui/ExternalLink"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
-
-import RowItem from "@/shared/components/RowItem"
+import Tooltip from "@/shared/ui/Tooltip"
 
 import { primeServices } from "@/utils/primeServices"
 
 import { useLinksQuery } from "@/redux/api/channels"
 import { useAppSelector } from "@/redux/hooks"
-import Text1 from "@/shared/typography/Text1"
-import Text2 from "@/shared/typography/Text2"
 
 import { cn } from "@/lib/classNames"
 
@@ -170,17 +172,26 @@ const PrimeTab = () => {
             <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
               {t("prime.help-text-2")}
             </Text1>
-            <ExternalLink href="#" className="w-fit">
-              возможности Prime
+            <ExternalLink
+              href="https://www.notion.so/crypton-prime/Crypton-Prime-04524d793a584b1fb5491c518b340820"
+              className="w-fit"
+            >
+              {t("prime.features")}
             </ExternalLink>
           </div>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
             <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
               {t("prime.help-text-3")}
             </Text1>
-            <ExternalLink href="#" className="w-fit">
-              план действий
-            </ExternalLink>
+            <Tooltip content={t("prime.soon")}>
+              <ExternalLink
+                href=""
+                className="w-fit"
+                onClick={(e) => e.preventDefault()}
+              >
+                {t("prime.plan")}
+              </ExternalLink>
+            </Tooltip>
           </div>
         </div>
       </RowItem>
