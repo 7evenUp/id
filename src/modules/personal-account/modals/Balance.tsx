@@ -115,15 +115,21 @@ const Balance = () => {
           <Text1>{t("balance.choose-deposit")}:</Text1>
           <Select defaultValue="crypto">
             <SelectTrigger
-              className={cn("w-[130px]", scale && "3xl:w-[8.463vw]")}
+              className={cn(
+                "w-[130px] 2xl:w-[150px]",
+                scale && "3xl:w-[8.463vw]"
+              )}
             />
             <SelectContent
-              className={cn("z-[999] w-[130px]", scale && "3xl:w-[8.463vw]")}
+              className={cn(
+                "z-[999] w-[130px] 2xl:w-[150px]",
+                scale && "3xl:w-[8.463vw]"
+              )}
             >
               <SelectItem value="crypto">
                 {t("balance.deposit-options.crypto")}
               </SelectItem>
-              <SelectItem value="card" disabled>
+              <SelectItem value="card">
                 {t("balance.deposit-options.fiat")}
               </SelectItem>
             </SelectContent>
