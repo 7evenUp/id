@@ -5,7 +5,7 @@ export interface ScaleState {
 }
 
 const initialState: ScaleState = {
-  value: false,
+  value: true,
 }
 
 export const scaleSlice = createSlice({
