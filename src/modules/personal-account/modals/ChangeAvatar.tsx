@@ -11,7 +11,7 @@ import UploadButton from "../components/UploadButton"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 
-import Text1 from "@/shared/typography/Text1"
+// import Text1 from "@/shared/typography/Text1"
 
 import { cn } from "@/lib/classNames"
 
@@ -129,7 +129,7 @@ const ChangeAvatar = () => {
           />
         )}
 
-        <span
+        {/* <span
           className={cn(
             "typography-semi-head mt-6",
             scale && "typography-semi-head_large 3xl:mt-[1.563vw]"
@@ -137,7 +137,7 @@ const ChangeAvatar = () => {
         >
           {t("change-avatar.choose-nft")}
         </span>
-        <Text1 className="mt-2">{t("change-avatar.nft-description")}</Text1>
+        <Text1 className="mt-2">{t("change-avatar.nft-description")}</Text1> */}
       </div>
     </DialogContent>
   )
