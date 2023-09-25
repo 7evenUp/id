@@ -17,9 +17,8 @@ const TabsList = React.forwardRef<
     <TabsPrimitive.List
       ref={ref}
       className={cn(
-        "flex items-center justify-between sm:justify-start w-full sm:gap-[72px] py-4 px-2 mobile-sm:px-5 mb-9 border-b border-gray-2 dark:border-gray-2",
-        scale &&
-          "3xl:gap-[4.687vw] 3xl:py-[1.042vw] 3xl:px-[1.302vw] 3xl:mb-[2.344vw]",
+        "flex items-center justify-between sm:justify-start w-full mb-9 border-b border-gray-2 dark:border-gray-2",
+        scale && "3xl:mb-[2.344vw]",
         className
       )}
       {...props}
@@ -33,18 +32,22 @@ const TabsTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, children, ...props }, ref) => {
   const scale = useAppSelector((state) => state.scale.value)
+
   return (
     <TabsPrimitive.Trigger
       ref={ref}
-      className={cn("group relative", className)}
+      className={cn(
+        "flex-1 flex justify-center items-center group relative py-4 px-2 mobile:px-5 hover:bg-zinc-200 active:bg-zinc-300 dark:hover:bg-zinc-800 dark:active:bg-zinc-700 transition-colors",
+        scale && "3xl:py-[1.042vw] 3xl:px-[1.302vw]",
+        className
+      )}
       {...props}
     >
       {children}
       <span
         className={cn(
-          "absolute hidden group-data-[state=active]:block w-10 mobile-sm:w-[68px] h-[3px] rounded-full left-0 bottom-0 translate-y-[18px] -translate-x-[7px] mobile-sm:-translate-x-5 bg-gray-1 dark:bg-gray-5",
-          scale &&
-            "3xl:w-[4.427vw] 3xl:h-[0.195vw] 3xl:translate-y-[1.172vw] 3xl:-translate-x-[1.302vw]"
+          "absolute hidden group-data-[state=active]:block w-full h-[3px] rounded-full left-1/2 -bottom-0.5 -translate-x-1/2 bg-gray-1 dark:bg-gray-5",
+          scale && "3xl:h-[0.195vw] 3xl:-bottom-[0.13vw]"
         )}
       />
     </TabsPrimitive.Trigger>
