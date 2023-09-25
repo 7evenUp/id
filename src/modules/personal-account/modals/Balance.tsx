@@ -129,7 +129,7 @@ const Balance = () => {
               <SelectItem value="crypto">
                 {t("balance.deposit-options.crypto")}
               </SelectItem>
-              <SelectItem value="card">
+              <SelectItem value="card" disabled>
                 {t("balance.deposit-options.fiat")}
               </SelectItem>
             </SelectContent>
