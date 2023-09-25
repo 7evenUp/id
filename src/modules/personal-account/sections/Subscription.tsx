@@ -32,7 +32,7 @@ const Subscription = () => {
   const { data: profileData } = useUserProfileQuery()
 
   const {
-    subscriptionInfo: { remainingDays, status },
+    subscriptionInfo: { remainingDays, status, subscriptionType },
     balance,
   } = profileData!
 
@@ -46,7 +46,15 @@ const Subscription = () => {
       >
         <div className="relative">
           <Subheading>{t("subs.heading")}</Subheading>
-          <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
+          {subscriptionType === null ? (
+            <SubscriptionMain
+              customTrigger={
+                <SubscriptionType className="cursor-pointer absolute left-full top-0 -translate-y-1/2" />
+              }
+            />
+          ) : (
+            <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
+          )}
         </div>
         {status !== null && (
           <ModalTrigger content={<FreezeSubs />}>

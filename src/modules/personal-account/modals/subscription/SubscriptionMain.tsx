@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 
 import BalanceModal from "../Balance"
 
@@ -11,7 +11,13 @@ import Button from "@/shared/ui/Button"
 
 import { useSubscriptionsQuery } from "@/redux/api/subscription"
 
-const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
+const SubscriptionMain = ({
+  triggerText,
+  customTrigger,
+}: {
+  triggerText?: string
+  customTrigger?: ReactNode
+}) => {
   const [firstStepOpened, setFirstStepOpened] = useState(false)
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
@@ -44,7 +50,13 @@ const SubscriptionMain = ({ triggerText }: { triggerText: string }) => {
 
   return (
     <>
-      <Button onClick={openFirstStep}>{triggerText}</Button>
+      {customTrigger ? (
+        <button className="absolute left-full top-0" onClick={openFirstStep}>
+          {customTrigger}
+        </button>
+      ) : (
+        <Button onClick={openFirstStep}>{triggerText}</Button>
+      )}
 
       <FirstStep
         open={firstStepOpened}
