@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Info } from "@/assets/icons/info.svg"
+import { ReactComponent as InfoCircle } from "@/assets/icons/info-circle.svg"
 
 import ReferralStats from "../modals/referral/ReferralStats"
 import ReferralInfo from "../modals/referral/ReferralInfo"
@@ -14,7 +14,6 @@ import AccentNumber from "@/shared/typography/AccentNumber"
 import Subheading from "@/shared/typography/Subheading"
 import Text0 from "@/shared/typography/Text0"
 
-import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
 import { useToast } from "@/shared/ui/Toast/useToast"
 
@@ -64,14 +63,12 @@ const Referral = () => {
       >
         <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
-          <IconButton className="transition-all bg-gray-2 hover:bg-gray-1 dark:bg-gray-4 dark:hover:bg-gray-5 active:bg-opacity-80 dark:active:bg-opacity-80 rounded-full focus:opacity-100">
-            <Info
-              className={cn(
-                "w-3 h-3 fill-white dark:fill-gray-1",
-                scale && "3xl:w-[0.781vw] 3xl:h-[0.781vw]"
-              )}
-            />
-          </IconButton>
+          <InfoCircle
+            className={cn(
+              "cursor-pointer hover:fill-gray-1 hover:text-white active:opacity-80 dark:active:opacity-80 dark:text-gray-4 dark:hover:fill-gray-2 w-[26px] h-[26px]",
+              scale && "3xl:w-[1.692vw] 3xl:h-[1.692vw]"
+            )}
+          />
         </ModalTrigger>
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
