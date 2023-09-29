@@ -55,7 +55,7 @@ const ReferralInfo = () => {
             className={cn(
               "flex flex-col gap-1 bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl mt-auto w-fit",
               scale &&
-                "3xl:gap-[0.26vw] 3xl:px-[1.563vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw]"
+                "3xl:gap-[0.26vw] 3xl:px-[1.4vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw]"
             )}
           >
             <Text1>

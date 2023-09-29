@@ -9,6 +9,8 @@ import TxHistoryMobile from "../components/TxHistoryMobile"
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 
+import Text1 from "@/shared/typography/Text1"
+
 import { useTransactionHistoryQuery } from "@/redux/api/profile"
 
 const TxHistory = () => {
@@ -45,7 +47,7 @@ const TxHistory = () => {
           <TxHistoryMobile />
         </>
       ) : (
-        <p>{t("history.no-data")}</p>
+        <Text1>{t("history.no-data")}</Text1>
       )}
     </DialogContent>
   )
