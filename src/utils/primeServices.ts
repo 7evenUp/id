@@ -35,15 +35,15 @@ export const primeServices = [
     links: [
       {
         name: "Главная",
-        href: "https://crypton-prime.notion.site/fb0eb6869a6d4117a9203ee49c6446dc",
+        href: "https://www.notion.so/crypton-prime/Crypton-Prime-04524d793a584b1fb5491c518b340820",
       },
       {
         name: "На этой неделе",
-        href: "https://www.notion.so/Crypton-Prime-d6d8939d73fb448faf783df6ef68be7f",
+        href: "https://www.notion.so/crypton-prime/d6d8939d73fb448faf783df6ef68be7f",
       },
       {
         name: "Таблица нод",
-        href: "https://www.notion.so/by-Crypton-a717ca04f72144fe89ede38048171adc",
+        href: "https://www.notion.so/crypton-prime/a717ca04f72144fe89ede38048171adc",
       },
     ],
   },
