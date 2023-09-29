@@ -90,56 +90,60 @@ const PrimeTab = () => {
             >
               {primeServices.map((service, i) =>
                 service.isExpandable ? (
-                  <Popover key={i}>
-                    <PopoverTrigger
-                      className={cn(
-                        "group h-7 flex items-center gap-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left",
-                        scale && "3xl:h-[1.822vw] 3xl:gap-[0.521vw]"
-                      )}
-                    >
-                      <Text2>{service.name}</Text2>
-
-                      <ArrowDown
+                  <div className="basis-1/2">
+                    <Popover key={i}>
+                      <PopoverTrigger
                         className={cn(
-                          "w-3.5 h-3.5 transition-transform will-change-transform group-data-[state=open]:rotate-180",
-                          scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+                          "group h-7 flex items-center gap-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left",
+                          scale && "3xl:h-[1.822vw] 3xl:gap-[0.521vw]"
                         )}
-                      />
-                    </PopoverTrigger>
-                    <PopoverContent
-                      className={cn(
-                        "flex flex-col gap-1.5",
-                        scale && "3xl:gap-[0.391vw]"
-                      )}
-                      sideOffset={-2}
-                    >
-                      {service.links.map((link, i) => (
-                        <a
-                          key={i}
-                          href={link.href}
-                          target="_blank"
+                      >
+                        <Text2>{service.name}</Text2>
+
+                        <ArrowDown
                           className={cn(
-                            "py-1 typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
-                            scale && "typography-text-2_large 3xl:py-[0.26vw]"
+                            "w-3.5 h-3.5 transition-transform will-change-transform group-data-[state=open]:rotate-180",
+                            scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
                           )}
-                        >
-                          {link.name}
-                        </a>
-                      ))}
-                    </PopoverContent>
-                  </Popover>
+                        />
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className={cn(
+                          "flex flex-col gap-1.5",
+                          scale && "3xl:gap-[0.391vw]"
+                        )}
+                        sideOffset={-2}
+                      >
+                        {service.links.map((link, i) => (
+                          <a
+                            key={i}
+                            href={link.href}
+                            target="_blank"
+                            className={cn(
+                              "py-1 typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
+                              scale && "typography-text-2_large 3xl:py-[0.26vw]"
+                            )}
+                          >
+                            {link.name}
+                          </a>
+                        ))}
+                      </PopoverContent>
+                    </Popover>
+                  </div>
                 ) : (
-                  <a
-                    href={service.href}
-                    target="_blank"
-                    key={i}
-                    className={cn(
-                      "h-7 flex items-center typography-text-2 basis-1/2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
-                      scale && "typography-text-2_large 3xl:h-[1.822vw]"
-                    )}
-                  >
-                    {service.name}
-                  </a>
+                  <div className="basis-1/2">
+                    <a
+                      href={service.href}
+                      target="_blank"
+                      key={i}
+                      className={cn(
+                        "h-7 flex items-center w-fit typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
+                        scale && "typography-text-2_large 3xl:h-[1.822vw]"
+                      )}
+                    >
+                      {service.name}
+                    </a>
+                  </div>
                 )
               )}
             </div>
