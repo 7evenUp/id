@@ -28,14 +28,14 @@
     @apply text-[10px] 2xl:text-[12px] leading-[140%] font-medium;
   }
   .typography-text-1_large {
-    @apply 3xl:text-[0.651vw];
+    @apply 3xl:text-[0.75vw];
   }
 
   .typography-text-2 {
     @apply text-[10px] 2xl:text-[12px] leading-[140%] font-semibold;
   }
   .typography-text-2_large {
-    @apply 3xl:text-[0.651vw];
+    @apply 3xl:text-[0.75vw];
   }
 
   .typography-accent {
