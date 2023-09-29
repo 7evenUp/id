@@ -85,6 +85,7 @@ const ProfileDiscord = () => {
       >
         discord
       </span>
+
       {isEditingMode ? (
         <input
           className="peer bg-transparent outline-none text-right w-full text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
@@ -98,23 +99,47 @@ const ProfileDiscord = () => {
           {inputValue ? inputValue : discordUsername}
         </span>
       )}
+
       {!discordUsername &&
         !isEditingMode &&
         !inputRef.current?.value.length && (
-          <Plus
+          <div
             className={cn(
-              "hidden sm:block absolute right-0 w-5 h-5",
+              "hidden sm:block absolute right-0 w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
               scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
             )}
-          />
+            onClick={onEdit}
+          >
+            <Plus
+              className={cn(
+                "absolute w-5 h-5",
+                scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+              )}
+            />
+          </div>
         )}
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
         {isEditingMode ? (
           <ConfirmButton onClick={onSubmit} />
-        ) : (
+        ) : discordUsername ? (
           <EditButton onClick={onEdit} />
+        ) : (
+          <div
+            className={cn(
+              "w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+              scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+            )}
+            onClick={onEdit}
+          >
+            <Plus
+              className={cn(
+                "absolute w-5 h-5",
+                scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+              )}
+            />
+          </div>
         )}
       </div>
 
@@ -123,7 +148,7 @@ const ProfileDiscord = () => {
         {isEditingMode ? (
           <ConfirmButton onClick={onSubmit} />
         ) : (
-          <EditButton onClick={onEdit} />
+          discordUsername && <EditButton onClick={onEdit} />
         )}
       </EditContainer>
     </RowItem>

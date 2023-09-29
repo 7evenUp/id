@@ -34,27 +34,54 @@ const ProfileTelegram = () => {
       {telegramUsername ? (
         <span className="text-right w-full">{telegramUsername}</span>
       ) : (
-        <Plus
-          className={cn(
-            "hidden sm:block absolute right-0 w-5 h-5",
-            scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
-          )}
-        />
+        <ModalTrigger content={<UpdateTelegram />}>
+          <div
+            className={cn(
+              "hidden sm:block absolute right-0 w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+              scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+            )}
+          >
+            <Plus
+              className={cn(
+                "absolute w-5 h-5",
+                scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+              )}
+            />
+          </div>
+        </ModalTrigger>
       )}
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
         <ModalTrigger content={<UpdateTelegram />}>
-          <EditButton />
+          {telegramUsername ? (
+            <EditButton />
+          ) : (
+            <div
+              className={cn(
+                "w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+                scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+              )}
+            >
+              <Plus
+                className={cn(
+                  "absolute w-5 h-5",
+                  scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+                )}
+              />
+            </div>
+          )}
         </ModalTrigger>
       </div>
 
       {/* Desktop editing */}
-      <EditContainer className="hidden sm:flex">
-        <ModalTrigger content={<UpdateTelegram />}>
-          <EditButton />
-        </ModalTrigger>
-      </EditContainer>
+      {telegramUsername && (
+        <EditContainer className="hidden sm:flex">
+          <ModalTrigger content={<UpdateTelegram />}>
+            <EditButton />
+          </ModalTrigger>
+        </EditContainer>
+      )}
     </RowItem>
   )
 }
