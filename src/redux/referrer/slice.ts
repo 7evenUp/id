@@ -3,22 +3,32 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
 export interface ReferrerState {
-  productName: string,
+  productName: string
   url: string
+  timestamp: Date | null
 }
 
 const initialState: ReferrerState = {
   productName: "",
-  url: ""
+  url: "",
+  timestamp: null,
 }
 
 export const referrerSlice = createSlice({
   name: "referrer",
   initialState,
   reducers: {
-    changeProductName: (state, action: PayloadAction<{productName: string, url: string}>) => {
+    changeProductName: (
+      state,
+      action: PayloadAction<{
+        productName: string
+        url: string
+        timestamp: Date
+      }>
+    ) => {
       state.productName = action.payload.productName
       state.url = action.payload.url
+      state.timestamp = action.payload.timestamp
     },
   },
 })

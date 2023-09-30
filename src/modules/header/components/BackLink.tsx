@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { addMinutes, isAfter } from "date-fns"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
@@ -12,12 +13,24 @@ const BackLink = () => {
   const { t } = useTranslation()
 
   const scale = useAppSelector((state) => state.scale.value)
-  const { productName: referrer, url: referrerUrl } = useAppSelector(
-    (state) => state.referrer
-  )
+  const {
+    productName: referrer,
+    url: referrerUrl,
+    timestamp,
+  } = useAppSelector((state) => state.referrer)
   const dispatch = useAppDispatch()
 
-  const [showBack, setShowBack] = useState(referrer ? true : false)
+  const [showBack, setShowBack] = useState(false)
+
+  useEffect(() => {
+    if (referrer && timestamp) {
+      const currentTime = new Date()
+      const timestampPlus5Minutes = addMinutes(timestamp, 5)
+
+      if (isAfter(currentTime, timestampPlus5Minutes)) setShowBack(false)
+      else setShowBack(true)
+    }
+  }, [])
 
   useEffect(() => {
     const ref = document.referrer
@@ -30,10 +43,17 @@ const BackLink = () => {
       const domain = `${splitRef.at(-2)}.${splitRef.at(-1)}`
       const productName = splitRef.at(0) as string
 
-      if (domain !== "crypton.xyz" || productName === "id") return
+      if (
+        domain !== "crypton.xyz" ||
+        productName === "id" ||
+        productName === "id-dev"
+      )
+        return
 
       setShowBack(true)
-      dispatch(changeProductName({ productName, url: ref }))
+      dispatch(
+        changeProductName({ productName, url: ref, timestamp: new Date() })
+      )
     }
   }, [])
 
