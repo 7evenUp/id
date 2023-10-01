@@ -90,8 +90,8 @@ const PrimeTab = () => {
             >
               {primeServices.map((service, i) =>
                 service.isExpandable ? (
-                  <div className="basis-1/2">
-                    <Popover key={i}>
+                  <div className="basis-1/2" key={i}>
+                    <Popover>
                       <PopoverTrigger
                         className={cn(
                           "group h-7 flex items-center gap-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink text-left",
@@ -131,11 +131,10 @@ const PrimeTab = () => {
                     </Popover>
                   </div>
                 ) : (
-                  <div className="basis-1/2">
+                  <div className="basis-1/2" key={i}>
                     <a
                       href={service.href}
                       target="_blank"
-                      key={i}
                       className={cn(
                         "h-7 flex items-center w-fit typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
                         scale && "typography-text-2_large 3xl:h-[1.822vw]"
