@@ -25,7 +25,7 @@ const BackLink = () => {
   useEffect(() => {
     if (referrer && timestamp) {
       const currentTime = new Date()
-      const timestampPlus5Minutes = addMinutes(timestamp, 5)
+      const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
 
       console.log('Current Time:', currentTime)
       console.log('Timestamp:', timestamp)
@@ -57,7 +57,7 @@ const BackLink = () => {
 
       setShowBack(true)
       dispatch(
-        changeProductName({ productName, url: ref, timestamp: new Date() })
+        changeProductName({ productName, url: ref, timestamp: new Date().toString() })
       )
     }
   }, [])
