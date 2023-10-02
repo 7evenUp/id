@@ -63,12 +63,15 @@ const Referral = () => {
       >
         <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
+          <div>
+
           <InfoCircle
             className={cn(
               "cursor-pointer hover:fill-gray-1 hover:text-white active:opacity-80 dark:active:opacity-80 dark:text-gray-4 dark:hover:fill-gray-2 w-[26px] h-[26px]",
               scale && "3xl:w-[1.692vw] 3xl:h-[1.692vw]"
             )}
           />
+          </div>
         </ModalTrigger>
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">

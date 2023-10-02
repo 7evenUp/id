@@ -1,3 +1,4 @@
 {
-  "server-error": "An error occurred on the server side"
+  "server-error": "An error occurred on the server side",
+  "email_already_taken": "This email already assigned to another account"
 }

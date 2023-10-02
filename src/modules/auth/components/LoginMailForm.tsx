@@ -60,7 +60,7 @@ const LoginMailForm = ({
     setEmailInput(email)
     trigger({
       email: email.toLowerCase().trim(),
-      redirect_url: "https://id.crypton.xyz",
+      redirect_url: window.location.origin,
     })
   }
 

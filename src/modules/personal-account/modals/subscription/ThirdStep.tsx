@@ -94,7 +94,7 @@ const ThirdStep = ({
               <Text0>
                 {t("buy-subs.third-step.part-1-text-2-start")}{" "}
                 <a
-                  href="#"
+                  href="https://www.notion.so/crypton-prime/Crypton-Prime-04524d793a584b1fb5491c518b340820"
                   target="_blank"
                   className="underline underline-offset-4 hover:opacity-60"
                 >
