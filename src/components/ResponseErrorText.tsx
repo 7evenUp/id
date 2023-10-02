@@ -6,6 +6,8 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
+const EMAIL_ALREADY_TAKEN = "This email already been used"
+
 const ResponseErrorText = ({
   error,
   className,
@@ -15,7 +17,20 @@ const ResponseErrorText = ({
 }) => {
   const { t } = useTranslation("reqResponses")
 
-  const scale = useAppSelector(state=>state.scale.value)
+  const scale = useAppSelector((state) => state.scale.value)
+
+  let message = t("server-error")
+
+  /* @ts-expect-error No-Error-Types */
+  if (error.message) {
+    /* @ts-expect-error No-Error-Types */
+    if (error.message === EMAIL_ALREADY_TAKEN) {
+      message = t("email_already_taken")
+    } else {
+      /* @ts-expect-error No-Error-Types */
+      message = error.message
+    }
+  }
 
   return (
     <span
@@ -25,8 +40,7 @@ const ResponseErrorText = ({
         className
       )}
     >
-      {/* @ts-expect-error No-Error-Types */}
-      {error.message ? error.message : t("server-error")}
+      {message}
     </span>
   )
 }

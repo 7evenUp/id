@@ -1,7 +1,10 @@
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+
+import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
 
 import ResponseSuccessText from "@/components/ResponseSuccessText"
 import ResponseErrorText from "@/components/ResponseErrorText"
@@ -18,23 +21,105 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
+import Text0 from "@/shared/typography/Text0"
+
 import {
   useUpdateEmailMutation,
+  useVerifyEmailMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import { DialogClose } from "@radix-ui/react-dialog"
 
 const UpdateEmail = () => {
+  const { t } = useTranslation("modals")
+
+  const [isSecondStep, setIsSecondStep] = useState(false)
+
+  const [oldEmailInput, setOldEmailInput] = useState("")
+  const [newEmailInput, setNewEmailInput] = useState("")
+
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const openSecondStep = () => setIsSecondStep(true)
+  const closeSecondStep = () => setIsSecondStep(false)
+
+  return (
+    <DialogContent
+      className={cn(
+        "mobile:w-[370px] sm:w-[370px]",
+        scale && "3xl:w-[24.088vw]"
+      )}
+      onCloseAutoFocus={(event) => event.preventDefault()}
+    >
+      {isSecondStep && (
+        <button
+          className={cn(
+            "typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit",
+            scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
+          )}
+          onClick={closeSecondStep}
+        >
+          <MoveLeft
+            className={cn(
+              "w-3.5 h-3.5",
+              scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+            )}
+          />
+          <span className="text-left">{t("change-email.back-button")}</span>
+        </button>
+      )}
+      <DialogHeader>
+        <DialogTitle>{t("change-email.heading")}</DialogTitle>
+        <span
+          className={cn(
+            "flex items-center typography-text-0",
+            scale && "typography-text-0_large"
+          )}
+        >
+          {isSecondStep ? "2" : "1"}/2
+        </span>
+      </DialogHeader>
+
+      {!isSecondStep ? (
+        <NewEmailForm
+          openSecondStep={openSecondStep}
+          oldEmailValue={oldEmailInput}
+          newEmailValue={newEmailInput}
+          setOldEmailValue={setOldEmailInput}
+          setNewEmailValue={setNewEmailInput}
+        />
+      ) : (
+        <CodeForm sentTo={newEmailInput} />
+      )}
+    </DialogContent>
+  )
+}
+
+export default UpdateEmail
+
+const NewEmailForm = ({
+  openSecondStep,
+  oldEmailValue,
+  newEmailValue,
+  setOldEmailValue,
+  setNewEmailValue,
+}: {
+  openSecondStep: () => void
+  oldEmailValue: string
+  newEmailValue: string
+  setOldEmailValue: Dispatch<SetStateAction<string>>
+  setNewEmailValue: Dispatch<SetStateAction<string>>
+}) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
 
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfileData } = useUserProfileQuery()
-  const [updateEmail, { isSuccess, error, isLoading }] =
-    useUpdateEmailMutation()
+  const [updateEmail, { isLoading, error }] = useUpdateEmailMutation()
 
   const { email } = userProfileData!
 
@@ -57,29 +142,135 @@ const UpdateEmail = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      oldEmail: "",
-      newEmail: "",
+      oldEmail: oldEmailValue ? oldEmailValue : "",
+      newEmail: newEmailValue ? newEmailValue : "",
     },
   })
 
-  const onSubmit = ({ newEmail }: z.infer<typeof formSchema>) => {
-    updateEmail({
-      email: newEmail,
-    })
+  const onSubmit = async ({
+    newEmail,
+    oldEmail,
+  }: z.infer<typeof formSchema>) => {
+    try {
+      await updateEmail({ email: newEmail }).unwrap()
+      setOldEmailValue(oldEmail)
+      setNewEmailValue(newEmail)
+      openSecondStep()
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
   return (
-    <DialogContent
-      className={cn(
-        "mobile:w-[370px] sm:w-[370px]",
-        scale && "3xl:w-[24.088vw]"
-      )}
-      onCloseAutoFocus={(event) => event.preventDefault()}
-    >
-      <DialogHeader>
-        <DialogTitle>{t("change-email.heading")}</DialogTitle>
-      </DialogHeader>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn("flex flex-col gap-[18px]", scale && "3xl:gap-[1.172vw]")}
+      >
+        <FormField
+          name="oldEmail"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                {t("change-email.old-label")}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error appearance-none"
+                  placeholder={t("change-email.old-placeholder")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="newEmail"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                {t("change-email.new-label")}
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error rounded-none"
+                  placeholder={t("change-email.new-placeholder")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
+        {error && <ResponseErrorText error={error} />}
+
+        <div
+          className={cn(
+            "flex gap-2 items-center",
+            scale && "3xl:gap-[0.521vw]"
+          )}
+        >
+          <Button type="submit" className="w-fit" isLoading={isLoading}>
+            {t("change-email.button")}
+          </Button>
+        </div>
+      </form>
+    </Form>
+  )
+}
+
+const CodeForm = ({ sentTo }: { sentTo: string }) => {
+  const { t } = useTranslation("modals")
+  const { t: tSchema } = useTranslation("schema")
+
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const [verifyEmail, { isLoading, isSuccess, isError }] =
+    useVerifyEmailMutation()
+
+  const codeFormSchema = z.object({
+    code: z
+      .string()
+      .min(1, {
+        message: tSchema("required"),
+      })
+      .regex(new RegExp("^[0-9]+$", "g"), { message: tSchema("digits-only") }),
+  })
+
+  const form = useForm<z.infer<typeof codeFormSchema>>({
+    resolver: zodResolver(codeFormSchema),
+    defaultValues: { code: "" },
+  })
+
+  const onSubmit = async ({ code }: z.infer<typeof codeFormSchema>) => {
+    try {
+      await verifyEmail({ code: parseInt(code) }).unwrap()
+    } catch (err) {
+      console.warn(err)
+    }
+  }
+
+  useEffect(() => {
+    if (isError)
+      form.setError(
+        "code",
+        { message: t("change-email.incorrect-code") },
+        { shouldFocus: true }
+      )
+  }, [isError, form])
+
+  return (
+    <>
+      <Text0>
+        {t("change-email.description")}{" "}
+        <span className="font-medium text-black dark:text-gray-5">
+          {sentTo}
+        </span>
+      </Text0>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -89,17 +280,20 @@ const UpdateEmail = () => {
           )}
         >
           <FormField
-            name="oldEmail"
+            name="code"
             control={form.control}
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                  {t("change-email.old-label")}
+                  {t("change-email.code-label")}
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error appearance-none"
-                    placeholder={t("change-email.old-placeholder")}
+                    className={cn(
+                      "text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                      scale && "3xl:text-[0.911vw]/[1.302vw]"
+                    )}
+                    placeholder={t("change-email.code-placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -107,47 +301,31 @@ const UpdateEmail = () => {
               </FormItem>
             )}
           />
-          <FormField
-            name="newEmail"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
-                  {t("change-email.new-label")}
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error rounded-none"
-                    placeholder={t("change-email.new-placeholder")}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+
           {isSuccess && (
             <ResponseSuccessText>
               {t("change-email.request-success")}
             </ResponseSuccessText>
           )}
 
-          {error && <ResponseErrorText error={error} />}
-
-          <div
-            className={cn(
-              "flex gap-2 items-center",
-              scale && "3xl:gap-[0.521vw]"
-            )}
-          >
-            <Button type="submit" className="w-fit" isLoading={isLoading}>
-              {t("change-email.button")}
+          {isSuccess ? (
+            <DialogClose asChild>
+              <Button className={cn("w-fit mt-2", scale && "3xl:mt-[0.521vw]")}>
+                {t("change-email.close-dialog")}
+              </Button>
+            </DialogClose>
+          ) : (
+            <Button
+              className={cn("w-fit mt-2", scale && "3xl:mt-[0.521vw]")}
+              type="submit"
+              isLoading={isLoading}
+              appearence={"outlined"}
+            >
+              {t("change-email.confirm-button")}
             </Button>
-          </div>
+          )}
         </form>
       </Form>
-    </DialogContent>
+    </>
   )
 }
-
-export default UpdateEmail

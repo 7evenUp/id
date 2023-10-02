@@ -3,6 +3,8 @@ import { api } from "./core"
 
 import { User } from "@/types/user"
 
+const INVALIDE_CODE_ERROR = 'invalid_verification_code'
+
 const profileApi = api.injectEndpoints({
   endpoints: (build) => ({
     userProfile: build.query<User, void>({
@@ -65,11 +67,24 @@ const profileApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail
+      })
+    }),
+    verifyEmail: build.mutation<User, { code: number }>({
+      query: (body) => ({
+        url: "users/verify-email/",
+        method: "POST",
+        body,
+      }),
       invalidatesTags: ["UserProfile"],
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
-      }),
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.errorCode
+      })
     }),
     updateWax: build.mutation<User, { wax_wallet: string }>({
       query: (body) => ({
@@ -135,6 +150,7 @@ export const {
   useVerifyDeactivationMutation,
   useUpdateNicknameMutation,
   useUpdateEmailMutation,
+  useVerifyEmailMutation,
   useUpdateWaxMutation,
   useUpdateWalletMutation,
   useUpdateDiscordMutation,

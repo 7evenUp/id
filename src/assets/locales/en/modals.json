@@ -6,7 +6,14 @@
     "new-label": "New email",
     "new-placeholder": "Enter your new email",
     "button": "confirm",
-    "request-success": "Your email has been successfully changed"
+    "back-button": "back",
+    "description": "Enter below the code which was sent to email",
+    "code-label": "Code",
+    "code-placeholder": "Enter your code",
+    "incorrect-code": "Incorrect code",
+    "confirm-button": "confirm",
+    "request-success": "Your email has been successfully changed",
+    "close-dialog": "Close"
   },
   "change-wallet": {
     "heading": "Synchronize wallet",

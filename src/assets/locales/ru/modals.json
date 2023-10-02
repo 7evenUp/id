@@ -6,7 +6,14 @@
     "new-label": "Новая почта",
     "new-placeholder": "Введите вашу новую почту",
     "button": "подтвердить",
-    "request-success": "Ваша почта успешно изменена"
+    "back-button": "назад",
+    "description": "Введите ниже код, отправленный на почту",
+    "code-label": "Код",
+    "code-placeholder": "Введите ваш код",
+    "incorrect-code": "Неверный код",
+    "confirm-button": "подтвердить",
+    "request-success": "Ваша почта успешно изменена",
+    "close-dialog": "Закрыть"
   },
   "change-wallet": {
     "heading": "Синхронизация кошелька",
