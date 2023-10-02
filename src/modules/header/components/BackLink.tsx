@@ -27,6 +27,11 @@ const BackLink = () => {
       const currentTime = new Date()
       const timestampPlus5Minutes = addMinutes(timestamp, 5)
 
+      console.log('Current Time:', currentTime)
+      console.log('Timestamp:', timestamp)
+      console.log('Timestamp + 5 minutes:', timestampPlus5Minutes)
+      console.log('Is after:', isAfter(currentTime, timestampPlus5Minutes))
+
       if (isAfter(currentTime, timestampPlus5Minutes)) setShowBack(false)
       else setShowBack(true)
     }
