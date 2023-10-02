@@ -5,7 +5,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 export interface ReferrerState {
   productName: string
   url: string
-  timestamp: Date | null
+  timestamp: string | null
 }
 
 const initialState: ReferrerState = {
@@ -23,7 +23,7 @@ export const referrerSlice = createSlice({
       action: PayloadAction<{
         productName: string
         url: string
-        timestamp: Date
+        timestamp: string
       }>
     ) => {
       state.productName = action.payload.productName
