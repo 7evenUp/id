@@ -213,6 +213,7 @@
     "title": "Подключение кошелька",
     "connecting-metamask": "Подключение кошелька MetaMask",
     "connecting-trustwallet": "Подключение кошелька Trust Wallet",
+    "connecting-rabby": "Подключение кошелька Rabby Wallet",
     "connecting-injected": "Подключение встроенного кошелька"
   }
 }

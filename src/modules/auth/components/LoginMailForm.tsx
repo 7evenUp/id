@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -23,6 +23,7 @@ import { useLoginMutation } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import { MAIL_TO_LINK } from "../constants"
 
 const LoginMailForm = ({
   emailInput,
@@ -34,7 +35,9 @@ const LoginMailForm = ({
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
 
-  const scale = useAppSelector(state=>state.scale.value)
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const [emailDomain, setEmailDomain] = useState("")
 
   const formSchema = z.object({
     email: z
@@ -57,9 +60,13 @@ const LoginMailForm = ({
   })
 
   const onSubmit = async ({ email }: z.infer<typeof formSchema>) => {
-    setEmailInput(email)
+    const cleanEmail = email.toLowerCase().trim()
+
+    setEmailInput(cleanEmail)
+    setEmailDomain(cleanEmail.split("@")[1])
+
     trigger({
-      email: email.toLowerCase().trim(),
+      email: cleanEmail,
       redirect_url: window.location.origin,
     })
   }
@@ -94,7 +101,28 @@ const LoginMailForm = ({
       <div className={cn("flex mt-3", scale && "3xl:mt-[0.781vw]")}>
         {isSuccess && (
           <ResponseSuccessText>
-            {t("login.request-success")}
+            {t("login.request-success")}{" "}
+            {emailDomain in MAIL_TO_LINK ? (
+              <a
+                href={
+                  MAIL_TO_LINK[
+                    emailDomain as "gmail.com" | "mail.ru" | "yandex.ru"
+                  ].link
+                }
+                target="_blank"
+                className="underline"
+              >
+                {
+                  MAIL_TO_LINK[
+                    emailDomain as "gmail.com" | "mail.ru" | "yandex.ru"
+                  ].name
+                }
+              </a>
+            ) : (
+              <a href={emailDomain} target="_blank" className="underline">
+                {emailDomain}
+              </a>
+            )}
           </ResponseSuccessText>
         )}
         {error && <ResponseErrorText error={error} />}

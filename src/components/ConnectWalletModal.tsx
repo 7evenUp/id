@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next"
 import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 import { ReactComponent as MetaMask } from "@/assets/icons/wallets/metamask-icon.svg"
 import { ReactComponent as TrustWallet } from "@/assets/icons/wallets/trust-wallet-logo.svg"
+import { ReactComponent as RabbyWallet } from "@/assets/icons/wallets/rabby-icon.svg"
 import { ReactComponent as Injected } from "@/assets/icons/wallets/injected-icon.svg"
 import { ReactComponent as WalletConnect } from "@/assets/icons/wallets/wallet-connect-logo.svg"
 
@@ -28,6 +29,8 @@ const METAMASK_INSTALL_LINK =
   "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
 const TRUSTWALLET_INSTALL_LINK =
   "https://chrome.google.com/webstore/detail/trust-wallet/egjidjbpglichdcondbcbdnbeeppgdph"
+const RABBY_INSTALL_LINK =
+  "https://chrome.google.com/webstore/detail/rabby-wallet/acmacodkjbdgmoleebolmdjonilkdbch"
 
 const ConnectWalletModal = ({
   open,
@@ -53,6 +56,11 @@ const ConnectWalletModal = ({
   const { connectAsync: connectTWAsync, isLoading: isTWLoading } = useConnect({
     connector: new TrustWalletConnector(),
   })
+
+  const { connectAsync: connectRabbyAsync, isLoading: isRabbyLoading } =
+    useConnect({
+      connector: new InjectedConnector(),
+    })
 
   const { connectAsync: connectInjectedAsync, isLoading: isInjectedLoading } =
     useConnect({
@@ -83,6 +91,17 @@ const ConnectWalletModal = ({
     } catch (error) {
       if (error instanceof ConnectorNotFoundError) {
         window.open(TRUSTWALLET_INSTALL_LINK, "_blank")
+      }
+    }
+  }
+
+  const onRabbyWalletClick = async () => {
+    if (setIsAuthStarted) setIsAuthStarted(true)
+    try {
+      if (!isConnected) await connectRabbyAsync()
+    } catch (error) {
+      if (error instanceof ConnectorNotFoundError) {
+        window.open(RABBY_INSTALL_LINK, "_blank")
       }
     }
   }
@@ -147,6 +166,23 @@ const ConnectWalletModal = ({
           </div>
         )}
 
+        {isRabbyLoading && (
+          <div
+            className={cn(
+              "flex items-center gap-2 text-sm -tracking-[0.01em]",
+              scale && "3xl:gap-[0.521vw] 3xl:text-[0.911vw]/[1.302vw]"
+            )}
+          >
+            <Loader
+              className={cn(
+                "animate-spin",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />
+            <p>{t("connect-wallet.connecting-rabby")}</p>
+          </div>
+        )}
+
         {isInjectedLoading && (
           <div
             className={cn(
@@ -184,6 +220,15 @@ const ConnectWalletModal = ({
               )}
             />{" "}
             Trust Wallet
+          </ConnectButton>
+          <ConnectButton onClick={onRabbyWalletClick}>
+            <RabbyWallet
+              className={cn(
+                "w-[24px] h-[24px]",
+                scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+              )}
+            />{" "}
+            Rabby Wallet
           </ConnectButton>
           <ConnectButton onClick={onInjectedClick}>
             <Injected

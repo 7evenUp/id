@@ -27,16 +27,9 @@ const BackLink = () => {
       const currentTime = new Date()
       const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
 
-      console.log("Current Time:", currentTime.toString())
-      console.log("Timestamp:", timestamp)
-      console.log("Timestamp + 5 minutes:", timestampPlus5Minutes.toString())
-      console.log("Is after:", isAfter(currentTime, timestampPlus5Minutes))
-
       if (isAfter(currentTime, timestampPlus5Minutes)) {
-        console.log("Setting showBack to false, line 36")
         setShowBack(false)
       } else {
-        console.log("Setting showBack to true, line 39")
         setShowBack(true)
       }
     }
@@ -45,19 +38,13 @@ const BackLink = () => {
   useEffect(() => {
     const ref = document.referrer
 
-    console.log("Inside useEffect #2, line 48")
-
     if (ref === "") return
-
-    console.log("Inside useEffect #2, line 52")
 
     const splitRef = new URL(ref).hostname.split(".")
 
     if (splitRef.length >= 2) {
       const domain = `${splitRef.at(-2)}.${splitRef.at(-1)}`
       const productName = splitRef.at(0) as string
-
-      console.log("Inside useEffect #2, line 60")
 
       if (
         domain !== "crypton.xyz" ||
@@ -66,9 +53,6 @@ const BackLink = () => {
       )
         return
 
-      console.log("Inside useEffect #2, line 69")
-
-      console.log("Setting showBack to true, line 71")
       setShowBack(true)
       dispatch(
         changeProductName({

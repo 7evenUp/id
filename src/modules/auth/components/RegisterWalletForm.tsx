@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -28,6 +29,8 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
 
+import { MAIL_TO_LINK } from "../constants"
+
 const AUTH_MESSAGE = "Authorization"
 
 const RegisterWalletForm = ({
@@ -41,6 +44,8 @@ const RegisterWalletForm = ({
   const { t: tSchema } = useTranslation("schema")
 
   const scale = useAppSelector((state) => state.scale.value)
+
+  const [emailDomain, setEmailDomain] = useState("")
 
   const { address } = useAccount()
 
@@ -74,11 +79,14 @@ const RegisterWalletForm = ({
       const url = new URL(location.href)
       const refCode = url.searchParams.get("ref_code")
 
+      const cleanEmail = email.toLowerCase().trim()
+      setEmailDomain(cleanEmail.split("@")[1])
+
       let payload: WalletReqParams = {
         address: address.toLowerCase(),
         message: AUTH_MESSAGE,
         signature,
-        email: email.toLowerCase().trim(),
+        email: cleanEmail,
         profile_username: username,
       }
 
@@ -182,7 +190,28 @@ const RegisterWalletForm = ({
       <div className={cn("flex mt-3", scale && "3xl:mt-[0.625vw]")}>
         {isSuccess && (
           <ResponseSuccessText>
-            {t("register.request-success")}
+            {t("register.request-success")}{" "}
+            {emailDomain in MAIL_TO_LINK ? (
+              <a
+                href={
+                  MAIL_TO_LINK[
+                    emailDomain as "gmail.com" | "mail.ru" | "yandex.ru"
+                  ].link
+                }
+                target="_blank"
+                className="underline"
+              >
+                {
+                  MAIL_TO_LINK[
+                    emailDomain as "gmail.com" | "mail.ru" | "yandex.ru"
+                  ].name
+                }
+              </a>
+            ) : (
+              <a href={emailDomain} target="_blank" className="underline">
+                {emailDomain}
+              </a>
+            )}
           </ResponseSuccessText>
         )}
         {error && <ResponseErrorText error={error} />}
