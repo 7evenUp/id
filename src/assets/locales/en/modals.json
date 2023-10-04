@@ -211,6 +211,7 @@
     "title": "Connecting a wallet",
     "connecting-metamask": "Connecting a MetaMask wallet",
     "connecting-trustwallet": "Connecting a Trust Wallet",
+    "connecting-rabby": "Connecting a Rabby Wallet",
     "connecting-injected": "Connecting injected wallet"
   }
 }

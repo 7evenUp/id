@@ -1,8 +1,13 @@
-import { Chain, ConnectorNotFoundError, WindowProvider } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { Address, getConfig } from '@wagmi/core'
-import '@wagmi/core/window'
-import { getAddress, ResourceUnavailableRpcError, ProviderRpcError, UserRejectedRequestError } from 'viem'
+import { Chain, ConnectorNotFoundError, WindowProvider } from "wagmi"
+import { InjectedConnector } from "wagmi/connectors/injected"
+import { Address, getConfig } from "@wagmi/core"
+import "@wagmi/core/window"
+import {
+  getAddress,
+  ResourceUnavailableRpcError,
+  ProviderRpcError,
+  UserRejectedRequestError,
+} from "viem"
 
 declare global {
   interface Window {
@@ -11,21 +16,22 @@ declare global {
 }
 
 const mappingNetwork: Record<number, string> = {
-  1: 'eth-mainnet',
-  5: 'eth-goerli',
-  56: 'bsc-mainnet',
-  97: 'bsc-testnet',
+  1: "eth-mainnet",
+  5: "eth-goerli",
+  56: "bsc-mainnet",
+  97: "bsc-testnet",
 }
 
 export function getTrustWalletProvider(): WindowProvider | undefined {
-  const isTrustWallet = (ethereum: NonNullable<Window['ethereum']>) => {
+  const isTrustWallet = (ethereum: NonNullable<Window["ethereum"]>) => {
     // Identify if Trust Wallet injected provider is present.
     const trustWallet = !!ethereum.isTrust
 
     return trustWallet
   }
 
-  const injectedProviderExist = typeof window !== 'undefined' && typeof window.ethereum !== 'undefined'
+  const injectedProviderExist =
+    typeof window !== "undefined" && typeof window.ethereum !== "undefined"
 
   // No injected providers exist.
   if (!injectedProviderExist) {
@@ -33,7 +39,7 @@ export function getTrustWalletProvider(): WindowProvider | undefined {
   }
 
   // Trust Wallet was injected into window.ethereum.
-  if (isTrustWallet(window.ethereum as NonNullable<Window['ethereum']>)) {
+  if (isTrustWallet(window.ethereum as NonNullable<Window["ethereum"]>)) {
     return window.ethereum
   }
 
@@ -51,7 +57,7 @@ export function getTrustWalletProvider(): WindowProvider | undefined {
 }
 
 export class TrustWalletConnector extends InjectedConnector {
-  readonly id = 'trustWallet'
+  readonly id = "trustWallet"
 
   constructor({
     chains: _chains,
@@ -64,7 +70,7 @@ export class TrustWalletConnector extends InjectedConnector {
     }
   } = {}) {
     const options = {
-      name: 'Trust Wallet',
+      name: "Trust Wallet",
       shimDisconnect: _options?.shimDisconnect ?? false,
       shimChainChangedDisconnect: _options?.shimChainChangedDisconnect ?? true,
     }
@@ -95,24 +101,27 @@ export class TrustWalletConnector extends InjectedConnector {
       }
 
       if (provider.on) {
-        provider.on('accountsChanged', this.onAccountsChanged)
-        provider.on('chainChanged', this.onChainChanged)
-        provider.on('disconnect', this.onDisconnect)
+        provider.on("accountsChanged", this.onAccountsChanged)
+        provider.on("chainChanged", this.onChainChanged)
+        provider.on("disconnect", this.onDisconnect)
       }
 
-      this.emit('message', { type: 'connecting' })
+      this.emit("message", { type: "connecting" })
 
       // Attempt to show wallet select prompt with `wallet_requestPermissions` when
       // `shimDisconnect` is active and account is in disconnected state (flag in storage)
       let account: Address | null = null
-      if (this.options?.shimDisconnect && !getConfig().storage?.getItem(this.shimDisconnectKey)) {
+      if (
+        this.options?.shimDisconnect &&
+        !getConfig().storage?.getItem(this.shimDisconnectKey)
+      ) {
         account = await this.getAccount().catch(() => null)
         const isConnected = !!account
         if (isConnected) {
           // Attempt to show another prompt for selecting wallet if already connected
           try {
             await provider.request({
-              method: 'wallet_requestPermissions',
+              method: "wallet_requestPermissions",
               params: [{ eth_accounts: {} }],
             })
             // User may have selected a different account so we will need to revalidate here.
@@ -128,7 +137,7 @@ export class TrustWalletConnector extends InjectedConnector {
 
       if (!account) {
         const accounts = await provider.request({
-          method: 'eth_requestAccounts',
+          method: "eth_requestAccounts",
         })
         account = getAddress(accounts[0] as Address)
       }
