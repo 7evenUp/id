@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
 
 import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
 
@@ -8,8 +9,6 @@ import EditButton from "../../components/EditButton"
 import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
-
-import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUpdateWaxMutation, useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
@@ -21,26 +20,12 @@ const ProfileWax = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { toast } = useToast()
-
   const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateWax, { isError, isSuccess }] = useUpdateWaxMutation()
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({ variant: "success", description: t("wax-response-success") })
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError) {
-      toast({ variant: "error", description: t("wax-response-error") })
-    }
-  }, [isError])
+  const [updateWax] = useUpdateWaxMutation()
 
   if (!userProfile) return null
 
@@ -60,8 +45,10 @@ const ProfileWax = () => {
 
     if (waxWallet === inputValue) return
 
-    updateWax({
-      wax_wallet: inputValue,
+    toast.promise(updateWax({ wax_wallet: inputValue }), {
+      loading: t("toast-loading"),
+      success: t("wax-response-success"),
+      error: t("wax-response-error"),
     })
   }
 

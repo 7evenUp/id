@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
 
 import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"
 import ConfirmButton from "../../components/ConfirmButton"
-
-import { useToast } from "@/shared/ui/Toast/useToast"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -19,31 +18,19 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
+const ERROR_UPDATE_LIMIT = "You cannot update discord twice a month"
+
 const ProfileDiscord = () => {
   const { t } = useTranslation()
 
   const scale = useAppSelector((state) => state.scale.value)
-
-  const { toast } = useToast()
 
   const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateDiscord, { isError, isSuccess }] = useUpdateDiscordMutation()
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({ variant: "success", description: t("discord-response-success") })
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError) {
-      toast({ variant: "error", description: t("discord-response-error") })
-    }
-  }, [isError])
+  const [updateDiscord] = useUpdateDiscordMutation()
 
   if (!userProfile) return null
 
@@ -63,8 +50,16 @@ const ProfileDiscord = () => {
 
     if (discordUsername === inputValue) return
 
-    updateDiscord({
-      discordUsername: inputValue,
+    toast.promise(updateDiscord({ discordUsername: inputValue }).unwrap(), {
+      loading: t("toast-loading"),
+      success: t("discord-response-success"),
+      error: (error) => {
+        if (error.data.detail === ERROR_UPDATE_LIMIT) {
+          return t("discord-response-error-limit")
+        } else {
+          return t("discord-response-error")
+        }
+      },
     })
   }
 

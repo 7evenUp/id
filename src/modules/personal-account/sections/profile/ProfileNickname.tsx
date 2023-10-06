@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
 
 import EditButton from "../../components/EditButton"
 import EditContainer from "../../components/EditContainer"
 import ConfirmButton from "../../components/ConfirmButton"
-
-import { useToast } from "@/shared/ui/Toast/useToast"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -18,32 +17,12 @@ const ProfileNickname = () => {
   const { t: tResponse } = useTranslation()
   const { t } = useTranslation("profile")
 
-  const { toast } = useToast()
-
   const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateNickname, { isError, isSuccess }] = useUpdateNicknameMutation()
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        variant: "success",
-        description: tResponse("nickname-response-success"),
-      })
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        variant: "error",
-        description: tResponse("nickname-response-error"),
-      })
-    }
-  }, [isError])
+  const [updateNickname] = useUpdateNicknameMutation()
 
   const { id, profileUsername } = userProfile!
 
@@ -61,9 +40,10 @@ const ProfileNickname = () => {
 
     if (profileUsername === inputValue) return
 
-    updateNickname({
-      id,
-      profileUsername: inputValue,
+    toast.promise(updateNickname({ id, profileUsername: inputValue }), {
+      loading: tResponse("toast-loading"),
+      success: tResponse("nickname-response-success"),
+      error: tResponse("nickname-response-error"),
     })
   }
 
