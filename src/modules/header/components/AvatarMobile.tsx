@@ -1,5 +1,5 @@
-import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
 
 import { ReactComponent as TrashIcon } from "@/assets/icons/trash.svg"
 import { ReactComponent as EditIcon } from "@/assets/icons/edit.svg"
@@ -11,7 +11,6 @@ import ChangeAvatar from "@/modules/personal-account/modals/ChangeAvatar"
 import Deactivation from "@/modules/personal-account/modals/Deactivation"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
-import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useLazyLogoutQuery } from "@/redux/api/auth"
@@ -20,23 +19,9 @@ import { useDeleteAvatarMutation } from "@/redux/api/avatar"
 const AvatarMobile = () => {
   const { t } = useTranslation()
 
-  const { toast } = useToast()
-
   const { data: profileData } = useUserProfileQuery()
   const [logout] = useLazyLogoutQuery()
-  const [deleteAvatar, { isSuccess, isError }] = useDeleteAvatarMutation()
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({ variant: "success", description: t("photo-response-success") })
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError) {
-      toast({ variant: "error", description: t("photo-response-error") })
-    }
-  }, [isError])
+  const [deleteAvatar] = useDeleteAvatarMutation()
 
   if (!profileData) return null
 
@@ -45,7 +30,13 @@ const AvatarMobile = () => {
   const activeAvatar = avatars.find((avatar) => avatar.isActive)
 
   const onDelete = () => {
-    if (activeAvatar) deleteAvatar({ avatar_id: activeAvatar.id })
+    if (activeAvatar) {
+      toast.promise(deleteAvatar({ avatar_id: activeAvatar.id }), {
+        loading: t("toast-loading"),
+        success: t("photo-response-success"),
+        error: t("photo-response-error"),
+      })
+    }
   }
 
   const onLogout = () => {

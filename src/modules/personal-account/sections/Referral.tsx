@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
 
 import { ReactComponent as InfoCircle } from "@/assets/icons/info-circle.svg"
 
@@ -15,7 +16,6 @@ import Subheading from "@/shared/typography/Subheading"
 import Text0 from "@/shared/typography/Text0"
 
 import Button from "@/shared/ui/Button"
-import { useToast } from "@/shared/ui/Toast/useToast"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
@@ -27,8 +27,6 @@ const Referral = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { toast } = useToast()
-
   const { data: profileData } = useUserProfileQuery()
 
   const {
@@ -38,8 +36,7 @@ const Referral = () => {
   const onPromoClick = () => {
     navigator.clipboard.writeText(refCode)
 
-    toast({
-      title: t("referral.toast-title"),
+    toast(t("referral.toast-title"), {
       description: t("referral.promo-copied"),
     })
   }
@@ -47,8 +44,7 @@ const Referral = () => {
   const onRefLinkClick = () => {
     navigator.clipboard.writeText(refLink)
 
-    toast({
-      title: t("referral.toast-title"),
+    toast(t("referral.toast-title"), {
       description: t("referral.link-copied"),
     })
   }
@@ -64,13 +60,12 @@ const Referral = () => {
         <Subheading>{t("referral.heading")}</Subheading>
         <ModalTrigger content={<ReferralInfo />}>
           <div>
-
-          <InfoCircle
-            className={cn(
-              "cursor-pointer hover:fill-gray-1 hover:text-white active:opacity-80 dark:active:opacity-80 dark:text-gray-4 dark:hover:fill-gray-2 w-[26px] h-[26px]",
-              scale && "3xl:w-[1.692vw] 3xl:h-[1.692vw]"
-            )}
-          />
+            <InfoCircle
+              className={cn(
+                "cursor-pointer hover:fill-gray-1 hover:text-white active:opacity-80 dark:active:opacity-80 dark:text-gray-4 dark:hover:fill-gray-2 w-[26px] h-[26px]",
+                scale && "3xl:w-[1.692vw] 3xl:h-[1.692vw]"
+              )}
+            />
           </div>
         </ModalTrigger>
       </div>

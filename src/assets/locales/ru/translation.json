@@ -17,5 +17,7 @@
   "wax-response-success": "Ваш wax кошелёк был успешно изменён",
   "wax-response-error": "Не удалось изменить wax кошелёк. Попробуйте позже",
   "discord-response-success": "Ваш discord был успешно изменён",
-  "discord-response-error": "Не удалось изменить discord никнейм"
+  "discord-response-error": "Не удалось изменить discord никнейм",
+  "discord-response-error-limit": "Вы не можете обновлять discord дважды в месяц",
+  "toast-loading": "Изменение данных..."
 }
