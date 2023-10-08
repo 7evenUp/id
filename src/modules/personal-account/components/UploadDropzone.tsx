@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { useTranslation } from "react-i18next"
 
@@ -21,10 +21,20 @@ const UploadDropzone = ({
 
   const scale = useAppSelector((state) => state.scale.value)
 
+  const [isLarge, setIsLarge] = useState(false)
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
+      setIsLarge(false)
       acceptedFiles.forEach((file) => {
         setFile(file)
+
+        if (file.size / 1024 >= 500) {
+          setIsLarge(true)
+          setFile(null)
+          return
+        }
+
         const reader = new FileReader()
 
         reader.onabort = () => console.log("file reading was aborted")
@@ -52,7 +62,8 @@ const UploadDropzone = ({
       className={cn(
         "group h-[60px] w-full border border-dashed border-gray-4 dark:border-gray-2 flex items-center justify-center rounded-lg cursor-pointer outline-none hover:bg-gray-6 dark:hover:bg-gray-2 dark:hover:bg-opacity-20",
         scale && "3xl:h-[3.906vw] 3xl:rounded-[0.521vw]",
-        isDragActive && "border-res-bot-blue dark:border-res-bot-blue"
+        isDragActive && "border-res-bot-blue dark:border-res-bot-blue",
+        isLarge && "border-error dark:border-error"
       )}
       {...getRootProps()}
     >
@@ -66,10 +77,13 @@ const UploadDropzone = ({
         className={cn(
           "text-gray-3 select-none text-center break-all px-1.5 group-hover:text-gray-2 dark:group-hover:text-gray-4",
           scale && "3xl:px-[0.391vw]",
-          isDragActive && "text-res-bot-blue dark:text-res-bot-blue"
+          isDragActive && "text-res-bot-blue dark:text-res-bot-blue",
+          isLarge && "text-error dark:text-error"
         )}
       >
-        {file
+        {isLarge
+          ? t("change-avatar.file-is-large")
+          : file
           ? `${file.name} - ${(file.size / 1024).toFixed(2)} kB`
           : t("change-avatar.uploading-area")}
       </TextTip>

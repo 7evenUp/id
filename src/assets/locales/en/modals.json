@@ -61,7 +61,8 @@
     "prev-images": "Previous images",
     "uploading-area": "image uploading area",
     "choose-nft": "Choose NFT",
-    "nft-description": "To select an NFT image, you need to link a Web 3.0 wallet"
+    "nft-description": "To select an NFT image, you need to link a Web 3.0 wallet",
+    "file-is-large": "Image is too large. Choose another one"
   },
   "freeze": {
     "status": "Subscription status",
