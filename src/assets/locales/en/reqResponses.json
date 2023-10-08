@@ -1,4 +1,7 @@
 {
   "server-error": "An error occurred on the server side",
-  "email_already_taken": "This email already assigned to another account"
+  "email_already_taken": "This email already assigned to another account",
+  "wallet_limit_reached": "You cannot update wallet twice a month",
+  "tg_already_set": "Telegram username already set",
+  "tg_limit_reached": "You cannot update telegram twice a month"
 }
