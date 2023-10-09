@@ -7,6 +7,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 
 const EMAIL_ALREADY_TAKEN = "This email already been used"
+const EMAIL_LIMIT_REACHED = "You cannot update email twice a month"
 const WALLET_LIMIT_REACHED = "You cannot update wallet twice a month"
 const TELEGRAM_ALREADY_SET = "Telegram username already set"
 const TELEGRAM_LIMIT_REACHED = "You cannot update telegram twice a month"
@@ -29,6 +30,10 @@ const ResponseErrorText = ({
     /* @ts-expect-error No-Error-Types */
     if (error.message === EMAIL_ALREADY_TAKEN) {
       message = t("email_already_taken")
+    }
+    /* @ts-expect-error No-Error-Types */
+    if (error.message === EMAIL_LIMIT_REACHED) {
+      message = t("email_limit_reached")
     }
     /* @ts-expect-error No-Error-Types */
     else if (error.message === WALLET_LIMIT_REACHED) {

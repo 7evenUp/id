@@ -15,6 +15,8 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
+const ERROR_LIMIT_REACHED = "limit_reached"
+
 const ProfileWax = () => {
   const { t } = useTranslation()
 
@@ -45,10 +47,16 @@ const ProfileWax = () => {
 
     if (waxWallet === inputValue) return
 
-    toast.promise(updateWax({ wax_wallet: inputValue }), {
+    toast.promise(updateWax({ wax_wallet: inputValue }).unwrap(), {
       loading: t("toast-loading"),
       success: t("wax-response-success"),
-      error: t("wax-response-error"),
+      error: (error) => {
+        if (error.data.errorCode === ERROR_LIMIT_REACHED) {
+          return t("wax-response-error-limit")
+        } else {
+          return t("wax-response-error")
+        }
+      },
     })
   }
 

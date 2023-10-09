@@ -1,6 +1,7 @@
 {
   "server-error": "На стороне сервера произошла ошибка",
   "email_already_taken": "Этот email уже привязан к другому аккаунту",
+  "email_limit_reached": "Вы не можете обновлять почту дважды в месяц",
   "wallet_limit_reached": "Вы не можете обновлять кошелёк дважды в месяц",
   "tg_already_set": "Вы уже синхронизировали этот username",
   "tg_limit_reached": "Вы не можете обновлять telegram дважды в месяц"
