@@ -37,8 +37,6 @@ const ProfileDiscord = () => {
   const { discordUsername } = userProfile
 
   const onSubmit = async () => {
-    setIsEditingMode(false)
-
     if (!inputRef.current) return
 
     const inputValue = inputRef.current.value
@@ -84,7 +82,13 @@ const ProfileDiscord = () => {
       {isEditingMode ? (
         <input
           className="peer bg-transparent outline-none text-right w-full text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
-          value={inputValue ? inputValue : discordUsername}
+          value={
+            inputValue
+              ? inputValue
+              : discordUsername === null
+              ? ""
+              : discordUsername
+          }
           onChange={(evt) => setInputValue(evt.currentTarget.value)}
           ref={inputRef}
           onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
@@ -95,24 +99,22 @@ const ProfileDiscord = () => {
         </span>
       )}
 
-      {!discordUsername &&
-        !isEditingMode &&
-        !inputRef.current?.value.length && (
-          <div
+      {!discordUsername && !isEditingMode && !inputValue && (
+        <button
+          className={cn(
+            "hidden sm:block absolute right-0 w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+            scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+          )}
+          onClick={onEdit}
+        >
+          <Plus
             className={cn(
-              "hidden sm:block absolute right-0 w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+              "absolute top-0 w-5 h-5",
               scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
             )}
-            onClick={onEdit}
-          >
-            <Plus
-              className={cn(
-                "absolute w-5 h-5",
-                scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
-              )}
-            />
-          </div>
-        )}
+          />
+        </button>
+      )}
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
@@ -143,7 +145,7 @@ const ProfileDiscord = () => {
         {isEditingMode ? (
           <ConfirmButton onClick={onSubmit} />
         ) : (
-          discordUsername && <EditButton onClick={onEdit} />
+          (discordUsername || inputValue) && <EditButton onClick={onEdit} />
         )}
       </EditContainer>
     </RowItem>

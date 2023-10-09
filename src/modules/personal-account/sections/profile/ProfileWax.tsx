@@ -34,8 +34,6 @@ const ProfileWax = () => {
   const { waxWallet } = userProfile
 
   const onSubmit = async () => {
-    setIsEditingMode(false)
-
     if (!inputRef.current) return
 
     const inputValue = inputRef.current.value
@@ -83,8 +81,7 @@ const ProfileWax = () => {
       {isEditingMode ? (
         <input
           className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
-          // @ts-expect-error null-check
-          value={inputValue ? inputValue : waxWallet}
+          value={inputValue ? inputValue : waxWallet === null ? "" : waxWallet}
           onChange={(evt) => setInputValue(evt.currentTarget.value)}
           ref={inputRef}
           onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
@@ -95,8 +92,8 @@ const ProfileWax = () => {
         </span>
       )}
 
-      {!waxWallet && !isEditingMode && !inputRef.current?.value.length && (
-        <div
+      {!waxWallet && !isEditingMode && !inputValue && (
+        <button
           className={cn(
             "hidden sm:block absolute right-0 w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
             scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
@@ -105,11 +102,11 @@ const ProfileWax = () => {
         >
           <Plus
             className={cn(
-              "absolute w-5 h-5",
+              "absolute top-0 w-5 h-5",
               scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
             )}
           />
-        </div>
+        </button>
       )}
 
       {/* Mobile editing */}
@@ -141,7 +138,7 @@ const ProfileWax = () => {
         {isEditingMode ? (
           <ConfirmButton onClick={onSubmit} />
         ) : (
-          waxWallet && <EditButton onClick={onEdit} />
+          (waxWallet || inputValue) && <EditButton onClick={onEdit} />
         )}
       </EditContainer>
     </RowItem>
