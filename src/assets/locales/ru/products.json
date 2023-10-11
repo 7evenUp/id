@@ -23,6 +23,9 @@
   },
   "prime": {
     "channels-and-chats": "Каналы и чаты Prime",
+    "tg-not-synced-yet-first": "Для корректной работы ссылок, сперва активируйте ",
+    "tg-not-synced-yet-link": "telegram бота",
+    "tg-not-synced-yet-second": ", после чего синхронизируйте свой telegram аккаунт в настройках профиля",
     "services-and-nav": "Сервисы и навигация",
     "prime-nav": "навигация Prime",
     "nav-text-1": "В подписке Prime мы собрали лучшее для комфортного заработка в мире криптовалют.",

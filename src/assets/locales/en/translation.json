@@ -16,8 +16,9 @@
   "nickname-response-error": "Unable to edit your nickname",
   "wax-response-success": "Your wax wallet was successfully changed",
   "wax-response-error": "Unable to edit your wax wallet",
+  "wax-response-error-limit": "You cannot update wax twice a month",
   "discord-response-success": "Your discord was successfully changed",
   "discord-response-error": "Unable to edit your discord",
-  "discord-response-error-limit": "You can not update discord twice a month",
+  "discord-response-error-limit": "You cannot update discord twice a month",
   "toast-loading": "Updating data..."
 }

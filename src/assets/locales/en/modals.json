@@ -147,6 +147,8 @@
     "third-step": {
       "step": "step 3/3: Prime services",
       "find-links": "You can also find links to the entry in your Personal Account, in the Prime Settings.",
+      "tg-not-synced-message-1": "For the links to work correctly, you need to activate our telegram bot and synchronize your telegram account.",
+      "tg-not-synced-message-2": "Information on telegram bot is available in the section \"GET BONUSES\", and you can sync your telegram account in your profile settings.",
       "part-1-heading": "EARN AND COMMUNICATE",
       "part-1-text-1": "All Prime content is concentrated in the Prime Telegram channel and chat rooms, so join, develop together with like-minded people, monetize your knowledge.",
       "part-1-text-2-start": "You can also familiarize yourself with all",

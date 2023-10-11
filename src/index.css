@@ -109,6 +109,20 @@ html.dark {
   background-color: #828282;
 }
 
+@media (min-width: 1921px) {
+  *::-webkit-scrollbar {
+    width: 0.52vw;
+    height: 0.52vw;
+    padding: 0.32vw
+  }
+
+  .dark *::-webkit-scrollbar {
+    width: 0.52vw;
+    height: 0.52vw;
+    padding: 0.32vw
+  }
+}
+
 /* Styles for Toast from `sonner` package */
 [data-sonner-toaster] {
   font-family: Montserrat, sans-serif;

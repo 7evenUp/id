@@ -35,7 +35,7 @@ const ProfileTelegram = () => {
         <span className="text-right w-full">{telegramUsername}</span>
       ) : (
         <ModalTrigger content={<UpdateTelegram />}>
-          <div
+          <button
             className={cn(
               "hidden sm:block absolute right-0 w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
               scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
@@ -43,11 +43,11 @@ const ProfileTelegram = () => {
           >
             <Plus
               className={cn(
-                "absolute w-5 h-5",
+                "absolute top-0 w-5 h-5",
                 scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
               )}
             />
-          </div>
+          </button>
         </ModalTrigger>
       )}
 
