@@ -13,6 +13,7 @@ import Button from "@/shared/ui/Button"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useLinksQuery } from "@/redux/api/channels"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 import { cn } from "@/lib/classNames"
 
@@ -29,6 +30,11 @@ const ThirdStep = ({
   const language = useAppSelector((state) => state.language.value)
 
   const { data: userLinks } = useLinksQuery({})
+  const { data: userProfile } = useUserProfileQuery()
+
+  if (!userProfile) return null
+
+  const { telegramId } = userProfile
 
   const filteredLinks = userLinks?.filter(
     (link) => link.link.channel.lang === language
@@ -43,7 +49,12 @@ const ThirdStep = ({
         )}
       >
         <SubscriptionModalHeader step={t("buy-subs.third-step.step")} />
-        <div className="flex flex-col h-[400px] xl:h-auto overflow-auto pr-2 xl:pr-0 divide-y divide-gray-4 dark:divide-gray-2">
+        <div
+          className={cn(
+            "flex flex-col h-[400px] xl:h-auto xl:max-h-[75vh] overflow-auto pr-2 divide-y divide-gray-4 dark:divide-gray-2",
+            scale && "3xl:pr-[0.26vw]"
+          )}
+        >
           <div
             className={cn(
               "flex flex-col-reverse md:flex-row justify-between gap-10 py-5",
@@ -70,9 +81,20 @@ const ThirdStep = ({
                     </ExternalLink>
                   ))}
               </div>
-              <TextTip className={cn("mt-5", scale && "3xl:mt-[1.302vw]")}>
-                {t("buy-subs.third-step.find-links")}
-              </TextTip>
+              {telegramId ? (
+                <TextTip className={cn("mt-5", scale && "3xl:mt-[1.302vw]")}>
+                  {t("buy-subs.third-step.find-links")}
+                </TextTip>
+              ) : (
+                <>
+                  <TextTip className={cn("mt-5", scale && "3xl:mt-[1.302vw]")}>
+                    {t("buy-subs.third-step.tg-not-synced-message-1")}
+                  </TextTip>
+                  <TextTip className={cn("mt-2", scale && "3xl:mt-[0.26vw]")}>
+                    {t("buy-subs.third-step.tg-not-synced-message-2")}
+                  </TextTip>
+                </>
+              )}
             </div>
             <div
               className={cn(
