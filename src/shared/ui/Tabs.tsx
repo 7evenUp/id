@@ -44,12 +44,6 @@ const TabsTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <span
-        className={cn(
-          "absolute hidden group-data-[state=active]:block w-full h-[3px] rounded-full left-1/2 -bottom-0.5 -translate-x-1/2 bg-gray-1 dark:bg-gray-5",
-          scale && "3xl:h-[0.195vw] 3xl:-bottom-[0.13vw]"
-        )}
-      />
     </TabsPrimitive.Trigger>
   )
 })
