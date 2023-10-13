@@ -1,0 +1,55 @@
+import { useEffect, useRef, useState } from "react"
+import { useAppSelector } from "@/redux/hooks"
+import { useUserProfileQuery } from "@/redux/api/profile"
+import { cn } from "@/lib/classNames"
+import Auth from "@/modules/auth/Auth"
+import SkeletonLayout from "@/components/SkeletonLayout"
+import PersonalAccount from "@/modules/personal-account/PersonalAccount"
+import Products from "@/modules/products/Products"
+
+const Main = () => {
+  const [isDelayed, setIsDelayed] = useState(true)
+  const delay = useRef({ time: 1000 })
+
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const { isLoading, data, error } = useUserProfileQuery()
+
+  useEffect(() => {
+    setTimeout(() => setIsDelayed(false), delay.current.time)
+  }, [])
+
+  useEffect(() => {
+    if (data) {
+      console.log("Fetched user data: ", data)
+    }
+  }, [data])
+
+  useEffect(() => {
+    if (error) {
+      console.error("Error happened while fetching GET users/profile: ", error)
+    }
+  }, [error])
+
+  return (
+    <main
+      className={cn(
+        "flex flex-col lg:flex-row justify-between gap-20",
+        scale && "3xl:gap-[5.208vw]"
+      )}
+    >
+      {error ? (
+        <Auth />
+      ) : isLoading || isDelayed ? (
+        <SkeletonLayout />
+      ) : data ? (
+        <>
+          <PersonalAccount />
+          <Products />
+        </>
+      ) : null}
+    </main>
+  )
+}
+
+export default Main
