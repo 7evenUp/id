@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -49,6 +49,7 @@ const Balance = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
+  const [paymentType, setPaymentType] = useState<"crypto" | "card">("crypto")
 
   const { data: profileData } = useUserProfileQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
@@ -71,12 +72,28 @@ const Balance = () => {
 
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
     if (!checkboxRef.current) return
+
     try {
-      const paymentUrl = await trigger({
-        amount: parseInt(amount),
-        is_receipt_needed:
-          checkboxRef.current.ariaChecked === "false" ? false : true,
-      }).unwrap()
+      let paymentUrl = ""
+
+      if (paymentType === "card") {
+        paymentUrl = await trigger({
+          amount: parseInt(amount),
+          is_receipt_need:
+            checkboxRef.current.ariaChecked === "false" ? false : true,
+          payment_type: paymentType,
+        }).unwrap()
+      } else {
+        paymentUrl = await trigger({
+          amount: parseInt(amount),
+          is_receipt_need:
+            checkboxRef.current.ariaChecked === "false" ? false : true,
+          payment_type: paymentType,
+          network: "BSC",
+          currency: "BUSD",
+        }).unwrap()
+      }
+
       form.reset()
       window.open(paymentUrl, "_blank")
     } catch (error) {
@@ -113,7 +130,12 @@ const Balance = () => {
           )}
         >
           <Text1>{t("balance.choose-deposit")}:</Text1>
-          <Select defaultValue="crypto">
+          <Select
+            value={paymentType}
+            onValueChange={(value) =>
+              setPaymentType(value as "crypto" | "card")
+            }
+          >
             <SelectTrigger
               className={cn(
                 "w-[130px] 2xl:w-[150px]",
@@ -129,7 +151,7 @@ const Balance = () => {
               <SelectItem value="crypto">
                 {t("balance.deposit-options.crypto")}
               </SelectItem>
-              <SelectItem value="card" disabled>
+              <SelectItem value="card">
                 {t("balance.deposit-options.fiat")}
               </SelectItem>
             </SelectContent>
