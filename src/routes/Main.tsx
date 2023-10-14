@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react"
-import { useAppSelector } from "@/redux/hooks"
-import { useUserProfileQuery } from "@/redux/api/profile"
-import { cn } from "@/lib/classNames"
-import Auth from "@/modules/auth/Auth"
+
 import SkeletonLayout from "@/components/SkeletonLayout"
+
+import Auth from "@/modules/auth/Auth"
 import PersonalAccount from "@/modules/personal-account/PersonalAccount"
 import Products from "@/modules/products/Products"
+
+import { useAppSelector } from "@/redux/hooks"
+import { useUserProfileQuery } from "@/redux/api/profile"
+
+import { cn } from "@/lib/classNames"
 
 const Main = () => {
   const [isDelayed, setIsDelayed] = useState(true)

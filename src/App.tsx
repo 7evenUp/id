@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider, Link } from "react-router-dom"
 
+import Main from "./routes/Main"
+
 import Header from "./modules/header/Header"
 
 import { useAppSelector } from "./redux/hooks"
 
 import { cn } from "./lib/classNames"
-import Main from "./routes/Main"
 
 const router = createBrowserRouter([
   {

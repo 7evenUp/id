@@ -4,7 +4,10 @@ type ReqResponse = string
 
 interface ReqParams {
   amount: number
-  is_receipt_needed: boolean
+  is_receipt_need: boolean
+  payment_type: "crypto" | "card"
+  network?: "BSC" | "TRON" | "ETH" | "BTC"
+  currency?: "BTC" | "BUSD" | "USDT" | "USDC" | "RUB" | "USD" | "KZT"
 }
 
 const balanceApi = api.injectEndpoints({
