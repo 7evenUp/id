@@ -86,20 +86,20 @@ const Subscription = () => {
           </div>
         </RowItem>
         <RowItem className="gap-6">
-          {remainingDays ? (
+          {status === null || status === "EXPIRED" ? (
+            <>
+              <Text0 className="dark:text-gray-4 w-fit block">
+                {t("subs.inactive-subs")}
+              </Text0>
+              <SubscriptionMain triggerText={t("subs.buy-btn")} />
+            </>
+          ) : (
             <>
               <Text0 className="dark:text-gray-4 w-fit block">
                 {t("subs.remaining")}:{" "}
                 <AccentNumber>{remainingDays}</AccentNumber>
               </Text0>
               <SubscriptionMain triggerText={t("subs.renew-btn")} />
-            </>
-          ) : (
-            <>
-              <Text0 className="dark:text-gray-4 w-fit block">
-                {t("subs.inactive-subs")}
-              </Text0>
-              <SubscriptionMain triggerText={t("subs.buy-btn")} />
             </>
           )}
         </RowItem>

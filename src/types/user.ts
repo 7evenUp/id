@@ -33,7 +33,9 @@ export interface SubscriptionInfo {
   currentBalance: number
   isFreezeAllowed: boolean
   remainingDays: number | null
-  status: "FROZEN" | null
+  status: "ACTIVE" | "FROZEN" | "EXPIRED" | null
+  subscriptionActiveTillDate: Date | null
+  subscriptionBoughtDaysAgo: number
   subscriptionType: "Prime" | null
 }
 
