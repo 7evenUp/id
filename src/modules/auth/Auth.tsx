@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAccount, useDisconnect, useSignMessage } from "wagmi"
-import { useWeb3Modal } from "@web3modal/react"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 
@@ -20,6 +20,7 @@ import { useAuthByWalletMutation } from "@/redux/api/auth"
 import { useRandomBannerQuery } from "@/redux/api/banners"
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const AUTH_MESSAGE = "Authorization"

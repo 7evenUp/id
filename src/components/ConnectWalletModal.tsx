@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect } from "react"
-import { useWeb3Modal } from "@web3modal/react"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 import { ConnectorNotFoundError, useAccount, useConnect } from "wagmi"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import { InjectedConnector } from "wagmi/connectors/injected"
