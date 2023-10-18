@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import { useAccount, useDisconnect, useSignMessage } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
-import { isMobile } from "react-device-detect"
+// import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
 
-import ConnectWalletModal from "@/components/ConnectWalletModal"
+// import ConnectWalletModal from "@/components/ConnectWalletModal"
 
 import AuthButton from "./components/AuthButton"
 import MailMode from "./components/MailMode"
@@ -22,6 +22,7 @@ import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const AUTH_MESSAGE = "Authorization"
 
@@ -30,7 +31,7 @@ const Auth = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const [connectModalOpened, setConnectModalOpened] = useState(false)
+  // const [connectModalOpened, setConnectModalOpened] = useState(false)
   const [isAuthStarted, setIsAuthStarted] = useState(false)
   const [isMailMode, setIsMailMode] = useState(false)
   const [signature, setSignature] = useState("")
@@ -75,13 +76,13 @@ const Auth = () => {
     if (isAuthStarted && isConnected) login()
   }, [isAuthStarted, isConnected])
 
-  const openConnectModal = () => {
-    setConnectModalOpened(true)
-  }
+  // const openConnectModal = () => {
+  //   open()
+  // }
 
-  const closeConnectModal = () => {
-    setConnectModalOpened(false)
-  }
+  // const closeConnectModal = () => {
+  //   setConnectModalOpened(false)
+  // }
 
   const handleConnect = async () => {
     setIsAuthStarted(true)
@@ -121,19 +122,26 @@ const Auth = () => {
                   scale && "3xl:gap-[0.781vw] 3xl:my-[0.91vw]"
                 )}
               >
-                {isMobile ? (
+                {/* {isMobile ? (
                   <AuthButton onClick={handleConnect}>
                     <Web3Logo />
                     <span>{t("web3-btn")}</span>
                   </AuthButton>
                 ) : (
-                  <AuthButton onClick={openConnectModal}>
+                  <AuthButton onClick={handleConnect}>
                     <Web3Logo
                       className={cn(scale && "3xl:w-[2.6vw] 3xl:h-[1.3vw]")}
                     />
                     <span>{t("web3-btn")}</span>
                   </AuthButton>
-                )}
+                )} */}
+
+                <AuthButton onClick={handleConnect}>
+                  <Web3Logo
+                    className={cn(scale && "3xl:w-[2.6vw] 3xl:h-[1.3vw]")}
+                  />
+                  <span>{t("web3-btn")}</span>
+                </AuthButton>
 
                 <AuthButton onClick={() => setIsMailMode(true)}>
                   <MailLogo
@@ -163,7 +171,10 @@ const Auth = () => {
                   scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
                 )}
               />
-              <p>{t("login.confirm-wallet-sign")}</p>
+              <p>
+                {t("login.confirm-wallet-sign")}{" "}
+                {address && cutWalletAddr(address)}
+              </p>
             </div>
           )}
         </div>
@@ -196,12 +207,12 @@ const Auth = () => {
         </div>
       </div>
 
-      <ConnectWalletModal
+      {/* <ConnectWalletModal
         open={connectModalOpened}
         onOpenChange={setConnectModalOpened}
         close={closeConnectModal}
         setIsAuthStarted={setIsAuthStarted}
-      />
+      /> */}
     </>
   )
 }

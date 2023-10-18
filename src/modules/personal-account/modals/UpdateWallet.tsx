@@ -1,11 +1,11 @@
-import { useState } from "react"
+// import { useState } from "react"
 import { useAccount } from "wagmi"
-import { isMobile } from "react-device-detect"
+// import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
-import ConnectWalletModal from "@/components/ConnectWalletModal"
+// import ConnectWalletModal from "@/components/ConnectWalletModal"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -22,13 +22,15 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const [connectModalOpened, setConnectModalOpened] = useState(false)
+  const { open } = useWeb3Modal()
+  // const [connectModalOpened, setConnectModalOpened] = useState(false)
 
   const { data: userProfileData } = useUserProfileQuery()
   const [updateWallet, { isLoading: isUpdateLoading, error, isSuccess }] =
@@ -38,13 +40,13 @@ const UpdateWallet = () => {
 
   const { wallet } = userProfileData!
 
-  const openConnectModal = () => {
-    setConnectModalOpened(true)
-  }
+  // const openConnectModal = () => {
+  //   setConnectModalOpened(true)
+  // }
 
-  const closeConnectWalletModal = () => {
-    setConnectModalOpened(false)
-  }
+  // const closeConnectWalletModal = () => {
+  //   setConnectModalOpened(false)
+  // }
 
   const handleConnect = async () => {
     if (!isConnected) open()
@@ -62,11 +64,11 @@ const UpdateWallet = () => {
         <DialogTitle>{t("change-wallet.heading")}</DialogTitle>
       </DialogHeader>
 
-      <ConnectWalletModal
+      {/* <ConnectWalletModal
         open={connectModalOpened}
         onOpenChange={setConnectModalOpened}
         close={closeConnectWalletModal}
-      />
+      /> */}
 
       {!wallet ? (
         <>
@@ -173,6 +175,21 @@ const UpdateWallet = () => {
         >
           {t("change-wallet.confirm-btn")}
         </Button>
+      ) :  (
+        <Button className="w-fit" onClick={handleConnect}>
+          {t("change-wallet.connect-btn")}
+        </Button>
+      )}
+
+      {/* {isConnected && address ? (
+        <Button
+          className="w-fit"
+          onClick={() => updateWallet({ wallet: address.toLowerCase() })}
+          isLoading={isUpdateLoading}
+          disabled={Boolean(wallet) && wallet === address.toLowerCase()}
+        >
+          {t("change-wallet.confirm-btn")}
+        </Button>
       ) : isMobile ? (
         <Button className="w-fit" onClick={handleConnect}>
           {t("change-wallet.connect-btn")}
@@ -181,7 +198,7 @@ const UpdateWallet = () => {
         <Button className="w-fit" onClick={openConnectModal}>
           {t("change-wallet.connect-btn")}
         </Button>
-      )}
+      )} */}
     </DialogContent>
   )
 }

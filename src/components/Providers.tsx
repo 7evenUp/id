@@ -13,8 +13,8 @@ const chains = [mainnet]
 const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
 const metadata = {
   name: "Crypton ID",
-  description: "Web3Modal Example",
-  url: "https://web3modal.com",
+  description: "Personal Cabinet for Crypton",
+  url: "https://id.crypton.xyz",
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 }
 
