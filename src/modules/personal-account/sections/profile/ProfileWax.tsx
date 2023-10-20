@@ -10,12 +10,12 @@ import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
 
+import { LIMIT_REACHED } from "@/utils/errorCodes"
+
 import { useUpdateWaxMutation, useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
-
-const ERROR_LIMIT_REACHED = "limit_reached"
 
 const ProfileWax = () => {
   const { t } = useTranslation()
@@ -49,7 +49,7 @@ const ProfileWax = () => {
       loading: t("toast-loading"),
       success: t("wax-response-success"),
       error: (error) => {
-        if (error.data.errorCode === ERROR_LIMIT_REACHED) {
+        if (error.errorCode === LIMIT_REACHED) {
           return t("wax-response-error-limit")
         } else {
           return t("wax-response-error")

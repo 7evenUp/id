@@ -2,6 +2,7 @@
 import { useAccount } from "wagmi"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
@@ -14,6 +15,7 @@ import Text0 from "@/shared/typography/Text0"
 import Text1 from "@/shared/typography/Text1"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
+import { LIMIT_REACHED } from "@/utils/errorCodes"
 
 import {
   useUpdateWalletMutation,
@@ -22,10 +24,10 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
 
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -164,7 +166,16 @@ const UpdateWallet = () => {
         </ResponseSuccessText>
       )}
 
-      {error && <ResponseErrorText error={error} />}
+      {error && (
+        <ResponseErrorText>
+          {
+            /* @ts-expect-error No-Error-Types */
+            error.errorCode === LIMIT_REACHED
+              ? tErrorResponses("wallet_limit_reached")
+              : tErrorResponses("server-error")
+          }
+        </ResponseErrorText>
+      )}
 
       {isConnected && address ? (
         <Button
@@ -175,7 +186,7 @@ const UpdateWallet = () => {
         >
           {t("change-wallet.confirm-btn")}
         </Button>
-      ) :  (
+      ) : (
         <Button className="w-fit" onClick={handleConnect}>
           {t("change-wallet.connect-btn")}
         </Button>

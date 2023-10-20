@@ -13,6 +13,8 @@ import { ReactComponent as HelpCircle } from "@/assets/icons/help-circle.svg"
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
 
+import Text1 from "@/shared/typography/Text1"
+
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import Input from "@/shared/ui/Input"
@@ -31,6 +33,8 @@ import {
 } from "@/shared/ui/HoverCard"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
 
+import { LIMIT_REACHED } from "@/utils/errorCodes"
+
 import {
   useUpdateTelegramMutation,
   useVerifyTelegramMutation,
@@ -38,7 +42,6 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
-import Text1 from "@/shared/typography/Text1"
 
 const nicknameFormSchema = z.object({
   nickname: z.string(),
@@ -146,6 +149,7 @@ const NicknameForm = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -259,7 +263,17 @@ const NicknameForm = ({
             </FormItem>
           )}
         />
-        {error && <ResponseErrorText error={error} />}
+
+        {error && (
+          <ResponseErrorText>
+            {
+              /* @ts-expect-error No-Error-Types */
+              error.errorCode === LIMIT_REACHED
+                ? tErrorResponses("tg_limit_reached")
+                : tErrorResponses("server-error")
+            }
+          </ResponseErrorText>
+        )}
 
         <Button
           className={cn("w-fit mt-2", scale && "3xl:mt-[0.521vw]")}

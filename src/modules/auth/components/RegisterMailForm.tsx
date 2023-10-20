@@ -37,6 +37,7 @@ const RegisterMailForm = ({
 }) => {
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -178,7 +179,11 @@ const RegisterMailForm = ({
             )}
           </ResponseSuccessText>
         )}
-        {error && <ResponseErrorText error={error} />}
+        {error && (
+          <ResponseErrorText>
+            {tErrorResponses("server-error")}
+          </ResponseErrorText>
+        )}
       </div>
     </>
   )

@@ -10,6 +10,8 @@ import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
 
+import { LIMIT_REACHED } from "@/utils/errorCodes"
+
 import {
   useUpdateDiscordMutation,
   useUserProfileQuery,
@@ -17,8 +19,6 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
-
-const ERROR_UPDATE_LIMIT = "You cannot update discord twice a month"
 
 const ProfileDiscord = () => {
   const { t } = useTranslation()
@@ -52,7 +52,7 @@ const ProfileDiscord = () => {
       loading: t("toast-loading"),
       success: t("discord-response-success"),
       error: (error) => {
-        if (error.data.detail === ERROR_UPDATE_LIMIT) {
+        if (error.errorCode === LIMIT_REACHED) {
           return t("discord-response-error-limit")
         } else {
           return t("discord-response-error")

@@ -45,6 +45,7 @@ const PREDEFINED_AMOUNT_VALUES = ["74", "211", "400", "755"]
 const Balance = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -237,8 +238,9 @@ const Balance = () => {
               {error && (
                 <ResponseErrorText
                   className={cn("mb-6 block", scale && "3xl:mb-[1.563vw]")}
-                  error={error}
-                />
+                >
+                  {tErrorResponses("server-error")}
+                </ResponseErrorText>
               )}
 
               <div

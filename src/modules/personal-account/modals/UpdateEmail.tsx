@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
+import { DialogClose } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
@@ -23,6 +24,8 @@ import {
 
 import Text0 from "@/shared/typography/Text0"
 
+import { EMAIL_ALREADY_BEEN_USED, LIMIT_REACHED } from "@/utils/errorCodes"
+
 import {
   useUpdateEmailMutation,
   useVerifyEmailMutation,
@@ -31,7 +34,6 @@ import {
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
-import { DialogClose } from "@radix-ui/react-dialog"
 
 const UpdateEmail = () => {
   const { t } = useTranslation("modals")
@@ -115,6 +117,7 @@ const NewEmailForm = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -206,7 +209,19 @@ const NewEmailForm = ({
           )}
         />
 
-        {error && <ResponseErrorText error={error} />}
+        {error && (
+          <ResponseErrorText>
+            {
+              /* @ts-expect-error No-Error-Types */
+              error.errorCode === LIMIT_REACHED
+                ? tErrorResponses("email_limit_reached")
+                : /* @ts-expect-error No-Error-Types */
+                error.errorCode === EMAIL_ALREADY_BEEN_USED
+                ? tErrorResponses("email_already_taken")
+                : tErrorResponses("server-error")
+            }
+          </ResponseErrorText>
+        )}
 
         <div
           className={cn(

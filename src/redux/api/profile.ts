@@ -3,8 +3,6 @@ import { api } from "./core"
 
 import { User } from "@/types/user"
 
-const INVALIDE_CODE_ERROR = "invalid_verification_code"
-
 const profileApi = api.injectEndpoints({
   endpoints: (build) => ({
     userProfile: build.query<User, void>({
@@ -70,6 +68,8 @@ const profileApi = api.injectEndpoints({
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
       }),
     }),
     verifyEmail: build.mutation<User, { code: number }>({
@@ -79,12 +79,6 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
-      transformErrorResponse: (response) => ({
-        // @ts-expect-error No-Error-Types
-        message: response.data.detail,
-        // @ts-expect-error No-Error-Types
-        errorCode: response.data.errorCode,
-      }),
     }),
     updateWax: build.mutation<User, { wax_wallet: string }>({
       query: (body) => ({
@@ -93,6 +87,12 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
+      }),
     }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({
@@ -104,6 +104,8 @@ const profileApi = api.injectEndpoints({
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
       }),
     }),
     updateDiscord: build.mutation<User, Pick<User, "discordUsername">>({
@@ -113,6 +115,12 @@ const profileApi = api.injectEndpoints({
         body,
       }),
       invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
+      }),
     }),
     updateTelegram: build.mutation<User, { telegram: string }>({
       query: (body) => ({
@@ -123,6 +131,8 @@ const profileApi = api.injectEndpoints({
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
       }),
     }),
     verifyTelegram: build.mutation<User, { code: number }>({
