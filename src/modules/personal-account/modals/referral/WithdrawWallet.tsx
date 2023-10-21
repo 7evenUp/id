@@ -45,6 +45,7 @@ const WithdrawWallet = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -236,7 +237,11 @@ const WithdrawWallet = ({
                 {t("ref-withdraw.personal-wallet-success")}
               </ResponseSuccessText>
             )}
-            {error && <ResponseErrorText error={error} />}
+            {error && (
+              <ResponseErrorText>
+                {tErrorResponses("server-error")}
+              </ResponseErrorText>
+            )}
 
             {isSuccess ? (
               <Button className="w-fit" type="button" onClick={onDialogClose}>

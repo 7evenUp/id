@@ -3,6 +3,7 @@
   "email_already_taken": "This email already assigned to another account",
   "email_limit_reached": "You cannot update email twice a month",
   "wallet_limit_reached": "You cannot update wallet twice a month",
+  "wallet_alredy_exists": "An account with this wallet address already exists",
   "tg_already_set": "Telegram username already set",
   "tg_limit_reached": "You cannot update telegram twice a month"
 }

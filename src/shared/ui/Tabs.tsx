@@ -37,7 +37,7 @@ const TabsTrigger = React.forwardRef<
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex-1 flex justify-center items-center group relative py-4 px-2 mobile:px-5 hover:bg-zinc-200 active:bg-zinc-300 dark:hover:bg-zinc-800 dark:active:bg-zinc-700 transition-colors",
+        "flex-1 flex justify-center items-center group relative py-4 px-2 mobile:px-5 hover:bg-zinc-200/[0.50] active:bg-zinc-300/[0.50] dark:hover:bg-zinc-800/[0.50] dark:active:bg-zinc-700/[0.50] transition-colors",
         scale && "3xl:py-[1.042vw] 3xl:px-[1.302vw]",
         className
       )}

@@ -31,7 +31,7 @@ const ServicesAndNavigation = () => {
         scale && "3xl:gap-[1.563vw]"
       )}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-4">
         <span>{t("prime.services-and-nav")}</span>
         <ExternalLink href="https://member.crypton.xyz/">
           {t("prime.prime-nav")}

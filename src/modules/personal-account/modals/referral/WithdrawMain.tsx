@@ -27,6 +27,7 @@ const WithdrawMain = ({
   openWallet: () => void
 }) => {
   const { t } = useTranslation("modals")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -87,7 +88,12 @@ const WithdrawMain = ({
             {t("ref-withdraw.shares-success")}
           </ResponseSuccessText>
         )}
-        {error && <ResponseErrorText error={error} />}
+        {error && (
+          <ResponseErrorText>
+            {tErrorResponses("server-error")}
+          </ResponseErrorText>
+        )}
+
         <div
           className={cn(
             "flex flex-col items-center mobile:flex-row gap-5",

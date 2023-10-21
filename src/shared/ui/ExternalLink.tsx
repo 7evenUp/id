@@ -21,7 +21,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = React.forwardRef<
   return (
     <a
       className={cn(
-        "flex items-center gap-1.5",
+        "flex items-center gap-1.5 shrink-0",
         buttonVariants({ appearence: "outlined" }),
         scale &&
           "3xl:text-[0.911vw]/[0.911vw] 3xl:px-[0.651vw] 3xl:py-[0.195vw] 3xl:gap-[0.391vw]",
@@ -34,15 +34,18 @@ const ExternalLink: React.FC<ExternalLinkProps> = React.forwardRef<
       {withTgIcon && (
         <Telegram
           className={cn(
-            "w-[18px] h-[18px]",
+            "w-[18px] h-[18px] shrink-0",
             scale && "3xl:w-[1.172vw] 3xl:h-[1.172vw]"
           )}
         />
       )}
+      <span className="text-center">
       {children}
+
+      </span>
       <ArrowTr
         className={cn(
-          "w-3.5 h-3.5",
+          "w-3.5 h-3.5 shrink-0",
           scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
         )}
       />

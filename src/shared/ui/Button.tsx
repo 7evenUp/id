@@ -8,7 +8,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 
 export const buttonVariants = cva(
-  "transition-colors flex items-center justify-center",
+  "transition-colors flex items-center justify-center shrink-0",
   {
     variants: {
       appearence: {

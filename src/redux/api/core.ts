@@ -7,6 +7,6 @@ export const api = createApi({
   }),
   refetchOnFocus: true,
   refetchOnReconnect: true,
-  tagTypes: ["UserProfile", "TxHistory"],
+  tagTypes: ["UserProfile", "TxHistory", "LinksAndChannels"],
   endpoints: () => ({}),
 })

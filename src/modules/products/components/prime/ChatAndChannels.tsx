@@ -100,7 +100,12 @@ const ChatAndChannels = () => {
           )}
         >
           {filteredLinks.map((link) => (
-            <ExternalLink key={link.id} href={link.link.url} withTgIcon>
+            <ExternalLink
+              key={link.id}
+              href={link.link.url}
+              withTgIcon
+              className="shrink"
+            >
               {link.link.channel.name}
             </ExternalLink>
           ))}
