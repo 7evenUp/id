@@ -15,7 +15,7 @@ import Text0 from "@/shared/typography/Text0"
 import Text1 from "@/shared/typography/Text1"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
-import { LIMIT_REACHED } from "@/utils/errorCodes"
+import { LIMIT_REACHED, USER_WALLET_ALREADY_EXISTS } from "@/utils/errorCodes"
 
 import {
   useUpdateWalletMutation,
@@ -60,6 +60,8 @@ const UpdateWallet = () => {
         "mobile:w-[370px] sm:w-[500px]",
         scale && "3xl:w-[32.552vw]"
       )}
+      onPointerDownOutside={(event) => event.preventDefault()}
+      onInteractOutside={(event) => event.preventDefault()}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       <DialogHeader>
@@ -172,6 +174,9 @@ const UpdateWallet = () => {
             /* @ts-expect-error No-Error-Types */
             error.errorCode === LIMIT_REACHED
               ? tErrorResponses("wallet_limit_reached")
+              : /* @ts-expect-error No-Error-Types */
+              error.errorCode === USER_WALLET_ALREADY_EXISTS
+              ? tErrorResponses("wallet_alredy_exists")
               : tErrorResponses("server-error")
           }
         </ResponseErrorText>

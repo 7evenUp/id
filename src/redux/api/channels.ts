@@ -1,6 +1,6 @@
 import { api } from "./core"
 
-import { Channel, LinksResponse } from "@/types/channels"
+import { LinksResponse } from "@/types/channels"
 
 interface ChannelLinksParams {
   channels?: number[]
@@ -16,25 +16,13 @@ interface JoinChannelParams {
 
 const channelsApi = api.injectEndpoints({
   endpoints: (build) => ({
-    channels: build.query<Channel[], void>({
-      query: () => ({
-        url: "channels/",
-        method: "GET",
-      }),
-      transformResponse: (response: { results: Channel[] }) => {
-        return response.results
-      },
-      transformErrorResponse: (response) => ({
-        // @ts-expect-error No-Error-Types
-        message: response.data.detail,
-      }),
-    }),
     links: build.query<LinksResponse[], ChannelLinksParams>({
       query: ({ channels, chat_id, lang }) => ({
         url: "channels/get-links-for-user/",
         method: "GET",
         params: { channels, chat_id, lang },
       }),
+      providesTags: ["LinksAndChannels"],
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
@@ -55,4 +43,4 @@ const channelsApi = api.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useChannelsQuery, useLinksQuery, useJoinChannelMutation } = channelsApi
+export const { useLinksQuery, useJoinChannelMutation } = channelsApi

@@ -19,7 +19,7 @@ const subscriptionApi = api.injectEndpoints({
         method: "POST",
         body: { id, promocode },
       }),
-      invalidatesTags: ["UserProfile", "TxHistory"],
+      invalidatesTags: ["UserProfile", "TxHistory", "LinksAndChannels"],
     }),
   }),
   overrideExisting: false,
