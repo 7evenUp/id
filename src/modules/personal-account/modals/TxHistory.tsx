@@ -25,7 +25,7 @@ const TxHistory = () => {
       <DialogHeader>
         <DialogTitle>{t("history.heading")}</DialogTitle>
         {transactions.length !== 0 && (
-          <Button>
+          <Button className="h-fit">
             <PDFDownloadLink
               document={<HistoryPDF data={transactions} />}
               fileName="history.pdf"

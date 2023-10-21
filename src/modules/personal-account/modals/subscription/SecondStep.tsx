@@ -64,7 +64,7 @@ const SecondStep = ({
 
         <div className={cn("flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px]", scale && "3xl:gap-[9.114vw]")}>
           <div className="flex flex-col">
-            <div className={cn("flex flex-col gap-4 w-[270px]", scale && "3xl:gap-[1.042vw] 3xl:w-[17.578vw]")}>
+            <div className={cn("flex flex-col gap-4 mobile-sm:w-[270px]", scale && "3xl:gap-[1.042vw] 3xl:w-[17.578vw]")}>
               <div className="flex items-center">
                 <Telegram className={cn("w-[18px] h-[18px]", scale && "3xl:w-[1.172vw] 3xl:h-[1.172vw]")} />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>

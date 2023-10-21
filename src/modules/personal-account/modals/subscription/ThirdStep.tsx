@@ -51,7 +51,7 @@ const ThirdStep = ({
         <SubscriptionModalHeader step={t("buy-subs.third-step.step")} />
         <div
           className={cn(
-            "flex flex-col h-[400px] xl:h-auto xl:max-h-[75vh] overflow-auto pr-2 divide-y divide-gray-4 dark:divide-gray-2",
+            "flex flex-col h-[350px] mobile-sm:h-[400px] xl:h-auto xl:max-h-[75vh] overflow-auto pr-2 divide-y divide-gray-4 dark:divide-gray-2",
             scale && "3xl:pr-[0.26vw]"
           )}
         >
@@ -76,7 +76,12 @@ const ThirdStep = ({
                 {filteredLinks &&
                   filteredLinks.length > 0 &&
                   filteredLinks.map((link) => (
-                    <ExternalLink key={link.id} href={link.link.url} withTgIcon>
+                    <ExternalLink
+                      key={link.id}
+                      href={link.link.url}
+                      withTgIcon
+                      className="shrink"
+                    >
                       {link.link.channel.name}
                     </ExternalLink>
                   ))}

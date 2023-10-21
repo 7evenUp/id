@@ -139,7 +139,7 @@ const Balance = () => {
           >
             <SelectTrigger
               className={cn(
-                "w-[130px] 2xl:w-[150px]",
+                "w-[130px] 2xl:w-[150px] shrink-0",
                 scale && "3xl:w-[8.463vw]"
               )}
             />
