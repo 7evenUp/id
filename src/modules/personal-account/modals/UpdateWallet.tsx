@@ -1,5 +1,5 @@
 // import { useState } from "react"
-import { useAccount } from "wagmi"
+import { useAccount, useDisconnect } from "wagmi"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
@@ -39,6 +39,7 @@ const UpdateWallet = () => {
     useUpdateWalletMutation()
 
   const { address, isConnected } = useAccount()
+  const { disconnect, isLoading: isDisconnectLoading } = useDisconnect()
 
   const { wallet } = userProfileData!
 
@@ -183,14 +184,19 @@ const UpdateWallet = () => {
       )}
 
       {isConnected && address ? (
-        <Button
-          className="w-fit"
-          onClick={() => updateWallet({ wallet: address.toLowerCase() })}
-          isLoading={isUpdateLoading}
-          disabled={Boolean(wallet) && wallet === address.toLowerCase()}
-        >
-          {t("change-wallet.confirm-btn")}
-        </Button>
+        <div className="flex flex-wrap-reverse gap-4">
+          <Button
+            className="w-fit"
+            onClick={() => updateWallet({ wallet: address.toLowerCase() })}
+            isLoading={isUpdateLoading}
+            disabled={Boolean(wallet) && wallet === address.toLowerCase()}
+          >
+            {t("change-wallet.confirm-btn")}
+          </Button>
+          <Button onClick={() => disconnect()} isLoading={isDisconnectLoading}>
+            {t("change-wallet.disconnect-btn")}
+          </Button>
+        </div>
       ) : (
         <Button className="w-fit" onClick={handleConnect}>
           {t("change-wallet.connect-btn")}

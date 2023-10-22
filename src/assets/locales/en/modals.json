@@ -34,6 +34,7 @@
     },
     "connect-btn": "connect",
     "confirm-btn": "confirm",
+    "disconnect-btn": "disconnect wallet",
     "wallet-connected-successfully": "The wallet has been successfully linked to your account",
     "wallet-changed-successfully": "Wallet successfully changed"
   },
