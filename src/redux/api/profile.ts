@@ -128,6 +128,7 @@ const profileApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["LinksAndChannels"],
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
