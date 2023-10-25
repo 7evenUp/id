@@ -144,6 +144,13 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
+    changeLanguage: build.mutation<User, { language: "ru" | "en" }>({
+      query: (body) => ({
+        url: "users/switch-language/",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 })
@@ -163,4 +170,5 @@ export const {
   useUpdateDiscordMutation,
   useUpdateTelegramMutation,
   useVerifyTelegramMutation,
+  useChangeLanguageMutation,
 } = profileApi
