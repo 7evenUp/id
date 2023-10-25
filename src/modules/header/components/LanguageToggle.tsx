@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { changeLang } from "@/redux/language/slice"
+import { useChangeLanguageMutation } from "@/redux/api/profile"
 
 import { cn } from "@/lib/classNames"
 
@@ -13,6 +14,8 @@ const LanguageToggle = () => {
   const dispatch = useAppDispatch()
 
   const { i18n } = useTranslation()
+
+  const [trigger] = useChangeLanguageMutation()
 
   useEffect(() => {
     if (language !== null) {
@@ -33,8 +36,10 @@ const LanguageToggle = () => {
   }, [])
 
   const toggleLanguage = () => {
-    dispatch(changeLang(language === "ru" ? "en" : "ru"))
-    i18n.changeLanguage(language === "ru" ? "en" : "ru")
+    const currentLang = language === "ru" ? "en" : "ru"
+    trigger({ language: currentLang })
+    dispatch(changeLang(currentLang))
+    i18n.changeLanguage(currentLang)
   }
 
   return (
