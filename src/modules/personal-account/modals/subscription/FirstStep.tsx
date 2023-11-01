@@ -8,7 +8,6 @@ import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"
 import SubscriptionCard from "../../components/SubscriptionCard"
 
 import Text1 from "@/shared/typography/Text1"
-import TextTip from "@/shared/typography/TextTip"
 
 import { Dialog, DialogContent } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
@@ -22,6 +21,9 @@ import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 import { useAppSelector } from "@/redux/hooks"
 
 import { Subscription } from "@/types/subscriptions"
+import { PROMO_CODE_NOT_FOUND } from "@/utils/errorCodes"
+
+const REFERRAL_DISCOUNT_AMOUNT = 5
 
 const FirstStep = ({
   open,
@@ -39,15 +41,18 @@ const FirstStep = ({
   setBoughtSubDuration: Dispatch<SetStateAction<number>>
 }) => {
   const { t } = useTranslation("modals")
+  const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
 
   const [activeSub, setActiveSub] = useState<number | null>(null)
   const [totalPrice, setTotalPrice] = useState(0)
   const [promo, setPromo] = useState("")
+  // больше ли скидка промокода чем реф скидка
+  const [isPromoLarger, setIsPromoLarger] = useState<boolean | null>(null)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [buy, { isLoading }] = useBuyMutation()
+  const [buy, { isLoading, error }] = useBuyMutation()
   const [
     validatePromocode,
     {
@@ -58,7 +63,7 @@ const FirstStep = ({
     },
   ] = useValidatePromocodeMutation()
 
-  const { balance } = userProfile!
+  const { balance, isReferralDiscountAvailable } = userProfile!
 
   const getSubscriptionPrice = (subID: number) => {
     const selectedSub = subscriptions[subID]
@@ -77,20 +82,32 @@ const FirstStep = ({
 
     if (isError || isValidateSuccess) resetRequest()
 
+    setIsPromoLarger(null)
+
     const price = getSubscriptionPrice(activeSub)
-    setTotalPrice(price)
+    setTotalPrice(
+      isReferralDiscountAvailable ? price - REFERRAL_DISCOUNT_AMOUNT : price
+    )
     setPromo(evt.currentTarget.value)
   }
 
   const onSelect = (subID: number) => {
     if (isError || isValidateSuccess) resetRequest()
 
+    setIsPromoLarger(null)
+
     const price = getSubscriptionPrice(subID)
     setActiveSub(subID)
-    setTotalPrice(price)
+    setTotalPrice(
+      isReferralDiscountAvailable ? price - REFERRAL_DISCOUNT_AMOUNT : price
+    )
   }
 
   const applyPromo = async () => {
+    if (activeSub === null) return
+
+    const price = getSubscriptionPrice(activeSub)
+
     if (activeSub !== null) {
       try {
         const { discountAmount, discountKind } = await validatePromocode({
@@ -99,9 +116,29 @@ const FirstStep = ({
         }).unwrap()
 
         if (discountKind.id === "MONEY") {
-          setTotalPrice((prev) => prev - discountAmount)
+          if (isReferralDiscountAvailable) {
+            if (discountAmount < REFERRAL_DISCOUNT_AMOUNT) {
+              setIsPromoLarger(false)
+              setTotalPrice(price - REFERRAL_DISCOUNT_AMOUNT)
+            } else {
+              setIsPromoLarger(true)
+              setTotalPrice(price - discountAmount)
+            }
+          } else {
+            setTotalPrice(price - discountAmount)
+          }
         } else {
-          setTotalPrice((prev) => prev - prev * discountAmount)
+          if (isReferralDiscountAvailable) {
+            if (price * discountAmount < REFERRAL_DISCOUNT_AMOUNT) {
+              setIsPromoLarger(false)
+              setTotalPrice(price - REFERRAL_DISCOUNT_AMOUNT)
+            } else {
+              setIsPromoLarger(true)
+              setTotalPrice(price - price * discountAmount)
+            }
+          } else {
+            setTotalPrice(price - price * discountAmount)
+          }
         }
       } catch {
         setPromo("")
@@ -116,8 +153,11 @@ const FirstStep = ({
       await buy({ id: subscriptions[activeSub].id, promocode: promo }).unwrap()
       setBoughtSubDuration(subscriptions[activeSub].duration.id)
       openSecondStep()
+      setTotalPrice(0)
+      setActiveSub(null)
+      setPromo("")
     } catch (error) {
-      console.error(error)
+      setPromo("")
     }
   }
 
@@ -237,9 +277,15 @@ const FirstStep = ({
               >
                 {t("buy-subs.first-step.total")}: ${totalPrice.toFixed(2)}
               </span>
-              <TextTip className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
-                {t("buy-subs.first-step.make-sure")}
-              </TextTip>
+              {isReferralDiscountAvailable && (
+                <Text1 className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+                  {isPromoLarger === null
+                    ? t("buy-subs.first-step.ref-discount-available")
+                    : isPromoLarger
+                    ? t("buy-subs.first-step.ref-discount-is-smaller")
+                    : t("buy-subs.first-step.ref-discount-is-larger")}
+                </Text1>
+              )}
             </div>
             <div
               className={cn(
@@ -264,11 +310,14 @@ const FirstStep = ({
                   {t("buy-subs.first-step.buy")}
                 </Button>
               </div>
-              {totalPrice > balance && (
-                <Text1 className="text-error">
-                  {t("buy-subs.first-step.not-enough")}
-                </Text1>
-              )}
+              <Text1 className="text-error">
+                {error
+                  ? /* @ts-expect-error No-Error-Types */
+                    error.errorCode === PROMO_CODE_NOT_FOUND
+                    ? tErrorResponses("promocode_not_found")
+                    : tErrorResponses("server-error")
+                  : totalPrice > balance && t("buy-subs.first-step.not-enough")}
+              </Text1>
             </div>
           </div>
         </div>

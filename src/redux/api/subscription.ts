@@ -19,6 +19,12 @@ const subscriptionApi = api.injectEndpoints({
         method: "POST",
         body: { id, promocode },
       }),
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
+      }),
       invalidatesTags: ["UserProfile", "TxHistory", "LinksAndChannels"],
     }),
   }),
