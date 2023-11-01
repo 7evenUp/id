@@ -8,6 +8,7 @@ export interface User {
   isBanned: boolean
   isDarkTheme: boolean
   isPaid: boolean
+  isReferralDiscountAvailable: boolean
   knowledge: string
   languageCode: string
   profileUsername: string

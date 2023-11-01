@@ -78,7 +78,7 @@
     "sub-freeze-title": "Subscription freeze",
     "sub-freeze-desc": "If you will not be able to follow Prime and enjoy all the benefits of a subscription for a long time, you can use the freeze function.",
     "how-works-title": "How it works?",
-    "how-works-desc": "As soon as you freeze your subscription, you will immediately lose access to all Prime services, but there will be subscription days on your account that you have not used yet. You can unfreeze your subscription and return all accesses at any time in the same section.",
+    "how-works-desc": "As soon as you freeze your subscription, you will immediately lose access to all Prime services, but there will be subscription days on your account that you have not used yet. You can unfreeze your subscription and return all accesses at any time in the same section. (It will be necessary to re-enter the channels and chats you are interested in)",
     "footer": "Please note that you can only freeze your subscription once a year!"
   },
   "history": {
@@ -123,7 +123,9 @@
       "promo-applied": "applied",
       "promo-error": "There is no such promo code",
       "total": "Total",
-      "make-sure": "Make sure that there are funds on your balance",
+      "ref-discount-available": "A referral discount of $5 is available to you for the first purchase",
+      "ref-discount-is-smaller": "A discount from the promo code will be applied, since it is more than referral",
+      "ref-discount-is-larger": "A referral discount will be applied, since it is more than the discount from the promo code",
       "replenish-btn": "replenish",
       "buy": "purchase",
       "not-enough": "Not enough funds on the balance!",

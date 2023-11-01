@@ -5,5 +5,6 @@
   "wallet_limit_reached": "You cannot update wallet twice a month",
   "wallet_alredy_exists": "This wallet address already assigned to another account",
   "tg_already_set": "Telegram username already set",
-  "tg_limit_reached": "You cannot update telegram twice a month"
+  "tg_limit_reached": "You cannot update telegram twice a month",
+  "promocode_not_found": "Promocode is invalid"
 }

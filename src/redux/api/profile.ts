@@ -144,7 +144,7 @@ const profileApi = api.injectEndpoints({
       }),
       invalidatesTags: ["UserProfile"],
     }),
-    changeLanguage: build.mutation<User, { language: "ru" | "en" }>({
+    changeLanguage: build.mutation<void, { language: "ru" | "en" }>({
       query: (body) => ({
         url: "users/switch-language/",
         method: "POST",
