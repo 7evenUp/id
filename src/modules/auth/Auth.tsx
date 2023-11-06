@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useAccount, useDisconnect, useSignMessage } from "wagmi"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 
@@ -8,7 +7,7 @@ import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
 import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
 import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
 
-// import ConnectWalletModal from "@/components/ConnectWalletModal"
+import ConnectWalletModal from "@/components/ConnectWalletModal"
 
 import AuthButton from "./components/AuthButton"
 import MailMode from "./components/MailMode"
@@ -31,7 +30,7 @@ const Auth = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  // const [connectModalOpened, setConnectModalOpened] = useState(false)
+  const [connectModalOpened, setConnectModalOpened] = useState(false)
   const [isAuthStarted, setIsAuthStarted] = useState(false)
   const [isMailMode, setIsMailMode] = useState(false)
   const [signature, setSignature] = useState("")
@@ -39,7 +38,6 @@ const Auth = () => {
   const { address, isConnected } = useAccount()
   const { disconnect } = useDisconnect()
   const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
-  const { open } = useWeb3Modal()
 
   const { refetch } = useUserProfileQuery()
   const [
@@ -76,18 +74,18 @@ const Auth = () => {
     if (isAuthStarted && isConnected) login()
   }, [isAuthStarted, isConnected])
 
-  // const openConnectModal = () => {
-  //   open()
-  // }
-
-  // const closeConnectModal = () => {
-  //   setConnectModalOpened(false)
-  // }
-
-  const handleConnect = async () => {
-    setIsAuthStarted(true)
-    if (!isConnected) open()
+  const openConnectModal = () => {
+    setConnectModalOpened(true)
   }
+
+  const closeConnectModal = () => {
+    setConnectModalOpened(false)
+  }
+
+  // const handleConnect = async () => {
+  //   setIsAuthStarted(true)
+  //   if (!isConnected) open()
+  // }
 
   return (
     <>
@@ -136,7 +134,7 @@ const Auth = () => {
                   </AuthButton>
                 )} */}
 
-                <AuthButton onClick={handleConnect}>
+                <AuthButton onClick={openConnectModal}>
                   <Web3Logo
                     className={cn(scale && "3xl:w-[2.6vw] 3xl:h-[1.3vw]")}
                   />
@@ -207,12 +205,12 @@ const Auth = () => {
         </div>
       </div>
 
-      {/* <ConnectWalletModal
+      <ConnectWalletModal
         open={connectModalOpened}
         onOpenChange={setConnectModalOpened}
         close={closeConnectModal}
         setIsAuthStarted={setIsAuthStarted}
-      /> */}
+      />
     </>
   )
 }

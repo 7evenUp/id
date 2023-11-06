@@ -1,12 +1,11 @@
-// import { useState } from "react"
+import { useState } from "react"
 import { useAccount, useDisconnect } from "wagmi"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
-// import ConnectWalletModal from "@/components/ConnectWalletModal"
+import ConnectWalletModal from "@/components/ConnectWalletModal"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
@@ -31,8 +30,7 @@ const UpdateWallet = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { open } = useWeb3Modal()
-  // const [connectModalOpened, setConnectModalOpened] = useState(false)
+  const [connectModalOpened, setConnectModalOpened] = useState(false)
 
   const { data: userProfileData } = useUserProfileQuery()
   const [updateWallet, { isLoading: isUpdateLoading, error, isSuccess }] =
@@ -43,17 +41,17 @@ const UpdateWallet = () => {
 
   const { wallet } = userProfileData!
 
-  // const openConnectModal = () => {
-  //   setConnectModalOpened(true)
-  // }
-
-  // const closeConnectWalletModal = () => {
-  //   setConnectModalOpened(false)
-  // }
-
-  const handleConnect = async () => {
-    if (!isConnected) open()
+  const openConnectModal = () => {
+    setConnectModalOpened(true)
   }
+
+  const closeConnectWalletModal = () => {
+    setConnectModalOpened(false)
+  }
+
+  // const handleConnect = async () => {
+  //   if (!isConnected) open()
+  // }
 
   return (
     <DialogContent
@@ -61,19 +59,19 @@ const UpdateWallet = () => {
         "mobile:w-[370px] sm:w-[500px]",
         scale && "3xl:w-[32.552vw]"
       )}
-      onPointerDownOutside={(event) => event.preventDefault()}
-      onInteractOutside={(event) => event.preventDefault()}
+      // onPointerDownOutside={(event) => event.preventDefault()}
+      // onInteractOutside={(event) => event.preventDefault()}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
       <DialogHeader>
         <DialogTitle>{t("change-wallet.heading")}</DialogTitle>
       </DialogHeader>
 
-      {/* <ConnectWalletModal
+      <ConnectWalletModal
         open={connectModalOpened}
         onOpenChange={setConnectModalOpened}
         close={closeConnectWalletModal}
-      /> */}
+      />
 
       {!wallet ? (
         <>
@@ -198,7 +196,7 @@ const UpdateWallet = () => {
           </Button>
         </div>
       ) : (
-        <Button className="w-fit" onClick={handleConnect}>
+        <Button className="w-fit" onClick={openConnectModal}>
           {t("change-wallet.connect-btn")}
         </Button>
       )}
