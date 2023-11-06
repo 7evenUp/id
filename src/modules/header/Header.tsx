@@ -1,15 +1,25 @@
+import { useAccount } from "wagmi"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
+
 import BackLink from "./components/BackLink"
 import ThemeToggle from "./components/ThemeToggle"
 import LanguageToggle from "./components/LanguageToggle"
 import AvatarMobile from "./components/AvatarMobile"
 import ScaleToggle from "./components/ScaleToggle"
 
+import Button from "@/shared/ui/Button"
+
 import { useAppSelector } from "@/redux/hooks"
+
+import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
 
 const Header = () => {
   const scale = useAppSelector((state) => state.scale.value)
+
+  const { address, isConnected } = useAccount()
+  const { open } = useWeb3Modal()
 
   return (
     <header
@@ -26,6 +36,11 @@ const Header = () => {
           scale && "3xl:gap-[0.781vw]"
         )}
       >
+        {isConnected && address !== undefined && (
+          <Button onClick={() => open({ view: "Account" })}>
+            {cutWalletAddr(address)}
+          </Button>
+        )}
         <LanguageToggle />
         <ThemeToggle />
         <ScaleToggle />
