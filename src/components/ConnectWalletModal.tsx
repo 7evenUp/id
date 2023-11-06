@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect } from "react"
+import { useWeb3Modal } from "@web3modal/wagmi/react"
 import { ConnectorNotFoundError, useAccount, useConnect } from "wagmi"
 import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import { InjectedConnector } from "wagmi/connectors/injected"
-// import { WalletConnectConnector } from "wagmi/connectors/walletConnect"
 import { useTranslation } from "react-i18next"
 
 import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
@@ -10,7 +10,7 @@ import { ReactComponent as MetaMask } from "@/assets/icons/wallets/metamask-icon
 import { ReactComponent as TrustWallet } from "@/assets/icons/wallets/trust-wallet-logo.svg"
 import { ReactComponent as RabbyWallet } from "@/assets/icons/wallets/rabby-icon.svg"
 import { ReactComponent as Injected } from "@/assets/icons/wallets/injected-icon.svg"
-// import { ReactComponent as WalletConnect } from "@/assets/icons/wallets/wallet-connect-logo.svg"
+import { ReactComponent as WalletConnect } from "@/assets/icons/wallets/wallet-connect-logo.svg"
 
 import {
   Dialog,
@@ -24,14 +24,6 @@ import { TrustWalletConnector } from "@/lib/TrustWalletConnector"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
-
-// const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
-// const metadata = {
-//   name: "Crypton ID",
-//   description: "Personal Cabinet for Crypton",
-//   url: "https://id.crypton.xyz",
-//   icons: ["https://avatars.githubusercontent.com/u/37784886"],
-// }
 
 const METAMASK_INSTALL_LINK =
   "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
@@ -53,17 +45,12 @@ const ConnectWalletModal = ({
 }) => {
   const { t } = useTranslation("modals")
 
-  console.log('#')
-  console.log('rerender')
-
   const scale = useAppSelector((state) => state.scale.value)
 
   const { isConnected } = useAccount()
 
   const { connectAsync: connectMMAsync, isLoading: isMMLoading } = useConnect({
-    connector: new MetaMaskConnector({
-      options: { UNSTABLE_shimOnConnectSelectAccount: true },
-    }),
+    connector: new MetaMaskConnector(),
   })
 
   const { connectAsync: connectTWAsync, isLoading: isTWLoading } = useConnect({
@@ -80,9 +67,7 @@ const ConnectWalletModal = ({
       connector: new InjectedConnector(),
     })
 
-  // const { connectAsync: connectWalletConnectAsync } = useConnect({
-  //   connector: new WalletConnectConnector({ options: { projectId, metadata } }),
-  // })
+  const { open: web3open } = useWeb3Modal()
 
   useEffect(() => {
     if (isConnected) close()
@@ -132,17 +117,11 @@ const ConnectWalletModal = ({
     }
   }
 
-  // const onWalletConnectClick = async () => {
-  //   if (setIsAuthStarted) setIsAuthStarted(true)
-  //   try {
-  //     if (!isConnected) await connectWalletConnectAsync()
-  //   } catch (error) {
-  //     console.error("WalletConnect error while connecting: ", error)
-  //   }
+  const onWalletConnectClick = () => {
+    if (setIsAuthStarted) setIsAuthStarted(true)
 
-  //   // if (openConnectModal) openConnectModal()
-  //   // web3open()
-  // }
+    web3open()
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -260,7 +239,7 @@ const ConnectWalletModal = ({
             />{" "}
             Injected
           </ConnectButton>
-          {/* <ConnectButton onClick={onWalletConnectClick}>
+          <ConnectButton onClick={onWalletConnectClick}>
             <WalletConnect
               className={cn(
                 "w-[24px] h-[24px]",
@@ -268,7 +247,7 @@ const ConnectWalletModal = ({
               )}
             />{" "}
             WalletConnect
-          </ConnectButton> */}
+          </ConnectButton>
         </div>
       </DialogContent>
     </Dialog>
