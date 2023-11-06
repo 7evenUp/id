@@ -40,11 +40,14 @@ const ProfileNickname = () => {
 
     if (profileUsername === inputValue) return
 
-    toast.promise(updateNickname({ id, profileUsername: inputValue }), {
-      loading: tResponse("toast-loading"),
-      success: tResponse("nickname-response-success"),
-      error: tResponse("nickname-response-error"),
-    })
+    toast.promise(
+      updateNickname({ id, profileUsername: inputValue }).unwrap(),
+      {
+        loading: tResponse("toast-loading"),
+        success: tResponse("nickname-response-success"),
+        error: tResponse("nickname-response-error"),
+      }
+    )
   }
 
   const onEdit = () => {
