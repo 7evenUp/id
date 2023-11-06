@@ -26,6 +26,7 @@ import { WalletReqParams, useRegisterByWalletMutation } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
+import { INVALID_DATA } from "@/utils/errorCodes"
 
 import { cn } from "@/lib/classNames"
 
@@ -217,7 +218,12 @@ const RegisterWalletForm = ({
         )}
         {error && (
           <ResponseErrorText>
-            {tErrorResponses("server-error")}
+            {
+              /* @ts-expect-error No-Error-Types */
+              error.code === INVALID_DATA
+                ? tErrorResponses("email_already_taken")
+                : tErrorResponses("server-error")
+            }
           </ResponseErrorText>
         )}
       </div>

@@ -30,7 +30,7 @@ const Avatar = () => {
 
   const onDelete = () => {
     if (activeAvatar) {
-      toast.promise(deleteAvatar({ avatar_id: activeAvatar.id }), {
+      toast.promise(deleteAvatar({ avatar_id: activeAvatar.id }).unwrap(), {
         loading: t("toast-loading"),
         success: t("photo-response-success"),
         error: t("photo-response-error"),
