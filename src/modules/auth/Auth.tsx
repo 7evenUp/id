@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAccount, useDisconnect, useSignMessage } from "wagmi"
+import { useAccount, useSignMessage } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
@@ -36,8 +36,7 @@ const Auth = () => {
   const [isMailMode, setIsMailMode] = useState(false)
   const [signature, setSignature] = useState("")
 
-  const { address, isConnected } = useAccount()
-  const { disconnect } = useDisconnect()
+  const { address, isConnected, isDisconnected } = useAccount()
   const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
   const { open } = useWeb3Modal()
 
@@ -59,7 +58,7 @@ const Auth = () => {
       try {
         signature = await signMessageAsync({ message: AUTH_MESSAGE })
       } catch {
-        disconnect()
+        setIsAuthStarted(false)
         return
       }
 
@@ -75,6 +74,13 @@ const Auth = () => {
     }
     if (isAuthStarted && isConnected) login()
   }, [isAuthStarted, isConnected])
+
+  useEffect(() => {
+    if (isDisconnected) {
+      reset()
+      setIsAuthStarted(false)
+    }
+  }, [isDisconnected])
 
   // const openConnectModal = () => {
   //   open()
