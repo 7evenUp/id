@@ -12,13 +12,13 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), svgr()],
     server: {
       host: true,
-      // proxy: {
-      //   "/api": {
-      //     target: env.VITE_API_BASE_URL,
-      //     changeOrigin: true,
-      //     secure: true,
-      //   },
-      // },
+      proxy: {
+        "/api": {
+          target: env.VITE_API_BASE_URL,
+          changeOrigin: true,
+          secure: true,
+        },
+      },
     },
     resolve: {
       alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
