@@ -12,13 +12,13 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), svgr()],
     server: {
       host: true,
-      proxy: {
-        "/api": {
-          target: env.VITE_API_BASE_URL,
-          changeOrigin: true,
-          secure: true,
-        },
-      },
+      // proxy: {
+      //   "/api": {
+      //     target: env.VITE_API_BASE_URL,
+      //     changeOrigin: true,
+      //     secure: true,
+      //   },
+      // },
     },
     resolve: {
       alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
@@ -29,13 +29,24 @@ export default defineConfig(({ mode }) => {
 // DEV CONFIG
 // import mkcert from 'vite-plugin-mkcert'
 
-// export default defineConfig({
-//   plugins: [react(), svgr(), mkcert()],
-//   server: {
-//     https: true,
-//     host: true
-//   },
-//   resolve: {
-//     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+// export default defineConfig(({ mode }) => {
+//   const env = loadEnv(mode, process.cwd(), "")
+
+//   return {
+//     plugins: [react(), svgr(), mkcert()],
+//     server: {
+//       https: true,
+//       host: true,
+//       proxy: {
+//         "/api": {
+//           target: env.VITE_API_BASE_URL,
+//           changeOrigin: true,
+//           secure: true,
+//         },
+//       },
+//     },
+//     resolve: {
+//       alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+//     },
 //   }
 // })
