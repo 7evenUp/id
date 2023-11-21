@@ -6,6 +6,6 @@ export const productToColor: Record<TabsValuesType, string> = {
   prime: "prime-pink",
   tools: "tools-green",
   calendar: "calendar-red",
-  universe: "university-velvet",
+  inventory: "university-velvet",
   academy: "academy-gold",
 }
