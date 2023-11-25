@@ -20,16 +20,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check paths and set strategy
-        id: get-changed-path
-        run: |
-          FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
-          if echo "$FILES_CHANGED" | grep -q "requirements.txt"; then
-            echo "strategy-type=container-rebuild" >> $GITHUB_ENV 
-          else
-            echo "strategy-type=file-update" >> $GITHUB_ENV
-          fi
-
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -43,18 +33,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - if: env.strategy-type == 'file-update'
-        name: Update backend files in running container
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          file: ./Dockerfile-update
-
-      - if: env.strategy-type == 'container-rebuild'
-        name: Rebuild and push Docker image
+      - name: Rebuild and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .

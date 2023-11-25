@@ -7,7 +7,7 @@ interface ReqParams {
   is_receipt_need: boolean
   payment_type: "crypto" | "card"
   network?: "BSC" | "TRON" | "ETH" | "BTC"
-  currency?: "BTC" | "BUSD" | "USDT" | "USDC" | "RUB" | "USD" | "KZT"
+  currency?: "BTC" | "BUSD" | "USDT" | "USDC" | "RUB" | "USD" | "KZT" | "BNB"
 }
 
 const balanceApi = api.injectEndpoints({

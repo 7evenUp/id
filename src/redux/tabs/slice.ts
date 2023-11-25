@@ -6,16 +6,16 @@ export type TabsValuesType =
   | "prime"
   | "tools"
   | "calendar"
-  | "universe"
   | "academy"
+  | "inventory"
 
-export const TABS_VALUES: Record<string, TabsValuesType> = {
-  RESEARCH_BOT: "research-bot",
-  PRIME: "prime",
-  TOOLS: "tools",
-  CALENDAR: "calendar",
-  UNIVERCE: "universe",
-  ACADEMY: "academy",
+export const TABS_VALUES: Record<TabsValuesType, TabsValuesType> = {
+  "research-bot": "research-bot",
+  prime: "prime",
+  tools: "tools",
+  calendar: "calendar",
+  academy: "academy",
+  inventory: "inventory",
 }
 
 export interface TabsState {

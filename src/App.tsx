@@ -1,8 +1,12 @@
-import { createBrowserRouter, RouterProvider, Link } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import Main from "./routes/Main"
 
 import Header from "./modules/header/Header"
+
+import PaymentError from "./routes/PaymentError"
+import PaymentSuccess from "./routes/PaymentSuccess"
+import ErrorPage from "./routes/ErrorPage"
 
 import { useAppSelector } from "./redux/hooks"
 
@@ -12,24 +16,17 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/payment-error",
-    element: (
-      <div>
-        <h1>Payment Error</h1>
-        <Link to={"/"}>Назад</Link>
-      </div>
-    ),
+    element: <PaymentError />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/payment-success",
-    element: (
-      <div>
-        <h1>Payment Success</h1>
-        <Link to={"/"}>Назад</Link>
-      </div>
-    ),
+    element: <PaymentSuccess />,
+    errorElement: <ErrorPage />,
   },
 ])
 

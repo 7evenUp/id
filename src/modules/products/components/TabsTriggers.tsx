@@ -6,8 +6,11 @@ import { ReactComponent as ToolsActiveIcon } from "@/assets/icons/products/Tools
 import { ReactComponent as ToolsIcon } from "@/assets/icons/products/Tools.svg"
 import { ReactComponent as CalendarActiveIcon } from "@/assets/icons/products/Calendar_Active.svg"
 import { ReactComponent as CalendarIcon } from "@/assets/icons/products/Calendar.svg"
-import { ReactComponent as UniverseIcon } from "@/assets/icons/products/Universe.svg"
+// import { ReactComponent as UniverseIcon } from "@/assets/icons/products/Universe.svg"
 import { ReactComponent as AcademyIcon } from "@/assets/icons/products/Academy.svg"
+
+import { ReactComponent as InventoryIcon } from "@/assets/icons/package.svg"
+import { ReactComponent as InventoryActiveIcon } from "@/assets/icons/package-open.svg"
 
 import { TABS_VALUES } from "@/redux/tabs/slice"
 import { useAppSelector } from "@/redux/hooks"
@@ -23,7 +26,7 @@ const TabsTriggers = () => {
 
   return (
     <>
-      <TabsTrigger value={TABS_VALUES.PRIME}>
+      <TabsTrigger value={TABS_VALUES.prime}>
         <Tooltip content="Prime">
           <div>
             {activeProduct === "prime" ? (
@@ -44,7 +47,28 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.RESEARCH_BOT}>
+      <TabsTrigger value={TABS_VALUES.inventory}>
+        <Tooltip content="WEB 3 XMS">
+          <div>
+            {activeProduct === "inventory" ? (
+              <InventoryActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px] stroke-university-velvet",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
+            ) : (
+              <InventoryIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:stroke-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
+            )}
+          </div>
+        </Tooltip>
+      </TabsTrigger>
+      <TabsTrigger value={TABS_VALUES["research-bot"]}>
         <Tooltip content="Research Bot">
           <div>
             {activeProduct === "research-bot" ? (
@@ -65,7 +89,7 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.TOOLS}>
+      <TabsTrigger value={TABS_VALUES.tools}>
         <Tooltip content="Tools">
           <div>
             {activeProduct === "tools" ? (
@@ -86,7 +110,7 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.CALENDAR}>
+      <TabsTrigger value={TABS_VALUES.calendar}>
         <Tooltip content="Calendar">
           <div>
             {activeProduct === "calendar" ? (
@@ -107,19 +131,7 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.UNIVERSE} disabled>
-        <Tooltip content="Universe">
-          <div>
-            <UniverseIcon
-              className={cn(
-                "w-[26px] h-[26px] dark:fill-gray-2",
-                scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-              )}
-            />
-          </div>
-        </Tooltip>
-      </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.ACADEMY} disabled>
+      <TabsTrigger value={TABS_VALUES.academy} disabled>
         <Tooltip content="Academy">
           <div>
             <AcademyIcon

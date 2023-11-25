@@ -97,6 +97,7 @@
   "balance": {
     "current": "current account balance",
     "choose-deposit": "Choose a deposit method",
+    "choose-cryptocurrency": "Choose cryptocurrency",
     "deposit-options": {
       "crypto": "crypto",
       "fiat": "by card"

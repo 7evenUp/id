@@ -97,6 +97,7 @@
   "balance": {
     "current": "текущий баланс счёта",
     "choose-deposit": "Выберите способ пополнения",
+    "choose-cryptocurrency": "Выберите валюту",
     "deposit-options": {
       "crypto": "криптовалюта",
       "fiat": "банковская карта"

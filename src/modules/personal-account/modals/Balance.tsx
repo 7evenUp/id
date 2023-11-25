@@ -51,6 +51,9 @@ const Balance = () => {
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
   const [paymentType, setPaymentType] = useState<"crypto" | "card">("crypto")
+  const [cryptoType, setCryptoType] = useState<
+    "USDT" | "BUSD" | "BNB" | "USDC"
+  >("USDT")
 
   const { data: profileData } = useUserProfileQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
@@ -91,7 +94,7 @@ const Balance = () => {
             checkboxRef.current.ariaChecked === "false" ? false : true,
           payment_type: paymentType,
           network: "BSC",
-          currency: "BUSD",
+          currency: cryptoType,
         }).unwrap()
       }
 
@@ -126,8 +129,8 @@ const Balance = () => {
         </div>
         <div
           className={cn(
-            "flex items-center gap-2 mb-",
-            scale && "3xl:gap-[0.521vw] 3xl:mb-1.302vw]"
+            "flex items-center gap-2 mb-4",
+            scale && "3xl:gap-[0.521vw] 3xl:mb-1.041vw]"
           )}
         >
           <Text1>{t("balance.choose-deposit")}:</Text1>
@@ -158,6 +161,63 @@ const Balance = () => {
             </SelectContent>
           </Select>
         </div>
+
+        {paymentType === "crypto" && (
+          <>
+            <Text1
+              className={cn(
+                "mt-4 mb-2",
+                scale && "3xl:mt-[1.041vw] 3xl:mb-[0.52vw]"
+              )}
+            >
+              {t("balance.choose-cryptocurrency")}:
+            </Text1>
+            <div
+              className={cn(
+                "flex items-center gap-2.5 mb-6",
+                scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
+              )}
+            >
+              <Chip
+                className={cn(
+                  cryptoType === "USDT" &&
+                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                )}
+                onClick={() => setCryptoType("USDT")}
+              >
+                USDT
+              </Chip>
+              <Chip
+                className={cn(
+                  cryptoType === "BUSD" &&
+                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                )}
+                onClick={() => setCryptoType("BUSD")}
+              >
+                BUSD
+              </Chip>
+              <Chip
+                className={cn(
+                  cryptoType === "BNB" &&
+                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                )}
+                onClick={() => setCryptoType("BNB")}
+              >
+                BNB
+              </Chip>
+              <Chip
+                className={cn(
+                  cryptoType === "USDC" &&
+                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                )}
+                onClick={() => setCryptoType("USDC")}
+              >
+                USDC
+              </Chip>
+            </div>
+          </>
+        )}
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
