@@ -37,6 +37,7 @@ import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useTopUpBalanceMutation } from "@/redux/api/balance"
 import { useAppSelector } from "@/redux/hooks"
+import { useAvailableMethodsQuery } from "@/redux/api/payments"
 
 import { cn } from "@/lib/classNames"
 
@@ -51,11 +52,11 @@ const Balance = () => {
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
   const [paymentType, setPaymentType] = useState<"crypto" | "card">("crypto")
-  const [cryptoType, setCryptoType] = useState<
-    "USDT" | "BUSD" | "BNB" | "USDC"
-  >("USDT")
+  const [activePaymentMethod, setActivePaymentMethod] = useState(0)
+  const [paymentURL, setPaymentURL] = useState("")
 
   const { data: profileData } = useUserProfileQuery()
+  const { data: availableMethods } = useAvailableMethodsQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
 
   const { balance } = profileData!
@@ -74,6 +75,15 @@ const Balance = () => {
     defaultValues: { amount: "" },
   })
 
+  if (!availableMethods || !availableMethods.length) return null
+
+  const cryptoMethods = availableMethods
+    .filter((el) => el.method.id === "crypto" && el.isActive)
+    .toSorted((a, b) => +b.isDefault - +a.isDefault)
+  // const cardMethods = availableMethods
+  //   .filter((el) => el.method.id === "card" && el.isActive)
+  //   .toSorted((a, b) => +b.isDefault - +a.isDefault)
+
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
     if (!checkboxRef.current) return
 
@@ -85,19 +95,22 @@ const Balance = () => {
           amount: parseInt(amount),
           is_receipt_need:
             checkboxRef.current.ariaChecked === "false" ? false : true,
-          payment_type: paymentType,
+          payment_type: "card",
         }).unwrap()
       } else {
         paymentUrl = await trigger({
           amount: parseInt(amount),
           is_receipt_need:
             checkboxRef.current.ariaChecked === "false" ? false : true,
-          payment_type: paymentType,
-          network: "BSC",
-          currency: cryptoType,
+          payment_type: "crypto",
+          // @ts-expect-error If "crypto" non-nullable
+          network: cryptoMethods[activePaymentMethod].network?.label,
+          // @ts-expect-error string is one of values
+          currency: cryptoMethods[activePaymentMethod].currency.label,
         }).unwrap()
       }
 
+      setPaymentURL(paymentUrl)
       form.reset()
       window.open(paymentUrl, "_blank")
     } catch (error) {
@@ -178,42 +191,18 @@ const Balance = () => {
                 scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
               )}
             >
-              <Chip
-                className={cn(
-                  cryptoType === "USDT" &&
-                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
-                )}
-                onClick={() => setCryptoType("USDT")}
-              >
-                USDT
-              </Chip>
-              <Chip
-                className={cn(
-                  cryptoType === "BUSD" &&
-                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
-                )}
-                onClick={() => setCryptoType("BUSD")}
-              >
-                BUSD
-              </Chip>
-              <Chip
-                className={cn(
-                  cryptoType === "BNB" &&
-                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
-                )}
-                onClick={() => setCryptoType("BNB")}
-              >
-                BNB
-              </Chip>
-              <Chip
-                className={cn(
-                  cryptoType === "USDC" &&
-                    "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
-                )}
-                onClick={() => setCryptoType("USDC")}
-              >
-                USDC
-              </Chip>
+              {cryptoMethods.map((el, i) => (
+                <Chip
+                  key={i}
+                  className={cn(
+                    i === activePaymentMethod &&
+                      "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                  )}
+                  onClick={() => setActivePaymentMethod(i)}
+                >
+                  {el.currency.label}
+                </Chip>
+              ))}
             </div>
           </>
         )}
@@ -289,11 +278,22 @@ const Balance = () => {
               </div>
 
               {isSuccess && (
-                <ResponseSuccessText
-                  className={cn("mb-6 block", scale && "3xl:mb-[1.563vw]")}
+                <div
+                  className={cn(
+                    "flex flex-col gap-2 mb-6",
+                    scale && "3xl:gap-[0.52vw] 3xl:mb-[1.563vw]"
+                  )}
                 >
-                  {t("balance.request-success")}
-                </ResponseSuccessText>
+                  <ResponseSuccessText className="block">
+                    {t("balance.request-success")}
+                  </ResponseSuccessText>
+                  <ResponseSuccessText className="block">
+                    {t("balance.if-link-not-opened")}{" "}
+                    <a href={paymentURL} target="_blank" className="underline">
+                      {t("balance.link")}
+                    </a>
+                  </ResponseSuccessText>
+                </div>
               )}
               {error && (
                 <ResponseErrorText
