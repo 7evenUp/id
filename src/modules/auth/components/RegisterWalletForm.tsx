@@ -210,7 +210,11 @@ const RegisterWalletForm = ({
                 }
               </a>
             ) : (
-              <a href={emailDomain} target="_blank" className="underline">
+              <a
+                href={`https://${emailDomain}`}
+                target="_blank"
+                className="underline"
+              >
                 {emailDomain}
               </a>
             )}

@@ -7,6 +7,7 @@ import { useTransactionHistoryQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { formatDate } from "@/lib/date-fns"
+import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const TxHistoryTable = () => {
   const { t, i18n } = useTranslation("modals")
@@ -62,7 +63,19 @@ const TxHistoryTable = () => {
                   ? t("history.tx-status-pending")
                   : t("history.tx-status-reject")}
               </TData>
-              <TData>{tx.txId || "-"}</TData>
+              <TData>
+                {tx.txId ? (
+                  <a
+                    href={`https://bscscan.com/tx/${tx.txId}`}
+                    target="_blank"
+                    className="underline underline-offset-2"
+                  >
+                    {cutWalletAddr(tx.txId)}
+                  </a>
+                ) : (
+                  "-"
+                )}
+              </TData>
             </tr>
           ))}
         </tbody>

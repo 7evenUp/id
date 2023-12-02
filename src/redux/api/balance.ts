@@ -8,6 +8,8 @@ interface ReqParams {
   payment_type: "crypto" | "card"
   network?: "BSC" | "TRON" | "ETH" | "BTC"
   currency?: "BTC" | "BUSD" | "USDT" | "USDC" | "RUB" | "USD" | "KZT" | "BNB"
+  successUrl: string
+  failUrl: string
 }
 
 const balanceApi = api.injectEndpoints({

@@ -96,6 +96,8 @@ const Balance = () => {
           is_receipt_need:
             checkboxRef.current.ariaChecked === "false" ? false : true,
           payment_type: "card",
+          successUrl: "https://id.crypton.xyz/payment-success",
+          failUrl: "https://id.crypton.xyz/payment-error",
         }).unwrap()
       } else {
         paymentUrl = await trigger({
@@ -107,6 +109,8 @@ const Balance = () => {
           network: cryptoMethods[activePaymentMethod].network?.label,
           // @ts-expect-error string is one of values
           currency: cryptoMethods[activePaymentMethod].currency.label,
+          successUrl: "https://id.crypton.xyz/payment-success",
+          failUrl: "https://id.crypton.xyz/payment-error",
         }).unwrap()
       }
 
