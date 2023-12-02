@@ -151,7 +151,7 @@ const ThirdStep = ({
               )}
             >
               <ExternalLink
-                href="https://t.me/crypton_lobby_bot"
+                href={import.meta.env.VITE_TG_BOT_LINK}
                 className="w-fit"
               >
                 Crypton Lobby
