@@ -18,7 +18,7 @@ const TabTitle = ({ title, link }: { title: string; link: string }) => {
       <Subheading>{title}</Subheading>
       <a
         className={cn(
-          "typography-btn-big dark:text-gray-5 flex items-center gap-2 hover:text-gray-3 dark:hover:text-gray-3",
+          "typography-btn-big dark:text-gray-5 flex items-center shrink-0 gap-2 hover:text-gray-3 dark:hover:text-gray-3",
           scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
         )}
         href={link}
