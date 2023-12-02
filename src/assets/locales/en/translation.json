@@ -20,5 +20,12 @@
   "discord-response-success": "Your discord was successfully changed",
   "discord-response-error": "Unable to edit your discord",
   "discord-response-error-limit": "You cannot update discord twice a month",
-  "toast-loading": "Updating data..."
+  "toast-loading": "Updating data...",
+  "payment-success-heading": "The payment was successful",
+  "payment-success-details": "Thank you for the replenishment!",
+  "payment-error-heading": "The payment was canceled or executed with an error",
+  "payment-error-details": "Please repeat later or double-check the data you entered",
+  "payment-page-go-to-main": "Go back to the main page",
+  "error-page-ooops": "Ooops!",
+  "error-page-details": "Sorry, an unexpected error has occurred:"
 }
