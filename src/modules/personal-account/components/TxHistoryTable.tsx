@@ -2,11 +2,11 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
+import { formatDate } from "@/lib/date-fns"
 
 import { useTransactionHistoryQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
-import { formatDate } from "@/lib/date-fns"
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const TxHistoryTable = () => {
