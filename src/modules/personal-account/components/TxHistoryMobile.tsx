@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next"
 
 import { cn } from "@/lib/classNames"
+import { formatDate } from "@/lib/date-fns"
 
 import { useTransactionHistoryQuery } from "@/redux/api/profile"
 
-import { formatDate } from "@/lib/date-fns"
+import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const TxHistoryMobile = () => {
   const { t, i18n } = useTranslation("modals")
@@ -55,7 +56,19 @@ const TxHistoryMobile = () => {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-3">{t("history.th-txid")}</span>
-            <span>{tx.txId || "no tx id"}</span>
+            <span>
+              {tx.txId ? (
+                <a
+                  href={`https://bscscan.com/tx/${tx.txId}`}
+                  target="_blank"
+                  className="underline underline-offset-2"
+                >
+                  {cutWalletAddr(tx.txId)}
+                </a>
+              ) : (
+                "-"
+              )}
+            </span>
           </div>
         </div>
       ))}
