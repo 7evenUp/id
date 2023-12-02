@@ -159,14 +159,14 @@ const Balance = () => {
           >
             <SelectTrigger
               className={cn(
-                "w-[130px] 2xl:w-[150px] shrink-0",
-                scale && "3xl:w-[8.463vw]"
+                "w-[150px] 2xl:w-[175px] shrink-0",
+                scale && "3xl:w-[9.765vw]"
               )}
             />
             <SelectContent
               className={cn(
-                "z-[999] w-[130px] 2xl:w-[150px]",
-                scale && "3xl:w-[8.463vw]"
+                "z-[999] w-[150px] 2xl:w-[175px]",
+                scale && "3xl:w-[9.765vw]"
               )}
             >
               <SelectItem value="crypto">
