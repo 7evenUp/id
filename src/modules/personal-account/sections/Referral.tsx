@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 
 import { ReactComponent as InfoCircle } from "@/assets/icons/info-circle.svg"
+import { ReactComponent as CopyIcon } from "@/assets/icons/copy.svg"
 
 import ReferralStats from "../modals/referral/ReferralStats"
 import ReferralInfo from "../modals/referral/ReferralInfo"
@@ -81,8 +82,24 @@ const Referral = () => {
               scale && "3xl:gap-[0.781vw]"
             )}
           >
-            <Button onClick={onPromoClick}>{t("referral.promo-btn")}</Button>
-            <Button onClick={onRefLinkClick}>{t("referral.link-btn")}</Button>
+            <Button onClick={onPromoClick}>
+              {t("referral.promo-btn")}{" "}
+              <CopyIcon
+                className={cn(
+                  "w-3.5 h-3.5",
+                  scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+                )}
+              />
+            </Button>
+            <Button onClick={onRefLinkClick}>
+              {t("referral.link-btn")}{" "}
+              <CopyIcon
+                className={cn(
+                  "w-3.5 h-3.5",
+                  scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+                )}
+              />
+            </Button>
           </div>
         </RowItem>
         <RowItem>

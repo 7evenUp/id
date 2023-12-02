@@ -23,6 +23,7 @@ import { useLoginMutation } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+
 import { MAIL_TO_LINK } from "../constants"
 
 const LoginMailForm = ({
@@ -120,7 +121,11 @@ const LoginMailForm = ({
                 }
               </a>
             ) : (
-              <a href={emailDomain} target="_blank" className="underline">
+              <a
+                href={`https://${emailDomain}`}
+                target="_blank"
+                className="underline"
+              >
                 {emailDomain}
               </a>
             )}
