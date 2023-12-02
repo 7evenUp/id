@@ -100,7 +100,7 @@
     "choose-cryptocurrency": "Выберите валюту",
     "deposit-options": {
       "crypto": "криптовалюта",
-      "fiat": "банковская карта"
+      "fiat": "банковская карта РФ"
     },
     "amount-label": "Сумма пополнения",
     "amount-placeholder": "Введите сумму",
