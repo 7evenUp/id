@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { useDisconnect } from "wagmi"
 import { useTranslation } from "react-i18next"
 
 import Deactivation from "./modals/Deactivation"
@@ -20,6 +21,8 @@ import { cn } from "@/lib/classNames"
 const PersonalAccount = () => {
   const { t } = useTranslation()
 
+  const { disconnect } = useDisconnect()
+
   const scale = useAppSelector((state) => state.scale.value)
 
   const [logout, { isSuccess, isError }] = useLazyLogoutQuery()
@@ -31,6 +34,7 @@ const PersonalAccount = () => {
   if (isError) console.error("Error!")
 
   const onLogout = () => {
+    disconnect()
     logout()
   }
 
