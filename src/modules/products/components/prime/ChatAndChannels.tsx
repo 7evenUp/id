@@ -58,7 +58,7 @@ const ChatAndChannels = () => {
                   {t("prime.tg-not-synced-yet-first")}
                   <a
                     className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
-                    href="https://t.me/crypton_lobby_bot"
+                    href={import.meta.env.VITE_TG_BOT_LINK}
                     target="_blank"
                   >
                     {t("prime.tg-not-synced-yet-link")}
@@ -82,7 +82,7 @@ const ChatAndChannels = () => {
                   {t("prime.tg-not-synced-yet-first")}
                   <a
                     className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
-                    href="https://t.me/crypton_lobby_bot"
+                    href={import.meta.env.VITE_TG_BOT_LINK}
                     target="_blank"
                   >
                     {t("prime.tg-not-synced-yet-link")}
