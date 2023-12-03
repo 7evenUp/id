@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 
-import { ReactComponent as TrashIcon } from "@/assets/icons/trash.svg"
-import { ReactComponent as EditIcon } from "@/assets/icons/edit.svg"
+import TrashIcon from "@/assets/icons/trash.svg?react"
+import EditIcon from "@/assets/icons/edit.svg?react"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
 

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
+import Plus from "@/assets/icons/plus.svg?react"
 
 import UpdateWallet from "../../modals/UpdateWallet"
 

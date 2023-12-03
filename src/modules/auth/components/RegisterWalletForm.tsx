@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { useAccount } from "wagmi"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
 
 import { AuthInput } from "./AuthInput"
 import ActionButton from "./ActionButton"

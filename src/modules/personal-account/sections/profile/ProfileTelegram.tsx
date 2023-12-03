@@ -1,4 +1,4 @@
-import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
+import Plus from "@/assets/icons/plus.svg?react"
 
 import UpdateTelegram from "../../modals/UpdateTelegram"
 

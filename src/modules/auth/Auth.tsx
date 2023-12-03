@@ -4,9 +4,9 @@ import { useWeb3Modal } from "@web3modal/wagmi/react"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
-import { ReactComponent as Web3Logo } from "@/assets/icons/utility/Web3_logo.svg"
-import { ReactComponent as MailLogo } from "@/assets/icons/utility/Mail_logo.svg"
+import Loader from "@/assets/icons/loader.svg?react"
+import Web3Logo from "@/assets/icons/utility/Web3_logo.svg?react"
+import MailLogo from "@/assets/icons/utility/Mail_logo.svg?react"
 
 // import ConnectWalletModal from "@/components/ConnectWalletModal"
 

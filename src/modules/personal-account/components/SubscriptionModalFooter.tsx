@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveRight } from "@/assets/icons/move-right.svg"
+import MoveRight from "@/assets/icons/move-right.svg?react"
 
 import { DialogFooter } from "@/shared/ui/Dialog"
 import { useAppSelector } from "@/redux/hooks"

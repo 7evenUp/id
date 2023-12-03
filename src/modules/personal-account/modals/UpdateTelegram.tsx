@@ -7,8 +7,8 @@ import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
 import { isMobile } from "react-device-detect"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
-import { ReactComponent as HelpCircle } from "@/assets/icons/help-circle.svg"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
+import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"

@@ -1,10 +1,10 @@
 import { Table } from "@tanstack/react-table"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as FastArrowLeft } from "@/assets/icons/fast-arrow-left.svg"
-import { ReactComponent as FastArrowRight } from "@/assets/icons/fast-arrow-right.svg"
-import { ReactComponent as NavArrowLeft } from "@/assets/icons/nav-arrow-left.svg"
-import { ReactComponent as NavArrowRight } from "@/assets/icons/nav-arrow-right.svg"
+import FastArrowLeft from "@/assets/icons/fast-arrow-left.svg?react"
+import FastArrowRight from "@/assets/icons/fast-arrow-right.svg?react"
+import NavArrowLeft from "@/assets/icons/nav-arrow-left.svg?react"
+import NavArrowRight from "@/assets/icons/nav-arrow-right.svg?react"
 
 import IconButton from "@/shared/ui/IconButton"
 

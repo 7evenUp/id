@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { isMobile } from "react-device-detect"
 
-import { ReactComponent as HelpCircle } from "@/assets/icons/help-circle.svg"
+import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
 import RowItem from "@/shared/components/RowItem"
 

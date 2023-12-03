@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Snow } from "@/assets/icons/snow.svg"
+import Snow from "@/assets/icons/snow.svg?react"
 
 import TxHistory from "../modals/TxHistory"
 import FreezeSubs from "../modals/FreezeSubs"

@@ -1,7 +1,7 @@
 import React from "react"
 import * as RadixSelect from "@radix-ui/react-select"
 
-import { ReactComponent as ArrowsSelect } from "@/assets/icons/arrows-select.svg"
+import ArrowsSelect from "@/assets/icons/arrows-select.svg?react"
 
 import { useAppSelector } from "@/redux/hooks"
 

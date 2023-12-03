@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as PrimeIcon } from "@/assets/icons/products/Prime.svg"
+import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 
 import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
 import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"

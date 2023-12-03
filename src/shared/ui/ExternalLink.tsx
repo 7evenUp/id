@@ -1,7 +1,7 @@
 import React, { AnchorHTMLAttributes } from "react"
 
-import { ReactComponent as ArrowTr } from "@/assets/icons/arrow-tr.svg"
-import { ReactComponent as Telegram } from "@/assets/icons/telegram.svg"
+import ArrowTr from "@/assets/icons/arrow-tr.svg?react"
+import Telegram from "@/assets/icons/telegram.svg?react"
 
 import { buttonVariants } from "./Button"
 

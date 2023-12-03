@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ReactComponent as Check } from "@/assets/icons/check.svg"
+import Check from "@/assets/icons/check.svg?react"
 
 import IconButton from "@/shared/ui/IconButton"
 

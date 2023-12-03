@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next"
 
 import * as Switch from "@radix-ui/react-switch"
 
-import { ReactComponent as ZoomIn } from "@/assets/icons/zoom-in.svg"
-import { ReactComponent as ZoomOut } from "@/assets/icons/zoom-out.svg"
+import ZoomIn from "@/assets/icons/zoom-in.svg?react"
+import ZoomOut from "@/assets/icons/zoom-out.svg?react"
 
 import Tooltip from "@/shared/ui/Tooltip"
 

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveRight } from "@/assets/icons/move-right.svg"
+import MoveRight from "@/assets/icons/move-right.svg?react"
 
 import Subheading from "@/shared/typography/Subheading"
 

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ReactComponent as Edit } from "@/assets/icons/edit.svg"
+import Edit from "@/assets/icons/edit.svg?react"
 
 import IconButton from "@/shared/ui/IconButton"
 

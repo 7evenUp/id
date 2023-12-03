@@ -1,7 +1,7 @@
 import React from "react"
 import * as RadixCheckbox from "@radix-ui/react-checkbox"
 
-import { ReactComponent as Check } from "@/assets/icons/check.svg"
+import Check from "@/assets/icons/check.svg?react"
 
 import { useAppSelector } from "@/redux/hooks"
 

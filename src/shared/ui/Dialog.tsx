@@ -1,7 +1,7 @@
 import React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 
-import { ReactComponent as Close } from "@/assets/icons/close.svg"
+import Close from "@/assets/icons/close.svg?react"
 
 import { cn } from "@/lib/classNames"
 import { useAppSelector } from "@/redux/hooks"

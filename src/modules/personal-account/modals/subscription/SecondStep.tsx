@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Telegram } from "@/assets/icons/telegram.svg"
-import { ReactComponent as Discord } from "@/assets/icons/discord.svg"
-import { ReactComponent as Ethereum } from "@/assets/icons/ethereum.svg"
-import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
+import Telegram from "@/assets/icons/telegram.svg?react"
+import Discord from "@/assets/icons/discord.svg?react"
+import Ethereum from "@/assets/icons/ethereum.svg?react"
+import Loader from "@/assets/icons/loader.svg?react"
 
 import UpdateTelegram from "../UpdateTelegram"
 import UpdateWallet from "../UpdateWallet"
