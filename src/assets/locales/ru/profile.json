@@ -8,7 +8,7 @@
   "subs": {
     "heading": "Подписка",
     "balance": "мой баланс",
-    "remaining": "до конца подписки",
+    "remaining": "дней до конца подписки",
     "inactive-subs": "подписка не активна",
     "history-btn": "история",
     "replenish-btn": "пополнить баланс",
