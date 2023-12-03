@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAccount, useSignMessage } from "wagmi"
+import { useAccount, useDisconnect, useSignMessage } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
@@ -23,8 +23,11 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
+import { toast } from "sonner"
 
 const AUTH_MESSAGE = "Authorization"
+const SIGN_REJECT_ERROR = "UserRejectedRequestError"
+const CONNECTOR_NOT_FOUND_ERROR = "ConnectorNotFoundError"
 
 const Auth = () => {
   const { t } = useTranslation("auth")
@@ -38,6 +41,7 @@ const Auth = () => {
 
   const { address, isConnected, isDisconnected } = useAccount()
   const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
+  const { disconnect } = useDisconnect()
   const { open } = useWeb3Modal()
 
   const { refetch } = useUserProfileQuery()
@@ -57,7 +61,18 @@ const Auth = () => {
 
       try {
         signature = await signMessageAsync({ message: AUTH_MESSAGE })
-      } catch {
+      } catch (error) {
+        // @ts-expect-error No-Error-Types
+        if (error.name === SIGN_REJECT_ERROR) {
+          toast.error(t("wallet-reject-error"))
+        }
+
+        // @ts-expect-error No-Error-Types
+        if (error.name === CONNECTOR_NOT_FOUND_ERROR) {
+          toast.error(t("wallet-connector-error"))
+        }
+
+        disconnect()
         setIsAuthStarted(false)
         return
       }
@@ -92,7 +107,7 @@ const Auth = () => {
 
   const handleConnect = async () => {
     setIsAuthStarted(true)
-    if (!isConnected) open()
+    if (!isConnected) open({ view: "Connect" })
   }
 
   return (

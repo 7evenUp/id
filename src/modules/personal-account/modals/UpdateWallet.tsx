@@ -52,7 +52,7 @@ const UpdateWallet = () => {
   // }
 
   const handleConnect = async () => {
-    if (!isConnected) open()
+    if (!isConnected) open({ view: "Connect" })
   }
 
   return (

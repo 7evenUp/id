@@ -5,12 +5,23 @@ import { PersistGate } from "redux-persist/integration/react"
 import { persistStore } from "redux-persist"
 import { store } from "@/redux/store"
 
-import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
+// import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react"
+import { createWeb3Modal } from "@web3modal/wagmi/react"
+import { walletConnectProvider, EIP6963Connector } from "@web3modal/wagmi"
 import { mainnet } from "wagmi/chains"
-import { WagmiConfig } from "wagmi"
+import { WagmiConfig, configureChains, createConfig } from "wagmi"
+import { publicProvider } from "wagmi/providers/public"
+import { InjectedConnector } from "wagmi/connectors/injected"
+import { WalletConnectConnector } from "wagmi/connectors/walletConnect"
 
-const chains = [mainnet]
+// const chains = [mainnet]
 const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID
+
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [walletConnectProvider({ projectId }), publicProvider()]
+)
+
 const metadata = {
   name: "Crypton ID",
   description: "Personal Cabinet for Crypton",
@@ -18,7 +29,20 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 }
 
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+const wagmiConfig = createConfig({
+  autoConnect: false,
+  connectors: [
+    new WalletConnectConnector({
+      chains,
+      options: { projectId, showQrModal: false, metadata },
+    }),
+    new EIP6963Connector({ chains }),
+    new InjectedConnector({ chains, options: { shimDisconnect: true } }),
+  ],
+  publicClient,
+})
+
+// const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
 createWeb3Modal({
   wagmiConfig,
