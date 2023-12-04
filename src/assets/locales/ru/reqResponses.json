@@ -6,5 +6,6 @@
   "wallet_alredy_exists": "Этот адрес кошелька уже привязан к другому аккаунту",
   "tg_already_set": "Вы уже синхронизировали этот username",
   "tg_limit_reached": "Вы не можете обновлять telegram дважды в месяц",
-  "promocode_not_found": "Промокод не валиден"
+  "promocode_not_found": "Промокод не валиден",
+  "top-up-minimum": "Требуется минимум"
 }

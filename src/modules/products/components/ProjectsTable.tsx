@@ -13,8 +13,8 @@ import {
 } from "@tanstack/react-table"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as SortDown } from "@/assets/icons/sort-down.svg"
-import { ReactComponent as SortUp } from "@/assets/icons/sort-up.svg"
+import SortDown from "@/assets/icons/sort-down.svg?react"
+import SortUp from "@/assets/icons/sort-up.svg?react"
 
 import ProjectsTablePagination from "./ProjectsTablePagination"
 

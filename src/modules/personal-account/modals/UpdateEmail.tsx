@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
 
 import ResponseSuccessText from "@/components/ResponseSuccessText"
 import ResponseErrorText from "@/components/ResponseErrorText"

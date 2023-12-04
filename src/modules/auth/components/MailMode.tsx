@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
 
 import LoginMailForm from "./LoginMailForm"
 import RegisterMailForm from "./RegisterMailForm"

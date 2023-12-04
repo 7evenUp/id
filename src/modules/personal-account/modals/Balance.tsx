@@ -303,7 +303,16 @@ const Balance = () => {
                 <ResponseErrorText
                   className={cn("mb-6 block", scale && "3xl:mb-[1.563vw]")}
                 >
-                  {tErrorResponses("server-error")}
+                  {
+                    // @ts-expect-error No-Error-Types
+                    error.message
+                      ? // @ts-expect-error No-Error-Types
+                        `${tErrorResponses("top-up-minimum")} ${error.message
+                          .split(" ")
+                          // @ts-expect-error No-Error-Types
+                          .at(-2)} ${error.message.split(" ").at(-1)}`
+                      : tErrorResponses("server-error")
+                  }
                 </ResponseErrorText>
               )}
 

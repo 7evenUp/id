@@ -5,12 +5,12 @@ import { MetaMaskConnector } from "wagmi/connectors/metaMask"
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
-import { ReactComponent as MetaMask } from "@/assets/icons/wallets/metamask-icon.svg"
-import { ReactComponent as TrustWallet } from "@/assets/icons/wallets/trust-wallet-logo.svg"
-import { ReactComponent as RabbyWallet } from "@/assets/icons/wallets/rabby-icon.svg"
-import { ReactComponent as Injected } from "@/assets/icons/wallets/injected-icon.svg"
-import { ReactComponent as WalletConnect } from "@/assets/icons/wallets/wallet-connect-logo.svg"
+import Loader from "@/assets/icons/loader.svg?react"
+import MetaMask from "@/assets/icons/wallets/metamask-icon.svg?react"
+import TrustWallet from "@/assets/icons/wallets/trust-wallet-logo.svg?react"
+import RabbyWallet from "@/assets/icons/wallets/rabby-icon.svg?react"
+import Injected from "@/assets/icons/wallets/injected-icon.svg?react"
+import WalletConnect from "@/assets/icons/wallets/wallet-connect-logo.svg?react"
 
 import {
   Dialog,

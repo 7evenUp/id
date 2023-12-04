@@ -1,7 +1,7 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as Close } from "@/assets/icons/close.svg"
+import Close from "@/assets/icons/close.svg?react"
 
 import { DialogContent } from "@/shared/ui/Dialog"
 

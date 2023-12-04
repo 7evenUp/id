@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 
-import { ReactComponent as Plus } from "@/assets/icons/plus.svg"
+import Plus from "@/assets/icons/plus.svg?react"
 
 import EditContainer from "../../components/EditContainer"
 import EditButton from "../../components/EditButton"

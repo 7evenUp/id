@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 
-import { ReactComponent as InfoCircle } from "@/assets/icons/info-circle.svg"
-import { ReactComponent as CopyIcon } from "@/assets/icons/copy.svg"
+import InfoCircle from "@/assets/icons/info-circle.svg?react"
+import CopyIcon from "@/assets/icons/copy.svg?react"
 
 import ReferralStats from "../modals/referral/ReferralStats"
 import ReferralInfo from "../modals/referral/ReferralInfo"

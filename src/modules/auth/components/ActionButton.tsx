@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
+import Loader from "@/assets/icons/loader.svg?react"
 
 import { useAppSelector } from "@/redux/hooks"
 

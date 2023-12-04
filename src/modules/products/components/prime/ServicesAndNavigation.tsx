@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as ArrowDown } from "@/assets/icons/nav-arrow-down.svg"
+import ArrowDown from "@/assets/icons/nav-arrow-down.svg?react"
 
 import RowItem from "@/shared/components/RowItem"
 

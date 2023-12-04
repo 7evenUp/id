@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { addMinutes, isAfter } from "date-fns"
 import { useTranslation } from "react-i18next"
 
-import { ReactComponent as MoveLeft } from "@/assets/icons/move-left.svg"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { changeProductName } from "@/redux/referrer/slice"

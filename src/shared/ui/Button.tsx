@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { ReactComponent as Loader } from "@/assets/icons/loader.svg"
+import Loader from "@/assets/icons/loader.svg?react"
 
 import { useAppSelector } from "@/redux/hooks"
 
