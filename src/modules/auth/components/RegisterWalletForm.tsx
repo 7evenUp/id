@@ -224,7 +224,10 @@ const RegisterWalletForm = ({
           <ResponseErrorText>
             {
               /* @ts-expect-error No-Error-Types */
-              error.code === INVALID_DATA
+              error.status === 429
+                ? tErrorResponses("too-many-requests")
+                : // @ts-expect-error No-Error-Types
+                error.code === INVALID_DATA
                 ? tErrorResponses("email_already_taken")
                 : tErrorResponses("server-error")
             }

@@ -31,8 +31,9 @@ const authApi = api.injectEndpoints({
         body,
       }),
       transformErrorResponse: (response) => ({
+        status: response.status,
         // @ts-expect-error No-Error-Types
-        code: response.data.code,
+        message: response.data?.detail,
       }),
     }),
     login: build.mutation<void, { email: string; redirect_url: string }>({
@@ -42,8 +43,9 @@ const authApi = api.injectEndpoints({
         body,
       }),
       transformErrorResponse: (response) => ({
+        status: response.status,
         // @ts-expect-error No-Error-Types
-        message: response.data.detail,
+        message: response.data?.detail,
       }),
     }),
     register: build.mutation<void, MailRegParams>({
@@ -53,8 +55,9 @@ const authApi = api.injectEndpoints({
         body,
       }),
       transformErrorResponse: (response) => ({
+        status: response.status,
         // @ts-expect-error No-Error-Types
-        message: response.data.detail,
+        message: response.data?.detail,
       }),
     }),
     logout: build.query<void, void>({
