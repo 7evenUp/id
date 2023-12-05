@@ -79,7 +79,7 @@ const Balance = () => {
 
   const cryptoMethods = availableMethods
     .filter((el) => el.method.id === "crypto" && el.isActive)
-    .toSorted((a, b) => +b.isDefault - +a.isDefault)
+    .sort((a, b) => +b.isDefault - +a.isDefault)
   // const cardMethods = availableMethods
   //   .filter((el) => el.method.id === "card" && el.isActive)
   //   .toSorted((a, b) => +b.isDefault - +a.isDefault)
