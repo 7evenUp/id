@@ -13,6 +13,9 @@ import {
   useUserProfileQuery,
 } from "@/redux/api/profile"
 
+const MAX_NICKNAME_LENGTH = 32
+
+
 const ProfileNickname = () => {
   const { t: tResponse } = useTranslation()
   const { t } = useTranslation("profile")
@@ -39,6 +42,11 @@ const ProfileNickname = () => {
     }
 
     if (profileUsername === inputValue) return
+
+    if (inputValue.length > MAX_NICKNAME_LENGTH) {
+      toast.error("Максимальное количество символов - 32")
+      return
+    }
 
     toast.promise(
       updateNickname({ id, profileUsername: inputValue }).unwrap(),
@@ -70,7 +78,7 @@ const ProfileNickname = () => {
           onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
         />
       ) : (
-        <span className="text-right text-gray-1 dark:text-gray-4">
+        <span className="text-right text-gray-1 dark:text-gray-4 pl-2 overflow-hidden">
           {inputValue ? inputValue : profileUsername}
         </span>
       )}

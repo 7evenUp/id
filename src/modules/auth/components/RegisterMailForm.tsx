@@ -185,7 +185,12 @@ const RegisterMailForm = ({
         )}
         {error && (
           <ResponseErrorText>
-            {tErrorResponses("server-error")}
+            {
+              // @ts-expect-error No-Error-Types
+              error.status === 429
+                ? tErrorResponses("too-many-requests")
+                : tErrorResponses("server-error")
+            }
           </ResponseErrorText>
         )}
       </div>

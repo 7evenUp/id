@@ -20,6 +20,8 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
+const MAX_NICKNAME_LENGTH = 32
+
 const ProfileDiscord = () => {
   const { t } = useTranslation()
 
@@ -47,6 +49,11 @@ const ProfileDiscord = () => {
     }
 
     if (discordUsername === inputValue) return
+
+    if (inputValue.length > MAX_NICKNAME_LENGTH) {
+      toast.error("Максимальное количество символов - 32")
+      return
+    }
 
     toast.promise(updateDiscord({ discordUsername: inputValue }).unwrap(), {
       loading: t("toast-loading"),
@@ -94,7 +101,12 @@ const ProfileDiscord = () => {
           onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
         />
       ) : (
-        <span className="text-right w-full text-gray-1 dark:text-gray-4">
+        <span
+          className={cn(
+            "text-right w-full text-gray-1 dark:text-gray-4 overflow-hidden pl-2 xl:max-w-[130px]",
+            scale && "3xl:max-w-[8.4635vw]"
+          )}
+        >
           {inputValue ? inputValue : discordUsername}
         </span>
       )}

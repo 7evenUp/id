@@ -18,9 +18,11 @@ const MailMode = ({ back }: { back: () => void }) => {
 
   const [usedEmail, setUsedEmail] = useState("")
 
-  const [, { isError, reset }] = useLoginMutation({
+  const [, { isError, reset, error }] = useLoginMutation({
     fixedCacheKey: "login-by-mail",
   })
+
+  console.log(error)
 
   return (
     <>
@@ -39,15 +41,18 @@ const MailMode = ({ back }: { back: () => void }) => {
         />
         <span className="text-left">{t("login.another-method")}</span>
       </button>
-      {isError ? (
-        <RegisterMailForm
-          emailInput={usedEmail}
-          setEmailInput={setUsedEmail}
-          resetLoginError={reset}
-        />
-      ) : (
-        <LoginMailForm emailInput={usedEmail} setEmailInput={setUsedEmail} />
-      )}
+      {
+        // @ts-expect-error No-Error-Types
+        isError && error.status !== 429 ? (
+          <RegisterMailForm
+            emailInput={usedEmail}
+            setEmailInput={setUsedEmail}
+            resetLoginError={reset}
+          />
+        ) : (
+          <LoginMailForm emailInput={usedEmail} setEmailInput={setUsedEmail} />
+        )
+      }
     </>
   )
 }

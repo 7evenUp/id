@@ -20,7 +20,7 @@ const ProfileEmail = () => {
   return (
     <RowItem className="relative group justify-end">
       <span className="mr-auto">{t("profile.email")}</span>
-      <span>{userProfile.email}</span>
+      <span className="pl-2 overflow-hidden">{userProfile.email}</span>
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
