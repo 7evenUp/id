@@ -23,18 +23,6 @@ const Main = () => {
     setTimeout(() => setIsDelayed(false), delay.current.time)
   }, [])
 
-  useEffect(() => {
-    if (data) {
-      console.log("Fetched user data: ", data)
-    }
-  }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.error("Error happened while fetching GET users/profile: ", error)
-    }
-  }, [error])
-
   return (
     <main
       className={cn(
