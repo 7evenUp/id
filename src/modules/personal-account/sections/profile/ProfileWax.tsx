@@ -17,6 +17,9 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
+const MAX_WALLET_LENGTH = 32
+
+
 const ProfileWax = () => {
   const { t } = useTranslation()
 
@@ -44,6 +47,11 @@ const ProfileWax = () => {
     }
 
     if (waxWallet === inputValue) return
+
+    if (inputValue.length > MAX_WALLET_LENGTH) {
+      toast.error("Максимальное количество символов - 32")
+      return
+    }
 
     toast.promise(updateWax({ wax_wallet: inputValue }).unwrap(), {
       loading: t("toast-loading"),
@@ -87,7 +95,7 @@ const ProfileWax = () => {
           onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
         />
       ) : (
-        <span className="text-right text-gray-1 dark:text-gray-4">
+        <span className="text-right text-gray-1 dark:text-gray-4 pl-2 overflow-hidden">
           {inputValue ? inputValue : waxWallet}
         </span>
       )}

@@ -32,7 +32,7 @@ const ProfileTelegram = () => {
         telegram
       </span>
       {telegramUsername ? (
-        <span className="text-right w-full">{telegramUsername}</span>
+        <span className="text-right w-full pl-2 overflow-hidden">{telegramUsername}</span>
       ) : (
         <ModalTrigger content={<UpdateTelegram />}>
           <button
