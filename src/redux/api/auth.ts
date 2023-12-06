@@ -33,7 +33,7 @@ const authApi = api.injectEndpoints({
       transformErrorResponse: (response) => ({
         status: response.status,
         // @ts-expect-error No-Error-Types
-        message: response.data?.detail,
+        code: response.data?.code,
       }),
     }),
     login: build.mutation<void, { email: string; redirect_url: string }>({
