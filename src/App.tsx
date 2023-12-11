@@ -57,7 +57,6 @@ const App = () => {
   useEffect(() => {
     if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
       if (isSuccess) {
-        console.log('I am here')
         triggerProfile()
       }
     }

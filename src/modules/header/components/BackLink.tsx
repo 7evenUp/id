@@ -41,9 +41,7 @@ const BackLink = () => {
   }, [])
 
   useEffect(() => {
-    console.log("HEADER* - 2-1")
     if (!referrer) {
-      console.log("HEADER* - 2-2")
       setShowBack(false)
     }
   }, [referrer])
@@ -88,8 +86,6 @@ const BackLink = () => {
       )
     }
   }, [])
-
-  
 
   if (!showBack) return null
 
