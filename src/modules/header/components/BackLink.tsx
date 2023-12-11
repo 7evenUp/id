@@ -41,6 +41,12 @@ const BackLink = () => {
   }, [])
 
   useEffect(() => {
+    if (!referrer) {
+      setShowBack(false)
+    }
+  }, [referrer])
+
+  useEffect(() => {
     const ref = document.referrer
 
     if (ref === "") return
@@ -80,10 +86,6 @@ const BackLink = () => {
       )
     }
   }, [])
-
-  useEffect(() => {
-    if (!referrer) setShowBack(false)
-  }, [referrer])
 
   if (!showBack) return null
 
