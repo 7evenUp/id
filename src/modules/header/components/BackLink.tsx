@@ -29,9 +29,9 @@ const BackLink = () => {
   useEffect(() => {
     if (referrer && timestamp) {
       const currentTime = new Date()
-      const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
+      const timestampPlus2Minutes = addMinutes(new Date(timestamp), 2)
 
-      if (isAfter(currentTime, timestampPlus5Minutes)) {
+      if (isAfter(currentTime, timestampPlus2Minutes)) {
         setShowBack(false)
       } else {
         setShowBack(true)

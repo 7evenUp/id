@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -21,11 +21,12 @@ import {
 } from "@/shared/ui/Form"
 
 import { useLoginMutation } from "@/redux/api/auth"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
 import { MAIL_TO_LINK } from "../constants"
+import { clearReferrer } from "@/redux/referrer/slice"
 
 const NEW_YEAR_URL = "https://events.crypton.xyz/"
 const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
@@ -41,6 +42,8 @@ const LoginMailForm = ({
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const dispatch = useAppDispatch()
 
   const scale = useAppSelector((state) => state.scale.value)
   const {
@@ -81,9 +84,9 @@ const LoginMailForm = ({
 
     if (referrer && timestamp) {
       const currentTime = new Date()
-      const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
+      const timestampPlus2Minutes = addMinutes(new Date(timestamp), 2)
 
-      if (isAfter(currentTime, timestampPlus5Minutes)) {
+      if (isAfter(currentTime, timestampPlus2Minutes)) {
         redirect_url = window.location.origin
       } else {
         redirect_url =
@@ -100,6 +103,12 @@ const LoginMailForm = ({
       redirect_url,
     })
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearReferrer())
+    }
+  }, [isSuccess])
 
   return (
     <>
