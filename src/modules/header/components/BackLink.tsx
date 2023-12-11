@@ -42,8 +42,6 @@ const BackLink = () => {
   useEffect(() => {
     const ref = document.referrer
 
-    console.log(document.referrer)
-
     if (ref === "") return
 
     if (ref === WEB3XMS_URL) {
