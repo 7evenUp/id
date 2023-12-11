@@ -30,9 +30,14 @@ export const referrerSlice = createSlice({
       state.url = action.payload.url
       state.timestamp = action.payload.timestamp
     },
+    clearReferrer: (state) => {
+      state.productName = ""
+      state.url = ""
+      state.timestamp = null
+    }
   },
 })
 
-export const { changeProductName } = referrerSlice.actions
+export const { changeProductName, clearReferrer } = referrerSlice.actions
 
 export default referrerSlice.reducer

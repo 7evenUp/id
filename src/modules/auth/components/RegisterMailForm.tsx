@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -21,7 +21,8 @@ import {
 } from "@/shared/ui/Form"
 
 import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { clearReferrer } from "@/redux/referrer/slice"
 
 import { cn } from "@/lib/classNames"
 
@@ -43,6 +44,8 @@ const RegisterMailForm = ({
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const dispatch = useAppDispatch()
 
   const scale = useAppSelector((state) => state.scale.value)
   const {
@@ -75,8 +78,6 @@ const RegisterMailForm = ({
     },
   })
 
-  
-
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
     const url = new URL(location.href)
     const refCode = url.searchParams.get("ref_code")
@@ -88,9 +89,9 @@ const RegisterMailForm = ({
 
     if (referrer && timestamp) {
       const currentTime = new Date()
-      const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
+      const timestampPlus2Minutes = addMinutes(new Date(timestamp), 2)
 
-      if (isAfter(currentTime, timestampPlus5Minutes)) {
+      if (isAfter(currentTime, timestampPlus2Minutes)) {
         redirect_url = window.location.origin
       } else {
         redirect_url =
@@ -117,6 +118,12 @@ const RegisterMailForm = ({
 
     register(payload)
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearReferrer())
+    }
+  }, [isSuccess])
 
   return (
     <>
