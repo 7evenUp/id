@@ -47,6 +47,7 @@ const App = () => {
     const ref = document.referrer
     if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
       logout()
+      location.reload()
     }
   }, [])
 
