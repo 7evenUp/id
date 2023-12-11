@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+import { addMinutes, isAfter } from "date-fns"
 
 import { AuthInput } from "./AuthInput"
 import ActionButton from "./ActionButton"
@@ -44,7 +45,11 @@ const RegisterMailForm = ({
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
-  const { url: referrerUrl } = useAppSelector((state) => state.referrer)
+  const {
+    productName: referrer,
+    url: referrerUrl,
+    timestamp,
+  } = useAppSelector((state) => state.referrer)
 
   const [emailDomain, setEmailDomain] = useState("")
 
@@ -70,6 +75,8 @@ const RegisterMailForm = ({
     },
   })
 
+  
+
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
     const url = new URL(location.href)
     const refCode = url.searchParams.get("ref_code")
@@ -77,15 +84,28 @@ const RegisterMailForm = ({
     const cleanEmail = email.toLowerCase().trim()
     setEmailDomain(cleanEmail.split("@")[1])
 
+    let redirect_url = window.location.origin
+
+    if (referrer && timestamp) {
+      const currentTime = new Date()
+      const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
+
+      if (isAfter(currentTime, timestampPlus5Minutes)) {
+        redirect_url = window.location.origin
+      } else {
+        redirect_url =
+          referrerUrl === NEW_YEAR_URL ||
+          referrerUrl === NEW_YEAR_URL_DEV ||
+          referrerUrl === WEB3XMS_URL
+            ? referrerUrl + "quest/phase-1"
+            : window.location.origin
+      }
+    }
+
     let payload: MailRegParams = {
       email: cleanEmail,
       profile_username: username,
-      redirect_url:
-        referrerUrl === NEW_YEAR_URL ||
-        referrerUrl === NEW_YEAR_URL_DEV ||
-        referrerUrl === WEB3XMS_URL
-          ? referrerUrl + "quest/phase-1"
-          : window.location.origin,
+      redirect_url,
     }
 
     if (refCode) {
@@ -97,6 +117,7 @@ const RegisterMailForm = ({
 
     register(payload)
   }
+
   return (
     <>
       <Form {...form}>
