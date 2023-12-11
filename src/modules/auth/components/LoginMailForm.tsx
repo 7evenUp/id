@@ -31,6 +31,7 @@ import { clearReferrer } from "@/redux/referrer/slice"
 const NEW_YEAR_URL = "https://events.crypton.xyz/"
 const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
 const WEB3XMS_URL = "https://web3xms.com/"
+const WEB3XMS_URL_DEV = "https://dev.web3xms.com/"
 
 const LoginMailForm = ({
   emailInput,
@@ -92,7 +93,8 @@ const LoginMailForm = ({
         redirect_url =
           referrerUrl === NEW_YEAR_URL ||
           referrerUrl === NEW_YEAR_URL_DEV ||
-          referrerUrl === WEB3XMS_URL
+          referrerUrl === WEB3XMS_URL ||
+          referrerUrl === WEB3XMS_URL_DEV
             ? referrerUrl + "quest/phase-1"
             : window.location.origin
       }

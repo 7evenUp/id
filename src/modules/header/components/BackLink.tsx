@@ -12,6 +12,7 @@ import { cn } from "@/lib/classNames"
 const NEW_YEAR_URL = "https://events.crypton.xyz/"
 const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
 const WEB3XMS_URL = "https://web3xms.com/"
+const WEB3XMS_URL_DEV = "https://dev.web3xms.com/"
 
 const BackLink = () => {
   const { t } = useTranslation()
@@ -44,7 +45,7 @@ const BackLink = () => {
 
     if (ref === "") return
 
-    if (ref === WEB3XMS_URL) {
+    if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
       setShowBack(true)
       dispatch(
         changeProductName({
@@ -95,7 +96,8 @@ const BackLink = () => {
       href={
         referrerUrl === NEW_YEAR_URL ||
         referrerUrl === NEW_YEAR_URL_DEV ||
-        referrerUrl === WEB3XMS_URL
+        referrerUrl === WEB3XMS_URL ||
+        referrerUrl === WEB3XMS_URL_DEV
           ? referrerUrl + "quest/phase-1"
           : referrerUrl
       }
