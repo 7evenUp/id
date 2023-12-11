@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -20,11 +20,12 @@ import {
 } from "@/shared/ui/Form"
 
 import { useLoginMutation } from "@/redux/api/auth"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
 import { MAIL_TO_LINK } from "../constants"
+import { changeProductName } from "@/redux/referrer/slice"
 
 const NEW_YEAR_URL = "https://events.crypton.xyz/"
 const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
@@ -40,6 +41,8 @@ const LoginMailForm = ({
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const dispatch = useAppDispatch()
 
   const scale = useAppSelector((state) => state.scale.value)
   const { url: referrerUrl } = useAppSelector((state) => state.referrer)
@@ -82,6 +85,18 @@ const LoginMailForm = ({
           : window.location.origin,
     })
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        changeProductName({
+          productName: "",
+          url: "",
+          timestamp: null,
+        })
+      )
+    }
+  }, [isSuccess])
 
   return (
     <>

@@ -23,7 +23,7 @@ export const referrerSlice = createSlice({
       action: PayloadAction<{
         productName: string
         url: string
-        timestamp: string
+        timestamp: string | null
       }>
     ) => {
       state.productName = action.payload.productName
