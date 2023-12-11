@@ -9,6 +9,9 @@ import { changeProductName } from "@/redux/referrer/slice"
 
 import { cn } from "@/lib/classNames"
 
+const NEW_YEAR_URL = "https://events.crypton.xyz/"
+const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
+
 const BackLink = () => {
   const { t } = useTranslation()
 
@@ -37,6 +40,8 @@ const BackLink = () => {
 
   useEffect(() => {
     const ref = document.referrer
+
+    console.log(document.referrer)
 
     if (ref === "") return
 
@@ -72,7 +77,13 @@ const BackLink = () => {
         "typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit cursor-pointer mr-auto",
         scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
       )}
-      href={referrerUrl}
+      href={
+        referrerUrl === NEW_YEAR_URL
+          ? NEW_YEAR_URL + "quest/phase-1"
+          : referrerUrl === NEW_YEAR_URL_DEV
+          ? NEW_YEAR_URL_DEV + "quest/phase-1"
+          : referrerUrl
+      }
     >
       <MoveLeft
         className={cn(
