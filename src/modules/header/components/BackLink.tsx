@@ -33,6 +33,7 @@ const BackLink = () => {
       const timestampPlus2Minutes = addMinutes(new Date(timestamp), 2)
 
       if (isAfter(currentTime, timestampPlus2Minutes)) {
+        console.log("HEADER* - 1")
         setShowBack(false)
       } else {
         setShowBack(true)
@@ -82,7 +83,10 @@ const BackLink = () => {
   }, [])
 
   useEffect(() => {
-    if (!referrer) setShowBack(false)
+    if (!referrer) {
+      console.log("HEADER* - 2")
+      setShowBack(false)
+    }
   }, [referrer])
 
   if (!showBack) return null

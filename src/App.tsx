@@ -42,10 +42,12 @@ const WEB3XMS_URL_DEV = "https://dev.web3xms.com/"
 const App = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
-  const [logout] = useLazyLogoutQuery()
+  const [logout, {isLoading}] = useLazyLogoutQuery()
   const [triggerProfile] = useLazyUserProfileQuery()
 
   console.log("1*")
+
+  const ref = document.referrer
 
   useEffect(() => {
     console.log("2*")
@@ -56,7 +58,7 @@ const App = () => {
       await triggerProfile().unwrap()
       console.log("3")
     }
-    const ref = document.referrer
+    
     if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
       logoutAsync()
     }
@@ -71,7 +73,13 @@ const App = () => {
         )}
       >
         <Header />
-        <RouterProvider router={router} />
+        {ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV ? (
+          !isLoading && (
+            <RouterProvider router={router} />
+          )
+        ) : (
+          <RouterProvider router={router} />
+        )}
       </div>
     </div>
   )
