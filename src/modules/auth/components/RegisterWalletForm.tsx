@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -24,7 +24,8 @@ import {
 } from "@/shared/ui/Form"
 
 import { WalletReqParams, useRegisterByWalletMutation } from "@/redux/api/auth"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { clearReferrer } from "@/redux/referrer/slice"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 import { INVALID_DATA } from "@/utils/errorCodes"
@@ -48,6 +49,8 @@ const RegisterWalletForm = ({
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const dispatch = useAppDispatch()
 
   const scale = useAppSelector((state) => state.scale.value)
   const {
@@ -132,6 +135,12 @@ const RegisterWalletForm = ({
       console.log("Catch error: ", error)
     }
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearReferrer())
+    }
+  }, [isSuccess])
 
   if (!address) return null
 
