@@ -80,6 +80,10 @@ const BackLink = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!referrer) setShowBack(false)
+  }, [referrer])
+
   if (!showBack) return null
 
   return (
