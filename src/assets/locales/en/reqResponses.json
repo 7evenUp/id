@@ -1,6 +1,6 @@
 {
   "server-error": "An error occurred on the server side",
-  "email_already_taken": "This email already assigned to another account",
+  "email_already_taken": "Your email is already registered in the system, please log in through it to link your wallet!",
   "email_limit_reached": "You cannot update email twice a month",
   "wallet_limit_reached": "You cannot update wallet twice a month",
   "wallet_alredy_exists": "This wallet address already assigned to another account",
