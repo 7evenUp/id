@@ -19,8 +19,11 @@ const Main = () => {
 
   const { isLoading, data, error } = useUserProfileQuery()
 
+  console.log("4")
+
   useEffect(() => {
     setTimeout(() => setIsDelayed(false), delay.current.time)
+    console.log("5")
   }, [])
 
   return (

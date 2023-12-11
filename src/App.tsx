@@ -47,8 +47,11 @@ const App = () => {
 
   useEffect(() => {
     const logoutAsync = async () => {
+      console.log("1")
       await logout().unwrap()
-      triggerProfile()
+      console.log("2")
+      await triggerProfile().unwrap()
+      console.log("3")
     }
     const ref = document.referrer
     if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
