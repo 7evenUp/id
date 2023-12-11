@@ -12,6 +12,9 @@ import { useAppSelector } from "./redux/hooks"
 
 import { cn } from "./lib/classNames"
 
+import { useLazyLogoutQuery } from "./redux/api/auth"
+import { useEffect } from "react"
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,8 +33,22 @@ const router = createBrowserRouter([
   },
 ])
 
+// const NEW_YEAR_URL = "https://events.crypton.xyz/"
+// const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
+const WEB3XMS_URL = "https://web3xms.com/"
+const WEB3XMS_URL_DEV = "https://dev.web3xms.com/"
+
 const App = () => {
   const scale = useAppSelector((state) => state.scale.value)
+
+  const [logout] = useLazyLogoutQuery()
+
+  useEffect(() => {
+    const ref = document.referrer
+    if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
+      logout()
+    }
+  }, [])
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
