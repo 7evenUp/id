@@ -45,7 +45,10 @@ const App = () => {
   const [logout] = useLazyLogoutQuery()
   const [triggerProfile] = useLazyUserProfileQuery()
 
+  console.log("1*")
+
   useEffect(() => {
+    console.log("2*")
     const logoutAsync = async () => {
       console.log("1")
       await logout().unwrap()
