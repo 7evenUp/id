@@ -28,6 +28,7 @@ import { MAIL_TO_LINK } from "../constants"
 
 const NEW_YEAR_URL = "https://events.crypton.xyz/"
 const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
+const WEB3XMS_URL = "https://web3xms.com/"
 
 const LoginMailForm = ({
   emailInput,
@@ -74,7 +75,9 @@ const LoginMailForm = ({
     trigger({
       email: cleanEmail,
       redirect_url:
-        referrerUrl === NEW_YEAR_URL || referrerUrl === NEW_YEAR_URL_DEV
+        referrerUrl === NEW_YEAR_URL ||
+        referrerUrl === NEW_YEAR_URL_DEV ||
+        referrerUrl === WEB3XMS_URL
           ? referrerUrl + "quest/phase-1"
           : window.location.origin,
     })

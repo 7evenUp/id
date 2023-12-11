@@ -11,6 +11,7 @@ import { cn } from "@/lib/classNames"
 
 const NEW_YEAR_URL = "https://events.crypton.xyz/"
 const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
+const WEB3XMS_URL = "https://web3xms.com/"
 
 const BackLink = () => {
   const { t } = useTranslation()
@@ -45,6 +46,18 @@ const BackLink = () => {
 
     if (ref === "") return
 
+    if (ref === WEB3XMS_URL) {
+      setShowBack(true)
+      dispatch(
+        changeProductName({
+          productName: "WEB 3 XMS",
+          url: ref,
+          timestamp: new Date().toString(),
+        })
+      )
+      return
+    }
+
     const splitRef = new URL(ref).hostname.split(".")
 
     if (splitRef.length >= 2) {
@@ -78,10 +91,10 @@ const BackLink = () => {
         scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
       )}
       href={
-        referrerUrl === NEW_YEAR_URL
-          ? NEW_YEAR_URL + "quest/phase-1"
-          : referrerUrl === NEW_YEAR_URL_DEV
-          ? NEW_YEAR_URL_DEV + "quest/phase-1"
+        referrerUrl === NEW_YEAR_URL ||
+        referrerUrl === NEW_YEAR_URL_DEV ||
+        referrerUrl === WEB3XMS_URL
+          ? referrerUrl + "quest/phase-1"
           : referrerUrl
       }
     >
