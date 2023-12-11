@@ -7,12 +7,14 @@ export interface WalletReqParams {
   email?: string
   profile_username?: string
   referral_code?: string
+  redirect_url?: string
 }
 
 export interface MailRegParams {
   email: string
   profile_username: string
   referral_code?: string
+  redirect_url: string
 }
 
 const authApi = api.injectEndpoints({

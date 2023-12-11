@@ -33,6 +33,9 @@ import { cn } from "@/lib/classNames"
 import { MAIL_TO_LINK } from "../constants"
 
 const AUTH_MESSAGE = "Authorization"
+const NEW_YEAR_URL = "https://events.crypton.xyz/"
+const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
+const WEB3XMS_URL = "https://web3xms.com/"
 
 const RegisterWalletForm = ({
   back,
@@ -46,6 +49,7 @@ const RegisterWalletForm = ({
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
+  const { url: referrerUrl } = useAppSelector((state) => state.referrer)
 
   const [emailDomain, setEmailDomain] = useState("")
 
@@ -90,6 +94,12 @@ const RegisterWalletForm = ({
         signature,
         email: cleanEmail,
         profile_username: username,
+        redirect_url:
+          referrerUrl === NEW_YEAR_URL ||
+          referrerUrl === NEW_YEAR_URL_DEV ||
+          referrerUrl === WEB3XMS_URL
+            ? referrerUrl + "quest/phase-1"
+            : window.location.origin,
       }
 
       if (refCode) {
