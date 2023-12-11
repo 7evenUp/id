@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useAccount } from "wagmi"
 import { useTranslation } from "react-i18next"
+import { addMinutes, isAfter } from "date-fns"
 
 import MoveLeft from "@/assets/icons/move-left.svg?react"
 
@@ -23,8 +24,7 @@ import {
 } from "@/shared/ui/Form"
 
 import { WalletReqParams, useRegisterByWalletMutation } from "@/redux/api/auth"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { changeProductName } from "@/redux/referrer/slice"
+import { useAppSelector } from "@/redux/hooks"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 import { INVALID_DATA } from "@/utils/errorCodes"
@@ -49,10 +49,12 @@ const RegisterWalletForm = ({
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
-  const dispatch = useAppDispatch()
-
   const scale = useAppSelector((state) => state.scale.value)
-  const { url: referrerUrl } = useAppSelector((state) => state.referrer)
+  const {
+    productName: referrer,
+    url: referrerUrl,
+    timestamp,
+  } = useAppSelector((state) => state.referrer)
 
   const [emailDomain, setEmailDomain] = useState("")
 
@@ -91,18 +93,31 @@ const RegisterWalletForm = ({
       const cleanEmail = email.toLowerCase().trim()
       setEmailDomain(cleanEmail.split("@")[1])
 
+      let redirect_url = window.location.origin
+
+      if (referrer && timestamp) {
+        const currentTime = new Date()
+        const timestampPlus5Minutes = addMinutes(new Date(timestamp), 5)
+
+        if (isAfter(currentTime, timestampPlus5Minutes)) {
+          redirect_url = window.location.origin
+        } else {
+          redirect_url =
+            referrerUrl === NEW_YEAR_URL ||
+            referrerUrl === NEW_YEAR_URL_DEV ||
+            referrerUrl === WEB3XMS_URL
+              ? referrerUrl + "quest/phase-1"
+              : window.location.origin
+        }
+      }
+
       let payload: WalletReqParams = {
         address: address.toLowerCase(),
         message: AUTH_MESSAGE,
         signature,
         email: cleanEmail,
         profile_username: username,
-        redirect_url:
-          referrerUrl === NEW_YEAR_URL ||
-          referrerUrl === NEW_YEAR_URL_DEV ||
-          referrerUrl === WEB3XMS_URL
-            ? referrerUrl + "quest/phase-1"
-            : window.location.origin,
+        redirect_url,
       }
 
       if (refCode) {
@@ -117,18 +132,6 @@ const RegisterWalletForm = ({
       console.log("Catch error: ", error)
     }
   }
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(
-        changeProductName({
-          productName: "",
-          url: "",
-          timestamp: null,
-        })
-      )
-    }
-  }, [isSuccess])
 
   if (!address) return null
 
