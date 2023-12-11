@@ -26,6 +26,9 @@ import { cn } from "@/lib/classNames"
 
 import { MAIL_TO_LINK } from "../constants"
 
+const NEW_YEAR_URL = "https://events.crypton.xyz/"
+const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
+
 const LoginMailForm = ({
   emailInput,
   setEmailInput,
@@ -38,6 +41,7 @@ const LoginMailForm = ({
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
+  const { url: referrerUrl } = useAppSelector((state) => state.referrer)
 
   const [emailDomain, setEmailDomain] = useState("")
 
@@ -69,7 +73,10 @@ const LoginMailForm = ({
 
     trigger({
       email: cleanEmail,
-      redirect_url: window.location.origin,
+      redirect_url:
+        referrerUrl === NEW_YEAR_URL || referrerUrl === NEW_YEAR_URL_DEV
+          ? referrerUrl + "quest/phase-1"
+          : window.location.origin,
     })
   }
 
