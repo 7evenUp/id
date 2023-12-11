@@ -157,6 +157,7 @@ const profileApi = api.injectEndpoints({
 
 export const {
   useUserProfileQuery,
+  useLazyUserProfileQuery,
   useTransactionHistoryQuery,
   useFreezeSubsMutation,
   useUnfreezeSubsMutation,

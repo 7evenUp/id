@@ -14,6 +14,7 @@ import { cn } from "./lib/classNames"
 
 import { useLazyLogoutQuery } from "./redux/api/auth"
 import { useEffect } from "react"
+import { useLazyUserProfileQuery } from "./redux/api/profile"
 
 const router = createBrowserRouter([
   {
@@ -42,11 +43,16 @@ const App = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const [logout] = useLazyLogoutQuery()
+  const [triggerProfile] = useLazyUserProfileQuery()
 
   useEffect(() => {
+    const logoutAsync = async () => {
+      await logout().unwrap()
+      triggerProfile()
+    }
     const ref = document.referrer
     if (ref === WEB3XMS_URL || ref === WEB3XMS_URL_DEV) {
-      logout()
+      logoutAsync()
     }
   }, [])
 
