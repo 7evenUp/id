@@ -31,7 +31,9 @@ const InventoryTab = () => {
       "https://web3xms.com/quest/phase-1?ref=" + refCode
     )
 
-    toast(t("ref_copied"))
+    toast(t("ref_copied_title"), {
+      description: t("ref_copied_desc"),
+    })
   }
 
   return (

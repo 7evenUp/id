@@ -1,6 +1,7 @@
 {
   "ref_link": "Referral link",
-  "ref_copied": "Referral link has been copied",
+  "ref_copied_title": "Copied",
+  "ref_copied_desc": "The referral link has been copied to the clipboard",
   "inventory": "Inventory",
   "website": "website",
   "save-btn": "save settings",
