@@ -22,8 +22,6 @@ const MailMode = ({ back }: { back: () => void }) => {
     fixedCacheKey: "login-by-mail",
   })
 
-  console.log(error)
-
   return (
     <>
       <button
