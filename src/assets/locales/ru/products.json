@@ -1,5 +1,7 @@
 {
-  "inventory-heading": "Инвентарь WEB 3 XMS", 
+  "ref_link": "Реферальная ссылка",
+  "ref_copied": "Реферальная ссылка скопирована",
+  "inventory": "Инвентарь",
   "website": "на сайт",
   "save-btn": "сохранить изменения",
   "res-bot": {

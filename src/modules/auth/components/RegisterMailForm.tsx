@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
-import { addMinutes, isAfter } from "date-fns"
 
 import { AuthInput } from "./AuthInput"
 import ActionButton from "./ActionButton"
@@ -21,17 +20,11 @@ import {
 } from "@/shared/ui/Form"
 
 import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { clearReferrer } from "@/redux/referrer/slice"
+import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
 import { MAIL_TO_LINK } from "../constants"
-
-const NEW_YEAR_URL = "https://events.crypton.xyz/"
-const NEW_YEAR_URL_DEV = "https://events-dev.crypton.xyz/"
-const WEB3XMS_URL = "https://web3xms.com/"
-const WEB3XMS_URL_DEV = "https://dev.web3xms.com/"
 
 const RegisterMailForm = ({
   emailInput,
@@ -46,14 +39,7 @@ const RegisterMailForm = ({
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
-  const dispatch = useAppDispatch()
-
   const scale = useAppSelector((state) => state.scale.value)
-  const {
-    productName: referrer,
-    url: referrerUrl,
-    timestamp,
-  } = useAppSelector((state) => state.referrer)
 
   const [emailDomain, setEmailDomain] = useState("")
 
@@ -86,24 +72,7 @@ const RegisterMailForm = ({
     const cleanEmail = email.toLowerCase().trim()
     setEmailDomain(cleanEmail.split("@")[1])
 
-    let redirect_url = window.location.origin
-
-    if (referrer && timestamp) {
-      const currentTime = new Date()
-      const timestampPlus2Minutes = addMinutes(new Date(timestamp), 2)
-
-      if (isAfter(currentTime, timestampPlus2Minutes)) {
-        redirect_url = window.location.origin
-      } else {
-        redirect_url =
-          referrerUrl === NEW_YEAR_URL ||
-          referrerUrl === NEW_YEAR_URL_DEV ||
-          referrerUrl === WEB3XMS_URL ||
-          referrerUrl === WEB3XMS_URL_DEV
-            ? referrerUrl + "quest/phase-1"
-            : window.location.origin
-      }
-    }
+    const redirect_url = window.location.origin
 
     let payload: MailRegParams = {
       email: cleanEmail,
@@ -120,12 +89,6 @@ const RegisterMailForm = ({
 
     register(payload)
   }
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(clearReferrer())
-    }
-  }, [isSuccess])
 
   return (
     <>

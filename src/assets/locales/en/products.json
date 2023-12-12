@@ -1,5 +1,7 @@
 {
-  "inventory-heading": "WEB 3 XMS Inventory", 
+  "ref_link": "Referral link",
+  "ref_copied": "Referral link has been copied",
+  "inventory": "Inventory",
   "website": "website",
   "save-btn": "save settings",
   "res-bot": {
