@@ -186,7 +186,10 @@ const ThirdStep = ({
                 scale && "3xl:w-[34vw]"
               )}
             >
-              <ExternalLink href="#" className="w-fit">
+              <ExternalLink
+                href="https://t.me/Crypton_Calendar_bot"
+                className="w-fit"
+              >
                 Calendar
               </ExternalLink>
             </div>
