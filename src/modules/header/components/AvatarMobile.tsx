@@ -94,7 +94,9 @@ const AvatarMobile = () => {
           <TrashIcon className="w-5 h-5" />{" "}
           <span className="py-1.5">{t("avatar-mobile-delete")}</span>
         </button>
+        
         <div className="h-px bg-gray-5 dark:bg-gray-2" />
+
         <button
           className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors"
           onClick={onLogout}
@@ -102,6 +104,9 @@ const AvatarMobile = () => {
           <LogoutIcon className="w-5 h-5" />{" "}
           <span className="py-1.5">{t("mobile-logout")}</span>
         </button>
+
+        <div className="h-px bg-gray-5 dark:bg-gray-2" />
+
         <ModalTrigger content={<Deactivation />}>
           <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
             <DeactivateIcon className="w-5 h-5" />{" "}
