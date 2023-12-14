@@ -8,5 +8,6 @@
   "tg-username-incorrect-format": "The format allows the use of the characters a-z, 0-9 and _",
   "tg-username-starts-error": "A username cannot start with a number or _",
   "tg-username-ends-error": "A username cannot end with a character _",
-  "balance-not-enough": "There are not enough funds on the balance"
+  "balance-not-enough": "There are not enough funds on the balance",
+  "min-widthraw": "The minimum withdrawal amount is $50"
 }

@@ -30,7 +30,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
-type WithdrawType = "USDC (ERC-20)" | "USDT (ERC-20)" | "USDT (TRC-20)"
+type WithdrawType = "USDT (BEP-20)"
 
 const WithdrawWallet = ({
   open,
@@ -50,7 +50,7 @@ const WithdrawWallet = ({
   const scale = useAppSelector((state) => state.scale.value)
 
   const [withdrawType, setWithdrawType] =
-    useState<WithdrawType>("USDC (ERC-20)")
+    useState<WithdrawType>("USDT (BEP-20)")
 
   const { data: userProfile } = useUserProfileQuery()
   const [
@@ -69,8 +69,12 @@ const WithdrawWallet = ({
     amount: z
       .string()
       .min(1, { message: tSchema("required") })
+      .regex(new RegExp("^[0-9]+$", "g"), { message: tSchema("digits-only") })
       .refine((val) => parseFloat(val) <= refBalance, {
         message: tSchema("balance-not-enough"),
+      })
+      .refine((val) => parseFloat(val) >= 50, {
+        message: tSchema("min-widthraw"),
       }),
   })
 
@@ -163,22 +167,10 @@ const WithdrawWallet = ({
               )}
             >
               <Chip
-                onClick={() => setWithdrawType("USDC (ERC-20)")}
+                onClick={() => setWithdrawType("USDT (BEP-20)")}
                 type="button"
               >
-                USDC Polygon (ERC20)
-              </Chip>
-              <Chip
-                onClick={() => setWithdrawType("USDT (ERC-20)")}
-                type="button"
-              >
-                USDT Polygon (ERC20)
-              </Chip>
-              <Chip
-                onClick={() => setWithdrawType("USDT (TRC-20)")}
-                type="button"
-              >
-                USDT Tron (TRC20)
+                USDT BSC (BEP-20)
               </Chip>
             </div>
             <FormField
