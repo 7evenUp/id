@@ -119,7 +119,11 @@ const WithdrawMain = ({
               : t("ref-withdraw.personal-account-btn")}
           </Button>
 
-          <Button className="w-fit" onClick={openWallet}>
+          <Button
+            disabled={refBalance <= 0.0}
+            className="w-fit"
+            onClick={openWallet}
+          >
             {t("ref-withdraw.wallet-btn")}
           </Button>
 
