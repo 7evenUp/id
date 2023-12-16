@@ -19,7 +19,7 @@ import { cn } from "@/lib/classNames"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
-const MAX_WALLET_LENGTH = 48
+const WALLET_LENGTH = 48
 
 const ProfileTon = () => {
   const { t } = useTranslation()
@@ -49,8 +49,8 @@ const ProfileTon = () => {
 
     if (tonWallet === inputValue) return
 
-    if (inputValue.length > MAX_WALLET_LENGTH) {
-      toast.error("Максимальное количество символов - 48")
+    if (inputValue.length !== WALLET_LENGTH) {
+      toast.error("Длина адреса TON должна составлять 48 символов")
       return
     }
 
@@ -97,10 +97,11 @@ const ProfileTon = () => {
         />
       ) : (
         <span className="text-right text-gray-1 dark:text-gray-4 pl-2 overflow-hidden">
-          {
-            // @ts-expect-error No-Null-Check for `tonWallet`
-            inputValue ? cutWalletAddr(inputValue) : cutWalletAddr(tonWallet)
-          }
+          {inputValue
+            ? cutWalletAddr(inputValue)
+            : tonWallet
+            ? cutWalletAddr(tonWallet)
+            : null}
         </span>
       )}
 
