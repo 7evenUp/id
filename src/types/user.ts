@@ -1,7 +1,7 @@
 export interface User {
   avatars: Avatar[]
   balance: number
-  capital: number
+  capital: number | null
   discordUsername: string
   email: string
   id: number
@@ -19,6 +19,8 @@ export interface User {
   username: string
   wallet: string | null
   waxWallet: string | null
+  tonWallet: string | null
+  utmData: string | null
 }
 
 export interface Avatar {

@@ -8,6 +8,7 @@ import ProfileWallet from "./ProfileWallet"
 import ProfileWax from "./ProfileWax"
 import ProfileDiscord from "./ProfileDiscord"
 import ProfileTelegram from "./ProfileTelegram"
+import ProfileTon from "./ProfileTon"
 
 import { useAppSelector } from "@/redux/hooks"
 
@@ -28,6 +29,7 @@ const Profile = () => {
         <ProfileEmail />
         <ProfileWallet />
         <ProfileWax />
+        <ProfileTon />
         <div
           className={cn(
             "flex flex-col xl:flex-row xl:justify-between xl:items-center xl:gap-10",
