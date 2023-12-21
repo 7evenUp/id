@@ -72,10 +72,14 @@ const InventoryTab = () => {
       <div
         className={cn(
           "mt-4 flex flex-wrap gap-5",
-          scale && "mt-[1.041vw] gap-[1.302vw]"
+          scale && "3xl:mt-[1.041vw] 3xl:gap-[1.302vw]"
         )}
       >
-        {isLoading && <Text0 className="mt-2">Загрузка...</Text0>}
+        {isLoading && (
+          <Text0 className={cn("mt-2", scale && "3xl:mt-[0.52vw]")}>
+            Загрузка...
+          </Text0>
+        )}
 
         {inventory &&
           inventory.items.length > 0 &&
@@ -84,7 +88,7 @@ const InventoryTab = () => {
         {inventory && inventory.items.length === 0 && <Empty />}
 
         {isError && (
-          <Text0 className={cn("mt-2", scale && "mt-[0.52vw]")}>
+          <Text0 className={cn("mt-2", scale && "3xl:mt-[0.52vw]")}>
             Ошибка загрузки инвентаря
           </Text0>
         )}
@@ -108,14 +112,14 @@ const Prize = ({
       className={cn(
         "flex flex-col gap-2 w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm",
         scale &&
-          "gap-[0.52vw] w-[13.541vw] p-[0.26vw] pb-[0.52vw] rounded-[1.041vw]"
+          "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
       )}
     >
       <img
         src={image!}
         className={cn(
           "w-full aspect-square rounded-xl",
-          scale && "rounded-[0.781vw]"
+          scale && "3xl:rounded-[0.781vw]"
         )}
       />
       <TextAccent className="text-center">{title}</TextAccent>
@@ -127,7 +131,7 @@ const Prize = ({
             <DialogTrigger
               className={cn(
                 "flex items-center justify-center gap-2 mb-2 hover:text-gray-3 dark:hover:text-gray-3",
-                scale && "gap-[0.52vw] mb-[0.52vw]"
+                scale && "3xl:gap-[0.52vw] 3xl:mb-[0.52vw]"
               )}
             >
               <Text2 className="underline underline-offset-4">
@@ -136,7 +140,7 @@ const Prize = ({
               <HelpCircle
                 className={cn(
                   "w-[18px] h-[18px]",
-                  scale && "w-[1.171vw] h-[1.171vw]"
+                  scale && "3xl:w-[1.171vw] 3xl:h-[1.171vw]"
                 )}
               />
             </DialogTrigger>
@@ -148,7 +152,7 @@ const Prize = ({
             </DialogContent>
           </Dialog>
           {type === "nft" ? (
-            <Button className={cn("mx-1", scale && "mx-[0.26vw]")}>
+            <Button className={cn("mx-1", scale && "3xl:mx-[0.26vw]")}>
               активировать
             </Button>
           ) : type === "crypton_promo_code" ? (
