@@ -90,7 +90,7 @@ const ProfileTon = () => {
       {isEditingMode ? (
         <input
           className="peer bg-transparent outline-none text-right text-gray-1 dark:text-gray-4 disabled:text-gray-1 dark:disabled:text-gray-4"
-          value={inputValue ? inputValue : tonWallet === null ? "" : tonWallet}
+          value={inputValue}
           onChange={(evt) => setInputValue(evt.currentTarget.value)}
           ref={inputRef}
           onBlur={() => setTimeout(() => setIsEditingMode(false), 100)}
