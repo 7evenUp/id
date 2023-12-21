@@ -5,18 +5,19 @@ export interface Inventory {
 
 export interface InventoryItem {
   id: number
-  prize_id: number
+  prizeId: number
   title: string | null
   description: string | null
   type: "nft" | "crypton_promo_code" | "sponsor_promo_code" | null
   rarity: string | null
-  background_color: string | null
+  backgroundColor: string | null
   image: string | null
   photos: Array<{ id: number; file: string; orderNumber: number }>
-  claim_link: string
-  is_claimed: boolean
-  is_used: boolean
-  claimed_at: string | null
-  used_at: string | null
-  received_at: string
+  claimLink: string
+  isClaimed: boolean
+  isUsed: boolean
+  claimedAt: string | null
+  usedAt: string | null
+  userData: string | null
+  receivedAt: string
 }
