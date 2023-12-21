@@ -14,6 +14,7 @@ import { cn } from "@/lib/classNames"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useInventoryQuery } from "@/redux/api/inventory"
 
 const InventoryTab = () => {
   const { t } = useTranslation("products")
@@ -21,6 +22,7 @@ const InventoryTab = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data } = useUserProfileQuery()
+  const { data: inventory, isLoading, isError } = useInventoryQuery()
 
   const {
     referralInfo: { refCode },
@@ -56,7 +58,16 @@ const InventoryTab = () => {
       <Subheading className="mt-5 3xl:mt-[1.302vw]">
         {t("inventory")}
       </Subheading>
-      <Text0 className="mt-2">Coming soon</Text0>
+      <div className="mt-2 flex gap-3">
+        {isLoading && <Text0 className="mt-2">Загрузка...</Text0>}
+        {inventory &&
+          inventory.items.length > 0 &&
+          inventory.items.map((prize) => (
+            <Text0 className="mt-2">{prize.title}</Text0>
+          ))}
+
+        {isError && <Text0 className="mt-2">Ошибка загрузки инвентаря</Text0>}
+      </div>
     </>
   )
 }
