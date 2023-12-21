@@ -15,7 +15,7 @@ import { cn } from "@/lib/classNames"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
-import { useInventoryQuery } from "@/redux/api/inventory"
+import { useClaimMutation, useInventoryQuery } from "@/redux/api/inventory"
 import ExternalLink from "@/shared/ui/ExternalLink"
 import { InventoryItem } from "@/types/ny-inventory"
 import TextAccent from "@/shared/typography/TextAccent"
@@ -98,14 +98,28 @@ const InventoryTab = () => {
 }
 
 const Prize = ({
+  id,
   title,
   image,
   type,
   userData,
   isUsed,
-  description,
+  instruction,
 }: InventoryItem) => {
   const scale = useAppSelector((state) => state.scale.value)
+
+  const [claim, { isLoading }] = useClaimMutation()
+
+  const onSubmit = async () => {
+    try {
+      const data = await claim({ inventoryPrizeId: id }).unwrap()
+      console.log(data)
+      toast.success("Приз успешно активирован")
+    } catch (error) {
+      toast.error("Произошла ошибка активации приза")
+      console.log(error)
+    }
+  }
 
   return (
     <div
@@ -124,7 +138,13 @@ const Prize = ({
       />
       <TextAccent className="text-center">{title}</TextAccent>
       {isUsed ? (
-        <Text0 className="text-center">Приз активирован</Text0>
+        type === "nft" ? (
+          <Text0 className="text-center mt-auto">Приз активирован</Text0>
+        ) : (
+          type === "crypton_promo_code" && (
+            <Text0 className="text-center mt-auto">{userData}</Text0>
+          )
+        )
       ) : (
         <>
           <Dialog>
@@ -148,18 +168,32 @@ const Prize = ({
               className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
             >
               <DialogTitle>Как активировать приз?</DialogTitle>
-              <Text0>{description}</Text0>
+              <Text0>{instruction}</Text0>
             </DialogContent>
           </Dialog>
           {type === "nft" ? (
-            <Button className={cn("mx-1", scale && "3xl:mx-[0.26vw]")}>
+            <Button
+              isLoading={isLoading}
+              onClick={onSubmit}
+              className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
+            >
               активировать
             </Button>
           ) : type === "crypton_promo_code" ? (
-            <Button>Промокод</Button>
+            <Button
+              isLoading={isLoading}
+              onClick={onSubmit}
+              className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
+            >
+              активировать
+            </Button>
           ) : (
             type === "sponsor_promo_code" &&
-            userData && <Text0 className="text-center">{userData}</Text0>
+            userData && (
+              <TextAccent className="text-center mt-auto">
+                {userData}
+              </TextAccent>
+            )
           )}
         </>
       )}

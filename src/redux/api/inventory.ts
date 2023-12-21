@@ -2,12 +2,12 @@ import { api } from "./core"
 
 import { Inventory } from "@/types/ny-inventory"
 
-// interface ClaimResponse {
-//   instruction: string | null
-//   prize_code: string | null
-//   help_text: string | null
-//   claim_url: string | null
-// }
+interface ClaimResponse {
+  instruction: string | null
+  prize_code: string | null
+  help_text: string | null
+  claim_url: string | null
+}
 
 const inventoryApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -16,15 +16,18 @@ const inventoryApi = api.injectEndpoints({
         url: "users/ny/inventory",
         method: "GET",
       }),
+      providesTags: ["Inventory"],
     }),
-    // claim: build.mutation<ClaimResponse, { inventory_prize_id: number }>({
-    //   query: ({ inventory_prize_id }) => ({
-    //     url: `api/me/inventory/${inventory_prize_id}/claim`,
-    //     method: "POST",
-    //   }),
-    // }),
+    claim: build.mutation<ClaimResponse, { inventoryPrizeId: number }>({
+      query: (body) => ({
+        url: "users/inventory/claim/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Inventory"],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useInventoryQuery } = inventoryApi
+export const { useInventoryQuery, useClaimMutation } = inventoryApi

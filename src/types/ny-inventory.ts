@@ -13,6 +13,7 @@ export interface InventoryItem {
   backgroundColor: string | null
   image: string | null
   photos: Array<{ id: number; file: string; orderNumber: number }>
+  instruction: string | null
   claimLink: string
   isClaimed: boolean
   isUsed: boolean
