@@ -174,7 +174,7 @@ const Prize = ({
               className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
             >
               <DialogTitle>Как активировать приз?</DialogTitle>
-              <Text0>{instruction}</Text0>
+              <Text0 className="h-[400px] md:h-auto overflow-auto break-words">{instruction}</Text0>
             </DialogContent>
           </Dialog>
           {type === "nft" ? (
