@@ -9,6 +9,8 @@
     "heading": "Subscription",
     "balance": "my balance",
     "remaining": "remaining days",
+    "frozen-status-title": "subscription status",
+    "frozen-status-text": "frozen",
     "inactive-subs": "subscription is inactive",
     "history-btn": "history",
     "replenish-btn": "replenish",

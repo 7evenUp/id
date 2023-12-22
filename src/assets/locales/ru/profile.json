@@ -9,6 +9,8 @@
     "heading": "Подписка",
     "balance": "мой баланс",
     "remaining": "дней до конца подписки",
+    "frozen-status-title": "статус подписки",
+    "frozen-status-text": "заморожена",
     "inactive-subs": "подписка не активна",
     "history-btn": "история",
     "replenish-btn": "пополнить баланс",

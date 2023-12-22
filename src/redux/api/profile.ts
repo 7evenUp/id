@@ -94,6 +94,20 @@ const profileApi = api.injectEndpoints({
         errorCode: response.data.code,
       }),
     }),
+    updateTon: build.mutation<User, { address: string }>({
+      query: (body) => ({
+        url: "users/set-ton-wallet/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
+      }),
+    }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({
         url: "users/change-wallet/",
@@ -167,6 +181,7 @@ export const {
   useUpdateEmailMutation,
   useVerifyEmailMutation,
   useUpdateWaxMutation,
+  useUpdateTonMutation,
   useUpdateWalletMutation,
   useUpdateDiscordMutation,
   useUpdateTelegramMutation,

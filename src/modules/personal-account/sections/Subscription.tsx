@@ -93,6 +93,14 @@ const Subscription = () => {
               </Text0>
               <SubscriptionMain triggerText={t("subs.buy-btn")} />
             </>
+          ) : status === "FROZEN" ? (
+            <>
+              <Text0 className="dark:text-gray-4 w-fit block">
+                {t("subs.frozen-status-title")}:{" "}
+                <AccentNumber>{t("subs.frozen-status-text")}</AccentNumber>
+              </Text0>
+              <SubscriptionMain triggerText={t("subs.renew-btn")} />
+            </>
           ) : (
             <>
               <Text0 className="dark:text-gray-4 w-fit block">
