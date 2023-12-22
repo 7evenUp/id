@@ -115,12 +115,15 @@ const Prize = ({
 
   const onSubmit = async () => {
     try {
-      const data = await claim({ inventoryPrizeId: id }).unwrap()
-      console.log(data)
-      toast.success("Приз успешно активирован")
+      await claim({ inventoryPrizeId: id }).unwrap()
+      toast.success("Активация прошла успешно")
     } catch (error) {
-      toast.error("Произошла ошибка активации приза")
-      console.log(error)
+      // @ts-expect-error no-rtkq-error-types
+      if (error.data.code === "not_accepted") {
+        toast.error("Активация станет доступна, когда запустится Календарь")
+      } else {
+        toast.error("Произошла ошибка активации приза")
+      }
     }
   }
 
