@@ -8,24 +8,27 @@ import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
 
 import Subheading from "@/shared/typography/Subheading"
+import TextAccent from "@/shared/typography/TextAccent"
 import Text0 from "@/shared/typography/Text0"
-import Button from "@/shared/ui/Button"
+import Text2 from "@/shared/typography/Text2"
 
-import { cn } from "@/lib/classNames"
+import Button from "@/shared/ui/Button"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useClaimMutation, useInventoryQuery } from "@/redux/api/inventory"
+
 import ExternalLink from "@/shared/ui/ExternalLink"
-import { InventoryItem } from "@/types/ny-inventory"
-import TextAccent from "@/shared/typography/TextAccent"
-import Text2 from "@/shared/typography/Text2"
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
 } from "@/shared/ui/Dialog"
+
+import { InventoryItem } from "@/types/ny-inventory"
+
+import { cn } from "@/lib/classNames"
 
 const InventoryTab = () => {
   const { t } = useTranslation("products")
@@ -124,7 +127,7 @@ const Prize = ({
   return (
     <div
       className={cn(
-        "flex flex-col gap-2 w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm",
+        "flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm",
         scale &&
           "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
       )}
@@ -172,13 +175,12 @@ const Prize = ({
             </DialogContent>
           </Dialog>
           {type === "nft" ? (
-            <Button
-              isLoading={isLoading}
-              onClick={onSubmit}
+            <ExternalLink
+              href="https://web3xms.com/quest/inventory"
               className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
             >
               активировать
-            </Button>
+            </ExternalLink>
           ) : type === "crypton_promo_code" ? (
             <Button
               isLoading={isLoading}
