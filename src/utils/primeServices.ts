@@ -70,6 +70,6 @@ export const primeServices = [
   },
   {
     name: "Бесплатные сделки на OTC",
-    href: "https://t.me/EnjoyOTC/146038",
+    href: "https://t.me/CryptonOTC",
   },
 ]
