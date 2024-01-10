@@ -1,6 +1,6 @@
 export interface Inventory {
   items: InventoryItem[]
-  items_count: number
+  itemsCount: number
 }
 
 export interface InventoryItem {
@@ -14,7 +14,6 @@ export interface InventoryItem {
   image: string | null
   photos: Array<{ id: number; file: string; orderNumber: number }>
   instruction: string | null
-  claimLink: string
   isClaimed: boolean
   isUsed: boolean
   claimedAt: string | null

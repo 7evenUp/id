@@ -2,7 +2,6 @@
   "ref_link": "Referral link",
   "ref_copied_title": "Copied",
   "ref_copied_desc": "The referral link has been copied to the clipboard",
-  "inventory": "Inventory",
   "website": "website",
   "save-btn": "save settings",
   "res-bot": {
@@ -46,5 +45,21 @@
     "features": "Prime features",
     "plan": "action plan",
     "soon": "Soon"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "all": "all",
+    "new": "new",
+    "activated": "activated",
+    "loading": "Loading...",
+    "error": "Inventory loading error",
+    "empty": "Inventory is empty",
+    "activation-success": "Successfully activated",
+    "activation-error": "Error happened while activating",
+    "calendar-not-ready": "Activation will be available when the Calendar is released",
+    "prize-activated": "Prize is activated",
+    "how-to-activate": "How to activate?",
+    "how-to-activate-prize": "How to activate prize?",
+    "activate-btn": "activate"
   }
 }
