@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import ResearchBotActiveIcon from "@/assets/icons/products/ResBot_Active.svg?react"
 import ResearchBotIcon from "@/assets/icons/products/ResBot.svg?react"
 import PrimeActiveIcon from "@/assets/icons/products/Prime_Active.svg?react"
@@ -21,6 +23,8 @@ import Tooltip from "@/shared/ui/Tooltip"
 import { cn } from "@/lib/classNames"
 
 const TabsTriggers = () => {
+  const { t } = useTranslation("products")
+
   const activeProduct = useAppSelector((state) => state.tabs.value)
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -48,7 +52,7 @@ const TabsTriggers = () => {
         </Tooltip>
       </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.inventory}>
-        <Tooltip content="WEB 3 XMS">
+        <Tooltip content={t("inventory.title")}>
           <div>
             {activeProduct === "inventory" ? (
               <InventoryActiveIcon
