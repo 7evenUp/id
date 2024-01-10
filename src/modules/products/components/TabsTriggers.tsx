@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 
-import ResearchBotActiveIcon from "@/assets/icons/products/ResBot_Active.svg?react"
-import ResearchBotIcon from "@/assets/icons/products/ResBot.svg?react"
+import ResearchActiveIcon from "@/assets/icons/products/ResBot_Active.svg?react"
+import ResearchIcon from "@/assets/icons/products/ResBot.svg?react"
 import PrimeActiveIcon from "@/assets/icons/products/Prime_Active.svg?react"
 import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 import ToolsActiveIcon from "@/assets/icons/products/Tools_Active.svg?react"
@@ -72,18 +72,18 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES["research-bot"]}>
-        <Tooltip content="Research Bot">
+      <TabsTrigger value={TABS_VALUES["research"]}>
+        <Tooltip content="Research">
           <div>
-            {activeProduct === "research-bot" ? (
-              <ResearchBotActiveIcon
+            {activeProduct === "research" ? (
+              <ResearchActiveIcon
                 className={cn(
                   "w-[26px] h-[26px]",
                   scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
                 )}
               />
             ) : (
-              <ResearchBotIcon
+              <ResearchIcon
                 className={cn(
                   "w-[26px] h-[26px] dark:fill-gray-4",
                   scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"

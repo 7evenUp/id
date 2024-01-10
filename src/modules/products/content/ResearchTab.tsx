@@ -20,7 +20,7 @@ import { cn } from "@/lib/classNames"
 
 type Language = "ru" | "en"
 
-const ResearchBotTab = () => {
+const ResearchTab = () => {
   const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
@@ -64,7 +64,7 @@ const ResearchBotTab = () => {
     <>
       <TabHeader>
         <TabTitle
-          title="Research Bot"
+          title="Research"
           link="https://t.me/crypton_research_bot"
         />
       </TabHeader>
@@ -78,7 +78,7 @@ const ResearchBotTab = () => {
   //   <>
   //     <TabHeader>
   //       <TabTitle
-  //         title="Research Bot"
+  //         title="Research"
   //         link="https://t.me/crypton_research_bot"
   //       />
   //       <Button className="sm:ml-auto w-fit">{t("save-btn")}</Button>
@@ -172,4 +172,4 @@ const ResearchBotTab = () => {
   // )
 }
 
-export default ResearchBotTab
+export default ResearchTab
