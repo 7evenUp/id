@@ -4,7 +4,7 @@ import TabsTriggers from "./components/TabsTriggers"
 
 import PrimeTab from "./content/PrimeTab"
 import InventoryTab from "./content/InventoryTab"
-import ResearchBotTab from "./content/ResearchBotTab"
+import ResearchTab from "./content/ResearchTab"
 import ToolsTab from "./content/ToolsTab"
 import CalendarTab from "./content/CalendarTab"
 
@@ -37,7 +37,7 @@ const Products = () => {
           className={cn(
             "absolute w-[16.666%] h-[3px] rounded-full left-0 -bottom-0.5 bg-gray-1 dark:bg-gray-5 transition-transform",
             activeProduct === TABS_VALUES.inventory && "translate-x-full",
-            activeProduct === TABS_VALUES["research-bot"] &&
+            activeProduct === TABS_VALUES["research"] &&
               "translate-x-[200%]",
             activeProduct === TABS_VALUES.tools && "translate-x-[300%]",
             activeProduct === TABS_VALUES.calendar && "translate-x-[400%]",
@@ -48,8 +48,8 @@ const Products = () => {
       <TabsContent value={TABS_VALUES.prime}>
         <PrimeTab />
       </TabsContent>
-      <TabsContent value={TABS_VALUES["research-bot"]}>
-        <ResearchBotTab />
+      <TabsContent value={TABS_VALUES["research"]}>
+        <ResearchTab />
       </TabsContent>
       <TabsContent value={TABS_VALUES.tools}>
         <ToolsTab />

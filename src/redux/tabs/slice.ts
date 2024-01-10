@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
 export type TabsValuesType =
-  | "research-bot"
+  | "research"
   | "prime"
   | "tools"
   | "calendar"
@@ -10,7 +10,7 @@ export type TabsValuesType =
   | "inventory"
 
 export const TABS_VALUES: Record<TabsValuesType, TabsValuesType> = {
-  "research-bot": "research-bot",
+  research: "research",
   prime: "prime",
   tools: "tools",
   calendar: "calendar",

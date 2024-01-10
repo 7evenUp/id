@@ -17,6 +17,15 @@ const inventoryApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["Inventory"],
+      transformResponse: (baseQueryReturnValue: Inventory) => {
+        const sorted = baseQueryReturnValue.items.sort(
+          (a, b) => +a.isUsed - +b.isUsed
+        )
+        return {
+          itemsCount: baseQueryReturnValue.itemsCount,
+          items: sorted,
+        }
+      },
     }),
     claim: build.mutation<ClaimResponse, { inventoryPrizeId: number }>({
       query: (body) => ({
