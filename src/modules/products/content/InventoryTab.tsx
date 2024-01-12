@@ -40,7 +40,7 @@ const InventoryTab = () => {
   const { t } = useTranslation("products")
 
   const [filterType, setFilterType] = useState<"all" | "new" | "activated">(
-    "new"
+    "all"
   )
   const [filteredData, setFilteredData] = useState<null | Inventory>(null)
 
