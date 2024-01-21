@@ -14,9 +14,12 @@ import Text2 from "@/shared/typography/Text2"
 import Button from "@/shared/ui/Button"
 
 import { useAppSelector } from "@/redux/hooks"
-import { useClaimMutation, useInventoryQuery } from "@/redux/api/inventory"
+import {
+  useClaimMutation,
+  useClaimNftMutation,
+  useInventoryQuery,
+} from "@/redux/api/inventory"
 
-import ExternalLink from "@/shared/ui/ExternalLink"
 import {
   Dialog,
   DialogContent,
@@ -134,9 +137,13 @@ const Prize = ({
 }: InventoryItem) => {
   const { t } = useTranslation("products")
 
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false)
+  const [link, setLink] = useState("")
+
   const scale = useAppSelector((state) => state.scale.value)
 
   const [claim, { isLoading }] = useClaimMutation()
+  const [claimNft, { isLoading: isNftLoading }] = useClaimNftMutation()
 
   const onSubmit = async () => {
     try {
@@ -152,86 +159,148 @@ const Prize = ({
     }
   }
 
+  const onNftSubmit = async () => {
+    try {
+      const response = await claimNft({ inventoryPrizeId: id }).unwrap()
+      setSuccessDialogOpen(true)
+      setLink(response.claimUrl ? response.claimUrl : "")
+      // toast.success(t("inventory.activation-success"))
+    } catch (error) {
+      // @ts-expect-error no-rtkq-error-types
+      if (error.data.code === "inventory_prize_not_found") {
+        toast.error(t("inventory.error-inventory_prize_not_found"))
+      }
+      // @ts-expect-error no-rtkq-error-types
+      else if (error.data.code === "sponsor_prize_is_unclaimed") {
+        toast.error(t("inventory.error-sponsor_prize_is_unclaimed"))
+      }
+      // @ts-expect-error no-rtkq-error-types
+      else if (error.data.code === "inventory_prize_already_used") {
+        toast.error(t("inventory.error-inventory_prize_already_used"))
+      }
+      // @ts-expect-error no-rtkq-error-types
+      else if (error.data.code === "user_ton_address_not_set") {
+        toast.error(t("inventory.error-user_ton_address_not_set"))
+      }
+      // @ts-expect-error no-rtkq-error-types
+      else if (error.data.code === "mint_error") {
+        toast.error(t("inventory.error-mint_error"))
+      }
+      // @ts-expect-error no-rtkq-error-types
+      else if (error.data.code === "excepted_soon") {
+        toast.error(t("inventory.calendar-not-ready"))
+      } else {
+        toast.error(t("inventory.activation-error"))
+      }
+    }
+  }
+
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm",
-        scale &&
-          "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
-      )}
-    >
-      <img
-        src={image!}
+    <>
+      <div
         className={cn(
-          "w-full aspect-square rounded-xl",
-          scale && "3xl:rounded-[0.781vw]"
+          "flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm",
+          scale &&
+            "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
         )}
-      />
-      <TextAccent className="text-center">{title}</TextAccent>
-      {isUsed ? (
-        type === "nft" ? (
-          <Text0 className="text-center mt-auto">
-            {t("inventory.prize-activated")}
-          </Text0>
-        ) : (
-          type === "crypton_promo_code" && (
-            <Text0 className="text-center mt-auto">{userData}</Text0>
-          )
-        )
-      ) : (
-        <>
-          <Dialog>
-            <DialogTrigger
-              className={cn(
-                "flex items-center justify-center gap-2 mb-2 hover:text-gray-3 dark:hover:text-gray-3",
-                scale && "3xl:gap-[0.52vw] 3xl:mb-[0.52vw]"
-              )}
-            >
-              <Text2 className="underline underline-offset-4">
-                {t("inventory.how-to-activate")}
-              </Text2>
-              <HelpCircle
-                className={cn(
-                  "w-[18px] h-[18px]",
-                  scale && "3xl:w-[1.171vw] 3xl:h-[1.171vw]"
-                )}
-              />
-            </DialogTrigger>
-            <DialogContent
-              className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
-            >
-              <DialogTitle>{t("inventory.how-to-activate-prize")}</DialogTitle>
-              <Text0 className="h-[400px] md:h-auto overflow-auto break-words">
-                {instruction}
-              </Text0>
-            </DialogContent>
-          </Dialog>
-          {type === "nft" ? (
-            <ExternalLink
-              href="https://web3xms.com/quest/inventory"
-              className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
-            >
-              {t("inventory.activate-btn")}
-            </ExternalLink>
-          ) : type === "crypton_promo_code" ? (
-            <Button
-              isLoading={isLoading}
-              onClick={onSubmit}
-              className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
-            >
-              {t("inventory.activate-btn")}
-            </Button>
-          ) : (
-            type === "sponsor_promo_code" &&
-            userData && (
-              <TextAccent className="text-center mt-auto">
-                {userData}
-              </TextAccent>
-            )
+      >
+        <img
+          src={image!}
+          className={cn(
+            "w-full aspect-square rounded-xl",
+            scale && "3xl:rounded-[0.781vw]"
           )}
-        </>
-      )}
-    </div>
+        />
+        <TextAccent className="text-center">{title}</TextAccent>
+        {isUsed ? (
+          type === "nft" ? (
+            <Text0 className="text-center mt-auto">
+              {t("inventory.prize-activated")}
+            </Text0>
+          ) : (
+            type === "crypton_promo_code" && (
+              <Text0 className="text-center mt-auto">{userData}</Text0>
+            )
+          )
+        ) : (
+          <>
+            <Dialog>
+              <DialogTrigger
+                className={cn(
+                  "flex items-center justify-center gap-2 mb-2 hover:text-gray-3 dark:hover:text-gray-3",
+                  scale && "3xl:gap-[0.52vw] 3xl:mb-[0.52vw]"
+                )}
+              >
+                <Text2 className="underline underline-offset-4">
+                  {t("inventory.how-to-activate")}
+                </Text2>
+                <HelpCircle
+                  className={cn(
+                    "w-[18px] h-[18px]",
+                    scale && "3xl:w-[1.171vw] 3xl:h-[1.171vw]"
+                  )}
+                />
+              </DialogTrigger>
+              <DialogContent
+                className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
+              >
+                <DialogTitle>
+                  {t("inventory.how-to-activate-prize")}
+                </DialogTitle>
+                <Text0 className="h-[400px] md:h-auto overflow-auto break-words">
+                  {instruction}
+                </Text0>
+              </DialogContent>
+            </Dialog>
+
+            {type === "nft" ? (
+              <Button
+                isLoading={isNftLoading}
+                onClick={onNftSubmit}
+                className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
+              >
+                {t("inventory.activate-btn")}
+              </Button>
+            ) : type === "crypton_promo_code" ? (
+              <Button
+                isLoading={isLoading}
+                onClick={onSubmit}
+                className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
+              >
+                {t("inventory.activate-btn")}
+              </Button>
+            ) : (
+              type === "sponsor_promo_code" &&
+              userData && (
+                <TextAccent className="text-center mt-auto">
+                  {userData}
+                </TextAccent>
+              )
+            )}
+          </>
+        )}
+      </div>
+
+      <Dialog open={successDialogOpen} onOpenChange={setSuccessDialogOpen}>
+        <DialogContent
+          className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
+        >
+          <DialogTitle>{t("inventory.activation-success")}</DialogTitle>
+          <Text0>{t("inventory.success-dialog-text-1")}</Text0>
+          <Text0>
+            {t("inventory.success-dialog-text-2")}{" "}
+            <a
+              href={link}
+              target="_blank"
+              className="underline underline-offset-4"
+            >
+              {t("inventory.success-dialog-link")}
+            </a>
+            .
+          </Text0>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
 
