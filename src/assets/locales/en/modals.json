@@ -15,6 +15,12 @@
     "request-success": "Your email has been successfully changed",
     "close-dialog": "Close"
   },
+  "change-ton": {
+    "heading": "Changing the TON address",
+    "status": "A wallet is linked to your account:",
+    "Для изменения, подключите к сайту кошелёк с другим адресом.": "To change it, connect a wallet with a different address to the Meta mask website.",
+    "подключить": "connect"
+  },
   "change-wallet": {
     "heading": "Synchronize wallet",
     "wallet-acc-unpresent": {
