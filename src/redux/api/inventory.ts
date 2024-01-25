@@ -9,6 +9,13 @@ interface ClaimResponse {
   claim_url: string | null
 }
 
+interface NFTClaimResponse {
+  instruction: string | null
+  prizeCode: string | null
+  helpText: string | null
+  claimUrl: string | null
+}
+
 const inventoryApi = api.injectEndpoints({
   endpoints: (build) => ({
     inventory: build.query<Inventory, void>({
@@ -35,8 +42,17 @@ const inventoryApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Inventory"],
     }),
+    claimNft: build.mutation<NFTClaimResponse, { inventoryPrizeId: number }>({
+      query: (body) => ({
+        url: "users/inventory/claim-nft/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Inventory"],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useInventoryQuery, useClaimMutation } = inventoryApi
+export const { useInventoryQuery, useClaimMutation, useClaimNftMutation } =
+  inventoryApi

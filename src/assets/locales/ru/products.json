@@ -60,6 +60,14 @@
     "prize-activated": "Приз активирован",
     "how-to-activate": "Как активировать?",
     "how-to-activate-prize": "Как активировать приз?",
-    "activate-btn": "активировать"
+    "activate-btn": "активировать",
+    "error-inventory_prize_not_found": "Этот приз не найден, либо он не ваш",
+    "error-sponsor_prize_is_unclaimed": "Приз спонсора не был получен",
+    "error-inventory_prize_already_used": "Приз уже был использован",
+    "error-user_ton_address_not_set": "Вы не установили адрес TON кошелька",
+    "error-mint_error": "Ошибка Минта NFT",
+    "success-dialog-text-1": "NFT придёт на ваш TON кошелёк в течении нескольких минут.",
+    "success-dialog-text-2": "Ваша NFT доступна по этой",
+    "success-dialog-link": "ссылке"
   }
 }

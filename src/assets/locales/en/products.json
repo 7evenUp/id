@@ -60,6 +60,14 @@
     "prize-activated": "Prize is activated",
     "how-to-activate": "How to activate?",
     "how-to-activate-prize": "How to activate prize?",
-    "activate-btn": "activate"
+    "activate-btn": "activate",
+    "error-inventory_prize_not_found": "This prize has not been found, or it is not yours",
+    "error-sponsor_prize_is_unclaimed": "The sponsor's prize was not received",
+    "error-inventory_prize_already_used": "The prize has already been used",
+    "error-user_ton_address_not_set": "You have not set the address of the TON wallet",
+    "error-mint_error": "NFT Mint Error",
+    "success-dialog-text-1": "The NFT will be credited to your TON wallet within a few minutes.",
+    "success-dialog-text-2": "Your NFT is available at this",
+    "success-dialog-link": "link"
   }
 }

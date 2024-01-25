@@ -37,8 +37,7 @@ const Products = () => {
           className={cn(
             "absolute w-[16.666%] h-[3px] rounded-full left-0 -bottom-0.5 bg-gray-1 dark:bg-gray-5 transition-transform",
             activeProduct === TABS_VALUES.inventory && "translate-x-full",
-            activeProduct === TABS_VALUES["research"] &&
-              "translate-x-[200%]",
+            activeProduct === TABS_VALUES["research"] && "translate-x-[200%]",
             activeProduct === TABS_VALUES.tools && "translate-x-[300%]",
             activeProduct === TABS_VALUES.calendar && "translate-x-[400%]",
             scale && "3xl:h-[0.195vw] 3xl:-bottom-[0.13vw]"
