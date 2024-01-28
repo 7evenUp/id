@@ -3,6 +3,20 @@ import { api } from "./core"
 
 import { User } from "@/types/user"
 
+interface VerifyTonPayload {
+  address: string
+  walletStateInit: string
+  stateInit: {
+    name: string
+    proof: {
+      timestamp: string
+      signature: string
+      payload: string
+      domain: { lengthBytes: number; value: string }
+    }
+  }
+}
+
 const profileApi = api.injectEndpoints({
   endpoints: (build) => ({
     userProfile: build.query<User, void>({
@@ -108,6 +122,20 @@ const profileApi = api.injectEndpoints({
         errorCode: response.data.code,
       }),
     }),
+    verifyTon: build.mutation<void, VerifyTonPayload>({
+      query: (body) => ({
+        url: "users/wallets/ton/verify/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["UserProfile"],
+      transformErrorResponse: (response) => ({
+        // @ts-expect-error No-Error-Types
+        message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        errorCode: response.data.code,
+      }),
+    }),
     updateWallet: build.mutation<User, Pick<User, "wallet">>({
       query: (body) => ({
         url: "users/change-wallet/",
@@ -182,6 +210,7 @@ export const {
   useVerifyEmailMutation,
   useUpdateWaxMutation,
   useUpdateTonMutation,
+  useVerifyTonMutation,
   useUpdateWalletMutation,
   useUpdateDiscordMutation,
   useUpdateTelegramMutation,

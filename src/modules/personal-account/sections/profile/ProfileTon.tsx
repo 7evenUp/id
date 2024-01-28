@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
-import {
-  useTonConnectModal,
-  useTonConnectUI,
-  toUserFriendlyAddress,
-} from "@tonconnect/ui-react"
+import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
 
 import Plus from "@/assets/icons/plus.svg?react"
 
@@ -18,7 +14,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { LIMIT_REACHED } from "@/utils/errorCodes"
 
-import { useUpdateTonMutation, useUserProfileQuery } from "@/redux/api/profile"
+import { useUserProfileQuery, useVerifyTonMutation } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
@@ -33,36 +29,78 @@ const ProfileTon = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [updateTon] = useUpdateTonMutation()
+  // const [updateTon] = useUpdateTonMutation()
+  const [verifyTon, { data, error }] = useVerifyTonMutation()
   const [tonConnectUI] = useTonConnectUI()
 
   const { open } = useTonConnectModal()
 
   useEffect(() => {
-    const unsubscribe = tonConnectUI.onStatusChange((walletAndWalletInfo) => {
-      if (walletAndWalletInfo) {
+    if (data) {
+      console.log("verifyTonData: ", data)
+    }
+  }, [data])
+
+  useEffect(() => {
+    if (error) {
+      console.log("Verify error: ", error)
+    }
+  }, [error])
+
+  useEffect(() => {
+    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
+      if (wallet) {
         if (
-          walletAndWalletInfo.connectItems?.tonProof &&
-          "proof" in walletAndWalletInfo.connectItems.tonProof
+          wallet.connectItems?.tonProof &&
+          "proof" in wallet.connectItems.tonProof
         ) {
-          console.log(walletAndWalletInfo)
+          console.log(wallet)
+          toast.promise(
+            verifyTon({
+              address: wallet.account.address,
+              walletStateInit: wallet.account.walletStateInit,
+              stateInit: {
+                name: "ton_proof",
+                proof: {
+                  ...wallet.connectItems.tonProof.proof,
+                  timestamp:
+                    wallet.connectItems.tonProof.proof.timestamp.toString(),
+                },
+              },
+            }).unwrap(),
+            {
+              loading: t("toast-loading"),
+              success: t("ton-response-success"),
+              error: (error) => {
+                if (error.errorCode === LIMIT_REACHED) {
+                  return t("ton-response-error-limit")
+                } else if (error.errorCode === "invalid_proof") {
+                  return "Invalid proof"
+                } else if (error.errorCode === "invalid_address") {
+                  return "Invalid address"
+                } else {
+                  return t("ton-response-error")
+                }
+              },
+            }
+          )
         }
 
-        const address = toUserFriendlyAddress(
-          walletAndWalletInfo.account.address
-        )
+        // const address = toUserFriendlyAddress(
+        //   wallet.account.address
+        // )
 
-        toast.promise(updateTon({ address }).unwrap(), {
-          loading: t("toast-loading"),
-          success: t("ton-response-success"),
-          error: (error) => {
-            if (error.errorCode === LIMIT_REACHED) {
-              return t("ton-response-error-limit")
-            } else {
-              return t("ton-response-error")
-            }
-          },
-        })
+        // toast.promise(updateTon({ address }).unwrap(), {
+        //   loading: t("toast-loading"),
+        //   success: t("ton-response-success"),
+        //   error: (error) => {
+        //     if (error.errorCode === LIMIT_REACHED) {
+        //       return t("ton-response-error-limit")
+        //     } else {
+        //       return t("ton-response-error")
+        //     }
+        //   },
+        // })
       }
     })
     return () => {
