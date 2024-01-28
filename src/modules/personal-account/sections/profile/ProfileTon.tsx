@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
+import { Address } from "@ton/core"
 
 import Plus from "@/assets/icons/plus.svg?react"
 
@@ -137,7 +138,13 @@ const ProfileTon = () => {
       </span>
 
       {tonWallet ? (
-        <span>{cutWalletAddr(tonWallet)}</span>
+        <span>
+          {cutWalletAddr(
+            Address.parseRaw(
+              Address.parseFriendly(tonWallet).address.toRawString()
+            ).toString({ bounceable: false })
+          )}
+        </span>
       ) : (
         <button
           className={cn(
