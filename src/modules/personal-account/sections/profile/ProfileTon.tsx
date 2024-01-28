@@ -41,6 +41,13 @@ const ProfileTon = () => {
   useEffect(() => {
     const unsubscribe = tonConnectUI.onStatusChange((walletAndWalletInfo) => {
       if (walletAndWalletInfo) {
+        if (
+          walletAndWalletInfo.connectItems?.tonProof &&
+          "proof" in walletAndWalletInfo.connectItems.tonProof
+        ) {
+          console.log(walletAndWalletInfo)
+        }
+
         const address = toUserFriendlyAddress(
           walletAndWalletInfo.account.address
         )
@@ -68,6 +75,10 @@ const ProfileTon = () => {
   const { tonWallet } = userProfile
 
   const onAddClick = async () => {
+    tonConnectUI.setConnectRequestParameters({
+      state: "ready",
+      value: { tonProof: "payload to sign" },
+    })
     if (tonConnectUI.connected) {
       await tonConnectUI.disconnect()
       open()
