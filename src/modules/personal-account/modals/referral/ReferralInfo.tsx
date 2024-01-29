@@ -7,6 +7,7 @@ import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
 import TextTip from "@/shared/typography/TextTip"
 import TextAccent from "@/shared/typography/TextAccent"
+import AccentNumber from "@/shared/typography/AccentNumber"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
@@ -91,10 +92,76 @@ const ReferralInfo = () => {
   )
 }
 
+const levelsData = [
+  {
+    lvl: 0,
+    referralNeeded: 0,
+    cashback: "10%",
+  },
+  {
+    lvl: 1,
+    referralNeeded: 5,
+    cashback: "11%",
+  },
+  {
+    lvl: 2,
+    referralNeeded: 8,
+    cashback: "12%",
+  },
+  {
+    lvl: 3,
+    referralNeeded: 10,
+    cashback: "13%",
+  },
+  {
+    lvl: 4,
+    referralNeeded: 17,
+    cashback: "14%",
+  },
+  {
+    lvl: 5,
+    referralNeeded: 25,
+    cashback: "15%",
+  },
+  {
+    lvl: 6,
+    referralNeeded: 30,
+    cashback: "16%",
+  },
+  {
+    lvl: 7,
+    referralNeeded: 35,
+    cashback: "17%",
+  },
+  {
+    lvl: 8,
+    referralNeeded: 40,
+    cashback: "18%",
+  },
+  {
+    lvl: 9,
+    referralNeeded: 45,
+    cashback: "19%",
+  },
+  {
+    lvl: 10,
+    referralNeeded: 50,
+    cashback: "20%",
+  },
+]
+
 const LevelsTable = () => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
+
+  const { data: profileData } = useUserProfileQuery()
+
+  if (!profileData) return null
+
+  const {
+    referralInfo: { refProgramLevel },
+  } = profileData
 
   return (
     <table>
@@ -122,83 +189,31 @@ const LevelsTable = () => {
           scale && "typography-text-2_large"
         )}
       >
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            0
-          </td>
-          <td className="text-center">0</td>
-          <td className="text-right">10%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            1
-          </td>
-          <td className="text-center">5</td>
-          <td className="text-right">11%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            2
-          </td>
-          <td className="text-center">8</td>
-          <td className="text-right">12%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            3
-          </td>
-          <td className="text-center">10</td>
-          <td className="text-right">13%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            4
-          </td>
-          <td className="text-center">17</td>
-          <td className="text-right">14%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            5
-          </td>
-          <td className="text-center">25</td>
-          <td className="text-right">15%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            6
-          </td>
-          <td className="text-center">30</td>
-          <td className="text-right">16%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            7
-          </td>
-          <td className="text-center">35</td>
-          <td className="text-right">17%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            8
-          </td>
-          <td className="text-center">40</td>
-          <td className="text-right">18%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            9
-          </td>
-          <td className="text-center">45</td>
-          <td className="text-right">19%</td>
-        </tr>
-        <tr>
-          <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
-            10
-          </td>
-          <td className="text-center">50</td>
-          <td className="text-right">20%</td>
-        </tr>
+        {levelsData.map((el) => (
+          <tr key={el.lvl}>
+            <td className={cn("text-left py-1", scale && "3xl:py-[0.26vw]")}>
+              {el.lvl === refProgramLevel ? (
+                <AccentNumber>{el.lvl}</AccentNumber>
+              ) : (
+                el.lvl
+              )}
+            </td>
+            <td className="text-center">
+              {el.lvl === refProgramLevel ? (
+                <AccentNumber>{el.referralNeeded}</AccentNumber>
+              ) : (
+                el.referralNeeded
+              )}
+            </td>
+            <td className="text-right">
+              {el.lvl === refProgramLevel ? (
+                <AccentNumber>{el.cashback}</AccentNumber>
+              ) : (
+                el.cashback
+              )}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )

@@ -5,6 +5,7 @@ import { cn } from "@/lib/classNames"
 import { useAppSelector } from "@/redux/hooks"
 
 import { productToColor } from "@/utils/productToColor"
+
 import TextAccent from "./TextAccent"
 
 const AccentNumber = ({ children }: { children: React.ReactNode }) => {
