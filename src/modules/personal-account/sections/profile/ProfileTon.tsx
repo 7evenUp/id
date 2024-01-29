@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
-import { Address } from "@ton/core"
+import { Address } from "@ton/core/dist/address/Address"
 
 import Plus from "@/assets/icons/plus.svg?react"
 
@@ -22,6 +22,8 @@ import { cn } from "@/lib/classNames"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
+const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
+
 const ProfileTon = () => {
   const { t } = useTranslation()
 
@@ -30,23 +32,10 @@ const ProfileTon = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfile } = useUserProfileQuery()
-  // const [updateTon] = useUpdateTonMutation()
-  const [verifyTon, { data, error }] = useVerifyTonMutation()
+  const [verifyTon] = useVerifyTonMutation()
   const [tonConnectUI] = useTonConnectUI()
 
   const { open } = useTonConnectModal()
-
-  useEffect(() => {
-    if (data) {
-      console.log("verifyTonData: ", data)
-    }
-  }, [data])
-
-  useEffect(() => {
-    if (error) {
-      console.log("Verify error: ", error)
-    }
-  }, [error])
 
   useEffect(() => {
     const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
@@ -76,9 +65,9 @@ const ProfileTon = () => {
                 if (error.errorCode === LIMIT_REACHED) {
                   return t("ton-response-error-limit")
                 } else if (error.errorCode === "invalid_proof") {
-                  return "Invalid proof"
+                  return t("ton-response-error-invalid-proof")
                 } else if (error.errorCode === "invalid_address") {
-                  return "Invalid address"
+                  return t("ton-response-error-invalid-address")
                 } else {
                   return t("ton-response-error")
                 }
@@ -86,22 +75,6 @@ const ProfileTon = () => {
             }
           )
         }
-
-        // const address = toUserFriendlyAddress(
-        //   wallet.account.address
-        // )
-
-        // toast.promise(updateTon({ address }).unwrap(), {
-        //   loading: t("toast-loading"),
-        //   success: t("ton-response-success"),
-        //   error: (error) => {
-        //     if (error.errorCode === LIMIT_REACHED) {
-        //       return t("ton-response-error-limit")
-        //     } else {
-        //       return t("ton-response-error")
-        //     }
-        //   },
-        // })
       }
     })
     return () => {
@@ -116,7 +89,7 @@ const ProfileTon = () => {
   const onAddClick = async () => {
     tonConnectUI.setConnectRequestParameters({
       state: "ready",
-      value: { tonProof: "payload to sign" },
+      value: { tonProof: TON_PAYLOAD_SECRET },
     })
     if (tonConnectUI.connected) {
       await tonConnectUI.disconnect()

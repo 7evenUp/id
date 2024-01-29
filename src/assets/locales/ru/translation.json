@@ -20,6 +20,8 @@
   "ton-response-success": "Ваш ton кошелёк был успешно изменён",
   "ton-response-error": "Не удалось изменить ton кошелёк. Попробуйте позже",
   "ton-response-error-limit": "Вы не можете обновлять ton дважды в месяц",
+  "ton-response-error-invalid-proof": "Мы не смогли верифицировать ваш кошелёк. Невалидный proof",
+  "ton-response-error-invalid-address": "Мы не смогли верифицировать ваш кошелёк. Невалидный адрес",
   "discord-response-success": "Ваш discord был успешно изменён",
   "discord-response-error": "Не удалось изменить discord никнейм",
   "discord-response-error-limit": "Вы не можете обновлять discord дважды в месяц",
