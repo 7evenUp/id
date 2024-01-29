@@ -21,6 +21,7 @@ import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 import { useAppSelector } from "@/redux/hooks"
 
 import { Subscription } from "@/types/subscriptions"
+
 import { PROMO_CODE_NOT_FOUND } from "@/utils/errorCodes"
 
 const REFERRAL_DISCOUNT_AMOUNT = 5
