@@ -1,7 +1,7 @@
 import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
-import { Address } from "@ton/core/dist/address/Address"
+// import { Address } from "@ton/core/dist/address/Address"
 
 import Text0 from "@/shared/typography/Text0"
 import Button from "@/shared/ui/Button"
@@ -19,7 +19,7 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
 
-const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
+// const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
 
 const UpdateTonWallet = ({
   children,
@@ -45,10 +45,10 @@ const UpdateTonWallet = ({
 
   const handleConnect = async () => {
     closeDialog()
-    tonConnectUI.setConnectRequestParameters({
-      state: "ready",
-      value: { tonProof: TON_PAYLOAD_SECRET },
-    })
+    // tonConnectUI.setConnectRequestParameters({
+    //   state: "ready",
+    //   value: { tonProof: TON_PAYLOAD_SECRET },
+    // })
     if (tonConnectUI.connected) {
       await tonConnectUI.disconnect()
       openTon()
@@ -78,13 +78,14 @@ const UpdateTonWallet = ({
               scale && "3xl:text-[1.0417vw]/[1.5625vw]"
             )}
           >
-            {cutWalletAddr(
+            {cutWalletAddr(tonWallet ? tonWallet : "")}
+            {/* {cutWalletAddr(
               tonWallet
                 ? Address.parseRaw(
                     Address.parseFriendly(tonWallet).address.toRawString()
                   ).toString({ bounceable: false })
                 : ""
-            )}
+            )} */}
           </span>
         </div>
         <Text0>

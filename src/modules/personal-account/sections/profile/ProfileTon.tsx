@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
-import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
-import { Address } from "@ton/core/dist/address/Address"
+import {
+  useTonConnectModal,
+  useTonConnectUI,
+  toUserFriendlyAddress,
+} from "@tonconnect/ui-react"
+// import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
+// import { Address } from "@ton/core/dist/address/Address"
 
 import Plus from "@/assets/icons/plus.svg?react"
 
@@ -15,14 +20,15 @@ import RowItem from "@/shared/components/RowItem"
 
 import { LIMIT_REACHED } from "@/utils/errorCodes"
 
-import { useUserProfileQuery, useVerifyTonMutation } from "@/redux/api/profile"
+import { useUpdateTonMutation, useUserProfileQuery } from "@/redux/api/profile"
+// import { useUserProfileQuery, useVerifyTonMutation } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
-const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
+// const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
 
 const ProfileTon = () => {
   const { t } = useTranslation()
@@ -32,51 +38,71 @@ const ProfileTon = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfile } = useUserProfileQuery()
-  const [verifyTon] = useVerifyTonMutation()
+  const [updateTon] = useUpdateTonMutation()
+  // const [verifyTon] = useVerifyTonMutation()
   const [tonConnectUI] = useTonConnectUI()
 
   const { open } = useTonConnectModal()
 
   useEffect(() => {
-    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
-      if (wallet) {
-        if (
-          wallet.connectItems?.tonProof &&
-          "proof" in wallet.connectItems.tonProof
-        ) {
-          console.log(wallet)
-          toast.promise(
-            verifyTon({
-              address: wallet.account.address,
-              walletStateInit: wallet.account.walletStateInit,
-              stateInit: {
-                name: "ton_proof",
-                proof: {
-                  ...wallet.connectItems.tonProof.proof,
-                  timestamp:
-                    wallet.connectItems.tonProof.proof.timestamp.toString(),
-                },
-              },
-            }).unwrap(),
-            {
-              loading: t("toast-loading"),
-              success: t("ton-response-success"),
-              error: (error) => {
-                if (error.errorCode === LIMIT_REACHED) {
-                  return t("ton-response-error-limit")
-                } else if (error.errorCode === "invalid_proof") {
-                  return t("ton-response-error-invalid-proof")
-                } else if (error.errorCode === "invalid_address") {
-                  return t("ton-response-error-invalid-address")
-                } else {
-                  return t("ton-response-error")
-                }
-              },
+    const unsubscribe = tonConnectUI.onStatusChange((walletAndWalletInfo) => {
+      if (walletAndWalletInfo) {
+        const address = toUserFriendlyAddress(
+          walletAndWalletInfo.account.address
+        )
+
+        toast.promise(updateTon({ address }).unwrap(), {
+          loading: t("toast-loading"),
+          success: t("ton-response-success"),
+          error: (error) => {
+            if (error.errorCode === LIMIT_REACHED) {
+              return t("ton-response-error-limit")
+            } else {
+              return t("ton-response-error")
             }
-          )
-        }
+          },
+        })
       }
     })
+    // const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
+    //   if (wallet) {
+    //     if (
+    //       wallet.connectItems?.tonProof &&
+    //       "proof" in wallet.connectItems.tonProof
+    //     ) {
+    //       console.log(wallet)
+    //       toast.promise(
+    //         verifyTon({
+    //           address: wallet.account.address,
+    //           walletStateInit: wallet.account.walletStateInit,
+    //           stateInit: {
+    //             name: "ton_proof",
+    //             proof: {
+    //               ...wallet.connectItems.tonProof.proof,
+    //               timestamp:
+    //                 wallet.connectItems.tonProof.proof.timestamp.toString(),
+    //             },
+    //           },
+    //         }).unwrap(),
+    //         {
+    //           loading: t("toast-loading"),
+    //           success: t("ton-response-success"),
+    //           error: (error) => {
+    //             if (error.errorCode === LIMIT_REACHED) {
+    //               return t("ton-response-error-limit")
+    //             } else if (error.errorCode === "invalid_proof") {
+    //               return t("ton-response-error-invalid-proof")
+    //             } else if (error.errorCode === "invalid_address") {
+    //               return t("ton-response-error-invalid-address")
+    //             } else {
+    //               return t("ton-response-error")
+    //             }
+    //           },
+    //         }
+    //       )
+    //     }
+    //   }
+    // })
     return () => {
       unsubscribe()
     }
@@ -87,10 +113,10 @@ const ProfileTon = () => {
   const { tonWallet } = userProfile
 
   const onAddClick = async () => {
-    tonConnectUI.setConnectRequestParameters({
-      state: "ready",
-      value: { tonProof: TON_PAYLOAD_SECRET },
-    })
+    // tonConnectUI.setConnectRequestParameters({
+    //   state: "ready",
+    //   value: { tonProof: TON_PAYLOAD_SECRET },
+    // })
     if (tonConnectUI.connected) {
       await tonConnectUI.disconnect()
       open()
@@ -111,13 +137,14 @@ const ProfileTon = () => {
       </span>
 
       {tonWallet ? (
-        <span>
-          {cutWalletAddr(
-            Address.parseRaw(
-              Address.parseFriendly(tonWallet).address.toRawString()
-            ).toString({ bounceable: false })
-          )}
-        </span>
+        <span>{cutWalletAddr(tonWallet)}</span>
+        // <span>
+        //   {cutWalletAddr(
+        //     Address.parseRaw(
+        //       Address.parseFriendly(tonWallet).address.toRawString()
+        //     ).toString({ bounceable: false })
+        //   )}
+        // </span>
       ) : (
         <button
           className={cn(
