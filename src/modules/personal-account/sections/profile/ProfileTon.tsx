@@ -144,30 +144,30 @@ const ProfileTon = () => {
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
-        <UpdateTonWallet
-          closeDialog={() => setDialogOpened(false)}
-          open={dialogOpened}
-          onOpenChange={setDialogOpened}
-        >
-          {tonWallet ? (
+        {tonWallet ? (
+          <UpdateTonWallet
+            closeDialog={() => setDialogOpened(false)}
+            open={dialogOpened}
+            onOpenChange={setDialogOpened}
+          >
             <EditButton />
-          ) : (
-            <div
+          </UpdateTonWallet>
+        ) : (
+          <div
+            className={cn(
+              "w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+              scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+            )}
+            onClick={onAddClick}
+          >
+            <Plus
               className={cn(
-                "w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+                "absolute w-5 h-5",
                 scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
               )}
-              onClick={onAddClick}
-            >
-              <Plus
-                className={cn(
-                  "absolute w-5 h-5",
-                  scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
-                )}
-              />
-            </div>
-          )}
-        </UpdateTonWallet>
+            />
+          </div>
+        )}
       </div>
 
       {/* Desktop editing */}
