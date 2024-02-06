@@ -82,13 +82,10 @@ const ProfileTon = () => {
   }, [])
 
   useEffect(() => {
-    console.log('inside useEffect')
     if (isVerifySuccess) {
-      console.log('inside if statement')
       setTimeout(() => {
-        console.log('check if working')
         refetch()
-      }, 100)
+      }, 2000)
     }
   }, [isVerifySuccess])
 
