@@ -31,8 +31,8 @@ const ProfileTon = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { data: userProfile } = useUserProfileQuery()
-  const [verifyTon] = useVerifyTonMutation()
+  const { data: userProfile, refetch } = useUserProfileQuery()
+  const [verifyTon, { isSuccess: isVerifySuccess }] = useVerifyTonMutation()
   const [tonConnectUI] = useTonConnectUI()
 
   const { open } = useTonConnectModal()
@@ -44,7 +44,6 @@ const ProfileTon = () => {
           wallet.connectItems?.tonProof &&
           "proof" in wallet.connectItems.tonProof
         ) {
-          console.log(wallet)
           toast.promise(
             verifyTon({
               address: wallet.account.address,
@@ -81,6 +80,14 @@ const ProfileTon = () => {
       unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    if (isVerifySuccess) {
+      setTimeout(() => {
+        refetch()
+      }, 2000)
+    }
+  }, [isVerifySuccess])
 
   if (!userProfile) return null
 
@@ -137,30 +144,30 @@ const ProfileTon = () => {
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
-        <UpdateTonWallet
-          closeDialog={() => setDialogOpened(false)}
-          open={dialogOpened}
-          onOpenChange={setDialogOpened}
-        >
-          {tonWallet ? (
+        {tonWallet ? (
+          <UpdateTonWallet
+            closeDialog={() => setDialogOpened(false)}
+            open={dialogOpened}
+            onOpenChange={setDialogOpened}
+          >
             <EditButton />
-          ) : (
-            <div
+          </UpdateTonWallet>
+        ) : (
+          <div
+            className={cn(
+              "w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+              scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+            )}
+            onClick={onAddClick}
+          >
+            <Plus
               className={cn(
-                "w-5 h-5 cursor-pointer rounded-full hover:shadow-[0_0_0_1px_#333333] dark:hover:shadow-[0_0_0_1px_#BDBDBD] transition-all active:opacity-80 dark:active:opacity-80",
+                "absolute w-5 h-5",
                 scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
               )}
-              onClick={onAddClick}
-            >
-              <Plus
-                className={cn(
-                  "absolute w-5 h-5",
-                  scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
-                )}
-              />
-            </div>
-          )}
-        </UpdateTonWallet>
+            />
+          </div>
+        )}
       </div>
 
       {/* Desktop editing */}

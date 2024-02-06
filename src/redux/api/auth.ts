@@ -19,6 +19,17 @@ export interface MailRegParams {
 
 const authApi = api.injectEndpoints({
   endpoints: (build) => ({
+    authByCode: build.mutation<void, { code: string }>({
+      query: ({ code }) => ({
+        url: `users/authenticate/?code=${code}`,
+        method: "GET",
+      }),
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        // @ts-expect-error No-Error-Types
+        message: response.data?.detail,
+      }),
+    }),
     authByWallet: build.mutation<void, WalletReqParams>({
       query: (body) => ({
         url: "users/authenticate-by-wallet/",
@@ -29,6 +40,18 @@ const authApi = api.injectEndpoints({
     registerByWallet: build.mutation<void, WalletReqParams>({
       query: (body) => ({
         url: "users/register-web-wallet/",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        // @ts-expect-error No-Error-Types
+        code: response.data?.code,
+      }),
+    }),
+    registerByWalletMobile: build.mutation<void, WalletReqParams>({
+      query: (body) => ({
+        url: "users/register-web-wallet/?use_verification_code=true",
         method: "POST",
         body,
       }),
@@ -50,9 +73,33 @@ const authApi = api.injectEndpoints({
         message: response.data?.detail,
       }),
     }),
+    loginMobile: build.mutation<void, { email: string; redirect_url: string }>({
+      query: (body) => ({
+        url: "users/login/?use_verification_code=true",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        // @ts-expect-error No-Error-Types
+        message: response.data?.detail,
+      }),
+    }),
     register: build.mutation<void, MailRegParams>({
       query: (body) => ({
         url: "users/register-web/",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        // @ts-expect-error No-Error-Types
+        message: response.data?.detail,
+      }),
+    }),
+    registerMobile: build.mutation<void, MailRegParams>({
+      query: (body) => ({
+        url: "users/register-web/?use_verification_code=true",
         method: "POST",
         body,
       }),
@@ -73,9 +120,13 @@ const authApi = api.injectEndpoints({
 })
 
 export const {
+  useAuthByCodeMutation,
   useLoginMutation,
+  useLoginMobileMutation,
   useRegisterMutation,
+  useRegisterMobileMutation,
   useLazyLogoutQuery,
   useAuthByWalletMutation,
   useRegisterByWalletMutation,
+  useRegisterByWalletMobileMutation,
 } = authApi

@@ -8,5 +8,6 @@
   "tg_limit_reached": "You cannot update telegram twice a month",
   "promocode_not_found": "Promocode is invalid",
   "top-up-minimum": "Required a minimum of",
-  "too-many-requests": "Too many requests. Please try again later"
+  "too-many-requests": "Too many requests. Please try again later",
+  "invalid-code": "Invalid code"
 }
