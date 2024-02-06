@@ -1,12 +1,15 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
+import { isDesktop } from "react-device-detect"
 
 import MoveLeft from "@/assets/icons/move-left.svg?react"
 
 import LoginMailForm from "./LoginMailForm"
+import LoginMailFormMobile from "./LoginMailFormMobile"
 import RegisterMailForm from "./RegisterMailForm"
+import RegisterMailFormMobile from "./RegisterMailFormMobile"
 
-import { useLoginMutation } from "@/redux/api/auth"
+import { useLoginMobileMutation, useLoginMutation } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
@@ -21,6 +24,11 @@ const MailMode = ({ back }: { back: () => void }) => {
   const [, { isError, reset, error }] = useLoginMutation({
     fixedCacheKey: "login-by-mail",
   })
+
+  const [, { isError: isMobileError, reset: mobileReset, error: mobileError }] =
+    useLoginMobileMutation({
+      fixedCacheKey: "login-by-mail-mobile",
+    })
 
   return (
     <>
@@ -39,7 +47,8 @@ const MailMode = ({ back }: { back: () => void }) => {
         />
         <span className="text-left">{t("login.another-method")}</span>
       </button>
-      {
+
+      {isDesktop ? (
         // @ts-expect-error No-Error-Types
         isError && error.status !== 429 ? (
           <RegisterMailForm
@@ -50,7 +59,19 @@ const MailMode = ({ back }: { back: () => void }) => {
         ) : (
           <LoginMailForm emailInput={usedEmail} setEmailInput={setUsedEmail} />
         )
-      }
+      ) : // @ts-expect-error No-Error-Types
+      isMobileError && mobileError.status !== 429 ? (
+        <RegisterMailFormMobile
+          emailInput={usedEmail}
+          setEmailInput={setUsedEmail}
+          resetLoginError={mobileReset}
+        />
+      ) : (
+        <LoginMailFormMobile
+          emailInput={usedEmail}
+          setEmailInput={setUsedEmail}
+        />
+      )}
     </>
   )
 }

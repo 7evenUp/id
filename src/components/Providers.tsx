@@ -63,8 +63,8 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ReduxProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <TonConnectUIProvider manifestUrl="https://id-dev.crypton.xyz/tonconnect-manifest.json">
-        <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+        <TonConnectUIProvider manifestUrl="https://id.crypton.xyz/tonconnect-manifest.json">
+          <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
         </TonConnectUIProvider>
       </PersistGate>
     </ReduxProvider>

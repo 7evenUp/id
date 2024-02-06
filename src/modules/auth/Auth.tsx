@@ -3,6 +3,8 @@ import { useAccount, useDisconnect, useSignMessage } from "wagmi"
 import { useWeb3Modal } from "@web3modal/wagmi/react"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
+import { isDesktop } from "react-device-detect"
+import { toast } from "sonner"
 
 import Loader from "@/assets/icons/loader.svg?react"
 import Web3Logo from "@/assets/icons/utility/Web3_logo.svg?react"
@@ -13,6 +15,7 @@ import MailLogo from "@/assets/icons/utility/Mail_logo.svg?react"
 import AuthButton from "./components/AuthButton"
 import MailMode from "./components/MailMode"
 import RegisterWalletForm from "./components/RegisterWalletForm"
+import RegisterWalletFormMobile from "./components/RegisterWalletFormMobile"
 
 import { Skeleton } from "@/shared/ui/Skeleton"
 
@@ -22,8 +25,8 @@ import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
-import { toast } from "sonner"
 
 const AUTH_MESSAGE = "Authorization"
 const SIGN_REJECT_ERROR = "UserRejectedRequestError"
@@ -173,9 +176,18 @@ const Auth = () => {
               </div>
             )}
 
-            {isAuthError && (
-              <RegisterWalletForm signature={signature} back={() => reset()} />
-            )}
+            {isAuthError &&
+              (isDesktop ? (
+                <RegisterWalletForm
+                  signature={signature}
+                  back={() => reset()}
+                />
+              ) : (
+                <RegisterWalletFormMobile
+                  signature={signature}
+                  back={() => reset()}
+                />
+              ))}
 
             {isMailMode && <MailMode back={() => setIsMailMode(false)} />}
           </div>

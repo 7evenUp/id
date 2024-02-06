@@ -50,7 +50,7 @@ const LoginMailForm = ({
       .email(tSchema("email-incorrect-format")),
   })
 
-  const [trigger, { isLoading, isSuccess, error }] = useLoginMutation({
+  const [login, { isLoading, isSuccess, error }] = useLoginMutation({
     fixedCacheKey: "login-by-mail",
   })
 
@@ -69,7 +69,7 @@ const LoginMailForm = ({
 
     const redirect_url = window.location.origin
 
-    trigger({
+    login({
       email: cleanEmail,
       redirect_url,
     })
