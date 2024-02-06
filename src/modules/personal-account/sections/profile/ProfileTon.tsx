@@ -31,8 +31,8 @@ const ProfileTon = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { data: userProfile } = useUserProfileQuery()
-  const [verifyTon] = useVerifyTonMutation()
+  const { data: userProfile, refetch } = useUserProfileQuery()
+  const [verifyTon, { isSuccess: isVerifySuccess }] = useVerifyTonMutation()
   const [tonConnectUI] = useTonConnectUI()
 
   const { open } = useTonConnectModal()
@@ -81,6 +81,12 @@ const ProfileTon = () => {
       unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    if (isVerifySuccess) {
+      setTimeout(() => refetch(), 50)
+    }
+  }, [isVerifySuccess])
 
   if (!userProfile) return null
 
