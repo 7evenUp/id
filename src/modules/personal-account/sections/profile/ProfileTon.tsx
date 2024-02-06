@@ -44,7 +44,6 @@ const ProfileTon = () => {
           wallet.connectItems?.tonProof &&
           "proof" in wallet.connectItems.tonProof
         ) {
-          console.log(wallet)
           toast.promise(
             verifyTon({
               address: wallet.account.address,
@@ -83,8 +82,13 @@ const ProfileTon = () => {
   }, [])
 
   useEffect(() => {
+    console.log('inside useEffect')
     if (isVerifySuccess) {
-      setTimeout(() => refetch(), 50)
+      console.log('inside if statement')
+      setTimeout(() => {
+        console.log('check if working')
+        refetch()
+      }, 100)
     }
   }, [isVerifySuccess])
 
