@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
+import { useUserProfileQuery } from "@/redux/api/profile"
 import {
   WalletReqParams,
   useAuthByCodeMutation,
@@ -56,13 +57,29 @@ const RegisterWalletFormMobile = ({
 
   const { address } = useAccount()
 
-  const [regWallet, { isSuccess, isLoading, error }] =
+  const { refetch } = useUserProfileQuery()
+  const [regWallet, { isSuccess: isRegisterSuccess, isLoading, error }] =
     useRegisterByWalletMobileMutation()
 
   const [
     authByCode,
-    { isError: isAuthError, error: authError, isLoading: isAuthLoading },
+    {
+      isError: isAuthError,
+      error: authError,
+      isLoading: isAuthLoading,
+      isSuccess: isAuthSuccess,
+    },
   ] = useAuthByCodeMutation()
+
+  useEffect(() => {
+    if (isAuthSuccess) setTimeout(() => refetch(), 100)
+  }, [isAuthSuccess])
+
+  useEffect(() => {
+    if (isRegisterSuccess) {
+      setIsCodeSent(true)
+    }
+  }, [isRegisterSuccess])
 
   const formSchema = z.object({
     username: z.string().min(1, {
@@ -136,12 +153,6 @@ const RegisterWalletFormMobile = ({
       console.log("Catch error: ", error)
     }
   }
-
-  useEffect(() => {
-    if (isSuccess) {
-      setIsCodeSent(true)
-    }
-  }, [isSuccess])
 
   if (!address) return null
 
@@ -248,7 +259,7 @@ const RegisterWalletFormMobile = ({
       )}
 
       <div className={cn("flex mt-3", scale && "3xl:mt-[0.625vw]")}>
-        {isSuccess && !isAuthError && (
+        {isRegisterSuccess && !isAuthError && (
           <ResponseSuccessText>
             {t("code-sent-register-success")}{" "}
             {emailDomain in MAIL_TO_LINK ? (

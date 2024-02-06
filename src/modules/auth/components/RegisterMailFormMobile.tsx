@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
+import { useUserProfileQuery } from "@/redux/api/profile"
 import {
   MailRegParams,
   useAuthByCodeMutation,
@@ -48,6 +49,7 @@ const RegisterMailFormMobile = ({
   const [emailDomain, setEmailDomain] = useState("")
   const [isCodeSent, setIsCodeSent] = useState(false)
 
+  const { refetch } = useUserProfileQuery()
   const [
     registerMobile,
     {
@@ -56,11 +58,25 @@ const RegisterMailFormMobile = ({
       error: registerError,
     },
   ] = useRegisterMobileMutation()
-
   const [
     authByCode,
-    { isError: isAuthError, error: authError, isLoading: isAuthLoading },
+    {
+      isError: isAuthError,
+      error: authError,
+      isLoading: isAuthLoading,
+      isSuccess: isAuthSuccess,
+    },
   ] = useAuthByCodeMutation()
+
+  useEffect(() => {
+    if (isAuthSuccess) setTimeout(() => refetch(), 100)
+  }, [isAuthSuccess])
+
+  useEffect(() => {
+    if (isRegisterSuccess) {
+      setIsCodeSent(true)
+    }
+  }, [isRegisterSuccess])
 
   const formSchema = z.object({
     username: z.string().min(1, {
@@ -125,12 +141,6 @@ const RegisterMailFormMobile = ({
 
     registerMobile(payload)
   }
-
-  useEffect(() => {
-    if (isRegisterSuccess) {
-      setIsCodeSent(true)
-    }
-  }, [isRegisterSuccess])
 
   return (
     <>

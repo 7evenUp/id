@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@/shared/ui/Form"
 
+import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAuthByCodeMutation, useLoginMobileMutation } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
 
@@ -42,6 +43,7 @@ const LoginMailFormMobile = ({
   const [emailDomain, setEmailDomain] = useState("")
   const [isCodeSent, setIsCodeSent] = useState(false)
 
+  const { refetch } = useUserProfileQuery()
   const [
     loginMobile,
     { isLoading: isLoginLoading, isSuccess: isLoginSuccess, error: loginError },
@@ -51,8 +53,23 @@ const LoginMailFormMobile = ({
 
   const [
     authByCode,
-    { isError: isAuthError, error: authError, isLoading: isAuthLoading },
+    {
+      isError: isAuthError,
+      error: authError,
+      isLoading: isAuthLoading,
+      isSuccess: isAuthSuccess,
+    },
   ] = useAuthByCodeMutation()
+
+  useEffect(() => {
+    if (isAuthSuccess) setTimeout(() => refetch(), 100)
+  }, [isAuthSuccess])
+
+  useEffect(() => {
+    if (isLoginSuccess) {
+      setIsCodeSent(true)
+    }
+  }, [isLoginSuccess])
 
   const formSchema = z.object({
     email: z
@@ -107,12 +124,6 @@ const LoginMailFormMobile = ({
       console.log("Error: login by mobile")
     }
   }
-
-  useEffect(() => {
-    if (isLoginSuccess) {
-      setIsCodeSent(true)
-    }
-  }, [isLoginSuccess])
 
   return (
     <>
