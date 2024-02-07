@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
+import Copy from "@/assets/icons/copy.svg?react"
+import Check from "@/assets/icons/check.svg?react"
 
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
@@ -34,8 +36,6 @@ import {
 } from "@/shared/ui/Select"
 
 import { Inventory, InventoryItem } from "@/types/ny-inventory"
-
-// import { inventory } from "./inventoryData"
 
 import { cn } from "@/lib/classNames"
 
@@ -139,6 +139,7 @@ const Prize = ({
 
   const [successDialogOpen, setSuccessDialogOpen] = useState(false)
   const [link, setLink] = useState("")
+  const [isSponsorCopied, setIsSponsorCopied] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -192,6 +193,16 @@ const Prize = ({
       } else {
         toast.error(t("inventory.activation-error"))
       }
+    }
+  }
+
+  const onSponsorCopy = () => {
+    if (userData) {
+      navigator.clipboard.writeText(userData)
+      setIsSponsorCopied(true)
+      setTimeout(() => {
+        setIsSponsorCopied(false)
+      }, 3000)
     }
   }
 
@@ -272,9 +283,37 @@ const Prize = ({
             ) : (
               type === "sponsor_promo_code" &&
               userData && (
-                <TextAccent className="text-center mt-auto">
-                  {userData}
-                </TextAccent>
+                <button
+                  className={cn(
+                    "flex items-center gap-2 mx-auto mt-auto",
+                    scale && "3xl:gap-[0.52vw]"
+                  )}
+                  onClick={onSponsorCopy}
+                >
+                  <TextAccent className="text-center">
+                    {userData.length > 12
+                      ? `${userData.slice(0, 12)}...`
+                      : userData}
+                  </TextAccent>
+                  {isSponsorCopied ? (
+                    <Check
+                      className={cn(
+                        "animate-in fade-in-0 w-4 h-4",
+                        scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                      )}
+                    />
+                  ) : (
+                    <Copy
+                      className={cn(
+                        "animate-in fade-in-0 w-4 h-4",
+                        scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                      )}
+                    />
+                  )}
+                </button>
+                // <TextAccent className="text-center mt-auto">
+                //   {userData}
+                // </TextAccent>
               )
             )}
           </>
