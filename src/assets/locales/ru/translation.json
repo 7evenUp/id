@@ -22,6 +22,8 @@
   "ton-response-error-limit": "Вы не можете обновлять ton дважды в месяц",
   "ton-response-error-invalid-proof": "Мы не смогли верифицировать ваш кошелёк. Невалидный proof",
   "ton-response-error-invalid-address": "Мы не смогли верифицировать ваш кошелёк. Невалидный адрес",
+  "ton-telegram-wallet-is-not-supported": "Кошелёк Telegram не поддерживается. Мы сооветуем Вам использовать кошелёк Tonkeeper",
+  "ton-your-wallet-is-not-supported": "Мы не поддерживаем используемый вами кошелёк. Советуем использовать кошелёк Tonkeeper",
   "discord-response-success": "Ваш discord был успешно изменён",
   "discord-response-error": "Не удалось изменить discord никнейм",
   "discord-response-error-limit": "Вы не можете обновлять discord дважды в месяц",
