@@ -40,10 +40,19 @@ const ProfileTon = () => {
   useEffect(() => {
     const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
       if (wallet) {
+        if (wallet.appName === "telegram-wallet") {
+          toast.error(t("ton-telegram-wallet-is-not-supported"))
+          return
+        }
+
         if (
           wallet.connectItems?.tonProof &&
           "proof" in wallet.connectItems.tonProof
         ) {
+          if (!wallet.account.walletStateInit) {
+            toast.error(t("ton-your-wallet-is-not-supported"))
+          }
+
           toast.promise(
             verifyTon({
               address: wallet.account.address,

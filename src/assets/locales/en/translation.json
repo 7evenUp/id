@@ -22,6 +22,8 @@
   "ton-response-error-limit": "You cannot update ton twice a month",
   "ton-response-error-invalid-proof": "We couldn't verify your wallet. Invalid proof",
   "ton-response-error-invalid-address": "We couldn't verify your wallet. Invalid address",
+  "ton-telegram-wallet-is-not-supported": "The Telegram wallet is not supported. We recommend using the Tonkeeper wallet",
+  "ton-your-wallet-is-not-supported": "We do not support the wallet you are using. We recommend using the Tonkeeper wallet",
   "discord-response-success": "Your discord was successfully changed",
   "discord-response-error": "Unable to edit your discord",
   "discord-response-error-limit": "You cannot update discord twice a month",
