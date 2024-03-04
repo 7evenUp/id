@@ -10,6 +10,7 @@ import CalendarActiveIcon from "@/assets/icons/products/Calendar_Active.svg?reac
 import CalendarIcon from "@/assets/icons/products/Calendar.svg?react"
 // import UniverseIcon from "@/assets/icons/products/Universe.svg?react"
 import AcademyIcon from "@/assets/icons/products/Academy.svg?react"
+import NutcrackerIcon from "@/assets/icons/products/Nutcracker.png"
 
 import InventoryIcon from "@/assets/icons/package.svg?react"
 import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
@@ -48,6 +49,20 @@ const TabsTriggers = () => {
                 )}
               />
             )}
+          </div>
+        </Tooltip>
+      </TabsTrigger>
+      <TabsTrigger value={TABS_VALUES.nutcracker}>
+        <Tooltip content={t("nutcracker.title")}>
+          <div>
+            <img
+              src={NutcrackerIcon}
+              className={cn(
+                "w-[26px] h-[26px]",
+                activeProduct === "nutcracker" ? "grayscale-0" : "grayscale",
+                scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+              )}
+            />
           </div>
         </Tooltip>
       </TabsTrigger>

@@ -11,14 +11,11 @@ const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => {
-  const scale = useAppSelector((state) => state.scale.value)
-
   return (
     <TabsPrimitive.List
       ref={ref}
       className={cn(
-        "flex items-center justify-between sm:justify-start w-full mb-9 border-b border-gray-2 dark:border-gray-2",
-        scale && "3xl:mb-[2.344vw]",
+        "flex items-center justify-between w-full border-b border-gray-2 dark:border-gray-2",
         className
       )}
       {...props}
@@ -37,7 +34,7 @@ const TabsTrigger = React.forwardRef<
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex-1 flex justify-center items-center group relative py-4 px-2 mobile:px-5 hover:bg-zinc-200/[0.50] active:bg-zinc-300/[0.50] dark:hover:bg-zinc-800/[0.50] dark:active:bg-zinc-700/[0.50] transition-colors",
+        "min-w-[85px] lg:min-w-[100px] flex-1 flex justify-center items-center group relative py-4 px-2 mobile:px-5 hover:bg-zinc-200/[0.50] active:bg-zinc-300/[0.50] dark:hover:bg-zinc-800/[0.50] dark:active:bg-zinc-700/[0.50] transition-colors",
         scale && "3xl:py-[1.042vw] 3xl:px-[1.302vw]",
         className
       )}

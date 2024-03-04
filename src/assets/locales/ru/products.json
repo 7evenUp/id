@@ -69,5 +69,8 @@
     "success-dialog-text-1": "NFT придёт на ваш TON кошелёк в течении нескольких минут.",
     "success-dialog-text-2": "Ваша NFT доступна по этой",
     "success-dialog-link": "ссылке"
+  },
+  "nutcracker": {
+    "title": "Щелкунчики"
   }
 }

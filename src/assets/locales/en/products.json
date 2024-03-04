@@ -69,5 +69,8 @@
     "success-dialog-text-1": "The NFT will be credited to your TON wallet within a few minutes.",
     "success-dialog-text-2": "Your NFT is available at this",
     "success-dialog-link": "link"
+  },
+  "nutcracker": {
+    "title": "The Nutcrackers"
   }
 }
