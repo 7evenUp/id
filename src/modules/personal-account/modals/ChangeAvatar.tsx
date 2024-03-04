@@ -1,6 +1,8 @@
 import { useState } from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
+import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
+import { toast } from "sonner"
 
 import Close from "@/assets/icons/close.svg?react"
 
@@ -10,36 +12,71 @@ import ModalTrigger from "../components/ModalTrigger"
 import UploadButton from "../components/UploadButton"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
+import ExternalLink from "@/shared/ui/ExternalLink"
+import Button from "@/shared/ui/Button"
 
-// import Text1 from "@/shared/typography/Text1"
-
-import { cn } from "@/lib/classNames"
+import TextAccent from "@/shared/typography/TextAccent"
+import Text0 from "@/shared/typography/Text0"
 
 import { useChangeAvatarMutation } from "@/redux/api/avatar"
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useGetNFTsQuery } from "@/redux/ton-api/nfts"
 import { useAppSelector } from "@/redux/hooks"
 
-const ChangeAvatar = () => {
+import { cn } from "@/lib/classNames"
+
+const NUTCRACKERS_ADDRESS = "EQB3Pd1e7fs89vw6wwlDzS-CrdvDY8phfdn7yKgvL6UQn6ij"
+const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
+
+const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
+
+  const [tonConnectUI] = useTonConnectUI()
+  const { open: openTon } = useTonConnectModal()
 
   const [file, setFile] = useState<File | null>(null)
   const [base64, setBase64] = useState("")
 
   const { data } = useUserProfileQuery()
-  const [trigger, { isSuccess, isLoading, isError }] = useChangeAvatarMutation()
 
-  const { id, avatars } = data!
+  const { id, avatars, tonWallet } = data!
+
+  const { data: nftsData, isLoading: isNftsLoading } = useGetNFTsQuery(
+    {
+      account_address: tonWallet!,
+      collection_address: NUTCRACKERS_ADDRESS,
+    },
+    { skip: tonWallet === null }
+  )
+  const [trigger, { isSuccess, isLoading }] = useChangeAvatarMutation()
 
   const activeAvatar = avatars.find((avatar) => avatar.isActive)
   const prevAvatars = avatars.filter((avatar) => !avatar.isActive)
 
-  if (isError) console.log("ERROR!!!")
+  const onSubmit = async () => {
+    try {
+      await trigger({ file_base64: base64, is_active: true, user: id }).unwrap()
+    } catch {
+      toast.error("Произошла ошибка загрузки аватарки")
+    } finally {
+      setFile(null)
+    }
+  }
 
-  const onSubmit = () => {
-    trigger({ file_base64: base64, is_active: true, user: id })
-    setFile(null)
+  const handleConnect = async () => {
+    closeDialog()
+    tonConnectUI.setConnectRequestParameters({
+      state: "ready",
+      value: { tonProof: TON_PAYLOAD_SECRET },
+    })
+    if (tonConnectUI.connected) {
+      await tonConnectUI.disconnect()
+      openTon()
+    } else {
+      openTon()
+    }
   }
 
   return (
@@ -48,7 +85,7 @@ const ChangeAvatar = () => {
     >
       <DialogHeader
         className={cn(
-          "flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2",
+          "flex-col mobile:flex-row mobile:items-center mobile:mb-6 gap-2",
           scale && "3xl:mb-[1.563vw] 3xl:gap-[0.521vw]"
         )}
       >
@@ -62,7 +99,9 @@ const ChangeAvatar = () => {
         />
       </DialogHeader>
       <div className="flex flex-col">
-        <div className={cn("flex gap-8", scale && "3xl:gap-[2.083vw]")}>
+        <div
+          className={cn("flex gap-4 sm:gap-8", scale && "3xl:gap-[2.083vw]")}
+        >
           <div
             className={cn(
               "shrink-0 w-[60px] h-[60px] flex items-center justify-center rounded-lg",
@@ -129,15 +168,78 @@ const ChangeAvatar = () => {
           />
         )}
 
-        {/* <span
+        <TextAccent className={cn("mt-6", scale && "3xl:mt-[1.563vw]")}>
+          {t("change-avatar.choose-nft")}
+        </TextAccent>
+        <div
           className={cn(
-            "typography-semi-head mt-6",
-            scale && "typography-semi-head_large 3xl:mt-[1.563vw]"
+            "mt-2 max-h-[240px] mobile-sm:max-h-[300px] md:max-h-[330px] pr-2 overflow-auto",
+            prevAvatars.length > 0 && "max-h-[180px] mobile-sm:max-h-[260px]",
+            scale && "3xl:mt-[0.52vw] 3xl:max-h-[21.5vw]"
           )}
         >
-          {t("change-avatar.choose-nft")}
-        </span>
-        <Text1 className="mt-2">{t("change-avatar.nft-description")}</Text1> */}
+          {!tonWallet ? (
+            <>
+              <Text0>{t("change-avatar.nft-description")}</Text0>
+              <Button
+                className={cn("mt-2", scale && "3xl:mt-[0.52vw]")}
+                onClick={handleConnect}
+              >
+                Привязать
+              </Button>
+            </>
+          ) : isNftsLoading ? (
+            <Text0>Загружаем Ваших Щелкунчиков...</Text0>
+          ) : nftsData ? (
+            nftsData.nft_items.length === 0 ? (
+              <div
+                className={cn(
+                  "flex flex-col gap-2",
+                  scale && "3xl:gap-[0.52vw]"
+                )}
+              >
+                <Text0>Кажется, у Вас нет ни одного Щелкунчика</Text0>
+                <ExternalLink
+                  href="https://nutcrackers-mint.crypton.xyz/"
+                  className="w-fit"
+                >
+                  Сминтить
+                </ExternalLink>
+                <ExternalLink
+                  href="https://getgems.io/nutcrackers"
+                  className="w-fit"
+                >
+                  Приобрести на GetGems
+                </ExternalLink>
+              </div>
+            ) : (
+              <div
+                className={cn(
+                  "grid grid-cols-2 mobile:grid-cols-3 w-fit gap-2",
+                  scale && "3xl:gap-[0.52vw]"
+                )}
+              >
+                {nftsData.nft_items.map((nft) => (
+                  <button
+                    key={nft.index}
+                    className={cn(
+                      "rounded-md w-fit overflow-hidden group max-w-[160px]",
+                      scale && "3xl:rounded-[0.4vw] 3xl:max-w-[10.416vw]"
+                    )}
+                  >
+                    <img
+                      id="imageid"
+                      src={nft.previews[3].url}
+                      className="aspect-square rounded-md group-hover:scale-110 transition-transform"
+                    />
+                  </button>
+                ))}
+              </div>
+            )
+          ) : (
+            <Text0>Не удалось загрузить Щелкунчиков</Text0>
+          )}
+        </div>
       </div>
     </DialogContent>
   )
