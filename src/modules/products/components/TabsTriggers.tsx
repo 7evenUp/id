@@ -52,20 +52,6 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.nutcracker}>
-        <Tooltip content={t("nutcracker.title")}>
-          <div>
-            <img
-              src={NutcrackerIcon}
-              className={cn(
-                "w-[26px] h-[26px]",
-                activeProduct === "nutcracker" ? "grayscale-0" : "grayscale",
-                scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-              )}
-            />
-          </div>
-        </Tooltip>
-      </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.inventory}>
         <Tooltip content={t("inventory.title")}>
           <div>
@@ -87,7 +73,7 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES["research"]}>
+      <TabsTrigger value={TABS_VALUES.research}>
         <Tooltip content="Research">
           <div>
             {activeProduct === "research" ? (
@@ -147,6 +133,20 @@ const TabsTriggers = () => {
                 )}
               />
             )}
+          </div>
+        </Tooltip>
+      </TabsTrigger>
+      <TabsTrigger value={TABS_VALUES.nutcracker}>
+        <Tooltip content={t("nutcracker.title")}>
+          <div>
+            <img
+              src={NutcrackerIcon}
+              className={cn(
+                "w-[26px] h-[26px]",
+                activeProduct === "nutcracker" ? "grayscale-0" : "grayscale",
+                scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+              )}
+            />
           </div>
         </Tooltip>
       </TabsTrigger>

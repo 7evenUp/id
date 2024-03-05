@@ -4,9 +4,17 @@ import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
 
 import Subheading from "@/shared/typography/Subheading"
+import ExternalLink from "@/shared/ui/ExternalLink"
+import RowItem from "@/shared/components/RowItem"
+
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const NutcrackerTab = () => {
   const { t } = useTranslation("products")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   return (
     <>
@@ -17,7 +25,26 @@ const NutcrackerTab = () => {
         />
       </TabHeader>
 
-      <Subheading className="mt-10 3xl:mt-[2.604vw]">Coming soon</Subheading>
+      <RowItem
+        className={cn(
+          "flex flex-col items-start gap-2",
+          scale && "3xl:gap-[0.52vw]"
+        )}
+      >
+        <ExternalLink
+          href="https://nutcrackers-mint.crypton.xyz/"
+          className="w-fit"
+        >
+          Сайт минта
+        </ExternalLink>
+        <ExternalLink href="https://getgems.io/nutcrackers" className="w-fit">
+          Приобрести на GetGems
+        </ExternalLink>
+      </RowItem>
+
+      <Subheading className={cn("mt-4", scale && "3xl:mt-[1vw]")}>
+        Coming soon
+      </Subheading>
     </>
   )
 }
