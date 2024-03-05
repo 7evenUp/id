@@ -12,7 +12,6 @@ import ModalTrigger from "../components/ModalTrigger"
 import UploadButton from "../components/UploadButton"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
-import ExternalLink from "@/shared/ui/ExternalLink"
 import Button from "@/shared/ui/Button"
 
 import TextAccent from "@/shared/typography/TextAccent"
@@ -192,26 +191,9 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
             <Text0>Загружаем Ваших Щелкунчиков...</Text0>
           ) : nftsData ? (
             nftsData.nft_items.length === 0 ? (
-              <div
-                className={cn(
-                  "flex flex-col gap-2",
-                  scale && "3xl:gap-[0.52vw]"
-                )}
-              >
-                <Text0>Кажется, у Вас нет ни одного Щелкунчика</Text0>
-                <ExternalLink
-                  href="https://nutcrackers-mint.crypton.xyz/"
-                  className="w-fit"
-                >
-                  Сминтить
-                </ExternalLink>
-                <ExternalLink
-                  href="https://getgems.io/nutcrackers"
-                  className="w-fit"
-                >
-                  Приобрести на GetGems
-                </ExternalLink>
-              </div>
+              <Text0>
+                Кажется, на Вашем TON кошельке нет ни одной NFT Щелкунчика
+              </Text0>
             ) : (
               <div
                 className={cn(
