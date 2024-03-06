@@ -70,6 +70,10 @@
     "choose-nft": "Choose the Nutcrackers NFT",
     "nft-description": "To select the NFT image of the Nutcracker as an avatar, you need to link a TON wallet",
     "file-is-large": "Image is too large. Choose another one",
+    "link-btn": "link",
+    "nutcrackers-loading": "Loading Your Nutcrackers...",
+    "nutcrackers-empty": "It seems that there is no Nutcrackers in your TON wallet.",
+    "nutcrackers-error": "Failed to load the Nutcrackers",
     "activate-btn": "Make as an avatar",
     "delete-btn": "Delete"
   },

@@ -22,9 +22,11 @@ import { useState } from "react"
 const PrevAvatars = ({
   avatars,
   SaveBtn,
+  resetBase64State,
 }: {
   avatars: Avatar[]
   SaveBtn: React.ReactNode
+  resetBase64State: () => void
 }) => {
   const { t } = useTranslation("modals")
 
@@ -50,7 +52,11 @@ const PrevAvatars = ({
         )}
       >
         {avatars.map((avatar, i) => (
-          <PrevAvatarDialog key={i} {...avatar} />
+          <PrevAvatarDialog
+            key={i}
+            {...avatar}
+            resetBase64State={resetBase64State}
+          />
         ))}
       </div>
     </div>
@@ -59,7 +65,11 @@ const PrevAvatars = ({
 
 export default PrevAvatars
 
-const PrevAvatarDialog = ({ id, file }: Avatar) => {
+const PrevAvatarDialog = ({
+  id,
+  file,
+  resetBase64State,
+}: Avatar & { resetBase64State: () => void }) => {
   const { t } = useTranslation("modals")
 
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -74,11 +84,13 @@ const PrevAvatarDialog = ({ id, file }: Avatar) => {
   const onActivateClick = async (avatarId: number) => {
     await activatePrevious({ avatar_id: avatarId }).unwrap()
     setDialogOpen(false)
+    resetBase64State()
   }
 
   const onDeleteClick = async (avatarId: number) => {
     await deleteAvatar({ avatar_id: avatarId }).unwrap()
     setDialogOpen(false)
+    resetBase64State()
   }
 
   return (

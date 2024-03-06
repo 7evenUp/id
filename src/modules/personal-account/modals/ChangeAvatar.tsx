@@ -143,6 +143,7 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
 
         {prevAvatars.length > 0 ? (
           <PrevAvatars
+            resetBase64State={() => setBase64("")}
             avatars={prevAvatars}
             SaveBtn={
               <UploadButton
@@ -184,16 +185,14 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
                 className={cn("mt-2", scale && "3xl:mt-[0.52vw]")}
                 onClick={handleConnect}
               >
-                Привязать
+                {t("change-avatar.link-btn")}
               </Button>
             </>
           ) : isNftsLoading ? (
-            <Text0>Загружаем Ваших Щелкунчиков...</Text0>
+            <Text0>{t("change-avatar.nutcrackers-loading")}</Text0>
           ) : nftsData ? (
             nftsData.nft_items.length === 0 ? (
-              <Text0>
-                Кажется, на Вашем TON кошельке нет ни одной NFT Щелкунчика
-              </Text0>
+              <Text0>{t("change-avatar.nutcrackers-empty")}</Text0>
             ) : (
               <div
                 className={cn(
@@ -219,7 +218,7 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
               </div>
             )
           ) : (
-            <Text0>Не удалось загрузить Щелкунчиков</Text0>
+            <Text0>{t("change-avatar.nutcrackers-error")}</Text0>
           )}
         </div>
       </div>
