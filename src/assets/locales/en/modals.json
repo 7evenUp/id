@@ -62,7 +62,7 @@
     "confirm-button-success": "success"
   },
   "change-avatar": {
-    "heading": "Set profile avatar",
+    "heading": "Set avatar",
     "save-button": "save",
     "save-success": "saved",
     "prev-images": "Previous images",
@@ -228,5 +228,17 @@
     "connecting-trustwallet": "Connecting a Trust Wallet",
     "connecting-rabby": "Connecting a Rabby Wallet",
     "connecting-injected": "Connecting injected wallet"
+  },
+  "points-info": {
+    "heading": "How Crypton Points work?",
+    "text-1": "You will receive cashback for each purchase of subscriptions",
+    "text-2-1": "In the future, you will be able to use",
+    "text-2-2": " to make purchases in the internal store, to purchase discounted merchandise and for many other things that we are still preparing for you.",
+    "text-3-1": "The functionality of using",
+    "text-3-2": "is under development, stay tuned!",
+    "table-title": "Table of the ratio of rarity to cashback",
+    "base-cashback": "The basic cashback (without Nutcracker) is 5%",
+    "rarity": "rarity",
+    "cashback": "cashback"
   }
 }
