@@ -63,7 +63,7 @@ const SubscriptionMain = ({
         onOpenChange={setFirstStepOpened}
         openBalanceModal={openBalanceModal}
         openSecondStep={openSecondStep}
-        subscriptions={subscriptions}
+        subscriptions={subscriptions.filter((sub) => sub.kind === 1)}
         setBoughtSubDuration={setBoughtSubDuration}
       />
 

@@ -50,10 +50,6 @@ const PointsInfo = () => {
             {t("points-info.text-2-1")} <TextAccent>Crypton Points</TextAccent>{" "}
             {t("points-info.text-2-2")}
           </Text0>
-          <Text0>
-            {t("points-info.text-3-1")} <TextAccent>Crypton Points</TextAccent>{" "}
-            {t("points-info.text-3-2")}
-          </Text0>
         </div>
         <div
           className={cn(

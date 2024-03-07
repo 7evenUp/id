@@ -12,7 +12,7 @@ import Text0 from "@/shared/typography/Text0"
 import RowItem from "@/shared/components/RowItem"
 
 import { useAppSelector } from "@/redux/hooks"
-import { useUserProfileQuery } from "@/redux/api/profile"
+import { useNutcrackersQuery, useUserProfileQuery } from "@/redux/api/profile"
 
 import { cn } from "@/lib/classNames"
 
@@ -22,6 +22,7 @@ const Points = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
+  const { data: nutcrackersData } = useNutcrackersQuery()
 
   const { points } = profileData!
 
@@ -52,11 +53,16 @@ const Points = () => {
             {t("points.balance")}: <AccentNumber>{points}</AccentNumber>
           </Text0>
         </RowItem>
-        <RowItem className="items-start">
-          <Text0 className="flex-shrink-0">
-            {t("points.cashback")}: <AccentNumber>5%</AccentNumber>
-          </Text0>
-        </RowItem>
+        {nutcrackersData && (
+          <RowItem className="items-start">
+            <Text0 className="flex-shrink-0">
+              {t("points.cashback")}:{" "}
+              <AccentNumber>
+                {nutcrackersData.pointsCacheBack * 100}%
+              </AccentNumber>
+            </Text0>
+          </RowItem>
+        )}
       </div>
     </div>
   )
