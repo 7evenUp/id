@@ -315,7 +315,9 @@ const FirstStep = ({
                       scale && "3xl:gap-[1.5625vw]"
                     )}
                   >
-                    <Text0>Начислим за покупку</Text0>
+                    <Text0>
+                      {t("buy-subs.first-step.points-for-purchase")}
+                    </Text0>
                     <div
                       className={cn(
                         "w-fit flex items-center gap-1.5 p-1 rounded-xl",
@@ -376,7 +378,7 @@ const FirstStep = ({
                     </div>
                   </div>
                   <div className="flex justify-between mobile:smitems-center flex-col mobile-sm:flex-row gap-1 mobile-sm:gap-6">
-                    <Text0>С NFT nutcrackers:</Text0>
+                    <Text0>{t("buy-subs.first-step.with-nutcracker")}:</Text0>
                     {nutcrackersData.maxRarity === null ? (
                       isDesktop ? (
                         <HoverCard openDelay={200}>

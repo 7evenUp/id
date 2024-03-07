@@ -175,10 +175,10 @@ const NutcrackerTab = () => {
           href="https://nutcrackers-mint.crypton.xyz/"
           className="w-fit"
         >
-          Сайт минта
+          {t("nutcracker.mint-website")}
         </ExternalLink>
         <ExternalLink href="https://getgems.io/nutcrackers" className="w-fit">
-          Приобрести на GetGems
+          {t("nutcracker.buy-on-getgems")}
         </ExternalLink>
       </RowItem>
 
@@ -188,7 +188,7 @@ const NutcrackerTab = () => {
           scale && "3xl:gap-[0.781vw]"
         )}
       >
-        Ваши щелкунчики
+        {t("nutcracker.your-nutcrackers")}
         {isLoading ? (
           <div
             className={cn("flex gap-4 flex-wrap", scale && "3xl:gap-[1.041vw]")}
@@ -220,7 +220,7 @@ const NutcrackerTab = () => {
           </div>
         ) : data ? (
           data.nutcrackers.length === 0 ? (
-            <Text1>На Вашем аккаунте нет ни одного Щелкунчика</Text1>
+            <Text1>{t("nutcracker.you-have-not-nutcrackers")}</Text1>
           ) : (
             <div
               className={cn(
@@ -251,7 +251,7 @@ const NutcrackerTab = () => {
             </div>
           )
         ) : (
-          <Text1>Не удалось загрузить данные</Text1>
+          <Text1>{t("nutcracker.load-error")}</Text1>
         )}
       </RowItem>
     </>

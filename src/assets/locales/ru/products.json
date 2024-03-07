@@ -71,6 +71,11 @@
     "success-dialog-link": "ссылке"
   },
   "nutcracker": {
-    "title": "Щелкунчики"
+    "title": "Щелкунчики",
+    "buy-on-getgems": "Приобрести на GetGems",
+    "mint-website": "Сайт минта",
+    "your-nutcrackers": "Ваши Щелкунчики",
+    "you-have-not-nutcrackers": "На Вашем аккаунте нет ни одного Щелкунчика",
+    "load-error": "Не удалось загрузить данные"
   }
 }

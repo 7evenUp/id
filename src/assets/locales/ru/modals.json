@@ -150,7 +150,9 @@
       "savings": "экономия",
       "choose-btn": "выбрать",
       "chosen-btn": "выбрано",
-      "automatic-debiting": "автоматическое списание"
+      "automatic-debiting": "автоматическое списание",
+      "points-for-purchase": "Начислим за покупку бонусы",
+      "with-nutcracker": "С Щелкунчиком"
     },
     "second-step": {
       "step": "шаг 2/3: Ввод данных",

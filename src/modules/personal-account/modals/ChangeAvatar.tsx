@@ -1,7 +1,7 @@
 import { useState } from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
-import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
+// import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
 import { toast } from "sonner"
 
 import Close from "@/assets/icons/close.svg?react"
@@ -12,43 +12,43 @@ import ModalTrigger from "../components/ModalTrigger"
 import UploadButton from "../components/UploadButton"
 
 import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
-import Button from "@/shared/ui/Button"
+// import Button from "@/shared/ui/Button"
 
-import TextAccent from "@/shared/typography/TextAccent"
-import Text0 from "@/shared/typography/Text0"
+// import TextAccent from "@/shared/typography/TextAccent"
+// import Text0 from "@/shared/typography/Text0"
 
 import { useChangeAvatarMutation } from "@/redux/api/avatar"
 import { useUserProfileQuery } from "@/redux/api/profile"
-import { useGetNFTsQuery } from "@/redux/ton-api/nfts"
+// import { useGetNFTsQuery } from "@/redux/ton-api/nfts"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
-const NUTCRACKERS_ADDRESS = "EQB3Pd1e7fs89vw6wwlDzS-CrdvDY8phfdn7yKgvL6UQn6ij"
-const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
+// const NUTCRACKERS_ADDRESS = "EQB3Pd1e7fs89vw6wwlDzS-CrdvDY8phfdn7yKgvL6UQn6ij"
+// const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
 
 const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const [tonConnectUI] = useTonConnectUI()
-  const { open: openTon } = useTonConnectModal()
+  // const [tonConnectUI] = useTonConnectUI()
+  // const { open: openTon } = useTonConnectModal()
 
   const [file, setFile] = useState<File | null>(null)
   const [base64, setBase64] = useState("")
 
   const { data } = useUserProfileQuery()
 
-  const { id, avatars, tonWallet } = data!
+  const { id, avatars } = data!
 
-  const { data: nftsData, isLoading: isNftsLoading } = useGetNFTsQuery(
-    {
-      account_address: tonWallet!,
-      collection_address: NUTCRACKERS_ADDRESS,
-    },
-    { skip: tonWallet === null }
-  )
+  // const { data: nftsData, isLoading: isNftsLoading } = useGetNFTsQuery(
+  //   {
+  //     account_address: tonWallet!,
+  //     collection_address: NUTCRACKERS_ADDRESS,
+  //   },
+  //   { skip: tonWallet === null }
+  // )
   const [trigger, { isSuccess, isLoading }] = useChangeAvatarMutation()
 
   const activeAvatar = avatars.find((avatar) => avatar.isActive)
@@ -64,19 +64,19 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
     }
   }
 
-  const handleConnect = async () => {
-    closeDialog()
-    tonConnectUI.setConnectRequestParameters({
-      state: "ready",
-      value: { tonProof: TON_PAYLOAD_SECRET },
-    })
-    if (tonConnectUI.connected) {
-      await tonConnectUI.disconnect()
-      openTon()
-    } else {
-      openTon()
-    }
-  }
+  // const handleConnect = async () => {
+  //   closeDialog()
+  //   tonConnectUI.setConnectRequestParameters({
+  //     state: "ready",
+  //     value: { tonProof: TON_PAYLOAD_SECRET },
+  //   })
+  //   if (tonConnectUI.connected) {
+  //     await tonConnectUI.disconnect()
+  //     openTon()
+  //   } else {
+  //     openTon()
+  //   }
+  // }
 
   return (
     <DialogContent
@@ -168,7 +168,7 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
           />
         )}
 
-        <TextAccent className={cn("mt-6", scale && "3xl:mt-[1.563vw]")}>
+        {/* <TextAccent className={cn("mt-6", scale && "3xl:mt-[1.563vw]")}>
           {t("change-avatar.choose-nft")}
         </TextAccent>
         <div
@@ -220,7 +220,7 @@ const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
           ) : (
             <Text0>{t("change-avatar.nutcrackers-error")}</Text0>
           )}
-        </div>
+        </div> */}
       </div>
     </DialogContent>
   )

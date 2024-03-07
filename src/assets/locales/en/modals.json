@@ -149,7 +149,9 @@
       "savings": "savings",
       "choose-btn": "choose",
       "chosen-btn": "chosen",
-      "automatic-debiting": "automatic debiting"
+      "automatic-debiting": "automatic debiting",
+      "points-for-purchase": "Points for purchase",
+      "with-nutcracker": "With the Nutcracker"
     },
     "second-step": {
       "step": "step 2/3: Data entry",
