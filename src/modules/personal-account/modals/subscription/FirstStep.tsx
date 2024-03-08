@@ -385,7 +385,7 @@ const FirstStep = ({
                           <HoverCardTrigger>
                             <div
                               className={cn(
-                                "flex items-center gap-2",
+                                "flex items-center gap-2 cursor-pointer",
                                 scale && "3xl:gap-[0.52vw]"
                               )}
                             >
@@ -412,7 +412,7 @@ const FirstStep = ({
                           <PopoverTrigger>
                             <div
                               className={cn(
-                                "flex items-center gap-2",
+                                "flex items-center gap-2 cursor-pointer",
                                 scale && "3xl:gap-[0.52vw]"
                               )}
                             >
