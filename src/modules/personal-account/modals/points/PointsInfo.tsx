@@ -43,23 +43,17 @@ const PointsInfo = () => {
         >
           <DialogTitle>{t("points-info.heading")}</DialogTitle>
 
+          <Text0>{t("points-info.text-1")}</Text0>
           <Text0>
-            Crypton Points — это программа лояльности внутри экосистемы Crypton.
-            Получайте кэшбэк от 5% до 20% в Crypton Points с каждой оплаты любой
-            подписки.
-          </Text0>
-          <Text0>
-            Функционал использования Crypton Points находится в разработке,
-            следите за обновлениями в{" "}
+            {t("points-info.text-2")}{" "}
             {language === "ru" ? (
               <>
-                канале{" "}
                 <a
                   href="https://t.me/cryptonannouncement"
                   target="_blank"
                   className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
                 >
-                  анонсов
+                  канале анонсов
                 </a>
               </>
             ) : (
@@ -73,12 +67,12 @@ const PointsInfo = () => {
             )}{" "}
             .
           </Text0>
-          <Text0>Базовый кэшбэк 5%.</Text0>
+          <Text0>{t("points-info.text-3")}</Text0>
 
-          <DialogTitle>Как увеличить кэшбэк?</DialogTitle>
+          <DialogTitle>{t("points-info.part-2-heading")}</DialogTitle>
 
           <Text0>
-            Для владельцев нашей NFT коллекции{" "}
+            {t("points-info.part-2-text-1-1")}{" "}
             <a
               href="https://getgems.io/nutcrackers"
               target="_blank"
@@ -86,15 +80,11 @@ const PointsInfo = () => {
             >
               Nutcrackers
             </a>{" "}
-            на TON, действует система повышенного кэшбэка от 10% до 20%. Размер
-            кэшбэка зависит от степени редкости вашего NFT.
+            {t("points-info.part-2-text-1-2")}
           </Text0>
-          <Text0>
-            Для получения повышенного кэшбэка обязательно привяжите TON кошелек
-            в ЛК Crypton ID.
-          </Text0>
-          <Text0>Расчет кэшбэка берется с NFT самой высокой редкости.</Text0>
-          <Text0>Бонусы не суммируются.</Text0>
+          <Text0>{t("points-info.part-2-text-2")}</Text0>
+          <Text0>{t("points-info.part-2-text-3")}</Text0>
+          <Text0>{t("points-info.part-2-text-4")}</Text0>
         </div>
         <div
           className={cn(
@@ -181,7 +171,7 @@ const RarityTable = () => {
             target="_blank"
             key={el.rarity}
             className={cn(
-              "flex items-center justify-between py-1 capitalize hover:underline underline-offset-4",
+              "flex items-center justify-between py-1 capitalize hover:underline",
               scale && "3xl:py-[0.26vw]",
               el.rarity === "uncommon"
                 ? "text-tools-green"

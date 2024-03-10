@@ -17,7 +17,7 @@ import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
-import { Dialog, DialogContent } from "@/shared/ui/Dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
 import {
@@ -318,119 +318,144 @@ const FirstStep = ({
                     <Text0>
                       {t("buy-subs.first-step.points-for-purchase")}
                     </Text0>
-                    <HoverCard openDelay={200}>
-                      <HoverCardTrigger>
-                        <div
+                    {isDesktop ? (
+                      <HoverCard openDelay={200}>
+                        <HoverCardTrigger>
+                          <div
+                            className={cn(
+                              "w-fit flex items-center gap-1.5 p-1 rounded-xl cursor-pointer hover:opacity-80 transition-opacity",
+                              scale &&
+                                "3xl:gap-[0.39vw] 3xl:p-[0.26vw] 3xl:rounded-[0.78125vw]",
+                              nutcrackersData.maxRarity === null
+                                ? "border border-gray-3 dark:border-gray-5"
+                                : nutcrackersData.maxRarity === "common"
+                                ? "bg-gray-5"
+                                : nutcrackersData.maxRarity === "uncommon"
+                                ? "bg-tools-green"
+                                : nutcrackersData.maxRarity === "rare"
+                                ? "bg-res-bot-blue"
+                                : nutcrackersData.maxRarity === "mythical"
+                                ? "bg-prime-pink"
+                                : nutcrackersData.maxRarity === "epic"
+                                ? "bg-university-velvet"
+                                : nutcrackersData.maxRarity === "legendary" &&
+                                  "bg-academy-gold"
+                            )}
+                          >
+                            <Text2
+                              className={cn(
+                                "rounded-full bg-gray-1 dark:bg-gray-6 text-gray-6 dark:text-black px-1 py-px",
+                                scale && "3xl:px-[0.26vw] 3xl:py-[0.0651vw]",
+                                nutcrackersData.maxRarity === null
+                                  ? "bg-gray-3 dark:bg-gray-5"
+                                  : nutcrackersData.maxRarity === "common" &&
+                                      "bg-gray-1 dark:bg-gray-2 dark:text-gray-5"
+                              )}
+                            >
+                              {nutcrackersData.pointsCacheBack * 100}%
+                            </Text2>
+                            <TextAccent
+                              className={cn(
+                                "text-black dark:text-gray-6 tabular-nums",
+                                nutcrackersData.maxRarity === null
+                                  ? "dark:text-gray-5"
+                                  : nutcrackersData.maxRarity === "common"
+                                  ? "dark:text-gray-1"
+                                  : nutcrackersData.maxRarity === "epic"
+                                  ? "text-gray-6"
+                                  : nutcrackersData.maxRarity === "legendary" &&
+                                    "dark:text-black"
+                              )}
+                            >
+                              +
+                              {(
+                                totalPrice * nutcrackersData.pointsCacheBack
+                              ).toFixed(2)}
+                            </TextAccent>
+                            <CryptonIcon
+                              className={cn(
+                                "w-5 h-5",
+                                scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                              )}
+                            />
+                          </div>
+                        </HoverCardTrigger>
+                        <HoverCardContent
                           className={cn(
-                            "w-fit flex items-center gap-1.5 p-1 rounded-xl cursor-pointer hover:opacity-80 transition-opacity",
-                            scale &&
-                              "3xl:gap-[0.39vw] 3xl:p-[0.26vw] 3xl:rounded-[0.78125vw]",
-                            nutcrackersData.maxRarity === null
-                              ? "border border-gray-3 dark:border-gray-5"
-                              : nutcrackersData.maxRarity === "common"
-                              ? "bg-gray-5"
-                              : nutcrackersData.maxRarity === "uncommon"
-                              ? "bg-tools-green"
-                              : nutcrackersData.maxRarity === "rare"
-                              ? "bg-res-bot-blue"
-                              : nutcrackersData.maxRarity === "mythical"
-                              ? "bg-prime-pink"
-                              : nutcrackersData.maxRarity === "epic"
-                              ? "bg-university-velvet"
-                              : nutcrackersData.maxRarity === "legendary" &&
-                                "bg-academy-gold"
+                            "flex flex-col gap-1 w-[95vw] sm:w-[600px]",
+                            scale && "3xl:gap-[0.26vw] 3xl:w-[39.06vw]"
                           )}
                         >
-                          <Text2
+                          <CryptonPointsInfo />
+                        </HoverCardContent>
+                      </HoverCard>
+                    ) : (
+                      <Popover>
+                        <PopoverTrigger>
+                          <div
                             className={cn(
-                              "rounded-full bg-gray-1 dark:bg-gray-6 text-gray-6 dark:text-black px-1 py-px",
-                              scale && "3xl:px-[0.26vw] 3xl:py-[0.0651vw]",
+                              "w-fit flex items-center gap-1.5 p-1 rounded-xl cursor-pointer hover:opacity-80 transition-opacity",
+                              scale &&
+                                "3xl:gap-[0.39vw] 3xl:p-[0.26vw] 3xl:rounded-[0.78125vw]",
                               nutcrackersData.maxRarity === null
-                                ? "bg-gray-3 dark:bg-gray-5"
-                                : nutcrackersData.maxRarity === "common" &&
-                                    "bg-gray-1 dark:bg-gray-2 dark:text-gray-5"
-                            )}
-                          >
-                            {nutcrackersData.pointsCacheBack * 100}%
-                          </Text2>
-                          <TextAccent
-                            className={cn(
-                              "text-black dark:text-gray-6 tabular-nums",
-                              nutcrackersData.maxRarity === null
-                                ? "dark:text-gray-5"
+                                ? "border border-gray-3 dark:border-gray-5"
                                 : nutcrackersData.maxRarity === "common"
-                                ? "dark:text-gray-1"
+                                ? "bg-gray-5"
+                                : nutcrackersData.maxRarity === "uncommon"
+                                ? "bg-tools-green"
+                                : nutcrackersData.maxRarity === "rare"
+                                ? "bg-res-bot-blue"
+                                : nutcrackersData.maxRarity === "mythical"
+                                ? "bg-prime-pink"
                                 : nutcrackersData.maxRarity === "epic"
-                                ? "text-gray-6"
+                                ? "bg-university-velvet"
                                 : nutcrackersData.maxRarity === "legendary" &&
-                                  "dark:text-black"
+                                  "bg-academy-gold"
                             )}
                           >
-                            +
-                            {(
-                              totalPrice * nutcrackersData.pointsCacheBack
-                            ).toFixed(2)}
-                          </TextAccent>
-                          <CryptonIcon
-                            className={cn(
-                              "w-5 h-5",
-                              scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
-                            )}
-                          />
-                        </div>
-                      </HoverCardTrigger>
-                      <HoverCardContent
-                        className={cn(
-                          "flex flex-col gap-1 w-[95vw] sm:w-[600px]",
-                          scale && "3xl:gap-[0.26vw] 3xl:w-[39.06vw]"
-                        )}
-                      >
-                        <TextAccent>{t("points-info.heading")}</TextAccent>
-
-                        <Text0>
-                          Crypton Points — это программа лояльности внутри
-                          экосистемы Crypton. Получайте кэшбэк от 5% до 20% в
-                          Crypton Points с каждой оплаты любой подписки.
-                        </Text0>
-                        <Text0>
-                          Функционал использования Crypton Points находится в
-                          разработке, следите за обновлениями в канале{" "}
-                          <a
-                            href="https://t.me/cryptonannouncement"
-                            target="_blank"
-                            className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-                          >
-                            анонсов
-                          </a>
-                          .
-                        </Text0>
-                        <Text0>Базовый кэшбэк 5%.</Text0>
-
-                        <TextAccent>Как увеличить кэшбэк?</TextAccent>
-
-                        <Text0>
-                          Для владельцев нашей NFT коллекции{" "}
-                          <a
-                            href="https://getgems.io/nutcrackers"
-                            target="_blank"
-                            className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-                          >
-                            Nutcrackers
-                          </a>{" "}
-                          на TON, действует система повышенного кэшбэка от 10%
-                          до 20%. Размер кэшбэка зависит от степени редкости
-                          вашего NFT.
-                        </Text0>
-                        <Text0>
-                          Для получения повышенного кэшбэка обязательно
-                          привяжите TON кошелек в ЛК Crypton ID.
-                        </Text0>
-                        <Text0>
-                          Расчет кэшбэка берется с NFT самой высокой редкости.
-                        </Text0>
-                        <Text0>Бонусы не суммируются.</Text0>
-                      </HoverCardContent>
-                    </HoverCard>
+                            <Text2
+                              className={cn(
+                                "rounded-full bg-gray-1 dark:bg-gray-6 text-gray-6 dark:text-black px-1 py-px",
+                                scale && "3xl:px-[0.26vw] 3xl:py-[0.0651vw]",
+                                nutcrackersData.maxRarity === null
+                                  ? "bg-gray-3 dark:bg-gray-5"
+                                  : nutcrackersData.maxRarity === "common" &&
+                                      "bg-gray-1 dark:bg-gray-2 dark:text-gray-5"
+                              )}
+                            >
+                              {nutcrackersData.pointsCacheBack * 100}%
+                            </Text2>
+                            <TextAccent
+                              className={cn(
+                                "text-black dark:text-gray-6 tabular-nums",
+                                nutcrackersData.maxRarity === null
+                                  ? "dark:text-gray-5"
+                                  : nutcrackersData.maxRarity === "common"
+                                  ? "dark:text-gray-1"
+                                  : nutcrackersData.maxRarity === "epic"
+                                  ? "text-gray-6"
+                                  : nutcrackersData.maxRarity === "legendary" &&
+                                    "dark:text-black"
+                              )}
+                            >
+                              +
+                              {(
+                                totalPrice * nutcrackersData.pointsCacheBack
+                              ).toFixed(2)}
+                            </TextAccent>
+                            <CryptonIcon
+                              className={cn(
+                                "w-5 h-5",
+                                scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                              )}
+                            />
+                          </div>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-[95vw]">
+                          <CryptonPointsInfo small />
+                        </PopoverContent>
+                      </Popover>
+                    )}
                   </div>
                   <div className="flex justify-between mobile:smitems-center flex-col mobile-sm:flex-row gap-1 mobile-sm:gap-6">
                     <Text0>{t("buy-subs.first-step.with-nutcracker")}:</Text0>
@@ -629,3 +654,108 @@ const RarityToDiscountTable = () => (
     </a>
   </>
 )
+
+const CryptonPointsInfo = ({ small }: { small?: boolean }) => {
+  const { t } = useTranslation("modals")
+
+  const language = useAppSelector((state) => state.language.value)
+
+  if (small)
+    return (
+      <>
+        <DialogTitle>{t("points-info.heading")}</DialogTitle>
+
+        <Text1>{t("points-info.text-1")}</Text1>
+        <Text1>
+          {t("points-info.text-2")}{" "}
+          {language === "ru" ? (
+            <>
+              <a
+                href="https://t.me/cryptonannouncement"
+                target="_blank"
+                className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+              >
+                канале анонсов
+              </a>
+            </>
+          ) : (
+            <a
+              href="https://twitter.com/cryptonxyz"
+              target="_blank"
+              className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+            >
+              twitter
+            </a>
+          )}{" "}
+          .
+        </Text1>
+        <Text1>{t("points-info.text-3")}</Text1>
+
+        <DialogTitle>{t("points-info.part-2-heading")}</DialogTitle>
+
+        <Text1>
+          {t("points-info.part-2-text-1-1")}{" "}
+          <a
+            href="https://getgems.io/nutcrackers"
+            target="_blank"
+            className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+          >
+            Nutcrackers
+          </a>{" "}
+          {t("points-info.part-2-text-1-2")}
+        </Text1>
+        <Text1>{t("points-info.part-2-text-2")}</Text1>
+        <Text1>{t("points-info.part-2-text-3")}</Text1>
+        <Text1>{t("points-info.part-2-text-4")}</Text1>
+      </>
+    )
+
+  return (
+    <>
+      <DialogTitle>{t("points-info.heading")}</DialogTitle>
+
+      <Text0>{t("points-info.text-1")}</Text0>
+      <Text0>
+        {t("points-info.text-2")}{" "}
+        {language === "ru" ? (
+          <>
+            <a
+              href="https://t.me/cryptonannouncement"
+              target="_blank"
+              className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+            >
+              канале анонсов
+            </a>
+          </>
+        ) : (
+          <a
+            href="https://twitter.com/cryptonxyz"
+            target="_blank"
+            className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+          >
+            twitter
+          </a>
+        )}{" "}
+        .
+      </Text0>
+      <Text0>{t("points-info.text-3")}</Text0>
+
+      <DialogTitle>{t("points-info.part-2-heading")}</DialogTitle>
+
+      <Text0>
+        {t("points-info.part-2-text-1-1")}{" "}
+        <a
+          href="https://getgems.io/nutcrackers"
+          target="_blank"
+          className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+        >
+          Nutcrackers
+        </a>{" "}
+        {t("points-info.part-2-text-1-2")}
+      </Text0>
+      <Text0>{t("points-info.part-2-text-2")}</Text0>
+      <Text0>{t("points-info.part-2-text-3")}</Text0>
+      <Text0>{t("points-info.part-2-text-4")}</Text0>
+    </>
+  )
+}

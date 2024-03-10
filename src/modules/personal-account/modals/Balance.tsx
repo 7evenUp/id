@@ -209,7 +209,7 @@ const Balance = () => {
                 scale && "3xl:gap-[0.521vw] 3xl:mb-1.041vw]"
               )}
             >
-              <Text1>Выберите сеть:</Text1>
+              <Text1>{t("balance.choose-network")}:</Text1>
               <Select
                 key={activeToken}
                 value={activeNetwork}
@@ -219,7 +219,7 @@ const Balance = () => {
                 disabled={!activeToken}
               >
                 <SelectTrigger
-                  placeholder="Выбрать"
+                  placeholder={t("balance.choose")}
                   className={cn(
                     "shrink-0 w-[100px]",
                     scale && "3xl:w-[6.51vw]"

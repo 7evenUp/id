@@ -110,6 +110,8 @@
     "current": "current account balance",
     "choose-deposit": "Choose a deposit method",
     "choose-cryptocurrency": "Choose cryptocurrency",
+    "choose-network": "Choose network",
+    "choose": "Choose",
     "deposit-options": {
       "crypto": "crypto",
       "fiat": "by card"
@@ -239,9 +241,15 @@
   },
   "points-info": {
     "heading": "What is Crypton Points?",
-    "text-1": "You will receive cashback for each purchase of subscriptions",
-    "text-2-1": "The functionality of using",
-    "text-2-2": "is under development, stay tuned!",
+    "text-1": "Crypton Points is a loyalty program within the Crypton ecosystem. Get cashback from 5% to 20% in Crypton Points from each payment of any subscription.",
+    "text-2": "The functionality of using Crypton Points is under development, stay tuned in",
+    "text-3": "The basic cashback is 5%.",
+    "part-2-heading": "How can I increase my cashback?",
+    "part-2-text-1-1": "For the owners of our NFT collection",
+    "part-2-text-1-2": "on TON, there is a system of increased cashback from 10% to 20%. The size of the cashback depends on the degree of rarity of your NFT.",
+    "part-2-text-2": "To get an increased cashback, be sure to link a TON wallet to the Crypton ID.",
+    "part-2-text-3": "The cashback calculation is taken from the NFT of the highest rarity.",
+    "part-2-text-4": "Bonuses are not cumulative.",
     "table-title": "Table of the ratio of NFT rarity to cashback",
     "base-cashback": "The basic cashback (without Nutcracker) is 5%",
     "rarity": "rarity",
