@@ -62,8 +62,8 @@ const PersonalAccount = () => {
       >
         <Profile />
         <Subscription />
-        <Referral />
         <Points />
+        <Referral />
 
         <div className="hidden sm:flex justify-between">
           <Button appearence="text" onClick={onLogout}>

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
+import { DialogContent, DialogTitle } from "@/shared/ui/Dialog"
 
 import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
@@ -15,6 +15,7 @@ const PointsInfo = () => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
+  const language = useAppSelector((state) => state.language.value)
 
   const { data: profileData } = useUserProfileQuery()
 
@@ -28,9 +29,6 @@ const PointsInfo = () => {
       )}
       onCloseAutoFocus={(event) => event.preventDefault()}
     >
-      <DialogHeader>
-        <DialogTitle>{t("points-info.heading")}</DialogTitle>
-      </DialogHeader>
       <div
         className={cn(
           "flex flex-col md:flex-row justify-between items-center mobile:items-start md:items-stretch h-[400px] md:h-auto overflow-auto pr-2 gap-6",
@@ -39,17 +37,64 @@ const PointsInfo = () => {
       >
         <div
           className={cn(
-            "flex flex-col gap-6 basis-1/2",
-            scale && "3xl:gap-[1.563vw]"
+            "flex flex-col gap-2 basis-1/2",
+            scale && "3xl:gap-[0.52vw]"
           )}
         >
+          <DialogTitle>{t("points-info.heading")}</DialogTitle>
+
           <Text0>
-            {t("points-info.text-1")} (<TextAccent>Crypton Points</TextAccent>).
+            Crypton Points — это программа лояльности внутри экосистемы Crypton.
+            Получайте кэшбэк от 5% до 20% в Crypton Points с каждой оплаты любой
+            подписки.
           </Text0>
           <Text0>
-            {t("points-info.text-2-1")} <TextAccent>Crypton Points</TextAccent>{" "}
-            {t("points-info.text-2-2")}
+            Функционал использования Crypton Points находится в разработке,
+            следите за обновлениями в{" "}
+            {language === "ru" ? (
+              <>
+                канале{" "}
+                <a
+                  href="https://t.me/cryptonannouncement"
+                  target="_blank"
+                  className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+                >
+                  анонсов
+                </a>
+              </>
+            ) : (
+              <a
+                href="https://twitter.com/cryptonxyz"
+                target="_blank"
+                className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+              >
+                twitter
+              </a>
+            )}{" "}
+            .
           </Text0>
+          <Text0>Базовый кэшбэк 5%.</Text0>
+
+          <DialogTitle>Как увеличить кэшбэк?</DialogTitle>
+
+          <Text0>
+            Для владельцев нашей NFT коллекции{" "}
+            <a
+              href="https://getgems.io/nutcrackers"
+              target="_blank"
+              className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
+            >
+              Nutcrackers
+            </a>{" "}
+            на TON, действует система повышенного кэшбэка от 10% до 20%. Размер
+            кэшбэка зависит от степени редкости вашего NFT.
+          </Text0>
+          <Text0>
+            Для получения повышенного кэшбэка обязательно привяжите TON кошелек
+            в ЛК Crypton ID.
+          </Text0>
+          <Text0>Расчет кэшбэка берется с NFT самой высокой редкости.</Text0>
+          <Text0>Бонусы не суммируются.</Text0>
         </div>
         <div
           className={cn(

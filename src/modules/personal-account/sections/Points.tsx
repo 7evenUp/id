@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
 
+import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
 import PointsInfo from "../modals/points/PointsInfo"
@@ -34,7 +35,17 @@ const Points = () => {
           scale && "3xl:pb-[1.042vw]"
         )}
       >
-        <Subheading>{t("points.heading")}</Subheading>
+        <div
+          className={cn("flex items-center gap-2", scale && "3xl:gap-[0.52vw]")}
+        >
+          <Subheading>{t("points.heading")}</Subheading>
+          <CryptonIcon
+            className={cn(
+              "w-6 h-6",
+              scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+            )}
+          />
+        </div>
         <ModalTrigger content={<PointsInfo />}>
           <div>
             <HelpCircle

@@ -238,11 +238,11 @@
     "connecting-injected": "Connecting injected wallet"
   },
   "points-info": {
-    "heading": "How Crypton Points work?",
+    "heading": "What is Crypton Points?",
     "text-1": "You will receive cashback for each purchase of subscriptions",
     "text-2-1": "The functionality of using",
     "text-2-2": "is under development, stay tuned!",
-    "table-title": "Table of the ratio of rarity to cashback",
+    "table-title": "Table of the ratio of NFT rarity to cashback",
     "base-cashback": "The basic cashback (without Nutcracker) is 5%",
     "rarity": "rarity",
     "cashback": "cashback"
