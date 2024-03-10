@@ -115,26 +115,32 @@ const rarityData = [
   {
     rarity: "common",
     cashback: "10%",
+    href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Common%22%5D%7D%7D",
   },
   {
     rarity: "uncommon",
     cashback: "12%",
+    href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Uncommon%22%5D%7D%7D",
   },
   {
     rarity: "rare",
     cashback: "14%",
+    href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Rare%22%5D%7D%7D",
   },
   {
     rarity: "mythical",
     cashback: "16%",
+    href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Mythical%22%5D%7D%7D",
   },
   {
     rarity: "epic",
     cashback: "18%",
+    href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Epic%22%5D%7D%7D",
   },
   {
     rarity: "legendary",
     cashback: "20%",
+    href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Legendary%22%5D%7D%7D",
   },
 ]
 
@@ -148,32 +154,35 @@ const RarityTable = () => {
   if (!profileData) return null
 
   return (
-    <table>
-      <thead
+    <div
+      className={cn(
+        "text-gray-3 typography-text-2",
+        scale && "typography-text-2_large"
+      )}
+    >
+      <div
         className={cn(
-          "text-gray-3 typography-text-2",
-          scale && "typography-text-2_large"
+          "flex items-center justify-between pb-3",
+          scale && "3xl:pb-[0.781vw]"
         )}
       >
-        <tr>
-          <th className={cn("text-left pb-3", scale && "3xl:pb-[0.781vw]")}>
-            {t("points-info.rarity")}
-          </th>
-          <th className={cn("text-right pb-3", scale && "3xl:pb-[0.781vw]")}>
-            {t("points-info.cashback")}
-          </th>
-        </tr>
-      </thead>
-      <tbody
+        <span>{t("points-info.rarity")}</span>
+        <span>{t("points-info.cashback")}</span>
+      </div>
+      <div
         className={cn(
           "typography-accent divide-y divide-gray-4 dark:divide-gray-2",
           scale && "typography-accent_large"
         )}
       >
         {rarityData.map((el) => (
-          <tr
+          <a
+            href={el.href}
+            target="_blank"
             key={el.rarity}
             className={cn(
+              "flex items-center justify-between py-1 capitalize hover:underline underline-offset-4",
+              scale && "3xl:py-[0.26vw]",
               el.rarity === "uncommon"
                 ? "text-tools-green"
                 : el.rarity === "rare"
@@ -185,31 +194,12 @@ const RarityTable = () => {
                 : el.rarity === "legendary" && "text-academy-gold"
             )}
           >
-            <td
-              className={cn(
-                "text-left py-1 capitalize",
-                scale && "3xl:py-[0.26vw]"
-              )}
-            >
-              {/* {el.lvl === refProgramLevel ? (
-                <AccentNumber>{el.lvl}</AccentNumber>
-              ) : (
-                el.lvl
-              )} */}
-              {el.rarity}
-            </td>
-            <td className="text-right tabular-nums">
-              {/* {el.lvl === refProgramLevel ? (
-                <AccentNumber>{el.cashback}</AccentNumber>
-              ) : (
-                el.cashback
-              )} */}
-              {el.cashback}
-            </td>
-          </tr>
+            <span>{el.rarity}</span>
+            <span>{el.cashback}</span>
+          </a>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </div>
   )
 }
 
