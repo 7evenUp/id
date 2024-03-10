@@ -52,16 +52,14 @@ const Balance = () => {
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
   const [paymentType, setPaymentType] = useState<"crypto" | "card">("crypto")
-  const [networkType, setNetworkType] = useState<string | undefined>(undefined)
-  const [activePaymentMethod, setActivePaymentMethod] = useState(0)
-  const [activePaymentMethodIndex, setActivePaymentMethodIndex] = useState(0)
+  const [activeToken, setActiveToken] = useState<string | undefined>(undefined)
+  const [activeNetwork, setActiveNetwork] = useState<string | undefined>(
+    undefined
+  )
   const [paymentURL, setPaymentURL] = useState("")
 
-  const { data: profileData } = useUserProfileQuery()
   const { data: availableMethods } = useAvailableMethodsQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
-
-  const { balance } = profileData!
 
   const formSchema = z.object({
     amount: z
@@ -77,21 +75,22 @@ const Balance = () => {
     defaultValues: { amount: "" },
   })
 
-  // список всех доступных сетей
   const networks = new Set<string>()
+  const tokens = new Set<string>()
 
   if (!availableMethods || !availableMethods.length) return null
 
   const cryptoMethods = availableMethods
     .filter((el) => el.method.id === "crypto" && el.isActive)
     .sort((a, b) => +b.isDefault - +a.isDefault)
-  // const cardMethods = availableMethods
-  //   .filter((el) => el.method.id === "card" && el.isActive)
-  //   .toSorted((a, b) => +b.isDefault - +a.isDefault)
 
   cryptoMethods.forEach((method) => {
-    if (method.network?.label && method.network.label) {
-      networks.add(method.network.label)
+    tokens.add(method.currency.label)
+
+    if (method.network && method.network.label && activeToken) {
+      if (activeToken === method.currency.label) {
+        networks.add(method.network.label)
+      }
     }
   })
 
@@ -117,15 +116,9 @@ const Balance = () => {
             checkboxRef.current.ariaChecked === "false" ? false : true,
           payment_type: "crypto",
           // @ts-expect-error If "crypto" non-nullable
-          // network: cryptoMethods[activePaymentMethod].network?.label,
-          network: availableMethods.find(
-            (el) => el.id === activePaymentMethodIndex
-          )?.network?.label,
+          network: activeNetwork ?? "BSC",
           // @ts-expect-error string is one of values
-          // currency: cryptoMethods[activePaymentMethod].currency.label,
-          currency: availableMethods.find(
-            (el) => el.id === activePaymentMethodIndex
-          )?.currency.label,
+          currency: activeToken ?? "USDT",
           successUrl: "https://id.crypton.xyz/payment-success",
           failUrl: "https://id.crypton.xyz/payment-error",
         }).unwrap()
@@ -142,25 +135,7 @@ const Balance = () => {
   return (
     <DialogContent className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}>
       <div>
-        <div
-          className={cn(
-            "flex justify-between items-baseline gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6",
-            scale &&
-              "3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]"
-          )}
-        >
-          <Text0 className="text-gray-3 dark:text-gray-4">
-            {t("balance.current")}
-          </Text0>
-          <span
-            className={cn(
-              "w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] dark:text-gray-5",
-              scale && "3xl:text-[3.515vw]"
-            )}
-          >
-            $ {balance}
-          </span>
-        </div>
+        <CurrentBalance />
         <div
           className={cn(
             "flex items-center gap-2 mb-4",
@@ -198,6 +173,36 @@ const Balance = () => {
 
         {paymentType === "crypto" && (
           <>
+            <Text1
+              className={cn(
+                "mt-4 mb-2",
+                scale && "3xl:mt-[1.041vw] 3xl:mb-[0.52vw]"
+              )}
+            >
+              {t("balance.choose-cryptocurrency")}:
+            </Text1>
+            <div
+              className={cn(
+                "flex items-center flex-wrap gap-2.5 mb-6",
+                scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
+              )}
+            >
+              {[...tokens].map((el, i) => (
+                <Chip
+                  key={i}
+                  className={cn(
+                    el === activeToken &&
+                      "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                  )}
+                  onClick={() => {
+                    setActiveToken(el)
+                    setActiveNetwork(undefined)
+                  }}
+                >
+                  {el}
+                </Chip>
+              ))}
+            </div>
             <div
               className={cn(
                 "flex items-center gap-2 mb-4",
@@ -206,22 +211,19 @@ const Balance = () => {
             >
               <Text1>Выберите сеть:</Text1>
               <Select
-                value={networkType}
+                key={activeToken}
+                value={activeNetwork}
                 onValueChange={(value) => {
-                  setNetworkType(value)
-                  setActivePaymentMethod(0)
-                  setActivePaymentMethodIndex(
-                    cryptoMethods.filter((el) => el.network?.label === value)[0]
-                      .id
-                  )
+                  setActiveNetwork(value)
                 }}
+                disabled={!activeToken}
               >
                 <SelectTrigger
+                  placeholder="Выбрать"
                   className={cn(
                     "shrink-0 w-[100px]",
                     scale && "3xl:w-[6.51vw]"
                   )}
-                  placeholder="Выбрать"
                 />
                 <SelectContent
                   className={cn("z-[999] w-[100px]", scale && "3xl:w-[6.51vw]")}
@@ -234,43 +236,6 @@ const Balance = () => {
                 </SelectContent>
               </Select>
             </div>
-
-            {networkType && (
-              <>
-                <Text1
-                  className={cn(
-                    "mt-4 mb-2",
-                    scale && "3xl:mt-[1.041vw] 3xl:mb-[0.52vw]"
-                  )}
-                >
-                  {t("balance.choose-cryptocurrency")}:
-                </Text1>
-                <div
-                  className={cn(
-                    "flex items-center flex-wrap gap-2.5 mb-6",
-                    scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
-                  )}
-                >
-                  {cryptoMethods
-                    .filter((el) => el.network?.label === networkType)
-                    .map((el, i) => (
-                      <Chip
-                        key={i}
-                        className={cn(
-                          i === activePaymentMethod &&
-                            "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
-                        )}
-                        onClick={() => {
-                          setActivePaymentMethod(i)
-                          setActivePaymentMethodIndex(el.id)
-                        }}
-                      >
-                        {el.currency.label}
-                      </Chip>
-                    ))}
-                </div>
-              </>
-            )}
           </>
         )}
 
@@ -390,7 +355,7 @@ const Balance = () => {
                   type="submit"
                   isLoading={isLoading}
                   disabled={
-                    paymentType === "crypto" && networkType === undefined
+                    paymentType === "crypto" && activeNetwork === undefined
                   }
                 >
                   {t("balance.replenish-btn")}
@@ -410,3 +375,35 @@ const Balance = () => {
 }
 
 export default Balance
+
+const CurrentBalance = () => {
+  const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const { data: profileData } = useUserProfileQuery()
+
+  const { balance } = profileData!
+
+  return (
+    <div
+      className={cn(
+        "flex justify-between items-end gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6",
+        scale &&
+          "3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]"
+      )}
+    >
+      <Text0 className="text-gray-3 dark:text-gray-4">
+        {t("balance.current")}
+      </Text0>
+      <span
+        className={cn(
+          "w-fit shrink-0 text-right font-semibold text-4xl sm:text-5xl dark:text-gray-5",
+          scale && "3xl:text-[3.125vw]"
+        )}
+      >
+        $ {balance}
+      </span>
+    </div>
+  )
+}
