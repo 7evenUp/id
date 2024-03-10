@@ -52,7 +52,9 @@ const Balance = () => {
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
   const [paymentType, setPaymentType] = useState<"crypto" | "card">("crypto")
+  const [networkType, setNetworkType] = useState<string | undefined>(undefined)
   const [activePaymentMethod, setActivePaymentMethod] = useState(0)
+  const [activePaymentMethodIndex, setActivePaymentMethodIndex] = useState(0)
   const [paymentURL, setPaymentURL] = useState("")
 
   const { data: profileData } = useUserProfileQuery()
@@ -75,6 +77,9 @@ const Balance = () => {
     defaultValues: { amount: "" },
   })
 
+  // список всех доступных сетей
+  const networks = new Set<string>()
+
   if (!availableMethods || !availableMethods.length) return null
 
   const cryptoMethods = availableMethods
@@ -83,6 +88,12 @@ const Balance = () => {
   // const cardMethods = availableMethods
   //   .filter((el) => el.method.id === "card" && el.isActive)
   //   .toSorted((a, b) => +b.isDefault - +a.isDefault)
+
+  cryptoMethods.forEach((method) => {
+    if (method.network?.label && method.network.label) {
+      networks.add(method.network.label)
+    }
+  })
 
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
     if (!checkboxRef.current) return
@@ -106,9 +117,15 @@ const Balance = () => {
             checkboxRef.current.ariaChecked === "false" ? false : true,
           payment_type: "crypto",
           // @ts-expect-error If "crypto" non-nullable
-          network: cryptoMethods[activePaymentMethod].network?.label,
+          // network: cryptoMethods[activePaymentMethod].network?.label,
+          network: availableMethods.find(
+            (el) => el.id === activePaymentMethodIndex
+          )?.network?.label,
           // @ts-expect-error string is one of values
-          currency: cryptoMethods[activePaymentMethod].currency.label,
+          // currency: cryptoMethods[activePaymentMethod].currency.label,
+          currency: availableMethods.find(
+            (el) => el.id === activePaymentMethodIndex
+          )?.currency.label,
           successUrl: "https://id.crypton.xyz/payment-success",
           failUrl: "https://id.crypton.xyz/payment-error",
         }).unwrap()
@@ -181,33 +198,79 @@ const Balance = () => {
 
         {paymentType === "crypto" && (
           <>
-            <Text1
-              className={cn(
-                "mt-4 mb-2",
-                scale && "3xl:mt-[1.041vw] 3xl:mb-[0.52vw]"
-              )}
-            >
-              {t("balance.choose-cryptocurrency")}:
-            </Text1>
             <div
               className={cn(
-                "flex items-center gap-2.5 mb-6",
-                scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
+                "flex items-center gap-2 mb-4",
+                scale && "3xl:gap-[0.521vw] 3xl:mb-1.041vw]"
               )}
             >
-              {cryptoMethods.map((el, i) => (
-                <Chip
-                  key={i}
+              <Text1>Выберите сеть:</Text1>
+              <Select
+                value={networkType}
+                onValueChange={(value) => {
+                  setNetworkType(value)
+                  setActivePaymentMethod(0)
+                  setActivePaymentMethodIndex(
+                    cryptoMethods.filter((el) => el.network?.label === value)[0]
+                      .id
+                  )
+                }}
+              >
+                <SelectTrigger
                   className={cn(
-                    i === activePaymentMethod &&
-                      "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                    "shrink-0 w-[100px]",
+                    scale && "3xl:w-[6.51vw]"
                   )}
-                  onClick={() => setActivePaymentMethod(i)}
+                  placeholder="Выбрать"
+                />
+                <SelectContent
+                  className={cn("z-[999] w-[100px]", scale && "3xl:w-[6.51vw]")}
                 >
-                  {el.currency.label}
-                </Chip>
-              ))}
+                  {[...networks].map((el) => (
+                    <SelectItem key={el} value={el}>
+                      {el}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
+
+            {networkType && (
+              <>
+                <Text1
+                  className={cn(
+                    "mt-4 mb-2",
+                    scale && "3xl:mt-[1.041vw] 3xl:mb-[0.52vw]"
+                  )}
+                >
+                  {t("balance.choose-cryptocurrency")}:
+                </Text1>
+                <div
+                  className={cn(
+                    "flex items-center flex-wrap gap-2.5 mb-6",
+                    scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
+                  )}
+                >
+                  {cryptoMethods
+                    .filter((el) => el.network?.label === networkType)
+                    .map((el, i) => (
+                      <Chip
+                        key={i}
+                        className={cn(
+                          i === activePaymentMethod &&
+                            "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
+                        )}
+                        onClick={() => {
+                          setActivePaymentMethod(i)
+                          setActivePaymentMethodIndex(el.id)
+                        }}
+                      >
+                        {el.currency.label}
+                      </Chip>
+                    ))}
+                </div>
+              </>
+            )}
           </>
         )}
 
@@ -322,7 +385,14 @@ const Balance = () => {
                   scale && "3xl:gap-[0.781vw]"
                 )}
               >
-                <Button className="w-fit" type="submit" isLoading={isLoading}>
+                <Button
+                  className="w-fit"
+                  type="submit"
+                  isLoading={isLoading}
+                  disabled={
+                    paymentType === "crypto" && networkType === undefined
+                  }
+                >
                   {t("balance.replenish-btn")}
                 </Button>
                 {isSuccess && (

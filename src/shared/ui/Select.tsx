@@ -12,7 +12,7 @@ const Select = RadixSelect.Root
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof RadixSelect.Trigger>,
   React.ComponentPropsWithoutRef<typeof RadixSelect.Trigger>
->(({ className, ...props }, forwardedRef) => {
+>(({ className, placeholder, ...props }, forwardedRef) => {
   const scale = useAppSelector((state) => state.scale.value)
 
   return (
@@ -26,7 +26,7 @@ const SelectTrigger = React.forwardRef<
       {...props}
       ref={forwardedRef}
     >
-      <RadixSelect.Value placeholder="Select" />
+      <RadixSelect.Value placeholder={placeholder} />
       <RadixSelect.Icon>
         <ArrowsSelect
           className={cn(
