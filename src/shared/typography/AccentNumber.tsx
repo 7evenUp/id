@@ -16,7 +16,7 @@ const AccentNumber = ({ children }: { children: React.ReactNode }) => {
   return (
     <TextAccent
       className={cn(
-        "text-res-bot-blue text-prime-pink text-tools-green text-calendar-red text-university-velvet text-academy-gold",
+        "text-res-bot-blue text-prime-pink text-tools-green text-calendar-red text-university-velvet text-academy-gold text-nutcracker-orange",
         `text-${color}`
       )}
     >

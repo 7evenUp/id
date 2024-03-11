@@ -52,14 +52,14 @@ const Balance = () => {
 
   const checkboxRef = useRef<HTMLButtonElement>(null)
   const [paymentType, setPaymentType] = useState<"crypto" | "card">("crypto")
-  const [activePaymentMethod, setActivePaymentMethod] = useState(0)
+  const [activeToken, setActiveToken] = useState<string | undefined>(undefined)
+  const [activeNetwork, setActiveNetwork] = useState<string | undefined>(
+    undefined
+  )
   const [paymentURL, setPaymentURL] = useState("")
 
-  const { data: profileData } = useUserProfileQuery()
   const { data: availableMethods } = useAvailableMethodsQuery()
   const [trigger, { isLoading, isSuccess, error }] = useTopUpBalanceMutation()
-
-  const { balance } = profileData!
 
   const formSchema = z.object({
     amount: z
@@ -75,14 +75,24 @@ const Balance = () => {
     defaultValues: { amount: "" },
   })
 
+  const networks = new Set<string>()
+  const tokens = new Set<string>()
+
   if (!availableMethods || !availableMethods.length) return null
 
   const cryptoMethods = availableMethods
     .filter((el) => el.method.id === "crypto" && el.isActive)
     .sort((a, b) => +b.isDefault - +a.isDefault)
-  // const cardMethods = availableMethods
-  //   .filter((el) => el.method.id === "card" && el.isActive)
-  //   .toSorted((a, b) => +b.isDefault - +a.isDefault)
+
+  cryptoMethods.forEach((method) => {
+    tokens.add(method.currency.label)
+
+    if (method.network && method.network.label && activeToken) {
+      if (activeToken === method.currency.label) {
+        networks.add(method.network.label)
+      }
+    }
+  })
 
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
     if (!checkboxRef.current) return
@@ -106,9 +116,9 @@ const Balance = () => {
             checkboxRef.current.ariaChecked === "false" ? false : true,
           payment_type: "crypto",
           // @ts-expect-error If "crypto" non-nullable
-          network: cryptoMethods[activePaymentMethod].network?.label,
+          network: activeNetwork ?? "BSC",
           // @ts-expect-error string is one of values
-          currency: cryptoMethods[activePaymentMethod].currency.label,
+          currency: activeToken ?? "USDT",
           successUrl: "https://id.crypton.xyz/payment-success",
           failUrl: "https://id.crypton.xyz/payment-error",
         }).unwrap()
@@ -125,25 +135,7 @@ const Balance = () => {
   return (
     <DialogContent className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}>
       <div>
-        <div
-          className={cn(
-            "flex justify-between items-baseline gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6",
-            scale &&
-              "3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]"
-          )}
-        >
-          <Text0 className="text-gray-3 dark:text-gray-4">
-            {t("balance.current")}
-          </Text0>
-          <span
-            className={cn(
-              "w-fit shrink-0 text-right font-semibold text-[40px] sm:text-[54px] dark:text-gray-5",
-              scale && "3xl:text-[3.515vw]"
-            )}
-          >
-            $ {balance}
-          </span>
-        </div>
+        <CurrentBalance />
         <div
           className={cn(
             "flex items-center gap-2 mb-4",
@@ -191,22 +183,58 @@ const Balance = () => {
             </Text1>
             <div
               className={cn(
-                "flex items-center gap-2.5 mb-6",
+                "flex items-center flex-wrap gap-2.5 mb-6",
                 scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
               )}
             >
-              {cryptoMethods.map((el, i) => (
+              {[...tokens].map((el, i) => (
                 <Chip
                   key={i}
                   className={cn(
-                    i === activePaymentMethod &&
+                    el === activeToken &&
                       "bg-gray-1 text-gray-6 dark:bg-gray-5 dark:text-gray-1 dark:hover:bg-gray-5"
                   )}
-                  onClick={() => setActivePaymentMethod(i)}
+                  onClick={() => {
+                    setActiveToken(el)
+                    setActiveNetwork(undefined)
+                  }}
                 >
-                  {el.currency.label}
+                  {el}
                 </Chip>
               ))}
+            </div>
+            <div
+              className={cn(
+                "flex items-center gap-2 mb-4",
+                scale && "3xl:gap-[0.521vw] 3xl:mb-1.041vw]"
+              )}
+            >
+              <Text1>{t("balance.choose-network")}:</Text1>
+              <Select
+                key={activeToken}
+                value={activeNetwork}
+                onValueChange={(value) => {
+                  setActiveNetwork(value)
+                }}
+                disabled={!activeToken}
+              >
+                <SelectTrigger
+                  placeholder={t("balance.choose")}
+                  className={cn(
+                    "shrink-0 w-[100px]",
+                    scale && "3xl:w-[6.51vw]"
+                  )}
+                />
+                <SelectContent
+                  className={cn("z-[999] w-[100px]", scale && "3xl:w-[6.51vw]")}
+                >
+                  {[...networks].map((el) => (
+                    <SelectItem key={el} value={el}>
+                      {el}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </>
         )}
@@ -322,7 +350,14 @@ const Balance = () => {
                   scale && "3xl:gap-[0.781vw]"
                 )}
               >
-                <Button className="w-fit" type="submit" isLoading={isLoading}>
+                <Button
+                  className="w-fit"
+                  type="submit"
+                  isLoading={isLoading}
+                  disabled={
+                    paymentType === "crypto" && activeNetwork === undefined
+                  }
+                >
                   {t("balance.replenish-btn")}
                 </Button>
                 {isSuccess && (
@@ -340,3 +375,35 @@ const Balance = () => {
 }
 
 export default Balance
+
+const CurrentBalance = () => {
+  const { t } = useTranslation("modals")
+
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const { data: profileData } = useUserProfileQuery()
+
+  const { balance } = profileData!
+
+  return (
+    <div
+      className={cn(
+        "flex justify-between items-end gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6",
+        scale &&
+          "3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]"
+      )}
+    >
+      <Text0 className="text-gray-3 dark:text-gray-4">
+        {t("balance.current")}
+      </Text0>
+      <span
+        className={cn(
+          "w-fit shrink-0 text-right font-semibold text-4xl sm:text-5xl dark:text-gray-5",
+          scale && "3xl:text-[3.125vw]"
+        )}
+      >
+        $ {balance}
+      </span>
+    </div>
+  )
+}

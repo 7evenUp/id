@@ -8,6 +8,7 @@ export type TabsValuesType =
   | "calendar"
   | "academy"
   | "inventory"
+  | "nutcracker"
 
 export const TABS_VALUES: Record<TabsValuesType, TabsValuesType> = {
   research: "research",
@@ -16,6 +17,7 @@ export const TABS_VALUES: Record<TabsValuesType, TabsValuesType> = {
   calendar: "calendar",
   academy: "academy",
   inventory: "inventory",
+  nutcracker: "nutcracker",
 }
 
 export interface TabsState {

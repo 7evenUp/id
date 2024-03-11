@@ -63,10 +63,7 @@ const ResearchTab = () => {
   return (
     <>
       <TabHeader>
-        <TabTitle
-          title="Research"
-          link="https://t.me/crypton_research_bot"
-        />
+        <TabTitle title="Research" link="https://research.crypton.xyz" />
       </TabHeader>
       <Subheading className={cn("mt-10", scale && "3xl:mt-[2.604vw]")}>
         Coming soon
@@ -77,10 +74,8 @@ const ResearchTab = () => {
   // return (
   //   <>
   //     <TabHeader>
-  //       <TabTitle
-  //         title="Research"
-  //         link="https://t.me/crypton_research_bot"
-  //       />
+  //       <TabTitle title="Research" link="https://research.crypton.xyz" />
+
   //       <Button className="sm:ml-auto w-fit">{t("save-btn")}</Button>
   //     </TabHeader>
   //     <RowItem className="flex-col sm:flex-row items-start sm:items-center gap-2 3xl:gap-[0.521vw]">

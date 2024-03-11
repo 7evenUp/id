@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { useAccount } from "wagmi"
@@ -14,6 +15,7 @@ import ChangeAvatar from "@/modules/personal-account/modals/ChangeAvatar"
 import Deactivation from "@/modules/personal-account/modals/Deactivation"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import { Dialog, DialogTrigger } from "@/shared/ui/Dialog"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useLazyLogoutQuery } from "@/redux/api/auth"
@@ -23,6 +25,8 @@ import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 const AvatarMobile = () => {
   const { t } = useTranslation()
+
+  const [changeAvatarOpened, setChangeAvatarOpened] = useState(false)
 
   const { data: profileData } = useUserProfileQuery()
   const [logout] = useLazyLogoutQuery()
@@ -81,12 +85,17 @@ const AvatarMobile = () => {
             <div className="h-px bg-gray-5 dark:bg-gray-2" />
           </>
         )}
-        <ModalTrigger content={<ChangeAvatar />}>
-          <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
-            <EditIcon className="w-5 h-5" />
-            <span className="py-1.5">{t("avatar-mobile-change")}</span>
-          </button>
-        </ModalTrigger>
+
+        <Dialog open={changeAvatarOpened} onOpenChange={setChangeAvatarOpened}>
+          <DialogTrigger asChild>
+            <button className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors">
+              <EditIcon className="w-5 h-5" />
+              <span className="py-1.5">{t("avatar-mobile-change")}</span>
+            </button>
+          </DialogTrigger>
+          <ChangeAvatar closeDialog={() => setChangeAvatarOpened(false)} />
+        </Dialog>
+
         <button
           className="flex gap-2 items-center text-gray-1 dark:text-gray-6 px-5 cursor-pointer hover:bg-gray-5 hover:bg-opacity-50 dark:hover:bg-gray-2 active:bg-opacity-80 dark:active:bg-opacity-70 transition-colors"
           onClick={onDelete}
@@ -94,7 +103,7 @@ const AvatarMobile = () => {
           <TrashIcon className="w-5 h-5" />{" "}
           <span className="py-1.5">{t("avatar-mobile-delete")}</span>
         </button>
-        
+
         <div className="h-px bg-gray-5 dark:bg-gray-2" />
 
         <button

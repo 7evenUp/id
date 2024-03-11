@@ -11,16 +11,18 @@ export interface User {
   isReferralDiscountAvailable: boolean
   knowledge: string
   languageCode: string
+  nutcrackerCount: number
+  points: number
   profileUsername: string
   referralInfo: ReferralInfo
   subscriptionInfo: SubscriptionInfo
   telegramUsername: string
   telegramId: number
-  username: string
   wallet: string | null
   waxWallet: string | null
   tonWallet: string | null
   utmData: string | null
+  timezone: string
 }
 
 export interface Avatar {

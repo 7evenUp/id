@@ -10,6 +10,7 @@ import ModalTrigger from "./components/ModalTrigger"
 import Profile from "./sections/profile/Profile"
 import Subscription from "./sections/Subscription"
 import Referral from "./sections/Referral"
+import Points from "./sections/Points"
 
 import Button from "@/shared/ui/Button"
 
@@ -61,6 +62,7 @@ const PersonalAccount = () => {
       >
         <Profile />
         <Subscription />
+        <Points />
         <Referral />
 
         <div className="hidden sm:flex justify-between">

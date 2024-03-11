@@ -1,7 +1,8 @@
-import { Transaction } from "@/types/types"
 import { api } from "./core"
 
 import { User } from "@/types/user"
+import { Transaction } from "@/types/types"
+import { Nutcrackers } from "@/types/nutcrackers"
 
 interface VerifyTonPayload {
   address: string
@@ -32,6 +33,12 @@ const profileApi = api.injectEndpoints({
         method: "GET",
       }),
       providesTags: ["TxHistory"],
+    }),
+    nutcrackers: build.query<Nutcrackers, void>({
+      query: () => ({
+        url: "users/nutcrackers/nutcrackers/",
+        method: "GET",
+      }),
     }),
     freezeSubs: build.mutation<void, void>({
       query: () => ({
@@ -200,6 +207,7 @@ const profileApi = api.injectEndpoints({
 export const {
   useUserProfileQuery,
   useLazyUserProfileQuery,
+  useNutcrackersQuery,
   useTransactionHistoryQuery,
   useFreezeSubsMutation,
   useUnfreezeSubsMutation,

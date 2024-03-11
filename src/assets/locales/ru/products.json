@@ -69,5 +69,13 @@
     "success-dialog-text-1": "NFT придёт на ваш TON кошелёк в течении нескольких минут.",
     "success-dialog-text-2": "Ваша NFT доступна по этой",
     "success-dialog-link": "ссылке"
+  },
+  "nutcracker": {
+    "title": "Щелкунчики",
+    "buy-on-getgems": "Приобрести на GetGems",
+    "mint-website": "Сайт минта",
+    "your-nutcrackers": "Ваши Щелкунчики",
+    "you-have-not-nutcrackers": "На Вашем аккаунте нет ни одного Щелкунчика",
+    "load-error": "Не удалось загрузить данные"
   }
 }

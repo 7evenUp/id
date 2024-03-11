@@ -14,14 +14,6 @@ import Text0 from "@/shared/typography/Text0"
 import Text2 from "@/shared/typography/Text2"
 
 import Button from "@/shared/ui/Button"
-
-import { useAppSelector } from "@/redux/hooks"
-import {
-  useClaimMutation,
-  useClaimNftMutation,
-  useInventoryQuery,
-} from "@/redux/api/inventory"
-
 import {
   Dialog,
   DialogContent,
@@ -34,6 +26,13 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/shared/ui/Select"
+
+import { useAppSelector } from "@/redux/hooks"
+import {
+  useClaimMutation,
+  useClaimNftMutation,
+  useInventoryQuery,
+} from "@/redux/api/inventory"
 
 import { Inventory, InventoryItem } from "@/types/ny-inventory"
 

@@ -69,5 +69,13 @@
     "success-dialog-text-1": "The NFT will be credited to your TON wallet within a few minutes.",
     "success-dialog-text-2": "Your NFT is available at this",
     "success-dialog-link": "link"
+  },
+  "nutcracker": {
+    "title": "The Nutcrackers",
+    "buy-on-getgems": "Buy on GetGems",
+    "mint-website": "Mint website",
+    "your-nutcrackers": "Your Nutcrackers",
+    "you-have-not-nutcrackers": "There are no Nutcrackers on your account",
+    "load-error": "Failed to load data"
   }
 }

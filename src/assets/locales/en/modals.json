@@ -62,14 +62,20 @@
     "confirm-button-success": "success"
   },
   "change-avatar": {
-    "heading": "Set profile avatar",
+    "heading": "Set avatar",
     "save-button": "save",
     "save-success": "saved",
     "prev-images": "Previous images",
     "uploading-area": "image uploading area",
-    "choose-nft": "Choose NFT",
-    "nft-description": "To select an NFT image, you need to link a Web 3.0 wallet",
-    "file-is-large": "Image is too large. Choose another one"
+    "choose-nft": "Choose the Nutcrackers NFT",
+    "nft-description": "To select the NFT image of the Nutcracker as an avatar, you need to link a TON wallet",
+    "file-is-large": "Image is too large. Choose another one",
+    "link-btn": "link",
+    "nutcrackers-loading": "Loading Your Nutcrackers...",
+    "nutcrackers-empty": "It seems that there is no Nutcrackers in your TON wallet.",
+    "nutcrackers-error": "Failed to load the Nutcrackers",
+    "activate-btn": "Make as an avatar",
+    "delete-btn": "Delete"
   },
   "freeze": {
     "status": "Subscription status",
@@ -104,6 +110,8 @@
     "current": "current account balance",
     "choose-deposit": "Choose a deposit method",
     "choose-cryptocurrency": "Choose cryptocurrency",
+    "choose-network": "Choose network",
+    "choose": "Choose",
     "deposit-options": {
       "crypto": "crypto",
       "fiat": "by card"
@@ -143,7 +151,9 @@
       "savings": "savings",
       "choose-btn": "choose",
       "chosen-btn": "chosen",
-      "automatic-debiting": "automatic debiting"
+      "automatic-debiting": "automatic debiting",
+      "points-for-purchase": "Points for purchase",
+      "with-nutcracker": "With the Nutcracker NFT"
     },
     "second-step": {
       "step": "step 2/3: Data entry",
@@ -228,5 +238,21 @@
     "connecting-trustwallet": "Connecting a Trust Wallet",
     "connecting-rabby": "Connecting a Rabby Wallet",
     "connecting-injected": "Connecting injected wallet"
+  },
+  "points-info": {
+    "heading": "What is Crypton Points?",
+    "text-1": "Crypton Points is a loyalty program within the Crypton ecosystem. Get cashback from 5% to 20% in Crypton Points from each payment of any subscription.",
+    "text-2": "The functionality of using Crypton Points is under development, stay tuned in",
+    "text-3": "The basic cashback is 5%.",
+    "part-2-heading": "How can I increase my cashback?",
+    "part-2-text-1-1": "For the owners of our NFT collection",
+    "part-2-text-1-2": "on TON, there is a system of increased cashback from 10% to 20%. The size of the cashback depends on the degree of rarity of your NFT.",
+    "part-2-text-2": "To get an increased cashback, be sure to link a TON wallet to the Crypton ID.",
+    "part-2-text-3": "The cashback calculation is taken from the NFT of the highest rarity.",
+    "part-2-text-4": "Bonuses are not cumulative.",
+    "table-title": "Table of the ratio of NFT rarity to cashback",
+    "base-cashback": "The basic cashback (without Nutcracker) is 5%",
+    "rarity": "rarity",
+    "cashback": "cashback"
   }
 }

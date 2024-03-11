@@ -29,7 +29,7 @@ const Main = () => {
   return (
     <main
       className={cn(
-        "flex flex-col lg:flex-row justify-between gap-20",
+        "flex flex-col lg:flex-row justify-between pb-32 md:pb-10 lg:pb-0 gap-20",
         scale && "3xl:gap-[5.208vw]"
       )}
     >

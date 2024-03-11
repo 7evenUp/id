@@ -65,13 +65,17 @@ const TxHistoryTable = () => {
               </TData>
               <TData>
                 {tx.txId ? (
-                  <a
-                    href={`https://bscscan.com/tx/${tx.txId}`}
-                    target="_blank"
-                    className="underline underline-offset-2"
-                  >
-                    {cutWalletAddr(tx.txId)}
-                  </a>
+                  tx.txId === "internal" ? (
+                    "internal"
+                  ) : (
+                    <a
+                      href={`https://bscscan.com/tx/${tx.txId}`}
+                      target="_blank"
+                      className="underline underline-offset-2"
+                    >
+                      {cutWalletAddr(tx.txId)}
+                    </a>
+                  )
                 ) : (
                   "-"
                 )}
