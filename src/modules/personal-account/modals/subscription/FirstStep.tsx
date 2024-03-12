@@ -451,7 +451,7 @@ const FirstStep = ({
                             />
                           </div>
                         </PopoverTrigger>
-                        <PopoverContent className="w-[95vw]">
+                        <PopoverContent className="w-[95vw] dark:text-gray-5">
                           <CryptonPointsInfo small />
                         </PopoverContent>
                       </Popover>
