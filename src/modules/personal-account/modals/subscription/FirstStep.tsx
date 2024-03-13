@@ -352,7 +352,10 @@ const FirstStep = ({
                                       "bg-gray-1 dark:bg-gray-2 dark:text-gray-5"
                               )}
                             >
-                              {nutcrackersData.pointsCacheBack * 100}%
+                              {Math.round(
+                                nutcrackersData.pointsCacheBack * 100
+                              )}
+                              %
                             </Text2>
                             <TextAccent
                               className={cn(
@@ -423,7 +426,10 @@ const FirstStep = ({
                                       "bg-gray-1 dark:bg-gray-2 dark:text-gray-5"
                               )}
                             >
-                              {nutcrackersData.pointsCacheBack * 100}%
+                              {Math.round(
+                                nutcrackersData.pointsCacheBack * 100
+                              )}
+                              %
                             </Text2>
                             <TextAccent
                               className={cn(

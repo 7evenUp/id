@@ -69,7 +69,7 @@ const Points = () => {
             <Text0 className="flex-shrink-0">
               {t("points.cashback")}:{" "}
               <AccentNumber>
-                {nutcrackersData.pointsCacheBack * 100}%
+                {Math.round(nutcrackersData.pointsCacheBack * 100)}%
               </AccentNumber>
             </Text0>
           </RowItem>
