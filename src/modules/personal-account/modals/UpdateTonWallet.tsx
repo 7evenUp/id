@@ -1,7 +1,7 @@
 import { useTonConnectModal, useTonConnectUI } from "@tonconnect/ui-react"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
-import { Address } from "@ton/core/dist/address/Address"
+// import { Address } from "@ton/core/dist/address/Address"
 
 import Text0 from "@/shared/typography/Text0"
 import Button from "@/shared/ui/Button"
@@ -78,13 +78,14 @@ const UpdateTonWallet = ({
               scale && "3xl:text-[1.0417vw]/[1.5625vw]"
             )}
           >
-            {cutWalletAddr(
+            {tonWallet ? cutWalletAddr(tonWallet) : ""}
+            {/* {cutWalletAddr(
               tonWallet
                 ? Address.parseRaw(
                     Address.parseFriendly(tonWallet).address.toRawString()
                   ).toString({ bounceable: false })
                 : ""
-            )}
+            )} */}
           </span>
         </div>
         <Text0>
