@@ -123,41 +123,48 @@ const FirstStep = ({
 
     const price = getSubscriptionPrice(activeSub)
 
-    if (activeSub !== null) {
-      try {
-        const { discountAmount, discountKind } = await validatePromocode({
+    try {
+      const { discountAmount, discountKind, discounts } =
+        await validatePromocode({
           promocode: promo,
           subscription: subscriptions[activeSub].id,
         }).unwrap()
 
-        if (discountKind.id === "MONEY") {
-          if (isReferralDiscountAvailable) {
-            if (discountAmount < REFERRAL_DISCOUNT_AMOUNT) {
-              setIsPromoLarger(false)
-              setTotalPrice(price - REFERRAL_DISCOUNT_AMOUNT)
-            } else {
-              setIsPromoLarger(true)
-              setTotalPrice(price - discountAmount)
-            }
+      const matchedDiscount = discounts.find(
+        (el) => el.subscriptionId === subscriptions[activeSub].id
+      )
+
+      const preferedDiscount = matchedDiscount
+        ? matchedDiscount.discountAmount
+        : discountAmount
+
+      if (discountKind.id === "MONEY") {
+        if (isReferralDiscountAvailable) {
+          if (preferedDiscount < REFERRAL_DISCOUNT_AMOUNT) {
+            setIsPromoLarger(false)
+            setTotalPrice(price - REFERRAL_DISCOUNT_AMOUNT)
           } else {
-            setTotalPrice(price - discountAmount)
+            setIsPromoLarger(true)
+            setTotalPrice(price - preferedDiscount)
           }
         } else {
-          if (isReferralDiscountAvailable) {
-            if (price * discountAmount < REFERRAL_DISCOUNT_AMOUNT) {
-              setIsPromoLarger(false)
-              setTotalPrice(price - REFERRAL_DISCOUNT_AMOUNT)
-            } else {
-              setIsPromoLarger(true)
-              setTotalPrice(price - price * discountAmount)
-            }
-          } else {
-            setTotalPrice(price - price * discountAmount)
-          }
+          setTotalPrice(price - preferedDiscount)
         }
-      } catch {
-        setPromo("")
+      } else {
+        if (isReferralDiscountAvailable) {
+          if (price * preferedDiscount < REFERRAL_DISCOUNT_AMOUNT) {
+            setIsPromoLarger(false)
+            setTotalPrice(price - REFERRAL_DISCOUNT_AMOUNT)
+          } else {
+            setIsPromoLarger(true)
+            setTotalPrice(price - price * preferedDiscount)
+          }
+        } else {
+          setTotalPrice(price - price * preferedDiscount)
+        }
       }
+    } catch {
+      setPromo("")
     }
   }
 
