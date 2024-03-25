@@ -123,7 +123,7 @@ const Auth = () => {
       >
         <div
           className={cn(
-            "flex flex-col justify-between gap-6 py-8 px-9 bg-white dark:bg-gray-1 rounded-xl md:rounded-none md:rounded-l-xl text-gray-1 dark:text-white w-full mobile:w-[370px] min-h-[340px] ",
+            "flex flex-col justify-between gap-6 py-4 px-5 sm:py-8 sm:px-9 bg-white dark:bg-gray-1 rounded-xl md:rounded-none md:rounded-l-xl text-gray-1 dark:text-white w-full mobile:w-[370px] min-h-[340px] ",
             scale &&
               "3xl:gap-[1.563vw] 3xl:py-[2.083vw] 3xl:px-[2.34vw] 3xl:rounded-l-[0.781vw] 3xl:w-[24.088vw] 3xl:min-h-[22.135vw]"
           )}

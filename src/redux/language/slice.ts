@@ -10,7 +10,7 @@ const initialState: LanguageState = {
 }
 
 export const languageSlice = createSlice({
-  name: "theme",
+  name: "language",
   initialState,
   reducers: {
     changeLang: (state, action: PayloadAction<"ru" | "en">) => {
