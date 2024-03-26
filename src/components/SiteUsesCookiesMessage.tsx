@@ -7,9 +7,9 @@ import Text0 from "@/shared/typography/Text0"
 import TextAccent from "@/shared/typography/TextAccent"
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { setHasShown } from "@/redux/cookie/slice"
 
 import { cn } from "@/lib/classNames"
-import { setHasShown } from "@/redux/cookie/slice"
 
 const SiteUsesCookiesMessage = () => {
   const { t } = useTranslation()
