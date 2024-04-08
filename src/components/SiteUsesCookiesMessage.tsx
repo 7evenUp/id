@@ -25,19 +25,20 @@ const SiteUsesCookiesMessage = () => {
           "3xl:w-[20.83vw] 3xl:bottom-[1.041vw] 3xl:right-[1.041vw] 3xl:gap-[0.78125vw] 3xl:p-[1.302vw] 3xl:rounded-[1.041vw]"
       )}
     >
-      <div
-        className={cn("flex items-center gap-2", scale && "3xl:gap-[0.52vw]")}
+      <Link
+        to="/privacy-policy"
+        onClick={() => dispatch(setHasShown())}
+        className={cn(
+          "flex items-center gap-2 hover:opacity-70 transition-opacity",
+          scale && "3xl:gap-[0.52vw]"
+        )}
       >
         <Text0>{t("we-use-cookie")}</Text0>
-        <Link to="/privacy-policy" onClick={() => dispatch(setHasShown())}>
-          <ArrowRight
-            className={cn(
-              "w-4 h-4",
-              scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
-            )}
-          />
-        </Link>
-      </div>
+
+        <ArrowRight
+          className={cn("w-4 h-4", scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]")}
+        />
+      </Link>
       <button
         className={cn(
           "border border-white rounded-lg transition-colors hover:bg-white hover:text-black active:bg-white/80",
