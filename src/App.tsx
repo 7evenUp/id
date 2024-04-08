@@ -7,6 +7,7 @@ import Header from "./modules/header/Header"
 import PaymentError from "./routes/PaymentError"
 import PaymentSuccess from "./routes/PaymentSuccess"
 import ErrorPage from "./routes/ErrorPage"
+import PrivacyPolicy from "./routes/PrivacyPolicy"
 
 import { useAppSelector } from "./redux/hooks"
 
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
   {
     path: "/payment-success",
     element: <PaymentSuccess />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
     errorElement: <ErrorPage />,
   },
 ])

@@ -4,6 +4,7 @@ import * as z from "zod"
 import { useForm } from "react-hook-form"
 import { useAccount } from "wagmi"
 import { useTranslation } from "react-i18next"
+import { Link } from "react-router-dom"
 
 import MoveLeft from "@/assets/icons/move-left.svg?react"
 
@@ -180,12 +181,12 @@ const RegisterWalletForm = ({
             )}
           >
             {t("register.privacy-policy.text")}{" "}
-            <a
-              href="#"
+            <Link
+              to="/privacy-policy"
               className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
             >
               {t("register.privacy-policy.link")}
-            </a>
+            </Link>
           </p>
           <ActionButton type="submit" isLoading={isLoading}>
             {t("register.register-btn")}

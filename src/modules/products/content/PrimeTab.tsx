@@ -10,7 +10,6 @@ import RowItem from "@/shared/components/RowItem"
 import Text1 from "@/shared/typography/Text1"
 
 import ExternalLink from "@/shared/ui/ExternalLink"
-import Tooltip from "@/shared/ui/Tooltip"
 
 import ServicesAndNavigation from "../components/prime/ServicesAndNavigation"
 
@@ -59,15 +58,12 @@ const PrimeTab = () => {
             <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
               {t("prime.help-text-3")}
             </Text1>
-            <Tooltip content={t("prime.soon")}>
-              <ExternalLink
-                href=""
-                className="w-fit"
-                onClick={(e) => e.preventDefault()}
-              >
-                {t("prime.plan")}
-              </ExternalLink>
-            </Tooltip>
+            <ExternalLink
+              href="https://www.notion.so/crypton-prime/acfd7a937ae941e1a5082316b5a81e70"
+              className="w-fit"
+            >
+              {t("prime.plan")}
+            </ExternalLink>
           </div>
         </div>
       </RowItem>

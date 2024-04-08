@@ -27,7 +27,8 @@ import { cn } from "@/lib/classNames"
 // const NUTCRACKERS_ADDRESS = "EQB3Pd1e7fs89vw6wwlDzS-CrdvDY8phfdn7yKgvL6UQn6ij"
 // const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
 
-const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
+// const ChangeAvatar = ({ closeDialog }: { closeDialog: () => void }) => {
+const ChangeAvatar = () => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)

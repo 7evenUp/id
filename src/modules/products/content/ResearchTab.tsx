@@ -1,64 +1,64 @@
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
+// import { useState } from "react"
+// import { useTranslation } from "react-i18next"
 
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
-import TextSizeSlider from "../components/TextSizeSlider"
-import BackgroundPicker from "../components/BackgroundPicker"
-import ProjectsTable from "../components/ProjectsTable"
+// import TextSizeSlider from "../components/TextSizeSlider"
+// import BackgroundPicker from "../components/BackgroundPicker"
+// import ProjectsTable from "../components/ProjectsTable"
 
 import Subheading from "@/shared/typography/Subheading"
 
-import Button from "@/shared/ui/Button"
-import Switch from "@/shared/ui/Switch"
+// import Button from "@/shared/ui/Button"
+// import Switch from "@/shared/ui/Switch"
 
-import RowItem from "@/shared/components/RowItem"
+// import RowItem from "@/shared/components/RowItem"
 
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
-type Language = "ru" | "en"
+// type Language = "ru" | "en"
 
 const ResearchTab = () => {
-  const { t } = useTranslation("products")
+  // const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const [resLanguage, setResLanguage] = useState<Language>("ru")
-  const [aggLanguage, setAggLanguage] = useState<Language>("en")
+  // const [resLanguage, setResLanguage] = useState<Language>("ru")
+  // const [aggLanguage, setAggLanguage] = useState<Language>("en")
 
-  const toggleResLanguage = (target: Language) => {
-    if (target === "ru") {
-      if (resLanguage === "ru") {
-        setResLanguage("en")
-      } else {
-        setResLanguage("ru")
-      }
-    } else {
-      if (resLanguage === "en") {
-        setResLanguage("ru")
-      } else {
-        setResLanguage("en")
-      }
-    }
-  }
+  // const toggleResLanguage = (target: Language) => {
+  //   if (target === "ru") {
+  //     if (resLanguage === "ru") {
+  //       setResLanguage("en")
+  //     } else {
+  //       setResLanguage("ru")
+  //     }
+  //   } else {
+  //     if (resLanguage === "en") {
+  //       setResLanguage("ru")
+  //     } else {
+  //       setResLanguage("en")
+  //     }
+  //   }
+  // }
 
-  const toggleAggLanguage = (target: Language) => {
-    if (target === "ru") {
-      if (aggLanguage === "ru") {
-        setAggLanguage("en")
-      } else {
-        setAggLanguage("ru")
-      }
-    } else {
-      if (aggLanguage === "en") {
-        setAggLanguage("ru")
-      } else {
-        setAggLanguage("en")
-      }
-    }
-  }
+  // const toggleAggLanguage = (target: Language) => {
+  //   if (target === "ru") {
+  //     if (aggLanguage === "ru") {
+  //       setAggLanguage("en")
+  //     } else {
+  //       setAggLanguage("ru")
+  //     }
+  //   } else {
+  //     if (aggLanguage === "en") {
+  //       setAggLanguage("ru")
+  //     } else {
+  //       setAggLanguage("en")
+  //     }
+  //   }
+  // }
 
   return (
     <>

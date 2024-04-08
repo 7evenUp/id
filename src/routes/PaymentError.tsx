@@ -5,7 +5,7 @@ import Text0 from "@/shared/typography/Text0"
 import Subheading from "@/shared/typography/Subheading"
 
 const PaymentError = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <div className="flex flex-col justify-center items-center gap-6">

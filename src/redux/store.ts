@@ -17,6 +17,7 @@ import themeReducer from "./theme/slice"
 import languageReducer from "./language/slice"
 import scaleReducer from "./scale/slice"
 import referrerReducer from "./referrer/slice"
+import cookieReducer from "./cookie/slice"
 
 import { api } from "./api/core"
 import { tonApi } from "./ton-api/core"
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   language: languageReducer,
   scale: scaleReducer,
   referrer: referrerReducer,
+  cookie: cookieReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

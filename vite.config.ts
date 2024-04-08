@@ -3,13 +3,14 @@ import path from "path"
 
 import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
+import { nodePolyfills } from "vite-plugin-node-polyfills"
 
 // PROD CONFIG
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "")
 
   return {
-    plugins: [react(), svgr()],
+    plugins: [react(), svgr(), nodePolyfills()],
     server: {
       host: true,
       proxy: {
@@ -33,10 +34,8 @@ export default defineConfig(({ mode }) => {
 //   const env = loadEnv(mode, process.cwd(), "")
 
 //   return {
-//     plugins: [react(), svgr(), mkcert()],
+//     plugins: [react(), svgr(), mkcert(), nodePolyfills()],
 //     server: {
-//       https: true,
-//       host: true,
 //       proxy: {
 //         "/api": {
 //           target: env.VITE_API_BASE_URL,

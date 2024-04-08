@@ -88,7 +88,8 @@ const Avatar = () => {
               </span>
             </button>
           </DialogTrigger>
-          <ChangeAvatar closeDialog={() => setChangeAvatarOpened(false)} />
+          <ChangeAvatar />
+          {/* <ChangeAvatar closeDialog={() => setChangeAvatarOpened(false)} /> */}
         </Dialog>
         <button
           className={cn(

@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 import SkeletonLayout from "@/components/SkeletonLayout"
+import SiteUsesCookiesMessage from "@/components/SiteUsesCookiesMessage"
 
 import Auth from "@/modules/auth/Auth"
 import PersonalAccount from "@/modules/personal-account/PersonalAccount"
@@ -13,9 +14,10 @@ import { cn } from "@/lib/classNames"
 
 const Main = () => {
   const [isDelayed, setIsDelayed] = useState(true)
-  const delay = useRef({ time: 1000 })
+  const [isCookieDelayed, setIsCookieDelayed] = useState(true)
 
   const scale = useAppSelector((state) => state.scale.value)
+  const isCookieShown = useAppSelector((state) => state.cookie.isShown)
 
   const { isLoading, data, error } = useUserProfileQuery()
 
@@ -23,27 +25,39 @@ const Main = () => {
   // error.originalStatus === 502
 
   useEffect(() => {
-    setTimeout(() => setIsDelayed(false), delay.current.time)
+    setTimeout(() => setIsDelayed(false), 1000)
   }, [])
 
+  useEffect(() => {
+    if (isCookieShown) {
+      setIsCookieDelayed(true)
+    } else {
+      setTimeout(() => setIsCookieDelayed(false), 3000)
+    }
+  }, [isCookieShown])
+
   return (
-    <main
-      className={cn(
-        "flex flex-col lg:flex-row justify-between pb-32 md:pb-10 lg:pb-0 gap-20",
-        scale && "3xl:gap-[5.208vw]"
-      )}
-    >
-      {error ? (
-        <Auth />
-      ) : isLoading || isDelayed ? (
-        <SkeletonLayout />
-      ) : data ? (
-        <>
-          <PersonalAccount />
-          <Products />
-        </>
-      ) : null}
-    </main>
+    <>
+      <main
+        className={cn(
+          "flex flex-col lg:flex-row justify-between pb-32 md:pb-10 lg:pb-0 gap-20",
+          scale && "3xl:gap-[5.208vw]"
+        )}
+      >
+        {error ? (
+          <Auth />
+        ) : isLoading || isDelayed ? (
+          <SkeletonLayout />
+        ) : data ? (
+          <>
+            <PersonalAccount />
+            <Products />
+          </>
+        ) : null}
+      </main>
+
+      {!isCookieDelayed && <SiteUsesCookiesMessage />}
+    </>
   )
 }
 
