@@ -93,7 +93,8 @@ const AvatarMobile = () => {
               <span className="py-1.5">{t("avatar-mobile-change")}</span>
             </button>
           </DialogTrigger>
-          <ChangeAvatar closeDialog={() => setChangeAvatarOpened(false)} />
+          <ChangeAvatar />
+          {/* <ChangeAvatar closeDialog={() => setChangeAvatarOpened(false)} /> */}
         </Dialog>
 
         <button

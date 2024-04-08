@@ -43,7 +43,7 @@ const Auth = () => {
   const [signature, setSignature] = useState("")
 
   const { address, isConnected, isDisconnected } = useAccount()
-  const { isLoading: isLoadingSign, signMessageAsync } = useSignMessage()
+  const { isPending: isLoadingSign, signMessageAsync } = useSignMessage()
   const { disconnect } = useDisconnect()
   const { open } = useWeb3Modal()
 

@@ -39,7 +39,7 @@ const UpdateWallet = () => {
     useUpdateWalletMutation()
 
   const { address, isConnected } = useAccount()
-  const { disconnect, isLoading: isDisconnectLoading } = useDisconnect()
+  const { disconnect, isPending: isDisconnectLoading } = useDisconnect()
 
   const { wallet } = userProfileData!
 
