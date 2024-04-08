@@ -5,8 +5,9 @@ import Telegram from "@/assets/icons/telegram.svg?react"
 
 import { buttonVariants } from "./Button"
 
-import { cn } from "@/lib/classNames"
 import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 interface ExternalLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   withTgIcon?: boolean
@@ -23,8 +24,10 @@ const ExternalLink: React.FC<ExternalLinkProps> = React.forwardRef<
       className={cn(
         "flex items-center gap-1.5 shrink-0",
         buttonVariants({ appearence: "outlined" }),
+        withTgIcon && "pl-1",
         scale &&
           "3xl:text-[0.911vw]/[0.911vw] 3xl:px-[0.651vw] 3xl:py-[0.195vw] 3xl:gap-[0.391vw]",
+        scale && withTgIcon && "3xl:pl-[0.26vw]",
         className
       )}
       target="_blank"
@@ -39,10 +42,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = React.forwardRef<
           )}
         />
       )}
-      <span className="text-center">
-      {children}
-
-      </span>
+      <span className="text-center">{children}</span>
       <ArrowTr
         className={cn(
           "w-3.5 h-3.5 shrink-0",
