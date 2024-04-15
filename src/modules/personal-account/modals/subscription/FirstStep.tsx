@@ -79,8 +79,6 @@ const FirstStep = ({
     },
   ] = useValidatePromocodeMutation()
 
-  console.log(promocodeValidateData)
-
   const { balance, isReferralDiscountAvailable } = userProfile!
 
   const getSubscriptionPrice = (subID: number) => {

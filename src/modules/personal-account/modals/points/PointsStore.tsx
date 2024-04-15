@@ -183,7 +183,6 @@ const ConfirmDialog = ({
       await buy({ prizeId }).unwrap()
       toast.success("Приз был успешно куплен")
     } catch (error) {
-      console.log(error)
       // @ts-expect-error RTKQ no error types
       if (error.status === 400) {
         // @ts-expect-error RTKQ no error types
