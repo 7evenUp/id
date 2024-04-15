@@ -9,6 +9,12 @@ export const api = createApi({
   }),
   refetchOnFocus: true,
   refetchOnReconnect: true,
-  tagTypes: ["UserProfile", "TxHistory", "LinksAndChannels", "Inventory"],
+  tagTypes: [
+    "UserProfile",
+    "TxHistory",
+    "LinksAndChannels",
+    "Inventory",
+    "Points",
+  ],
   endpoints: () => ({}),
 })

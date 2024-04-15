@@ -8,7 +8,13 @@ import { productToColor } from "@/utils/productToColor"
 
 import TextAccent from "./TextAccent"
 
-const AccentNumber = ({ children }: { children: React.ReactNode }) => {
+const AccentNumber = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) => {
   const activeProduct = useAppSelector((state) => state.tabs.value)
 
   const color = productToColor[activeProduct]
@@ -17,7 +23,8 @@ const AccentNumber = ({ children }: { children: React.ReactNode }) => {
     <TextAccent
       className={cn(
         "text-res-bot-blue text-prime-pink text-tools-green text-calendar-red text-university-velvet text-academy-gold text-nutcracker-orange",
-        `text-${color}`
+        `text-${color}`,
+        className
       )}
     >
       {children}
