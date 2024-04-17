@@ -21,6 +21,8 @@ export interface Subscription {
       }
     }
   }>
+  referralDiscountAmount: number | null
+  referralDiscountKind: "MONEY" | "PERCENT" | null
   subReferralDiscounts: Array<{
     subscriptionId: number
     discountAmount: number
