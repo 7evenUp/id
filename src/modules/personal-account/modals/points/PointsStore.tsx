@@ -2,13 +2,17 @@ import { toast } from "sonner"
 import { isDesktop } from "react-device-detect"
 import { DialogClose } from "@radix-ui/react-dialog"
 
-import ModalTrigger from "../../components/ModalTrigger"
-
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import PercentageIcon from "@/assets/icons/percentage.svg?react"
 import NftIcon from "@/assets/icons/nft.svg?react"
 
-import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
 import { Skeleton } from "@/shared/ui/Skeleton"
 import {
@@ -29,6 +33,7 @@ import { useUserProfileQuery } from "@/redux/api/profile"
 import { PointsPrize } from "@/types/points"
 
 import { cn } from "@/lib/classNames"
+import { Dispatch, SetStateAction, useState } from "react"
 
 const PointsStore = () => {
   const scale = useAppSelector((state) => state.scale.value)
@@ -93,7 +98,13 @@ export default PointsStore
 const Prize = (prize: PointsPrize) => {
   const { image, photos, description, title, type, price } = prize
 
+  const [open, setOpen] = useState(false)
+
   const scale = useAppSelector((state) => state.scale.value)
+
+  const { data: profileData } = useUserProfileQuery()
+
+  const { points } = profileData!
 
   return (
     <div className="flex flex-col">
@@ -153,9 +164,14 @@ const Prize = (prize: PointsPrize) => {
         {description}
       </Text1>
 
-      <ModalTrigger content={<ConfirmDialog {...prize} />}>
-        <Button className="mt-auto">приобрести</Button>
-      </ModalTrigger>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button className="mt-auto" disabled={points < price}>
+            приобрести
+          </Button>
+        </DialogTrigger>
+        <ConfirmDialog {...prize} setOpen={setOpen} />
+      </Dialog>
     </div>
   )
 }
@@ -168,7 +184,8 @@ const ConfirmDialog = ({
   title,
   type,
   photos,
-}: PointsPrize) => {
+  setOpen,
+}: PointsPrize & { setOpen: Dispatch<SetStateAction<boolean>> }) => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const [buy, { isLoading }] = useBuyPrizeMutation()
@@ -213,17 +230,23 @@ const ConfirmDialog = ({
             toast.error("Данный товар закончился")
             break
 
+          case "excepted_soon":
+            toast.error("Активация станет доступна, когда сервис будет запущен")
+            break
+
           default:
             break
         }
       } else {
         toast.error("При покупке приза произошла неизвестная ошибка")
       }
+    } finally {
+      setOpen(false)
     }
   }
 
   return (
-    <DialogContent>
+    <DialogContent className={cn("sm:p-4", scale && "3xl:p-[1.041vw]")}>
       <DialogHeader>
         <DialogTitle>Подтверждение покупки</DialogTitle>
       </DialogHeader>
