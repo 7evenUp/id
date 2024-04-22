@@ -69,8 +69,8 @@ const SubscriptionCard = ({
           >
             <Text2
               className={cn(
-                "rounded-sm p-0. text-gray-1 bg-gradient-to-r from-corral to-purple",
-                scale && "3xl:rounded-[0.13vw]  3xl:p-[0.13vw]"
+                "rounded-sm px-0.5 text-gray-1 bg-gradient-to-r from-corral to-purple",
+                scale && "3xl:rounded-[0.13vw] 3xl:px-[0.13vw]"
               )}
             >
               -{discount.percent}%

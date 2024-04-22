@@ -7,6 +7,7 @@
   "tg_already_set": "Вы уже синхронизировали этот username",
   "tg_limit_reached": "Вы не можете обновлять telegram дважды в месяц",
   "promocode_not_found": "Промокод не валиден",
+  "insufficient_balance": "Недостаточно средств",
   "top-up-minimum": "Требуется минимум",
   "too-many-requests": "Замечено много попыток авторизации. Пожалуйста, повторите позже",
   "invalid-code": "Неверный код"

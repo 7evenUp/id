@@ -1,11 +1,3 @@
-export interface SubscriptionsResponse {
-  count: number
-  pageCount: number
-  next: string | null
-  previous: string | null
-  results: Subscription[]
-}
-
 export interface Subscription {
   id: number
   createdDatetime: string
@@ -20,4 +12,22 @@ export interface Subscription {
   kind: 1 | 2 // 1 - Prime | 2 - Calendar
   baseDiscount: number | null
   baseDiscountAmount: number | null
+  benefits: Array<{
+    file: null | string
+    id: number
+    translations: {
+      ru: {
+        name: string
+      }
+    }
+  }>
+  referralDiscountAmount: number | null
+  referralDiscountKind: "MONEY" | "PERCENT" | null
+  subReferralDiscounts: Array<{
+    subscriptionId: number
+    discountAmount: number
+    referralDiscount: {
+      discountKind: "PERCENT" | "MONEY"
+    }
+  }>
 }

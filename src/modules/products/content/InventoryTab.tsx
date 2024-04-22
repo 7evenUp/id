@@ -20,12 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/ui/Dialog"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/shared/ui/Select"
+import { SegmentedButton, SegmentedRoot } from "@/shared/ui/SegmentedButtons"
 
 import { useAppSelector } from "@/redux/hooks"
 import {
@@ -74,26 +69,23 @@ const InventoryTab = () => {
         <TabTitle title={t("inventory.title")} link={null} />
       </TabHeader>
 
-      <Select
+      <SegmentedRoot
+        type="single"
+        className={cn(
+          "w-full sm:w-[520px] mt-2",
+          scale && "3xl:w-[33.854vw] 3xl:mt-[0.52vw]"
+        )}
         value={filterType}
         onValueChange={(value) =>
           setFilterType(value as "all" | "new" | "activated")
         }
       >
-        <SelectTrigger
-          className={cn(
-            "w-32 2xl:w-36 shrink-0 mt-2",
-            scale && "3xl:w-[8.35vw]"
-          )}
-        />
-        <SelectContent
-          className={cn("z-[999] w-32 2xl:w-36", scale && "3xl:w-[8.35vw]")}
-        >
-          <SelectItem value="all">{t("inventory.all")}</SelectItem>
-          <SelectItem value="new">{t("inventory.new")}</SelectItem>
-          <SelectItem value="activated">{t("inventory.activated")}</SelectItem>
-        </SelectContent>
-      </Select>
+        <SegmentedButton value="all">{t("inventory.all")}</SegmentedButton>
+        <SegmentedButton value="new">{t("inventory.new")}</SegmentedButton>
+        <SegmentedButton value="activated">
+          {t("inventory.activated")}
+        </SegmentedButton>
+      </SegmentedRoot>
 
       <div
         className={cn(
@@ -133,6 +125,7 @@ const Prize = ({
   userData,
   isUsed,
   instruction,
+  photos,
 }: InventoryItem) => {
   const { t } = useTranslation("products")
 
@@ -214,13 +207,25 @@ const Prize = ({
             "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
         )}
       >
-        <img
-          src={image!}
-          className={cn(
-            "w-full aspect-square rounded-xl",
-            scale && "3xl:rounded-[0.781vw]"
-          )}
-        />
+        {image ? (
+          <img
+            src={image}
+            className={cn(
+              "w-full aspect-square rounded-xl object-cover",
+              scale && "3xl:rounded-[0.781vw]"
+            )}
+          />
+        ) : (
+          photos.length > 0 && (
+            <img
+              src={photos[0].file}
+              className={cn(
+                "w-full aspect-square rounded-xl object-cover",
+                scale && "3xl:rounded-[0.781vw]"
+              )}
+            />
+          )
+        )}
         <TextAccent className="text-center">{title}</TextAccent>
         {isUsed ? (
           type === "nft" ? (

@@ -187,7 +187,7 @@ const ThirdStep = ({
               )}
             >
               <ExternalLink
-                href="https://t.me/Crypton_Calendar_bot"
+                href="https://calendar.crypton.xyz/"
                 className="w-fit"
               >
                 Calendar
