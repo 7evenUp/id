@@ -20,9 +20,6 @@ const ServicesAndNavigation = () => {
   const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
-  const language = useAppSelector((state) => state.language.value)
-
-  if (language === "en") return null
 
   return (
     <RowItem
