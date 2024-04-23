@@ -27,16 +27,11 @@ const Phase3 = ({
   close: (forever?: boolean) => void
 }) => {
   const scale = useAppSelector((state) => state.scale.value)
-  const language = useAppSelector((state) => state.language.value)
 
   const { data: userLinks } = useLinksQuery({})
   const { data: userProfile } = useUserProfileQuery()
 
   const { telegramUsername } = userProfile!
-
-  const filteredLinks = userLinks?.filter(
-    (link) => link.link.channel.lang === language
-  )
 
   const onPrevClick = () => {
     openSecondPhase()
@@ -77,9 +72,9 @@ const Phase3 = ({
               scale && "3xl:gap-[0.781vw] 3xl:max-h-[13.02vw]"
             )}
           >
-            {filteredLinks &&
-              filteredLinks.length > 0 &&
-              filteredLinks.map((link) => (
+            {userLinks &&
+              userLinks.length > 0 &&
+              userLinks.map((link) => (
                 <ExternalLink
                   key={link.id}
                   href={link.link.url}
