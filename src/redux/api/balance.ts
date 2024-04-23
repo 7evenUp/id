@@ -25,8 +25,11 @@ const balanceApi = api.injectEndpoints({
         return response.paymentUrl
       },
       transformErrorResponse: (response) => ({
+        status: response.status,
         // @ts-expect-error No-Error-Types
         message: response.data.detail,
+        // @ts-expect-error No-Error-Types
+        code: response.data.code,
       }),
     }),
   }),

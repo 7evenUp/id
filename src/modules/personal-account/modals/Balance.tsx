@@ -67,6 +67,9 @@ const Balance = () => {
       .min(1, { message: tSchema("required") })
       .regex(new RegExp("^[0-9]+$", "g"), {
         message: tSchema("digits-only"),
+      })
+      .refine((val) => parseInt(val) > 0, {
+        message: tSchema("min-top-up"),
       }),
   })
 
@@ -334,12 +337,15 @@ const Balance = () => {
                 >
                   {
                     // @ts-expect-error No-Error-Types
-                    error.message
+                    error.code === "invalid_data"
                       ? // @ts-expect-error No-Error-Types
                         `${tErrorResponses("top-up-minimum")} ${error.message
                           .split(" ")
                           // @ts-expect-error No-Error-Types
                           .at(-2)} ${error.message.split(" ").at(-1)}`
+                      : // @ts-expect-error No-Error-Types
+                      error.code === "top_up_low_limit"
+                      ? tSchema("min-top-up")
                       : tErrorResponses("server-error")
                   }
                 </ResponseErrorText>
