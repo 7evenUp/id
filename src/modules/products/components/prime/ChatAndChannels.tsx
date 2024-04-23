@@ -23,7 +23,7 @@ const ChatAndChannels = () => {
   const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
-  const language = useAppSelector((state) => state.language.value)
+  // const language = useAppSelector((state) => state.language.value)
 
   const { data: userLinks } = useLinksQuery({})
   const { data: userProfile } = useUserProfileQuery()
@@ -32,11 +32,11 @@ const ChatAndChannels = () => {
 
   const { telegramId } = userProfile
 
-  const filteredLinks = userLinks?.filter(
-    (link) => link.link.channel.lang === language
-  )
+  // const filteredLinks = userLinks?.filter(
+  //   (link) => link.link.channel.lang === language
+  // )
 
-  if (filteredLinks && filteredLinks.length > 0) {
+  if (userLinks && userLinks.length > 0) {
     return (
       <RowItem
         className={cn(
@@ -99,7 +99,7 @@ const ChatAndChannels = () => {
             scale && "3xl:gap-[0.8vw]"
           )}
         >
-          {filteredLinks.map((link) => (
+          {userLinks.map((link) => (
             <ExternalLink
               key={link.id}
               href={link.link.url}
