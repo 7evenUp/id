@@ -18,8 +18,27 @@ const pointsApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Points", "UserProfile", "Inventory"],
     }),
+    getShares: build.query<PointsPrize[], void>({
+      query: () => ({
+        url: "points-store/shares/",
+        method: "GET",
+      }),
+      providesTags: ["Shares"],
+    }),
+    claimShares: build.mutation<PointsBuyPrizeResponse, { prizeId: number }>({
+      query: ({ prizeId }) => ({
+        url: `points-store/shares/claim/?prizeId=${prizeId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Shares", "UserProfile", "Inventory"],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useGetPrizesQuery, useBuyPrizeMutation } = pointsApi
+export const {
+  useGetPrizesQuery,
+  useBuyPrizeMutation,
+  useGetSharesQuery,
+  useClaimSharesMutation,
+} = pointsApi

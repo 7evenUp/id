@@ -4,7 +4,7 @@ import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
 import PointsInfo from "../modals/points/PointsInfo"
-// import PointsStore from "../modals/points/PointsStore"
+import PointsStore from "../modals/points/PointsStore"
 import ModalTrigger from "../components/ModalTrigger"
 
 import AccentNumber from "@/shared/typography/AccentNumber"
@@ -13,7 +13,8 @@ import Text0 from "@/shared/typography/Text0"
 
 import RowItem from "@/shared/components/RowItem"
 
-// import Button from "@/shared/ui/Button"
+import { Skeleton } from "@/shared/ui/Skeleton"
+import Button from "@/shared/ui/Button"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useNutcrackersQuery, useUserProfileQuery } from "@/redux/api/profile"
@@ -26,7 +27,7 @@ const Points = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
-  const { data: nutcrackersData } = useNutcrackersQuery()
+  const { data: nutcrackersData, isLoading } = useNutcrackersQuery()
 
   const { points } = profileData!
 
@@ -66,19 +67,33 @@ const Points = () => {
           <Text0 className="flex-shrink-0">
             {t("points.balance")}: <AccentNumber>{points}</AccentNumber>
           </Text0>
-          {/* <ModalTrigger content={<PointsStore />}>
+          <ModalTrigger content={<PointsStore />}>
             <Button>к покупкам</Button>
-          </ModalTrigger> */}
+          </ModalTrigger>
         </RowItem>
-        {nutcrackersData && (
-          <RowItem className="items-start">
-            <Text0 className="flex-shrink-0">
-              {t("points.cashback")}:{" "}
-              <AccentNumber>
-                {Math.round(nutcrackersData.pointsCacheBack * 100)}%
-              </AccentNumber>
-            </Text0>
+        {isLoading ? (
+          <RowItem
+            className={cn("justify-start gap-2", scale && "3xl:gap-[0.52vw]")}
+          >
+            <Text0 className="flex-shrink-0">{t("points.cashback")}:</Text0>
+            <Skeleton
+              className={cn(
+                "w-5 h-4",
+                scale && "3xl:w-[1.302vw] 3xl:h-[1.041vw]"
+              )}
+            />
           </RowItem>
+        ) : (
+          nutcrackersData && (
+            <RowItem className="items-start">
+              <Text0 className="flex-shrink-0">
+                {t("points.cashback")}:{" "}
+                <AccentNumber>
+                  {Math.round(nutcrackersData.pointsCacheBack * 100)}%
+                </AccentNumber>
+              </Text0>
+            </RowItem>
+          )
         )}
       </div>
     </div>

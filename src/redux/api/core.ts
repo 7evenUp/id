@@ -15,6 +15,7 @@ export const api = createApi({
     "LinksAndChannels",
     "Inventory",
     "Points",
+    "Shares",
   ],
   endpoints: () => ({}),
 })

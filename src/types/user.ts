@@ -23,6 +23,7 @@ export interface User {
   tonWallet: string | null
   utmData: string | null
   timezone: string
+  investFundBalance: number
 }
 
 export interface Avatar {
