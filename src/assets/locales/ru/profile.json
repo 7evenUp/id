@@ -36,6 +36,7 @@
     "cashback": "текущий кэшбэк"
   },
   "shares": {
-    "balance": "мои shares"
+    "balance": "мои $SHARES",
+    "convert": "конвертировать"
   }
 }

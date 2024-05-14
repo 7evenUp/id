@@ -41,9 +41,9 @@ const SharesStore = () => {
       )}
     >
       <DialogHeader className="gap-1 mobile:gap-0 mobile:items-center flex-col mobile:flex-row">
-        <DialogTitle>Конвертация Shares в NFT</DialogTitle>
+        <DialogTitle>Конвертация $SHARES в NFT</DialogTitle>
         <Text0 className="relative mr-4 sm:m-0 w-fit">
-          Ваши shares:{" "}
+          Мои $SHARES:{" "}
           <TextAccent className="dark:text-gray-5">
             {investFundBalance}
           </TextAccent>
@@ -89,7 +89,7 @@ const Prize = (prize: PointsPrize) => {
 
   const { data: profileData } = useUserProfileQuery()
 
-  const { points } = profileData!
+  const { investFundBalance } = profileData!
 
   return (
     <div className="flex flex-col">
@@ -147,7 +147,7 @@ const Prize = (prize: PointsPrize) => {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="mt-auto" disabled={points < price}>
+          <Button className="mt-auto" disabled={investFundBalance < price}>
             конвертация
           </Button>
         </DialogTrigger>
@@ -180,14 +180,16 @@ const ConfirmDialog = ({
     try {
       await claim({ prizeId }).unwrap()
       dispatch(change("inventory"))
-      toast.success("Shares успешно конвертированы в NFT")
+      toast.success("$SHARES успешно конвертированы в NFT")
     } catch (error) {
       // @ts-expect-error RTKQ no error types
       if (error.status === 400) {
         // @ts-expect-error RTKQ no error types
         switch (error.data.code) {
           case "insufficient_balance":
-            toast.error("На Вашем аккаунте недостаточно Shares для конвертации")
+            toast.error(
+              "На Вашем аккаунте недостаточно $SHARES для конвертации"
+            )
             break
 
           case "user_ton_address_not_set":
@@ -272,7 +274,7 @@ const ConfirmDialog = ({
           <TextAccent className="dark:text-gray-5">
             {(investFundBalance - price).toFixed(2)}
           </TextAccent>{" "}
-          shares
+          $SHARES
         </Text0>
         <div
           className={cn(

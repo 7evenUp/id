@@ -33,7 +33,7 @@ const Shares = () => {
           scale && "3xl:pb-[1.042vw]"
         )}
       >
-        <Subheading>Shares</Subheading>
+        <Subheading>$SHARES</Subheading>
       </div>
 
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
@@ -43,7 +43,7 @@ const Shares = () => {
             <AccentNumber>{investFundBalance}</AccentNumber>
           </Text0>
           <ModalTrigger content={<SharesStore />}>
-            <Button>Конвертировать</Button>
+            <Button>{t("shares.convert")}</Button>
           </ModalTrigger>
         </RowItem>
       </div>
