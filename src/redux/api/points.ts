@@ -30,7 +30,7 @@ const pointsApi = api.injectEndpoints({
         url: `points-store/shares/claim/?prizeId=${prizeId}`,
         method: "POST",
       }),
-      invalidatesTags: ["Shares", "UserProfile", "Inventory"],
+      invalidatesTags: ["Shares", "SharesHistory", "UserProfile", "Inventory"],
     }),
   }),
   overrideExisting: false,

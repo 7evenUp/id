@@ -24,6 +24,7 @@ export interface User {
   utmData: string | null
   timezone: string
   investFundBalance: number
+  investFundClosestBurnings: Array<{ burningDate: string; amount: number }>
 }
 
 export interface Avatar {

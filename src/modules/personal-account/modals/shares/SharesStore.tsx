@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react"
 import { toast } from "sonner"
 import { DialogClose } from "@radix-ui/react-dialog"
+import { useTranslation } from "react-i18next"
 
 import {
   Dialog,
@@ -15,6 +16,7 @@ import { Skeleton } from "@/shared/ui/Skeleton"
 import Text0 from "@/shared/typography/Text0"
 import TextAccent from "@/shared/typography/TextAccent"
 import Text1 from "@/shared/typography/Text1"
+import TextXs from "@/shared/typography/TextXs"
 
 import { useClaimSharesMutation, useGetSharesQuery } from "@/redux/api/points"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
@@ -23,15 +25,18 @@ import { change } from "@/redux/tabs/slice"
 
 import { PointsPrize } from "@/types/points"
 
+import { formatDate } from "@/lib/date-fns"
 import { cn } from "@/lib/classNames"
 
 const SharesStore = () => {
+  const { t, i18n } = useTranslation("modals")
+
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
   const { data: prizes } = useGetSharesQuery()
 
-  const { investFundBalance } = profileData!
+  const { investFundBalance, investFundClosestBurnings } = profileData!
 
   return (
     <DialogContent
@@ -41,14 +46,26 @@ const SharesStore = () => {
       )}
     >
       <DialogHeader className="gap-1 mobile:gap-0 mobile:items-center flex-col mobile:flex-row">
-        <DialogTitle>Конвертация $SHARES в NFT</DialogTitle>
-        <Text0 className="relative mr-4 sm:m-0 w-fit">
-          Мои $SHARES:{" "}
+        <DialogTitle>{t("shares.convert.heading")}</DialogTitle>
+        <Text0 className="w-fit">
+          {t("shares.convert.my-shares")}:{" "}
           <TextAccent className="dark:text-gray-5">
             {investFundBalance}
           </TextAccent>
         </Text0>
       </DialogHeader>
+      <div className="flex flex-col items-end gap-1">
+        {investFundClosestBurnings.length > 0 &&
+          investFundClosestBurnings.map((el, i) => (
+            <TextXs key={i}>
+              <span className="font-semibold">{el.amount} $SHARES</span>{" "}
+              {t("shares.convert.burn")}{" "}
+              <span className="font-semibold">
+                {formatDate(el.burningDate, i18n.language as "ru" | "en")}
+              </span>
+            </TextXs>
+          ))}
+      </div>
       <div
         className={cn(
           "flex flex-col gap-6 max-h-[440px] overflow-auto pr-2 pb-1",
@@ -57,9 +74,9 @@ const SharesStore = () => {
         )}
       >
         <Text0>
-          Какой-нибудь текст-пояснение. Мол типо после конвертации Ваша NFT
-          попадёт в секцию <TextAccent>Инвентарь</TextAccent>. Покупайте
-          уникальные призы / предметы / бонусы и пользуйтесь на здоровье.
+          {t("shares.convert.description-1")}{" "}
+          <TextAccent>{t("shares.convert.inventory")}</TextAccent>{" "}
+          {t("shares.convert.description-2")}
         </Text0>
         {prizes && prizes.length > 0 && (
           <div
@@ -82,6 +99,8 @@ export default SharesStore
 
 const Prize = (prize: PointsPrize) => {
   const { image, photos, description, title, price } = prize
+
+  const { t } = useTranslation("modals")
 
   const [open, setOpen] = useState(false)
 
@@ -117,7 +136,7 @@ const Prize = (prize: PointsPrize) => {
               scale && "3xl:rounded-[0.78125vw]"
             )}
           >
-            <Text0>У приза нет картинки</Text0>
+            <Text0>У $SHARES нет картинки</Text0>
           </Skeleton>
         )}
         <div
@@ -148,7 +167,7 @@ const Prize = (prize: PointsPrize) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button className="mt-auto" disabled={investFundBalance < price}>
-            конвертация
+            {t("shares.convert.convert")}
           </Button>
         </DialogTrigger>
         <ConfirmDialog {...prize} setOpen={setOpen} />
@@ -166,6 +185,8 @@ const ConfirmDialog = ({
   photos,
   setOpen,
 }: PointsPrize & { setOpen: Dispatch<SetStateAction<boolean>> }) => {
+  const { t } = useTranslation("modals")
+
   const scale = useAppSelector((state) => state.scale.value)
   const dispatch = useAppDispatch()
 
@@ -226,7 +247,7 @@ const ConfirmDialog = ({
   return (
     <DialogContent className={cn("sm:p-4", scale && "3xl:p-[1.041vw]")}>
       <DialogHeader>
-        <DialogTitle>Подтверждение конвертации</DialogTitle>
+        <DialogTitle>{t("shares.confirm.heading")}</DialogTitle>
       </DialogHeader>
       <div className={cn("flex flex-col gap-2", scale && "3xl:gap-[0.52vw]")}>
         <div
@@ -270,7 +291,7 @@ const ConfirmDialog = ({
         </div>
 
         <Text0>
-          После покупки у Вас останется{" "}
+          {t("shares.confirm.after")}{" "}
           <TextAccent className="dark:text-gray-5">
             {(investFundBalance - price).toFixed(2)}
           </TextAccent>{" "}
@@ -283,14 +304,14 @@ const ConfirmDialog = ({
           )}
         >
           <DialogClose>
-            <Button className="w-fit">отмена</Button>
+            <Button className="w-fit">{t("shares.confirm.cancel")}</Button>
           </DialogClose>
           <Button
             className="w-fit"
             onClick={() => claimShares(id)}
             isLoading={isLoading}
           >
-            подтвердить
+            {t("shares.confirm.submit")}
           </Button>
         </div>
       </div>

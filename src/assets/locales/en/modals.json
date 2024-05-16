@@ -254,5 +254,30 @@
     "base-cashback": "The basic cashback (without Nutcracker) is 5%",
     "rarity": "rarity",
     "cashback": "cashback"
+  },
+  "shares": {
+    "history": {
+      "heading": "$SHARES History",
+      "amount": "Amount",
+      "balanceBefore": "Balance before",
+      "balanceAfter": "Balance after",
+      "kind": "Kind",
+      "no-data": "There is no data for displaying history"
+    },
+    "convert": {
+      "heading": "Converting $SHARES to NFT",
+      "my-shares": "My $SHARES",
+      "burn": "will be burned",
+      "description-1": "After conversion, your $SHARES will be displayed in the",
+      "description-2": "section. From there, you can withdraw them to your wallet on the TON network.",
+      "inventory": "\"Inventory\"",
+      "convert": "convert"
+    },
+    "confirm": {
+      "heading": "Confirmation of conversion",
+      "after": "After the conversion, you will have",
+      "cancel": "cancel",
+      "submit": "submit"
+    }
   }
 }

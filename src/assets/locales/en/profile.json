@@ -37,6 +37,7 @@
   },
   "shares": {
     "balance": "my $SHARES",
+    "history": "history",
     "convert": "convert"
   }
 }

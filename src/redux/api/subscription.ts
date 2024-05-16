@@ -25,7 +25,12 @@ const subscriptionApi = api.injectEndpoints({
         // @ts-expect-error No-Error-Types
         errorCode: response.data.code,
       }),
-      invalidatesTags: ["UserProfile", "TxHistory", "LinksAndChannels"],
+      invalidatesTags: [
+        "UserProfile",
+        "TxHistory",
+        "SharesHistory",
+        "LinksAndChannels",
+      ],
     }),
   }),
   overrideExisting: false,

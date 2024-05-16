@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next"
 
 import SharesStore from "../modals/shares/SharesStore"
+import SharesHistory from "../modals/shares/SharesHistory"
+
 import ModalTrigger from "../components/ModalTrigger"
 
 import AccentNumber from "@/shared/typography/AccentNumber"
@@ -42,9 +44,19 @@ const Shares = () => {
             {t("shares.balance")}:{" "}
             <AccentNumber>{investFundBalance}</AccentNumber>
           </Text0>
-          <ModalTrigger content={<SharesStore />}>
-            <Button>{t("shares.convert")}</Button>
-          </ModalTrigger>
+          <div
+            className={cn(
+              "flex gap-1.5 xl:gap-3 flex-wrap justify-end",
+              scale && "3xl:gap-[0.781vw]"
+            )}
+          >
+            <ModalTrigger content={<SharesHistory />}>
+              <Button>{t("shares.history")}</Button>
+            </ModalTrigger>
+            <ModalTrigger content={<SharesStore />}>
+              <Button>{t("shares.convert")}</Button>
+            </ModalTrigger>
+          </div>
         </RowItem>
       </div>
     </div>
