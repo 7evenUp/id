@@ -11,7 +11,6 @@ import {
   DialogContent,
   DialogHeader,
 } from "@/shared/ui/Dialog"
-import Button from "@/shared/ui/Button"
 
 import Text1 from "@/shared/typography/Text1"
 
@@ -46,7 +45,12 @@ const SelectSubscription = ({
           <DialogTitle>{t("buy-subs.selection.title")}</DialogTitle>
         </DialogHeader>
 
-        <div className="flex items-center justify-center flex-col sm:flex-row gap-4 sm:gap-10">
+        <div
+          className={cn(
+            "flex justify-center flex-col sm:flex-row gap-4 sm:gap-10",
+            scale && "3xl:gap-[2.6vw]"
+          )}
+        >
           <Card onClick={openCalendar}>
             <div
               className={cn(
@@ -56,7 +60,7 @@ const SelectSubscription = ({
             >
               <CalendarActiveIcon
                 className={cn(
-                  "group-hover:block group-hover:scale-105 hidden w-[30px] h-[30px]",
+                  "group-hover:block hidden w-[30px] h-[30px]",
                   scale && "3xl:w-[1.953vw] 3xl:h-[1.953vw]"
                 )}
               />
@@ -75,7 +79,12 @@ const SelectSubscription = ({
                 Calendar
               </span>
             </div>
-            <Text1 className="mt-2 text-center">
+            <Text1
+              className={cn(
+                "mt-2 text-left group-hover:translate-y-2 transition-transform duration-500",
+                scale && "3xl:group-hover:translate-y-[0.52vw] 3xl:mt-[0.52vw]"
+              )}
+            >
               {t("buy-subs.selection.calendar-text")}
             </Text1>
           </Card>
@@ -88,7 +97,7 @@ const SelectSubscription = ({
             >
               <PrimeActiveIcon
                 className={cn(
-                  "group-hover:block group-hover:scale-110 hidden w-[27px] h-[30px]",
+                  "group-hover:block group-hover:scale-105 hidden w-[27px] h-[30px]",
                   scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
                 )}
               />
@@ -107,8 +116,12 @@ const SelectSubscription = ({
                 Prime
               </span>
             </div>
-            <Text1 className="mt-2 text-center">
-              {" "}
+            <Text1
+              className={cn(
+                "mt-2 text-left group-hover:translate-y-2 transition-transform duration-500",
+                scale && "3xl:group-hover:translate-y-[0.52vw] 3xl:mt-[0.52vw]"
+              )}
+            >
               {t("buy-subs.selection.prime-text")}
             </Text1>
           </Card>
@@ -127,29 +140,18 @@ const Card = ({
   onClick: () => void
   children: React.ReactNode
 }) => {
-  const { t } = useTranslation("modals")
-
   const scale = useAppSelector((state) => state.scale.value)
 
   return (
-    <div
+    <button
+      onClick={onClick}
       className={cn(
-        "group sm:min-h-[247px] min-w-[188px] flex-1 flex flex-col items-center rounded-xl border border-gray-1 dark:border-gray-3 p-5",
+        "group min-w-[188px] flex-1 flex flex-col items-center rounded-xl border border-gray-1 dark:border-gray-3 p-5 hover:bg-stone-200/30 dark:hover:bg-stone-200/10 active:scale-95 transition-all duration-500",
         scale &&
           "3xl:min-h-[16.08vw] 3xl:min-w-[12.239vw] 3xl:rounded-[0.781vw] 3xl:p-[1.302vw]"
       )}
     >
       {children}
-
-      <Button
-        className={cn(
-          "w-[158px] disabled:bg-gray-1 disabled:hover:bg-gray-1 disabled:text-white dark:disabled:bg-white dark:disabled:hover:bg-white dark:disabled:text-black mt-4 sm:mt-auto",
-          scale && "3xl:w-[10.286vw]"
-        )}
-        onClick={onClick}
-      >
-        {t("buy-subs.selection.continue-btn")}
-      </Button>
-    </div>
+    </button>
   )
 }

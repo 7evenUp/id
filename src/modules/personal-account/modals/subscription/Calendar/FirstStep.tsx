@@ -36,6 +36,8 @@ import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 
 import { Subscription } from "@/types/subscriptions"
 
+import { PROMO_CODE_NOT_FOUND, INSUFFICIENT_BALANCE } from "@/utils/errorCodes"
+
 import { cn } from "@/lib/classNames"
 
 const FirstStep = ({

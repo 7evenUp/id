@@ -36,7 +36,7 @@
     "cashback": "current cashback"
   },
   "shares": {
-    "balance": "my $SHARES",
+    "balance": "my balance",
     "history": "history",
     "convert": "convert"
   }
