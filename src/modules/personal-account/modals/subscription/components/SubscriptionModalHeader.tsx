@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import SubscriptionType from "./SubscriptionType"
+import SubscriptionType from "@/modules/personal-account/components/SubscriptionType"
 
 import { DialogHeader } from "@/shared/ui/Dialog"
 

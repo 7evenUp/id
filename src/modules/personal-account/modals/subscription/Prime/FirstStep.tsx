@@ -6,10 +6,13 @@ import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import CheckIcon from "@/assets/icons/check.svg?react"
 import HelpIcon from "@/assets/icons/help-circle.svg?react"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
 
-import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
-import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"
-import SubscriptionCard from "../../components/SubscriptionCard"
+import SubscriptionModalHeader from "../components/SubscriptionModalHeader"
+import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
+import SubscriptionCard from "../components/SubscriptionCard"
+import CryptonPointsInfo from "../components/CryptonPointsInfo"
+import RarityToDiscountTable from "../components/RarityToDiscountTable"
 
 import TextAccent from "@/shared/typography/TextAccent"
 import Text2 from "@/shared/typography/Text2"
@@ -17,7 +20,7 @@ import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
-import { Dialog, DialogContent, DialogTitle } from "@/shared/ui/Dialog"
+import { Dialog, DialogContent } from "@/shared/ui/Dialog"
 import Input from "@/shared/ui/Input"
 import Button from "@/shared/ui/Button"
 import {
@@ -43,6 +46,7 @@ const FirstStep = ({
   open,
   onOpenChange,
   openSecondStep,
+  openSelection,
   openBalanceModal,
   subscriptions,
   setBoughtSubDuration,
@@ -50,6 +54,7 @@ const FirstStep = ({
   open: boolean
   onOpenChange: (open: boolean) => void
   openSecondStep: () => void
+  openSelection: () => void
   openBalanceModal: () => void
   subscriptions: Subscription[]
   setBoughtSubDuration: Dispatch<SetStateAction<number>>
@@ -251,6 +256,21 @@ const FirstStep = ({
           scale && "3xl:pb-[3.645vw] 3xl:max-w-[70vw]"
         )}
       >
+        <button
+          className={cn(
+            "typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit",
+            scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
+          )}
+          onClick={openSelection}
+        >
+          <MoveLeft
+            className={cn(
+              "w-3.5 h-3.5",
+              scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+            )}
+          />
+          <span className="text-left">{t("buy-subs.back-btn")}</span>
+        </button>
         <SubscriptionModalHeader step={t("buy-subs.first-step.step")} />
 
         <div
@@ -683,161 +703,3 @@ const PrimeInfo = () => {
 }
 
 export default FirstStep
-
-const RarityToDiscountTable = () => (
-  <>
-    <a
-      href="https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Common%22%5D%7D%7D"
-      target="_blank"
-      className="flex items-center justify-between hover:underline"
-    >
-      <span>common</span>
-      <TextAccent className="tabular-nums">10%</TextAccent>
-    </a>
-    <a
-      href="https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Uncommon%22%5D%7D%7D"
-      target="_blank"
-      className="flex items-center justify-between text-tools-green hover:underline"
-    >
-      <span>uncommon</span>
-      <TextAccent className="tabular-nums">12%</TextAccent>
-    </a>
-    <a
-      href="https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Rare%22%5D%7D%7D"
-      target="_blank"
-      className="flex items-center justify-between text-res-bot-blue hover:underline"
-    >
-      <span>rare</span>
-      <TextAccent className="tabular-nums">14%</TextAccent>
-    </a>
-    <a
-      href="https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Mythical%22%5D%7D%7D"
-      target="_blank"
-      className="flex items-center justify-between text-prime-pink hover:underline"
-    >
-      <span>mythical</span>
-      <TextAccent className="tabular-nums">16%</TextAccent>
-    </a>
-    <a
-      href="https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Epic%22%5D%7D%7D"
-      target="_blank"
-      className="flex items-center justify-between text-university-velvet hover:underline"
-    >
-      <span>epic</span>
-      <TextAccent className="tabular-nums">18%</TextAccent>
-    </a>
-    <a
-      href="https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Legendary%22%5D%7D%7D"
-      target="_blank"
-      className="flex items-center justify-between text-academy-gold hover:underline"
-    >
-      <span>legendary</span>
-      <TextAccent className="tabular-nums">20%</TextAccent>
-    </a>
-  </>
-)
-
-const CryptonPointsInfo = ({ small }: { small?: boolean }) => {
-  const { t } = useTranslation("modals")
-
-  const language = useAppSelector((state) => state.language.value)
-
-  if (small)
-    return (
-      <>
-        <DialogTitle>{t("points-info.heading")}</DialogTitle>
-
-        <Text1>{t("points-info.text-1")}</Text1>
-        <Text1>
-          {t("points-info.text-2")}{" "}
-          {language === "ru" ? (
-            <>
-              <a
-                href="https://t.me/cryptonannouncement"
-                target="_blank"
-                className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-              >
-                канале анонсов
-              </a>
-            </>
-          ) : (
-            <a
-              href="https://twitter.com/cryptonxyz"
-              target="_blank"
-              className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-            >
-              twitter
-            </a>
-          )}{" "}
-          .
-        </Text1>
-        <Text1>{t("points-info.text-3")}</Text1>
-
-        <DialogTitle>{t("points-info.part-2-heading")}</DialogTitle>
-
-        <Text1>
-          {t("points-info.part-2-text-1-1")}{" "}
-          <a
-            href="https://getgems.io/nutcrackers"
-            target="_blank"
-            className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-          >
-            Nutcrackers
-          </a>{" "}
-          {t("points-info.part-2-text-1-2")}
-        </Text1>
-        <Text1>{t("points-info.part-2-text-2")}</Text1>
-        <Text1>{t("points-info.part-2-text-3")}</Text1>
-        <Text1>{t("points-info.part-2-text-4")}</Text1>
-      </>
-    )
-
-  return (
-    <>
-      <DialogTitle>{t("points-info.heading")}</DialogTitle>
-
-      <Text0>{t("points-info.text-1")}</Text0>
-      <Text0>
-        {t("points-info.text-2")}{" "}
-        {language === "ru" ? (
-          <>
-            <a
-              href="https://t.me/cryptonannouncement"
-              target="_blank"
-              className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-            >
-              канале анонсов
-            </a>
-          </>
-        ) : (
-          <a
-            href="https://twitter.com/cryptonxyz"
-            target="_blank"
-            className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-          >
-            twitter
-          </a>
-        )}{" "}
-        .
-      </Text0>
-      <Text0>{t("points-info.text-3")}</Text0>
-
-      <DialogTitle>{t("points-info.part-2-heading")}</DialogTitle>
-
-      <Text0>
-        {t("points-info.part-2-text-1-1")}{" "}
-        <a
-          href="https://getgems.io/nutcrackers"
-          target="_blank"
-          className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-        >
-          Nutcrackers
-        </a>{" "}
-        {t("points-info.part-2-text-1-2")}
-      </Text0>
-      <Text0>{t("points-info.part-2-text-2")}</Text0>
-      <Text0>{t("points-info.part-2-text-3")}</Text0>
-      <Text0>{t("points-info.part-2-text-4")}</Text0>
-    </>
-  )
-}

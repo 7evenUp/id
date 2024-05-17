@@ -132,6 +132,28 @@
       "need-help": "Need help? Contact your Prime mentor",
       "link": "contact the mentor"
     },
+    "back-btn": "back",
+    "selection": {
+      "title": "Choosing subscription type",
+      "calendar-text": "A calendar of current and profitable events in the world of cryptocurrencies. It significantly saves time and significantly increases your productivity.",
+      "prime-text": "Effective strategies to increase earnings with tangible savings personal time. The Prime team carefully selects the most significant events and forms ways of earning for both beginners and advanced users.",
+      "continue-btn": "select"
+    },
+    "calendar": {
+      "first-step": {
+        "step": "step 1/2: Choosing a plan",
+        "desc": "A calendar of current and profitable events in the world of cryptocurrencies. It significantly saves time and significantly increases your productivity."
+      },
+      "second-step": {
+        "step": "шаг 2/2: Calendar access",
+        "congrats": "CONGRATULATIONS",
+        "congrats-message_one": "{{count}} month Calendar subscription has been purchased!",
+        "congrats-message_other": "{{count}} months Calendar subscription has been purchased!",
+        "access-available": "Now you have access to the Calendar",
+        "go-to-calendar-btn": "proceed",
+        "continue-btn": "close"
+      }
+    },
     "first-step": {
       "step": "step 1/3: Choosing a plan",
       "prime-desc": "Effective strategies to increase earnings with tangible savings personal time. The Prime team carefully selects the most significant events and forms ways of earning for both beginners and advanced users.",

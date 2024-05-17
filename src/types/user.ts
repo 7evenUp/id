@@ -43,7 +43,7 @@ export interface SubscriptionInfo {
   status: "ACTIVE" | "FROZEN" | "EXPIRED" | null
   subscriptionActiveTillDate: Date | null
   subscriptionBoughtDaysAgo: number
-  subscriptionType: "Prime" | null
+  subscriptionType: "Prime" | "Calendar" | null
 }
 
 export interface ReferralInfo {

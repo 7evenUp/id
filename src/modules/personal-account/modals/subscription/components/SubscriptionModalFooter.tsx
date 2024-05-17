@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next"
 import MoveRight from "@/assets/icons/move-right.svg?react"
 
 import { DialogFooter } from "@/shared/ui/Dialog"
+
 import { useAppSelector } from "@/redux/hooks"
+
 import { cn } from "@/lib/classNames"
 
 const SubscriptionModalFooter = () => {
