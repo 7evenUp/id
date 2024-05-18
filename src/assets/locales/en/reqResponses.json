@@ -10,5 +10,6 @@
   "insufficient_balance": "Insufficient balance",
   "top-up-minimum": "Required a minimum of",
   "too-many-requests": "Too many requests. Please try again later",
-  "invalid-code": "Invalid code"
+  "invalid-code": "Invalid code",
+  "already_active_subscription": "You already have active subscription"
 }

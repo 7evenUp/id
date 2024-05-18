@@ -10,5 +10,6 @@
   "insufficient_balance": "Недостаточно средств",
   "top-up-minimum": "Требуется минимум",
   "too-many-requests": "Замечено много попыток авторизации. Пожалуйста, повторите позже",
-  "invalid-code": "Неверный код"
+  "invalid-code": "Неверный код",
+  "already_active_subscription": "У вас уже есть активная подписка"
 }

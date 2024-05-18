@@ -5,9 +5,8 @@ import Phase2 from "./Phase2"
 import Phase3 from "./Phase3"
 import Phase4 from "./Phase4"
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { setHasShown } from "@/redux/intro/slice"
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useHidePrimeInstructionMutation } from "@/redux/api/user"
 
 const IntroModal = () => {
   const [firstPhaseOpened, setFirstPhaseOpened] = useState(false)
@@ -15,13 +14,12 @@ const IntroModal = () => {
   const [thirdPhaseOpened, setThirdPhaseOpened] = useState(false)
   const [forthPhaseOpened, setForthPhaseOpened] = useState(false)
 
-  const dispatch = useAppDispatch()
-  const isIntroShown = useAppSelector((state) => state.intro.isShown)
-
   const { data: profileData } = useUserProfileQuery()
+  const [hidePrimeInstruction] = useHidePrimeInstructionMutation()
 
   const {
-    subscriptionInfo: { status },
+    subscriptionInfo: { status, subscriptionType },
+    isPrimeInstructionShown,
   } = profileData!
 
   const openFirstPhase = () => {
@@ -53,21 +51,21 @@ const IntroModal = () => {
     setForthPhaseOpened(false)
 
     if (forever) {
-      dispatch(setHasShown())
+      hidePrimeInstruction()
     }
   }
 
   useEffect(() => {
-    if (!isIntroShown) {
+    if (!isPrimeInstructionShown) {
       setTimeout(() => {
-        if (status === "ACTIVE") {
+        if (status === "ACTIVE" && subscriptionType === "Prime") {
           setFirstPhaseOpened(true)
         }
       }, 1000)
     }
   }, [])
 
-  if (isIntroShown) return null
+  if (isPrimeInstructionShown) return null
 
   return (
     <>

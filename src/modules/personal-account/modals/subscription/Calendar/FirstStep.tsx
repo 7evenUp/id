@@ -36,7 +36,11 @@ import { useValidatePromocodeMutation } from "@/redux/api/promocodes"
 
 import { Subscription } from "@/types/subscriptions"
 
-import { PROMO_CODE_NOT_FOUND, INSUFFICIENT_BALANCE } from "@/utils/errorCodes"
+import {
+  PROMO_CODE_NOT_FOUND,
+  INSUFFICIENT_BALANCE,
+  ALREADY_ACTIVE_SUBSCRIPTION,
+} from "@/utils/errorCodes"
 
 import { cn } from "@/lib/classNames"
 
@@ -652,6 +656,9 @@ const FirstStep = ({
                     : /* @ts-expect-error No-Error-Types */
                     error.errorCode === INSUFFICIENT_BALANCE
                     ? tErrorResponses("insufficient_balance")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === ALREADY_ACTIVE_SUBSCRIPTION
+                    ? tErrorResponses("already_active_subscription")
                     : tErrorResponses("server-error")
                   : totalPrice > balance && t("buy-subs.first-step.not-enough")}
               </Text1>

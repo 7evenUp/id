@@ -25,6 +25,7 @@ export interface User {
   timezone: string
   investFundBalance: number
   investFundClosestBurnings: Array<{ burningDate: string; amount: number }>
+  isPrimeInstructionShown: boolean
 }
 
 export interface Avatar {

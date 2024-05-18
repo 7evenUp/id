@@ -11,8 +11,15 @@ const userApi = api.injectEndpoints({
       }),
       providesTags: ["SharesHistory"],
     }),
+    hidePrimeInstruction: build.mutation<void, void>({
+      query: () => ({
+        url: "user/setters/disable-prime-instruction/",
+        method: "POST",
+      }),
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useGetSharesHistoryQuery } = userApi
+export const { useGetSharesHistoryQuery, useHidePrimeInstructionMutation } =
+  userApi
