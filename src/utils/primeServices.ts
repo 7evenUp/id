@@ -13,12 +13,12 @@ export const primeServices = [
     isExpandable: true,
     links: [
       {
-        name: "Календарь в Telegram",
-        href: "https://t.me/Crypton_Calendar_bot",
+        name: "Веб-календарь",
+        href: "https://calendar.crypton.xyz/",
       },
       {
-        name: "Календарь в Notion",
-        href: "https://www.notion.so/crypton-prime/6b17e625702f412f8ccda548b0f3fb0f?v=b82a825420e242fa98f47a9779dffdfe",
+        name: "Календарь в Telegram",
+        href: "https://t.me/Crypton_Calendar_bot",
       },
     ],
   },
