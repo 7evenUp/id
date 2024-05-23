@@ -1,5 +1,5 @@
 // import { useState } from "react"
-// import { useTranslation } from "react-i18next"
+import { useTranslation } from "react-i18next"
 
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
@@ -21,7 +21,7 @@ import { cn } from "@/lib/classNames"
 // type Language = "ru" | "en"
 
 const ResearchTab = () => {
-  // const { t } = useTranslation("products")
+  const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -66,7 +66,7 @@ const ResearchTab = () => {
         <TabTitle title="Research" link="https://research.crypton.xyz" />
       </TabHeader>
       <Subheading className={cn("mt-10", scale && "3xl:mt-[2.604vw]")}>
-        Coming soon
+        {t("research.heading")}
       </Subheading>
     </>
   )

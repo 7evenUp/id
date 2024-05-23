@@ -76,5 +76,11 @@
     "your-nutcrackers": "Your Nutcrackers",
     "you-have-not-nutcrackers": "There are no Nutcrackers on your account",
     "load-error": "Failed to load data"
+  },
+  "research": {
+    "heading": "Dashboard coming soon!"
+  },
+  "calendar": {
+    "heading": "Dashboard coming soon!"
   }
 }

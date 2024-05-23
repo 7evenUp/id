@@ -54,7 +54,12 @@ const SharesStore = () => {
           </TextAccent>
         </Text0>
       </DialogHeader>
-      <div className="flex flex-col items-end gap-1">
+      <div
+        className={cn(
+          "ml-auto flex flex-col items-end gap-1 bg-gray-5/30 dark:bg-gray-2 w-fit p-3 rounded-md",
+          scale && "3xl:p-[0.78125vw] 3xl:rounded-[0.39vw]"
+        )}
+      >
         {investFundClosestBurnings.length > 0 &&
           investFundClosestBurnings.map((el, i) => (
             <TextXs key={i}>

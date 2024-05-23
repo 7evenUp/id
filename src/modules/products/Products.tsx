@@ -47,13 +47,13 @@ const Products = () => {
             {/* Active indicator */}
             <span
               className={cn(
-                "absolute w-[14.2857%] h-[3px] rounded-full left-0 -bottom-0.5 bg-gray-1 dark:bg-gray-5 transition-transform",
-                activeProduct === TABS_VALUES.inventory && "translate-x-full",
-                activeProduct === TABS_VALUES.research && "translate-x-[200%]",
+                "absolute w-[16.6666%] h-[3px] rounded-full left-0 -bottom-0.5 bg-gray-1 dark:bg-gray-5 transition-transform",
+                activeProduct === TABS_VALUES.research && "translate-x-full",
+                activeProduct === TABS_VALUES.calendar && "translate-x-[200%]",
                 activeProduct === TABS_VALUES.tools && "translate-x-[300%]",
-                activeProduct === TABS_VALUES.calendar && "translate-x-[400%]",
                 activeProduct === TABS_VALUES.nutcracker &&
-                  "translate-x-[500%]",
+                  "translate-x-[400%]",
+                activeProduct === TABS_VALUES.inventory && "translate-x-[500%]",
                 scale && "3xl:h-[0.195vw] 3xl:-bottom-[0.13vw]"
               )}
             />
