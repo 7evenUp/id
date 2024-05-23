@@ -49,7 +49,11 @@ const SharesHistoryTable = () => {
                     : tx.kind.id === "DEPOSIT" && "text-success"
                 )}
               >
-                {tx.kind.label}
+                {tx.kind.id === "DEPOSIT"
+                  ? t("shares.history.deposit")
+                  : tx.kind.id === "WITHDRAW"
+                  ? t("shares.history.withdraw")
+                  : tx.kind.label}
               </TData>
             </tr>
           ))}

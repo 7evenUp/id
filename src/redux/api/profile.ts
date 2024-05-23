@@ -32,6 +32,11 @@ const profileApi = api.injectEndpoints({
         url: "users/transaction-history/",
         method: "GET",
       }),
+      transformResponse: (response: Transaction[]) => {
+        return response.sort(
+          (a, b) => +new Date(b.createdDatetime) - +new Date(a.createdDatetime)
+        )
+      },
       providesTags: ["TxHistory"],
     }),
     nutcrackers: build.query<Nutcrackers, void>({

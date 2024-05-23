@@ -283,7 +283,9 @@
       "balanceBefore": "Balance before",
       "balanceAfter": "Balance after",
       "kind": "Kind",
-      "no-data": "There is no data for displaying history"
+      "no-data": "There is no data for displaying history",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw"
     },
     "convert": {
       "heading": "Converting $SHARES to NFT",

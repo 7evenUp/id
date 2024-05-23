@@ -52,15 +52,16 @@ const PointsStore = () => {
     >
       <DialogHeader className="gap-1 mobile:gap-0 mobile:items-center flex-col mobile:flex-row">
         <DialogTitle>Магазин Crypton Points</DialogTitle>
-        <Text0 className="relative mr-4 sm:m-0 w-fit">
+        <Text0
+          className={cn(
+            "w-fit flex items-center gap-1.5",
+            scale && "3xl:gap-[0.39vw]"
+          )}
+        >
           Ваш баланс:{" "}
           <TextAccent className="dark:text-gray-5">{points}</TextAccent>
           <CryptonIcon
-            className={cn(
-              "absolute w-4 h-4 -top-1 -right-4",
-              scale &&
-                "3xl:w-[1.041vw] 3xl:h-[1.041vw] 3xl:-top-[0.26vw] 3xl:-right-[1.041vw]"
-            )}
+            className={cn("w-5 h-5", scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]")}
           />
         </Text0>
       </DialogHeader>
