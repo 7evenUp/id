@@ -278,7 +278,7 @@
   },
   "shares": {
     "history": {
-      "heading": "$SHARES History",
+      "heading": "Shares History",
       "amount": "Amount",
       "balanceBefore": "Balance before",
       "balanceAfter": "Balance after",
@@ -288,10 +288,10 @@
       "withdraw": "Withdraw"
     },
     "convert": {
-      "heading": "Converting $SHARES to NFT",
-      "my-shares": "My $SHARES",
+      "heading": "Converting Shares to NFT",
+      "my-shares": "My Shares",
       "burn": "will be burned",
-      "description-1": "After conversion, your $SHARES will be displayed in the",
+      "description-1": "After conversion, your Shares will be displayed in the",
       "description-2": "section. From there, you can withdraw them to your wallet on the TON network.",
       "inventory": "\"Inventory\"",
       "convert": "convert"

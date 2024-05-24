@@ -15,7 +15,7 @@ import { Skeleton } from "@/shared/ui/Skeleton"
 
 import Text0 from "@/shared/typography/Text0"
 import TextAccent from "@/shared/typography/TextAccent"
-import Text1 from "@/shared/typography/Text1"
+// import Text1 from "@/shared/typography/Text1"
 import TextXs from "@/shared/typography/TextXs"
 
 import { useClaimSharesMutation, useGetSharesQuery } from "@/redux/api/points"
@@ -54,23 +54,24 @@ const SharesStore = () => {
           </TextAccent>
         </Text0>
       </DialogHeader>
-      <div
-        className={cn(
-          "ml-auto flex flex-col items-end gap-1 bg-gray-5/30 dark:bg-gray-2 w-fit p-3 rounded-md",
-          scale && "3xl:p-[0.78125vw] 3xl:rounded-[0.39vw]"
-        )}
-      >
-        {investFundClosestBurnings.length > 0 &&
-          investFundClosestBurnings.map((el, i) => (
+      {investFundClosestBurnings.length > 0 && (
+        <div
+          className={cn(
+            "ml-auto flex flex-col items-end gap-1 bg-gray-5/30 dark:bg-gray-2 w-fit p-3 rounded-md",
+            scale && "3xl:p-[0.78125vw] 3xl:rounded-[0.39vw]"
+          )}
+        >
+          {investFundClosestBurnings.map((el, i) => (
             <TextXs key={i}>
-              <span className="font-semibold">{el.amount} $SHARES</span>{" "}
+              <span className="font-semibold">{el.amount} Shares</span>{" "}
               {t("shares.convert.burn")}{" "}
               <span className="font-semibold">
                 {formatDate(el.burningDate, i18n.language as "ru" | "en")}
               </span>
             </TextXs>
           ))}
-      </div>
+        </div>
+      )}
       <div
         className={cn(
           "flex flex-col gap-6 max-h-[440px] overflow-auto pr-2 pb-1",
@@ -103,7 +104,7 @@ const SharesStore = () => {
 export default SharesStore
 
 const Prize = (prize: PointsPrize) => {
-  const { image, photos, description, title, price } = prize
+  const { image, photos, title, price } = prize
 
   const { t } = useTranslation("modals")
 
@@ -141,10 +142,10 @@ const Prize = (prize: PointsPrize) => {
               scale && "3xl:rounded-[0.78125vw]"
             )}
           >
-            <Text0>У $SHARES нет картинки</Text0>
+            <Text0>У Shares нет картинки</Text0>
           </Skeleton>
         )}
-        <div
+        {/* <div
           className={cn(
             "absolute left-1 bottom-1 flex items-center justify-center w-7 h-7 rounded-lg bg-gray-6 dark:bg-gray-1 shadow-sm shadow-black/50",
             scale &&
@@ -154,20 +155,20 @@ const Prize = (prize: PointsPrize) => {
           <TextAccent className="text-black dark:text-gray-6 tabular-nums">
             {price}
           </TextAccent>
-        </div>
+        </div> */}
       </div>
 
       <TextAccent
         className={cn(
-          "mt-2 mb-1 dark:text-gray-5",
-          scale && "3xl:mt-[0.52vw] 3xl:mb-[0.26vw]"
+          "mt-2 mb-3 dark:text-gray-5",
+          scale && "3xl:mt-[0.52vw] 3xl:mb-[0.78125vw]"
         )}
       >
         {title}
       </TextAccent>
-      <Text1 className={cn("mb-3", scale && "3xl:mb-[0.78125vw]")}>
+      {/* <Text1 className={cn("mb-3", scale && "3xl:mb-[0.78125vw]")}>
         {description}
-      </Text1>
+      </Text1> */}
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -206,16 +207,14 @@ const ConfirmDialog = ({
     try {
       await claim({ prizeId }).unwrap()
       dispatch(change("inventory"))
-      toast.success("$SHARES успешно конвертированы в NFT")
+      toast.success("Shares успешно конвертированы в NFT")
     } catch (error) {
       // @ts-expect-error RTKQ no error types
       if (error.status === 400) {
         // @ts-expect-error RTKQ no error types
         switch (error.data.code) {
           case "insufficient_balance":
-            toast.error(
-              "На Вашем аккаунте недостаточно $SHARES для конвертации"
-            )
+            toast.error("На Вашем аккаунте недостаточно Shares для конвертации")
             break
 
           case "user_ton_address_not_set":
@@ -300,7 +299,7 @@ const ConfirmDialog = ({
           <TextAccent className="dark:text-gray-5">
             {(investFundBalance - price).toFixed(2)}
           </TextAccent>{" "}
-          $SHARES
+          Shares
         </Text0>
         <div
           className={cn(

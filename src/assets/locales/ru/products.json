@@ -71,8 +71,10 @@
   },
   "nutcracker": {
     "title": "Щелкунчики",
-    "buy-on-getgems": "Приобрести на GetGems",
+    "buy-parts": "Приобрести детали",
+    "buy-on-getgems": "Приобрести щелкунчика",
     "mint-website": "Сайт минта",
+    "join-chat": "Вступить в закрытый чат",
     "your-nutcrackers": "Ваши Щелкунчики",
     "you-have-not-nutcrackers": "На Вашем аккаунте нет ни одного Щелкунчика",
     "load-error": "Не удалось загрузить данные"

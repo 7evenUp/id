@@ -35,7 +35,7 @@ const Shares = () => {
           scale && "3xl:pb-[1.042vw]"
         )}
       >
-        <Subheading>$SHARES</Subheading>
+        <Subheading>Shares</Subheading>
       </div>
 
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">

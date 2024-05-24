@@ -31,21 +31,35 @@ const NutcrackerTab = () => {
         />
       </TabHeader>
 
-      <RowItem
-        className={cn(
-          "flex flex-col items-start gap-2",
-          scale && "3xl:gap-[0.52vw]"
-        )}
-      >
-        <ExternalLink
-          href="https://nutcrackers-mint.crypton.xyz/"
-          className="w-fit"
+      <RowItem className="justify-start">
+        <div
+          className={cn(
+            "flex items-center flex-wrap max-w-[450px] gap-2",
+            scale && "3xl:gap-[0.52vw]"
+          )}
         >
-          {t("nutcracker.mint-website")}
-        </ExternalLink>
-        <ExternalLink href="https://getgems.io/nutcrackers" className="w-fit">
-          {t("nutcracker.buy-on-getgems")}
-        </ExternalLink>
+          <ExternalLink href="https://getgems.io/nutcrackers" className="w-fit">
+            {t("nutcracker.buy-on-getgems")}
+          </ExternalLink>
+          <ExternalLink
+            href="https://getgems.io/crypton?filter=%7B%22attributes%22%3A%7B%22The+Nutcracker%27s+parts%22%3A%5B%22Right+hand%22%2C%22Body%22%2C%22Left+hand%22%2C%22Head%22%2C%22Left+leg%22%2C%22Right+leg%22%5D%7D%7D"
+            className="w-fit"
+          >
+            {t("nutcracker.buy-parts")}
+          </ExternalLink>
+          <ExternalLink
+            href="https://nutcrackers-mint.crypton.xyz/"
+            className="w-fit"
+          >
+            {t("nutcracker.mint-website")}
+          </ExternalLink>
+          <ExternalLink
+            href="https://t.me/nutcrackers_collection_bot"
+            className="w-fit"
+          >
+            {t("nutcracker.join-chat")}
+          </ExternalLink>
+        </div>
       </RowItem>
 
       <RowItem

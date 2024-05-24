@@ -71,8 +71,10 @@
   },
   "nutcracker": {
     "title": "The Nutcrackers",
-    "buy-on-getgems": "Buy on GetGems",
+    "buy-parts": "Purchase details",
+    "buy-on-getgems": "Buy the Nutcracker",
     "mint-website": "Mint website",
+    "join-chat": "Join a private chat",
     "your-nutcrackers": "Your Nutcrackers",
     "you-have-not-nutcrackers": "There are no Nutcrackers on your account",
     "load-error": "Failed to load data"
