@@ -41,8 +41,8 @@ const SharesStore = () => {
   return (
     <DialogContent
       className={cn(
-        "sm:max-w-[550px] md:max-w-[680px] 2xl:max-w-[800px]",
-        scale && "3xl:w-[44.27vw]"
+        "sm:max-w-[550px] md:max-w-[680px] xl:max-w-[1200px]",
+        scale && "3xl:w-[78.125vw]"
       )}
     >
       <DialogHeader className="gap-1 mobile:gap-0 mobile:items-center flex-col mobile:flex-row">
@@ -79,7 +79,7 @@ const SharesStore = () => {
             "3xl:gap-[1.5625vwvw] 3xl:max-h-[28.64vw] 3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
         )}
       >
-        <Text0>
+        <Text0 className="max-w-prose">
           {t("shares.convert.description-1")}{" "}
           <TextAccent>{t("shares.convert.inventory")}</TextAccent>{" "}
           {t("shares.convert.description-2")}
@@ -87,7 +87,7 @@ const SharesStore = () => {
         {prizes && prizes.length > 0 && (
           <div
             className={cn(
-              "grid grid-cols-1 mobile-sm:grid-cols-2 mobile:grid-cols-3 gap-10 mobile-sm:gap-6 md:gap-10",
+              "grid grid-cols-1 mobile-sm:grid-cols-2 mobile:grid-cols-3 xl:grid-cols-5 gap-10 mobile-sm:gap-4 md:gap-8",
               scale && "3xl:gap-[2.6vw]"
             )}
           >
