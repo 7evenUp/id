@@ -22,15 +22,12 @@ import { RootTabsValuesType, changeRootTab } from "@/redux/root-tabs/slice"
 
 import { cn } from "@/lib/classNames"
 
-import { productToColor } from "@/utils/productToColor"
-
 const Products = () => {
   const { t } = useTranslation("products")
 
   const activeRootTab = useAppSelector((state) => state.rootTabs.value)
   const activeProduct = useAppSelector((state) => state.tabs.value)
   const scale = useAppSelector((state) => state.scale.value)
-  const color = productToColor[activeProduct]
 
   const dispatch = useAppDispatch()
 
@@ -57,8 +54,7 @@ const Products = () => {
         <TabsPrimitive.Trigger
           value="products"
           className={cn(
-            "rounded px-2 py-1 data-[state=active]:bg-res-bot-blue data-[state=active]:bg-prime-pink data-[state=active]:bg-tools-green data-[state=active]:bg-calendar-red data-[state=active]:bg-nutcracker-orange data-[state=active]:text-white data-[state=inactive]:hover:opacity-70 transition-colors duration-300",
-            `data-[state=active]:bg-${color}`,
+            "rounded px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800 data-[state=active]:bg-gray-1 data-[state=active]:text-white dark:data-[state=active]:bg-gray-4 dark:data-[state=active]:text-gray-1 hover:data-[state=active]:bg-gray-1/80 active:data-[state=active]:bg-gray-1/90 dark:hover:data-[state=active]:bg-gray-4/90 dark:active:data-[state=active]:bg-gray-4/80 transition-colors",
             scale && "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
           )}
         >
@@ -67,7 +63,7 @@ const Products = () => {
         <TabsPrimitive.Trigger
           value="inventory"
           className={cn(
-            "rounded px-2 py-1 data-[state=active]:bg-university-velvet data-[state=active]:text-white data-[state=inactive]:hover:opacity-70 transition-colors duration-500",
+            "rounded px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800 data-[state=active]:bg-gray-1 data-[state=active]:text-white dark:data-[state=active]:bg-gray-4 dark:data-[state=active]:text-gray-1 hover:data-[state=active]:bg-gray-1/80 active:data-[state=active]:bg-gray-1/90 dark:hover:data-[state=active]:bg-gray-4/90 dark:active:data-[state=active]:bg-gray-4/80 transition-colors",
             scale && "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
           )}
         >
