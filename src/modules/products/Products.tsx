@@ -54,7 +54,7 @@ const Products = () => {
         <TabsPrimitive.Trigger
           value="products"
           className={cn(
-            "rounded px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800 data-[state=active]:bg-gray-1 data-[state=active]:text-white dark:data-[state=active]:bg-gray-4 dark:data-[state=active]:text-gray-1 hover:data-[state=active]:bg-gray-1/80 active:data-[state=active]:bg-gray-1/90 dark:hover:data-[state=active]:bg-gray-4/90 dark:active:data-[state=active]:bg-gray-4/80 transition-colors",
+            "rounded px-2 py-1 text-gray-2 dark:text-gray-3 data-[state=active]:text-black dark:data-[state=active]:text-gray-5 data-[state=active]:bg-gray-5/25 dark:data-[state=active]:bg-gray-1 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors",
             scale && "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
           )}
         >
@@ -63,7 +63,7 @@ const Products = () => {
         <TabsPrimitive.Trigger
           value="inventory"
           className={cn(
-            "rounded px-2 py-1 hover:bg-zinc-200 dark:hover:bg-zinc-800 data-[state=active]:bg-gray-1 data-[state=active]:text-white dark:data-[state=active]:bg-gray-4 dark:data-[state=active]:text-gray-1 hover:data-[state=active]:bg-gray-1/80 active:data-[state=active]:bg-gray-1/90 dark:hover:data-[state=active]:bg-gray-4/90 dark:active:data-[state=active]:bg-gray-4/80 transition-colors",
+            "rounded px-2 py-1 text-gray-2 dark:text-gray-3 data-[state=active]:text-black dark:data-[state=active]:text-gray-5 data-[state=active]:bg-gray-5/25 dark:data-[state=active]:bg-gray-1 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors",
             scale && "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
           )}
         >
