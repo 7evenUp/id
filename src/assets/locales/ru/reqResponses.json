@@ -11,5 +11,13 @@
   "top-up-minimum": "Требуется минимум",
   "too-many-requests": "Замечено много попыток авторизации. Пожалуйста, повторите позже",
   "invalid-code": "Неверный код",
-  "already_active_subscription": "У вас уже есть активная подписка"
+  "already_active_subscription": "У вас уже есть активная подписка",
+  "user_not_found": "Пользователь не был найден",
+  "shares-limit_reached": "При конвертации произошла ошибка на сервере",
+  "shares-insufficient_balance": "На Вашем аккаунте недостаточно Shares для конвертации",
+  "shares-user_ton_address_not_set": "Для конвертации необходимо привязать TON кашелёк",
+  "shares-param_not_provided": "Параметр не был передан для запроса на конвертацию",
+  "shares-prize_not_found": "Shares с этим ID не был найден",
+  "shares-no_more_prizes": "Данный Shares закончился",
+  "shares-unknown_error": "Произошла неизвестная ошибка во время конвертации"
 }

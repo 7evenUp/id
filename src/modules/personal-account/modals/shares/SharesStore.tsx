@@ -192,6 +192,7 @@ const ConfirmDialog = ({
   setOpen,
 }: PointsPrize & { setOpen: Dispatch<SetStateAction<boolean>> }) => {
   const { t } = useTranslation("modals")
+  const { t: tErrors } = useTranslation("reqResponses")
 
   const scale = useAppSelector((state) => state.scale.value)
   const dispatch = useAppDispatch()
@@ -213,35 +214,39 @@ const ConfirmDialog = ({
       if (error.status === 400) {
         // @ts-expect-error RTKQ no error types
         switch (error.data.code) {
+          case "limit_reached":
+            toast.error(tErrors("shares-limit_reached"))
+            break
           case "insufficient_balance":
-            toast.error("На Вашем аккаунте недостаточно Shares для конвертации")
+            toast.error(tErrors("shares-insufficient_balance"))
             break
 
           case "user_ton_address_not_set":
-            toast.error("Для конвертации необходимо привязать TON кашелёк")
+            toast.error(tErrors("shares-user_ton_address_not_set"))
             break
 
           case "param_not_provided":
-            toast.error("Параметр не был передан для запроса на покупку")
+            toast.error(tErrors("shares-param_not_provided"))
             break
 
           case "user_not_found":
-            toast.error("Пользователь не был найден")
+            toast.error(tErrors("user_not_found"))
             break
 
           case "prize_not_found":
-            toast.error("Приз с этим ID не был найден")
+            toast.error(tErrors("shares-prize_not_found"))
             break
 
           case "no_more_prizes":
-            toast.error("Данный товар закончился")
+            toast.error(tErrors("shares-no_more_prizes"))
             break
 
           default:
+            toast.error(tErrors("shares-unknown_error"))
             break
         }
       } else {
-        toast.error("При конвертации произошла неизвестная ошибка")
+        toast.error(tErrors("server-error"))
       }
     } finally {
       setOpen(false)

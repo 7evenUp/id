@@ -33,7 +33,9 @@
   "points": {
     "heading": "Crypton Points",
     "balance": "my balance",
-    "cashback": "current cashback"
+    "cashback": "current cashback",
+    "store": "store",
+    "soon": "soon"
   },
   "shares": {
     "balance": "my balance",

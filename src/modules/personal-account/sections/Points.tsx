@@ -20,6 +20,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { useNutcrackersQuery, useUserProfileQuery } from "@/redux/api/profile"
 
 import { cn } from "@/lib/classNames"
+import Tooltip from "@/shared/ui/Tooltip"
 
 const Points = () => {
   const { t } = useTranslation("profile")
@@ -67,6 +68,9 @@ const Points = () => {
           <Text0 className="flex-shrink-0">
             {t("points.balance")}: <AccentNumber>{points}</AccentNumber>
           </Text0>
+          <Tooltip content={t("points.soon")}>
+            <Button disabled>{t("points.store")}</Button>
+          </Tooltip>
           {/* <ModalTrigger content={<PointsStore />}>
             <Button>к покупкам</Button>
           </ModalTrigger> */}
