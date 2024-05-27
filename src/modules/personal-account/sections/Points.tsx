@@ -67,9 +67,9 @@ const Points = () => {
           <Text0 className="flex-shrink-0">
             {t("points.balance")}: <AccentNumber>{points}</AccentNumber>
           </Text0>
-          <ModalTrigger content={<PointsStore />}>
+          {/* <ModalTrigger content={<PointsStore />}>
             <Button>к покупкам</Button>
-          </ModalTrigger>
+          </ModalTrigger> */}
         </RowItem>
         {isLoading ? (
           <RowItem
