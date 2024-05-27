@@ -13,6 +13,7 @@ import {
 import storage from "redux-persist/lib/storage"
 
 import tabsReducer from "./tabs/slice"
+import rootTabsReducer from "./root-tabs/slice"
 import themeReducer from "./theme/slice"
 import languageReducer from "./language/slice"
 import scaleReducer from "./scale/slice"
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   [tonApi.reducerPath]: tonApi.reducer,
   tabs: tabsReducer,
+  rootTabs: rootTabsReducer,
   theme: themeReducer,
   language: languageReducer,
   scale: scaleReducer,

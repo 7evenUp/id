@@ -6,8 +6,8 @@ import HelpCircle from "@/assets/icons/help-circle.svg?react"
 import Copy from "@/assets/icons/copy.svg?react"
 import Check from "@/assets/icons/check.svg?react"
 
-import TabHeader from "../components/TabHeader"
-import TabTitle from "../components/TabTitle"
+// import TabHeader from "../components/TabHeader"
+// import TabTitle from "../components/TabTitle"
 
 import TextAccent from "@/shared/typography/TextAccent"
 import Text0 from "@/shared/typography/Text0"
@@ -64,10 +64,14 @@ const InventoryTab = () => {
   }, [filterType, inventory])
 
   return (
-    <>
-      <TabHeader>
+    <div
+      className={cn("typography-text-0", scale && "typography-text-0_large")}
+    >
+      {/* <TabHeader>
         <TabTitle title={t("inventory.title")} link={null} />
-      </TabHeader>
+      </TabHeader> */}
+
+      <div className="border-b border-gray-4 dark:border-gray-1" />
 
       <SegmentedRoot
         type="single"
@@ -113,7 +117,7 @@ const InventoryTab = () => {
           </Text0>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

@@ -11,8 +11,8 @@ import CalendarIcon from "@/assets/icons/products/Calendar.svg?react"
 // import AcademyIcon from "@/assets/icons/products/Academy.svg?react"
 import NutcrackerIcon from "@/assets/icons/products/Nutcracker.svg?react"
 
-import InventoryIcon from "@/assets/icons/package.svg?react"
-import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
+// import InventoryIcon from "@/assets/icons/package.svg?react"
+// import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
 
 import { TABS_VALUES } from "@/redux/tabs/slice"
 import { useAppSelector } from "@/redux/hooks"
@@ -121,7 +121,7 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.inventory}>
+      {/* <TabsTrigger value={TABS_VALUES.inventory}>
         <Tooltip content={t("inventory.title")}>
           <div>
             {activeProduct === "inventory" ? (
@@ -141,7 +141,7 @@ const TabsTriggers = () => {
             )}
           </div>
         </Tooltip>
-      </TabsTrigger>
+      </TabsTrigger> */}
       {/* <TabsTrigger value={TABS_VALUES.academy} disabled>
         <Tooltip content="Academy">
           <div>

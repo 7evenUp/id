@@ -21,7 +21,7 @@ import TextXs from "@/shared/typography/TextXs"
 import { useClaimSharesMutation, useGetSharesQuery } from "@/redux/api/points"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
-import { change } from "@/redux/tabs/slice"
+import { changeRootTab } from "@/redux/root-tabs/slice"
 
 import { PointsPrize } from "@/types/points"
 
@@ -206,7 +206,7 @@ const ConfirmDialog = ({
 
     try {
       await claim({ prizeId }).unwrap()
-      dispatch(change("inventory"))
+      dispatch(changeRootTab("inventory"))
       toast.success("Shares успешно конвертированы в NFT")
     } catch (error) {
       // @ts-expect-error RTKQ no error types

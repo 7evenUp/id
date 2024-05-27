@@ -1,4 +1,6 @@
 {
+  "products-root": "products",
+  "inventory-root": "inventory",
   "ref_link": "Referral link",
   "ref_copied_title": "Copied",
   "ref_copied_desc": "The referral link has been copied to the clipboard",
