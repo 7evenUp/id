@@ -23,6 +23,9 @@ const pointsApi = api.injectEndpoints({
         url: "points-store/shares/",
         method: "GET",
       }),
+      transformResponse: (baseQueryReturnValue: PointsPrize[]) => {
+        return baseQueryReturnValue.sort((a, b) => a.price - b.price)
+      },
       providesTags: ["Shares"],
     }),
     claimShares: build.mutation<PointsBuyPrizeResponse, { prizeId: number }>({
