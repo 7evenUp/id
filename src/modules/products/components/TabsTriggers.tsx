@@ -8,11 +8,11 @@ import ToolsIcon from "@/assets/icons/products/Tools.svg?react"
 import CalendarActiveIcon from "@/assets/icons/products/Calendar_Active.svg?react"
 import CalendarIcon from "@/assets/icons/products/Calendar.svg?react"
 // import UniverseIcon from "@/assets/icons/products/Universe.svg?react"
-import AcademyIcon from "@/assets/icons/products/Academy.svg?react"
+// import AcademyIcon from "@/assets/icons/products/Academy.svg?react"
 import NutcrackerIcon from "@/assets/icons/products/Nutcracker.svg?react"
 
-import InventoryIcon from "@/assets/icons/package.svg?react"
-import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
+// import InventoryIcon from "@/assets/icons/package.svg?react"
+// import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
 
 import { TABS_VALUES } from "@/redux/tabs/slice"
 import { useAppSelector } from "@/redux/hooks"
@@ -51,27 +51,6 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.inventory}>
-        <Tooltip content={t("inventory.title")}>
-          <div>
-            {activeProduct === "inventory" ? (
-              <InventoryActiveIcon
-                className={cn(
-                  "w-[26px] h-[26px] stroke-university-velvet",
-                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-                )}
-              />
-            ) : (
-              <InventoryIcon
-                className={cn(
-                  "w-[26px] h-[26px] dark:stroke-gray-4",
-                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-                )}
-              />
-            )}
-          </div>
-        </Tooltip>
-      </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.research}>
         <Tooltip content="Research">
           <div>
@@ -83,27 +62,6 @@ const TabsTriggers = () => {
                 scale && "3xl:h-[1.693vw]"
               )}
             />
-          </div>
-        </Tooltip>
-      </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.tools}>
-        <Tooltip content="Tools">
-          <div>
-            {activeProduct === "tools" ? (
-              <ToolsActiveIcon
-                className={cn(
-                  "w-[26px] h-[26px]",
-                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-                )}
-              />
-            ) : (
-              <ToolsIcon
-                className={cn(
-                  "w-[26px] h-[26px] dark:fill-gray-4",
-                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-                )}
-              />
-            )}
           </div>
         </Tooltip>
       </TabsTrigger>
@@ -128,6 +86,27 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
+      <TabsTrigger value={TABS_VALUES.tools}>
+        <Tooltip content="Tools">
+          <div>
+            {activeProduct === "tools" ? (
+              <ToolsActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px]",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
+            ) : (
+              <ToolsIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:fill-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
+            )}
+          </div>
+        </Tooltip>
+      </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.nutcracker}>
         <Tooltip content={t("nutcracker.title")}>
           <div>
@@ -142,7 +121,28 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.academy} disabled>
+      {/* <TabsTrigger value={TABS_VALUES.inventory}>
+        <Tooltip content={t("inventory.title")}>
+          <div>
+            {activeProduct === "inventory" ? (
+              <InventoryActiveIcon
+                className={cn(
+                  "w-[26px] h-[26px] stroke-university-velvet",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
+            ) : (
+              <InventoryIcon
+                className={cn(
+                  "w-[26px] h-[26px] dark:stroke-gray-4",
+                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                )}
+              />
+            )}
+          </div>
+        </Tooltip>
+      </TabsTrigger> */}
+      {/* <TabsTrigger value={TABS_VALUES.academy} disabled>
         <Tooltip content="Academy">
           <div>
             <AcademyIcon
@@ -153,7 +153,7 @@ const TabsTriggers = () => {
             />
           </div>
         </Tooltip>
-      </TabsTrigger>
+      </TabsTrigger> */}
     </>
   )
 }

@@ -10,5 +10,14 @@
   "insufficient_balance": "Insufficient balance",
   "top-up-minimum": "Required a minimum of",
   "too-many-requests": "Too many requests. Please try again later",
-  "invalid-code": "Invalid code"
+  "invalid-code": "Invalid code",
+  "already_active_subscription": "You already have active subscription",
+  "user_not_found": "The user was not found",
+  "shares-limit_reached": "An error occurred on the server during the conversion",
+  "shares-insufficient_balance": "There are not enough Shares on your account to convert",
+  "shares-user_ton_address_not_set": "To convert, you need to connect a TON wallet",
+  "shares-param_not_provided": "The parameter was not passed for the conversion request",
+  "shares-prize_not_found": "Shares with this ID was not found",
+  "shares-no_more_prizes": "This Shares has ended",
+  "shares-unknown_error": "An unknown error has occurred during the conversion"
 }

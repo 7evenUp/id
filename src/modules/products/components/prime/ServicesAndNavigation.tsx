@@ -72,6 +72,7 @@ const ServicesAndNavigation = () => {
                       scale && "3xl:gap-[0.391vw]"
                     )}
                     sideOffset={-2}
+                    align="start"
                   >
                     {service.links.map((link, i) => (
                       <a

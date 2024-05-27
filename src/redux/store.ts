@@ -13,12 +13,12 @@ import {
 import storage from "redux-persist/lib/storage"
 
 import tabsReducer from "./tabs/slice"
+import rootTabsReducer from "./root-tabs/slice"
 import themeReducer from "./theme/slice"
 import languageReducer from "./language/slice"
 import scaleReducer from "./scale/slice"
 import referrerReducer from "./referrer/slice"
 import cookieReducer from "./cookie/slice"
-import introReducer from "./intro/slice"
 
 import { api } from "./api/core"
 import { tonApi } from "./ton-api/core"
@@ -34,12 +34,12 @@ const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   [tonApi.reducerPath]: tonApi.reducer,
   tabs: tabsReducer,
+  rootTabs: rootTabsReducer,
   theme: themeReducer,
   language: languageReducer,
   scale: scaleReducer,
   referrer: referrerReducer,
   cookie: cookieReducer,
-  intro: introReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

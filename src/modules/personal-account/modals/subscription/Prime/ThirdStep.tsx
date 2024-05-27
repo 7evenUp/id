@@ -1,8 +1,8 @@
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 
-import SubscriptionModalHeader from "../../components/SubscriptionModalHeader"
-import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"
+import SubscriptionModalHeader from "../components/SubscriptionModalHeader"
+import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
 
 import Text0 from "@/shared/typography/Text0"
 import TextTip from "@/shared/typography/TextTip"

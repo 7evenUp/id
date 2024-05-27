@@ -6,13 +6,14 @@ import Discord from "@/assets/icons/discord.svg?react"
 import Ethereum from "@/assets/icons/ethereum.svg?react"
 import Loader from "@/assets/icons/loader.svg?react"
 
-import UpdateTelegram from "../UpdateTelegram"
-import UpdateWallet from "../UpdateWallet"
+import UpdateTelegram from "../../UpdateTelegram"
+import UpdateWallet from "../../UpdateWallet"
 
-import ModalHeader from "../../components/SubscriptionModalHeader"
-import SubscriptionModalFooter from "../../components/SubscriptionModalFooter"
-import ModalTrigger from "../../components/ModalTrigger"
-import ConfirmButton from "../../components/ConfirmButton"
+import ModalHeader from "../components/SubscriptionModalHeader"
+import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
+
+import ModalTrigger from "@/modules/personal-account/components/ModalTrigger"
+import ConfirmButton from "@/modules/personal-account/components/ConfirmButton"
 
 import Text0 from "@/shared/typography/Text0"
 import TextTip from "@/shared/typography/TextTip"
@@ -59,14 +60,34 @@ const SecondStep = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className={cn("pb-14 sm:pb-14 sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px]", scale && "3xl:pb-[3.645vw] 3xl:max-w-[52.083vw]")}>
+      <DialogContent
+        className={cn(
+          "pb-14 sm:pb-14 sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px]",
+          scale && "3xl:pb-[3.645vw] 3xl:max-w-[52.083vw]"
+        )}
+      >
         <ModalHeader step={t("buy-subs.second-step.step")} />
 
-        <div className={cn("flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px]", scale && "3xl:gap-[9.114vw]")}>
+        <div
+          className={cn(
+            "flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px]",
+            scale && "3xl:gap-[9.114vw]"
+          )}
+        >
           <div className="flex flex-col">
-            <div className={cn("flex flex-col gap-4 mobile-sm:w-[270px]", scale && "3xl:gap-[1.042vw] 3xl:w-[17.578vw]")}>
+            <div
+              className={cn(
+                "flex flex-col gap-4 mobile-sm:w-[270px]",
+                scale && "3xl:gap-[1.042vw] 3xl:w-[17.578vw]"
+              )}
+            >
               <div className="flex items-center">
-                <Telegram className={cn("w-[18px] h-[18px]", scale && "3xl:w-[1.172vw] 3xl:h-[1.172vw]")} />
+                <Telegram
+                  className={cn(
+                    "w-[18px] h-[18px]",
+                    scale && "3xl:w-[1.172vw] 3xl:h-[1.172vw]"
+                  )}
+                />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
                   Telegram
                 </Text0>
@@ -81,7 +102,12 @@ const SecondStep = ({
                 )}
               </div>
               <div className="flex items-center">
-                <Discord className={cn("w-[18px] h-[20px]", scale && "3xl:w-[1.172vw] 3xl:h-[1.302vw]")} />
+                <Discord
+                  className={cn(
+                    "w-[18px] h-[20px]",
+                    scale && "3xl:w-[1.172vw] 3xl:h-[1.302vw]"
+                  )}
+                />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
                   Discord
                 </Text0>
@@ -103,7 +129,12 @@ const SecondStep = ({
                       )}
                     >
                       {isLoading ? (
-                        <Loader className={cn("animate-spin w-5 h-5", scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]")} />
+                        <Loader
+                          className={cn(
+                            "animate-spin w-5 h-5",
+                            scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+                          )}
+                        />
                       ) : (
                         <ConfirmButton
                           onClick={onUpdateDiscord}
@@ -117,7 +148,12 @@ const SecondStep = ({
                 )}
               </div>
               <div className="flex items-center">
-                <Ethereum className={cn("w-[18px] h-[21px]", scale && "3xl:w-[1.172vw] 3xl:h-[1.367vw]")} />
+                <Ethereum
+                  className={cn(
+                    "w-[18px] h-[21px]",
+                    scale && "3xl:w-[1.172vw] 3xl:h-[1.367vw]"
+                  )}
+                />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
                   {t("buy-subs.second-step.wallet")}
                 </Text0>
@@ -144,7 +180,9 @@ const SecondStep = ({
               {t("buy-subs.second-step.continue-btn")}
             </Button>
           </div>
-          <div className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.042vw]")}>
+          <div
+            className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.042vw]")}
+          >
             <h3
               className={cn(
                 "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text",

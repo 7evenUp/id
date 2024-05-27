@@ -23,6 +23,9 @@ export interface User {
   tonWallet: string | null
   utmData: string | null
   timezone: string
+  investFundBalance: number
+  investFundClosestBurnings: Array<{ burningDate: string; amount: number }>
+  isPrimeInstructionShown: boolean
 }
 
 export interface Avatar {
@@ -41,7 +44,7 @@ export interface SubscriptionInfo {
   status: "ACTIVE" | "FROZEN" | "EXPIRED" | null
   subscriptionActiveTillDate: Date | null
   subscriptionBoughtDaysAgo: number
-  subscriptionType: "Prime" | null
+  subscriptionType: "Prime" | "Calendar" | null
 }
 
 export interface ReferralInfo {
