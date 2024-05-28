@@ -76,7 +76,7 @@ const SharesStore = () => {
         className={cn(
           "flex flex-col gap-6 max-h-[440px] overflow-auto pr-2 pb-1",
           scale &&
-            "3xl:gap-[1.5625vwvw] 3xl:max-h-[28.64vw] 3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
+            "3xl:gap-[1.5625vw] 3xl:max-h-[28.64vw] 3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
         )}
       >
         <Text0 className="max-w-prose">
@@ -88,7 +88,7 @@ const SharesStore = () => {
           <div
             className={cn(
               "grid grid-cols-1 mobile-sm:grid-cols-2 mobile:grid-cols-3 xl:grid-cols-5 gap-10 mobile-sm:gap-4 md:gap-8",
-              scale && "3xl:gap-[2.6vw]"
+              scale && "3xl:gap-[2.08vw]"
             )}
           >
             {prizes.map(({ id, ...rest }) => (
@@ -186,7 +186,6 @@ const ConfirmDialog = ({
   id,
   price,
   image,
-  description,
   title,
   photos,
   setOpen,
@@ -295,17 +294,18 @@ const ConfirmDialog = ({
             className={cn("flex flex-col gap-2", scale && "3xl:gap-[0.52vw]")}
           >
             <TextAccent className="dark:text-gray-5">{title}</TextAccent>
-            <Text0>{description}</Text0>
+            <Text0
+              className={cn("max-w-[200px]", scale && "3xl:max-w-[13.02vw]")}
+            >
+              {t("shares.confirm.after")}{" "}
+              <TextAccent className="dark:text-gray-5">
+                {(investFundBalance - price).toFixed(2)}
+              </TextAccent>{" "}
+              Shares
+            </Text0>
           </div>
         </div>
 
-        <Text0>
-          {t("shares.confirm.after")}{" "}
-          <TextAccent className="dark:text-gray-5">
-            {(investFundBalance - price).toFixed(2)}
-          </TextAccent>{" "}
-          Shares
-        </Text0>
         <div
           className={cn(
             "flex justify-end gap-3 mt-3",
