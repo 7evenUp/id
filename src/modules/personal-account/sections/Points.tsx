@@ -15,12 +15,12 @@ import RowItem from "@/shared/components/RowItem"
 
 import { Skeleton } from "@/shared/ui/Skeleton"
 import Button from "@/shared/ui/Button"
+// import Tooltip from "@/shared/ui/Tooltip"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useNutcrackersQuery, useUserProfileQuery } from "@/redux/api/profile"
 
 import { cn } from "@/lib/classNames"
-import Tooltip from "@/shared/ui/Tooltip"
 
 const Points = () => {
   const { t } = useTranslation("profile")
@@ -68,12 +68,12 @@ const Points = () => {
           <Text0 className="flex-shrink-0">
             {t("points.balance")}: <AccentNumber>{points}</AccentNumber>
           </Text0>
-          <Tooltip content={t("points.soon")}>
+          {/* <Tooltip content={t("points.soon")}>
             <Button disabled>{t("points.store")}</Button>
-          </Tooltip>
-          {/* <ModalTrigger content={<PointsStore />}>
-            <Button>к покупкам</Button>
-          </ModalTrigger> */}
+          </Tooltip> */}
+          <ModalTrigger content={<PointsStore />}>
+            <Button>{t("points.store")}</Button>
+          </ModalTrigger>
         </RowItem>
         {isLoading ? (
           <RowItem
