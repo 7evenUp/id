@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import ChatAndChannels from "../components/prime/ChatAndChannels"
+import ServicesAndNavigation from "../components/prime/ServicesAndNavigation"
 
 import TabHeader from "../components/TabHeader"
 import TabTitle from "../components/TabTitle"
@@ -11,10 +12,16 @@ import Text1 from "@/shared/typography/Text1"
 
 import ExternalLink from "@/shared/ui/ExternalLink"
 
-import ServicesAndNavigation from "../components/prime/ServicesAndNavigation"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
+
+  const { data: userProfile } = useUserProfileQuery()
+
+  const {
+    subscriptionInfo: { status, subscriptionType },
+  } = userProfile!
 
   return (
     <>
@@ -54,17 +61,19 @@ const PrimeTab = () => {
               {t("prime.features")}
             </ExternalLink>
           </div>
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
-            <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
-              {t("prime.help-text-3")}
-            </Text1>
-            <ExternalLink
-              href="https://www.notion.so/crypton-prime/acfd7a937ae941e1a5082316b5a81e70"
-              className="w-fit"
-            >
-              {t("prime.plan")}
-            </ExternalLink>
-          </div>
+          {status === "ACTIVE" && subscriptionType === "Prime" && (
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 sm:gap-0">
+              <Text1 className="max-w-prose w-auto sm:w-[62%] xl:w-auto">
+                {t("prime.help-text-3")}
+              </Text1>
+              <ExternalLink
+                href="https://www.notion.so/crypton-prime/acfd7a937ae941e1a5082316b5a81e70"
+                className="w-fit"
+              >
+                {t("prime.plan")}
+              </ExternalLink>
+            </div>
+          )}
         </div>
       </RowItem>
       <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row justify-between gap-3 py-2 3xl:gap-[0.781vw] 3xl:py-[0.521vw] dark:text-gray-4">
