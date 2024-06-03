@@ -91,7 +91,7 @@ const FirstStep = ({
   const getSubscriptionPrice = (subID: number) => {
     const { individualPrice, price } = subscriptions[subID]
 
-    return individualPrice === null ? price : individualPrice
+    return individualPrice ? individualPrice : price
   }
 
   const onPromoInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -301,8 +301,8 @@ const FirstStep = ({
                 }
               else discount = null
 
-              if (sub.individualPrice === null) activePrice = sub.price
-              else activePrice = sub.individualPrice
+              if (sub.individualPrice) activePrice = sub.individualPrice
+              else activePrice = sub.price
 
               if (discount === null) price = activePrice
               else price = activePrice - discount.amount

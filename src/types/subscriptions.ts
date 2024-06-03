@@ -6,7 +6,7 @@ export interface Subscription {
     label: string
   }
   name: string
-  individualPrice: number | null
+  individualPrice?: number | null
   price: number
   isActive: boolean
   kindId: 1 | 2 // 1 - Prime | 2 - Calendar
