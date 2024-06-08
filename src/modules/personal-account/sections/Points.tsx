@@ -4,7 +4,7 @@ import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
 import PointsInfo from "../modals/points/PointsInfo"
-// import PointsStore from "../modals/points/PointsStore"
+import PointsStore from "../modals/points/PointsStore"
 import ModalTrigger from "../components/ModalTrigger"
 
 import AccentNumber from "@/shared/typography/AccentNumber"
@@ -15,7 +15,7 @@ import RowItem from "@/shared/components/RowItem"
 
 import { Skeleton } from "@/shared/ui/Skeleton"
 import Button from "@/shared/ui/Button"
-import Tooltip from "@/shared/ui/Tooltip"
+// import Tooltip from "@/shared/ui/Tooltip"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useNutcrackersQuery, useUserProfileQuery } from "@/redux/api/profile"
@@ -68,12 +68,12 @@ const Points = () => {
           <Text0 className="flex-shrink-0">
             {t("points.balance")}: <AccentNumber>{points}</AccentNumber>
           </Text0>
-          <Tooltip content={t("points.soon")}>
+          {/* <Tooltip content={t("points.soon")}>
             <Button disabled>{t("points.store")}</Button>
-          </Tooltip>
-          {/* <ModalTrigger content={<PointsStore />}>
+          </Tooltip> */}
+          <ModalTrigger content={<PointsStore />}>
             <Button>{t("points.store")}</Button>
-          </ModalTrigger> */}
+          </ModalTrigger>
         </RowItem>
         {isLoading ? (
           <RowItem

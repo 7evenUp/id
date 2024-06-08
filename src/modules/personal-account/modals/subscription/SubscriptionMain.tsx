@@ -2,10 +2,10 @@ import { ReactNode, useState } from "react"
 
 import BalanceModal from "../Balance"
 
-// import SelectSubscription from "./SelectSubscription"
+import SelectSubscription from "./SelectSubscription"
 
-// import FirstStepCalendar from "./Calendar/FirstStep"
-// import SecondStepCalendar from "./Calendar/SecondStep"
+import FirstStepCalendar from "./Calendar/FirstStep"
+import SecondStepCalendar from "./Calendar/SecondStep"
 
 import FirstStepPrime from "./Prime/FirstStep"
 import SecondStep from "./Prime/SecondStep"
@@ -27,11 +27,11 @@ const SubscriptionMain = ({
   triggerText?: string
   customTrigger?: ReactNode
 }) => {
-  // const [selectionOpened, setSelectionOpened] = useState(false)
+  const [selectionOpened, setSelectionOpened] = useState(false)
   const [primeOpened, setPrimeOpened] = useState(false)
-  // const [calendarOpened, setCalendarOpened] = useState(false)
-  // const [secondStepCalendarOpened, setSecondStepCalendarOpened] =
-  //   useState(false)
+  const [calendarOpened, setCalendarOpened] = useState(false)
+  const [secondStepCalendarOpened, setSecondStepCalendarOpened] =
+    useState(false)
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
   const [balanceOpened, setBalanceOpened] = useState(false)
@@ -42,7 +42,7 @@ const SubscriptionMain = ({
 
   const { data: subscriptions, isLoading } = useSubscriptionsQuery()
 
-  if (isLoading)
+  if (isLoading && !customTrigger)
     return (
       <Skeleton
         className={cn(
@@ -54,30 +54,30 @@ const SubscriptionMain = ({
 
   if (!subscriptions) return null
 
-  // const openSelection = () => {
-  //   setSelectionOpened(true)
-  //   setPrimeOpened(false)
-  //   setCalendarOpened(false)
-  // }
+  const openSelection = () => {
+    setSelectionOpened(true)
+    setPrimeOpened(false)
+    setCalendarOpened(false)
+  }
 
   const openPrime = () => {
-    // setSelectionOpened(false)
+    setSelectionOpened(false)
     setPrimeOpened(true)
   }
 
-  // const openCalendar = () => {
-  //   setSelectionOpened(false)
-  //   setCalendarOpened(true)
-  // }
+  const openCalendar = () => {
+    setSelectionOpened(false)
+    setCalendarOpened(true)
+  }
 
-  // const openSecondStepCalendar = () => {
-  //   setCalendarOpened(false)
-  //   setSecondStepCalendarOpened(true)
-  // }
+  const openSecondStepCalendar = () => {
+    setCalendarOpened(false)
+    setSecondStepCalendarOpened(true)
+  }
 
   const openBalanceModal = () => {
     setPrimeOpened(false)
-    // setCalendarOpened(false)
+    setCalendarOpened(false)
     setBalanceOpened(true)
   }
 
@@ -93,22 +93,22 @@ const SubscriptionMain = ({
 
   return (
     <>
-      {customTrigger ? (
+      {/* {customTrigger ? (
         <button className="absolute left-full top-0" onClick={openPrime}>
           {customTrigger}
         </button>
       ) : (
         <Button onClick={openPrime}>{triggerText}</Button>
-      )}
-      {/* {customTrigger ? (
+      )} */}
+      {customTrigger ? (
         <button className="absolute left-full top-0" onClick={openSelection}>
           {customTrigger}
         </button>
       ) : (
         <Button onClick={openSelection}>{triggerText}</Button>
-      )} */}
+      )}
 
-      {/* <SelectSubscription
+      <SelectSubscription
         open={selectionOpened}
         onOpenChange={setSelectionOpened}
         openPrime={openPrime}
@@ -129,12 +129,12 @@ const SubscriptionMain = ({
         open={secondStepCalendarOpened}
         onOpenChange={setSecondStepCalendarOpened}
         boughtSubDuration={boughtSubDuration}
-      /> */}
+      />
 
       <FirstStepPrime
         open={primeOpened}
         onOpenChange={setPrimeOpened}
-        // openSelection={openSelection}
+        openSelection={openSelection}
         openBalanceModal={openBalanceModal}
         openSecondStep={openSecondStep}
         subscriptions={subscriptions.filter((sub) => sub.kindId === 1)}
