@@ -1,4 +1,9 @@
+import differenceInDays from "date-fns/differenceInDays"
+import { isDesktop } from "react-device-detect"
 import { useTranslation } from "react-i18next"
+
+import PrimeActiveIcon from "@/assets/icons/products/Prime_Active.svg?react"
+import CalendarActiveIcon from "@/assets/icons/products/Calendar_Active.svg?react"
 
 import Snow from "@/assets/icons/snow.svg?react"
 
@@ -9,20 +14,30 @@ import SubscriptionMain from "../modals/subscription/SubscriptionMain"
 
 import ModalTrigger from "../components/ModalTrigger"
 import SubscriptionType from "../components/SubscriptionType"
+import SubscriptionTypeDisabled from "../components/SubscriptionTypeDisabled"
 
 import RowItem from "@/shared/components/RowItem"
 
 import AccentNumber from "@/shared/typography/AccentNumber"
 import Subheading from "@/shared/typography/Subheading"
 import Text0 from "@/shared/typography/Text0"
+import TextXs from "@/shared/typography/TextXs"
+import Text1 from "@/shared/typography/Text1"
 
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/shared/ui/HoverCard"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import { formatDate } from "@/lib/date-fns"
 
 const Subscription = () => {
   const { t } = useTranslation("profile")
@@ -32,6 +47,7 @@ const Subscription = () => {
   const { data: profileData } = useUserProfileQuery()
 
   const {
+    subscriptions,
     subscriptionInfo: { remainingDays, status, subscriptionType },
     balance,
   } = profileData!
@@ -52,6 +68,8 @@ const Subscription = () => {
                 <SubscriptionType className="cursor-pointer absolute left-full top-0 -translate-y-1/2" />
               }
             />
+          ) : subscriptions.length > 1 ? (
+            <UpcomingSubscriptions />
           ) : (
             <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
           )}
@@ -117,3 +135,238 @@ const Subscription = () => {
 }
 
 export default Subscription
+
+const UpcomingSubscriptions = () => {
+  const { t, i18n } = useTranslation("profile")
+
+  const scale = useAppSelector((state) => state.scale.value)
+
+  const { data: profileData } = useUserProfileQuery()
+
+  const { subscriptions } = profileData!
+
+  return (
+    <div
+      className={cn(
+        "absolute left-full top-0 -translate-y-1/2 flex items-center gap-2",
+        scale && "3xl:gap-[0.52vw]"
+      )}
+    >
+      <SubscriptionType />
+      {subscriptions.map((subscription, i) => {
+        if (i === 0) return
+
+        if (isDesktop)
+          return (
+            <HoverCard key={i} openDelay={150}>
+              <HoverCardTrigger asChild>
+                <SubscriptionTypeDisabled>
+                  {subscription.kindName}
+                </SubscriptionTypeDisabled>
+              </HoverCardTrigger>
+              <HoverCardContent
+                className={cn(
+                  "w-72 2xl:w-80 flex flex-col gap-4",
+                  scale && "3xl:w-[20.8333vw] 3xl:gap-[1.0417vw]"
+                )}
+              >
+                <Text0 className="text-center">
+                  {t("subs.popover-heading")}
+                </Text0>
+                <div
+                  className={cn(
+                    "flex flex-col gap-2",
+                    scale && "3xl:gap-[0.52vw]"
+                  )}
+                >
+                  <TextXs className="font-semibold">
+                    {t("subs.popover-active")}
+                  </TextXs>
+                  <div
+                    className={cn(
+                      "flex items-center gap-3 rounded-xl py-1 px-3 border border-gray-3 dark:border-gray-3",
+                      scale &&
+                        "3xl:gap-[0.7813vw] 3xl:rounded-[0.7813vw] 3xl:py-[0.2604vw] 3xl:px-[0.7813vw]"
+                    )}
+                  >
+                    {subscriptions[0].kindName === "Prime" ? (
+                      <PrimeActiveIcon
+                        className={cn(
+                          "w-[26px] h-[26px]",
+                          scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                        )}
+                      />
+                    ) : (
+                      subscriptions[0].kindName === "Calendar" && (
+                        <CalendarActiveIcon
+                          className={cn(
+                            "w-[26px] h-[26px]",
+                            scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                          )}
+                        />
+                      )
+                    )}
+
+                    <div className="flex flex-col">
+                      <Text0>{subscriptions[0].kindName}</Text0>
+                      <Text1>
+                        {t("subs.popover-ending")}{" "}
+                        {formatDate(
+                          subscriptions[0].tillDatetime,
+                          i18n.language as "ru" | "en"
+                        )}
+                      </Text1>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className={cn(
+                    "flex flex-col gap-2",
+                    scale && "3xl:gap-[0.52vw]"
+                  )}
+                >
+                  <div>
+                    <TextXs className="font-semibold">
+                      {t("subs.popover-upcoming")}
+                    </TextXs>
+                    <Text1>{t("subs.popover-upcoming-description")}</Text1>
+                  </div>
+                  <div
+                    className={cn(
+                      "flex items-center gap-3 rounded-xl py-1 px-3 border border-gray-3 dark:border-gray-3",
+                      scale &&
+                        "3xl:gap-[0.7813vw] 3xl:rounded-[0.7813vw] 3xl:py-[0.2604vw] 3xl:px-[0.7813vw]"
+                    )}
+                  >
+                    {subscription.kindName === "Calendar" && (
+                      <CalendarActiveIcon
+                        className={cn(
+                          "w-[26px] h-[26px]",
+                          scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                        )}
+                      />
+                    )}
+                    <div className="flex flex-col">
+                      <Text0>{subscription.kindName}</Text0>
+                      <Text1>
+                        {t("subs.popover-will-be-active", {
+                          count: differenceInDays(
+                            new Date(subscription.tillDatetime),
+                            new Date(subscription.fromDatetime)
+                          ),
+                        })}
+                      </Text1>
+                    </div>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
+          )
+
+        return (
+          <Popover key={i}>
+            <PopoverTrigger asChild>
+              <SubscriptionTypeDisabled>
+                {subscription.kindName}
+              </SubscriptionTypeDisabled>
+            </PopoverTrigger>
+            <PopoverContent
+              className={cn(
+                "w-72 2xl:w-80 flex flex-col gap-4",
+                scale && "3xl:w-[20.8333vw] 3xl:gap-[1.0417vw]"
+              )}
+            >
+              <Text0 className="text-center">{t("subs.popover-heading")}</Text0>
+              <div
+                className={cn(
+                  "flex flex-col gap-2",
+                  scale && "3xl:gap-[0.52vw]"
+                )}
+              >
+                <TextXs className="font-semibold">
+                  {t("subs.popover-active")}
+                </TextXs>
+                <div
+                  className={cn(
+                    "flex items-center gap-3 rounded-xl py-1 px-3 border border-gray-3 dark:border-gray-3",
+                    scale &&
+                      "3xl:gap-[0.7813vw] 3xl:rounded-[0.7813vw] 3xl:py-[0.2604vw] 3xl:px-[0.7813vw]"
+                  )}
+                >
+                  {subscriptions[0].kindName === "Prime" ? (
+                    <PrimeActiveIcon
+                      className={cn(
+                        "w-[26px] h-[26px]",
+                        scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                      )}
+                    />
+                  ) : (
+                    subscriptions[0].kindName === "Calendar" && (
+                      <CalendarActiveIcon
+                        className={cn(
+                          "w-[26px] h-[26px]",
+                          scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                        )}
+                      />
+                    )
+                  )}
+
+                  <div className="flex flex-col">
+                    <Text0>{subscriptions[0].kindName}</Text0>
+                    <Text1>
+                      {t("subs.popover-ending")}{" "}
+                      {formatDate(
+                        subscriptions[0].tillDatetime,
+                        i18n.language as "ru" | "en"
+                      )}
+                    </Text1>
+                  </div>
+                </div>
+              </div>
+              <div
+                className={cn(
+                  "flex flex-col gap-2",
+                  scale && "3xl:gap-[0.52vw]"
+                )}
+              >
+                <div>
+                  <TextXs className="font-semibold">
+                    {t("subs.popover-upcoming")}
+                  </TextXs>
+                  <Text1>{t("subs.popover-upcoming-description")}</Text1>
+                </div>
+                <div
+                  className={cn(
+                    "flex items-center gap-3 rounded-xl py-1 px-3 border border-gray-3 dark:border-gray-3",
+                    scale &&
+                      "3xl:gap-[0.7813vw] 3xl:rounded-[0.7813vw] 3xl:py-[0.2604vw] 3xl:px-[0.7813vw]"
+                  )}
+                >
+                  {subscription.kindName === "Calendar" && (
+                    <CalendarActiveIcon
+                      className={cn(
+                        "w-[26px] h-[26px]",
+                        scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
+                      )}
+                    />
+                  )}
+                  <div className="flex flex-col">
+                    <Text0>{subscription.kindName}</Text0>
+                    <Text1>
+                      {t("subs.popover-will-be-active", {
+                        count: differenceInDays(
+                          new Date(subscription.tillDatetime),
+                          new Date(subscription.fromDatetime)
+                        ),
+                      })}
+                    </Text1>
+                  </div>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+        )
+      })}
+    </div>
+  )
+}
