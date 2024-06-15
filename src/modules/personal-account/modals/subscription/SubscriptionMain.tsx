@@ -101,7 +101,13 @@ const SubscriptionMain = ({
         <Button onClick={openPrime}>{triggerText}</Button>
       )} */}
       {customTrigger ? (
-        <button className="absolute left-full top-0" onClick={openSelection}>
+        <button
+          className={cn(
+            "-translate-y-2",
+            scale && "3xl:gap3xl:-translate-y-[0.52vw]"
+          )}
+          onClick={openSelection}
+        >
           {customTrigger}
         </button>
       ) : (
