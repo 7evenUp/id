@@ -27,6 +27,8 @@ const SubscriptionTypeListItem = ({
         status === "ACTIVE" &&
           kindName === "Calendar" &&
           "bg-calendar-red dark:bg-calendar-red",
+        status === "FROZEN" &&
+          "bg-gradient-to-r from-frozen-start to-frozen-end",
         scale && "typography-text-1_large 3xl:px-[0.391vw] 3xl:py-[0.13vw]",
         className
       )}

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react"
+import { useState } from "react"
 
 import BalanceModal from "../Balance"
 
@@ -20,13 +20,7 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
-const SubscriptionMain = ({
-  triggerText,
-  customTrigger,
-}: {
-  triggerText?: string
-  customTrigger?: ReactNode
-}) => {
+const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
   const [selectionOpened, setSelectionOpened] = useState(false)
   const [primeOpened, setPrimeOpened] = useState(false)
   const [calendarOpened, setCalendarOpened] = useState(false)
@@ -42,7 +36,7 @@ const SubscriptionMain = ({
 
   const { data: subscriptions, isLoading } = useSubscriptionsQuery()
 
-  if (isLoading && !customTrigger)
+  if (isLoading)
     return (
       <Skeleton
         className={cn(
@@ -93,26 +87,7 @@ const SubscriptionMain = ({
 
   return (
     <>
-      {/* {customTrigger ? (
-        <button className="absolute left-full top-0" onClick={openPrime}>
-          {customTrigger}
-        </button>
-      ) : (
-        <Button onClick={openPrime}>{triggerText}</Button>
-      )} */}
-      {customTrigger ? (
-        <button
-          className={cn(
-            "-translate-y-2",
-            scale && "3xl:gap3xl:-translate-y-[0.52vw]"
-          )}
-          onClick={openSelection}
-        >
-          {customTrigger}
-        </button>
-      ) : (
-        <Button onClick={openSelection}>{triggerText}</Button>
-      )}
+      <Button onClick={openSelection}>{triggerText}</Button>
 
       <SelectSubscription
         open={selectionOpened}

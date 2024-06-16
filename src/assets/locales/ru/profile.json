@@ -20,6 +20,8 @@
     "popover-active": "Действующая",
     "popover-upcoming": "Предстоящие",
     "popover-upcoming-description": "Будут активироваться в порядке очереди, когда действующая прекратит своё действие",
+    "popover-frozen": "Замороженные",
+    "popover-frozen-description": "Будут активированы в порядке очереди, когда истечёт время заморозки, или когда вы разморозите вручную",
     "popover-ending": "Закончится",
     "popover-will-be-active_one": "Будет активна {{count}} день",
     "popover-will-be-active_few": "Будет активна {{count}} дня",

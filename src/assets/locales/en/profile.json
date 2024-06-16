@@ -20,6 +20,8 @@
     "popover-active": "Active",
     "popover-upcoming": "Upcoming",
     "popover-upcoming-description": "Will be activated on a first-come, first-served basis when the active one expires",
+    "popover-frozen": "Frozen",
+    "popover-frozen-description": "Will be activated on a first-come, first-served basis when the freezing time expires or when you unfreeze manually",
     "popover-ending": "Expires on",
     "popover-will-be-active_one": "Will be active {{count}} day",
     "popover-will-be-active_other": "Will be active {{count}} days"
