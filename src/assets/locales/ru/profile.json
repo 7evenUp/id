@@ -43,9 +43,7 @@
   "points": {
     "heading": "Crypton Points",
     "balance": "мой баланс",
-    "cashback": "текущий кэшбэк",
-    "store": "магазин",
-    "soon": "скоро"
+    "cashback": "текущий кэшбэк"
   },
   "shares": {
     "balance": "мой баланс",

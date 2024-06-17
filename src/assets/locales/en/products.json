@@ -1,6 +1,7 @@
 {
   "products-root": "products",
   "inventory-root": "inventory",
+  "points-store-root": "store",
   "ref_link": "Referral link",
   "ref_copied_title": "Copied",
   "ref_copied_desc": "The referral link has been copied to the clipboard",
@@ -70,6 +71,10 @@
     "success-dialog-text-1": "The NFT will be credited to your TON wallet within a few minutes.",
     "success-dialog-text-2": "Your NFT is available at this",
     "success-dialog-link": "link"
+  },
+  "points-store": {
+    "title": "Crypton Points Store",
+    "disabled": "The store's functionality is under development"
   },
   "nutcracker": {
     "title": "The Nutcrackers",

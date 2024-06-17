@@ -1,6 +1,7 @@
 {
   "products-root": "продукты",
   "inventory-root": "инвентарь",
+  "points-store-root": "магазин",
   "ref_link": "Реферальная ссылка",
   "ref_copied_title": "Скопировано",
   "ref_copied_desc": "Реферальная ссылка скопирована в буфер обмена",
@@ -70,6 +71,10 @@
     "success-dialog-text-1": "NFT придёт на ваш TON кошелёк в течении нескольких минут.",
     "success-dialog-text-2": "Ваша NFT доступна по этой",
     "success-dialog-link": "ссылке"
+  },
+  "points-store": {
+    "title": "Магазин Crypton Points",
+    "disabled": "Функционал магазина находится в разработке"
   },
   "nutcracker": {
     "title": "Щелкунчики",
