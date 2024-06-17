@@ -6,7 +6,7 @@ import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import CheckIcon from "@/assets/icons/check.svg?react"
 import HelpIcon from "@/assets/icons/help-circle.svg?react"
-// import MoveLeft from "@/assets/icons/move-left.svg?react"
+import MoveLeft from "@/assets/icons/move-left.svg?react"
 
 import SubscriptionModalHeader from "../components/SubscriptionModalHeader"
 import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
@@ -46,7 +46,7 @@ const FirstStep = ({
   open,
   onOpenChange,
   openSecondStep,
-  // openSelection,
+  openSelection,
   openBalanceModal,
   subscriptions,
   setBoughtSubDuration,
@@ -54,7 +54,7 @@ const FirstStep = ({
   open: boolean
   onOpenChange: (open: boolean) => void
   openSecondStep: () => void
-  // openSelection: () => void
+  openSelection: () => void
   openBalanceModal: () => void
   subscriptions: Subscription[]
   setBoughtSubDuration: Dispatch<SetStateAction<number>>
@@ -89,7 +89,7 @@ const FirstStep = ({
   const getSubscriptionPrice = (subID: number) => {
     const { individualPrice, price } = subscriptions[subID]
 
-    return individualPrice === undefined ? price : individualPrice
+    return individualPrice ? individualPrice : price
   }
 
   const onPromoInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -256,7 +256,7 @@ const FirstStep = ({
           scale && "3xl:pb-[3.645vw] 3xl:max-w-[70vw]"
         )}
       >
-        {/* <button
+        <button
           className={cn(
             "typography-btn-big flex items-center gap-2 hover:text-gray-3 w-fit",
             scale && "typography-btn-big_large 3xl:gap-[0.521vw]"
@@ -270,7 +270,7 @@ const FirstStep = ({
             )}
           />
           <span className="text-left">{t("buy-subs.back-btn")}</span>
-        </button> */}
+        </button>
         <SubscriptionModalHeader step={t("buy-subs.first-step.step")} />
 
         <div
@@ -297,8 +297,8 @@ const FirstStep = ({
                 }
               else discount = null
 
-              if (sub.individualPrice === undefined) activePrice = sub.price
-              else activePrice = sub.individualPrice
+              if (sub.individualPrice) activePrice = sub.individualPrice
+              else activePrice = sub.price
 
               if (discount === null) price = activePrice
               else price = activePrice - discount.amount

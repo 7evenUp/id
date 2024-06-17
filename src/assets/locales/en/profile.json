@@ -15,7 +15,16 @@
     "history-btn": "history",
     "replenish-btn": "top up",
     "buy-btn": "buy subscription",
-    "renew-btn": "renew"
+    "renew-btn": "renew",
+    "popover-heading": "Subscriptions",
+    "popover-active": "Active",
+    "popover-upcoming": "Upcoming",
+    "popover-upcoming-description": "Will be activated on a first-come, first-served basis when the active one expires",
+    "popover-frozen": "Frozen",
+    "popover-frozen-description": "Will be activated on a first-come, first-served basis when the freezing time expires or when you unfreeze manually",
+    "popover-ending": "Expires on",
+    "popover-will-be-active_one": "Will be active {{count}} day",
+    "popover-will-be-active_other": "Will be active {{count}} days"
   },
   "referral": {
     "heading": "Referral system",
@@ -33,9 +42,7 @@
   "points": {
     "heading": "Crypton Points",
     "balance": "my balance",
-    "cashback": "current cashback",
-    "store": "store",
-    "soon": "soon"
+    "cashback": "current cashback"
   },
   "shares": {
     "balance": "my balance",

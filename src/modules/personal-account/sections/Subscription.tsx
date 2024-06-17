@@ -9,6 +9,7 @@ import SubscriptionMain from "../modals/subscription/SubscriptionMain"
 
 import ModalTrigger from "../components/ModalTrigger"
 import SubscriptionType from "../components/SubscriptionType"
+import UpcomingSubscriptions from "../components/UpcomingSubscriptions"
 
 import RowItem from "@/shared/components/RowItem"
 
@@ -32,7 +33,8 @@ const Subscription = () => {
   const { data: profileData } = useUserProfileQuery()
 
   const {
-    subscriptionInfo: { remainingDays, status, subscriptionType },
+    subscriptions,
+    subscriptionInfo: { remainingDays, status },
     balance,
   } = profileData!
 
@@ -44,16 +46,17 @@ const Subscription = () => {
           scale && "3xl:mb-[1.042vw]"
         )}
       >
-        <div className="relative">
+        <div className="flex gap-1">
           <Subheading>{t("subs.heading")}</Subheading>
-          {subscriptionType === null ? (
-            <SubscriptionMain
-              customTrigger={
-                <SubscriptionType className="cursor-pointer absolute left-full top-0 -translate-y-1/2" />
-              }
-            />
+          {subscriptions.length > 1 ? (
+            <UpcomingSubscriptions />
           ) : (
-            <SubscriptionType className="absolute left-full top-0 -translate-y-1/2" />
+            <SubscriptionType
+              className={cn(
+                "h-fit -translate-y-2",
+                scale && "3xl:gap3xl:-translate-y-[0.52vw]"
+              )}
+            />
           )}
         </div>
         {status !== null && (

@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 
-export type RootTabsValuesType = "products" | "inventory"
+export type RootTabsValuesType = "products" | "inventory" | "store"
 
 export const ROOT_TABS_VALUES: Record<RootTabsValuesType, RootTabsValuesType> =
   {
     products: "products",
     inventory: "inventory",
+    store: "store",
   }
 
 export interface RootTabsState {

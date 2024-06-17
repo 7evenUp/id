@@ -16,6 +16,7 @@ export interface User {
   profileUsername: string
   referralInfo: ReferralInfo
   subscriptionInfo: SubscriptionInfo
+  subscriptions: ActiveUserSubscription[]
   telegramUsername: string
   telegramId: number
   wallet: string | null
@@ -38,13 +39,21 @@ export interface Avatar {
 }
 
 export interface SubscriptionInfo {
+  subscriptionBoughtDaysAgo: number
   currentBalance: number
-  isFreezeAllowed: boolean
   remainingDays: number | null
   status: "ACTIVE" | "FROZEN" | "EXPIRED" | null
-  subscriptionActiveTillDate: Date | null
-  subscriptionBoughtDaysAgo: number
   subscriptionType: "Prime" | "Calendar" | null
+  subscriptionActiveTillDate: Date | null
+  isFreezeAllowed: boolean
+}
+
+export interface ActiveUserSubscription {
+  fromDatetime: string
+  tillDatetime: string
+  status: "ACTIVE" | "UPCOMING" | "FROZEN"
+  durationDays: number
+  kindName: "Prime" | "Calendar"
 }
 
 export interface ReferralInfo {

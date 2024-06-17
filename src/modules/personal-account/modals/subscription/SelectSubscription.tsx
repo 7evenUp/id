@@ -13,6 +13,7 @@ import {
 } from "@/shared/ui/Dialog"
 
 import Text1 from "@/shared/typography/Text1"
+import TextTip from "@/shared/typography/TextTip"
 
 import { useAppSelector } from "@/redux/hooks"
 
@@ -51,6 +52,48 @@ const SelectSubscription = ({
             scale && "3xl:gap-[2.6vw]"
           )}
         >
+          <Card onClick={openPrime}>
+            <div
+              className={cn(
+                "flex items-center gap-3",
+                scale && "3xl:gap-[0.781vw]"
+              )}
+            >
+              <PrimeActiveIcon
+                className={cn(
+                  "group-hover:block group-hover:scale-105 hidden w-[27px] h-[30px]",
+                  scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
+                )}
+              />
+              <PrimeIcon
+                className={cn(
+                  "group-hover:hidden block dark:fill-gray-5 w-[27px] h-[30px]",
+                  scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
+                )}
+              />
+              <span
+                className={cn(
+                  "text-[22px]/[22px] 2xl:text-2xl tracking-[0.03em] font-semibold",
+                  scale && "3xl:text-[1.432vw]/[1.432vw]"
+                )}
+              >
+                Prime
+              </span>
+            </div>
+            <TextTip
+              className={cn("mt-2 text-left", scale && "3xl:mt-[0.52vw]")}
+            >
+              {t("buy-subs.selection.prime-includes")}
+            </TextTip>
+            <Text1
+              className={cn(
+                "mt-2 text-left group-hover:translate-y-2 transition-transform duration-500",
+                scale && "3xl:group-hover:translate-y-[0.52vw] 3xl:mt-[0.52vw]"
+              )}
+            >
+              {t("buy-subs.selection.prime-text")}
+            </Text1>
+          </Card>
           <Card onClick={openCalendar}>
             <div
               className={cn(
@@ -86,43 +129,6 @@ const SelectSubscription = ({
               )}
             >
               {t("buy-subs.selection.calendar-text")}
-            </Text1>
-          </Card>
-          <Card onClick={openPrime}>
-            <div
-              className={cn(
-                "flex items-center gap-3",
-                scale && "3xl:gap-[0.781vw]"
-              )}
-            >
-              <PrimeActiveIcon
-                className={cn(
-                  "group-hover:block group-hover:scale-105 hidden w-[27px] h-[30px]",
-                  scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
-                )}
-              />
-              <PrimeIcon
-                className={cn(
-                  "group-hover:hidden block dark:fill-gray-5 w-[27px] h-[30px]",
-                  scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
-                )}
-              />
-              <span
-                className={cn(
-                  "text-[22px]/[22px] 2xl:text-2xl tracking-[0.03em] font-semibold",
-                  scale && "3xl:text-[1.432vw]/[1.432vw]"
-                )}
-              >
-                Prime
-              </span>
-            </div>
-            <Text1
-              className={cn(
-                "mt-2 text-left group-hover:translate-y-2 transition-transform duration-500",
-                scale && "3xl:group-hover:translate-y-[0.52vw] 3xl:mt-[0.52vw]"
-              )}
-            >
-              {t("buy-subs.selection.prime-text")}
             </Text1>
           </Card>
         </div>

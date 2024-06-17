@@ -15,7 +15,17 @@
     "history-btn": "история",
     "replenish-btn": "пополнить баланс",
     "buy-btn": "купить подписку",
-    "renew-btn": "продлить"
+    "renew-btn": "продлить",
+    "popover-heading": "Подписки",
+    "popover-active": "Действующая",
+    "popover-upcoming": "Предстоящие",
+    "popover-upcoming-description": "Будут активироваться в порядке очереди, когда действующая прекратит своё действие",
+    "popover-frozen": "Замороженные",
+    "popover-frozen-description": "Будут активированы в порядке очереди, когда истечёт время заморозки, или когда вы разморозите вручную",
+    "popover-ending": "Закончится",
+    "popover-will-be-active_one": "Будет активна {{count}} день",
+    "popover-will-be-active_few": "Будет активна {{count}} дня",
+    "popover-will-be-active_many": "Будет активна {{count}} дней"
   },
   "referral": {
     "heading": "Реферальная система",
@@ -33,9 +43,7 @@
   "points": {
     "heading": "Crypton Points",
     "balance": "мой баланс",
-    "cashback": "текущий кэшбэк",
-    "store": "магазин",
-    "soon": "скоро"
+    "cashback": "текущий кэшбэк"
   },
   "shares": {
     "balance": "мой баланс",
