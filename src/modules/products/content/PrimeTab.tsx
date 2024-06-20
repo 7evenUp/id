@@ -1,4 +1,7 @@
 import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
+
+import CopyIcon from "@/assets/icons/copy.svg?react"
 
 import ChatAndChannels from "../components/prime/ChatAndChannels"
 import ServicesAndNavigation from "../components/prime/ServicesAndNavigation"
@@ -11,22 +14,46 @@ import RowItem from "@/shared/components/RowItem"
 import Text1 from "@/shared/typography/Text1"
 
 import ExternalLink from "@/shared/ui/ExternalLink"
+import Button from "@/shared/ui/Button"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useAppSelector } from "@/redux/hooks"
+
+import { cn } from "@/lib/classNames"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
+
+  const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfile } = useUserProfileQuery()
 
   const {
     subscriptionInfo: { status, subscriptionType },
+    referralInfo: { refCode },
   } = userProfile!
+
+  const onRefLinkClick = () => {
+    navigator.clipboard.writeText("https://in-prime.crypton.xyz?ref=" + refCode)
+
+    toast(t("calendar.toast-title"), {
+      description: t("calendar.link-copied"),
+    })
+  }
 
   return (
     <>
       <TabHeader>
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
+        <Button onClick={onRefLinkClick} className="w-fit sm:ml-auto">
+          {t("calendar.ref-link")}
+          <CopyIcon
+            className={cn(
+              "w-3.5 h-3.5",
+              scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+            )}
+          />
+        </Button>
       </TabHeader>
 
       <ChatAndChannels />
