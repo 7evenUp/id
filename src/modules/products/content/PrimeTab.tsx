@@ -36,8 +36,8 @@ const PrimeTab = () => {
   const onRefLinkClick = () => {
     navigator.clipboard.writeText("https://in-prime.crypton.xyz?ref=" + refCode)
 
-    toast(t("calendar.toast-title"), {
-      description: t("calendar.link-copied"),
+    toast(t("prime.toast-title"), {
+      description: t("prime.link-copied"),
     })
   }
 
@@ -46,7 +46,7 @@ const PrimeTab = () => {
       <TabHeader>
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
         <Button onClick={onRefLinkClick} className="w-fit sm:ml-auto">
-          {t("calendar.ref-link")}
+          {t("prime.ref-link")}
           <CopyIcon
             className={cn(
               "w-3.5 h-3.5",
