@@ -51,20 +51,6 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.research}>
-        <Tooltip content="Research">
-          <div>
-            <ResearchIcon
-              className={cn(
-                "h-[26px] w-auto text-gray-1 dark:text-gray-4",
-                activeProduct === "research" &&
-                  "text-[#1B5CF6] dark:text-[#1B5CF6]",
-                scale && "3xl:h-[1.693vw]"
-              )}
-            />
-          </div>
-        </Tooltip>
-      </TabsTrigger>
       <TabsTrigger value={TABS_VALUES.calendar}>
         <Tooltip content="Calendar">
           <div>
@@ -83,6 +69,20 @@ const TabsTriggers = () => {
                 )}
               />
             )}
+          </div>
+        </Tooltip>
+      </TabsTrigger>
+      <TabsTrigger value={TABS_VALUES.research}>
+        <Tooltip content="Research">
+          <div>
+            <ResearchIcon
+              className={cn(
+                "h-[26px] w-auto text-gray-1 dark:text-gray-4",
+                activeProduct === "research" &&
+                  "text-[#1B5CF6] dark:text-[#1B5CF6]",
+                scale && "3xl:h-[1.693vw]"
+              )}
+            />
           </div>
         </Tooltip>
       </TabsTrigger>
