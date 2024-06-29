@@ -10,6 +10,7 @@ import Products from "@/modules/products/Products"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useSubscriptionsQuery } from "@/redux/api/subscription"
 
 import { cn } from "@/lib/classNames"
 
@@ -20,7 +21,8 @@ const Main = () => {
   const scale = useAppSelector((state) => state.scale.value)
   const isCookieShown = useAppSelector((state) => state.cookie.isShown)
 
-  const { isLoading, data, error } = useUserProfileQuery()
+  const { isLoading: isProfileLoading, data, error } = useUserProfileQuery()
+  const { isLoading: isSubscriptionsLoading } = useSubscriptionsQuery()
 
   // console.log(error)
   // error.originalStatus === 502
@@ -47,7 +49,7 @@ const Main = () => {
       >
         {error ? (
           <Auth />
-        ) : isLoading || isDelayed ? (
+        ) : isProfileLoading || isSubscriptionsLoading || isDelayed ? (
           <SkeletonLayout />
         ) : data ? (
           <>

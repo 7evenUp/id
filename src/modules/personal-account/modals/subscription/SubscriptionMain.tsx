@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import BalanceModal from "../Balance"
 
@@ -35,6 +35,21 @@ const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: subscriptions, isLoading } = useSubscriptionsQuery()
+
+  useEffect(() => {
+    const url = new URL(location.href)
+    const openModalParam = url.searchParams.get("open_modal")
+
+    if (!openModalParam) return
+
+    if (openModalParam === "buy_prime") {
+      setPrimeOpened(true)
+    }
+
+    if (openModalParam === "buy_calendar") {
+      setCalendarOpened(true)
+    }
+  }, [])
 
   if (isLoading)
     return (
