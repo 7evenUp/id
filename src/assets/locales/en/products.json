@@ -28,9 +28,6 @@
     "page-of": "Page {{current}} of {{total}}"
   },
   "prime": {
-    "ref-link": "referral link",
-    "toast-title": "Copied",
-    "link-copied": "The Prime referral link has been copied to the clipboard",
     "channels-and-chats": "Prime channels and chats",
     "tg-not-synced-yet-first": "For the links to work correctly, first activate the ",
     "tg-not-synced-yet-link": "telegram bot",
@@ -93,9 +90,6 @@
     "heading": "Dashboard coming soon!"
   },
   "calendar": {
-    "heading": "Dashboard coming soon!",
-    "ref-link": "referral link",
-    "toast-title": "Copied",
-    "link-copied": "The Calendar referral link has been copied to the clipboard"
+    "heading": "Dashboard coming soon!"
   }
 }

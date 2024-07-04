@@ -31,7 +31,7 @@ const Referral = () => {
   const { data: profileData } = useUserProfileQuery()
 
   const {
-    referralInfo: { refCode, refLink, refBalance, refCashBack },
+    referralInfo: { refCode, refBalance, refCashBack },
   } = profileData!
 
   const onPromoClick = () => {
@@ -42,11 +42,21 @@ const Referral = () => {
     })
   }
 
-  const onRefLinkClick = () => {
-    navigator.clipboard.writeText(refLink)
+  const onPrimeClick = () => {
+    navigator.clipboard.writeText("https://in-prime.crypton.xyz?ref=" + refCode)
 
     toast(t("referral.toast-title"), {
-      description: t("referral.link-copied"),
+      description: t("referral.prime-copied"),
+    })
+  }
+
+  const onCalendarClick = () => {
+    navigator.clipboard.writeText(
+      "https://calendar.crypton.xyz?ref_code=" + refCode
+    )
+
+    toast(t("referral.toast-title"), {
+      description: t("referral.calendar-copied"),
     })
   }
 
@@ -76,14 +86,28 @@ const Referral = () => {
             {t("referral.cashback")}:{" "}
             <AccentNumber>{refCashBack * 100}%</AccentNumber>
           </Text0>
+          <Button onClick={onPromoClick}>
+            {t("referral.promo-btn")}{" "}
+            <CopyIcon
+              className={cn(
+                "w-3.5 h-3.5",
+                scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+              )}
+            />
+          </Button>
+        </RowItem>
+        <RowItem>
+          <Text0 className="dark:text-gray-4">
+            {t("referral.referral-links")}
+          </Text0>
           <div
             className={cn(
               "flex gap-1.5 xl:gap-3 flex-wrap justify-end flex-shrink",
               scale && "3xl:gap-[0.781vw]"
             )}
           >
-            <Button onClick={onPromoClick}>
-              {t("referral.promo-btn")}{" "}
+            <Button onClick={onPrimeClick}>
+              Prime
               <CopyIcon
                 className={cn(
                   "w-3.5 h-3.5",
@@ -91,8 +115,8 @@ const Referral = () => {
                 )}
               />
             </Button>
-            <Button onClick={onRefLinkClick}>
-              {t("referral.link-btn")}{" "}
+            <Button onClick={onCalendarClick}>
+              Calendar
               <CopyIcon
                 className={cn(
                   "w-3.5 h-3.5",

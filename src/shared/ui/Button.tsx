@@ -41,10 +41,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           buttonVariants({ appearence }),
           scale &&
             (appearence === "outlined" || appearence === undefined) &&
-            "3xl:text-[0.911vw]/[0.911vw] 3xl:px-[0.651vw] 3xl:py-[0.195vw]",
+            "3xl:text-[0.911vw]/[0.911vw] 3xl:px-[0.651vw] 3xl:py-[0.195vw] 3xl:gap-[0.52vw]",
           scale &&
             appearence === "success" &&
-            "3xl:text-[0.911vw]/[0.911vw] 3xl:px-[0.651vw] 3xl:py-[0.195vw]",
+            "3xl:text-[0.911vw]/[0.911vw] 3xl:px-[0.651vw] 3xl:py-[0.195vw] 3xl:gap-[0.52vw]",
           scale && appearence === "text" && "3xl:text-[0.651vw]",
           className
         )}

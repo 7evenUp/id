@@ -37,7 +37,9 @@
     "view-btn": "view statistics",
     "toast-title": "Copied",
     "promo-copied": "Promo code copied to clipboard",
-    "link-copied": "The referral link has been copied to the clipboard"
+    "prime-copied": "The Prime referral link has been copied to the clipboard",
+    "calendar-copied": "The Calendar referral link has been copied to the clipboard",
+    "referral-links": "referral links:"
   },
   "points": {
     "heading": "Crypton Points",
