@@ -173,6 +173,7 @@
       "duration_few": "{{count}} месяца",
       "duration_many": "{{count}} месяцев",
       "savings": "экономия",
+      "bonuses": "Бонусы",
       "choose-btn": "выбрать",
       "chosen-btn": "выбрано",
       "points-for-purchase": "Начислим за покупку бонусы",

@@ -1,9 +1,15 @@
 import { useTranslation } from "react-i18next"
+import { isDesktop } from "react-device-detect"
 
 import GiftIcon from "@/assets/icons/gift.svg?react"
 
 import Button from "@/shared/ui/Button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/shared/ui/HoverCard"
 
 import Text0 from "@/shared/typography/Text0"
 import Text1 from "@/shared/typography/Text1"
@@ -90,35 +96,70 @@ const SubscriptionCard = ({
         </div>
       )}
       <div className="flex flex-col items-center mt-auto">
-        {prizes && prizes.length > 0 && (
-          <Popover>
-            <PopoverTrigger
-              className={cn(
-                "flex items-center justify-center gap-1.5 rounded px-2 py-1 mb-3 text-black dark:text-gray-5 bg-gray-5/25 dark:bg-gray-2/50 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors cursor-pointer",
-                scale &&
-                  "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:gap-[0.36vw]"
-              )}
-            >
-              <GiftIcon
+        {prizes &&
+          prizes.length > 0 &&
+          (isDesktop ? (
+            <HoverCard openDelay={150}>
+              <HoverCardTrigger
                 className={cn(
-                  "w-4 h-4",
-                  scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                  "flex items-center justify-center gap-1.5 rounded px-2 py-1 mb-3 text-black dark:text-gray-5 bg-gray-5/25 dark:bg-gray-2/50 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors cursor-pointer",
+                  scale &&
+                    "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:mb-[0.78125vw] 3xl:gap-[0.36vw]"
                 )}
-              />
-              <Text0>Бонусы</Text0>
-            </PopoverTrigger>
-            <PopoverContent className="flex flex-col gap-1 w-[280px]">
-              {prizes.map((prize) => (
-                <Text1>
-                  - {prize.translations.ru.name}{" "}
-                  {prize.remainingCount && (
-                    <span>(осталось {prize.remainingCount})</span>
+              >
+                <GiftIcon
+                  className={cn(
+                    "w-4 h-4",
+                    scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
                   )}
-                </Text1>
-              ))}
-            </PopoverContent>
-          </Popover>
-        )}
+                />
+                <Text0>{t("buy-subs.first-step.bonuses")}</Text0>
+              </HoverCardTrigger>
+              <HoverCardContent
+                className={cn(
+                  "flex flex-col gap-1 w-[280px]",
+                  scale && "3xl:gap-[0.26vw] 3xl:w-[19vw]"
+                )}
+              >
+                {prizes.map((prize) => (
+                  <Text1>
+                    - {prize.translations.ru.name}{" "}
+                    {prize.remainingCount && (
+                      <span>(осталось {prize.remainingCount})</span>
+                    )}
+                  </Text1>
+                ))}
+              </HoverCardContent>
+            </HoverCard>
+          ) : (
+            <Popover>
+              <PopoverTrigger
+                className={cn(
+                  "flex items-center justify-center gap-1.5 rounded px-2 py-1 mb-3 text-black dark:text-gray-5 bg-gray-5/25 dark:bg-gray-2/50 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors cursor-pointer",
+                  scale &&
+                    "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:gap-[0.36vw]"
+                )}
+              >
+                <GiftIcon
+                  className={cn(
+                    "w-4 h-4",
+                    scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                  )}
+                />
+                <Text0>Бонусы</Text0>
+              </PopoverTrigger>
+              <PopoverContent className="flex flex-col gap-1 w-[280px]">
+                {prizes.map((prize) => (
+                  <Text1>
+                    - {prize.translations.ru.name}{" "}
+                    {prize.remainingCount && (
+                      <span>(осталось {prize.remainingCount})</span>
+                    )}
+                  </Text1>
+                ))}
+              </PopoverContent>
+            </Popover>
+          ))}
         <Button
           className={cn(
             "w-[158px] disabled:bg-gray-1 disabled:hover:bg-gray-1 disabled:text-white dark:disabled:bg-white dark:disabled:hover:bg-white dark:disabled:text-black",

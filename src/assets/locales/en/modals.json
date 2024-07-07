@@ -171,6 +171,7 @@
       "duration_one": "{{count}} month",
       "duration_other": "{{count}} months",
       "savings": "savings",
+      "bonuses": "Bonuses",
       "choose-btn": "choose",
       "chosen-btn": "chosen",
       "points-for-purchase": "Points for purchase",
