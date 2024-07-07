@@ -311,6 +311,7 @@ const FirstStep = ({
                   })}
                   discount={discount}
                   price={price}
+                  prizes={sub.benefits}
                   selected={activeSub === i}
                   onSelect={() => onSelect(i)}
                 />
