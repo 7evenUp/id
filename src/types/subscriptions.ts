@@ -12,15 +12,7 @@ export interface Subscription {
   kindId: 1 | 2 // 1 - Prime | 2 - Calendar
   baseDiscount: number | null
   baseDiscountAmount: number | null
-  benefits: Array<{
-    file: null | string
-    id: number
-    translations: {
-      ru: {
-        name: string
-      }
-    }
-  }>
+  benefits: SubscriptionBenefit[]
   referralDiscountAmount: number | null
   referralDiscountKind: "MONEY" | "PERCENT" | null
   subReferralDiscounts: Array<{
@@ -30,4 +22,16 @@ export interface Subscription {
       discountKind: "PERCENT" | "MONEY"
     }
   }>
+}
+
+export interface SubscriptionBenefit {
+  file: null | string
+  id: number
+  remainingCount: number | null
+  translations: {
+    ru: {
+      name: string
+      description: string | null
+    }
+  }
 }

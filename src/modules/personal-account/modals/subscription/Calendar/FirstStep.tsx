@@ -572,7 +572,7 @@ const FirstStep = ({
                                 scale && "3xl:gap-[0.52vw]"
                               )}
                             >
-                              <TextAccent>10-20%</TextAccent>
+                              <TextAccent>100-200%</TextAccent>
                               <HelpIcon
                                 className={cn(
                                   "w-5 h-5",
