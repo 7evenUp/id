@@ -34,7 +34,7 @@ const SubscriptionCard = ({
   selected: boolean
   onSelect: () => void
   discount: { percent: number; amount: number } | null
-  prizes: SubscriptionBenefit[]
+  prizes?: SubscriptionBenefit[]
 }) => {
   const { t } = useTranslation("modals")
 

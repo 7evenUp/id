@@ -104,32 +104,32 @@ const PointsInfo = () => {
 const rarityData = [
   {
     rarity: "common",
-    cashback: "10%",
+    cashback: "100%",
     href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Common%22%5D%7D%7D",
   },
   {
     rarity: "uncommon",
-    cashback: "12%",
+    cashback: "120%",
     href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Uncommon%22%5D%7D%7D",
   },
   {
     rarity: "rare",
-    cashback: "14%",
+    cashback: "140%",
     href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Rare%22%5D%7D%7D",
   },
   {
     rarity: "mythical",
-    cashback: "16%",
+    cashback: "160%",
     href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Mythical%22%5D%7D%7D",
   },
   {
     rarity: "epic",
-    cashback: "18%",
+    cashback: "180%",
     href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Epic%22%5D%7D%7D",
   },
   {
     rarity: "legendary",
-    cashback: "20%",
+    cashback: "200%",
     href: "https://getgems.io/nutcrackers?filter=%7B%22attributes%22%3A%7B%22Rarity%22%3A%5B%22Legendary%22%5D%7D%7D",
   },
 ]
