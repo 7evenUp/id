@@ -80,6 +80,7 @@ const FirstStep = ({
     {
       data: promocodeValidateData,
       isError,
+      error: promocodeError,
       reset: resetRequest,
       isLoading: isValidateLoading,
       isSuccess: isValidateSuccess,
@@ -325,7 +326,7 @@ const FirstStep = ({
           {activeSub !== null && (
             <div
               className={cn(
-                "relative flex items-center gap-2 mb-5",
+                "relative flex items-center flex-wrap gap-2 mb-5",
                 scale && "3xl:gap-[0.521vw] 3xl:mb-[1.302vw]"
               )}
             >
@@ -341,11 +342,27 @@ const FirstStep = ({
               {isError && (
                 <Text1
                   className={cn(
-                    "absolute bottom-0 translate-y-4 text-error",
+                    "w-full sm:absolute sm:bottom-0 sm:translate-y-4 text-error",
                     scale && "3xl:translate-y-[1.042vw]"
                   )}
                 >
-                  {t("buy-subs.first-step.promo-error")}
+                  {promocodeError.status === 400
+                    ? promocodeError.data.code === "discount_not_found"
+                      ? t("buy-subs.first-step.promo-error")
+                      : promocodeError.data.code ===
+                        "discount_for_non_subscribed_only"
+                      ? tErrorResponses("discount_for_non_subscribed_only")
+                      : promocodeError.data.code ===
+                        "discount_for_new_users_only"
+                      ? tErrorResponses("discount_for_new_users_only")
+                      : promocodeError.data.code ===
+                        "discount_code_already_used"
+                      ? tErrorResponses("discount_code_already_used")
+                      : promocodeError.data.code ===
+                        "discount_code_validation_error"
+                      ? tErrorResponses("discount_code_validation_error")
+                      : tErrorResponses("server-error")
+                    : tErrorResponses("server-error")}
                 </Text1>
               )}
               {promo && !isError && (
