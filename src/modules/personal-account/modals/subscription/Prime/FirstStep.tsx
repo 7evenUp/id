@@ -40,8 +40,6 @@ import { Subscription } from "@/types/subscriptions"
 
 import { PROMO_CODE_NOT_FOUND, INSUFFICIENT_BALANCE } from "@/utils/errorCodes"
 
-// const REFERRAL_DISCOUNT_AMOUNT = 5
-
 const FirstStep = ({
   open,
   onOpenChange,
@@ -343,23 +341,31 @@ const FirstStep = ({
                     scale && "3xl:translate-y-[1.042vw]"
                   )}
                 >
-                  {promocodeError.status === 400
-                    ? promocodeError.data.code === "discount_not_found"
-                      ? t("buy-subs.first-step.promo-error")
-                      : promocodeError.data.code ===
-                        "discount_for_non_subscribed_only"
-                      ? tErrorResponses("discount_for_non_subscribed_only")
-                      : promocodeError.data.code ===
-                        "discount_for_new_users_only"
-                      ? tErrorResponses("discount_for_new_users_only")
-                      : promocodeError.data.code ===
-                        "discount_code_already_used"
-                      ? tErrorResponses("discount_code_already_used")
-                      : promocodeError.data.code ===
-                        "discount_code_validation_error"
-                      ? tErrorResponses("discount_code_validation_error")
+                  {
+                    /* @ts-expect-error No-Error-Types */
+                    promocodeError.status === 400
+                      ? /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code === "discount_not_found"
+                        ? t("buy-subs.first-step.promo-error")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_for_non_subscribed_only"
+                        ? tErrorResponses("discount_for_non_subscribed_only")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_for_new_users_only"
+                        ? tErrorResponses("discount_for_new_users_only")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_code_already_used"
+                        ? tErrorResponses("discount_code_already_used")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_code_validation_error"
+                        ? tErrorResponses("discount_code_validation_error")
+                        : tErrorResponses("server-error")
                       : tErrorResponses("server-error")
-                    : tErrorResponses("server-error")}
+                  }
                 </Text1>
               )}
               {promo && !isError && (
@@ -665,6 +671,21 @@ const FirstStep = ({
               <Text1 className="text-error">
                 {error
                   ? /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_not_found"
+                    ? t("buy-subs.first-step.promo-error")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_for_non_subscribed_only"
+                    ? tErrorResponses("discount_for_non_subscribed_only")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_for_new_users_only"
+                    ? tErrorResponses("discount_for_new_users_only")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_code_already_used"
+                    ? tErrorResponses("discount_code_already_used")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_code_validation_error"
+                    ? tErrorResponses("discount_code_validation_error")
+                    : /* @ts-expect-error No-Error-Types */
                     error.errorCode === PROMO_CODE_NOT_FOUND
                     ? tErrorResponses("promocode_not_found")
                     : /* @ts-expect-error No-Error-Types */
