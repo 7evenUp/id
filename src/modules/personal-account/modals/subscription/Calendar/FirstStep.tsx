@@ -100,22 +100,37 @@ const FirstStep = ({
 
     if (isError || isValidateSuccess) resetRequest()
 
-    const { baseDiscountAmount, referralDiscountAmount, referralDiscountKind } =
+    const { baseDiscount, referralDiscountAmount, referralDiscountKind } =
       subscriptions[activeSub]
 
     setIsPromoLarger(null)
 
     const price = getSubscriptionPrice(activeSub)
-    const activePrice = baseDiscountAmount ? price - baseDiscountAmount : price
 
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
-        setTotalPrice(activePrice - referralDiscountAmount)
+        if (baseDiscount) {
+          setTotalPrice(
+            price - price * (baseDiscount / 100) - referralDiscountAmount
+          )
+        } else {
+          setTotalPrice(price - referralDiscountAmount)
+        }
       } else {
-        setTotalPrice(activePrice - activePrice * referralDiscountAmount)
+        if (baseDiscount) {
+          setTotalPrice(
+            price - price * (baseDiscount / 100 + referralDiscountAmount)
+          )
+        } else {
+          setTotalPrice(price - price * referralDiscountAmount)
+        }
       }
     } else {
-      setTotalPrice(activePrice)
+      if (baseDiscount) {
+        setTotalPrice(price - price * (baseDiscount / 100))
+      } else {
+        setTotalPrice(price)
+      }
     }
     setPromo(evt.currentTarget.value)
   }
@@ -123,35 +138,49 @@ const FirstStep = ({
   const onSelect = (subID: number) => {
     if (isError || isValidateSuccess) resetRequest()
 
-    const { baseDiscountAmount, referralDiscountAmount, referralDiscountKind } =
+    const { baseDiscount, referralDiscountAmount, referralDiscountKind } =
       subscriptions[subID]
 
     setIsPromoLarger(null)
 
     const price = getSubscriptionPrice(subID)
-    const activePrice = baseDiscountAmount ? price - baseDiscountAmount : price
 
     setActiveSub(subID)
 
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
-        setTotalPrice(activePrice - referralDiscountAmount)
+        if (baseDiscount) {
+          setTotalPrice(
+            price - price * (baseDiscount / 100) - referralDiscountAmount
+          )
+        } else {
+          setTotalPrice(price - referralDiscountAmount)
+        }
       } else {
-        setTotalPrice(activePrice - activePrice * referralDiscountAmount)
+        if (baseDiscount) {
+          setTotalPrice(
+            price - price * (baseDiscount / 100 + referralDiscountAmount)
+          )
+        } else {
+          setTotalPrice(price - price * referralDiscountAmount)
+        }
       }
     } else {
-      setTotalPrice(activePrice)
+      if (baseDiscount) {
+        setTotalPrice(price - price * (baseDiscount / 100))
+      } else {
+        setTotalPrice(price)
+      }
     }
   }
 
   const applyPromo = async () => {
     if (activeSub === null) return
 
-    const { baseDiscountAmount, referralDiscountAmount, referralDiscountKind } =
+    const { baseDiscount, referralDiscountAmount, referralDiscountKind } =
       subscriptions[activeSub]
 
     const price = getSubscriptionPrice(activeSub)
-    const activePrice = baseDiscountAmount ? price - baseDiscountAmount : price
 
     try {
       const { discountAmount, discountKind, discounts } =
@@ -169,49 +198,117 @@ const FirstStep = ({
         : discountAmount
 
       if (discountKind.id === "MONEY") {
-        setTotalPrice(activePrice - preferedDiscount)
+        if (baseDiscount) {
+          setTotalPrice(price - price * (baseDiscount / 100) - preferedDiscount)
+        } else {
+          setTotalPrice(price - preferedDiscount)
+        }
 
         if (referralDiscountAmount && referralDiscountKind) {
           if (referralDiscountKind === "MONEY") {
             if (preferedDiscount > referralDiscountAmount) {
+              if (baseDiscount) {
+                setTotalPrice(
+                  price - price * (baseDiscount / 100) - preferedDiscount
+                )
+              } else {
+                setTotalPrice(price - preferedDiscount)
+              }
               setIsPromoLarger(true)
-              setTotalPrice(activePrice - preferedDiscount)
             } else {
               setIsPromoLarger(false)
-              setTotalPrice(activePrice - referralDiscountAmount)
+              if (baseDiscount) {
+                setTotalPrice(
+                  price - price * (baseDiscount / 100) - discountAmount
+                )
+              } else {
+                setTotalPrice(price - discountAmount)
+              }
             }
           } else {
-            if (preferedDiscount > activePrice * referralDiscountAmount) {
-              setIsPromoLarger(true)
-              setTotalPrice(activePrice - preferedDiscount)
+            if (baseDiscount) {
+              if (
+                preferedDiscount >
+                price * (baseDiscount / 100 + referralDiscountAmount)
+              ) {
+                setTotalPrice(
+                  price - price * (baseDiscount / 100) - preferedDiscount
+                )
+                setIsPromoLarger(true)
+              } else {
+                setIsPromoLarger(false)
+                setTotalPrice(
+                  price - price * (baseDiscount / 100 + referralDiscountAmount)
+                )
+              }
             } else {
-              setTotalPrice(activePrice - activePrice * referralDiscountAmount)
-              setIsPromoLarger(false)
+              if (preferedDiscount > price * referralDiscountAmount) {
+                setIsPromoLarger(true)
+                setTotalPrice(price - preferedDiscount)
+              } else {
+                setIsPromoLarger(false)
+                setTotalPrice(price - price * referralDiscountAmount)
+              }
             }
           }
         }
       } else {
-        setTotalPrice(activePrice - activePrice * preferedDiscount)
+        if (baseDiscount) {
+          setTotalPrice(price - price * (baseDiscount / 100 + preferedDiscount))
+        } else {
+          setTotalPrice(price - price * preferedDiscount)
+        }
 
         if (referralDiscountAmount && referralDiscountKind) {
           if (referralDiscountKind === "MONEY") {
-            if (activePrice * preferedDiscount > referralDiscountAmount) {
-              setIsPromoLarger(true)
-              setTotalPrice(activePrice - activePrice * preferedDiscount)
+            if (baseDiscount) {
+              if (
+                price * (baseDiscount / 100 + preferedDiscount) >
+                referralDiscountAmount
+              ) {
+                setIsPromoLarger(true)
+                setTotalPrice(
+                  price - price * (baseDiscount / 100 + preferedDiscount)
+                )
+              } else {
+                setIsPromoLarger(false)
+                setTotalPrice(
+                  price - price * (baseDiscount / 100) - referralDiscountAmount
+                )
+              }
             } else {
-              setIsPromoLarger(false)
-              setTotalPrice(activePrice - referralDiscountAmount)
+              if (price * preferedDiscount > referralDiscountAmount) {
+                setIsPromoLarger(true)
+                setTotalPrice(price - price * preferedDiscount)
+              } else {
+                setIsPromoLarger(false)
+                setTotalPrice(price - referralDiscountAmount)
+              }
             }
           } else {
-            if (
-              price * preferedDiscount >
-              activePrice * referralDiscountAmount
-            ) {
-              setIsPromoLarger(true)
-              setTotalPrice(activePrice - activePrice * preferedDiscount)
+            if (baseDiscount) {
+              if (
+                price * (baseDiscount / 100 + preferedDiscount) >
+                price * (baseDiscount / 100 + referralDiscountAmount)
+              ) {
+                setIsPromoLarger(true)
+                setTotalPrice(
+                  price - price * (baseDiscount / 100 + preferedDiscount)
+                )
+              } else {
+                setIsPromoLarger(false)
+                setTotalPrice(
+                  price - price * (baseDiscount / 100 + referralDiscountAmount)
+                )
+              }
             } else {
-              setTotalPrice(activePrice - activePrice * referralDiscountAmount)
-              setIsPromoLarger(false)
+              if (price * preferedDiscount > price * referralDiscountAmount) {
+                setIsPromoLarger(true)
+                setTotalPrice(price - price * preferedDiscount)
+              } else {
+                setIsPromoLarger(false)
+                setTotalPrice(price - price * referralDiscountAmount)
+              }
             }
           }
         }
