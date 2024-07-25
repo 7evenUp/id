@@ -80,6 +80,7 @@ const FirstStep = ({
     {
       data: promocodeValidateData,
       isError,
+      error: promocodeError,
       reset: resetRequest,
       isLoading: isValidateLoading,
       isSuccess: isValidateSuccess,
@@ -104,7 +105,8 @@ const FirstStep = ({
 
     setIsPromoLarger(null)
 
-    const activePrice = getSubscriptionPrice(activeSub)
+    const price = getSubscriptionPrice(activeSub)
+    const activePrice = baseDiscountAmount ? price - baseDiscountAmount : price
 
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
@@ -113,9 +115,7 @@ const FirstStep = ({
         setTotalPrice(activePrice - activePrice * referralDiscountAmount)
       }
     } else {
-      setTotalPrice(
-        baseDiscountAmount ? activePrice - baseDiscountAmount : activePrice
-      )
+      setTotalPrice(activePrice)
     }
     setPromo(evt.currentTarget.value)
   }
@@ -128,7 +128,8 @@ const FirstStep = ({
 
     setIsPromoLarger(null)
 
-    const activePrice = getSubscriptionPrice(subID)
+    const price = getSubscriptionPrice(subID)
+    const activePrice = baseDiscountAmount ? price - baseDiscountAmount : price
 
     setActiveSub(subID)
 
@@ -139,9 +140,7 @@ const FirstStep = ({
         setTotalPrice(activePrice - activePrice * referralDiscountAmount)
       }
     } else {
-      setTotalPrice(
-        baseDiscountAmount ? activePrice - baseDiscountAmount : activePrice
-      )
+      setTotalPrice(activePrice)
     }
   }
 
@@ -152,6 +151,7 @@ const FirstStep = ({
       subscriptions[activeSub]
 
     const price = getSubscriptionPrice(activeSub)
+    const activePrice = baseDiscountAmount ? price - baseDiscountAmount : price
 
     try {
       const { discountAmount, discountKind, discounts } =
@@ -169,61 +169,48 @@ const FirstStep = ({
         : discountAmount
 
       if (discountKind.id === "MONEY") {
-        if (baseDiscountAmount) {
-          if (baseDiscountAmount > preferedDiscount) {
-            setTotalPrice(price - baseDiscountAmount)
-          } else {
-            setTotalPrice(price - preferedDiscount)
-          }
-        } else {
-          setTotalPrice(price - preferedDiscount)
-        }
+        setTotalPrice(activePrice - preferedDiscount)
 
         if (referralDiscountAmount && referralDiscountKind) {
           if (referralDiscountKind === "MONEY") {
             if (preferedDiscount > referralDiscountAmount) {
               setIsPromoLarger(true)
-              setTotalPrice(price - preferedDiscount)
+              setTotalPrice(activePrice - preferedDiscount)
             } else {
               setIsPromoLarger(false)
-              setTotalPrice(price - referralDiscountAmount)
+              setTotalPrice(activePrice - referralDiscountAmount)
             }
           } else {
-            if (preferedDiscount > price * referralDiscountAmount) {
+            if (preferedDiscount > activePrice * referralDiscountAmount) {
               setIsPromoLarger(true)
-              setTotalPrice(price - preferedDiscount)
+              setTotalPrice(activePrice - preferedDiscount)
             } else {
-              setTotalPrice(price - price * referralDiscountAmount)
+              setTotalPrice(activePrice - activePrice * referralDiscountAmount)
               setIsPromoLarger(false)
             }
           }
         }
       } else {
-        if (baseDiscountAmount) {
-          if (baseDiscountAmount > price * preferedDiscount) {
-            setTotalPrice(price - baseDiscountAmount)
-          } else {
-            setTotalPrice(price - price * preferedDiscount)
-          }
-        } else {
-          setTotalPrice(price - price * preferedDiscount)
-        }
+        setTotalPrice(activePrice - activePrice * preferedDiscount)
 
         if (referralDiscountAmount && referralDiscountKind) {
           if (referralDiscountKind === "MONEY") {
-            if (price * preferedDiscount > referralDiscountAmount) {
+            if (activePrice * preferedDiscount > referralDiscountAmount) {
               setIsPromoLarger(true)
-              setTotalPrice(price - price * preferedDiscount)
+              setTotalPrice(activePrice - activePrice * preferedDiscount)
             } else {
               setIsPromoLarger(false)
-              setTotalPrice(price - referralDiscountAmount)
+              setTotalPrice(activePrice - referralDiscountAmount)
             }
           } else {
-            if (price * preferedDiscount > price * referralDiscountAmount) {
+            if (
+              price * preferedDiscount >
+              activePrice * referralDiscountAmount
+            ) {
               setIsPromoLarger(true)
-              setTotalPrice(price - price * preferedDiscount)
+              setTotalPrice(activePrice - activePrice * preferedDiscount)
             } else {
-              setTotalPrice(price - price * referralDiscountAmount)
+              setTotalPrice(activePrice - activePrice * referralDiscountAmount)
               setIsPromoLarger(false)
             }
           }
@@ -325,7 +312,7 @@ const FirstStep = ({
           {activeSub !== null && (
             <div
               className={cn(
-                "relative flex items-center gap-2 mb-5",
+                "relative flex items-center flex-wrap gap-2 mb-5",
                 scale && "3xl:gap-[0.521vw] 3xl:mb-[1.302vw]"
               )}
             >
@@ -341,11 +328,35 @@ const FirstStep = ({
               {isError && (
                 <Text1
                   className={cn(
-                    "absolute bottom-0 translate-y-4 text-error",
+                    "w-full sm:absolute sm:bottom-0 sm:translate-y-4 text-error",
                     scale && "3xl:translate-y-[1.042vw]"
                   )}
                 >
-                  {t("buy-subs.first-step.promo-error")}
+                  {
+                    /* @ts-expect-error No-Error-Types */
+                    promocodeError.status === 400
+                      ? /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code === "discount_not_found"
+                        ? t("buy-subs.first-step.promo-error")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_for_non_subscribed_only"
+                        ? tErrorResponses("discount_for_non_subscribed_only")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_for_new_users_only"
+                        ? tErrorResponses("discount_for_new_users_only")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_code_already_used"
+                        ? tErrorResponses("discount_code_already_used")
+                        : /* @ts-expect-error No-Error-Types */
+                        promocodeError.data.code ===
+                          "discount_code_validation_error"
+                        ? tErrorResponses("discount_code_validation_error")
+                        : tErrorResponses("server-error")
+                      : tErrorResponses("server-error")
+                  }
                 </Text1>
               )}
               {promo && !isError && (
@@ -651,6 +662,21 @@ const FirstStep = ({
               <Text1 className="text-error">
                 {error
                   ? /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_not_found"
+                    ? t("buy-subs.first-step.promo-error")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_for_non_subscribed_only"
+                    ? tErrorResponses("discount_for_non_subscribed_only")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_for_new_users_only"
+                    ? tErrorResponses("discount_for_new_users_only")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_code_already_used"
+                    ? tErrorResponses("discount_code_already_used")
+                    : /* @ts-expect-error No-Error-Types */
+                    error.errorCode === "discount_code_validation_error"
+                    ? tErrorResponses("discount_code_validation_error")
+                    : /* @ts-expect-error No-Error-Types */
                     error.errorCode === PROMO_CODE_NOT_FOUND
                     ? tErrorResponses("promocode_not_found")
                     : /* @ts-expect-error No-Error-Types */

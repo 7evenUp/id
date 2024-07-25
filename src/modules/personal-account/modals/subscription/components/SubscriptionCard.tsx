@@ -122,7 +122,7 @@ const SubscriptionCard = ({
                 )}
               >
                 {prizes.map((prize) => (
-                  <Text1>
+                  <Text1 key={prize.id}>
                     - {prize.translations.ru.name}{" "}
                     {prize.remainingCount && (
                       <span>(осталось {prize.remainingCount})</span>

@@ -6,7 +6,6 @@
   "wallet_alredy_exists": "This wallet address already assigned to another account",
   "tg_already_set": "Telegram username already set",
   "tg_limit_reached": "You cannot update telegram twice a month",
-  "promocode_not_found": "Promocode is invalid",
   "insufficient_balance": "Insufficient balance",
   "top-up-minimum": "Required a minimum of",
   "too-many-requests": "Too many requests. Please try again later",
@@ -19,5 +18,10 @@
   "shares-param_not_provided": "The parameter was not passed for the conversion request",
   "shares-prize_not_found": "Shares with this ID was not found",
   "shares-no_more_prizes": "This Shares has ended",
-  "shares-unknown_error": "An unknown error has occurred during the conversion"
+  "shares-unknown_error": "An unknown error has occurred during the conversion",
+  "promocode_not_found": "Promocode is invalid",
+  "discount_for_non_subscribed_only": "The promo code is only available for accounts without an active subscription",
+  "discount_for_new_users_only": "The promo code is only available to new users",
+  "discount_code_already_used": "The promo code has already been used",
+  "discount_code_validation_error": "We can't validate the promo code"
 }
