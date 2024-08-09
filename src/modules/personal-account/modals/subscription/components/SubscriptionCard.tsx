@@ -60,8 +60,8 @@ const SubscriptionCard = ({
       </Text2>
       <span
         className={cn(
-          "font-semibold text-[40px] sm:text-[48px] dark:text-gray-5 mt-5",
-          scale && "3xl:text-[3.125vw] 3xl:mt-[1.302vw]",
+          "font-semibold text-[40px] dark:text-gray-5 mt-5",
+          scale && "3xl:text-[2.604vw] 3xl:mt-[1.302vw]",
           selected && "mt-7",
           selected && scale && "3xl:mt-[1.823vw]"
         )}
