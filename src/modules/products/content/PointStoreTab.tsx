@@ -61,7 +61,7 @@ const PointStoreTab = () => {
       </div>
 
       <div
-        className={cn("flex flex-col gap-6", scale && "3xl:gap-[1.5625vwvw]")}
+        className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.041vwvw]")}
       >
         <div className="flex flex-col">
           <TextAccent
@@ -70,49 +70,49 @@ const PointStoreTab = () => {
               scale && "3xl:mb-[0.26vw] 3xl:text-[1.171875vw]/[1.822vw]"
             )}
           >
-            Тип приза
+            {t("points-store.Тип приза")}
           </TextAccent>
           <div
             className={cn(
-              "flex items-center gap-2",
-              scale && "3xl:gap-[0.52vw]"
+              "flex items-start gap-2 mb-1",
+              scale && "3xl:gap-[0.52vw] 3xl:mb-[0.26vw]"
             )}
           >
             <NftIcon
               className={cn(
-                "w-4 h-4 shrink-0",
-                scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                "w-4 h-4 shrink-0 mt-0.5",
+                scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw] 3xl:mt-[0.13vw]"
               )}
             />
-            <TextAccent className="dark:text-gray-5">- NFT</TextAccent>
+            <TextAccent className="dark:text-gray-5 shrink-0">NFT —</TextAccent>
+            <Text0>
+              {t(
+                "points-store.Вы сможете использовать приз данного типа как захотите, ведь он будет храниться у Вас на кошельке"
+              )}
+            </Text0>
           </div>
-          <Text0
-            className={cn(
-              "ml-6 mb-2 max-w-prose",
-              scale && "3xl:ml-[1.5625vw] 3xl:mb-[0.52vw]"
-            )}
-          >
-            Вы сможете использовать приз данного типа как захотите, ведь он
-            будет храниться у Вас на кошельке
-          </Text0>
+
           <div
             className={cn(
-              "flex items-center gap-2",
+              "flex items-start gap-2",
               scale && "3xl:gap-[0.52vw]"
             )}
           >
             <PercentageIcon
               className={cn(
-                "w-4 h-4 shrink-0",
-                scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                "w-4 h-4 shrink-0 mt-0.5",
+                scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw] 3xl:mt-[0.13vw]"
               )}
             />
-            <TextAccent className="dark:text-gray-5">- Промокод</TextAccent>
+            <TextAccent className="dark:text-gray-5 shrink-0">
+              {t("points-store.Промокод")} —
+            </TextAccent>
+            <Text0>
+              {t(
+                "points-store.С призом данного типа вы можете купить подписки Prime / Calendar по скидке"
+              )}
+            </Text0>
           </div>
-          <Text0 className={cn("ml-6", scale && "3xl:ml-[1.5625vw]")}>
-            С призом данного типа вы можете купить подписки Prime / Calendar по
-            скидке
-          </Text0>
         </div>
 
         {prizes && prizes.length > 0 && (
@@ -136,131 +136,124 @@ const PointStoreTab = () => {
 export default PointStoreTab
 
 const Prize = (prize: PointsPrize) => {
+  const { t } = useTranslation("products")
+
   const { image, photos, description, title, type, price, availableQuantity } =
     prize
 
-  const [open, setOpen] = useState(false)
-
   const scale = useAppSelector((state) => state.scale.value)
+
+  const [open, setOpen] = useState(false)
 
   const { data: profileData } = useUserProfileQuery()
 
   const { points } = profileData!
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <button
-          className={cn(
-            "group relative flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm overflow-hidden",
-            scale &&
-              "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
-          )}
-          disabled={points < price}
-        >
-          <div className="relative">
-            {image ? (
-              <img
-                src={image}
-                className={cn(
-                  "rounded-xl object-cover aspect-square",
-                  scale && "3xl:rounded-[0.78125vw]"
-                )}
-              />
-            ) : photos.length > 0 ? (
-              <img
-                src={photos[0].file}
-                className={cn(
-                  "rounded-xl object-cover aspect-square",
-                  scale && "3xl:rounded-[0.78125vw]"
-                )}
-              />
-            ) : (
-              <Skeleton
-                className={cn(
-                  "rounded-xl aspect-square flex items-center justify-center",
-                  scale && "3xl:rounded-[0.78125vw]"
-                )}
-              >
-                <Text0>У приза нет картинки</Text0>
-              </Skeleton>
-            )}
-            <div
-              className={cn(
-                "absolute left-1 bottom-1 p-1.5 rounded-lg bg-gray-6 dark:bg-gray-1 shadow-sm shadow-black/50",
-                scale &&
-                  "3xl:left-[0.26vw] 3xl:bottom-[0.26vw] 3xl:p-[0.39vw] 3xl:rounded-[0.52vw]"
-              )}
-            >
-              <Text2>Осталось: {availableQuantity}</Text2>
-            </div>
-            <div
-              className={cn(
-                "absolute right-1 top-1 grid place-content-center rounded-full w-6 h-6 bg-white dark:bg-gray-1 shadow-sm shadow-black/50",
-                scale &&
-                  "3xl:right-[0.26vw] 3xl:top-[0.26vw] 3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
-              )}
-            >
-              {type === "nft" ? (
-                <NftIcon
-                  className={cn(
-                    "w-4 h-4",
-                    scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
-                  )}
-                />
-              ) : (
-                <PercentageIcon
-                  className={cn(
-                    "w-4 h-4",
-                    scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
-                  )}
-                />
-              )}
-            </div>
-          </div>
-
-          <div className={cn("flex flex-col px-2", scale && "3xl:px-[0.52vw]")}>
-            <div
-              className={cn(
-                "flex items-center gap-1.5 mb-1",
-                scale && "3xl:gap-[0.39vw] 3xl:mb-[0.26vw]"
-              )}
-            >
-              <TextAccent className="text-black dark:text-gray-6 tabular-nums">
-                {price}
-              </TextAccent>
-              <CryptonIcon
-                className={cn(
-                  "w-5 h-5",
-                  scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
-                )}
-              />
-            </div>
-            <TextAccent
-              className={cn(
-                "text-left mb-1 dark:text-gray-5",
-                scale && "3xl:mt-[0.52vw] 3xl:mb-[0.26vw]"
-              )}
-            >
-              {title}
-            </TextAccent>
-            <Text1 className="text-left">{description}</Text1>
-          </div>
-
-          <div
+    <div
+      className={cn(
+        "group relative flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 bg-white dark:bg-gray-1 rounded-2xl shadow-sm overflow-hidden",
+        scale &&
+          "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.26vw] 3xl:rounded-[1.041vw]"
+      )}
+    >
+      <div className="relative">
+        {image ? (
+          <img
+            src={image}
             className={cn(
-              "flex items-center justify-center absolute bg-gray-1/60 dark:bg-gray-2/70 h-full w-full left-0 bottom-0 translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 rounded-2xl transition-all duration-300",
-              scale && "3xl:rounded-[1.041vw]"
+              "rounded-xl object-cover aspect-square",
+              scale && "3xl:rounded-[0.78125vw]"
+            )}
+          />
+        ) : photos.length > 0 ? (
+          <img
+            src={photos[0].file}
+            className={cn(
+              "rounded-xl object-cover aspect-square",
+              scale && "3xl:rounded-[0.78125vw]"
+            )}
+          />
+        ) : (
+          <Skeleton
+            className={cn(
+              "rounded-xl aspect-square flex items-center justify-center",
+              scale && "3xl:rounded-[0.78125vw]"
             )}
           >
-            <Subheading className="text-white">
-              {points < price ? "Недостаточно средств" : "Приобрести"}
-            </Subheading>
-          </div>
-        </button>
-      </DialogTrigger>
-      <ConfirmDialog {...prize} setOpen={setOpen} />
-    </Dialog>
+            <Text0>У приза нет картинки</Text0>
+          </Skeleton>
+        )}
+        <div
+          className={cn(
+            "absolute left-1 bottom-1 p-1.5 rounded-lg bg-gray-6 dark:bg-gray-1 shadow-sm shadow-black/50",
+            scale &&
+              "3xl:left-[0.26vw] 3xl:bottom-[0.26vw] 3xl:p-[0.39vw] 3xl:rounded-[0.52vw]"
+          )}
+        >
+          <Text2>
+            {t("points-store.Осталось")}: {availableQuantity}
+          </Text2>
+        </div>
+        <div
+          className={cn(
+            "absolute right-1 top-1 grid place-content-center rounded-full w-6 h-6 bg-white dark:bg-gray-1 shadow-sm shadow-black/50",
+            scale &&
+              "3xl:right-[0.26vw] 3xl:top-[0.26vw] 3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+          )}
+        >
+          {type === "nft" ? (
+            <NftIcon
+              className={cn(
+                "w-4 h-4",
+                scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+              )}
+            />
+          ) : (
+            <PercentageIcon
+              className={cn(
+                "w-4 h-4",
+                scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+              )}
+            />
+          )}
+        </div>
+      </div>
+
+      <div className={cn("flex flex-col px-2", scale && "3xl:px-[0.52vw]")}>
+        <div
+          className={cn(
+            "flex items-center gap-1.5 mb-1",
+            scale && "3xl:gap-[0.39vw] 3xl:mb-[0.26vw]"
+          )}
+        >
+          <TextAccent className="text-black dark:text-gray-6 tabular-nums">
+            {price}
+          </TextAccent>
+          <CryptonIcon
+            className={cn("w-5 h-5", scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]")}
+          />
+        </div>
+        <TextAccent
+          className={cn(
+            "text-left mb-1 dark:text-gray-5",
+            scale && "3xl:mt-[0.52vw] 3xl:mb-[0.26vw]"
+          )}
+        >
+          {title}
+        </TextAccent>
+        <Text1 className="text-left">{description}</Text1>
+      </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button className="mt-auto" disabled={points < price}>
+            {t("points-store.приобрести")}
+          </Button>
+        </DialogTrigger>
+        <ConfirmDialog {...prize} setOpen={setOpen} />
+      </Dialog>
+    </div>
   )
 }
 
@@ -274,6 +267,8 @@ const ConfirmDialog = ({
   photos,
   setOpen,
 }: PointsPrize & { setOpen: Dispatch<SetStateAction<boolean>> }) => {
+  const { t } = useTranslation("products")
+
   const scale = useAppSelector((state) => state.scale.value)
 
   const [buy, { isLoading }] = useBuyPrizeMutation()
@@ -286,7 +281,7 @@ const ConfirmDialog = ({
 
     try {
       await buy({ prizeId }).unwrap()
-      toast.success("Приз был успешно куплен")
+      toast.success(t("points-store.Приз был успешно куплен"))
     } catch (error) {
       // @ts-expect-error RTKQ no error types
       if (error.status === 400) {
@@ -336,7 +331,7 @@ const ConfirmDialog = ({
   return (
     <DialogContent className={cn("sm:p-4", scale && "3xl:p-[1.041vw]")}>
       <DialogHeader>
-        <DialogTitle>Подтверждение покупки</DialogTitle>
+        <DialogTitle>{t("points-store.Подтверждение покупки")}</DialogTitle>
       </DialogHeader>
       <div className={cn("flex flex-col gap-2", scale && "3xl:gap-[0.52vw]")}>
         <div
@@ -376,16 +371,19 @@ const ConfirmDialog = ({
           >
             <TextAccent className="dark:text-gray-5">{title}</TextAccent>
             <Text0>{description}</Text0>
-            <Text0>Тип приза: {type === "nft" ? "NFT" : "Промокод"}</Text0>
+            <Text0>
+              {t("points-store.Тип приза")}:{" "}
+              {type === "nft" ? "NFT" : "Промокод"}
+            </Text0>
           </div>
         </div>
 
         <Text0>
-          После покупки у Вас останется{" "}
+          {t("points-store.После покупки у Вас останется")}{" "}
           <TextAccent className="dark:text-gray-5">
             {(points - price).toFixed(2)}
           </TextAccent>{" "}
-          бонусов
+          {t("points-store.бонусов")}
         </Text0>
         <div
           className={cn(
@@ -394,14 +392,14 @@ const ConfirmDialog = ({
           )}
         >
           <DialogClose>
-            <Button className="w-fit">отмена</Button>
+            <Button className="w-fit">{t("points-store.отмена")}</Button>
           </DialogClose>
           <Button
             className="w-fit"
             onClick={() => buyPrize(id)}
             isLoading={isLoading}
           >
-            подтвердить
+            {t("points-store.подтвердить")}
           </Button>
         </div>
       </div>
