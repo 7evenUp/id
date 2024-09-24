@@ -1,5 +1,6 @@
 export interface PointsPrize {
   id: number
+  availableQuantity: number
   price: number
   currency: "union_points"
   title: string
@@ -7,7 +8,7 @@ export interface PointsPrize {
   totalCount: number
   link: string
   rarity: string
-  backgroundColor: string
+  backgroundColor: string | null
   image: string
   type: "nft" | "crypton_promo_code"
   photos: [

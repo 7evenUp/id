@@ -69,7 +69,7 @@ const PointsStore = () => {
         className={cn(
           "flex flex-col gap-6 max-h-[440px] overflow-auto pr-2 pb-1",
           scale &&
-            "3xl:gap-[1.5625vwvw] 3xl:max-h-[28.64vw] 3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
+            "3xl:gap-[1.5625vw] 3xl:max-h-[28.64vw] 3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
         )}
       >
         <Text0>

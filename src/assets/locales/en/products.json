@@ -74,7 +74,19 @@
   },
   "points-store": {
     "title": "Crypton Points Store",
-    "disabled": "The store's functionality is under development"
+    "disabled": "The store's functionality is under development",
+    "Тип товара": "Product type",
+    "Товары данного типа содержат в себе различные промокоды. Это могут быть скидки на подписки Prime/Calendar или партнерские сервисы.": "Products of this type contain various promo codes. These can be discounts on Prime/Calendar subscriptions or partner services.",
+    "Промокод": "Promo code",
+    "Вы сможете получить NFT на ваш TON кошелек после активации товара в инвентаре ID": "You will be able to receive NFT to your TON wallet after activating the product in the ID inventory",
+    "приобрести": "purchase",
+    "Осталось": "Remains",
+    "Товар был успешно куплен": "The product was successfully purchased",
+    "Подтверждение покупки": "Confirmation of purchase",
+    "После покупки у Вас останется": "After the purchase, you will have",
+    "бонусов": "points",
+    "отмена": "cancel",
+    "подтвердить": "confirm"
   },
   "nutcracker": {
     "title": "The Nutcrackers",
