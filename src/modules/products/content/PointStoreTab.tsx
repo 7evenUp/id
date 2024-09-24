@@ -20,7 +20,7 @@ import Button from "@/shared/ui/Button"
 import Subheading from "@/shared/typography/Subheading"
 import TextAccent from "@/shared/typography/TextAccent"
 import Text2 from "@/shared/typography/Text2"
-import Text1 from "@/shared/typography/Text1"
+// import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
 
 import { useBuyPrizeMutation } from "@/redux/api/points"
@@ -175,7 +175,7 @@ export default PointStoreTab
 const Prize = (prize: PointsPrize) => {
   const { t } = useTranslation("products")
 
-  const { image, photos, description, title, type, price, availableQuantity } =
+  const { image, photos, title, type, price, availableQuantity } =
     prize
 
   const scale = useAppSelector((state) => state.scale.value)
@@ -279,7 +279,7 @@ const Prize = (prize: PointsPrize) => {
         >
           {title}
         </TextAccent>
-        <Text1 className="text-left">{description}</Text1>
+        {/* <Text1 className="text-left">{description}</Text1> */}
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -298,7 +298,7 @@ const ConfirmDialog = ({
   id,
   price,
   image,
-  description,
+  // description,
   title,
   type,
   photos,
@@ -407,7 +407,7 @@ const ConfirmDialog = ({
             className={cn("flex flex-col gap-2", scale && "3xl:gap-[0.52vw]")}
           >
             <TextAccent className="dark:text-gray-5">{title}</TextAccent>
-            <Text0>{description}</Text0>
+            {/* <Text0>{description}</Text0> */}
             <Text0>
               {t("points-store.Тип товара")}:{" "}
               {type === "nft" ? "NFT" : "Промокод"}
