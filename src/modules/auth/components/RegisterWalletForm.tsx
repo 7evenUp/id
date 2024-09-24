@@ -131,7 +131,7 @@ const RegisterWalletForm = ({
       <p
         className={cn(
           "text-xs w-full mb-3",
-          scale && "3xl:text-[0.625vw]/[0.833vw] 3xl:mb-[0.625vwvw]"
+          scale && "3xl:text-[0.625vw]/[0.833vw] 3xl:mb-[0.625vw]"
         )}
       >
         {t("register.creation-with-wallet")}: {cutWalletAddr(address)}

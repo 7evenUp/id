@@ -37,7 +37,7 @@ const PointStoreTab = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { data: prizes } = useGetPrizesQuery()
+  const { data: prizes, isLoading } = useGetPrizesQuery()
 
   return (
     <div
@@ -60,9 +60,7 @@ const PointStoreTab = () => {
         />
       </div>
 
-      <div
-        className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.041vwvw]")}
-      >
+      <div className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.041vw]")}>
         <div className="flex flex-col">
           <TextAccent
             className={cn(
@@ -70,7 +68,7 @@ const PointStoreTab = () => {
               scale && "3xl:mb-[0.26vw] 3xl:text-[1.171875vw]/[1.822vw]"
             )}
           >
-            {t("points-store.Тип приза")}
+            {t("points-store.Тип товара")}
           </TextAccent>
           <div
             className={cn(
@@ -87,7 +85,7 @@ const PointStoreTab = () => {
             <TextAccent className="dark:text-gray-5 shrink-0">NFT —</TextAccent>
             <Text0>
               {t(
-                "points-store.Вы сможете использовать приз данного типа как захотите, ведь он будет храниться у Вас на кошельке"
+                "points-store.Вы сможете получить NFT на ваш TON кошелек после активации товара в инвентаре ID"
               )}
             </Text0>
           </div>
@@ -109,20 +107,59 @@ const PointStoreTab = () => {
             </TextAccent>
             <Text0>
               {t(
-                "points-store.С призом данного типа вы можете купить подписки Prime / Calendar по скидке"
+                "points-store.Товары данного типа содержат в себе различные промокоды. Это могут быть скидки на подписки Prime/Calendar или партнерские сервисы."
               )}
             </Text0>
           </div>
         </div>
 
-        {prizes && prizes.length > 0 && (
+        {isLoading ? (
           <div
             className={cn("flex flex-wrap gap-5", scale && "3xl:gap-[1.302vw]")}
           >
-            {prizes.map(({ id, ...rest }) => (
-              <Prize key={id} id={id} {...rest} />
-            ))}
+            <Skeleton
+              className={cn(
+                "w-[208px] h-[320px] rounded-2xl",
+                scale &&
+                  "3xl:w-[13.541vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+              )}
+            />
+            <Skeleton
+              className={cn(
+                "w-[200px] h-[320px] rounded-2xl",
+                scale &&
+                  "3xl:w-[13.02vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+              )}
+            />
+            <Skeleton
+              className={cn(
+                "w-[200px] h-[320px] rounded-2xl",
+                scale &&
+                  "3xl:w-[13.02vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+              )}
+            />
+            <Skeleton
+              className={cn(
+                "w-[200px] h-[320px] rounded-2xl",
+                scale &&
+                  "3xl:w-[13.02vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+              )}
+            />
           </div>
+        ) : (
+          prizes &&
+          prizes.length > 0 && (
+            <div
+              className={cn(
+                "flex flex-wrap gap-5",
+                scale && "3xl:gap-[1.302vw]"
+              )}
+            >
+              {prizes.map(({ id, ...rest }) => (
+                <Prize key={id} id={id} {...rest} />
+              ))}
+            </div>
+          )
         )}
       </div>
 
@@ -181,7 +218,7 @@ const Prize = (prize: PointsPrize) => {
               scale && "3xl:rounded-[0.78125vw]"
             )}
           >
-            <Text0>У приза нет картинки</Text0>
+            <Text0>У товара нет картинки</Text0>
           </Skeleton>
         )}
         <div
@@ -281,7 +318,7 @@ const ConfirmDialog = ({
 
     try {
       await buy({ prizeId }).unwrap()
-      toast.success(t("points-store.Приз был успешно куплен"))
+      toast.success(t("points-store.Товар был успешно куплен"))
     } catch (error) {
       // @ts-expect-error RTKQ no error types
       if (error.status === 400) {
@@ -306,7 +343,7 @@ const ConfirmDialog = ({
             break
 
           case "prize_not_found":
-            toast.error("Приз с этим ID не был найден")
+            toast.error("Товар с этим ID не был найден")
             break
 
           case "no_more_prizes":
@@ -321,7 +358,7 @@ const ConfirmDialog = ({
             break
         }
       } else {
-        toast.error("При покупке приза произошла неизвестная ошибка")
+        toast.error("При покупке товара произошла неизвестная ошибка")
       }
     } finally {
       setOpen(false)
@@ -363,7 +400,7 @@ const ConfirmDialog = ({
                 scale && "3xl:rounded-[0.78125vw] 3xl:w-[8.33vw]"
               )}
             >
-              <Text0>У приза нет картинки</Text0>
+              <Text0>У товара нет картинки</Text0>
             </Skeleton>
           )}
           <div
@@ -372,7 +409,7 @@ const ConfirmDialog = ({
             <TextAccent className="dark:text-gray-5">{title}</TextAccent>
             <Text0>{description}</Text0>
             <Text0>
-              {t("points-store.Тип приза")}:{" "}
+              {t("points-store.Тип товара")}:{" "}
               {type === "nft" ? "NFT" : "Промокод"}
             </Text0>
           </div>
