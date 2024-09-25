@@ -47,14 +47,14 @@ const PointStoreTab = () => {
 
       <div
         className={cn(
-          "flex items-center gap-2 mt-5 pb-4",
-          scale && "3xl:gap-[0.52vw] 3xl:mt-[1.302vw] 3xl:pb-[1.042vw]"
+          "flex items-center gap-2 mt-5 pb-6",
+          scale && "3xl:gap-[0.52vw] 3xl:mt-[1.302vw] 3xl:pb-[1.5625vw]"
         )}
       >
         <Subheading>{t("points-store.title")}</Subheading>
         <CryptonIcon
           className={cn(
-            "w-6 h-6",
+            "shrink-0 w-6 h-6",
             scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
           )}
         />
@@ -64,16 +64,16 @@ const PointStoreTab = () => {
         <div className="flex flex-col">
           <TextAccent
             className={cn(
-              "mb-1 text-lg dark:text-gray-5",
-              scale && "3xl:mb-[0.26vw] 3xl:text-[1.171875vw]/[1.822vw]"
+              "mb-2 text-lg dark:text-gray-5",
+              scale && "3xl:mb-[0.52vw] 3xl:text-[1.171875vw]/[1.822vw]"
             )}
           >
             {t("points-store.Тип товара")}
           </TextAccent>
           <div
             className={cn(
-              "flex items-start gap-1 sm:gap-2 max-sm:mb-2 max-sm:flex-wrap",
-              scale && "3xl:gap-[0.52vw]"
+              "flex items-start gap-1 mb-2 flex-wrap",
+              scale && "3xl:gap-[0.26vw] 3xl:mb-[0.52vw]"
             )}
           >
             <NftIcon
@@ -82,8 +82,8 @@ const PointStoreTab = () => {
                 scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw] 3xl:mt-[0.13vw]"
               )}
             />
-            <TextAccent className="dark:text-gray-5 shrink-0">NFT —</TextAccent>
-            <Text0 className="max-sm:ml-4 max-sm:w-full">
+            <TextAccent className="dark:text-gray-5 shrink-0">NFT</TextAccent>
+            <Text0 className="w-full">
               {t(
                 "points-store.Вы сможете получить NFT на ваш TON кошелек после активации товара в инвентаре ID"
               )}
@@ -92,8 +92,8 @@ const PointStoreTab = () => {
 
           <div
             className={cn(
-              "flex items-start gap-1 sm:gap-2 max-sm:flex-wrap",
-              scale && "3xl:gap-[0.52vw]"
+              "flex items-start gap-1 flex-wrap",
+              scale && "3xl:gap-[0.26vw]"
             )}
           >
             <PercentageIcon
@@ -103,9 +103,9 @@ const PointStoreTab = () => {
               )}
             />
             <TextAccent className="dark:text-gray-5 shrink-0">
-              {t("points-store.Промокод")} —
+              {t("points-store.Промокод")}
             </TextAccent>
-            <Text0 className="max-sm:ml-4 max-sm:w-full">
+            <Text0 className="w-full">
               {t(
                 "points-store.Товары данного типа содержат в себе различные промокоды. Это могут быть скидки на подписки Prime/Calendar или партнерские сервисы."
               )}
@@ -122,30 +122,30 @@ const PointStoreTab = () => {
           >
             <Skeleton
               className={cn(
-                "w-[208px] h-[320px] rounded-2xl",
+                "max-mobile-sm:max-w-[100%] max-mobile:min-w-[162px] max-mobile:flex-1 max-mobile:max-w-[50%] mobile:w-48 sm:w-52 h-[300px] sm:h-[320px] rounded-2xl",
                 scale &&
                   "3xl:w-[13.541vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
               )}
             />
             <Skeleton
               className={cn(
-                "w-[200px] h-[320px] rounded-2xl",
+                "max-mobile-sm:max-w-[100%] max-mobile:min-w-[162px] max-mobile:flex-1 max-mobile:max-w-[50%] mobile:w-48 sm:w-52 h-[300px] sm:h-[320px] rounded-2xl",
                 scale &&
-                  "3xl:w-[13.02vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+                  "3xl:w-[13.541vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
               )}
             />
             <Skeleton
               className={cn(
-                "w-[200px] h-[320px] rounded-2xl",
+                "max-mobile-sm:max-w-[100%] max-mobile:min-w-[162px] max-mobile:flex-1 max-mobile:max-w-[50%] mobile:w-48 sm:w-52 h-[300px] sm:h-[320px] rounded-2xl",
                 scale &&
-                  "3xl:w-[13.02vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+                  "3xl:w-[13.541vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
               )}
             />
             <Skeleton
               className={cn(
-                "w-[200px] h-[320px] rounded-2xl",
+                "max-mobile-sm:max-w-[100%] max-mobile:min-w-[162px] max-mobile:flex-1 max-mobile:max-w-[50%] mobile:w-48 sm:w-52 h-[300px] sm:h-[320px] rounded-2xl",
                 scale &&
-                  "3xl:w-[13.02vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
+                  "3xl:w-[13.541vw] 3xl:h-[20.833vw] 3xl:rounded-[1.041vw]"
               )}
             />
           </div>
@@ -154,7 +154,7 @@ const PointStoreTab = () => {
           prizes.length > 0 && (
             <div
               className={cn(
-                "flex flex-col items-center mobile:items-stretch mobile:flex-row mobile:flex-wrap gap-3 md:gap-5",
+                "flex flex-col items-center mobile-sm:items-stretch mobile-sm:flex-row mobile-sm:flex-wrap gap-3 md:gap-5",
                 scale && "3xl:gap-[1.302vw]"
               )}
             >
@@ -191,7 +191,7 @@ const Prize = (prize: PointsPrize) => {
   return (
     <div
       className={cn(
-        "group relative flex flex-col gap-2 w-[80%] mobile-sm:w-[75%] mobile-sm:max-w-[240px] mobile:max-w-none mobile:w-48 sm:w-52 p-1 bg-white dark:bg-gray-1 rounded-2xl shadow-sm overflow-hidden",
+        "group relative flex flex-col gap-2 max-mobile-sm:max-w-[80%] max-mobile:min-w-[162px] max-mobile:flex-1 max-mobile:max-w-[50%] mobile:w-48 sm:w-52 p-1 bg-white dark:bg-gray-1 rounded-2xl shadow-sm overflow-hidden",
         scale &&
           "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.26vw] 3xl:rounded-[1.041vw]"
       )}
@@ -248,7 +248,12 @@ const Prize = (prize: PointsPrize) => {
         </div>
       </div>
 
-      <div className={cn("flex flex-col px-2", scale && "3xl:px-[0.52vw]")}>
+      <div
+        className={cn(
+          "flex flex-col px-0.5 mobile:px-2",
+          scale && "3xl:px-[0.52vw]"
+        )}
+      >
         <div
           className={cn(
             "flex items-center justify-between w-full mb-2",
