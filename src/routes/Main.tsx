@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import SkeletonLayout from "@/components/SkeletonLayout"
 import SiteUsesCookiesMessage from "@/components/SiteUsesCookiesMessage"
-import IntroModal from "@/components/IntroModal"
+// import IntroModal from "@/components/IntroModal"
 
 import Auth from "@/modules/auth/Auth"
 import PersonalAccount from "@/modules/personal-account/PersonalAccount"
@@ -55,7 +55,7 @@ const Main = () => {
           <>
             <PersonalAccount />
             <Products />
-            <IntroModal />
+            {/* <IntroModal /> */}
           </>
         ) : null}
       </main>
