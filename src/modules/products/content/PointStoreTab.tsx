@@ -20,7 +20,7 @@ import Button from "@/shared/ui/Button"
 import Subheading from "@/shared/typography/Subheading"
 import TextAccent from "@/shared/typography/TextAccent"
 import Text2 from "@/shared/typography/Text2"
-import Text1 from "@/shared/typography/Text1"
+// import Text1 from "@/shared/typography/Text1"
 import Text0 from "@/shared/typography/Text0"
 
 import { useBuyPrizeMutation } from "@/redux/api/points"
@@ -72,8 +72,8 @@ const PointStoreTab = () => {
           </TextAccent>
           <div
             className={cn(
-              "flex items-start gap-2 mb-1",
-              scale && "3xl:gap-[0.52vw] 3xl:mb-[0.26vw]"
+              "flex items-start gap-1 sm:gap-2 max-sm:mb-2 max-sm:flex-wrap",
+              scale && "3xl:gap-[0.52vw]"
             )}
           >
             <NftIcon
@@ -83,7 +83,7 @@ const PointStoreTab = () => {
               )}
             />
             <TextAccent className="dark:text-gray-5 shrink-0">NFT —</TextAccent>
-            <Text0>
+            <Text0 className="max-sm:ml-4 max-sm:w-full">
               {t(
                 "points-store.Вы сможете получить NFT на ваш TON кошелек после активации товара в инвентаре ID"
               )}
@@ -92,7 +92,7 @@ const PointStoreTab = () => {
 
           <div
             className={cn(
-              "flex items-start gap-2",
+              "flex items-start gap-1 sm:gap-2 max-sm:flex-wrap",
               scale && "3xl:gap-[0.52vw]"
             )}
           >
@@ -105,7 +105,7 @@ const PointStoreTab = () => {
             <TextAccent className="dark:text-gray-5 shrink-0">
               {t("points-store.Промокод")} —
             </TextAccent>
-            <Text0>
+            <Text0 className="max-sm:ml-4 max-sm:w-full">
               {t(
                 "points-store.Товары данного типа содержат в себе различные промокоды. Это могут быть скидки на подписки Prime/Calendar или партнерские сервисы."
               )}
@@ -115,7 +115,10 @@ const PointStoreTab = () => {
 
         {isLoading ? (
           <div
-            className={cn("flex flex-wrap gap-5", scale && "3xl:gap-[1.302vw]")}
+            className={cn(
+              "flex flex-wrap gap-3 md:gap-5",
+              scale && "3xl:gap-[1.302vw]"
+            )}
           >
             <Skeleton
               className={cn(
@@ -151,7 +154,7 @@ const PointStoreTab = () => {
           prizes.length > 0 && (
             <div
               className={cn(
-                "flex flex-wrap gap-5",
+                "flex flex-col items-center mobile:items-stretch mobile:flex-row mobile:flex-wrap gap-3 md:gap-5",
                 scale && "3xl:gap-[1.302vw]"
               )}
             >
@@ -175,8 +178,7 @@ export default PointStoreTab
 const Prize = (prize: PointsPrize) => {
   const { t } = useTranslation("products")
 
-  const { image, photos, description, title, type, price, availableQuantity } =
-    prize
+  const { image, photos, title, type, price, availableQuantity } = prize
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -189,7 +191,7 @@ const Prize = (prize: PointsPrize) => {
   return (
     <div
       className={cn(
-        "group relative flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 bg-white dark:bg-gray-1 rounded-2xl shadow-sm overflow-hidden",
+        "group relative flex flex-col gap-2 w-[80%] mobile-sm:w-[75%] mobile-sm:max-w-[240px] mobile:max-w-none mobile:w-48 sm:w-52 p-1 bg-white dark:bg-gray-1 rounded-2xl shadow-sm overflow-hidden",
         scale &&
           "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.26vw] 3xl:rounded-[1.041vw]"
       )}
@@ -223,17 +225,6 @@ const Prize = (prize: PointsPrize) => {
         )}
         <div
           className={cn(
-            "absolute left-1 bottom-1 p-1.5 rounded-lg bg-gray-6 dark:bg-gray-1 shadow-sm shadow-black/50",
-            scale &&
-              "3xl:left-[0.26vw] 3xl:bottom-[0.26vw] 3xl:p-[0.39vw] 3xl:rounded-[0.52vw]"
-          )}
-        >
-          <Text2>
-            {t("points-store.Осталось")}: {availableQuantity}
-          </Text2>
-        </div>
-        <div
-          className={cn(
             "absolute right-1 top-1 grid place-content-center rounded-full w-6 h-6 bg-white dark:bg-gray-1 shadow-sm shadow-black/50",
             scale &&
               "3xl:right-[0.26vw] 3xl:top-[0.26vw] 3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
@@ -260,16 +251,34 @@ const Prize = (prize: PointsPrize) => {
       <div className={cn("flex flex-col px-2", scale && "3xl:px-[0.52vw]")}>
         <div
           className={cn(
-            "flex items-center gap-1.5 mb-1",
-            scale && "3xl:gap-[0.39vw] 3xl:mb-[0.26vw]"
+            "flex items-center justify-between w-full mb-2",
+            scale && "3xl:mb-[0.52vw]"
           )}
         >
-          <TextAccent className="text-black dark:text-gray-6 tabular-nums">
-            {price}
-          </TextAccent>
-          <CryptonIcon
-            className={cn("w-5 h-5", scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]")}
-          />
+          <div
+            className={cn(
+              "flex items-center gap-1.5",
+              scale && "3xl:gap-[0.39vw]"
+            )}
+          >
+            <TextAccent className="text-black dark:text-gray-6 tabular-nums">
+              {price}
+            </TextAccent>
+            <CryptonIcon
+              className={cn("w-5 h-5", scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]")}
+            />
+          </div>
+
+          <div
+            className={cn(
+              "px-1.5 py-1 rounded-lg bg-gray-6 dark:bg-gray-2/20 shadow-sm shadow-black/20",
+              scale && "3xl:px-[0.39vw] 3xl:py-[0.26vw] 3xl:rounded-[0.52vw]"
+            )}
+          >
+            <Text2>
+              {t("points-store.Осталось")}: {availableQuantity}
+            </Text2>
+          </div>
         </div>
         <TextAccent
           className={cn(
@@ -279,12 +288,12 @@ const Prize = (prize: PointsPrize) => {
         >
           {title}
         </TextAccent>
-        <Text1 className="text-left">{description}</Text1>
+        {/* <Text1 className="text-left">{description}</Text1> */}
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="mt-auto" disabled={points < price}>
+          <Button className="mt-auto max-sm:py-1.5" disabled={points < price}>
             {t("points-store.приобрести")}
           </Button>
         </DialogTrigger>
@@ -298,7 +307,7 @@ const ConfirmDialog = ({
   id,
   price,
   image,
-  description,
+  // description,
   title,
   type,
   photos,
@@ -407,7 +416,7 @@ const ConfirmDialog = ({
             className={cn("flex flex-col gap-2", scale && "3xl:gap-[0.52vw]")}
           >
             <TextAccent className="dark:text-gray-5">{title}</TextAccent>
-            <Text0>{description}</Text0>
+            {/* <Text0>{description}</Text0> */}
             <Text0>
               {t("points-store.Тип товара")}:{" "}
               {type === "nft" ? "NFT" : "Промокод"}
