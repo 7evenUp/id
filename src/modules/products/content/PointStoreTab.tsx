@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from "react"
+import { useState, Dispatch, SetStateAction, useEffect } from "react"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
@@ -16,6 +16,13 @@ import {
   DialogTitle,
 } from "@/shared/ui/Dialog"
 import Button from "@/shared/ui/Button"
+import {
+  SelectNew,
+  SelectContentNew,
+  SelectItemNew,
+  SelectTriggerNew,
+} from "@/shared/ui/SelectNew"
+// import { SegmentedButton, SegmentedRoot } from "@/shared/ui/SegmentedButtons"
 
 import Subheading from "@/shared/typography/Subheading"
 import TextAccent from "@/shared/typography/TextAccent"
@@ -35,9 +42,33 @@ import { cn } from "@/lib/classNames"
 const PointStoreTab = () => {
   const { t } = useTranslation("products")
 
+  // const [filterType, setFilterType] = useState<"all" | "nft" | "promo">("all")
+  const [sortedData, setSortedData] = useState<null | PointsPrize[]>(null)
+  const [sortPrice, setSortPrice] = useState<"asc" | "desc">("asc")
+
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { data: prizes, isLoading } = useGetPrizesQuery()
+  const { data: prizes, isLoading } = useGetPrizesQuery({ orderBy: "price" })
+
+  useEffect(() => {
+    if (!prizes) return
+
+    if (sortPrice === "asc") {
+      setSortedData(prizes)
+    } else if (sortPrice === "desc") {
+      setSortedData([...prizes].sort((a, b) => b.price - a.price))
+    }
+
+    // if (filterType === "all") {
+    //   setFilteredData(prizes)
+    // } else if (filterType === "nft") {
+    //   setFilteredData(prizes.filter((prize) => prize.type === "nft"))
+    // } else if (filterType === "promo") {
+    //   setFilteredData(
+    //     prizes.filter((prize) => prize.type === "crypton_promo_code")
+    //   )
+    // }
+  }, [sortPrice, prizes])
 
   return (
     <div
@@ -113,6 +144,86 @@ const PointStoreTab = () => {
           </div>
         </div>
 
+        <div className="flex gap-10">
+          {/* <SegmentedRoot
+            type="single"
+            className={cn("w-full sm:w-[520px]", scale && "3xl:w-[33.854vw]")}
+            value={filterType}
+            onValueChange={(value) =>
+              setFilterType(value as "all" | "nft" | "promo")
+            }
+          >
+            <SegmentedButton value="all">{t("inventory.all")}</SegmentedButton>
+            <SegmentedButton value="nft">NFT</SegmentedButton>
+            <SegmentedButton value="promo">
+              {t("points-store.Промокод")}
+            </SegmentedButton>
+          </SegmentedRoot> */}
+          {/* <Popover>
+            <PopoverTrigger className="h-10 w-10 rounded-xl bg-gray-5/25 dark:bg-gray-1 flex items-center justify-center hover:bg-gray-5/50 dark:hover:bg-gray-2/70 transition-colors">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 6h18" />
+                <path d="M7 12h10" />
+                <path d="M10 18h4" />
+              </svg>
+            </PopoverTrigger>
+            <PopoverContent align="start" className="dark:text-gray-5 w-60">
+              <div
+                className={cn(
+                  "flex items-center gap-2 mb-2",
+                  scale && "3xl:gap-[0.521vw] 3xl:mb-[0.26vw]"
+                )}
+              >
+                <Checkbox id="nft" />
+                <CheckboxLabel htmlFor="nft">NFT</CheckboxLabel>
+              </div>
+              <div
+                className={cn(
+                  "flex items-center gap-2 mb-2",
+                  scale && "3xl:gap-[0.521vw] 3xl:mb-[0.26vw]"
+                )}
+              >
+                <Checkbox id="crypton_promocode" />
+                <CheckboxLabel htmlFor="crypton_promocode">Crypton Promocode</CheckboxLabel>
+              </div>
+              <div
+                className={cn(
+                  "flex items-center gap-2",
+                  scale && "3xl:gap-[0.521vw]"
+                )}
+              >
+                <Checkbox id="sponsor_promocode" />
+                <CheckboxLabel htmlFor="sponsor_promocode">Sponsor Promocode</CheckboxLabel>
+              </div>
+            </PopoverContent>
+          </Popover> */}
+
+          <SelectNew
+            value={sortPrice}
+            onValueChange={(value) => setSortPrice(value as "asc" | "desc")}
+          >
+            <SelectTriggerNew placeholder="Сортировать по:" />
+            <SelectContentNew>
+              <SelectItemNew value="asc">
+                {t("points-store.От наименьшего к большему")}
+              </SelectItemNew>
+              <SelectItemNew value="desc">
+                {t("points-store.От наибольшего к меньшему")}
+              </SelectItemNew>
+            </SelectContentNew>
+          </SelectNew>
+        </div>
+
         {isLoading ? (
           <div
             className={cn(
@@ -150,15 +261,15 @@ const PointStoreTab = () => {
             />
           </div>
         ) : (
-          prizes &&
-          prizes.length > 0 && (
+          sortedData &&
+          sortedData.length > 0 && (
             <div
               className={cn(
                 "flex flex-col items-center mobile-sm:items-stretch mobile-sm:flex-row mobile-sm:flex-wrap gap-3 md:gap-5",
                 scale && "3xl:gap-[1.302vw]"
               )}
             >
-              {prizes.map(({ id, ...rest }) => (
+              {sortedData.map(({ id, ...rest }) => (
                 <Prize key={id} id={id} {...rest} />
               ))}
             </div>
