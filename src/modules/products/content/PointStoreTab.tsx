@@ -288,7 +288,7 @@ export default PointStoreTab
 
 const Prize = (prize: PointsPrize) => {
   const { t } = useTranslation("products")
-
+  
   const { image, photos, title, type, price, availableQuantity } = prize
 
   const scale = useAppSelector((state) => state.scale.value)
