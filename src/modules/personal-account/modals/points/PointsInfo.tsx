@@ -15,7 +15,6 @@ const PointsInfo = () => {
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
-  const language = useAppSelector((state) => state.language.value)
 
   const { data: profileData } = useUserProfileQuery()
 
@@ -44,29 +43,6 @@ const PointsInfo = () => {
           <DialogTitle>{t("points-info.heading")}</DialogTitle>
 
           <Text0>{t("points-info.text-1")}</Text0>
-          <Text0>
-            {t("points-info.text-2")}{" "}
-            {language === "ru" ? (
-              <>
-                <a
-                  href="https://t.me/cryptonannouncement"
-                  target="_blank"
-                  className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-                >
-                  канале анонсов
-                </a>
-              </>
-            ) : (
-              <a
-                href="https://twitter.com/cryptonxyz"
-                target="_blank"
-                className="underline underline-offset-4 text-res-bot-blue hover:opacity-70 transition-opacity"
-              >
-                twitter
-              </a>
-            )}{" "}
-            .
-          </Text0>
           <Text0>{t("points-info.text-3")}</Text0>
 
           <DialogTitle>{t("points-info.part-2-heading")}</DialogTitle>

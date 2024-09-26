@@ -4,9 +4,9 @@ import { PointsBuyPrizeResponse, PointsPrize } from "@/types/points"
 
 const pointsApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getPrizes: build.query<PointsPrize[], void>({
-      query: () => ({
-        url: "points-store/prizes/",
+    getPrizes: build.query<PointsPrize[], { orderBy: "price" | "name" }>({
+      query: ({ orderBy }) => ({
+        url: "points-store/prizes/?orderBy=" + orderBy,
         method: "GET",
       }),
       providesTags: ["Points"],

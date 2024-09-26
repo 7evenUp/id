@@ -86,7 +86,9 @@
     "После покупки у Вас останется": "After the purchase, you will have",
     "бонусов": "points",
     "отмена": "cancel",
-    "подтвердить": "confirm"
+    "подтвердить": "confirm",
+    "От наименьшего к большему": "Price: Low to High",
+    "От наибольшего к меньшему": "Price: High to Low"
   },
   "nutcracker": {
     "title": "The Nutcrackers",
