@@ -53,5 +53,8 @@ jobs:
           echo "WEBHOOK=${{ secrets.WEBHOOK_DEV }}" >> $GITHUB_ENV
 
       - name: Webhook
+        env:
+          HTTP_PROXY: ${{ secrets.HTTP_PROXY }}
+          HTTPS_PROXY: ${{ secrets.HTTPS_PROXY }}
         run: |
           curl -k -X POST -H "Content-Type: application/json" -H "X-Webhook-Signature: ${{ secrets.WEBHOOK_SECRET }}" -d '{"text": "Docker image build complete: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}", "repository": "${{ github.repository }}", "ref": "${{ github.ref }}", "commit": "${{ github.sha }}"}' $WEBHOOK
