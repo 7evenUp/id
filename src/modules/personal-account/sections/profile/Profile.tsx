@@ -5,10 +5,10 @@ import Subheading from "@/shared/typography/Subheading"
 import ProfileNickname from "./ProfileNickname"
 import ProfileEmail from "./ProfileEmail"
 import ProfileWallet from "./ProfileWallet"
-import ProfileWax from "./ProfileWax"
-import ProfileDiscord from "./ProfileDiscord"
-import ProfileTelegram from "./ProfileTelegram"
 import ProfileTon from "./ProfileTon"
+import ProfileTelegram from "./ProfileTelegram"
+// import ProfileWax from "./ProfileWax"
+// import ProfileDiscord from "./ProfileDiscord"
 
 import { useAppSelector } from "@/redux/hooks"
 
@@ -28,17 +28,10 @@ const Profile = () => {
         <ProfileNickname />
         <ProfileEmail />
         <ProfileWallet />
-        <ProfileWax />
         <ProfileTon />
-        <div
-          className={cn(
-            "flex flex-col xl:flex-row xl:justify-between xl:items-center xl:gap-10",
-            scale && "3xl:gap-[2.604vw]"
-          )}
-        >
-          <ProfileDiscord />
-          <ProfileTelegram />
-        </div>
+        <ProfileTelegram />
+        {/* <ProfileWax /> */}
+        {/* <ProfileDiscord /> */}
       </div>
     </div>
   )
