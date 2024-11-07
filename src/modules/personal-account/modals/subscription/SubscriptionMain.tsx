@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 
 import BalanceModal from "../Balance"
 
-import SelectSubscription from "./SelectSubscription"
+// import SelectSubscription from "./SelectSubscription"
 
-import FirstStepCalendar from "./Calendar/FirstStep"
-import SecondStepCalendar from "./Calendar/SecondStep"
+// import FirstStepCalendar from "./Calendar/FirstStep"
+// import SecondStepCalendar from "./Calendar/SecondStep"
 
 import FirstStepPrime from "./Prime/FirstStep"
 import SecondStep from "./Prime/SecondStep"
@@ -21,11 +21,11 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 
 const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
-  const [selectionOpened, setSelectionOpened] = useState(false)
+  // const [selectionOpened, setSelectionOpened] = useState(false)
   const [primeOpened, setPrimeOpened] = useState(false)
-  const [calendarOpened, setCalendarOpened] = useState(false)
-  const [secondStepCalendarOpened, setSecondStepCalendarOpened] =
-    useState(false)
+  // const [calendarOpened, setCalendarOpened] = useState(false)
+  // const [secondStepCalendarOpened, setSecondStepCalendarOpened] =
+  //   useState(false)
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
   const [balanceOpened, setBalanceOpened] = useState(false)
@@ -46,9 +46,9 @@ const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
       setPrimeOpened(true)
     }
 
-    if (openModalParam === "buy_calendar") {
-      setCalendarOpened(true)
-    }
+    // if (openModalParam === "buy_calendar") {
+    //   setCalendarOpened(true)
+    // }
   }, [])
 
   if (isLoading)
@@ -63,30 +63,30 @@ const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
 
   if (!subscriptions) return null
 
-  const openSelection = () => {
-    setSelectionOpened(true)
-    setPrimeOpened(false)
-    setCalendarOpened(false)
-  }
+  // const openSelection = () => {
+  //   setSelectionOpened(true)
+  //   setPrimeOpened(false)
+  //   setCalendarOpened(false)
+  // }
 
   const openPrime = () => {
-    setSelectionOpened(false)
+    // setSelectionOpened(false)
     setPrimeOpened(true)
   }
 
-  const openCalendar = () => {
-    setSelectionOpened(false)
-    setCalendarOpened(true)
-  }
+  // const openCalendar = () => {
+  //   setSelectionOpened(false)
+  //   setCalendarOpened(true)
+  // }
 
-  const openSecondStepCalendar = () => {
-    setCalendarOpened(false)
-    setSecondStepCalendarOpened(true)
-  }
+  // const openSecondStepCalendar = () => {
+  //   setCalendarOpened(false)
+  //   setSecondStepCalendarOpened(true)
+  // }
 
   const openBalanceModal = () => {
     setPrimeOpened(false)
-    setCalendarOpened(false)
+    // setCalendarOpened(false)
     setBalanceOpened(true)
   }
 
@@ -102,9 +102,9 @@ const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
 
   return (
     <>
-      <Button onClick={openSelection}>{triggerText}</Button>
+      <Button onClick={openPrime}>{triggerText}</Button>
 
-      <SelectSubscription
+      {/* <SelectSubscription
         open={selectionOpened}
         onOpenChange={setSelectionOpened}
         openPrime={openPrime}
@@ -125,12 +125,12 @@ const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
         open={secondStepCalendarOpened}
         onOpenChange={setSecondStepCalendarOpened}
         boughtSubDuration={boughtSubDuration}
-      />
+      /> */}
 
       <FirstStepPrime
         open={primeOpened}
         onOpenChange={setPrimeOpened}
-        openSelection={openSelection}
+        // openSelection={openSelection}
         openBalanceModal={openBalanceModal}
         openSecondStep={openSecondStep}
         subscriptions={subscriptions.filter((sub) => sub.kindId === 1)}

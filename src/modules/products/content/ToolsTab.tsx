@@ -7,7 +7,7 @@ const ToolsTab = () => {
   return (
     <>
       <TabHeader>
-        <TabTitle title="Tools" link="https://tools.crypton.xyz/ru/T0" />
+        <TabTitle title="Tools" link="https://tools.crypton.xyz/main" />
       </TabHeader>
       <Subheading className="mt-10 3xl:mt-[2.604vw]">Coming soon</Subheading>
     </>
