@@ -2,6 +2,7 @@
   "products-root": "products",
   "inventory-root": "inventory",
   "points-store-root": "store",
+  "promo-root": "promo",
   "ref_link": "Referral link",
   "ref_copied_title": "Copied",
   "ref_copied_desc": "The referral link has been copied to the clipboard",
