@@ -36,7 +36,7 @@ export const generateAnimation = (
         return (
           <div
             className={cn(
-              "relative w-[136px] h-[136px] bg-gray-2 rounded-xl",
+              "relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-5xl",
               prizes[generatedId].color === "red" && "bg-red-400",
               prizes[generatedId].color === "yellow" && "bg-yellow-400",
               prizes[generatedId].color === "blue" && "bg-blue-400",
@@ -47,7 +47,9 @@ export const generateAnimation = (
               el === 20 && winItem.color === "green" && "bg-green"
             )}
             key={el}
-          ></div>
+          >
+            {el}
+          </div>
         )
       })}
     </>
