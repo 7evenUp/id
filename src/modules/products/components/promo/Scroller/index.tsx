@@ -1,21 +1,30 @@
 import { useEffect, useRef, useState } from "react"
-import { motion, useMotionValue, animate } from "motion/react"
+import {
+  motion,
+  useMotionValue,
+  animate,
+  useMotionValueEvent,
+} from "motion/react"
 
 import ClickWheelSound from "@/assets/audio/click_wheel.mp3"
+
+import { generateAnimation } from "./generateAnimation"
+import { prizes } from "./prizes"
 
 import Text0 from "@/shared/typography/Text0"
 
 import Button from "@/shared/ui/Button"
 
+import { getRandomInteger } from "@/utils/getRandomInteger"
 import { cn } from "@/lib/classNames"
-
-import styles from "./styles.module.css"
-import { generateAnimation } from "./generateAnimation"
-import { prizes } from "./prizes"
 
 const audio = new Audio(ClickWheelSound)
 
-const ANIMATION_DURATION_IN_SEC = 20
+const PRIZE_WIDTH = 136
+const GAP_BETWEEN_PRIZES = 16
+const PRIZE_WIDTH_WITH_GAP = PRIZE_WIDTH + GAP_BETWEEN_PRIZES
+const ANIMATION_DURATION_IN_SEC = 8
+const AMOUNT_OF_GENERATED_PRIZES = 50
 
 const Scroller = () => {
   const itemPassedRef = useRef(0)
@@ -25,9 +34,17 @@ const Scroller = () => {
 
   const x = useMotionValue(0)
 
+  useMotionValueEvent(x, "animationComplete", () => {
+    setAnimationStarted(false)
+  })
+
   useEffect(() => {
     setWonPrizes(
-      generateAnimation(50, { color: "blue", numberInContainer: 5 }, prizes)
+      generateAnimation(
+        AMOUNT_OF_GENERATED_PRIZES,
+        { color: "blue", numberInContainer: 5 },
+        prizes
+      )
     )
   }, [])
 
@@ -35,23 +52,16 @@ const Scroller = () => {
     if (!animationStarted) return
 
     const intervalId = setInterval(() => {
-      const itemPassed = Math.floor(Math.abs(x.get()) / 152)
+      const itemPassed = Math.floor(Math.abs(x.get()) / PRIZE_WIDTH_WITH_GAP)
 
       if (itemPassed === itemPassedRef.current) {
         return
       } else {
-        console.log("motion x: ", Math.abs(x.get()))
-        console.log("itemPassed: ", itemPassed)
         audio.currentTime = 0
         audio.play()
         itemPassedRef.current = itemPassed
       }
     }, 16)
-
-    setTimeout(() => {
-      clearInterval(intervalId)
-      setAnimationStarted(false)
-    }, ANIMATION_DURATION_IN_SEC * 1000)
 
     return () => clearInterval(intervalId)
   }, [animationStarted])
@@ -63,9 +73,15 @@ const Scroller = () => {
 
     x.jump(0)
 
-    const randInt = 5998
+    // Рандомная позиция по координате x, чтобы перекрестие упало на 40-ой элемент
+    const randInt = getRandomInteger(5940, 6050)
+
     setWonPrizes(
-      generateAnimation(50, { color: "blue", numberInContainer: 5 }, prizes)
+      generateAnimation(
+        AMOUNT_OF_GENERATED_PRIZES,
+        { color: "red", numberInContainer: 5 },
+        prizes
+      )
     )
 
     setAnimationStarted(true)
@@ -86,10 +102,8 @@ const Scroller = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center gap-10 h-80 bg-[#4B4B4B]/[16%] rounded-xl">
-        <div
-          className={cn(styles.mask, "relative w-full py-4 overflow-hidden")}
-        >
+      <div className="flex flex-col items-center justify-center gap-10 h-80 bg-gray-5/25 dark:bg-[#4B4B4B]/[16%] rounded-xl">
+        <div className="relative w-full py-4 overflow-hidden">
           <motion.div style={{ x }} className="flex gap-4 w-fit ml-[50%]">
             {wonPrizes}
           </motion.div>
@@ -97,7 +111,7 @@ const Scroller = () => {
           <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 rotate-180 bottom-2" />
         </div>
         <button
-          className="text-sm flex items-center justify-center font-semibold h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1"
+          className="text-sm flex items-center justify-center font-semibold h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
           onClick={onOpenClick}
         >
           Крутить рулетку
@@ -116,24 +130,11 @@ const RoundedTriangle = ({ className }: { className: string }) => (
     viewBox="0 0 28 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={className}
+    className={cn("drop-shadow-[0_0_1px_rgba(0,0,0,0.3)]", className)}
   >
     <path
       d="M11.4019 22.5C12.5566 24.5 15.4434 24.5 16.5981 22.5L26.9904 4.5C28.1451 2.5 26.7017 0 24.3923 0H3.60769C1.29829 0 -0.145082 2.5 1.00962 4.5L11.4019 22.5Z"
-      fill="url(#paint0_radial_471_993)"
+      fill="#FFE19C"
     />
-    <defs>
-      <radialGradient
-        id="paint0_radial_471_993"
-        cx="0"
-        cy="0"
-        r="1"
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(14 25.8545) rotate(-90) scale(26.6727 25.2121)"
-      >
-        <stop stopColor="#FFEFCB" />
-        <stop offset="1" stopColor="#FFE19D" />
-      </radialGradient>
-    </defs>
   </svg>
 )

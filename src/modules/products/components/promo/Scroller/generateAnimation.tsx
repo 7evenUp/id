@@ -41,10 +41,10 @@ export const generateAnimation = (
               prizes[generatedId].color === "yellow" && "bg-yellow-400",
               prizes[generatedId].color === "blue" && "bg-blue-400",
               prizes[generatedId].color === "green" && "bg-green",
-              el === 20 && winItem.color === "red" && "bg-red-400",
-              el === 20 && winItem.color === "yellow" && "bg-yellow-400",
-              el === 20 && winItem.color === "blue" && "bg-blue-400",
-              el === 20 && winItem.color === "green" && "bg-green"
+              el === 40 && winItem.color === "red" && "bg-red-400",
+              el === 40 && winItem.color === "yellow" && "bg-yellow-400",
+              el === 40 && winItem.color === "blue" && "bg-blue-400",
+              el === 40 && winItem.color === "green" && "bg-green"
             )}
             key={el}
           >
