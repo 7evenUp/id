@@ -9,13 +9,20 @@ import {
 import ClickWheelSound from "@/assets/audio/click_wheel.mp3"
 
 import { generateAnimation } from "./generateAnimation"
-import { prizes } from "./prizes"
 
 import Text0 from "@/shared/typography/Text0"
 
 import Button from "@/shared/ui/Button"
+import { Skeleton } from "@/shared/ui/Skeleton"
+
+import {
+  useGetContainersQuery,
+  useOpenContainerMutation,
+} from "@/redux/api/crypton-events"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 import { getRandomInteger } from "@/utils/getRandomInteger"
+
 import { cn } from "@/lib/classNames"
 
 const audio = new Audio(ClickWheelSound)
@@ -30,46 +37,53 @@ const Scroller = () => {
   const itemPassedRef = useRef(0)
 
   const [wonPrizes, setWonPrizes] = useState<JSX.Element | null>(null)
-  const [animationStarted, setAnimationStarted] = useState(false)
+
+  const { data: profile } = useUserProfileQuery()
+  const { data: containerData, isLoading } = useGetContainersQuery()
+  const [openContainer] = useOpenContainerMutation()
+
+  const { promoBoxAvailableOpensNumber } = profile!
 
   const x = useMotionValue(0)
 
-  useMotionValueEvent(x, "animationComplete", () => {
-    setAnimationStarted(false)
+  useMotionValueEvent(x, "change", (currentX) => {
+    const itemPassed = Math.floor(Math.abs(currentX) / PRIZE_WIDTH_WITH_GAP)
+
+    if (itemPassed === itemPassedRef.current) return
+
+    audio.currentTime = 0
+    audio.play()
+    itemPassedRef.current = itemPassed
   })
 
   useEffect(() => {
+    if (
+      !containerData ||
+      containerData.containers.length === 0 ||
+      containerData.containers[0].prizes.length === 0
+    )
+      return
+
     setWonPrizes(
       generateAnimation(
         AMOUNT_OF_GENERATED_PRIZES,
         { color: "blue", numberInContainer: 5 },
-        prizes
+        containerData.containers[0].prizes
       )
     )
-  }, [])
-
-  useEffect(() => {
-    if (!animationStarted) return
-
-    const intervalId = setInterval(() => {
-      const itemPassed = Math.floor(Math.abs(x.get()) / PRIZE_WIDTH_WITH_GAP)
-
-      if (itemPassed === itemPassedRef.current) {
-        return
-      } else {
-        audio.currentTime = 0
-        audio.play()
-        itemPassedRef.current = itemPassed
-      }
-    }, 16)
-
-    return () => clearInterval(intervalId)
-  }, [animationStarted])
+  }, [containerData])
 
   const onOpenClick = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+
+    if (
+      !containerData ||
+      containerData.containers.length === 0 ||
+      containerData.containers[0].prizes.length === 0
+    )
+      return
 
     x.jump(0)
 
@@ -80,11 +94,9 @@ const Scroller = () => {
       generateAnimation(
         AMOUNT_OF_GENERATED_PRIZES,
         { color: "red", numberInContainer: 5 },
-        prizes
+        containerData.containers[0].prizes
       )
     )
-
-    setAnimationStarted(true)
 
     animate(x, -randInt, {
       duration: ANIMATION_DURATION_IN_SEC,
@@ -97,25 +109,36 @@ const Scroller = () => {
       <div className="flex items-center justify-between">
         <Text0>Всего открытий боксов: 4</Text0>
         <div className="flex items-center gap-8">
-          <Text0>Осталось открытий боксов: 2</Text0>
+          <Text0>
+            Осталось открытий боксов: {promoBoxAvailableOpensNumber}
+          </Text0>
           <Button>получить больше</Button>
         </div>
       </div>
 
       <div className="flex flex-col items-center justify-center gap-10 h-80 bg-gray-5/25 dark:bg-[#4B4B4B]/[16%] rounded-xl">
         <div className="relative w-full py-4 overflow-hidden">
-          <motion.div style={{ x }} className="flex gap-4 w-fit ml-[50%]">
-            {wonPrizes}
-          </motion.div>
+          {isLoading ? (
+            <PrizesSkeleton />
+          ) : (
+            <motion.div style={{ x }} className="flex gap-4 w-fit ml-[50%]">
+              {wonPrizes}
+            </motion.div>
+          )}
           <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 top-2" />
           <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 rotate-180 bottom-2" />
         </div>
-        <button
-          className="text-sm flex items-center justify-center font-semibold h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
-          onClick={onOpenClick}
-        >
-          Крутить рулетку
-        </button>
+
+        {isLoading ? (
+          <Skeleton className="rounded-[10px] h-10 w-44" />
+        ) : (
+          <button
+            className="text-sm flex items-center justify-center font-semibold h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
+            onClick={onOpenClick}
+          >
+            Крутить рулетку
+          </button>
+        )}
       </div>
     </div>
   )
@@ -137,4 +160,15 @@ const RoundedTriangle = ({ className }: { className: string }) => (
       fill="#FFE19C"
     />
   </svg>
+)
+
+const PrizesSkeleton = () => (
+  <div className="flex gap-4 w-fit ml-[50%]">
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+  </div>
 )

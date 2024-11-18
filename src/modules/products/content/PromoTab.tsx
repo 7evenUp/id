@@ -7,6 +7,7 @@ import Text0 from "@/shared/typography/Text0"
 import Text2 from "@/shared/typography/Text2"
 
 import { useAppSelector } from "@/redux/hooks"
+import { useLastContainerOpenResultsQuery } from "@/redux/api/crypton-events"
 
 import { cn } from "@/lib/classNames"
 
@@ -14,6 +15,8 @@ const PromoTab = () => {
   const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
+
+  const { data } = useLastContainerOpenResultsQuery()
 
   return (
     <div
