@@ -6,8 +6,6 @@ import {
   useMotionValueEvent,
 } from "motion/react"
 
-import ClickWheelSound from "@/assets/audio/click_wheel.mp3"
-
 import { generateAnimation } from "./generateAnimation"
 
 import Text0 from "@/shared/typography/Text0"
@@ -22,6 +20,7 @@ import {
 import { useUserProfileQuery } from "@/redux/api/profile"
 
 import { getRandomInteger } from "@/utils/getRandomInteger"
+import { Sound } from "@/utils/sound"
 
 import { cn } from "@/lib/classNames"
 
@@ -31,10 +30,13 @@ const PRIZE_WIDTH_WITH_GAP = PRIZE_WIDTH + GAP_BETWEEN_PRIZES
 const ANIMATION_DURATION_IN_SEC = 8
 const AMOUNT_OF_GENERATED_PRIZES = 50
 
+const clickWheelSound = new Sound("./sounds/click_wheel.mp3")
+
 const Scroller = () => {
   const itemPassedRef = useRef(0)
 
   const [wonPrizes, setWonPrizes] = useState<JSX.Element | null>(null)
+  const [soundLoaded, setSoundLoaded] = useState(false)
 
   const { data: profile } = useUserProfileQuery()
   const { data: containerData, isLoading } = useGetContainersQuery()
@@ -44,13 +46,19 @@ const Scroller = () => {
 
   const x = useMotionValue(0)
 
+  useEffect(() => {
+    Promise.all([clickWheelSound.load()]).then(() => {
+      setSoundLoaded(true)
+    })
+  }, [])
+
   useMotionValueEvent(x, "change", (currentX) => {
     const itemPassed = Math.floor(Math.abs(currentX) / PRIZE_WIDTH_WITH_GAP)
 
     if (itemPassed === itemPassedRef.current) return
 
-    const audio = new Audio(ClickWheelSound)
-    audio.play()
+    if (soundLoaded) clickWheelSound.play()
+
     itemPassedRef.current = itemPassed
   })
 
