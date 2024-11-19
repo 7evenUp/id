@@ -21,7 +21,7 @@ const cryptonEventsApi = api.injectEndpoints({
     openContainer: build.mutation<OpenContainerResponse, OpenContainerArgs>({
       query: ({ user_id, containerId }) => ({
         url:
-          "crypton-events/containers/open?user_id=" +
+          "crypton-events/containers/open/?user_id=" +
           user_id +
           "&containerId=" +
           containerId,
