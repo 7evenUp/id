@@ -25,8 +25,6 @@ import { getRandomInteger } from "@/utils/getRandomInteger"
 
 import { cn } from "@/lib/classNames"
 
-const audio = new Audio(ClickWheelSound)
-
 const PRIZE_WIDTH = 136
 const GAP_BETWEEN_PRIZES = 16
 const PRIZE_WIDTH_WITH_GAP = PRIZE_WIDTH + GAP_BETWEEN_PRIZES
@@ -51,7 +49,7 @@ const Scroller = () => {
 
     if (itemPassed === itemPassedRef.current) return
 
-    audio.currentTime = 0
+    const audio = new Audio(ClickWheelSound)
     audio.play()
     itemPassedRef.current = itemPassed
   })
