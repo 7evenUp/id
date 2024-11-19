@@ -23,6 +23,7 @@ import { getRandomInteger } from "@/utils/getRandomInteger"
 import { Sound } from "@/utils/sound"
 
 import { cn } from "@/lib/classNames"
+import { toast } from "sonner"
 
 const PRIZE_WIDTH = 136
 const GAP_BETWEEN_PRIZES = 16
@@ -36,7 +37,6 @@ const Scroller = () => {
   const itemPassedRef = useRef(0)
 
   const [wonPrizes, setWonPrizes] = useState<JSX.Element | null>(null)
-  const [soundLoaded, setSoundLoaded] = useState(false)
 
   const { data: profile } = useUserProfileQuery()
   const { data: containerData, isLoading } = useGetContainersQuery()
@@ -46,18 +46,12 @@ const Scroller = () => {
 
   const x = useMotionValue(0)
 
-  useEffect(() => {
-    Promise.all([clickWheelSound.load()]).then(() => {
-      setSoundLoaded(true)
-    })
-  }, [])
-
   useMotionValueEvent(x, "change", (currentX) => {
     const itemPassed = Math.floor(Math.abs(currentX) / PRIZE_WIDTH_WITH_GAP)
 
     if (itemPassed === itemPassedRef.current) return
 
-    if (soundLoaded) clickWheelSound.play()
+    clickWheelSound.play()
 
     itemPassedRef.current = itemPassed
   })
@@ -69,6 +63,10 @@ const Scroller = () => {
       containerData.containers[0].prizes.length === 0
     )
       return
+
+    const randInt = getRandomInteger(5940, 6050)
+
+    x.set(-randInt)
 
     setWonPrizes(
       generateAnimation(
@@ -91,23 +89,31 @@ const Scroller = () => {
     )
       return
 
-    x.jump(0)
+    try {
+      await Promise.all([clickWheelSound.load()])
+      
+      toast.success("Звук загружен")
 
-    // Рандомная позиция по координате x, чтобы перекрестие упало на 40-ой элемент
-    const randInt = getRandomInteger(5940, 6050)
+      x.jump(0)
 
-    setWonPrizes(
-      generateAnimation(
-        AMOUNT_OF_GENERATED_PRIZES,
-        { color: "red", numberInContainer: 5 },
-        containerData.containers[0].prizes
+      // Рандомная позиция по координате x, чтобы перекрестие упало на 40-ой элемент
+      const randInt = getRandomInteger(5940, 6050)
+
+      setWonPrizes(
+        generateAnimation(
+          AMOUNT_OF_GENERATED_PRIZES,
+          { color: "red", numberInContainer: 5 },
+          containerData.containers[0].prizes
+        )
       )
-    )
 
-    animate(x, -randInt, {
-      duration: ANIMATION_DURATION_IN_SEC,
-      ease: [0, 1.01, 0.73, 1],
-    })
+      animate(x, -randInt, {
+        duration: ANIMATION_DURATION_IN_SEC,
+        ease: [0, 1.01, 0.73, 1],
+      })
+    } catch {
+      toast.error("Не получилось загрузить звук")
+    }
   }
 
   return (
