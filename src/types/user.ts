@@ -25,6 +25,7 @@ export interface User {
   telegramUsername: string
   timezone: string
   tonWallet: string | null
+  totalOpenedPromoBox: number
   wallet: string | null
   waxWallet: string | null
 }

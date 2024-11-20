@@ -5,10 +5,12 @@ import {
   animate,
   useMotionValueEvent,
 } from "motion/react"
+import { toast } from "sonner"
 
 import Loader from "@/assets/icons/loader.svg?react"
 
 import { generateAnimation } from "./generateAnimation"
+import WinDialog from "./WinDialog"
 
 import Text0 from "@/shared/typography/Text0"
 
@@ -22,17 +24,16 @@ import {
 } from "@/redux/api/crypton-events"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
-import { getRandomInteger } from "@/utils/getRandomInteger"
 import { Sound } from "@/utils/sound"
 
 import { cn } from "@/lib/classNames"
-import { toast } from "sonner"
 
 const PRIZE_WIDTH = 136
 const GAP_BETWEEN_PRIZES = 16
 const PRIZE_WIDTH_WITH_GAP = PRIZE_WIDTH + GAP_BETWEEN_PRIZES
 const ANIMATION_DURATION_IN_SEC = 8
 const AMOUNT_OF_GENERATED_PRIZES = 50
+const MIDDLE_X_POSITION = 5996
 
 const clickWheelSound = new Sound("./sounds/click_wheel.mp3")
 
@@ -41,15 +42,21 @@ const Scroller = () => {
 
   const [wonPrizes, setWonPrizes] = useState<JSX.Element | null>(null)
   const [soundLoaded, setSoundLoaded] = useState(false)
+  const [animationStarted, setAnimationStarted] = useState(false)
+  const [winOpened, setWinOpened] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profile } = useUserProfileQuery()
   const { data: containerData, isLoading } = useGetContainersQuery()
-  const [openContainer, { isLoading: isOpenLoading }] =
+  const [openContainer, { data: winData, isLoading: isOpenLoading }] =
     useOpenContainerMutation()
 
-  const { promoBoxAvailableOpensNumber, id: userId } = profile!
+  const {
+    promoBoxAvailableOpensNumber,
+    totalOpenedPromoBox,
+    id: userId,
+  } = profile!
 
   const x = useMotionValue(0)
 
@@ -64,9 +71,13 @@ const Scroller = () => {
 
     if (itemPassed === itemPassedRef.current) return
 
-    if (soundLoaded) clickWheelSound.play()
+    if (soundLoaded && animationStarted) clickWheelSound.play()
 
     itemPassedRef.current = itemPassed
+  })
+
+  useMotionValueEvent(x, "animationComplete", () => {
+    setAnimationStarted(false)
   })
 
   useEffect(() => {
@@ -80,10 +91,12 @@ const Scroller = () => {
     setWonPrizes(
       generateAnimation(
         AMOUNT_OF_GENERATED_PRIZES,
-        { color: "blue", numberInContainer: 5 },
+        containerData.containers[0].prizes[0].prize,
         containerData.containers[0].prizes
       )
     )
+
+    x.set(-MIDDLE_X_POSITION)
   }, [containerData])
 
   const onOpenClick = async (
@@ -101,28 +114,31 @@ const Scroller = () => {
     if (soundLoaded) clickWheelSound.play(0)
 
     try {
-      await openContainer({
+      const winResult = await openContainer({
         containerId: containerData.containers[0].id,
         user_id: userId,
       }).unwrap()
 
       x.jump(0)
 
-      // Рандомная позиция по координате x, чтобы перекрестие упало на 40-ой элемент
-      const randInt = getRandomInteger(5940, 6050)
-
       setWonPrizes(
         generateAnimation(
           AMOUNT_OF_GENERATED_PRIZES,
-          { color: "red", numberInContainer: 5 },
+          winResult.prize,
           containerData.containers[0].prizes
         )
       )
 
-      animate(x, -randInt, {
+      setAnimationStarted(true)
+
+      animate(x, -MIDDLE_X_POSITION, {
         duration: ANIMATION_DURATION_IN_SEC,
         ease: [0, 1.01, 0.73, 1],
       })
+
+      setTimeout(() => {
+        setWinOpened(true)
+      }, ANIMATION_DURATION_IN_SEC * 1000 + 200)
     } catch (error) {
       // @ts-expect-error NO_RTKQ_ERROR_TYPES
       if (error.status === 400) {
@@ -139,50 +155,53 @@ const Scroller = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex md:items-center md:justify-between gap-2 flex-col md:flex-row">
-        <Text0>Всего открытий боксов: 4</Text0>
-        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
-          <Text0>
-            Осталось открытий боксов: {promoBoxAvailableOpensNumber}
-          </Text0>
-          <Button className="w-fit">получить больше</Button>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-center justify-center gap-10 h-80 bg-gray-5/25 dark:bg-[#4B4B4B]/[16%] rounded-xl">
-        <div className="relative w-full py-4 overflow-hidden">
-          {isLoading ? (
-            <PrizesSkeleton />
-          ) : (
-            <motion.div style={{ x }} className="flex gap-4 w-fit ml-[50%]">
-              {wonPrizes}
-            </motion.div>
-          )}
-          <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 top-2" />
-          <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 rotate-180 bottom-2" />
+    <>
+      <div className="flex flex-col gap-5">
+        <div className="flex md:items-center md:justify-between gap-2 flex-col md:flex-row">
+          <Text0>Всего открытий боксов: {totalOpenedPromoBox}</Text0>
+          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
+            <Text0>
+              Осталось открытий боксов: {promoBoxAvailableOpensNumber}
+            </Text0>
+            <Button className="w-fit">получить больше</Button>
+          </div>
         </div>
 
-        {isLoading ? (
-          <Skeleton className="rounded-[10px] h-10 w-44" />
-        ) : (
-          <button
-            className="text-sm flex items-center justify-center font-semibold gap-2 h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
-            onClick={onOpenClick}
-          >
-            {isOpenLoading && (
-              <Loader
-                className={cn(
-                  "animate-spin w-3.5 h-3.5",
-                  scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
-                )}
-              />
+        <div className="flex flex-col items-center justify-center gap-10 h-80 bg-gray-5/25 dark:bg-[#4B4B4B]/[16%] rounded-xl">
+          <div className="relative w-full py-4 overflow-hidden">
+            {isLoading ? (
+              <PrizesSkeleton />
+            ) : (
+              <motion.div style={{ x }} className="flex gap-4 w-fit ml-[50%]">
+                {wonPrizes}
+              </motion.div>
             )}
-            Крутить рулетку
-          </button>
-        )}
+            <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 top-2" />
+            <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 rotate-180 bottom-2" />
+          </div>
+
+          {isLoading ? (
+            <Skeleton className="rounded-[10px] h-10 w-44" />
+          ) : (
+            <button
+              className="text-sm flex items-center justify-center font-semibold gap-2 h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
+              onClick={onOpenClick}
+            >
+              {isOpenLoading && (
+                <Loader
+                  className={cn(
+                    "animate-spin w-3.5 h-3.5",
+                    scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+                  )}
+                />
+              )}
+              Крутить рулетку
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+      <WinDialog open={winOpened} onOpenChange={setWinOpened} data={winData} />
+    </>
   )
 }
 
@@ -205,7 +224,16 @@ const RoundedTriangle = ({ className }: { className: string }) => (
 )
 
 const PrizesSkeleton = () => (
-  <div className="flex gap-4 w-fit ml-[50%]">
+  <div className="flex gap-4 w-fit ml-[50%] -translate-x-1/2">
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
     <Skeleton className="w-[136px] h-[136px] rounded-xl" />
     <Skeleton className="w-[136px] h-[136px] rounded-xl" />
     <Skeleton className="w-[136px] h-[136px] rounded-xl" />

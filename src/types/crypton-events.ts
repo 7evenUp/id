@@ -38,5 +38,5 @@ export interface Prize {
 
 export interface OpenContainerResponse {
   userData: string
-  prize: ContainerPrize
+  prize: Prize
 }

@@ -27,8 +27,16 @@ const cryptonEventsApi = api.injectEndpoints({
           containerId,
         method: "POST",
       }),
+      invalidatesTags: ["UserProfile"],
     }),
-    lastContainerOpenResults: build.query<void, void>({
+    lastContainerOpenResults: build.query<
+      {
+        prizeImageUrl: string
+        prizeTitle: string
+        userProfileName: string
+      }[],
+      void
+    >({
       query: () => ({
         url: "crypton-events/last-opened-containers/",
         method: "GET",

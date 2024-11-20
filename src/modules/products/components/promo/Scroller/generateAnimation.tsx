@@ -1,6 +1,4 @@
-import { ContainerPrize } from "@/types/crypton-events"
-
-import { cn } from "@/lib/classNames"
+import { ContainerPrize, Prize } from "@/types/crypton-events"
 
 const weightedSample = (items: Record<number, number>) => {
   const total = Object.values(items).reduce((sum, weight) => sum + weight, 0)
@@ -19,7 +17,7 @@ const weightedSample = (items: Record<number, number>) => {
 
 export const generateAnimation = (
   length: number,
-  winItem: { color: string; numberInContainer: number },
+  winItem: Prize,
   prizes: ContainerPrize[]
 ) => {
   const samples: Record<number, number> = {}
@@ -37,16 +35,15 @@ export const generateAnimation = (
 
         return (
           <div
-            className={cn(
-              "relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-sm text-center",
-              el === 40 && winItem.color === "red" && "bg-red-400",
-              el === 40 && winItem.color === "yellow" && "bg-yellow-400",
-              el === 40 && winItem.color === "blue" && "bg-blue-400",
-              el === 40 && winItem.color === "green" && "bg-green"
-            )}
+            className="relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-sm text-center"
             key={el}
           >
-            {prizes[generatedId].prize.image ? (
+            {el === 40 ? (
+              <img
+                src={winItem.image}
+                className="w-full h-full rounded-xl object-cover"
+              />
+            ) : prizes[generatedId].prize.image ? (
               <img
                 src={prizes[generatedId].prize.image}
                 className="w-full h-full rounded-xl object-cover"
