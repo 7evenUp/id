@@ -4,6 +4,7 @@ import Scroller from "../components/promo/Scroller"
 
 import Subheading from "@/shared/typography/Subheading"
 import Text0 from "@/shared/typography/Text0"
+import Text1 from "@/shared/typography/Text1"
 import Text2 from "@/shared/typography/Text2"
 
 import { useAppSelector } from "@/redux/hooks"
@@ -48,21 +49,23 @@ const PromoTab = () => {
 
       <Text0 className="mb-3.5 mt-9">{t("Последние подарки")}</Text0>
 
-      <div className="flex items-center flex-wrap gap-x-5 gap-y-6">
+      <div className="flex flex-wrap gap-x-5 gap-y-6">
         {lastOpenedContainers &&
           lastOpenedContainers.length !== 0 &&
           lastOpenedContainers.map((lastOpen, i) => (
-            <div className="flex flex-col gap-3 w-[120px]" key={i}>
+            <div className="flex flex-col gap-3 w-[140px]" key={i}>
               <img
                 src={lastOpen.prizeImageUrl}
-                className="bg-gray-2 rounded-[10px] w-full aspect-square"
+                className="bg-gray-2 rounded-[10px] w-full aspect-square object-cover"
               />
-              <Text2>{lastOpen.prizeTitle}</Text2>
-              <div className="flex items-center gap-1">
-                <div className="w-[18px] h-[18px] rounded-full bg-gray-3" />
-                <Text2>{lastOpen.userProfileName}</Text2>
+              <Text0>{lastOpen.prizeTitle}</Text0>
+              <div className="flex items-center gap-1 mt-auto">
+                <div className="w-[18px] h-[18px] rounded-full bg-gray-3 shrink-0" />
+                <Text2 className="truncate">{lastOpen.userProfileName}</Text2>
               </div>
-              <Text0 className="text-white/50">12 мин назад</Text0>
+              <Text1 className="text-gray-2 dark:text-white/50">
+                12 мин назад
+              </Text1>
             </div>
           ))}
       </div>

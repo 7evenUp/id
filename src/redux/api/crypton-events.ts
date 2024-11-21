@@ -10,6 +10,8 @@ interface OpenContainerArgs {
   containerId: number
 }
 
+const DELAY_AFTER_SUCCESSFUL_OPEN_IN_MS = 8000
+
 const cryptonEventsApi = api.injectEndpoints({
   endpoints: (build) => ({
     getContainers: build.query<ContainersResponse, void>({
@@ -27,7 +29,18 @@ const cryptonEventsApi = api.injectEndpoints({
           containerId,
         method: "POST",
       }),
-      invalidatesTags: ["UserProfile"],
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        await queryFulfilled
+        setTimeout(() => {
+          dispatch(
+            api.util.invalidateTags([
+              "UserProfile",
+              "LastOpenedContainers",
+              "Inventory",
+            ])
+          )
+        }, DELAY_AFTER_SUCCESSFUL_OPEN_IN_MS)
+      },
     }),
     lastContainerOpenResults: build.query<
       {
@@ -41,6 +54,7 @@ const cryptonEventsApi = api.injectEndpoints({
         url: "crypton-events/last-opened-containers/",
         method: "GET",
       }),
+      providesTags: ["LastOpenedContainers"],
     }),
   }),
   overrideExisting: false,

@@ -27,7 +27,7 @@ const WinDialog = ({
         >
           {data === undefined ? (
             <>
-              <div className="flex items-center justify-center pt-10 font-paperfiller text-3xl">
+              <div className="flex items-center justify-center pt-10 text-3xl">
                 Не удалось узнать приз
               </div>
               <Dialog.Close className="absolute right-4 top-4 sm:left-full sm:translate-x-2 md:translate-x-5 sm:top-0 text-black dark:text-white">
@@ -36,7 +36,7 @@ const WinDialog = ({
             </>
           ) : (
             <>
-              <div className="w-full h-full sm:h-auto flex flex-col-reverse items-center sm:items-stretch justify-center sm:justify-start sm:flex-row gap-6 sm:gap-0 font-circe-bold text-xs/[125%] mobile-sm:text-sm/[125%] sm:text-xs/[125%] md:text-sm/[125%] 2xl:text-base/[125%] 3xl:text-[20px]/[125%] tracking-[0.02em]">
+              <div className="w-full h-full sm:h-auto flex flex-col-reverse items-center sm:items-stretch justify-center sm:justify-start sm:flex-row gap-6 sm:gap-0 text-xs/[125%] mobile-sm:text-sm/[125%] sm:text-xs/[125%] md:text-sm/[125%] 2xl:text-base/[125%] 3xl:text-[20px]/[125%] tracking-[0.02em]">
                 <div className="flex shrink-0">
                   <img
                     src={data.prize.image!}
