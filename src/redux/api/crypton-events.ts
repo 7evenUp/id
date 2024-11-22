@@ -44,8 +44,10 @@ const cryptonEventsApi = api.injectEndpoints({
     }),
     lastContainerOpenResults: build.query<
       {
+        openedDatetime: string
         prizeImageUrl: string
         prizeTitle: string
+        userProfileAvatar: string
         userProfileName: string
       }[],
       void

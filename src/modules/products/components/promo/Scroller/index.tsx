@@ -44,6 +44,7 @@ const Scroller = () => {
   const [soundLoaded, setSoundLoaded] = useState(false)
   const [animationStarted, setAnimationStarted] = useState(false)
   const [winOpened, setWinOpened] = useState(false)
+  const [isOpenLocked, setIsOpenLocked] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -104,6 +105,8 @@ const Scroller = () => {
   ) => {
     event.preventDefault()
 
+    if (isOpenLoading || isOpenLocked) return
+
     if (
       !containerData ||
       containerData.containers.length === 0 ||
@@ -118,6 +121,8 @@ const Scroller = () => {
         containerId: containerData.containers[0].id,
         user_id: userId,
       }).unwrap()
+
+      setIsOpenLocked(true)
 
       x.jump(0)
 
@@ -138,6 +143,7 @@ const Scroller = () => {
 
       setTimeout(() => {
         setWinOpened(true)
+        setIsOpenLocked(false)
       }, ANIMATION_DURATION_IN_SEC * 1000 + 200)
     } catch (error) {
       // @ts-expect-error NO_RTKQ_ERROR_TYPES
@@ -184,8 +190,12 @@ const Scroller = () => {
             <Skeleton className="rounded-[10px] h-10 w-44" />
           ) : (
             <button
-              className="text-sm flex items-center justify-center font-semibold gap-2 h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
+              className={cn(
+                "text-sm flex items-center justify-center font-semibold gap-2 h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f] disabled:pointer-events-none",
+                isOpenLocked && "animate-pulse duration-1000"
+              )}
               onClick={onOpenClick}
+              disabled={promoBoxAvailableOpensNumber <= 0 || isOpenLocked}
             >
               {isOpenLoading && (
                 <Loader
@@ -195,7 +205,7 @@ const Scroller = () => {
                   )}
                 />
               )}
-              Крутить рулетку
+              {isOpenLocked ? "Крутим-крутим..." : "Крутить рулетку"}
             </button>
           )}
         </div>

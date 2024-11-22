@@ -1,4 +1,6 @@
 import { useTranslation } from "react-i18next"
+import { formatDistanceToNow } from "date-fns"
+import { ru, enUS } from "date-fns/locale"
 
 import Scroller from "../components/promo/Scroller"
 
@@ -16,6 +18,7 @@ const PromoTab = () => {
   const { t } = useTranslation("products")
 
   const scale = useAppSelector((state) => state.scale.value)
+  const lang = useAppSelector((state) => state.language.value)
 
   const { data: lastOpenedContainers } = useLastContainerOpenResultsQuery()
 
@@ -60,12 +63,20 @@ const PromoTab = () => {
               />
               <Text0>{lastOpen.prizeTitle}</Text0>
               <div className="flex items-center gap-1 mt-auto">
-                <div className="w-[18px] h-[18px] rounded-full bg-gray-3 shrink-0" />
+                <img
+                  className="shrink-0 w-[18px] h-[18px] bg-gray-3 rounded-full object-cover"
+                  src={lastOpen.userProfileAvatar}
+                />
                 <Text2 className="truncate">{lastOpen.userProfileName}</Text2>
               </div>
-              <Text1 className="text-gray-2 dark:text-white/50">
-                12 мин назад
-              </Text1>
+              {lastOpen.openedDatetime && (
+                <Text1 className="text-gray-2 dark:text-white/50">
+                  {formatDistanceToNow(new Date(lastOpen.openedDatetime), {
+                    addSuffix: true,
+                    locale: lang === "ru" ? ru : enUS,
+                  })}
+                </Text1>
+              )}
             </div>
           ))}
       </div>
