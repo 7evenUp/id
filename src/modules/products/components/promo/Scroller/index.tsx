@@ -6,11 +6,15 @@ import {
   useMotionValueEvent,
 } from "motion/react"
 import { toast } from "sonner"
+import { useTranslation } from "react-i18next"
 
 import Loader from "@/assets/icons/loader.svg?react"
+import Plus from "@/assets/icons/plus.svg?react"
 
 import { generateAnimation } from "./generateAnimation"
 import WinDialog from "./WinDialog"
+
+import SubscriptionMain from "@/modules/personal-account/modals/subscription/SubscriptionMain"
 
 import Text0 from "@/shared/typography/Text0"
 
@@ -38,6 +42,8 @@ const MIDDLE_X_POSITION = 5996
 const clickWheelSound = new Sound("./sounds/click_wheel.mp3")
 
 const Scroller = () => {
+  const { t } = useTranslation("products")
+
   const itemPassedRef = useRef(0)
 
   const [wonPrizes, setWonPrizes] = useState<JSX.Element | null>(null)
@@ -150,12 +156,12 @@ const Scroller = () => {
       if (error.status === 400) {
         // @ts-expect-error NO_RTKQ_ERROR_TYPES
         if (error.data.code === "not_enough_available_open_box_attempts") {
-          toast.error("Недостаточно ключей для лутбокса")
+          toast.error(t("Недостаточно ключей для лутбокса"))
         } else {
-          toast.error("Не удалось открыть контейнер")
+          toast.error(t("Не удалось открыть бокс"))
         }
       } else {
-        toast.error("Не удалось открыть контейнер")
+        toast.error(t("Не удалось открыть бокс"))
       }
     }
   }
@@ -164,12 +170,18 @@ const Scroller = () => {
     <>
       <div className="flex flex-col gap-5">
         <div className="flex md:items-center md:justify-between gap-2 flex-col md:flex-row">
-          <Text0>Всего открытий боксов: {totalOpenedPromoBox}</Text0>
+          <Text0>
+            {t("Всего открытий боксов:")} {totalOpenedPromoBox}
+          </Text0>
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
             <Text0>
-              Осталось открытий боксов: {promoBoxAvailableOpensNumber}
+              {t("Осталось открытий боксов:")} {promoBoxAvailableOpensNumber}
             </Text0>
-            <Button className="w-fit">получить больше</Button>
+            <SubscriptionMain>
+              <Button className="w-fit">
+                {t("получить больше")} <Plus className="w-5 h-5" />
+              </Button>
+            </SubscriptionMain>
           </div>
         </div>
 
@@ -192,7 +204,8 @@ const Scroller = () => {
             <button
               className={cn(
                 "text-sm flex items-center justify-center font-semibold gap-2 h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f] disabled:pointer-events-none",
-                isOpenLocked && "animate-pulse duration-1000"
+                isOpenLocked && "animate-pulse duration-1000",
+                promoBoxAvailableOpensNumber <= 0 && "opacity-50"
               )}
               onClick={onOpenClick}
               disabled={promoBoxAvailableOpensNumber <= 0 || isOpenLocked}
@@ -205,7 +218,7 @@ const Scroller = () => {
                   )}
                 />
               )}
-              {isOpenLocked ? "Крутим-крутим..." : "Крутить рулетку"}
+              {isOpenLocked ? t("Крутим-крутим...") : t("Крутить рулетку")}
             </button>
           )}
         </div>

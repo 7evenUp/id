@@ -1,4 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog"
+import { useTranslation } from "react-i18next"
 
 import CloseIcon from "@/assets/icons/close.svg?react"
 
@@ -19,6 +20,8 @@ const WinDialog = ({
   onOpenChange: (open: boolean) => void
   data: OpenContainerResponse | undefined
 }) => {
+  const { t } = useTranslation("products")
+
   const dispatch = useAppDispatch()
 
   const goToInventory = () => {
@@ -38,7 +41,7 @@ const WinDialog = ({
           {data === undefined ? (
             <>
               <div className="flex items-center justify-center pt-10 text-3xl">
-                Не удалось узнать приз
+                {t("Не удалось узнать приз")}
               </div>
               <Dialog.Close className="absolute right-4 top-4 sm:left-full sm:translate-x-2 md:translate-x-5 sm:top-0 text-black dark:text-white">
                 <CloseIcon className="w-6 h-6 sm:w-[36px] sm:h-[36px] 3xl:w-[44px] 3xl:h-[44px] [filter:_drop-shadow(0_0_1px_rgb(0_0_0/0.5));]" />
@@ -55,7 +58,7 @@ const WinDialog = ({
                 </div>
                 <div className="flex flex-col p-3 mobile-sm:py-0 mobile-sm:px-6 sm:p-4 2xl:p-6 3xl:p-8">
                   <TextAccent className="mb-2">
-                    Поздравляем! Вы выиграли:
+                    {t("Поздравляем! Вы выиграли:")}
                   </TextAccent>
                   <Subheading className="mb-1">{data.prize.title}</Subheading>
                   <p className="max-w-[380px] sm:max-w-auto">
@@ -65,7 +68,7 @@ const WinDialog = ({
                     className="mt-4 sm:mt-auto text-xs flex items-center justify-center w-full font-semibold gap-2 h-8 px-6 rounded-lg bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
                     onClick={goToInventory}
                   >
-                    Посмотреть в инвентаре
+                    {t("Посмотреть в инвентаре")}
                   </button>
                 </div>
               </div>
