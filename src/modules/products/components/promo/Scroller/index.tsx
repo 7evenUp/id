@@ -169,7 +169,7 @@ const Scroller = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <div className="flex md:items-center md:justify-between gap-2 flex-col md:flex-row">
+        <div className="flex md:items-center md:justify-between gap-2 flex-col md:flex-row lg:flex-col lg:items-start xl:flex-row xl:items-center">
           <Text0>
             {t("Всего открытий боксов:")} {totalOpenedPromoBox}
           </Text0>
@@ -178,7 +178,7 @@ const Scroller = () => {
               {t("Осталось открытий боксов:")} {promoBoxAvailableOpensNumber}
             </Text0>
             <SubscriptionMain>
-              <Button className="w-fit">
+              <Button className="w-fit" appearence="inverted">
                 {t("получить больше")} <Plus className="w-5 h-5" />
               </Button>
             </SubscriptionMain>

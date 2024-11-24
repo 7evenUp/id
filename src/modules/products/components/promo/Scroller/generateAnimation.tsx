@@ -1,5 +1,7 @@
 import { ContainerPrize, Prize } from "@/types/crypton-events"
 
+import InfoDialog from "./InfoDialog"
+
 const weightedSample = (items: Record<number, number>) => {
   const total = Object.values(items).reduce((sum, weight) => sum + weight, 0)
 
@@ -33,25 +35,29 @@ export const generateAnimation = (
         const generatedId =
           generatedResult === undefined ? 0 : parseInt(generatedResult)
 
+        const image =
+          el === 40 ? winItem.image : prizes[generatedId].prize.image
+        const title =
+          el === 40 ? winItem.title : prizes[generatedId].prize.title
+        const description =
+          el === 40
+            ? winItem.description
+            : prizes[generatedId].prize.description
+
         return (
-          <div
-            className="relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-sm text-center"
+          <InfoDialog
             key={el}
+            image={image}
+            title={title}
+            description={description}
           >
-            {el === 40 ? (
+            <div className="relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-sm text-center">
               <img
-                src={winItem.image}
+                src={image}
                 className="w-full h-full rounded-xl object-cover"
               />
-            ) : prizes[generatedId].prize.image ? (
-              <img
-                src={prizes[generatedId].prize.image}
-                className="w-full h-full rounded-xl object-cover"
-              />
-            ) : (
-              <span>{prizes[generatedId].prize.title}</span>
-            )}
-          </div>
+            </div>
+          </InfoDialog>
         )
       })}
     </>
