@@ -70,13 +70,15 @@ const InfoDialog = ({
                       </>
                     )
                   ) : (
-                    <a
-                      href={getgemsLink}
-                      target="_blank"
-                      className="underline underline-offset-2 hover:opacity-70"
-                    >
-                      GetGems
-                    </a>
+                    getgemsLink && (
+                      <a
+                        href={getgemsLink}
+                        target="_blank"
+                        className="underline underline-offset-2 hover:opacity-70"
+                      >
+                        GetGems
+                      </a>
+                    )
                   )}
                 </div>
               </div>
