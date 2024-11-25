@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
+import {
+  addHours,
+  differenceInHours,
+  differenceInMinutes,
+  isAfter,
+} from "date-fns"
 
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
 import Copy from "@/assets/icons/copy.svg?react"
@@ -130,6 +136,7 @@ const Prize = ({
   isUsed,
   instruction,
   photos,
+  receivedAt,
 }: InventoryItem) => {
   const { t } = useTranslation("products")
 
@@ -141,6 +148,18 @@ const Prize = ({
 
   const [claim, { isLoading }] = useClaimMutation()
   const [claimNft, { isLoading: isNftLoading }] = useClaimNftMutation()
+
+  const HOURS_UNTIL_UNFREEZE = import.meta.env.VITE_HOURS_UNTIL_UNFREEZE || 48
+  const unfreezeDate = addHours(new Date(receivedAt), HOURS_UNTIL_UNFREEZE)
+  const isAbleToClaim = isAfter(new Date(), unfreezeDate)
+
+  let hours = 0
+  let minutes = 0
+
+  if (!isAbleToClaim) {
+    hours = differenceInHours(unfreezeDate, new Date())
+    minutes = Math.round(differenceInMinutes(unfreezeDate, new Date()) % 60)
+  }
 
   const onSubmit = async () => {
     try {
@@ -166,6 +185,10 @@ const Prize = ({
       // @ts-expect-error no-rtkq-error-types
       if (error.data.code === "inventory_prize_not_found") {
         toast.error(t("inventory.error-inventory_prize_not_found"))
+      }
+      // @ts-expect-error no-rtkq-error-types
+      if (error.data.code === "prize_activation_freeze") {
+        toast.error("Активация заморожена")
       }
       // @ts-expect-error no-rtkq-error-types
       else if (error.data.code === "sponsor_prize_is_unclaimed") {
@@ -277,8 +300,11 @@ const Prize = ({
                 isLoading={isNftLoading}
                 onClick={onNftSubmit}
                 className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
+                disabled={!isAbleToClaim}
               >
-                {t("inventory.activate-btn")}
+                {isAbleToClaim
+                  ? t("inventory.activate-btn")
+                  : `${hours}ч:${minutes}мин`}
               </Button>
             ) : type === "crypton_promo_code" ? (
               <Button
@@ -286,7 +312,9 @@ const Prize = ({
                 onClick={onSubmit}
                 className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
               >
-                {t("inventory.activate-btn")}
+                {isAbleToClaim
+                  ? t("inventory.activate-btn")
+                  : `${hours}ч:${minutes}мин`}
               </Button>
             ) : (
               type === "sponsor_promo_code" &&
