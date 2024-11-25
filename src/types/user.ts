@@ -5,28 +5,29 @@ export interface User {
   discordUsername: string
   email: string
   id: number
+  investFundBalance: number
+  investFundClosestBurnings: Array<{ burningDate: string; amount: number }>
   isBanned: boolean
   isDarkTheme: boolean
   isPaid: boolean
+  isPrimeInstructionShown: boolean
   isReferralDiscountAvailable: boolean
   knowledge: string
   languageCode: string
   nutcrackerCount: number
   points: number
   profileUsername: string
+  promoBoxAvailableOpensNumber: number
   referralInfo: ReferralInfo
   subscriptionInfo: SubscriptionInfo
   subscriptions: ActiveUserSubscription[]
-  telegramUsername: string
   telegramId: number
+  telegramUsername: string
+  timezone: string
+  tonWallet: string | null
+  totalOpenedPromoBox: number
   wallet: string | null
   waxWallet: string | null
-  tonWallet: string | null
-  utmData: string | null
-  timezone: string
-  investFundBalance: number
-  investFundClosestBurnings: Array<{ burningDate: string; amount: number }>
-  isPrimeInstructionShown: boolean
 }
 
 export interface Avatar {

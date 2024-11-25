@@ -17,6 +17,8 @@ export const buttonVariants = cva(
         success:
           "gap-1 text-sm/[14px] 2xl:text-base/[16px] px-2.5 py-[3px] rounded-full hover:bg-opacity-70 active:bg-opacity-80 text-white bg-success disabled:hover:bg-opacity-100",
         text: "text-[10px] 2xl:text-xs/[12px] leading-[140%] tracking-[0.05em] font-medium text-gray-3 hover:text-gray-4",
+        inverted:
+          "gap-1 text-sm/[14px] 2xl:text-base/[16px] px-2.5 py-[3px] rounded-full bg-gray-1 text-white hover:bg-white hover:text-gray-1 border border-gray-1 dark:bg-white dark:text-gray-1 dark:hover:bg-gray-1 dark:hover:text-white",
       },
     },
     defaultVariants: {

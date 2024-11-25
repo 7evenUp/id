@@ -124,9 +124,9 @@ const SubscriptionCard = ({
                 {prizes.map((prize) => (
                   <Text1 key={prize.id}>
                     - {prize.translations.ru.name}{" "}
-                    {prize.remainingCount && (
+                    {/* {prize.remainingCount && (
                       <span>(осталось {prize.remainingCount})</span>
-                    )}
+                    )} */}
                   </Text1>
                 ))}
               </HoverCardContent>
@@ -152,9 +152,9 @@ const SubscriptionCard = ({
                 {prizes.map((prize) => (
                   <Text1>
                     - {prize.translations.ru.name}{" "}
-                    {prize.remainingCount && (
+                    {/* {prize.remainingCount && (
                       <span>(осталось {prize.remainingCount})</span>
-                    )}
+                    )} */}
                   </Text1>
                 ))}
               </PopoverContent>

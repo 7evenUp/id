@@ -20,7 +20,13 @@ import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
 
-const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
+const SubscriptionMain = ({
+  triggerText,
+  children,
+}: {
+  triggerText?: string
+  children?: React.ReactNode
+}) => {
   // const [selectionOpened, setSelectionOpened] = useState(false)
   const [primeOpened, setPrimeOpened] = useState(false)
   // const [calendarOpened, setCalendarOpened] = useState(false)
@@ -102,7 +108,11 @@ const SubscriptionMain = ({ triggerText }: { triggerText?: string }) => {
 
   return (
     <>
-      <Button onClick={openPrime}>{triggerText}</Button>
+      {triggerText ? (
+        <Button onClick={openPrime}>{triggerText}</Button>
+      ) : (
+        <div onClick={openPrime}>{children}</div>
+      )}
 
       {/* <SelectSubscription
         open={selectionOpened}

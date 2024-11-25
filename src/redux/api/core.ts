@@ -17,6 +17,7 @@ export const api = createApi({
     "Points",
     "Shares",
     "SharesHistory",
+    "LastOpenedContainers",
   ],
   endpoints: () => ({}),
 })

@@ -2,6 +2,8 @@ import { api } from "./core"
 
 import { Subscription } from "@/types/subscriptions"
 
+const DELAY_AFTER_SUCCESSFUL_BUY_IN_MS = 600
+
 const subscriptionApi = api.injectEndpoints({
   endpoints: (build) => ({
     subscriptions: build.query<Subscription[], void>({
@@ -25,12 +27,19 @@ const subscriptionApi = api.injectEndpoints({
         // @ts-expect-error No-Error-Types
         errorCode: response.data.code,
       }),
-      invalidatesTags: [
-        "UserProfile",
-        "TxHistory",
-        "SharesHistory",
-        "LinksAndChannels",
-      ],
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        await queryFulfilled
+        setTimeout(() => {
+          dispatch(
+            api.util.invalidateTags([
+              "UserProfile",
+              "TxHistory",
+              "SharesHistory",
+              "LinksAndChannels",
+            ])
+          )
+        }, DELAY_AFTER_SUCCESSFUL_BUY_IN_MS)
+      },
     }),
   }),
   overrideExisting: false,
