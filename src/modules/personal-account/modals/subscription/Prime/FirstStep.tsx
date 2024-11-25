@@ -396,6 +396,7 @@ const FirstStep = ({
                   prizes={sub.benefits}
                   selected={activeSub === i}
                   onSelect={() => onSelect(i)}
+                  order={i}
                 />
               )
             })}

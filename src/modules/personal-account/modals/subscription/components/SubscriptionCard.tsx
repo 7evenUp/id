@@ -21,6 +21,8 @@ import { SubscriptionBenefit } from "@/types/subscriptions"
 
 import { cn } from "@/lib/classNames"
 
+const HARDCODED_BENEFIT_NAME = "Ключик для Lootbox"
+
 const SubscriptionCard = ({
   duration,
   discount,
@@ -28,6 +30,7 @@ const SubscriptionCard = ({
   onSelect,
   price,
   prizes,
+  order,
 }: {
   duration: string
   price: number
@@ -35,6 +38,7 @@ const SubscriptionCard = ({
   onSelect: () => void
   discount: { percent: number; amount: number } | null
   prizes?: SubscriptionBenefit[]
+  order: number
 }) => {
   const { t } = useTranslation("modals")
 
@@ -123,7 +127,17 @@ const SubscriptionCard = ({
               >
                 {prizes.map((prize) => (
                   <Text1 key={prize.id}>
-                    - {prize.translations.ru.name}{" "}
+                    {prize.translations.ru.name === HARDCODED_BENEFIT_NAME
+                      ? order === 0
+                        ? "- 1 открытие бокса"
+                        : order === 1
+                        ? "- 3 открытия бокса"
+                        : order === 2
+                        ? "- 6 открытий бокса"
+                        : order === 3
+                        ? "- 12 открытий бокса"
+                        : "- " + prize.translations.ru.name
+                      : "- " + prize.translations.ru.name}
                     {/* {prize.remainingCount && (
                       <span>(осталось {prize.remainingCount})</span>
                     )} */}
