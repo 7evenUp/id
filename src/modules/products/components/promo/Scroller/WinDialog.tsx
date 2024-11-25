@@ -6,8 +6,8 @@ import CloseIcon from "@/assets/icons/close.svg?react"
 import TextAccent from "@/shared/typography/TextAccent"
 import Subheading from "@/shared/typography/Subheading"
 
-import { changeRootTab } from "@/redux/root-tabs/slice"
-import { useAppDispatch } from "@/redux/hooks"
+// import { changeRootTab } from "@/redux/root-tabs/slice"
+// import { useAppDispatch } from "@/redux/hooks"
 
 import { OpenContainerResponse } from "@/types/crypton-events"
 
@@ -22,12 +22,12 @@ const WinDialog = ({
 }) => {
   const { t } = useTranslation("products")
 
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
-  const goToInventory = () => {
-    onOpenChange(false)
-    dispatch(changeRootTab("inventory"))
-  }
+  // const goToInventory = () => {
+  //   onOpenChange(false)
+  //   dispatch(changeRootTab("inventory"))
+  // }
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -64,12 +64,50 @@ const WinDialog = ({
                   <p className="max-w-[380px] sm:max-w-auto">
                     {data.prize.description}
                   </p>
-                  <button
+                  <div className="flex items-center gap-3 mt-4 sm:mt-auto">
+                    {data.prize.link ? (
+                      data.prize.link === data.prize.nftImageUrl ? (
+                        <a
+                          href={data.prize.nftImageUrl}
+                          target="_blank"
+                          className="underline underline-offset-2 hover:opacity-70"
+                        >
+                          GetGems
+                        </a>
+                      ) : (
+                        <>
+                          <a
+                            href={data.prize.link}
+                            target="_blank"
+                            className="underline underline-offset-2 hover:opacity-70"
+                          >
+                            Подробнее
+                          </a>
+                          <a
+                            href={data.prize.nftImageUrl}
+                            target="_blank"
+                            className="underline underline-offset-2 hover:opacity-70"
+                          >
+                            GetGems
+                          </a>
+                        </>
+                      )
+                    ) : (
+                      <a
+                        href={data.prize.nftImageUrl}
+                        target="_blank"
+                        className="underline underline-offset-2 hover:opacity-70"
+                      >
+                        GetGems
+                      </a>
+                    )}
+                  </div>
+                  {/* <button
                     className="mt-4 sm:mt-auto text-xs flex items-center justify-center w-full font-semibold gap-2 h-8 px-6 rounded-lg bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f]"
                     onClick={goToInventory}
                   >
                     {t("Посмотреть в инвентаре")}
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <Dialog.Close className="absolute right-4 top-4 sm:left-full sm:translate-x-2 md:translate-x-5 sm:top-0 text-black dark:text-white">

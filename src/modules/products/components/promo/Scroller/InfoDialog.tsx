@@ -10,11 +10,15 @@ const InfoDialog = ({
   image,
   title,
   description,
+  getgemsLink,
+  moreLink,
 }: {
   children: React.ReactNode
   image: string
   title: string
   description: string
+  getgemsLink: string
+  moreLink?: string
 }) => {
   return (
     <Dialog.Root>
@@ -37,6 +41,44 @@ const InfoDialog = ({
               <div className="flex flex-col p-3 mobile-sm:py-0 mobile-sm:px-6 sm:p-4 2xl:p-6 3xl:p-8">
                 <Subheading className="mb-1">{title}</Subheading>
                 <p className="max-w-[380px] sm:max-w-auto">{description}</p>
+                <div className="flex items-center gap-3 mt-auto">
+                  {moreLink ? (
+                    moreLink === getgemsLink ? (
+                      <a
+                        href={getgemsLink}
+                        target="_blank"
+                        className="underline underline-offset-2 hover:opacity-70"
+                      >
+                        GetGems
+                      </a>
+                    ) : (
+                      <>
+                        <a
+                          href={moreLink}
+                          target="_blank"
+                          className="underline underline-offset-2 hover:opacity-70"
+                        >
+                          Подробнее
+                        </a>
+                        <a
+                          href={getgemsLink}
+                          target="_blank"
+                          className="underline underline-offset-2 hover:opacity-70"
+                        >
+                          GetGems
+                        </a>
+                      </>
+                    )
+                  ) : (
+                    <a
+                      href={getgemsLink}
+                      target="_blank"
+                      className="underline underline-offset-2 hover:opacity-70"
+                    >
+                      GetGems
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
             <Dialog.Close className="absolute right-4 top-4 sm:left-full sm:translate-x-2 md:translate-x-5 sm:top-0 text-black dark:text-white">

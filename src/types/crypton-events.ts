@@ -24,6 +24,7 @@ export interface Prize {
   id: number
   image: string
   link: string
+  nftImageUrl: string
   rarity: string
   title: string
   totalCountForUser: number

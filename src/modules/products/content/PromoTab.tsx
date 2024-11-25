@@ -3,11 +3,11 @@ import { formatDistanceToNow } from "date-fns"
 import { ru, enUS } from "date-fns/locale"
 
 import Scroller from "../components/promo/Scroller"
+import InfoDialog from "../components/promo/Scroller/InfoDialog"
 
 import Subheading from "@/shared/typography/Subheading"
 import Text0 from "@/shared/typography/Text0"
 import Text1 from "@/shared/typography/Text1"
-import Text2 from "@/shared/typography/Text2"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useLastContainerOpenResultsQuery } from "@/redux/api/crypton-events"
@@ -50,34 +50,43 @@ const PromoTab = () => {
 
       <Scroller />
 
-      <Text0 className="mb-3.5 mt-9">{t("Последние подарки")}</Text0>
+      <Text0 className="mb-3.5 mt-9 text-center mobile-sm:text-left">
+        {t("Последние подарки")}
+      </Text0>
 
-      <div className="flex flex-wrap gap-x-5 gap-y-6">
+      <div className="flex flex-col items-center mobile-sm:flex-row mobile-sm:items-stretch mobile-sm:flex-wrap gap-x-5 gap-y-6">
         {lastOpenedContainers &&
           lastOpenedContainers.length !== 0 &&
           lastOpenedContainers.map((lastOpen, i) => (
-            <div className="flex flex-col gap-3 w-[140px]" key={i}>
-              <img
-                src={lastOpen.prizeImageUrl}
-                className="bg-gray-2 rounded-[10px] w-full aspect-square object-cover"
-              />
-              <Text0>{lastOpen.prizeTitle}</Text0>
-              <div className="flex items-center gap-1 mt-auto">
+            <InfoDialog
+              image={lastOpen.prizeImageUrl}
+              title={lastOpen.prizeTitle}
+              description={lastOpen.prizeDescription}
+              getgemsLink={lastOpen.prizeNftImageUrl}
+              key={i}
+            >
+              <div className="flex flex-col gap-3 w-[250px] mobile-sm:w-[160px]">
                 <img
-                  className="shrink-0 w-[18px] h-[18px] bg-gray-3 rounded-full object-cover"
-                  src={lastOpen.userProfileAvatar}
+                  src={lastOpen.prizeImageUrl}
+                  className="bg-gray-2 rounded-[10px] w-full aspect-square object-cover"
                 />
-                <Text2 className="truncate">{lastOpen.userProfileName}</Text2>
+                <div className="flex items-center gap-1 mt-auto">
+                  <img
+                    className="shrink-0 w-6 h-6 bg-gray-3 rounded-full object-cover"
+                    src={lastOpen.userProfileAvatar}
+                  />
+                  <Text0 className="truncate">{lastOpen.userProfileName}</Text0>
+                </div>
+                {lastOpen.openedDatetime && (
+                  <Text1 className="text-gray-2 dark:text-white/50 text-left">
+                    {formatDistanceToNow(new Date(lastOpen.openedDatetime), {
+                      addSuffix: true,
+                      locale: lang === "ru" ? ru : enUS,
+                    })}
+                  </Text1>
+                )}
               </div>
-              {lastOpen.openedDatetime && (
-                <Text1 className="text-gray-2 dark:text-white/50">
-                  {formatDistanceToNow(new Date(lastOpen.openedDatetime), {
-                    addSuffix: true,
-                    locale: lang === "ru" ? ru : enUS,
-                  })}
-                </Text1>
-              )}
-            </div>
+            </InfoDialog>
           ))}
       </div>
     </div>

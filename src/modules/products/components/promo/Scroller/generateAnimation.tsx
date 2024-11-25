@@ -43,6 +43,12 @@ export const generateAnimation = (
           el === 40
             ? winItem.description
             : prizes[generatedId].prize.description
+        const moreLink =
+          el === 40 ? winItem.link : prizes[generatedId].prize.link
+        const getgemsLink =
+          el === 40
+            ? winItem.nftImageUrl
+            : prizes[generatedId].prize.nftImageUrl
 
         return (
           <InfoDialog
@@ -50,6 +56,8 @@ export const generateAnimation = (
             image={image}
             title={title}
             description={description}
+            moreLink={moreLink}
+            getgemsLink={getgemsLink}
           >
             <div className="relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-sm text-center">
               <img
