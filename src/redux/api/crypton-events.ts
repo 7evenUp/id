@@ -6,7 +6,6 @@ import {
 } from "@/types/crypton-events"
 
 interface OpenContainerArgs {
-  user_id: number
   containerId: number
 }
 
@@ -21,12 +20,8 @@ const cryptonEventsApi = api.injectEndpoints({
       }),
     }),
     openContainer: build.mutation<OpenContainerResponse, OpenContainerArgs>({
-      query: ({ user_id, containerId }) => ({
-        url:
-          "crypton-events/containers/open/?user_id=" +
-          user_id +
-          "&containerId=" +
-          containerId,
+      query: ({ containerId }) => ({
+        url: "crypton-events/containers/open/?containerId=" + containerId,
         method: "POST",
       }),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {

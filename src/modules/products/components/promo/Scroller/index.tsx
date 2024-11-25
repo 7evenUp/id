@@ -59,11 +59,7 @@ const Scroller = () => {
   const [openContainer, { data: winData, isLoading: isOpenLoading }] =
     useOpenContainerMutation()
 
-  const {
-    promoBoxAvailableOpensNumber,
-    totalOpenedPromoBox,
-    id: userId,
-  } = profile!
+  const { promoBoxAvailableOpensNumber, totalOpenedPromoBox } = profile!
 
   const x = useMotionValue(0)
 
@@ -125,7 +121,6 @@ const Scroller = () => {
     try {
       const winResult = await openContainer({
         containerId: containerData.containers[0].id,
-        user_id: userId,
       }).unwrap()
 
       setIsOpenLocked(true)
@@ -160,6 +155,10 @@ const Scroller = () => {
         } else {
           toast.error(t("Не удалось открыть бокс"))
         }
+      }
+      // @ts-expect-error NO_RTKQ_ERROR_TYPES
+      else if (error.status === 429) {
+        toast.error("Слишком много запросов. Пожалуйста, попробуйте позже")
       } else {
         toast.error(t("Не удалось открыть бокс"))
       }

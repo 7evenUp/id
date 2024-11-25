@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_WALLET_CONNECT_PROJECT_ID: string
   readonly VITE_YM_ID: string
   readonly VITE_TG_BOT_LINK: string
+  readonly VITE_HOURS_UNTIL_UNFREEZE: number
 }
 
 interface ImportMeta {
