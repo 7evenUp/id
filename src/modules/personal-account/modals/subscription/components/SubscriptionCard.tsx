@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { isDesktop } from "react-device-detect"
 
@@ -17,32 +18,89 @@ import Text2 from "@/shared/typography/Text2"
 
 import { useAppSelector } from "@/redux/hooks"
 
-import { SubscriptionBenefit } from "@/types/subscriptions"
+import { Subscription } from "@/types/subscriptions"
 
 import { cn } from "@/lib/classNames"
 
 const HARDCODED_BENEFIT_NAME = "Ключик для Lootbox"
 
 const SubscriptionCard = ({
-  duration,
-  discount,
+  subscription,
   selected,
   onSelect,
-  price,
-  prizes,
   order,
+  discounts,
+  discountKind,
+  discountAmount,
+  isValidForPromo,
 }: {
-  duration: string
-  price: number
+  subscription: Subscription
   selected: boolean
   onSelect: () => void
-  discount: { percent: number; amount: number } | null
-  prizes?: SubscriptionBenefit[]
   order: number
+  discounts:
+    | Array<{
+        subscriptionId: number
+        discountAmount: number
+      }>
+    | undefined
+  discountAmount: number | undefined
+  discountKind:
+    | {
+        id: "MONEY" | "PERCENT"
+        label: "Money" | "%"
+      }
+    | undefined
+  isValidForPromo: boolean
 }) => {
   const { t } = useTranslation("modals")
 
+  const { baseDiscount, price, id, duration, benefits, individualPrice } =
+    subscription
+
+  const [cardPrice, setCardPrice] = useState(0)
+
   const scale = useAppSelector((state) => state.scale.value)
+
+  const getSubscriptionPrice = () => {
+    return individualPrice ? individualPrice : price
+  }
+
+  useEffect(() => {
+    const price = getSubscriptionPrice()
+
+    let fullPrice
+
+    if (isValidForPromo && discountKind && discountAmount && discounts) {
+      const matchedDiscount = discounts.find((el) => el.subscriptionId === id)
+
+      const preferedDiscount = matchedDiscount
+        ? matchedDiscount.discountAmount
+        : discountAmount
+
+      if (discountKind.id === "MONEY") {
+        if (baseDiscount) {
+          fullPrice = price - price * (baseDiscount / 100) - preferedDiscount
+        } else {
+          fullPrice = price - preferedDiscount
+        }
+      } else {
+        if (baseDiscount) {
+          fullPrice = price - price * (baseDiscount / 100 + preferedDiscount)
+        } else {
+          fullPrice = price - price * preferedDiscount
+        }
+      }
+
+      setCardPrice(fullPrice)
+    } else {
+      if (baseDiscount) {
+        setCardPrice(price - price * (baseDiscount / 100))
+      } else {
+        setCardPrice(price)
+      }
+    }
+  }, [discountKind, discountAmount, discounts])
 
   return (
     <div
@@ -60,7 +118,9 @@ const SubscriptionCard = ({
           scale && "3xl:py-[0.391vw] 3xl:rounded-t-[0.781vw]"
         )}
       >
-        {duration}
+        {t("buy-subs.first-step.duration", {
+          count: duration.id,
+        })}
       </Text2>
       <span
         className={cn(
@@ -70,9 +130,19 @@ const SubscriptionCard = ({
           selected && scale && "3xl:mt-[1.823vw]"
         )}
       >
-        ${price}
+        $
+        {Number.isInteger(cardPrice) ? (
+          cardPrice
+        ) : (
+          <>
+            {cardPrice.toFixed(2).split(".")[0]}
+            <span className="text-xl">
+              .{cardPrice.toFixed(2).split(".")[1]}
+            </span>
+          </>
+        )}
       </span>
-      {discount && (
+      {price !== cardPrice && (
         <div
           className={cn(
             "flex items-center gap-1.5",
@@ -85,7 +155,7 @@ const SubscriptionCard = ({
               scale && "3xl:rounded-[0.13vw] 3xl:px-[0.26vw] 3xl:py-[0.13vw]"
             )}
           >
-            -{discount.percent}%
+            -{Math.round(100 - (cardPrice * 100) / price)}%
           </Text2>
           <div
             className={cn(
@@ -94,14 +164,15 @@ const SubscriptionCard = ({
             )}
           >
             <Text2 className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
-              {t("buy-subs.first-step.savings")} {discount.amount}$
+              {t("buy-subs.first-step.savings")}{" "}
+              {(price - cardPrice).toFixed(2)}$
             </Text2>
           </div>
         </div>
       )}
       <div className="flex flex-col items-center mt-auto">
-        {prizes &&
-          prizes.length > 0 &&
+        {benefits &&
+          benefits.length > 0 &&
           (isDesktop ? (
             <HoverCard openDelay={150}>
               <HoverCardTrigger
@@ -125,7 +196,7 @@ const SubscriptionCard = ({
                   scale && "3xl:gap-[0.26vw] 3xl:w-[19vw]"
                 )}
               >
-                {prizes.map((prize) => (
+                {benefits.map((prize) => (
                   <Text1 key={prize.id}>
                     {prize.translations.ru.name === HARDCODED_BENEFIT_NAME
                       ? order === 0
@@ -163,7 +234,7 @@ const SubscriptionCard = ({
                 <Text0>Бонусы</Text0>
               </PopoverTrigger>
               <PopoverContent className="flex flex-col gap-1 w-[280px]">
-                {prizes.map((prize) => (
+                {benefits.map((prize) => (
                   <Text1>
                     - {prize.translations.ru.name}{" "}
                     {/* {prize.remainingCount && (

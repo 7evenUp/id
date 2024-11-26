@@ -65,6 +65,19 @@ const FirstStep = ({
   const [activeSub, setActiveSub] = useState<number | null>(null)
   const [totalPrice, setTotalPrice] = useState(0)
   const [promo, setPromo] = useState("")
+  const [validFor, setValidFor] = useState<number[]>([])
+  const [invalidFor, setInvalidFor] = useState<number[]>([])
+  const [discountAmount, setDiscountAmount] = useState(0)
+  const [discountKind, setDiscountKind] = useState<{
+    id: "MONEY" | "PERCENT"
+    label: "Money" | "%"
+  }>()
+  const [discounts, setDiscounts] = useState<
+    Array<{
+      subscriptionId: number
+      discountAmount: number
+    }>
+  >([])
   // больше ли скидка промокода чем реф скидка
   const [isPromoLarger, setIsPromoLarger] = useState<boolean | null>(null)
 
@@ -93,6 +106,12 @@ const FirstStep = ({
 
   const onPromoInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (activeSub === null) return
+
+    setDiscountAmount(0)
+    setDiscountKind(undefined)
+    setDiscounts([])
+    setValidFor([])
+    setInvalidFor([])
 
     if (isError || isValidateSuccess) resetRequest()
 
@@ -133,6 +152,12 @@ const FirstStep = ({
 
   const onSelect = (subID: number) => {
     if (isError || isValidateSuccess) resetRequest()
+
+    setDiscountAmount(0)
+    setDiscountKind(undefined)
+    setDiscounts([])
+    setValidFor([])
+    setInvalidFor([])
 
     const { baseDiscount, referralDiscountAmount, referralDiscountKind } =
       subscriptions[subID]
@@ -179,11 +204,22 @@ const FirstStep = ({
     const price = getSubscriptionPrice(activeSub)
 
     try {
-      const { discountAmount, discountKind, discounts } =
-        await validatePromocode({
-          promocode: promo,
-          subscription: subscriptions[activeSub].id,
-        }).unwrap()
+      const {
+        discountAmount,
+        discountKind,
+        discounts,
+        invalidForSubscriptions,
+        validForSubscriptions,
+      } = await validatePromocode({
+        promocode: promo,
+        subscription: subscriptions[activeSub].id,
+      }).unwrap()
+
+      setDiscountAmount(discountAmount)
+      setDiscountKind(discountKind)
+      setDiscounts(discounts)
+      setValidFor(validForSubscriptions)
+      setInvalidFor(invalidForSubscriptions)
 
       const matchedDiscount = discounts.find(
         (el) => el.subscriptionId === subscriptions[activeSub].id
@@ -370,33 +406,29 @@ const FirstStep = ({
             )}
           >
             {subscriptions.map((sub, i) => {
-              let discount, activePrice, price
-
-              if (sub.baseDiscount !== null && sub.baseDiscountAmount !== null)
-                discount = {
-                  percent: sub.baseDiscount,
-                  amount: sub.baseDiscountAmount,
-                }
-              else discount = null
-
-              if (sub.individualPrice) activePrice = sub.individualPrice
-              else activePrice = sub.price
-
-              if (discount === null) price = activePrice
-              else price = activePrice - discount.amount
-
               return (
                 <SubscriptionCard
                   key={sub.id}
-                  duration={t("buy-subs.first-step.duration", {
-                    count: sub.duration.id,
-                  })}
-                  discount={discount}
-                  price={price}
-                  prizes={sub.benefits}
+                  subscription={sub}
                   selected={activeSub === i}
                   onSelect={() => onSelect(i)}
                   order={i}
+                  discounts={discounts}
+                  discountAmount={discountAmount}
+                  discountKind={discountKind}
+                  isValidForPromo={
+                    validFor.length === 0 && invalidFor.length === 0
+                      ? true
+                      : invalidFor.length === 0 && validFor.includes(sub.id)
+                      ? true
+                      : validFor.length === 0 && !invalidFor.includes(sub.id)
+                      ? true
+                      : validFor.length !== 0 &&
+                        invalidFor.length !== 0 &&
+                        validFor.includes(sub.id)
+                      ? true
+                      : false
+                  }
                 />
               )
             })}
