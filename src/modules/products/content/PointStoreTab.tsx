@@ -288,7 +288,7 @@ export default PointStoreTab
 
 const Prize = (prize: PointsPrize) => {
   const { t } = useTranslation("products")
-  
+
   const { image, photos, title, type, price, availableQuantity } = prize
 
   const scale = useAppSelector((state) => state.scale.value)
@@ -477,6 +477,32 @@ const ConfirmDialog = ({
 
           case "excepted_soon":
             toast.error("Активация станет доступна, когда сервис будет запущен")
+            break
+
+          case "inventory_prize_not_found":
+            toast.error("Произошла ошибка inventory_prize_not_found")
+            break
+
+          case "sponsor_prize_is_unclaimed":
+            toast.error("Произошла ошибка sponsor_prize_is_unclaimed")
+            break
+
+          case "inventory_prize_already_used":
+            toast.error("Произошла ошибка inventory_prize_already_used")
+            break
+
+          case "mint_error":
+            toast.error("Произошла ошибка mint_error")
+            break
+
+          case "crypton_service_not_configured":
+            toast.error("Произошла ошибка crypton_service_not_configured")
+            break
+
+          case "prize_activation_freeze":
+            toast.error(
+              "Активация приза заморожена. Пожалуйста, попробуйте позже"
+            )
             break
 
           default:
