@@ -9,16 +9,16 @@ import { toast } from "sonner"
 import { useTranslation } from "react-i18next"
 
 import Loader from "@/assets/icons/loader.svg?react"
-import Plus from "@/assets/icons/plus.svg?react"
+// import Plus from "@/assets/icons/plus.svg?react"
 
 import { generateAnimation } from "./generateAnimation"
 import WinDialog from "./WinDialog"
 
-import SubscriptionMain from "@/modules/personal-account/modals/subscription/SubscriptionMain"
+// import SubscriptionMain from "@/modules/personal-account/modals/subscription/SubscriptionMain"
 
 import Text0 from "@/shared/typography/Text0"
 
-import Button from "@/shared/ui/Button"
+// import Button from "@/shared/ui/Button"
 import { Skeleton } from "@/shared/ui/Skeleton"
 
 import { useAppSelector } from "@/redux/hooks"
@@ -176,11 +176,11 @@ const Scroller = () => {
             <Text0>
               {t("Осталось открытий боксов:")} {promoBoxAvailableOpensNumber}
             </Text0>
-            <SubscriptionMain>
+            {/* <SubscriptionMain>
               <Button className="w-fit" appearence="inverted">
                 {t("получить больше")} <Plus className="w-5 h-5" />
               </Button>
-            </SubscriptionMain>
+            </SubscriptionMain> */}
           </div>
         </div>
 
