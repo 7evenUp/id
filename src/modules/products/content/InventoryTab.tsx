@@ -79,6 +79,32 @@ const InventoryTab = () => {
 
       <div className="border-b border-gray-4 dark:border-gray-1" />
 
+      <div className="max-w-prose mb-6 mt-4 flex flex-col gap-2 rounded-xl px-4 py-3 border bg-[hsl(208,100%,97%)] dark:bg-[hsl(207,20%,35%)] border-[hsl(221,91%,91%)] dark:border-[hsl(212.3,5.9%,57.1%)] text-[hsl(210,92%,45%)] dark:text-[hsl(213,40%,85%)]">
+        <Text0>
+          Чтобы активировать ваш подарок, дождитесь окончания трейд-бана.
+        </Text0>
+        <Text0>
+          После этого вы сможете вывести предмет в формате TON NFT, активировать
+          его на сайте{" "}
+          <a
+            href="https://merch.crypton.xyz/"
+            target="_blank"
+            className="underline underline-offset-2 hover:opacity-70"
+          >
+            https://merch.crypton.xyz
+          </a>{" "}
+          или продать на торговой площадке{" "}
+          <a
+            href="https://getgems.io/"
+            target="_blank"
+            className="underline underline-offset-2 hover:opacity-70"
+          >
+            GetGems
+          </a>
+          .
+        </Text0>
+      </div>
+
       <SegmentedRoot
         type="single"
         className={cn(
