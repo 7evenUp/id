@@ -125,11 +125,7 @@ const FirstStep = ({
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
         if (baseDiscountAmount) {
-          setTotalPrice(
-            price -
-              baseDiscountAmount -
-              Math.ceil(price * referralDiscountAmount)
-          )
+          setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
         } else {
           setTotalPrice(price - referralDiscountAmount)
         }
@@ -141,7 +137,7 @@ const FirstStep = ({
               Math.ceil(price * referralDiscountAmount)
           )
         } else {
-          setTotalPrice(price - price * referralDiscountAmount)
+          setTotalPrice(price - Math.ceil(price * referralDiscountAmount))
         }
       }
     } else {
