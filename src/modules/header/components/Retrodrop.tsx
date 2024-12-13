@@ -22,7 +22,7 @@ const Retrodrop = () => {
         href="https://t.me/nutsfarm_bot/nutscoin"
         target="_blank"
       >
-        <div className="animated absolute -left-full h-10 top-2 w-3 -translate-x-full rotate-[-24deg] blur-md bg-[#FFFCE9]" />
+        <div className="animated absolute -left-[100px] h-full top-0 w-3 -translate-x-full blur-sm bg-[#FFFCE9] skew-x-[30deg]" />
         {t("Забрать $NUTS Airdrop")}
       </a>
     )

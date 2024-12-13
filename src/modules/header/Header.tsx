@@ -37,12 +37,12 @@ const Header = () => {
           scale && "3xl:gap-[0.781vw]"
         )}
       >
+        <Retrodrop />
         {isConnected && address !== undefined && (
           <Button onClick={() => open({ view: "Account" })}>
             {cutWalletAddr(address)}
           </Button>
         )}
-        <Retrodrop />
         <LanguageToggle />
         <ThemeToggle />
         <ScaleToggle />

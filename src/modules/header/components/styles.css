@@ -1,9 +1,9 @@
 .animated {
-  animation: shine 3s linear infinite;
+  animation: shine 3s ease-in-out infinite;
 }
 
 @keyframes shine {
   100% {
-    left: 200%;
+    left: 120%;
   }
 }
