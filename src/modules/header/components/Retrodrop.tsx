@@ -6,14 +6,37 @@ import { useUserProfileQuery } from "@/redux/api/profile"
 import "./styles.css"
 
 const Retrodrop = () => {
-  const { t } = useTranslation()
-
   const { data: profile, isLoading } = useUserProfileQuery()
 
-  const { isSuccess } = useCheckRetrodropQuery(
-    { telegramId: profile?.telegramId || -1 },
-    { skip: isLoading || !profile || profile.telegramId === null }
-  )
+  if (isLoading || !profile) return null
+
+  let payload: { userId: number; telegramId?: number } = {
+    userId: profile.id,
+  }
+
+  if (profile.telegramId) {
+    payload = {
+      ...payload,
+      telegramId: profile.telegramId,
+    }
+  }
+
+  return <RetrodropLogic payload={payload} />
+}
+
+export default Retrodrop
+
+const RetrodropLogic = ({
+  payload,
+}: {
+  payload: {
+    telegramId?: number
+    userId: number
+  }
+}) => {
+  const { t } = useTranslation()
+
+  const { isSuccess } = useCheckRetrodropQuery({ ...payload })
 
   if (isSuccess)
     return (
@@ -26,8 +49,4 @@ const Retrodrop = () => {
         {t("Забрать $NUTS Airdrop")}
       </a>
     )
-
-  return null
 }
-
-export default Retrodrop

@@ -2,10 +2,11 @@ import { api } from "./core"
 
 const nutsfarmApi = api.injectEndpoints({
   endpoints: (build) => ({
-    checkRetrodrop: build.query<void, { telegramId: number }>({
-      query: ({ telegramId }) => ({
-        url: "nutsfarm/retro-drop/check/?telegramId=" + telegramId,
+    checkRetrodrop: build.query<void, { telegramId?: number; userId: number }>({
+      query: (body) => ({
+        url: "nutsfarm/retro-drop/check/",
         method: "GET",
+        params: body,
       }),
     }),
   }),
