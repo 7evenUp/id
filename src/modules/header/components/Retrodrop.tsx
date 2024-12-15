@@ -47,10 +47,17 @@ const RetrodropLogic = ({
         onClick={() => {
           // @ts-expect-error no global var types
           ym(95752251, "reachGoal", "retrodrop")
+          // @ts-expect-error no global var types
+          ym(95752251, "userParams", {
+            Union_id: payload.userId,
+            Telegram_id: payload.telegramId ?? null,
+          })
         }}
       >
         <div className="animated absolute -left-[100px] h-full top-0 w-3 -translate-x-full blur-sm bg-[#FFFCE9] skew-x-[30deg]" />
         {t("Забрать $NUTS Airdrop")}
       </a>
     )
+
+  return null
 }
