@@ -7,7 +7,7 @@ import EcosystemIcon from "@/assets/icons/ecosystem.svg?react"
 import InventoryIcon from "@/assets/icons/package.svg?react"
 import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
 import StoreIcon from "@/assets/icons/store.svg?react"
-import PromoIcon from "@/assets/icons/promo.svg?react"
+// import PromoIcon from "@/assets/icons/promo.svg?react"
 
 import { Tabs, TabsContent, TabsList } from "@/shared/ui/Tabs"
 
@@ -21,7 +21,7 @@ import NutcrackerTab from "./content/NutcrackerTab"
 
 import InventoryTab from "./content/InventoryTab"
 import PointStoreTab from "./content/PointStoreTab"
-import PromoTab from "./content/PromoTab"
+// import PromoTab from "./content/PromoTab"
 
 import Text0 from "@/shared/typography/Text0"
 
@@ -119,7 +119,7 @@ const Products = () => {
               />
               <Text0>{t("points-store-root")}</Text0>
             </TabsPrimitive.Trigger>
-            <TabsPrimitive.Trigger
+            {/* <TabsPrimitive.Trigger
               value="promo"
               className={cn(
                 "flex items-center justify-center gap-1.5 rounded px-2 py-1 text-gray-2 dark:text-gray-3 data-[state=active]:text-black dark:data-[state=active]:text-gray-5 data-[state=active]:bg-gray-5/25 dark:data-[state=active]:bg-gray-1 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors",
@@ -134,7 +134,7 @@ const Products = () => {
                 )}
               />
               <Text0>{t("promo-root")}</Text0>
-            </TabsPrimitive.Trigger>
+            </TabsPrimitive.Trigger> */}
           </TabsPrimitive.List>
         </ScrollArea.Viewport>
         <ScrollArea.Scrollbar
@@ -211,9 +211,9 @@ const Products = () => {
       <TabsPrimitive.Content value="points-store">
         <PointStoreTab />
       </TabsPrimitive.Content>
-      <TabsPrimitive.Content value="promo">
+      {/* <TabsPrimitive.Content value="promo">
         <PromoTab />
-      </TabsPrimitive.Content>
+      </TabsPrimitive.Content> */}
     </TabsPrimitive.Root>
   )
 }

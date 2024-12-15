@@ -20,7 +20,7 @@ const inventoryApi = api.injectEndpoints({
   endpoints: (build) => ({
     inventory: build.query<Inventory, void>({
       query: () => ({
-        url: "users/ny/inventory",
+        url: "users/ny/inventory/",
         method: "GET",
       }),
       providesTags: ["Inventory"],

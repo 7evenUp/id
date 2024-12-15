@@ -55,8 +55,15 @@ const SubscriptionCard = ({
 }) => {
   const { t } = useTranslation("modals")
 
-  const { baseDiscount, price, id, duration, benefits, individualPrice } =
-    subscription
+  const {
+    baseDiscount,
+    baseDiscountAmount,
+    price,
+    id,
+    duration,
+    benefits,
+    individualPrice,
+  } = subscription
 
   const [cardPrice, setCardPrice] = useState(0)
 
@@ -65,6 +72,21 @@ const SubscriptionCard = ({
   const getSubscriptionPrice = () => {
     return individualPrice ? individualPrice : price
   }
+
+  const totalDiscount =
+    discountAmount && discountKind
+      ? baseDiscount
+        ? discountKind.id === "MONEY"
+          ? Math.floor(
+              (discountAmount * 100) / getSubscriptionPrice() + baseDiscount
+            )
+          : discountAmount * 100 + baseDiscount
+        : discountKind.id === "MONEY"
+        ? Math.floor((discountAmount * 100) / getSubscriptionPrice())
+        : discountAmount * 100
+      : baseDiscount
+      ? baseDiscount
+      : 0
 
   useEffect(() => {
     const price = getSubscriptionPrice()
@@ -79,23 +101,24 @@ const SubscriptionCard = ({
         : discountAmount
 
       if (discountKind.id === "MONEY") {
-        if (baseDiscount) {
-          fullPrice = price - price * (baseDiscount / 100) - preferedDiscount
+        if (baseDiscountAmount) {
+          fullPrice = price - baseDiscountAmount - preferedDiscount
         } else {
           fullPrice = price - preferedDiscount
         }
       } else {
-        if (baseDiscount) {
-          fullPrice = price - price * (baseDiscount / 100 + preferedDiscount)
+        if (baseDiscountAmount) {
+          fullPrice =
+            price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
         } else {
-          fullPrice = price - price * preferedDiscount
+          fullPrice = price - Math.ceil(price * preferedDiscount)
         }
       }
 
       setCardPrice(fullPrice)
     } else {
-      if (baseDiscount) {
-        setCardPrice(price - price * (baseDiscount / 100))
+      if (baseDiscountAmount) {
+        setCardPrice(price - baseDiscountAmount)
       } else {
         setCardPrice(price)
       }
@@ -155,7 +178,7 @@ const SubscriptionCard = ({
               scale && "3xl:rounded-[0.13vw] 3xl:px-[0.26vw] 3xl:py-[0.13vw]"
             )}
           >
-            -{Math.round(100 - (cardPrice * 100) / price)}%
+            -{totalDiscount}%
           </Text2>
           <div
             className={cn(

@@ -6,6 +6,7 @@ import ThemeToggle from "./components/ThemeToggle"
 import LanguageToggle from "./components/LanguageToggle"
 import AvatarMobile from "./components/AvatarMobile"
 import ScaleToggle from "./components/ScaleToggle"
+import Retrodrop from "./components/Retrodrop"
 
 import Button from "@/shared/ui/Button"
 
@@ -36,6 +37,7 @@ const Header = () => {
           scale && "3xl:gap-[0.781vw]"
         )}
       >
+        <Retrodrop />
         {isConnected && address !== undefined && (
           <Button onClick={() => open({ view: "Account" })}>
             {cutWalletAddr(address)}
@@ -49,6 +51,7 @@ const Header = () => {
       {/* Header on Mobile */}
       <div className="sm:hidden flex gap-6">
         <div className="flex items-center gap-3">
+          <Retrodrop />
           <LanguageToggle />
           <ThemeToggle />
         </div>
