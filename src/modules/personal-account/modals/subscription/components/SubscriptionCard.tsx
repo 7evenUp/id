@@ -61,6 +61,7 @@ const SubscriptionCard = ({
     duration,
     benefits,
     individualPrice,
+    isPromotionalModeActive,
   } = subscription
 
   const [cardPrice, setCardPrice] = useState(0)
@@ -106,14 +107,34 @@ const SubscriptionCard = ({
 
       if (discountKind.id === "MONEY") {
         if (baseDiscountAmount) {
-          fullPrice = price - baseDiscountAmount - preferedDiscount
+          if (isPromotionalModeActive) {
+            fullPrice = price - baseDiscountAmount - preferedDiscount
+          } else {
+            if (price - baseDiscountAmount - preferedDiscount > 1000) {
+              fullPrice = 999 - preferedDiscount
+            } else {
+              fullPrice = price - baseDiscountAmount - preferedDiscount
+            }
+          }
         } else {
           fullPrice = price - preferedDiscount
         }
       } else {
         if (baseDiscountAmount) {
-          fullPrice =
-            price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
+          if (isPromotionalModeActive) {
+            fullPrice =
+              price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
+          } else {
+            if (
+              price - baseDiscountAmount - Math.ceil(price * preferedDiscount) >
+              1000
+            ) {
+              fullPrice = 999 - Math.ceil(price * preferedDiscount)
+            } else {
+              fullPrice =
+                price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
+            }
+          }
         } else {
           fullPrice = price - Math.ceil(price * preferedDiscount)
         }
@@ -122,7 +143,15 @@ const SubscriptionCard = ({
       setCardPrice(fullPrice)
     } else {
       if (baseDiscountAmount) {
-        setCardPrice(price - baseDiscountAmount)
+        if (isPromotionalModeActive) {
+          setCardPrice(price - baseDiscountAmount)
+        } else {
+          if (price - baseDiscountAmount > 1000) {
+            setCardPrice(999)
+          } else {
+            setCardPrice(price - baseDiscountAmount)
+          }
+        }
       } else {
         setCardPrice(price)
       }

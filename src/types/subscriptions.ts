@@ -9,6 +9,7 @@ export interface Subscription {
   individualPrice?: number | null
   price: number
   isActive: boolean
+  isPromotionalModeActive: boolean
   kindId: 1 | 2 // 1 - Prime | 2 - Calendar
   baseDiscount: number | null
   baseDiscountAmount: number | null

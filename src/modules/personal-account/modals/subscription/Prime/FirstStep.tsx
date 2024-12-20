@@ -125,24 +125,57 @@ const FirstStep = ({
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
         if (baseDiscountAmount) {
-          setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
+          if (subscriptions[activeSub].isPromotionalModeActive) {
+            setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
+          } else {
+            if (price - baseDiscountAmount - referralDiscountAmount > 1000) {
+              setTotalPrice(999 - referralDiscountAmount)
+            } else {
+              price - baseDiscountAmount - referralDiscountAmount
+            }
+          }
         } else {
           setTotalPrice(price - referralDiscountAmount)
         }
       } else {
         if (baseDiscountAmount) {
-          setTotalPrice(
-            price -
-              baseDiscountAmount -
-              Math.ceil(price * referralDiscountAmount)
-          )
+          if (subscriptions[activeSub].isPromotionalModeActive) {
+            setTotalPrice(
+              price -
+                baseDiscountAmount -
+                Math.ceil(price * referralDiscountAmount)
+            )
+          } else {
+            if (
+              price -
+                baseDiscountAmount -
+                Math.ceil(price * referralDiscountAmount) >
+              1000
+            ) {
+              setTotalPrice(999 - 999 * referralDiscountAmount)
+            } else {
+              setTotalPrice(
+                price -
+                  baseDiscountAmount -
+                  Math.ceil(price * referralDiscountAmount)
+              )
+            }
+          }
         } else {
           setTotalPrice(price - Math.ceil(price * referralDiscountAmount))
         }
       }
     } else {
       if (baseDiscountAmount) {
-        setTotalPrice(price - baseDiscountAmount)
+        if (subscriptions[activeSub].isPromotionalModeActive) {
+          setTotalPrice(price - baseDiscountAmount)
+        } else {
+          if (price - baseDiscountAmount > 1000) {
+            setTotalPrice(999)
+          } else {
+            setTotalPrice(price - baseDiscountAmount)
+          }
+        }
       } else {
         setTotalPrice(price)
       }
@@ -171,24 +204,57 @@ const FirstStep = ({
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
         if (baseDiscountAmount) {
-          setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
+          if (subscriptions[subID].isPromotionalModeActive) {
+            setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
+          } else {
+            if (price - baseDiscountAmount - referralDiscountAmount > 1000) {
+              setTotalPrice(999 - referralDiscountAmount)
+            } else {
+              price - baseDiscountAmount - referralDiscountAmount
+            }
+          }
         } else {
           setTotalPrice(price - referralDiscountAmount)
         }
       } else {
         if (baseDiscountAmount) {
-          setTotalPrice(
-            price -
-              baseDiscountAmount -
-              Math.ceil(price * referralDiscountAmount)
-          )
+          if (subscriptions[subID].isPromotionalModeActive) {
+            setTotalPrice(
+              price -
+                baseDiscountAmount -
+                Math.ceil(price * referralDiscountAmount)
+            )
+          } else {
+            if (
+              price -
+                baseDiscountAmount -
+                Math.ceil(price * referralDiscountAmount) >
+              1000
+            ) {
+              setTotalPrice(999 - 999 * referralDiscountAmount)
+            } else {
+              setTotalPrice(
+                price -
+                  baseDiscountAmount -
+                  Math.ceil(price * referralDiscountAmount)
+              )
+            }
+          }
         } else {
           setTotalPrice(price - Math.ceil(price * referralDiscountAmount))
         }
       }
     } else {
       if (baseDiscountAmount) {
-        setTotalPrice(price - baseDiscountAmount)
+        if (subscriptions[subID].isPromotionalModeActive) {
+          setTotalPrice(price - baseDiscountAmount)
+        } else {
+          if (price - baseDiscountAmount > 1000) {
+            setTotalPrice(999)
+          } else {
+            setTotalPrice(price - baseDiscountAmount)
+          }
+        }
       } else {
         setTotalPrice(price)
       }
@@ -241,11 +307,21 @@ const FirstStep = ({
           : Math.ceil(price * preferedDiscount)
 
       if (baseDiscountAmount) {
-        setTotalPrice(
-          price -
-            baseDiscountAmount -
-            Math.max(referralDiscount, promocodeDiscount)
-        )
+        if (subscriptions[activeSub].isPromotionalModeActive) {
+          setTotalPrice(
+            price -
+              baseDiscountAmount -
+              Math.max(referralDiscount, promocodeDiscount)
+          )
+        } else {
+          if (
+            price -
+              baseDiscountAmount -
+              Math.max(referralDiscount, promocodeDiscount) >
+            1000
+          )
+            setTotalPrice(999 - Math.max(referralDiscount, promocodeDiscount))
+        }
       } else {
         setTotalPrice(price - Math.max(referralDiscount, promocodeDiscount))
       }
