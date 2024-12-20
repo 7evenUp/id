@@ -38,12 +38,10 @@ const SubscriptionCard = ({
   selected: boolean
   onSelect: () => void
   order: number
-  discounts:
-    | Array<{
-        subscriptionId: number
-        discountAmount: number
-      }>
-    | undefined
+  discounts: {
+    subscriptionId: number
+    discountAmount: number
+  }[]
   discountAmount: number | undefined
   discountKind:
     | {
@@ -73,17 +71,23 @@ const SubscriptionCard = ({
     return individualPrice ? individualPrice : price
   }
 
+  const matchedDiscount = discounts.find((el) => el.subscriptionId === id)
+
+  const preferedDiscount = matchedDiscount
+    ? matchedDiscount.discountAmount
+    : discountAmount
+
   const totalDiscount =
-    discountAmount && discountKind
+    preferedDiscount && discountKind
       ? baseDiscount
         ? discountKind.id === "MONEY"
           ? Math.floor(
-              (discountAmount * 100) / getSubscriptionPrice() + baseDiscount
+              (preferedDiscount * 100) / getSubscriptionPrice() + baseDiscount
             )
-          : discountAmount * 100 + baseDiscount
+          : preferedDiscount * 100 + baseDiscount
         : discountKind.id === "MONEY"
-        ? Math.floor((discountAmount * 100) / getSubscriptionPrice())
-        : discountAmount * 100
+        ? Math.floor((preferedDiscount * 100) / getSubscriptionPrice())
+        : preferedDiscount * 100
       : baseDiscount
       ? baseDiscount
       : 0
