@@ -6,7 +6,7 @@ export interface Promocode {
     subscriptionId: number
     discountAmount: number
   }>
-  invalidForSubscriptions: []
+  invalidForSubscriptions: number[]
   isReferralCode: boolean
-  validForSubscriptions: []
+  validForSubscriptions: number[]
 }

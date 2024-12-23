@@ -4,7 +4,7 @@ import { Promocode } from "@/types/promocode"
 
 interface ReqParameters {
   promocode: string
-  subscription: number
+  subscription?: number
 }
 
 const promocodeApi = api.injectEndpoints({
