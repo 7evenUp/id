@@ -38,12 +38,10 @@ const SubscriptionCard = ({
   selected: boolean
   onSelect: () => void
   order: number
-  discounts:
-    | Array<{
-        subscriptionId: number
-        discountAmount: number
-      }>
-    | undefined
+  discounts: {
+    subscriptionId: number
+    discountAmount: number
+  }[]
   discountAmount: number | undefined
   discountKind:
     | {
@@ -63,6 +61,7 @@ const SubscriptionCard = ({
     duration,
     benefits,
     individualPrice,
+    isPromotionalModeActive,
   } = subscription
 
   const [cardPrice, setCardPrice] = useState(0)
@@ -73,17 +72,23 @@ const SubscriptionCard = ({
     return individualPrice ? individualPrice : price
   }
 
+  const matchedDiscount = discounts.find((el) => el.subscriptionId === id)
+
+  const preferedDiscount = matchedDiscount
+    ? matchedDiscount.discountAmount
+    : discountAmount
+
   const totalDiscount =
-    discountAmount && discountKind
+    preferedDiscount && discountKind
       ? baseDiscount
         ? discountKind.id === "MONEY"
           ? Math.floor(
-              (discountAmount * 100) / getSubscriptionPrice() + baseDiscount
+              (preferedDiscount * 100) / getSubscriptionPrice() + baseDiscount
             )
-          : discountAmount * 100 + baseDiscount
+          : preferedDiscount * 100 + baseDiscount
         : discountKind.id === "MONEY"
-        ? Math.floor((discountAmount * 100) / getSubscriptionPrice())
-        : discountAmount * 100
+        ? Math.floor((preferedDiscount * 100) / getSubscriptionPrice())
+        : preferedDiscount * 100
       : baseDiscount
       ? baseDiscount
       : 0
@@ -102,14 +107,34 @@ const SubscriptionCard = ({
 
       if (discountKind.id === "MONEY") {
         if (baseDiscountAmount) {
-          fullPrice = price - baseDiscountAmount - preferedDiscount
+          if (isPromotionalModeActive) {
+            fullPrice = price - baseDiscountAmount - preferedDiscount
+          } else {
+            if (price - baseDiscountAmount - preferedDiscount > 1000) {
+              fullPrice = 999 - preferedDiscount
+            } else {
+              fullPrice = price - baseDiscountAmount - preferedDiscount
+            }
+          }
         } else {
           fullPrice = price - preferedDiscount
         }
       } else {
         if (baseDiscountAmount) {
-          fullPrice =
-            price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
+          if (isPromotionalModeActive) {
+            fullPrice =
+              price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
+          } else {
+            if (
+              price - baseDiscountAmount - Math.ceil(price * preferedDiscount) >
+              1000
+            ) {
+              fullPrice = 999 - Math.ceil(price * preferedDiscount)
+            } else {
+              fullPrice =
+                price - baseDiscountAmount - Math.ceil(price * preferedDiscount)
+            }
+          }
         } else {
           fullPrice = price - Math.ceil(price * preferedDiscount)
         }
@@ -118,7 +143,15 @@ const SubscriptionCard = ({
       setCardPrice(fullPrice)
     } else {
       if (baseDiscountAmount) {
-        setCardPrice(price - baseDiscountAmount)
+        if (isPromotionalModeActive) {
+          setCardPrice(price - baseDiscountAmount)
+        } else {
+          if (price - baseDiscountAmount > 1000) {
+            setCardPrice(999)
+          } else {
+            setCardPrice(price - baseDiscountAmount)
+          }
+        }
       } else {
         setCardPrice(price)
       }

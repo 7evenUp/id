@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
-import PrimeActiveIcon from "@/assets/icons/products/Prime_Active.svg?react"
+import PrimeActivePng from "@/assets/icons/products/Prime-active-png.png"
 import CalendarIcon from "@/assets/icons/products/Calendar.svg?react"
 import CalendarActiveIcon from "@/assets/icons/products/Calendar_Active.svg?react"
 
@@ -59,7 +59,8 @@ const SelectSubscription = ({
                 scale && "3xl:gap-[0.781vw]"
               )}
             >
-              <PrimeActiveIcon
+              <img
+                src={PrimeActivePng}
                 className={cn(
                   "group-hover:block group-hover:scale-105 hidden w-[27px] h-[30px]",
                   scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
