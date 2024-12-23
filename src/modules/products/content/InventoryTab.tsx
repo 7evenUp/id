@@ -79,7 +79,7 @@ const InventoryTab = () => {
 
       <div className="border-b border-gray-4 dark:border-gray-1" />
 
-      {/* <div className="max-w-prose mb-6 mt-4 flex flex-col gap-2 rounded-xl px-4 py-3 border bg-[hsl(208,100%,97%)] dark:bg-[hsl(207,20%,35%)] border-[hsl(221,91%,91%)] dark:border-[hsl(212.3,5.9%,57.1%)] text-[hsl(210,92%,45%)] dark:text-[hsl(213,40%,85%)]">
+      <div className="max-w-prose mb-6 mt-4 flex flex-col gap-2 rounded-xl px-4 py-3 border bg-[hsl(208,100%,97%)] dark:bg-[hsl(207,20%,35%)] border-[hsl(221,91%,91%)] dark:border-[hsl(212.3,5.9%,57.1%)] text-[hsl(210,92%,45%)] dark:text-[hsl(213,40%,85%)]">
         <Text0>
           Чтобы активировать ваш подарок, дождитесь окончания трейд-бана.
         </Text0>
@@ -103,7 +103,7 @@ const InventoryTab = () => {
           </a>
           .
         </Text0>
-      </div> */}
+      </div>
 
       <SegmentedRoot
         type="single"
