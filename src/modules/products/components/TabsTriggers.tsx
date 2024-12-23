@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 
 import ResearchIcon from "@/assets/icons/products/Research.svg?react"
-import PrimeActiveIcon from "@/assets/icons/products/Prime_Active.svg?react"
+import PrimeActivePng from "@/assets/icons/products/Prime-active-png.png"
 import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 import ToolsActiveIcon from "@/assets/icons/products/Tools_Active.svg?react"
 import ToolsIcon from "@/assets/icons/products/Tools.svg?react"
@@ -34,9 +34,10 @@ const TabsTriggers = () => {
         <Tooltip content="Prime">
           <div>
             {activeProduct === "prime" ? (
-              <PrimeActiveIcon
+              <img
+                src={PrimeActivePng}
                 className={cn(
-                  "w-[26px] h-[26px]",
+                  "w-auto h-[26px]",
                   scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
                 )}
               />

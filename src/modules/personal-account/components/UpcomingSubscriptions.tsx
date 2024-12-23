@@ -2,7 +2,7 @@ import differenceInDays from "date-fns/differenceInDays"
 import { isDesktop } from "react-device-detect"
 import { useTranslation } from "react-i18next"
 
-import PrimeActiveIcon from "@/assets/icons/products/Prime_Active.svg?react"
+import PrimeActivePng from "@/assets/icons/products/Prime-active-png.png"
 import CalendarActiveIcon from "@/assets/icons/products/Calendar_Active.svg?react"
 
 import SubscriptionTypeListItem from "./SubscriptionTypeListItem"
@@ -70,7 +70,8 @@ const UpcomingSubscriptions = () => {
                 )}
               >
                 {subscriptions[0].kindName === "Prime" ? (
-                  <PrimeActiveIcon
+                  <img
+                    src={PrimeActivePng}
                     className={cn(
                       "w-[26px] h-[26px]",
                       scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
@@ -129,7 +130,8 @@ const UpcomingSubscriptions = () => {
                     )}
                   >
                     {subscription.kindName === "Prime" ? (
-                      <PrimeActiveIcon
+                      <img
+                        src={PrimeActivePng}
                         className={cn(
                           "w-[26px] h-[26px]",
                           scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
@@ -168,7 +170,8 @@ const UpcomingSubscriptions = () => {
                     )}
                   >
                     {subscription.kindName === "Prime" ? (
-                      <PrimeActiveIcon
+                      <img
+                        src={PrimeActivePng}
                         className={cn(
                           "w-[26px] h-[26px]",
                           scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
@@ -238,7 +241,8 @@ const UpcomingSubscriptions = () => {
               )}
             >
               {subscriptions[0].kindName === "Prime" ? (
-                <PrimeActiveIcon
+                <img
+                  src={PrimeActivePng}
                   className={cn(
                     "w-[26px] h-[26px]",
                     scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
@@ -295,7 +299,8 @@ const UpcomingSubscriptions = () => {
                   )}
                 >
                   {subscription.kindName === "Prime" ? (
-                    <PrimeActiveIcon
+                    <img
+                      src={PrimeActivePng}
                       className={cn(
                         "w-[26px] h-[26px]",
                         scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
@@ -334,7 +339,8 @@ const UpcomingSubscriptions = () => {
                   )}
                 >
                   {subscription.kindName === "Prime" ? (
-                    <PrimeActiveIcon
+                    <img
+                      src={PrimeActivePng}
                       className={cn(
                         "w-[26px] h-[26px]",
                         scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
