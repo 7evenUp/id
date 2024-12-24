@@ -112,21 +112,24 @@ const SubscriptionCard = ({
     if (baseDiscount) discount = baseDiscount
 
     if (referralDiscount > promocodeDiscount) {
-      if (baseDiscount) {
-        if (referralDiscountKind === "MONEY") {
-          discount = Math.floor(
-            (referralDiscount * 100) / getSubscriptionPrice() + baseDiscount
-          )
+      if (referralDiscountAmount) {
+        if (baseDiscount) {
+          if (referralDiscountKind === "MONEY") {
+            discount = Math.floor(
+              (referralDiscountAmount * 100) / getSubscriptionPrice() +
+                baseDiscount
+            )
+          } else {
+            discount = referralDiscountAmount * 100 + baseDiscount
+          }
         } else {
-          discount = referralDiscount * 100 + baseDiscount
-        }
-      } else {
-        if (referralDiscountKind === "MONEY") {
-          discount = Math.floor(
-            (referralDiscount * 100) / getSubscriptionPrice()
-          )
-        } else {
-          discount = referralDiscount * 100
+          if (referralDiscountKind === "MONEY") {
+            discount = Math.floor(
+              (referralDiscountAmount * 100) / getSubscriptionPrice()
+            )
+          } else {
+            discount = referralDiscountAmount * 100
+          }
         }
       }
     }
@@ -162,6 +165,7 @@ const SubscriptionCard = ({
     promocodeDiscount,
     referralDiscount,
     referralDiscountKind,
+    referralDiscountAmount,
   ])
 
   useEffect(() => {
