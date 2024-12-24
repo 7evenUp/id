@@ -352,7 +352,7 @@ const FirstStep = ({
       setTotalPrice(finalPrice)
 
       if (referralDiscountAmount && referralDiscountKind) {
-        if (referralDiscount > promocodeDiscount) {
+        if (referralDiscount < promocodeDiscount) {
           setIsPromoLarger(true)
         } else {
           setIsPromoLarger(false)

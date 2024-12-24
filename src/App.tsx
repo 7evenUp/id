@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-
-import Main from "./routes/Main"
 
 import Header from "./modules/header/Header"
 
-import PaymentError from "./routes/PaymentError"
-import PaymentSuccess from "./routes/PaymentSuccess"
-import ErrorPage from "./routes/ErrorPage"
-import PrivacyPolicy from "./routes/PrivacyPolicy"
+const Main = lazy(() => import("./routes/Main"))
+const PaymentError = lazy(() => import("./routes/PaymentError"))
+const PaymentSuccess = lazy(() => import("./routes/PaymentSuccess"))
+const ErrorPage = lazy(() => import("./routes/ErrorPage"))
+const PrivacyPolicy = lazy(() => import("./routes/PrivacyPolicy"))
+
+import SkeletonLayout from "./components/SkeletonLayout"
 
 import { useAppSelector } from "./redux/hooks"
 
@@ -48,7 +50,16 @@ const App = () => {
         )}
       >
         <Header />
-        <RouterProvider router={router} />
+
+        <Suspense
+          fallback={
+            <main className="flex flex-col lg:flex-row justify-between pb-32 md:pb-10 lg:pb-0 gap-20">
+              <SkeletonLayout />
+            </main>
+          }
+        >
+          <RouterProvider router={router} />
+        </Suspense>
       </div>
     </div>
   )
