@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { isDesktop } from "react-device-detect"
 
@@ -70,9 +70,10 @@ const SubscriptionCard = ({
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const getSubscriptionPrice = useCallback(() => {
-    return individualPrice ? individualPrice : price
-  }, [price, individualPrice])
+  const subscriptionPrice = useMemo(
+    () => (individualPrice ? individualPrice : price),
+    [individualPrice, price]
+  )
 
   const preferedDiscount = useMemo(() => {
     const matchedDiscount = discounts.find((el) => el.subscriptionId === id)
@@ -88,19 +89,19 @@ const SubscriptionCard = ({
     if (isValidForPromo && discountKind)
       return discountKind.id === "MONEY"
         ? preferedDiscount
-        : Math.ceil(price * preferedDiscount)
+        : Math.ceil(subscriptionPrice * preferedDiscount)
 
     return 0
-  }, [discountKind, isValidForPromo, preferedDiscount, price])
+  }, [discountKind, isValidForPromo, preferedDiscount, subscriptionPrice])
 
   const referralDiscount = useMemo(() => {
     if (referralDiscountAmount && referralDiscountKind)
       return referralDiscountKind === "MONEY"
         ? referralDiscountAmount
-        : Math.ceil(price * referralDiscountAmount)
+        : Math.ceil(subscriptionPrice * referralDiscountAmount)
 
     return 0
-  }, [price, referralDiscountAmount, referralDiscountKind])
+  }, [subscriptionPrice, referralDiscountAmount, referralDiscountKind])
 
   const baseDiscountAmountNotNullable = baseDiscountAmount
     ? baseDiscountAmount
@@ -116,8 +117,7 @@ const SubscriptionCard = ({
         if (baseDiscount) {
           if (referralDiscountKind === "MONEY") {
             discount = Math.floor(
-              (referralDiscountAmount * 100) / getSubscriptionPrice() +
-                baseDiscount
+              (referralDiscountAmount * 100) / subscriptionPrice + baseDiscount
             )
           } else {
             discount = referralDiscountAmount * 100 + baseDiscount
@@ -125,7 +125,7 @@ const SubscriptionCard = ({
         } else {
           if (referralDiscountKind === "MONEY") {
             discount = Math.floor(
-              (referralDiscountAmount * 100) / getSubscriptionPrice()
+              (referralDiscountAmount * 100) / subscriptionPrice
             )
           } else {
             discount = referralDiscountAmount * 100
@@ -139,16 +139,14 @@ const SubscriptionCard = ({
         if (baseDiscount) {
           if (discountKind.id === "MONEY") {
             discount = Math.floor(
-              (preferedDiscount * 100) / getSubscriptionPrice() + baseDiscount
+              (preferedDiscount * 100) / subscriptionPrice + baseDiscount
             )
           } else {
             discount = preferedDiscount * 100 + baseDiscount
           }
         } else {
           if (discountKind.id === "MONEY") {
-            discount = Math.floor(
-              (preferedDiscount * 100) / getSubscriptionPrice()
-            )
+            discount = Math.floor((preferedDiscount * 100) / subscriptionPrice)
           } else {
             discount = preferedDiscount * 100
           }
@@ -160,7 +158,7 @@ const SubscriptionCard = ({
   }, [
     baseDiscount,
     discountKind,
-    getSubscriptionPrice,
+    subscriptionPrice,
     preferedDiscount,
     promocodeDiscount,
     referralDiscount,
@@ -169,7 +167,7 @@ const SubscriptionCard = ({
   ])
 
   useEffect(() => {
-    const price = getSubscriptionPrice()
+    const price = subscriptionPrice
 
     let fullPrice
 
@@ -187,7 +185,7 @@ const SubscriptionCard = ({
     setCardPrice(fullPrice)
   }, [
     baseDiscountAmountNotNullable,
-    getSubscriptionPrice,
+    subscriptionPrice,
     isPromotionalModeActive,
     promocodeDiscount,
     referralDiscount,
