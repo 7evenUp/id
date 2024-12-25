@@ -135,7 +135,7 @@ const SubscriptionCard = ({
     }
 
     if (preferedDiscount && discountKind) {
-      if (promocodeDiscount > referralDiscount) {
+      if (promocodeDiscount >= referralDiscount) {
         if (baseDiscount) {
           if (discountKind.id === "MONEY") {
             discount = Math.floor(
