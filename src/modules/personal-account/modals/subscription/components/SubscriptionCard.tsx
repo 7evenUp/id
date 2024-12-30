@@ -231,7 +231,7 @@ const SubscriptionCard = ({
           </>
         )}
       </span>
-      {price !== cardPrice && (
+      {subscriptionPrice !== cardPrice && (
         <div
           className={cn(
             "flex items-center gap-1.5",
