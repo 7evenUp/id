@@ -7,6 +7,7 @@ const Main = lazy(() => import("./routes/Main"))
 const PaymentError = lazy(() => import("./routes/PaymentError"))
 const PaymentSuccess = lazy(() => import("./routes/PaymentSuccess"))
 const ErrorPage = lazy(() => import("./routes/ErrorPage"))
+const TermsOfUse = lazy(() => import("./routes/TermsOfUse"))
 const PrivacyPolicy = lazy(() => import("./routes/PrivacyPolicy"))
 
 import SkeletonLayout from "./components/SkeletonLayout"
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
   {
     path: "/payment-success",
     element: <PaymentSuccess />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/terms-of-use",
+    element: <TermsOfUse />,
     errorElement: <ErrorPage />,
   },
   {

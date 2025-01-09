@@ -22,6 +22,12 @@ import ruSchema from "@/assets/locales/ru/schema.json"
 import enReqResponses from "@/assets/locales/en/reqResponses.json"
 import ruReqResponses from "@/assets/locales/ru/reqResponses.json"
 
+import ruPrivacy from "@/assets/locales/ru/privacy.json"
+import enPrivacy from "@/assets/locales/en/privacy.json"
+
+import ruTermsOfUse from "@/assets/locales/ru/terms-of-use.json"
+import enTermsOfUse from "@/assets/locales/en/terms-of-use.json"
+
 export const resources = {
   en: {
     translation: { ...enTranslate },
@@ -31,6 +37,8 @@ export const resources = {
     auth: { ...enAuth },
     schema: { ...enSchema },
     reqResponses: { ...enReqResponses },
+    privacy: { ...enPrivacy },
+    termsOfUse: { ...enTermsOfUse },
   },
   ru: {
     translation: { ...ruTranslate },
@@ -40,6 +48,8 @@ export const resources = {
     auth: { ...ruAuth },
     schema: { ...ruSchema },
     reqResponses: { ...ruReqResponses },
+    privacy: { ...ruPrivacy },
+    termsOfUse: { ...ruTermsOfUse },
   },
 } as const
 
@@ -54,6 +64,8 @@ i18n.use(initReactI18next).init({
     "auth",
     "schema",
     "reqResponses",
+    "privacy",
+    "termsOfUse"
   ],
   fallbackLng: "ru",
 })

@@ -144,13 +144,21 @@ const RegisterMailForm = ({
               scale && "3xl:text-[0.781vw]/[1.042vw]"
             )}
           >
-            {t("register.privacy-policy.text")}{" "}
+            {t("register.privacy-policy.text-1")}{" "}
+            <Link
+              to="/terms-of-use"
+              className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+            >
+              {t("register.privacy-policy.link-terms")}
+            </Link>{" "}
+            {t("register.privacy-policy.text-2")}{" "}
             <Link
               to="/privacy-policy"
               className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
             >
-              {t("register.privacy-policy.link")}
-            </Link>
+              {t("register.privacy-policy.link-privacy")}
+            </Link>{" "}
+            {t("register.privacy-policy.text-3")}
           </p>
           <ActionButton type="submit" isLoading={isLoading}>
             {t("register.register-btn")}
