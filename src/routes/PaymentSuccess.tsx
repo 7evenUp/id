@@ -14,7 +14,7 @@ const PaymentSuccess = () => {
       </Subheading>
       <Text0>{t("payment-success-details")}</Text0>
       <Link to={"/"} className="underline underline-offset-4 hover:opacity-80">
-        {t("payment-page-go-to-main")}
+        {t("Вернуться на главную")}
       </Link>
     </div>
   )
