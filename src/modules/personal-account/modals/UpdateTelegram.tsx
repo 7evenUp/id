@@ -5,10 +5,8 @@ import { useForm } from "react-hook-form"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query"
 import { SerializedError } from "@reduxjs/toolkit"
 import { useTranslation } from "react-i18next"
-import { isMobile } from "react-device-detect"
 
 import MoveLeft from "@/assets/icons/move-left.svg?react"
-import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
@@ -26,12 +24,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/shared/ui/HoverCard"
-import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
 
 import { LIMIT_REACHED } from "@/utils/errorCodes"
 
@@ -184,6 +176,28 @@ const NicknameForm = ({
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn("flex flex-col gap-[18px]", scale && "3xl:gap-[1.172vw]")}
       >
+        <div>
+          <Text1>
+            <span className="tabular-nums">1.</span>{" "}
+            {t("change-tg.Активируйте")}{" "}
+            <a
+              className="text-res-bot-blue underline hover:opacity-70"
+              href={import.meta.env.VITE_TG_BOT_LINK}
+              target="_blank"
+            >
+              lobby bot
+            </a>
+          </Text1>
+          <Text1>
+            <span className="tabular-nums">2.</span>{" "}
+            {t("change-tg.Введите свой telegram username")}
+          </Text1>
+          <Text1>
+            <span className="tabular-nums">3.</span>{" "}
+            {t("change-tg.Введите код, полученный от lobby bot")}
+          </Text1>
+        </div>
+
         <FormField
           name="nickname"
           control={form.control}
@@ -211,53 +225,6 @@ const NicknameForm = ({
                     {...field}
                   />
                 </FormControl>
-                {isMobile ? (
-                  <Popover>
-                    <PopoverTrigger asChild role="button">
-                      <span>
-                        <HelpCircle className="absolute right-0 top-1.5 w-4 h-4 cursor-pointer" />
-                      </span>
-                    </PopoverTrigger>
-                    <PopoverContent align="end" className="w-[300px]">
-                      <p>
-                        {t("change-tg.help-card-first")}
-                        <a
-                          className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
-                          href={import.meta.env.VITE_TG_BOT_LINK}
-                          target="_blank"
-                        >
-                          {t("change-tg.help-card-link")}
-                        </a>
-                        {t("change-tg.help-card-second")}
-                      </p>
-                    </PopoverContent>
-                  </Popover>
-                ) : (
-                  <HoverCard openDelay={200}>
-                    <HoverCardTrigger>
-                      <HelpCircle
-                        className={cn(
-                          "absolute right-0 top-1.5 w-4 h-4 cursor-pointer",
-                          scale &&
-                            "3xl:top-[0.39vw] 3xl:w-[1.041vw] 3xl:h-[1.041vw]"
-                        )}
-                      />
-                    </HoverCardTrigger>
-                    <HoverCardContent>
-                      <p>
-                        {t("change-tg.help-card-first")}
-                        <a
-                          className="text-res-bot-blue underline underline-offset-4 hover:opacity-70"
-                          href={import.meta.env.VITE_TG_BOT_LINK}
-                          target="_blank"
-                        >
-                          {t("change-tg.help-card-link")}
-                        </a>
-                        {t("change-tg.help-card-second")}
-                      </p>
-                    </HoverCardContent>
-                  </HoverCard>
-                )}
               </div>
               <FormMessage />
             </FormItem>
