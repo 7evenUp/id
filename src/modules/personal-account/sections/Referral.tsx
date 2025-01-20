@@ -84,7 +84,7 @@ const Referral = () => {
         <RowItem className="items-start">
           <Text0 className="w-full xl:w-auto">
             {t("referral.cashback")}:{" "}
-            <AccentNumber>{refCashBack * 100}%</AccentNumber>
+            <AccentNumber>{(refCashBack * 100).toFixed()}%</AccentNumber>
           </Text0>
           <Button onClick={onPromoClick}>
             {t("referral.promo-btn")}{" "}
