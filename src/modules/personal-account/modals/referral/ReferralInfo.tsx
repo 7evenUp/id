@@ -1,6 +1,13 @@
+import React, { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import { DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/Dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/shared/ui/Dialog"
 import ExternalLink from "@/shared/ui/ExternalLink"
 
 import Text1 from "@/shared/typography/Text1"
@@ -12,14 +19,32 @@ import AccentNumber from "@/shared/typography/AccentNumber"
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
 
+import {
+  SEARCH_PARAM_KEYS,
+  SEARCH_PARAM_VALUES,
+} from "@/constants/searchParams"
+
 import { cn } from "@/lib/classNames"
 
-const ReferralInfo = () => {
+const ReferralInfo = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation("modals")
+
+  const [modalOpened, setModalOpened] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
+
+  useEffect(() => {
+    const url = new URL(location.href)
+    const openModalParam = url.searchParams.get(SEARCH_PARAM_KEYS.open_modal)
+
+    if (!openModalParam) return
+
+    if (openModalParam === SEARCH_PARAM_VALUES.open_modal.referral_system) {
+      setModalOpened(true)
+    }
+  }, [])
 
   if (!profileData) return null
 
@@ -28,67 +53,70 @@ const ReferralInfo = () => {
   } = profileData
 
   return (
-    <DialogContent
-      className={cn(
-        "sm:max-w-[550px] md:max-w-[680px] 2xl:max-w-[800px]",
-        scale && "3xl:w-[44.27vw]"
-      )}
-      onCloseAutoFocus={(event) => event.preventDefault()}
-    >
-      <DialogHeader>
-        <DialogTitle>{t("ref-info.heading")}</DialogTitle>
-      </DialogHeader>
-      <div
+    <Dialog open={modalOpened} onOpenChange={setModalOpened}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent
         className={cn(
-          "flex flex-col md:flex-row justify-between items-center mobile:items-start md:items-stretch h-[400px] md:h-auto overflow-auto pr-2 gap-6",
-          scale && "3xl:pr-[0.521vw] 3xl:gap-[1.563vw]"
+          "sm:max-w-[550px] md:max-w-[680px] 2xl:max-w-[800px]",
+          scale && "3xl:w-[44.27vw]"
         )}
+        onCloseAutoFocus={(event) => event.preventDefault()}
       >
+        <DialogHeader>
+          <DialogTitle>{t("ref-info.heading")}</DialogTitle>
+        </DialogHeader>
         <div
           className={cn(
-            "flex flex-col gap-6 basis-1/2",
-            scale && "3xl:gap-[1.563vw]"
+            "flex flex-col md:flex-row justify-between items-center mobile:items-start md:items-stretch h-[400px] md:h-auto overflow-auto pr-2 gap-6",
+            scale && "3xl:pr-[0.521vw] 3xl:gap-[1.563vw]"
           )}
         >
-          <Text0>{t("ref-info.text-1")}</Text0>
-          <Text0>{t("ref-info.text-2")}</Text0>
           <div
             className={cn(
-              "flex flex-col gap-1 bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl mt-auto w-fit",
-              scale &&
-                "3xl:gap-[0.26vw] 3xl:px-[1.4vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw]"
+              "flex flex-col gap-6 basis-1/2",
+              scale && "3xl:gap-[1.563vw]"
             )}
           >
-            <Text1>
-              {t("ref-info.level")}: {refProgramLevel}
-            </Text1>
-            <Text1>
-              {t("ref-info.to-next-level")}: {toNextLevelRemained}
-            </Text1>
-            <Text1>
-              {t("ref-info.cashback")}: {refCashBack * 100}%
-            </Text1>
+            <Text0>{t("ref-info.text-1")}</Text0>
+            <Text0>{t("ref-info.text-2")}</Text0>
+            <div
+              className={cn(
+                "flex flex-col gap-1 bg-gray-6 dark:bg-gray-2 px-6 py-3 rounded-xl mt-auto w-fit",
+                scale &&
+                  "3xl:gap-[0.26vw] 3xl:px-[1.4vw] 3xl:py-[0.781vw] 3xl:rounded-[0.781vw]"
+              )}
+            >
+              <Text1>
+                {t("ref-info.level")}: {refProgramLevel}
+              </Text1>
+              <Text1>
+                {t("ref-info.to-next-level")}: {toNextLevelRemained}
+              </Text1>
+              <Text1>
+                {t("ref-info.cashback")}: {refCashBack * 100}%
+              </Text1>
+            </div>
+          </div>
+          <div
+            className={cn(
+              "w-full mobile:w-[210px] 2xl:w-[270px] flex flex-col gap-5",
+              scale && "3xl:w-[13.671vw] 3xl:gap-[1.302vw]"
+            )}
+          >
+            <TextAccent>{t("ref-info.table-heading")}</TextAccent>
+            <LevelsTable />
+            <TextTip>{t("ref-info.after-10")}</TextTip>
+            <ExternalLink
+              withTgIcon
+              href="https://t.me/crypton_support"
+              className="w-fit"
+            >
+              {t("ref-info.link")}
+            </ExternalLink>
           </div>
         </div>
-        <div
-          className={cn(
-            "w-full mobile:w-[210px] 2xl:w-[270px] flex flex-col gap-5",
-            scale && "3xl:w-[13.671vw] 3xl:gap-[1.302vw]"
-          )}
-        >
-          <TextAccent>{t("ref-info.table-heading")}</TextAccent>
-          <LevelsTable />
-          <TextTip>{t("ref-info.after-10")}</TextTip>
-          <ExternalLink
-            withTgIcon
-            href="https://t.me/crypton_support"
-            className="w-fit"
-          >
-            {t("ref-info.link")}
-          </ExternalLink>
-        </div>
-      </div>
-    </DialogContent>
+      </DialogContent>
+    </Dialog>
   )
 }
 
