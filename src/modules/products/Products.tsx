@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import * as ScrollArea from "@radix-ui/react-scroll-area"
 import { isDesktop } from "react-device-detect"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
@@ -29,6 +30,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { TABS_VALUES, TabsValuesType, change } from "@/redux/tabs/slice"
 import { RootTabsValuesType, changeRootTab } from "@/redux/root-tabs/slice"
 
+import {
+  SEARCH_PARAM_KEYS,
+  SEARCH_PARAM_VALUES,
+} from "@/constants/searchParams"
+
 import { cn } from "@/lib/classNames"
 
 const Products = () => {
@@ -47,6 +53,23 @@ const Products = () => {
   const handleProductsTabChange = (value: string) => {
     dispatch(change(value as TabsValuesType))
   }
+
+  useEffect(() => {
+    const url = new URL(location.href)
+    const openModalParam = url.searchParams.get(SEARCH_PARAM_KEYS.open_tab)
+
+    if (!openModalParam) return
+
+    if (openModalParam === SEARCH_PARAM_VALUES.open_tab.products) {
+      dispatch(changeRootTab("products"))
+    }
+    if (openModalParam === SEARCH_PARAM_VALUES.open_tab.inventory) {
+      dispatch(changeRootTab("inventory"))
+    }
+    if (openModalParam === SEARCH_PARAM_VALUES.open_tab.store) {
+      dispatch(changeRootTab("store"))
+    }
+  }, [])
 
   return (
     <TabsPrimitive.Root
@@ -104,7 +127,7 @@ const Products = () => {
               <Text0>{t("inventory-root")}</Text0>
             </TabsPrimitive.Trigger>
             <TabsPrimitive.Trigger
-              value="points-store"
+              value="store"
               className={cn(
                 "flex items-center justify-center gap-1.5 rounded px-2 py-1 text-gray-2 dark:text-gray-3 data-[state=active]:text-black dark:data-[state=active]:text-gray-5 data-[state=active]:bg-gray-5/25 dark:data-[state=active]:bg-gray-1 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors",
                 scale &&
@@ -208,7 +231,7 @@ const Products = () => {
       <TabsPrimitive.Content value="inventory">
         <InventoryTab />
       </TabsPrimitive.Content>
-      <TabsPrimitive.Content value="points-store">
+      <TabsPrimitive.Content value="store">
         <PointStoreTab />
       </TabsPrimitive.Content>
       {/* <TabsPrimitive.Content value="promo">

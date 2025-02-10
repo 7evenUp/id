@@ -18,6 +18,11 @@ import { Skeleton } from "@/shared/ui/Skeleton"
 import { useSubscriptionsQuery } from "@/redux/api/subscription"
 import { useAppSelector } from "@/redux/hooks"
 
+import {
+  SEARCH_PARAM_KEYS,
+  SEARCH_PARAM_VALUES,
+} from "@/constants/searchParams"
+
 import { cn } from "@/lib/classNames"
 
 const SubscriptionMain = ({
@@ -44,12 +49,16 @@ const SubscriptionMain = ({
 
   useEffect(() => {
     const url = new URL(location.href)
-    const openModalParam = url.searchParams.get("open_modal")
+    const openModalParam = url.searchParams.get(SEARCH_PARAM_KEYS.open_modal)
 
     if (!openModalParam) return
 
-    if (openModalParam === "buy_prime") {
+    if (openModalParam === SEARCH_PARAM_VALUES.open_modal.buy_prime) {
       setPrimeOpened(true)
+    }
+
+    if (openModalParam === SEARCH_PARAM_VALUES.open_modal.topup) {
+      setBalanceOpened(true)
     }
 
     // if (openModalParam === "buy_calendar") {

@@ -69,7 +69,7 @@ const Referral = () => {
         )}
       >
         <Subheading>{t("referral.heading")}</Subheading>
-        <ModalTrigger content={<ReferralInfo />}>
+        <ReferralInfo>
           <div>
             <InfoCircle
               className={cn(
@@ -78,7 +78,7 @@ const Referral = () => {
               )}
             />
           </div>
-        </ModalTrigger>
+        </ReferralInfo>
       </div>
       <div className="flex flex-col border-t border-gray-4 dark:border-gray-1">
         <RowItem className="items-start">
