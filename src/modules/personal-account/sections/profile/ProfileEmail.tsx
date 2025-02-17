@@ -1,4 +1,8 @@
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
+
+import Bell from "@/assets/icons/bell.svg?react"
+import BellOff from "@/assets/icons/bell-off.svg?react"
 
 import UpdateEmail from "../../modals/UpdateEmail"
 
@@ -9,9 +13,12 @@ import EditContainer from "../../components/EditContainer"
 import RowItem from "@/shared/components/RowItem"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
+import Tooltip from "@/shared/ui/Tooltip"
 
 const ProfileEmail = () => {
   const { t } = useTranslation("profile")
+
+  const [isSucces, setIsSuccess] = useState(false)
 
   const { data: userProfile } = useUserProfileQuery()
 
@@ -19,7 +26,21 @@ const ProfileEmail = () => {
 
   return (
     <RowItem className="relative group justify-end">
-      <span className="mr-auto">{t("profile.email")}</span>
+      <div className="flex items-center gap-2 mr-auto">
+        <span>{t("profile.email")}</span>
+        <Tooltip content="Notification">
+          <button
+            className="hover:bg-gray-5/50 active:bg-gray-5 dark:hover:bg-gray-1 dark:active:bg-gray-1/70 rounded-full p-1 transition-colors"
+            onClick={() => setIsSuccess((p) => !p)}
+          >
+            {isSucces ? (
+              <Bell className="h-4 w-4" />
+            ) : (
+              <BellOff className="h-4 w-4" />
+            )}
+          </button>
+        </Tooltip>
+      </div>
       <span className="pl-2 overflow-hidden">{userProfile.email}</span>
 
       {/* Mobile editing */}

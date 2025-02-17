@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -26,6 +26,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 
 import { MAIL_TO_LINK } from "../constants"
+import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 const RegisterMailForm = ({
   emailInput,
@@ -39,6 +40,9 @@ const RegisterMailForm = ({
   const { t } = useTranslation("auth")
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const checkboxNewsRef = useRef<HTMLButtonElement>(null)
+  const checkboxPrivacyRef = useRef<HTMLButtonElement>(null)
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -138,7 +142,47 @@ const RegisterMailForm = ({
               </FormItem>
             )}
           />
-          <p
+          <div
+            className={cn(
+              "flex items-center gap-2",
+              scale && "3xl:gap-[0.52vw]"
+            )}
+          >
+            <Checkbox id="news" ref={checkboxNewsRef} className="shrink-0" />
+            <CheckboxLabel htmlFor="news">
+              Подписаться на новости и скидки
+            </CheckboxLabel>
+          </div>
+          <div
+            className={cn(
+              "flex items-start gap-2",
+              scale && "3xl:gap-[0.52vw]"
+            )}
+          >
+            <Checkbox
+              defaultChecked={true}
+              id="privacy"
+              ref={checkboxPrivacyRef}
+              className="shrink-0"
+            />
+            <CheckboxLabel htmlFor="privacy">
+              Подтверждаю, что ознакомлен и согласен с{" "}
+              <Link
+                to="/terms-of-use"
+                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+              >
+                {t("register.privacy-policy.link-terms")}
+              </Link>{" "}
+              и{" "}
+              <Link
+                to="/privacy-policy"
+                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+              >
+                {t("register.privacy-policy.link-privacy")}
+              </Link>
+            </CheckboxLabel>
+          </div>
+          {/* <p
             className={cn(
               "text-xs w-full",
               scale && "3xl:text-[0.781vw]/[1.042vw]"
@@ -159,7 +203,7 @@ const RegisterMailForm = ({
               {t("register.privacy-policy.link-privacy")}
             </Link>{" "}
             {t("register.privacy-policy.text-3")}
-          </p>
+          </p> */}
           <ActionButton type="submit" isLoading={isLoading}>
             {t("register.register-btn")}
           </ActionButton>
