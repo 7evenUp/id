@@ -29,7 +29,6 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^5.29.0",
     "@tanstack/react-table": "^8.9.3",
-    "@ton/core": "^0.53.0",
     "@tonconnect/ui-react": "^2.0.0",
     "@wagmi/core": "^2.6.16",
     "@web3modal/wagmi": "^4.1.5",

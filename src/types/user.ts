@@ -1,4 +1,5 @@
 export interface User {
+  advertisingConsent: boolean | null
   avatars: Avatar[]
   balance: number
   capital: number | null

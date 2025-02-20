@@ -205,6 +205,17 @@ const profileApi = api.injectEndpoints({
         body,
       }),
     }),
+    setAdvertisingConsent: build.mutation<
+      void,
+      { advertising_consent: boolean }
+    >({
+      query: (body) => ({
+        url: "users/advertising-consent/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["UserProfile"],
+    }),
   }),
   overrideExisting: false,
 })
@@ -229,4 +240,5 @@ export const {
   useUpdateTelegramMutation,
   useVerifyTelegramMutation,
   useChangeLanguageMutation,
+  useSetAdvertisingConsentMutation,
 } = profileApi

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 import SkeletonLayout from "@/components/SkeletonLayout"
 import SiteUsesCookiesMessage from "@/components/SiteUsesCookiesMessage"
+import Newsletter from "@/components/Newsletter"
 // import IntroModal from "@/components/IntroModal"
 
 import Auth from "@/modules/auth/Auth"
@@ -56,6 +57,7 @@ const Main = () => {
             <PersonalAccount />
             <Products />
             {/* <IntroModal /> */}
+            <Newsletter />
           </>
         ) : null}
       </main>
