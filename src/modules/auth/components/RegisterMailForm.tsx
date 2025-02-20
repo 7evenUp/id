@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef, useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -19,6 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
+import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 import { MailRegParams, useRegisterMutation } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
@@ -26,7 +27,6 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 
 import { MAIL_TO_LINK } from "../constants"
-import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 const RegisterMailForm = ({
   emailInput,
@@ -41,12 +41,11 @@ const RegisterMailForm = ({
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
-  const checkboxNewsRef = useRef<HTMLButtonElement>(null)
-  const checkboxPrivacyRef = useRef<HTMLButtonElement>(null)
-
   const scale = useAppSelector((state) => state.scale.value)
 
   const [emailDomain, setEmailDomain] = useState("")
+  const [isNewsChecked, setIsNewsChecked] = useState(true)
+  const [isPrivacyChecked, setIsPrivacyChecked] = useState(true)
 
   const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
 
@@ -71,6 +70,8 @@ const RegisterMailForm = ({
   })
 
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
+    if (!isPrivacyChecked) return
+
     const url = new URL(location.href)
     const refCode = url.searchParams.get("ref_code")
 
@@ -83,6 +84,8 @@ const RegisterMailForm = ({
       email: cleanEmail,
       profile_username: username,
       redirect_url,
+      advertising_consent: isNewsChecked,
+      useVerificationCode: false,
     }
 
     if (refCode) {
@@ -148,7 +151,12 @@ const RegisterMailForm = ({
               scale && "3xl:gap-[0.52vw]"
             )}
           >
-            <Checkbox id="news" ref={checkboxNewsRef} className="shrink-0" />
+            <Checkbox
+              id="news"
+              checked={isNewsChecked}
+              onCheckedChange={(val) => setIsNewsChecked(val as boolean)}
+              className="shrink-0"
+            />
             <CheckboxLabel htmlFor="news">
               Подписаться на новости и скидки
             </CheckboxLabel>
@@ -162,7 +170,8 @@ const RegisterMailForm = ({
             <Checkbox
               defaultChecked={true}
               id="privacy"
-              ref={checkboxPrivacyRef}
+              checked={isPrivacyChecked}
+              onCheckedChange={(val) => setIsPrivacyChecked(val as boolean)}
               className="shrink-0"
             />
             <CheckboxLabel htmlFor="privacy">
@@ -204,7 +213,11 @@ const RegisterMailForm = ({
             </Link>{" "}
             {t("register.privacy-policy.text-3")}
           </p> */}
-          <ActionButton type="submit" isLoading={isLoading}>
+          <ActionButton
+            type="submit"
+            isLoading={isLoading}
+            disabled={!isPrivacyChecked}
+          >
             {t("register.register-btn")}
           </ActionButton>
         </form>
