@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
+
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 
 import {
@@ -21,6 +23,8 @@ import { useAppSelector } from "@/redux/hooks"
 import { cn } from "@/lib/classNames"
 
 const Newsletter = () => {
+  const { t } = useTranslation()
+
   const [opened, setOpened] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
@@ -75,28 +79,32 @@ const Newsletter = () => {
           <div
             className={cn("flex flex-col mb-4", scale && "3xl:mb-[1.042vw]")}
           >
-            <DialogTitle>Подписка на рассылку</DialogTitle>
+            <DialogTitle>{t("Подписка на рассылку")}</DialogTitle>
           </div>
         </DialogHeader>
 
         <Text0>
-          Подписаться на рассылку, чтобы получать информацию об акциях и
-          новостях экосистемы Crypton.
+          {t(
+            "Подписаться на рассылку, чтобы получать информацию об акциях и новостях экосистемы Crypton."
+          )}
         </Text0>
 
         <div className="flex items-center gap-6 ml-auto">
           <Button
             appearence="text"
-            className={cn("w-fit mt-6", scale && "3xl:mt-[1.5625vw]")}
+            className={cn(
+              "w-fit mt-6 focus:outline-none focus:underline",
+              scale && "3xl:mt-[1.5625vw]"
+            )}
             onClick={onCancelClick}
           >
-            <Text0>Нет, спасибо</Text0>
+            <Text0>{t("Нет, спасибо")}</Text0>
           </Button>
           <Button
             className={cn("w-fit mt-6 pr-1", scale && "3xl:mt-[1.5625vw]")}
             onClick={onConfirmClick}
           >
-            Подписаться
+            {t("Подписаться")}
             <div className="inline-flex items-center gap-1 rounded-full bg-gray-5/50 dark:bg-gray-3/50 pl-2 pr-1 py-1">
               +40
               <CryptonIcon

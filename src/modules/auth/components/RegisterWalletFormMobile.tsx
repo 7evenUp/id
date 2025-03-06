@@ -271,7 +271,7 @@ const RegisterWalletFormMobile = ({
                 className="shrink-0"
               />
               <CheckboxLabel htmlFor="news">
-                Подписаться на новости и скидки
+                {t("Подписаться на новости и скидки")}
               </CheckboxLabel>
             </div>
             <div
@@ -288,14 +288,14 @@ const RegisterWalletFormMobile = ({
                 className="shrink-0"
               />
               <CheckboxLabel htmlFor="privacy">
-                Подтверждаю, что ознакомлен и согласен с{" "}
+                {t("Подтверждаю, что ознакомлен и согласен с")}{" "}
                 <Link
                   to="/terms-of-use"
                   className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
                 >
                   {t("register.privacy-policy.link-terms")}
                 </Link>{" "}
-                и{" "}
+                {t("и")}{" "}
                 <Link
                   to="/privacy-policy"
                   className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"

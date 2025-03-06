@@ -35,7 +35,7 @@ const ProfileEmail = () => {
     <RowItem className="relative group justify-end">
       <div className="flex items-center gap-2 mr-auto">
         <span>{t("profile.email")}</span>
-        <Tooltip content="Notification">
+        <Tooltip content={t("Рассылка")}>
           <button
             className="hover:bg-gray-5/50 active:bg-gray-5 dark:hover:bg-gray-1 dark:active:bg-gray-1/70 rounded-full p-1 transition-colors"
             onClick={() =>
