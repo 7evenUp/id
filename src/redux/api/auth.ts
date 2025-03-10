@@ -8,6 +8,8 @@ export interface WalletReqParams {
   profile_username?: string
   referral_code?: string
   redirect_url?: string
+  advertising_consent: boolean
+  useVerificationCode: boolean
 }
 
 export interface MailRegParams {
@@ -15,6 +17,8 @@ export interface MailRegParams {
   profile_username: string
   referral_code?: string
   redirect_url: string
+  advertising_consent: boolean
+  useVerificationCode: boolean
 }
 
 const authApi = api.injectEndpoints({
@@ -38,23 +42,18 @@ const authApi = api.injectEndpoints({
       }),
     }),
     registerByWallet: build.mutation<void, WalletReqParams>({
-      query: (body) => ({
-        url: "users/register-web-wallet/",
-        method: "POST",
-        body,
-      }),
-      transformErrorResponse: (response) => ({
-        status: response.status,
-        // @ts-expect-error No-Error-Types
-        code: response.data?.code,
-      }),
-    }),
-    registerByWalletMobile: build.mutation<void, WalletReqParams>({
-      query: (body) => ({
-        url: "users/register-web-wallet/?use_verification_code=true",
-        method: "POST",
-        body,
-      }),
+      query: (body) => {
+        const { useVerificationCode, ...rest } = body
+        let url = "users/register-web-wallet/"
+
+        if (useVerificationCode) url += "?use_verification_code=true"
+
+        return {
+          url,
+          method: "POST",
+          body: rest,
+        }
+      },
       transformErrorResponse: (response) => ({
         status: response.status,
         // @ts-expect-error No-Error-Types
@@ -86,23 +85,18 @@ const authApi = api.injectEndpoints({
       }),
     }),
     register: build.mutation<void, MailRegParams>({
-      query: (body) => ({
-        url: "users/register-web/",
-        method: "POST",
-        body,
-      }),
-      transformErrorResponse: (response) => ({
-        status: response.status,
-        // @ts-expect-error No-Error-Types
-        message: response.data?.detail,
-      }),
-    }),
-    registerMobile: build.mutation<void, MailRegParams>({
-      query: (body) => ({
-        url: "users/register-web/?use_verification_code=true",
-        method: "POST",
-        body,
-      }),
+      query: (body) => {
+        const { useVerificationCode, ...rest } = body
+        let url = "users/register-web/"
+
+        if (useVerificationCode) url += "?use_verification_code=true"
+
+        return {
+          url,
+          method: "POST",
+          body: rest,
+        }
+      },
       transformErrorResponse: (response) => ({
         status: response.status,
         // @ts-expect-error No-Error-Types
@@ -124,9 +118,7 @@ export const {
   useLoginMutation,
   useLoginMobileMutation,
   useRegisterMutation,
-  useRegisterMobileMutation,
   useLazyLogoutQuery,
   useAuthByWalletMutation,
   useRegisterByWalletMutation,
-  useRegisterByWalletMobileMutation,
 } = authApi

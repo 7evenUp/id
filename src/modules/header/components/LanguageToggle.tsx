@@ -24,14 +24,13 @@ const LanguageToggle = () => {
     }
 
     const lang = window.navigator.language
-    const langFistTwo = lang.substring(0, 2)
 
-    if (langFistTwo !== "ru") {
-      dispatch(changeLang("en"))
-      i18n.changeLanguage("en")
-    } else {
+    if (lang.startsWith("ru")) {
       dispatch(changeLang("ru"))
       i18n.changeLanguage("ru")
+    } else {
+      dispatch(changeLang("en"))
+      i18n.changeLanguage("en")
     }
   }, [])
 

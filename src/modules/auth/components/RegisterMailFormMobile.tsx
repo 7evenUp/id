@@ -19,12 +19,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
+import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import {
   MailRegParams,
   useAuthByCodeMutation,
-  useRegisterMobileMutation,
+  useRegisterMutation,
 } from "@/redux/api/auth"
 import { useAppSelector } from "@/redux/hooks"
 
@@ -49,6 +50,8 @@ const RegisterMailFormMobile = ({
 
   const [emailDomain, setEmailDomain] = useState("")
   const [isCodeSent, setIsCodeSent] = useState(false)
+  const [isNewsChecked, setIsNewsChecked] = useState(true)
+  const [isPrivacyChecked, setIsPrivacyChecked] = useState(true)
 
   const { refetch } = useUserProfileQuery()
   const [
@@ -58,7 +61,7 @@ const RegisterMailFormMobile = ({
       isSuccess: isRegisterSuccess,
       error: registerError,
     },
-  ] = useRegisterMobileMutation()
+  ] = useRegisterMutation()
   const [
     authByCode,
     {
@@ -119,6 +122,8 @@ const RegisterMailFormMobile = ({
   }
 
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
+    if (!isPrivacyChecked) return
+
     const url = new URL(location.href)
     const refCode = url.searchParams.get("ref_code")
 
@@ -131,6 +136,8 @@ const RegisterMailFormMobile = ({
       email: cleanEmail,
       profile_username: username,
       redirect_url,
+      advertising_consent: isNewsChecked,
+      useVerificationCode: true,
     }
 
     if (refCode) {
@@ -218,29 +225,57 @@ const RegisterMailFormMobile = ({
                 </FormItem>
               )}
             />
-            <p
+            <div
               className={cn(
-                "text-xs w-full",
-                scale && "3xl:text-[0.781vw]/[1.042vw]"
+                "flex items-center gap-2",
+                scale && "3xl:gap-[0.52vw]"
               )}
             >
-              {t("register.privacy-policy.text-1")}{" "}
-              <Link
-                to="/terms-of-use"
-                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
-              >
-                {t("register.privacy-policy.link-terms")}
-              </Link>{" "}
-              {t("register.privacy-policy.text-2")}{" "}
-              <Link
-                to="/privacy-policy"
-                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
-              >
-                {t("register.privacy-policy.link-privacy")}
-              </Link>{" "}
-              {t("register.privacy-policy.text-3")}
-            </p>
-            <ActionButton type="submit" isLoading={isRegisterLoading}>
+              <Checkbox
+                id="news"
+                checked={isNewsChecked}
+                onCheckedChange={(val) => setIsNewsChecked(val as boolean)}
+                className="shrink-0"
+              />
+              <CheckboxLabel htmlFor="news">
+                {t("Подписаться на новости и скидки")}
+              </CheckboxLabel>
+            </div>
+            <div
+              className={cn(
+                "flex items-start gap-2",
+                scale && "3xl:gap-[0.52vw]"
+              )}
+            >
+              <Checkbox
+                defaultChecked={true}
+                id="privacy"
+                checked={isPrivacyChecked}
+                onCheckedChange={(val) => setIsPrivacyChecked(val as boolean)}
+                className="shrink-0"
+              />
+              <CheckboxLabel htmlFor="privacy">
+                {t("Подтверждаю, что ознакомлен и согласен с")}{" "}
+                <Link
+                  to="/terms-of-use"
+                  className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+                >
+                  {t("register.privacy-policy.link-terms")}
+                </Link>{" "}
+                {t("и")}{" "}
+                <Link
+                  to="/privacy-policy"
+                  className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+                >
+                  {t("register.privacy-policy.link-privacy")}
+                </Link>
+              </CheckboxLabel>
+            </div>
+            <ActionButton
+              type="submit"
+              isLoading={isRegisterLoading}
+              disabled={!isPrivacyChecked}
+            >
               {t("register.register-btn")}
             </ActionButton>
           </form>
