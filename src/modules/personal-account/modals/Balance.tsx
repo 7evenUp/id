@@ -41,7 +41,7 @@ import { useAvailableMethodsQuery } from "@/redux/api/payments"
 
 import { cn } from "@/lib/classNames"
 
-const PREDEFINED_AMOUNT_VALUES = ["74", "211", "400", "755"]
+const PREDEFINED_AMOUNT_VALUES = ["99", "282", "534", "999"]
 
 const Balance = () => {
   const { t } = useTranslation("modals")
