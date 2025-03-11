@@ -276,10 +276,6 @@ const PointStoreTab = () => {
           )
         )}
       </div>
-
-      {/* <Text0 className={cn("py-2", scale && "3xl:py-[0.52vw]")}>
-        {t("points-store.disabled")}
-      </Text0> */}
     </div>
   )
 }
