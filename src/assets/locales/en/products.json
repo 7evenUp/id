@@ -88,7 +88,10 @@
     "отмена": "cancel",
     "подтвердить": "confirm",
     "От наименьшего к большему": "Price: Low to High",
-    "От наибольшего к меньшему": "Price: High to Low"
+    "От наибольшего к меньшему": "Price: High to Low",
+    "Размеры одежды": "Clothing Sizes",
+    "Актуальное наличие размеров можно узнать на": "The current availability of sizes can be found on",
+    "сайте": "the website"
   },
   "nutcracker": {
     "title": "The Nutcrackers",

@@ -6,6 +6,7 @@ import { toast } from "sonner"
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import PercentageIcon from "@/assets/icons/percentage.svg?react"
 import NftIcon from "@/assets/icons/nft.svg?react"
+import HelpIcon from "@/assets/icons/help-circle.svg?react"
 
 import { Skeleton } from "@/shared/ui/Skeleton"
 import {
@@ -22,6 +23,12 @@ import {
   SelectItemNew,
   SelectTriggerNew,
 } from "@/shared/ui/SelectNew"
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/shared/ui/HoverCard"
 // import { SegmentedButton, SegmentedRoot } from "@/shared/ui/SegmentedButtons"
 
 import Subheading from "@/shared/typography/Subheading"
@@ -38,6 +45,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { PointsPrize } from "@/types/points"
 
 import { cn } from "@/lib/classNames"
+import { isDesktop } from "react-device-detect"
 
 const PointStoreTab = () => {
   const { t } = useTranslation("products")
@@ -69,6 +77,14 @@ const PointStoreTab = () => {
     //   )
     // }
   }, [sortPrice, prizes])
+
+  const HoverCardOrPopover = isDesktop ? HoverCard : Popover
+  const HoverCardOrPopoverTrigger = isDesktop
+    ? HoverCardTrigger
+    : PopoverTrigger
+  const HoverCardOrPopoverContent = isDesktop
+    ? HoverCardContent
+    : PopoverContent
 
   return (
     <div
@@ -144,7 +160,7 @@ const PointStoreTab = () => {
           </div>
         </div>
 
-        <div className="flex gap-10">
+        <div className="flex items-center gap-4">
           {/* <SegmentedRoot
             type="single"
             className={cn("w-full sm:w-[520px]", scale && "3xl:w-[33.854vw]")}
@@ -222,6 +238,37 @@ const PointStoreTab = () => {
               </SelectItemNew>
             </SelectContentNew>
           </SelectNew>
+
+          <HoverCardOrPopover>
+            <HoverCardOrPopoverTrigger asChild>
+              <button className="hover:bg-gray-5/50 active:bg-gray-5 dark:hover:bg-gray-1 dark:active:bg-gray-1/70 rounded-full h-fit transition-colors">
+                <HelpIcon
+                  className={cn(
+                    "w-6 h-6",
+                    scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+                  )}
+                />
+              </button>
+            </HoverCardOrPopoverTrigger>
+            <HoverCardOrPopoverContent
+              className={cn(
+                "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5",
+                scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw]"
+              )}
+            >
+              <TextAccent>{t("points-store.Размеры одежды")}</TextAccent>
+              <Text0 className="text-left">
+                {t("points-store.Актуальное наличие размеров можно узнать на")}{" "}
+                <a
+                  className="text-res-bot-blue underline hover:opacity-70"
+                  target="_blank"
+                  href="https://merch.crypton.xyz/"
+                >
+                  {t("points-store.сайте")}
+                </a>
+              </Text0>
+            </HoverCardOrPopoverContent>
+          </HoverCardOrPopover>
         </div>
 
         {isLoading ? (
