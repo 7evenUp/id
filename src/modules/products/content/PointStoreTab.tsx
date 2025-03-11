@@ -252,8 +252,8 @@ const PointStoreTab = () => {
             </HoverCardOrPopoverTrigger>
             <HoverCardOrPopoverContent
               className={cn(
-                "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5",
-                scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw]"
+                "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5 p-2",
+                scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
               )}
             >
               <TextAccent>{t("points-store.Размеры одежды")}</TextAccent>
