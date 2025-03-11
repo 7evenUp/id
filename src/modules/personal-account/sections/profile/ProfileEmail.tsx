@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 
 import Bell from "@/assets/icons/bell.svg?react"
@@ -10,24 +11,25 @@ import EditButton from "../../components/EditButton"
 import EditContainer from "../../components/EditContainer"
 
 import RowItem from "@/shared/components/RowItem"
+import Tooltip from "@/shared/ui/Tooltip"
 
 import {
   useSetAdvertisingConsentMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
-import Tooltip from "@/shared/ui/Tooltip"
 
 const ProfileEmail = () => {
   const { t } = useTranslation("profile")
 
   const { data: userProfile } = useUserProfileQuery()
-  const [mutate, { isLoading }] = useSetAdvertisingConsentMutation()
+  const [mutate] = useSetAdvertisingConsentMutation()
 
-  if (!userProfile) return null
+  const { advertisingConsent, email } = userProfile!
+
+  const [consentState, setConsentState] = useState(Boolean(advertisingConsent))
 
   const onChangeAdvertisingClick = (isAdvertisingOn: boolean) => {
-    if (isLoading) return
-
+    setConsentState(isAdvertisingOn)
     mutate({ advertising_consent: isAdvertisingOn })
   }
 
@@ -38,11 +40,9 @@ const ProfileEmail = () => {
         <Tooltip content={t("Рассылка")}>
           <button
             className="hover:bg-gray-5/50 active:bg-gray-5 dark:hover:bg-gray-1 dark:active:bg-gray-1/70 rounded-full p-1 transition-colors"
-            onClick={() =>
-              onChangeAdvertisingClick(!userProfile.advertisingConsent)
-            }
+            onClick={() => onChangeAdvertisingClick(!consentState)}
           >
-            {userProfile.advertisingConsent ? (
+            {consentState ? (
               <Bell className="h-4 w-4" />
             ) : (
               <BellOff className="h-4 w-4" />
@@ -50,7 +50,7 @@ const ProfileEmail = () => {
           </button>
         </Tooltip>
       </div>
-      <span className="pl-2 overflow-hidden">{userProfile.email}</span>
+      <span className="pl-2 overflow-hidden">{email}</span>
 
       {/* Mobile editing */}
       <div className="sm:hidden ml-6">
