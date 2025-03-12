@@ -75,7 +75,6 @@
   },
   "points-store": {
     "title": "Crypton Points Store",
-    "disabled": "The store's functionality is under development",
     "Тип товара": "Product type",
     "Товары данного типа содержат в себе различные промокоды. Это могут быть скидки на подписки Prime/Calendar или партнерские сервисы.": "Products of this type contain various promo codes. These can be discounts on Prime/Calendar subscriptions or partner services.",
     "Промокод": "Promo code",
@@ -89,7 +88,10 @@
     "отмена": "cancel",
     "подтвердить": "confirm",
     "От наименьшего к большему": "Price: Low to High",
-    "От наибольшего к меньшему": "Price: High to Low"
+    "От наибольшего к меньшему": "Price: High to Low",
+    "Размеры одежды": "Clothing Sizes",
+    "Актуальное наличие размеров можно узнать на": "The current availability of sizes can be found on",
+    "сайте": "the website"
   },
   "nutcracker": {
     "title": "The Nutcrackers",
