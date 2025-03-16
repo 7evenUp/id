@@ -145,11 +145,11 @@
         "desc": "Календарь актуальных и прибыльных событий в мире криптовалют. Существенно экономит время и в разы повышает твою продуктивность."
       },
       "second-step": {
-        "step": "шаг 2/2: Ресурсы Calendar",
+        "step": "шаг 2/2: Ресурсы Pro",
         "congrats": "ПОЗДРАВЛЯЕМ",
-        "congrats-message_one": "Подписка Calendar на {{count}} месяц приобретена!",
-        "congrats-message_few": "Подписка Calendar на {{count}} месяца приобретена!",
-        "congrats-message_many": "Подписка Calendar на {{count}} месяцев приобретена!",
+        "congrats-message_one": "Подписка Pro на {{count}} месяц приобретена!",
+        "congrats-message_few": "Подписка Pro на {{count}} месяца приобретена!",
+        "congrats-message_many": "Подписка Pro на {{count}} месяцев приобретена!",
         "access-available": "Теперь у Вас есть доступ к Календарю",
         "go-to-calendar-btn": "перейти",
         "continue-btn": "закрыть"

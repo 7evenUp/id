@@ -36,10 +36,7 @@ const TabsTriggers = () => {
             {activeProduct === "prime" ? (
               <img
                 src={PrimeActivePng}
-                className={cn(
-                  "w-auto h-[26px]",
-                  scale && "3xl:w-[1.693vw] 3xl:h-[1.693vw]"
-                )}
+                className={cn("w-auto h-[26px]", scale && "3xl:h-[1.693vw]")}
               />
             ) : (
               <PrimeIcon

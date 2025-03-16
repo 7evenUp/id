@@ -145,10 +145,10 @@
         "desc": "A calendar of current and profitable events in the world of cryptocurrencies. It significantly saves time and significantly increases your productivity."
       },
       "second-step": {
-        "step": "шаг 2/2: Calendar access",
+        "step": "шаг 2/2: Pro access",
         "congrats": "CONGRATULATIONS",
-        "congrats-message_one": "{{count}} month Calendar subscription has been purchased!",
-        "congrats-message_other": "{{count}} months Calendar subscription has been purchased!",
+        "congrats-message_one": "{{count}} month Pro subscription has been purchased!",
+        "congrats-message_other": "{{count}} months Pro subscription has been purchased!",
         "access-available": "Now you have access to the Calendar",
         "go-to-calendar-btn": "proceed",
         "continue-btn": "close"
