@@ -371,7 +371,7 @@ const Prize = (prize: PointsPrize) => {
         </div>
 
         {kind !== null && kind === "clothes" && (
-          <HoverCardOrPopover>
+          <HoverCardOrPopover openDelay={100}>
             <HoverCardOrPopoverTrigger asChild>
               <button className="absolute right-1 bottom-1 bg-white dark:bg-gray-1 shadow-sm shadow-black/50 rounded-full">
                 <InfoCircle
