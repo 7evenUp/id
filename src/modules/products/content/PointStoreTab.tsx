@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import PercentageIcon from "@/assets/icons/percentage.svg?react"
 import NftIcon from "@/assets/icons/nft.svg?react"
-import HelpIcon from "@/assets/icons/help-circle.svg?react"
+import InfoCircle from "@/assets/icons/info-circle.svg?react"
 
 import { Skeleton } from "@/shared/ui/Skeleton"
 import {
@@ -77,14 +77,6 @@ const PointStoreTab = () => {
     //   )
     // }
   }, [sortPrice, prizes])
-
-  const HoverCardOrPopover = isDesktop ? HoverCard : Popover
-  const HoverCardOrPopoverTrigger = isDesktop
-    ? HoverCardTrigger
-    : PopoverTrigger
-  const HoverCardOrPopoverContent = isDesktop
-    ? HoverCardContent
-    : PopoverContent
 
   return (
     <div
@@ -238,37 +230,6 @@ const PointStoreTab = () => {
               </SelectItemNew>
             </SelectContentNew>
           </SelectNew>
-
-          <HoverCardOrPopover>
-            <HoverCardOrPopoverTrigger asChild>
-              <button className="hover:bg-gray-5/50 active:bg-gray-5 dark:hover:bg-gray-1 dark:active:bg-gray-1/70 rounded-full h-fit transition-colors">
-                <HelpIcon
-                  className={cn(
-                    "w-6 h-6",
-                    scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
-                  )}
-                />
-              </button>
-            </HoverCardOrPopoverTrigger>
-            <HoverCardOrPopoverContent
-              className={cn(
-                "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5 p-2",
-                scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
-              )}
-            >
-              <TextAccent>{t("points-store.Размеры одежды")}</TextAccent>
-              <Text0 className="text-left">
-                {t("points-store.Актуальное наличие размеров можно узнать на")}{" "}
-                <a
-                  className="text-res-bot-blue underline hover:opacity-70"
-                  target="_blank"
-                  href="https://merch.crypton.xyz/"
-                >
-                  {t("points-store.сайте")}
-                </a>
-              </Text0>
-            </HoverCardOrPopoverContent>
-          </HoverCardOrPopover>
         </div>
 
         {isLoading ? (
@@ -332,7 +293,7 @@ export default PointStoreTab
 const Prize = (prize: PointsPrize) => {
   const { t } = useTranslation("products")
 
-  const { image, photos, title, type, price, availableQuantity } = prize
+  const { image, photos, title, type, price, availableQuantity, kind } = prize
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -341,6 +302,14 @@ const Prize = (prize: PointsPrize) => {
   const { data: profileData } = useUserProfileQuery()
 
   const { points } = profileData!
+
+  const HoverCardOrPopover = isDesktop ? HoverCard : Popover
+  const HoverCardOrPopoverTrigger = isDesktop
+    ? HoverCardTrigger
+    : PopoverTrigger
+  const HoverCardOrPopoverContent = isDesktop
+    ? HoverCardContent
+    : PopoverContent
 
   return (
     <div
@@ -400,6 +369,39 @@ const Prize = (prize: PointsPrize) => {
             />
           )}
         </div>
+
+        {kind !== null && kind === "clothes" && (
+          <HoverCardOrPopover>
+            <HoverCardOrPopoverTrigger asChild>
+              <button className="absolute right-1 bottom-1 bg-white dark:bg-gray-1 shadow-sm shadow-black/50 rounded-full">
+                <InfoCircle
+                  className={cn(
+                    "w-6 h-6",
+                    scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+                  )}
+                />
+              </button>
+            </HoverCardOrPopoverTrigger>
+            <HoverCardOrPopoverContent
+              className={cn(
+                "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5 p-2",
+                scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
+              )}
+            >
+              <TextAccent>{t("points-store.Размеры одежды")}</TextAccent>
+              <Text0 className="text-left">
+                {t("points-store.Актуальное наличие размеров можно узнать на")}{" "}
+                <a
+                  className="text-res-bot-blue underline hover:opacity-70"
+                  target="_blank"
+                  href="https://merch.crypton.xyz/"
+                >
+                  {t("points-store.сайте")}
+                </a>
+              </Text0>
+            </HoverCardOrPopoverContent>
+          </HoverCardOrPopover>
+        )}
       </div>
 
       <div
