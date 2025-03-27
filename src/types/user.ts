@@ -55,7 +55,7 @@ export interface ActiveUserSubscription {
   tillDatetime: string
   status: "ACTIVE" | "UPCOMING" | "FROZEN"
   durationDays: number
-  kindName: "Prime" | "Calendar"
+  kindName: "Prime" | "Pro"
 }
 
 export interface ReferralInfo {

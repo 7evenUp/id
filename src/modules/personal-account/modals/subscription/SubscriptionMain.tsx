@@ -61,7 +61,7 @@ const SubscriptionMain = ({
       setBalanceOpened(true)
     }
 
-    // if (openModalParam === "buy_calendar") {
+    // if (openModalParam === SEARCH_PARAM_VALUES.open_modal.buy_calendar) {
     //   setCalendarOpened(true)
     // }
   }, [])

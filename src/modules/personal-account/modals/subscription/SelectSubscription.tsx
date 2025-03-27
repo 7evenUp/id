@@ -62,8 +62,8 @@ const SelectSubscription = ({
               <img
                 src={PrimeActivePng}
                 className={cn(
-                  "group-hover:block group-hover:scale-105 hidden w-[27px] h-[30px]",
-                  scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
+                  "group-hover:block group-hover:scale-105 hidden w-[27px] h-7",
+                  scale && "3xl:w-[1.757vw] 3xl:h-[1.8229vw]"
                 )}
               />
               <PrimeIcon
@@ -120,7 +120,7 @@ const SelectSubscription = ({
                   scale && "3xl:text-[1.432vw]/[1.432vw]"
                 )}
               >
-                Calendar
+                Pro
               </span>
             </div>
             <Text1

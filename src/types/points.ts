@@ -11,6 +11,7 @@ export interface PointsPrize {
   backgroundColor: string | null
   image: string
   type: "nft" | "crypton_promo_code"
+  kind: "clothes" | "subscription" | "wallet" | "accessories" | null
   photos: [
     {
       id: number

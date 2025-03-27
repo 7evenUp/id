@@ -84,7 +84,7 @@ const UpcomingSubscriptions = () => {
                   className={cn("w-[26px] h-auto", scale && "3xl:w-[1.693vw]")}
                 />
               ) : (
-                subscriptions[0].kindName === "Calendar" && (
+                subscriptions[0].kindName === "Pro" && (
                   <CalendarActiveIcon
                     className={cn(
                       "w-[26px] h-auto",
@@ -142,7 +142,7 @@ const UpcomingSubscriptions = () => {
                       )}
                     />
                   ) : (
-                    subscription.kindName === "Calendar" && (
+                    subscription.kindName === "Pro" && (
                       <CalendarActiveIcon
                         className={cn(
                           "w-[26px] h-auto",
@@ -179,7 +179,7 @@ const UpcomingSubscriptions = () => {
                       )}
                     />
                   ) : (
-                    subscription.kindName === "Calendar" && (
+                    subscription.kindName === "Pro" && (
                       <CalendarActiveIcon
                         className={cn(
                           "w-[26px] h-auto",
