@@ -55,8 +55,8 @@ const SelectSubscription = ({
           <Card onClick={openPrime}>
             <div
               className={cn(
-                "flex items-center gap-3",
-                scale && "3xl:gap-[0.781vw]"
+                "flex items-center gap-3 h-[30px]",
+                scale && "3xl:gap-[0.781vw] 3xl:h-[1.953vw]"
               )}
             >
               <img
