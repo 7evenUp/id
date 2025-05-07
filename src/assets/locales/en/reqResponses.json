@@ -23,5 +23,7 @@
   "discount_for_non_subscribed_only": "The promo code is only available for accounts without an active subscription",
   "discount_for_new_users_only": "The promo code is only available to new users",
   "discount_code_already_used": "The promo code has already been used",
-  "discount_code_validation_error": "We can't validate the promo code"
+  "discount_code_validation_error": "We can't validate the promo code",
+  "Повторный запрос на вход будет доступен через": "Login will be available in",
+  "мин": "min"
 }
