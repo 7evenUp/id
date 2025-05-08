@@ -6,6 +6,7 @@ import Newsletter from "@/components/Newsletter"
 // import IntroModal from "@/components/IntroModal"
 
 import Auth from "@/modules/auth/Auth"
+import NewAuth from "@/modules/newAuth"
 import PersonalAccount from "@/modules/personal-account/PersonalAccount"
 import Products from "@/modules/products/Products"
 
@@ -44,12 +45,12 @@ const Main = () => {
     <>
       <main
         className={cn(
-          "flex flex-col lg:flex-row justify-between pb-32 md:pb-10 lg:pb-0 gap-20",
+          "flex-1 flex flex-col lg:flex-row justify-between pb-32 md:pb-10 lg:pb-0 gap-20",
           scale && "3xl:gap-[5.208vw]"
         )}
       >
         {error ? (
-          <Auth />
+          <NewAuth />
         ) : isProfileLoading || isSubscriptionsLoading || isDelayed ? (
           <SkeletonLayout />
         ) : data ? (
