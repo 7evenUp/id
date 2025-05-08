@@ -8,6 +8,7 @@ import { toast } from "sonner"
 import Loader from "@/assets/icons/loader.svg?react"
 import Web3Logo from "@/assets/icons/utility/Web3_logo.svg?react"
 import MailLogo from "@/assets/icons/utility/Mail_logo.svg?react"
+import GoogleLogo from "@/assets/icons/utility/Google_logo.svg?react"
 
 import AuthButton from "./components/AuthButton"
 import MailMode from "./components/MailMode"
@@ -16,7 +17,7 @@ import RegisterWalletFormMobile from "./components/RegisterWalletFormMobile"
 
 import { Skeleton } from "@/shared/ui/Skeleton"
 
-import { useAuthByWalletMutation } from "@/redux/api/auth"
+import { useAuthByWalletMutation, useLoginMutation } from "@/redux/api/auth"
 import { useRandomBannerQuery } from "@/redux/api/banners"
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
@@ -44,16 +45,20 @@ const Auth = () => {
   const { open } = useWeb3Modal()
 
   const { refetch } = useUserProfileQuery()
+  const { data: banner, isLoading: isBannerLoading } = useRandomBannerQuery()
   const [
     authenticate,
     { isError: isAuthError, reset, isSuccess: isAuthSuccess },
   ] = useAuthByWalletMutation()
-  const { data: banner, isLoading: isBannerLoading } = useRandomBannerQuery()
+  const [login, { isLoading: isLoginLoading, data: loginData }] =
+    useLoginMutation()
 
+  // Рефетч профиля, если авторизация успешна
   useEffect(() => {
     if (isAuthSuccess) setTimeout(() => refetch(), 100)
   }, [isAuthSuccess])
 
+  // Обработка авторизации через кошлеь
   useEffect(() => {
     const login = async () => {
       let signature
@@ -89,6 +94,7 @@ const Auth = () => {
     if (isAuthStarted && isConnected) login()
   }, [isAuthStarted, isConnected])
 
+  // Обработка отключения кошелька
   useEffect(() => {
     if (isDisconnected) {
       reset()
@@ -96,9 +102,25 @@ const Auth = () => {
     }
   }, [isDisconnected])
 
+  useEffect(() => {
+    if (!loginData) return
+    if (loginData.oauthRedirectTo === null) return
+
+    window.location.href = loginData.oauthRedirectTo
+  }, [loginData])
+
   const handleConnect = async () => {
     setIsAuthStarted(true)
     if (!isConnected) open({ view: "Connect" })
+  }
+
+  const handleGoogle = async () => {
+    const redirect_url = window.location.origin
+
+    login({
+      oauth: "GOOGLE",
+      redirect_url,
+    })
   }
 
   return (
@@ -158,6 +180,27 @@ const Auth = () => {
                   className={cn(scale && "3xl:w-[1.822vw] 3xl:h-[1.953vw]")}
                 />
                 <span>{t("email-btn")}</span>
+              </AuthButton>
+
+              <AuthButton onClick={handleGoogle}>
+                {isLoginLoading ? (
+                  <Loader
+                    className={cn(
+                      "animate-spin",
+                      scale && "3xl:w-[1.563vw] 3xl:h-[1.563vw]"
+                    )}
+                  />
+                ) : (
+                  <>
+                    <GoogleLogo
+                      className={cn(
+                        "w-6 h-6",
+                        scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+                      )}
+                    />
+                    <span>Google</span>
+                  </>
+                )}
               </AuthButton>
             </div>
           )}
