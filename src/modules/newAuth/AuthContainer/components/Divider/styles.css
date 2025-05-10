@@ -1,0 +1,27 @@
+.id_crypton_divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+}
+
+.id_crypton_divider::before,
+.id_crypton_divider::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dark .id_crypton_divider {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .id_crypton_divider::before,
+.dark .id_crypton_divider::after {
+  background-color: rgba(255, 255, 255, 0.4);
+}

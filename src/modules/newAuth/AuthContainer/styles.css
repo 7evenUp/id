@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 320px;
+  color: black;
+}
+
+.dark .id_crypton_auth {
+  color: white;
 }
 
 .id_crypton_logo {
@@ -12,81 +18,10 @@
 .id_crypton_title {
   font-size: 18px;
   font-weight: 600;
-  margin-top: 32px;
-  margin-bottom: 4px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
-.id_crypton_description {
-  opacity: 60%;
-}
-
-.id_crypton_auth_variants {
+.id_crypton_form {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 40px;
-
-  & button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    height: 36px;
-    width: 100%;
-    border-radius: 6px;
-    border: 1px solid black;
-    font-size: 14px;
-  }
-}
-
-.id_crypton_divider {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
-
-  &::before,
-  &::after {
-    content: "";
-    flex-grow: 1;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-}
-
-.id_crypton_label {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 32px;
-
-  & span {
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  & input {
-    height: 36px;
-    width: 100%;
-    border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-  }
-}
-
-.id_crypton_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  width: 100%;
-  border-radius: 6px;
-  border: 1px solid black;
-  font-size: 14px;
 }

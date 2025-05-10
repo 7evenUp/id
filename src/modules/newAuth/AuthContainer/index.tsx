@@ -1,24 +1,26 @@
-import IdIcon from "../Icons/ID"
+import { useState } from "react"
 
-import './styles.css'
+import AuthVariants from "./components/AuthVariants"
+import Divider from "./components/Divider"
+import EmailLogin from "./components/EmailLogin"
+import IdIcon from "./components/Icons/ID"
+
+import "./styles.css"
 
 const AuthContainer = () => {
+  const [emailInput, setEmailInput] = useState("")
+
   return (
-    <div className="container">
-      <IdIcon className="logo" />
-      <h2 className="title">Sign in to Crypton</h2>
-      <p className="description">Welcome back! Please sign in to continue</p>
-      <div className="auth_variants">
-        <button>Web3 Wallet</button>
-        <button>Google</button>
-        <button>Apple</button>
-      </div>
-      <p className="divider">or</p>
-      <label className="label">
-        <span>Email address</span>
-        <input type="email" />
-      </label>
-      <button className="button">Continue</button>
+    <div className="id_crypton_auth">
+      <IdIcon className="id_crypton_logo" />
+
+      <h2 className="id_crypton_title">Sign in to Crypton</h2>
+
+      <AuthVariants />
+
+      <Divider />
+
+      <EmailLogin emailInput={emailInput} setEmailInput={setEmailInput} />
     </div>
   )
 }
