@@ -1,6 +1,6 @@
-import Button from "../Button"
-import Apple from "../Icons/Apple"
+import Button from "../../shared/Button"
 
+import Apple from "../Icons/Apple"
 import Google from "../Icons/Google"
 import Web3 from "../Icons/Web3"
 

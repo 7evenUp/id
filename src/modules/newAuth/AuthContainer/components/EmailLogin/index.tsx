@@ -2,25 +2,66 @@ import { Dispatch, SetStateAction, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { useMutation } from "@tanstack/react-query"
+import { AxiosError } from "axios"
+import { differenceInMinutes } from "date-fns"
+import { isDesktop } from "react-device-detect"
 
-import { Form, FormControl, FormField, FormItem, FormMessage } from "../Form"
-import Button from "../Button"
-import Input from "../Input"
-import { useLoginMutation } from "@/redux/api/auth"
+import AuthByCode from "../AuthByCode"
+import MailToLinkMap from "../MailToLinkMap"
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../../shared/Form"
+import Button from "../../shared/Button"
+import Input from "../../shared/Input"
+
+import AuthApi from "../../api"
+import { LoginRequest } from "../../api/types"
 
 const EmailLogin = ({
   emailInput,
   setEmailInput,
+  setIsUserNotFoundByMailLogin,
 }: {
   emailInput: string
   setEmailInput: Dispatch<SetStateAction<string>>
+  setIsUserNotFoundByMailLogin: Dispatch<SetStateAction<boolean>>
 }) => {
   const [emailDomain, setEmailDomain] = useState("")
 
-  const [login, { isLoading: isLoginLoading, isSuccess, error }] =
-    useLoginMutation({
-      fixedCacheKey: "login-by-mail",
-    })
+  const {
+    mutate: login,
+    isPending: isLoginLoading,
+    isSuccess: isLoginSuccess,
+    error,
+  } = useMutation({
+    mutationFn: (body: LoginRequest) => AuthApi.login(body),
+    onSuccess: (data) => {
+      console.log("success: ", data)
+    },
+    onError: (error: Error) => {
+      if (error instanceof AxiosError) {
+        if (
+          error.status === 400 &&
+          error.response?.data.code === "user_not_found"
+        ) {
+          setIsUserNotFoundByMailLogin(true)
+        }
+      }
+
+      console.log(error)
+      console.error(
+        error instanceof AxiosError
+          ? `❌ ${error.response?.data?.message || error.message}`
+          : `❌ Неизвестная ошибка`
+      )
+    },
+  })
 
   const formSchema = z.object({
     email: z
@@ -51,7 +92,21 @@ const EmailLogin = ({
     login({
       email: cleanEmail,
       redirect_url,
+      use_verification_code: !isDesktop,
     })
+  }
+
+  if (isLoginSuccess) {
+    if (!isDesktop) {
+      return <AuthByCode emailDomain={emailDomain} />
+    } else {
+      return (
+        <p className="id_crypton_message__success">
+          Ссылка для входа отправлена вам на почту{" "}
+          <MailToLinkMap emailDomain={emailDomain} />
+        </p>
+      )
+    }
   }
 
   return (
@@ -73,6 +128,23 @@ const EmailLogin = ({
         <Button style={{ marginTop: 24 }} isLoading={isLoginLoading}>
           Continue
         </Button>
+
+        {error && (
+          <p className="id_crypton_message__error" style={{ marginTop: 12 }}>
+            {error instanceof AxiosError
+              ? error.status === 429
+                ? "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                : error.response?.data.loginBlockedTill
+                ? "Повторный запрос на вход будет доступен через " +
+                  differenceInMinutes(
+                    new Date(error.response?.data.loginBlockedTill * 1000),
+                    new Date()
+                  ) +
+                  " мин"
+                : "На стороне сервера произошла ошибка"
+              : "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"}
+          </p>
+        )}
       </form>
     </Form>
   )

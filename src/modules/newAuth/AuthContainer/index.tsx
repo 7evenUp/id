@@ -9,18 +9,32 @@ import "./styles.css"
 
 const AuthContainer = () => {
   const [emailInput, setEmailInput] = useState("")
+  const [isUserNotFoundByMailLogin, setIsUserNotFoundByMailLogin] =
+    useState(false)
 
   return (
     <div className="id_crypton_auth">
       <IdIcon className="id_crypton_logo" />
 
-      <h2 className="id_crypton_title">Sign in to Crypton</h2>
+      {isUserNotFoundByMailLogin ? (
+        <>
+          <h2 className="id_crypton_title">Register</h2>
+        </>
+      ) : (
+        <>
+          <h2 className="id_crypton_title">Sign in to Crypton</h2>
 
-      <AuthVariants />
+          <AuthVariants />
 
-      <Divider />
+          <Divider />
 
-      <EmailLogin emailInput={emailInput} setEmailInput={setEmailInput} />
+          <EmailLogin
+            emailInput={emailInput}
+            setEmailInput={setEmailInput}
+            setIsUserNotFoundByMailLogin={setIsUserNotFoundByMailLogin}
+          />
+        </>
+      )}
     </div>
   )
 }
