@@ -18,11 +18,11 @@ const AuthContainer = () => {
 
       {isUserNotFoundByMailLogin ? (
         <>
-          <h2 className="id_crypton_title">Register</h2>
+          <h2 className="id_crypton_title">Регистрация</h2>
         </>
       ) : (
         <>
-          <h2 className="id_crypton_title">Sign in to Crypton</h2>
+          <h2 className="id_crypton_title">Вход в Crypton</h2>
 
           <AuthVariants />
 

@@ -67,9 +67,9 @@ const EmailLogin = ({
     email: z
       .string()
       .min(1, {
-        message: "The field is required",
+        message: "Поле обязательно для заполнения",
       })
-      .email("Invalid mail format"),
+      .email("Неверный формат"),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -118,7 +118,11 @@ const EmailLogin = ({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="email" placeholder="Enter your email" {...field} />
+                <Input
+                  type="email"
+                  placeholder="Введите вашу почту"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -126,7 +130,7 @@ const EmailLogin = ({
         />
 
         <Button style={{ marginTop: 24 }} isLoading={isLoginLoading}>
-          Continue
+          Продолжить
         </Button>
 
         {error && (
@@ -135,7 +139,7 @@ const EmailLogin = ({
               ? error.status === 429
                 ? "Замечено много попыток авторизации. Пожалуйста, повторите позже"
                 : error.response?.data.loginBlockedTill
-                ? "Повторный запрос на вход будет доступен через " +
+                ? "Повторное получение письма на почту будет доступен через " +
                   differenceInMinutes(
                     new Date(error.response?.data.loginBlockedTill * 1000),
                     new Date()

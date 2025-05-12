@@ -11,15 +11,15 @@ const AuthVariants = () => {
     <div className="id_crypton_auth_buttons">
       <Button>
         <Web3 />
-        Continue with Wallet
+        Продолжить с Wallet
       </Button>
       <Button>
         <Google />
-        Continue with Google
+        Продолжить с Google
       </Button>
       <Button>
         <Apple />
-        Continue with Apple
+        Продолжить с Apple
       </Button>
     </div>
   )

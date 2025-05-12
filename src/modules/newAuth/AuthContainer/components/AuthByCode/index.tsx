@@ -73,7 +73,7 @@ const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
             </p>
           ) : (
             <p className="id_crypton_message">
-              Enter the code from your email{" "}
+              Введите код, который пришёл на почту{" "}
               <MailToLinkMap emailDomain={emailDomain} />
             </p>
           )}
