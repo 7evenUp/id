@@ -1,8 +1,9 @@
-import Button from "../../shared/Button"
+import GoogleButton from "./GoogleButton"
 
 import Apple from "../Icons/Apple"
-import Google from "../Icons/Google"
 import Web3 from "../Icons/Web3"
+
+import Button from "../../shared/Button"
 
 import "./styles.css"
 
@@ -13,10 +14,7 @@ const AuthVariants = () => {
         <Web3 />
         Продолжить с Wallet
       </Button>
-      <Button>
-        <Google />
-        Продолжить с Google
-      </Button>
+      <GoogleButton />
       <Button>
         <Apple />
         Продолжить с Apple

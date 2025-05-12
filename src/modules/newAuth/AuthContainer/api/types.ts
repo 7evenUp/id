@@ -7,7 +7,7 @@ export interface WalletReqParams {
   referral_code?: string
   redirect_url?: string
   advertising_consent: boolean
-  useVerificationCode: boolean
+  use_verification_code: boolean
 }
 
 export interface MailRegParams {
@@ -16,7 +16,7 @@ export interface MailRegParams {
   referral_code?: string
   redirect_url: string
   advertising_consent: boolean
-  useVerificationCode: boolean
+  use_verification_code: boolean
 }
 
 export interface LoginResponse {

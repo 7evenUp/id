@@ -16,6 +16,42 @@
   height: 40px;
 }
 
+.id_crypton_reset_auth {
+  font-size: 12px;
+  text-underline-offset: 3px;
+  color: rgba(0, 0, 0, 0.6);
+  transition: all 0.15s ease-in-out;
+  position: relative;
+}
+
+.id_crypton_reset_auth::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: all 0.15s ease-in-out;
+}
+
+.id_crypton_reset_auth:hover {
+  opacity: 75%;
+}
+
+.id_crypton_reset_auth:hover::after {
+  transform: scaleX(1);
+}
+
+.dark .id_crypton_reset_auth {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .id_crypton_reset_auth::after {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
 .id_crypton_title {
   font-size: 18px;
   font-weight: 600;

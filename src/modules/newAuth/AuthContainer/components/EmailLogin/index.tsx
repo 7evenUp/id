@@ -139,7 +139,7 @@ const EmailLogin = ({
               ? error.status === 429
                 ? "Замечено много попыток авторизации. Пожалуйста, повторите позже"
                 : error.response?.data.loginBlockedTill
-                ? "Повторное получение письма на почту будет доступен через " +
+                ? "Повторное получение письма на почту будет доступно через " +
                   differenceInMinutes(
                     new Date(error.response?.data.loginBlockedTill * 1000),
                     new Date()

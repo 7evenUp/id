@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { LoginRequest, LoginResponse } from "./types"
+import { LoginRequest, LoginResponse, MailRegParams } from "./types"
 
 const api = axios.create({
   baseURL: "/api/v1",
@@ -26,6 +26,19 @@ export default class AuthApi {
     const response = await api.get("/users/authenticate/", {
       params: {
         code,
+      },
+    })
+    return response.data
+  }
+
+  // Авторизация через ввод кода с почты / тг-бота
+  static async registerByEmail({
+    use_verification_code,
+    ...body
+  }: MailRegParams): Promise<void> {
+    const response = await api.post("/users/register-web/", body, {
+      params: {
+        use_verification_code: use_verification_code,
       },
     })
     return response.data
