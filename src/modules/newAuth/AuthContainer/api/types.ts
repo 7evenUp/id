@@ -10,6 +10,12 @@ export interface WalletReqParams {
   use_verification_code: boolean
 }
 
+export interface AuthByWalletRequest {
+  address: string
+  signature: string
+  message: string
+}
+
 export interface MailRegParams {
   email: string
   profile_username: string

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAccount, useDisconnect, useSignMessage } from "wagmi"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
+import { useAppKit } from "@reown/appkit/react"
 import { useTranslation } from "react-i18next"
 import { isDesktop } from "react-device-detect"
 import { toast } from "sonner"
@@ -42,7 +42,7 @@ const Auth = () => {
   const { address, isConnected, isDisconnected } = useAccount()
   const { isPending: isLoadingSign, signMessageAsync } = useSignMessage()
   const { disconnect } = useDisconnect()
-  const { open } = useWeb3Modal()
+  const { open } = useAppKit()
 
   const { refetch } = useUserProfileQuery()
   const { data: banner, isLoading: isBannerLoading } = useRandomBannerQuery()

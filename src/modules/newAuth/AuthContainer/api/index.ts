@@ -1,6 +1,11 @@
 import axios from "axios"
 
-import { LoginRequest, LoginResponse, MailRegParams } from "./types"
+import {
+  AuthByWalletRequest,
+  LoginRequest,
+  LoginResponse,
+  MailRegParams,
+} from "./types"
 
 const api = axios.create({
   baseURL: "/api/v1",
@@ -31,7 +36,7 @@ export default class AuthApi {
     return response.data
   }
 
-  // Авторизация через ввод кода с почты / тг-бота
+  // Регистрация по почте
   static async registerByEmail({
     use_verification_code,
     ...body
@@ -41,6 +46,12 @@ export default class AuthApi {
         use_verification_code: use_verification_code,
       },
     })
+    return response.data
+  }
+
+  // Авторизация через веб-кошелёк
+  static async authByWallet({ ...body }: AuthByWalletRequest): Promise<void> {
+    const response = await api.post("/users/authenticate-by-wallet/", body)
     return response.data
   }
 }

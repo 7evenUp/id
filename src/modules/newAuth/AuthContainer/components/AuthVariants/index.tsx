@@ -1,24 +1,15 @@
+import WalletButton from "./WalletButton"
 import GoogleButton from "./GoogleButton"
-
-import Apple from "../Icons/Apple"
-import Web3 from "../Icons/Web3"
-
-import Button from "../../shared/Button"
+import AppleButton from "./AppleButton"
 
 import "./styles.css"
 
 const AuthVariants = () => {
   return (
     <div className="id_crypton_auth_buttons">
-      <Button>
-        <Web3 />
-        Продолжить с Wallet
-      </Button>
+      <WalletButton />
       <GoogleButton />
-      <Button>
-        <Apple />
-        Продолжить с Apple
-      </Button>
+      <AppleButton />
     </div>
   )
 }
