@@ -1,11 +1,11 @@
-export interface WalletReqParams {
+export interface RegisterByWalletRequest {
   address: string
   signature: string
   message: string
-  email?: string
-  profile_username?: string
+  email: string
+  profile_username: string
   referral_code?: string
-  redirect_url?: string
+  redirect_url: string
   advertising_consent: boolean
   use_verification_code: boolean
 }

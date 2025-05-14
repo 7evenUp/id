@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useAccount, useDisconnect, useSignMessage } from "wagmi"
 import { useAppKit } from "@reown/appkit/react"
+import { AxiosError } from "axios"
 
 import Web3 from "../Icons/Web3"
 import Button from "../../shared/Button"
@@ -11,9 +12,14 @@ import Loader from "../../shared/Loader"
 
 const AUTH_MESSAGE = "Authorization"
 
-const WalletButton = () => {
+const WalletButton = ({
+  setSignature,
+  setIsUserNotFoundByWalletAuth,
+}: {
+  setSignature: Dispatch<SetStateAction<string>>
+  setIsUserNotFoundByWalletAuth: Dispatch<SetStateAction<boolean>>
+}) => {
   const [isAuthStarted, setIsAuthStarted] = useState(false)
-  const [signature, setSignature] = useState("")
 
   const { address, isConnected, isDisconnected } = useAccount()
   const { isPending: isLoadingSign, signMessageAsync } = useSignMessage()
@@ -21,13 +27,23 @@ const WalletButton = () => {
   const { open } = useAppKit()
 
   const {
-    mutate: authenticate,
+    mutateAsync: authenticate,
     isPending: isAuthLoading,
     reset,
   } = useMutation({
     mutationFn: (body: AuthByWalletRequest) => AuthApi.authByWallet(body),
     onSuccess: (data) => {
       console.log(data)
+    },
+    onError: (error: Error) => {
+      if (error instanceof AxiosError) {
+        if (
+          error.status === 400 &&
+          error.response?.data.code === "user_does_not_exists"
+        ) {
+          setIsUserNotFoundByWalletAuth(true)
+        }
+      }
     },
   })
 
@@ -72,7 +88,7 @@ const WalletButton = () => {
 
   return (
     <Button onClick={handleConnect}>
-      {isLoadingSign ? (
+      {isLoadingSign || isAuthLoading ? (
         <Loader />
       ) : (
         <>
