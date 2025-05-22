@@ -182,7 +182,7 @@ const Auth = () => {
                 <span>{t("email-btn")}</span>
               </AuthButton>
 
-              <AuthButton onClick={handleGoogle}>
+              {/* <AuthButton onClick={handleGoogle}>
                 {isLoginLoading ? (
                   <Loader
                     className={cn(
@@ -201,7 +201,7 @@ const Auth = () => {
                     <span>Google</span>
                   </>
                 )}
-              </AuthButton>
+              </AuthButton> */}
             </div>
           )}
 
