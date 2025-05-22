@@ -49,8 +49,11 @@ const MailMode = ({ back }: { back: () => void }) => {
       </button>
 
       {isDesktop ? (
+        isError &&
         // @ts-expect-error No-Error-Types
-        isError && error.status !== 429 ? (
+        error.status !== 429 &&
+        // @ts-expect-error No-Error-Types
+        Boolean(error.other?.loginBlockedTill) === false ? (
           <RegisterMailForm
             emailInput={usedEmail}
             setEmailInput={setUsedEmail}
@@ -59,8 +62,11 @@ const MailMode = ({ back }: { back: () => void }) => {
         ) : (
           <LoginMailForm emailInput={usedEmail} setEmailInput={setUsedEmail} />
         )
-      ) : // @ts-expect-error No-Error-Types
-      isMobileError && mobileError.status !== 429 ? (
+      ) : isMobileError &&
+        // @ts-expect-error No-Error-Types
+        mobileError.status !== 429 &&
+        // @ts-expect-error No-Error-Types
+        Boolean(mobileError.other?.loginBlockedTill) === false ? (
         <RegisterMailFormMobile
           emailInput={usedEmail}
           setEmailInput={setUsedEmail}

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useTranslation } from "react-i18next"
+import { differenceInMinutes } from "date-fns"
 
 import ActionButton from "./ActionButton"
 import { AuthInput } from "./AuthInput"
@@ -217,8 +218,21 @@ const LoginMailFormMobile = ({
           <ResponseErrorText>
             {
               // @ts-expect-error No-Error-Types
-              error.status === 429
+              loginError.status === 429
                 ? tErrorResponses("too-many-requests")
+                : // @ts-expect-error No-Error-Types
+                loginError.other.loginBlockedTill
+                ? tErrorResponses(
+                    "Повторный запрос на вход будет доступен через"
+                  ) +
+                  " " +
+                  differenceInMinutes(
+                    // @ts-expect-error No-Error-Types
+                    new Date(loginError.other.loginBlockedTill * 1000),
+                    new Date()
+                  ) +
+                  " " +
+                  tErrorResponses("мин")
                 : tErrorResponses("server-error")
             }
           </ResponseErrorText>

@@ -21,6 +21,22 @@ export interface MailRegParams {
   useVerificationCode: boolean
 }
 
+export interface LoginResponse {
+  email: string | null
+  tgUsername: string | null
+  redirectUrl: string | null
+  tgLoginAvailable: boolean
+  oauth: "GOOGLE" | null
+  oauthRedirectTo: string | null
+  loginBlockedTill: number | null
+}
+
+export interface LoginRequest {
+  email?: string
+  redirect_url: string
+  oauth?: "GOOGLE"
+}
+
 const authApi = api.injectEndpoints({
   endpoints: (build) => ({
     authByCode: build.mutation<void, { code: string }>({
@@ -60,7 +76,7 @@ const authApi = api.injectEndpoints({
         code: response.data?.code,
       }),
     }),
-    login: build.mutation<void, { email: string; redirect_url: string }>({
+    login: build.mutation<LoginResponse, LoginRequest>({
       query: (body) => ({
         url: "users/login/",
         method: "POST",
@@ -70,9 +86,11 @@ const authApi = api.injectEndpoints({
         status: response.status,
         // @ts-expect-error No-Error-Types
         message: response.data?.detail,
+        // @ts-expect-error No-Error-Types
+        other: { ...response.data },
       }),
     }),
-    loginMobile: build.mutation<void, { email: string; redirect_url: string }>({
+    loginMobile: build.mutation<LoginResponse, LoginRequest>({
       query: (body) => ({
         url: "users/login/?use_verification_code=true",
         method: "POST",
@@ -82,6 +100,8 @@ const authApi = api.injectEndpoints({
         status: response.status,
         // @ts-expect-error No-Error-Types
         message: response.data?.detail,
+        // @ts-expect-error No-Error-Types
+        other: { ...response.data },
       }),
     }),
     register: build.mutation<void, MailRegParams>({

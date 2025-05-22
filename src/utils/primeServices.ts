@@ -4,8 +4,8 @@ export const primeServices = [
     href: "https://t.me/crypton_support",
   },
   {
-    name: "Публикации",
-    href: "https://t.me/c/1440423043/756",
+    name: "Авторский контент",
+    href: "https://t.me/c/2179694110/4/55",
   },
   {
     name: "Календарь",
@@ -23,42 +23,8 @@ export const primeServices = [
     ],
   },
   {
-    name: "Prime в Notion",
-    href: "#",
-    isExpandable: true,
-    links: [
-      {
-        name: "Главная",
-        href: "https://www.notion.so/crypton-prime/Crypton-Prime-04524d793a584b1fb5491c518b340820",
-      },
-      {
-        name: "На этой неделе",
-        href: "https://www.notion.so/crypton-prime/d6d8939d73fb448faf783df6ef68be7f",
-      },
-      {
-        name: "Таблица нод",
-        href: "https://www.notion.so/crypton-prime/a717ca04f72144fe89ede38048171adc",
-      },
-    ],
-  },
-  {
     name: "Голосовые сессии",
-    href: "#",
-    isExpandable: true,
-    links: [
-      {
-        name: "Круглый стол",
-        href: "https://t.me/c/1440423043/765",
-      },
-      {
-        name: "АМА-сессии",
-        href: "https://t.me/c/1440423043/764",
-      },
-      {
-        name: "Зарабатываем вместе",
-        href: "https://t.me/c/1440423043/786",
-      },
-    ],
+    href: "https://t.me/c/2179694110/5/157",
   },
   {
     name: "Инвестфонд",
