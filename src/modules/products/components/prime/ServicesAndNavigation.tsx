@@ -30,9 +30,6 @@ const ServicesAndNavigation = () => {
     >
       <div className="flex justify-between items-center gap-4">
         <span>{t("prime.services-and-nav")}</span>
-        <ExternalLink href="https://member.crypton.xyz/">
-          {t("prime.prime-nav")}
-        </ExternalLink>
       </div>
       <div
         className={cn(
@@ -109,7 +106,6 @@ const ServicesAndNavigation = () => {
         <div className="flex flex-col gap-3.5 py-3 px-4 3xl:gap-[0.911vw] 3xl:py-[0.781vw] 3xl:px-[1.041vw] bg-white dark:bg-gray-1 rounded-xl 3xl:rounded-[0.781vw] w-fit">
           <Text1 className="lg:max-w-prose">{t("prime.nav-text-1")}</Text1>
           <Text1 className="lg:max-w-prose">{t("prime.nav-text-2")}</Text1>
-          <Text1 className="lg:max-w-prose">{t("prime.nav-text-3")}</Text1>
         </div>
       </div>
     </RowItem>
