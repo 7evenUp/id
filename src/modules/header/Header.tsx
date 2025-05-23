@@ -1,5 +1,5 @@
 import { useAccount } from "wagmi"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
+import { useAppKit } from "@reown/appkit/react"
 
 import BackLink from "./components/BackLink"
 import ThemeToggle from "./components/ThemeToggle"
@@ -20,7 +20,7 @@ const Header = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { address, isConnected } = useAccount()
-  const { open } = useWeb3Modal()
+  const { open } = useAppKit()
 
   return (
     <header

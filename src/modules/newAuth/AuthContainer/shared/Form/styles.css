@@ -1,0 +1,24 @@
+.id_crypton_FormItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.id_crypton_FormLabel {
+  font-size: 14px;
+}
+
+.id_crypton_FormLabel__error {
+  color: #f14848;
+}
+
+.id_crypton_FormDescription {
+  font-size: 14px;
+  color: #828282;
+}
+
+.id_crypton_FormMessage {
+  font-size: 12px;
+  font-weight: 500;
+  color: #f14848;
+}

@@ -1,0 +1,41 @@
+.id_crypton_CheckboxLabel {
+  font-size: 0.75rem;
+  line-height: 140%;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  user-select: none;
+}
+
+.id_crypton_Checkbox_Root {
+  width: 16px;
+  height: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.id_crypton_Checkbox_Root[data-state="checked"] {
+  background-color: black;
+  border: none;
+}
+
+.dark .id_crypton_Checkbox_Root {
+  border: 1px solid white;
+}
+
+.dark .id_crypton_Checkbox_Root[data-state="checked"] {
+  background-color: white;
+}
+
+.id_crypton_Checkbox_Indicator {
+  color: white;
+}
+
+.dark .id_crypton_Checkbox_Indicator {
+  color: black;
+}
+
+.id_crypton_Checkbox_Indicator > svg {
+  width: 16px;
+  height: 16px;
+}

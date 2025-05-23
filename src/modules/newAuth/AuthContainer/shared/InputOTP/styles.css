@@ -1,0 +1,78 @@
+.id_crypton_InputOTP:disabled {
+  cursor: not-allowed;
+}
+
+.id_crypton_InputOTP_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.id_crypton_InputOTP_container:has(:disabled) {
+  opacity: 50%;
+}
+
+.id_crypton_InputOTPGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.id_crypton_InputOTPSlot {
+  position: relative;
+  display: flex;
+  height: 48px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+  border-radius: 8px;
+}
+
+.dark .id_crypton_InputOTPSlot {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.id_crypton_InputOTPSlot__active {
+  z-index: 10;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.8);
+}
+
+.dark .id_crypton_InputOTPSlot__active {
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.8);
+}
+
+.id_crypton_InputOTPSlot_caret_container {
+  pointer-events: none;
+  position: absolute;
+  inset: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.id_crypton_InputOTPSlot_caret {
+  height: 16px;
+  width: 1px;
+  background-color: black;
+  animation: caret-blink 1.25s ease-out infinite;
+}
+
+.dark .id_crypton_InputOTPSlot_caret {
+  background-color: white;
+}
+
+@keyframes caret-blink {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  50% {
+    opacity: 0;
+  }
+}

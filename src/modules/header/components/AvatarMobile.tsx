@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { useAccount } from "wagmi"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
+import { useAppKit } from "@reown/appkit/react"
 
 import TrashIcon from "@/assets/icons/trash.svg?react"
 import EditIcon from "@/assets/icons/edit.svg?react"
@@ -33,7 +33,7 @@ const AvatarMobile = () => {
   const [deleteAvatar] = useDeleteAvatarMutation()
 
   const { address, isConnected } = useAccount()
-  const { open } = useWeb3Modal()
+  const { open } = useAppKit()
 
   if (!profileData) return null
 

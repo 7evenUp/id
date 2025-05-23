@@ -1,0 +1,84 @@
+.id_crypton_input {
+  height: 40px;
+  width: 100%;
+  padding-inline: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.04);
+  color: black;
+  font-size: 14px;
+  transition: all 0.15s ease-in-out;
+  outline: none;
+}
+
+.id_crypton_input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.id_crypton_input:hover {
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.id_crypton_input:focus {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.dark .id_crypton_input {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.dark .id_crypton_input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dark .id_crypton_input:hover {
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background-color: rgba(255, 255, 255, 0.16);
+}
+
+.dark .id_crypton_input:focus {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.id_crypton_input[aria-invalid="true"] {
+  border: 1px solid rgba(241, 72, 72, 0.16);
+  background-color: rgba(241, 72, 72, 0.04);
+}
+
+.id_crypton_input[aria-invalid="true"]::placeholder {
+  color: rgba(241, 72, 72, 0.6);
+}
+
+.id_crypton_input[aria-invalid="true"]:hover {
+  border: 1px solid rgba(241, 72, 72, 0.16);
+  background-color: rgba(241, 72, 72, 0.08);
+}
+
+.id_crypton_input[aria-invalid="true"]:focus {
+  border: 1px solid rgba(241, 72, 72, 0.12);
+  background-color: rgba(241, 72, 72, 0.06);
+}
+
+.dark .id_crypton_input[aria-invalid="true"] {
+  border: 1px solid rgba(241, 72, 72, 0.16);
+  background-color: rgba(241, 72, 72, 0.08);
+}
+
+.dark .id_crypton_input[aria-invalid="true"]::placeholder {
+  color: rgba(241, 72, 72, 0.6);
+}
+
+.dark .id_crypton_input[aria-invalid="true"]:hover {
+  border: 1px solid rgba(241, 72, 72, 0.32);
+  background-color: rgba(241, 72, 72, 0.16);
+}
+
+.dark .id_crypton_input[aria-invalid="true"]:focus {
+  border: 1px solid rgba(241, 72, 72, 0.24);
+  background-color: rgba(241, 72, 72, 0.12);
+}

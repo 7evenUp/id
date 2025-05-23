@@ -1,0 +1,98 @@
+.id_crypton_auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  min-height: 436px;
+  color: black;
+}
+
+.dark .id_crypton_auth {
+  color: white;
+}
+
+.id_crypton_logo {
+  width: 40px;
+  height: 40px;
+}
+
+.id_crypton_reset_auth {
+  font-size: 12px;
+  text-underline-offset: 3px;
+  color: rgba(0, 0, 0, 0.6);
+  transition: all 0.15s ease-in-out;
+  position: relative;
+}
+
+.id_crypton_reset_auth::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: all 0.15s ease-in-out;
+}
+
+.id_crypton_reset_auth:hover {
+  opacity: 75%;
+}
+
+.id_crypton_reset_auth:hover::after {
+  transform: scaleX(1);
+}
+
+.dark .id_crypton_reset_auth {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .id_crypton_reset_auth::after {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.id_crypton_title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.id_crypton_form {
+  width: 100%;
+}
+
+.id_crypton_message {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.025em;
+  text-wrap: balance;
+}
+
+.dark .id_crypton_message {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.id_crypton_message__success {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  color: #20cd69;
+  letter-spacing: 0.025em;
+  text-wrap: balance;
+}
+
+.id_crypton_message__error {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  color: #f14848;
+  letter-spacing: 0.025em;
+  text-wrap: balance;
+}

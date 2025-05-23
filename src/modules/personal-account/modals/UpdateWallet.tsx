@@ -2,7 +2,7 @@
 import { useAccount, useDisconnect } from "wagmi"
 // import { isMobile } from "react-device-detect"
 import { useTranslation } from "react-i18next"
-import { useWeb3Modal } from "@web3modal/wagmi/react"
+import { useAppKit } from "@reown/appkit/react"
 
 import ResponseErrorText from "@/components/ResponseErrorText"
 import ResponseSuccessText from "@/components/ResponseSuccessText"
@@ -31,7 +31,7 @@ const UpdateWallet = () => {
 
   const scale = useAppSelector((state) => state.scale.value)
 
-  const { open } = useWeb3Modal()
+  const { open } = useAppKit()
   // const [connectModalOpened, setConnectModalOpened] = useState(false)
 
   const { data: userProfileData } = useUserProfileQuery()
