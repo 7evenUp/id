@@ -2,7 +2,7 @@ import AuthContainer from "./AuthContainer"
 
 const NewAuth = () => {
   return (
-    <div className="m-auto py-10 px-12 bg-[#fff] dark:bg-black rounded-xl">
+    <div className="m-auto mobile:py-10 mobile:px-12 mobile:bg-[#fff] mobile:dark:bg-black rounded-xl">
       <AuthContainer />
     </div>
   )
