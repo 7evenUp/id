@@ -28,7 +28,13 @@ import "./styles.css"
 
 const AUTH_MESSAGE = "Authorization"
 
-const WalletRegister = ({ signature }: { signature: string }) => {
+const WalletRegister = ({
+  signature,
+  refetchAfterSuccessAuth,
+}: {
+  signature: string
+  refetchAfterSuccessAuth: VoidFunction
+}) => {
   const [emailDomain, setEmailDomain] = useState("")
   const [isNewsChecked, setIsNewsChecked] = useState(true)
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(true)
@@ -121,7 +127,12 @@ const WalletRegister = ({ signature }: { signature: string }) => {
 
   if (isRegisterSuccess) {
     if (!isDesktop) {
-      return <AuthByCode emailDomain={emailDomain} />
+      return (
+        <AuthByCode
+          emailDomain={emailDomain}
+          refetchAfterSuccessAuth={refetchAfterSuccessAuth}
+        />
+      )
     } else {
       return (
         <p className="id_crypton_message__success">

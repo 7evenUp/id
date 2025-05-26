@@ -9,7 +9,11 @@ import IdIcon from "./components/Icons/ID"
 
 import "./styles.css"
 
-const AuthContainer = () => {
+const AuthContainer = ({
+  refetchAfterSuccessAuth,
+}: {
+  refetchAfterSuccessAuth: VoidFunction
+}) => {
   const [emailInput, setEmailInput] = useState("")
   const [isUserNotFoundByMailLogin, setIsUserNotFoundByMailLogin] =
     useState(false)
@@ -31,7 +35,10 @@ const AuthContainer = () => {
         <>
           <h2 className="id_crypton_title">Регистрация</h2>
 
-          <EmailRegister emailInput={emailInput} />
+          <EmailRegister
+            emailInput={emailInput}
+            refetchAfterSuccessAuth={refetchAfterSuccessAuth}
+          />
 
           <Divider />
 
@@ -43,7 +50,10 @@ const AuthContainer = () => {
         <>
           <h2 className="id_crypton_title">Регистрация</h2>
 
-          <WalletRegister signature={signature} />
+          <WalletRegister
+            signature={signature}
+            refetchAfterSuccessAuth={refetchAfterSuccessAuth}
+          />
 
           <Divider />
 
@@ -66,6 +76,7 @@ const AuthContainer = () => {
             emailInput={emailInput}
             setEmailInput={setEmailInput}
             setIsUserNotFoundByMailLogin={setIsUserNotFoundByMailLogin}
+            refetchAfterSuccessAuth={refetchAfterSuccessAuth}
           />
         </>
       )}

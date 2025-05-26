@@ -14,7 +14,13 @@ import "./styles.css"
 
 const MAX_CODE_LENGTH = 4
 
-const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
+const AuthByCode = ({
+  emailDomain,
+  refetchAfterSuccessAuth,
+}: {
+  emailDomain: string
+  refetchAfterSuccessAuth: VoidFunction
+}) => {
   const [value, setValue] = React.useState("")
 
   const {
@@ -26,7 +32,7 @@ const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
   } = useMutation({
     mutationFn: ({ code }: { code: string }) => AuthApi.authByCode({ code }),
     onSuccess: () => {
-      console.log("success: ")
+      refetchAfterSuccessAuth()
     },
   })
 
@@ -43,7 +49,7 @@ const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
   return (
     <div className="id_crypton_code_container">
       {isSuccess ? (
-        <p></p>
+        <p className="id_crypton_message__success">Успешно введённый код</p>
       ) : (
         <>
           <InputOTP

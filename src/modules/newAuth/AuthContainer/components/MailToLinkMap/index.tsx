@@ -1,3 +1,5 @@
+import { isDesktop } from "react-device-detect"
+
 const MAIL_TO_LINK_MAP = {
   "yandex.ru": {
     name: "Yandex",
@@ -50,6 +52,8 @@ const MAIL_TO_LINK_MAP = {
 }
 
 const MailToLinkMap = ({ emailDomain }: { emailDomain: string }) => {
+  if (!isDesktop) return null
+
   if (emailDomain in MAIL_TO_LINK_MAP)
     return (
       <a

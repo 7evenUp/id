@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react"
 
 import WalletButton from "./WalletButton"
 import GoogleButton from "./GoogleButton"
-import AppleButton from "./AppleButton"
+// import AppleButton from "./AppleButton"
 
 import "./styles.css"
 
@@ -20,7 +20,7 @@ const AuthVariants = ({
         setIsUserNotFoundByWalletAuth={setIsUserNotFoundByWalletAuth}
       />
       <GoogleButton />
-      <AppleButton />
+      {/* <AppleButton /> */}
     </div>
   )
 }

@@ -27,10 +27,12 @@ const EmailLogin = ({
   emailInput,
   setEmailInput,
   setIsUserNotFoundByMailLogin,
+  refetchAfterSuccessAuth,
 }: {
   emailInput: string
   setEmailInput: Dispatch<SetStateAction<string>>
   setIsUserNotFoundByMailLogin: Dispatch<SetStateAction<boolean>>
+  refetchAfterSuccessAuth: VoidFunction
 }) => {
   const [emailDomain, setEmailDomain] = useState("")
 
@@ -98,7 +100,12 @@ const EmailLogin = ({
 
   if (isLoginSuccess) {
     if (!isDesktop) {
-      return <AuthByCode emailDomain={emailDomain} />
+      return (
+        <AuthByCode
+          emailDomain={emailDomain}
+          refetchAfterSuccessAuth={refetchAfterSuccessAuth}
+        />
+      )
     } else {
       return (
         <p className="id_crypton_message__success">

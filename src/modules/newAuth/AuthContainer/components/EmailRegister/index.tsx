@@ -26,7 +26,13 @@ import { MailRegParams } from "../../api/types"
 
 import "./styles.css"
 
-const EmailRegister = ({ emailInput }: { emailInput: string }) => {
+const EmailRegister = ({
+  emailInput,
+  refetchAfterSuccessAuth,
+}: {
+  emailInput: string
+  refetchAfterSuccessAuth: VoidFunction
+}) => {
   const [emailDomain, setEmailDomain] = useState("")
   const [isNewsChecked, setIsNewsChecked] = useState(true)
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(true)
@@ -112,7 +118,12 @@ const EmailRegister = ({ emailInput }: { emailInput: string }) => {
 
   if (isRegisterSuccess) {
     if (!isDesktop) {
-      return <AuthByCode emailDomain={emailDomain} />
+      return (
+        <AuthByCode
+          emailDomain={emailDomain}
+          refetchAfterSuccessAuth={refetchAfterSuccessAuth}
+        />
+      )
     } else {
       return (
         <p className="id_crypton_message__success">
