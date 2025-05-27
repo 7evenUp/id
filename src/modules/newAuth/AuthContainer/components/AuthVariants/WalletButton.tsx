@@ -20,6 +20,7 @@ const WalletButton = ({
   setIsUserNotFoundByWalletAuth: Dispatch<SetStateAction<boolean>>
 }) => {
   const [isAuthStarted, setIsAuthStarted] = useState(false)
+  const [isOpenLoading, setIsOpenLoading] = useState(false)
 
   const { address, isConnected, isDisconnected } = useAccount()
   const { isPending: isLoadingSign, signMessageAsync } = useSignMessage()
@@ -83,12 +84,18 @@ const WalletButton = ({
 
   const handleConnect = async () => {
     setIsAuthStarted(true)
-    if (!isConnected) open({ view: "Connect" })
+    if (!isConnected) {
+      setIsOpenLoading(true)
+      open({ view: "Connect" }).finally(() => {
+        setIsOpenLoading(false)
+        console.log("i am here")
+      })
+    }
   }
 
   return (
     <Button onClick={handleConnect}>
-      {isLoadingSign || isAuthLoading ? (
+      {isLoadingSign || isAuthLoading || isOpenLoading ? (
         <Loader />
       ) : (
         <>

@@ -38,6 +38,7 @@ const WalletRegister = ({
   const [emailDomain, setEmailDomain] = useState("")
   const [isNewsChecked, setIsNewsChecked] = useState(true)
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(true)
+  const [isPrivacyError, setIsPrivacyError] = useState(false)
 
   const { address } = useAccount()
 
@@ -92,7 +93,10 @@ const WalletRegister = ({
   })
 
   const onSubmit = async ({ email, username }: z.infer<typeof formSchema>) => {
-    if (!isPrivacyChecked) return
+    if (!isPrivacyChecked) {
+      setIsPrivacyError(true)
+      return
+    }
     if (isRegisterLoading) return
     if (!address) return
 
@@ -203,7 +207,10 @@ const WalletRegister = ({
               defaultChecked={true}
               id="privacy"
               checked={isPrivacyChecked}
-              onCheckedChange={(val) => setIsPrivacyChecked(val as boolean)}
+              onCheckedChange={(val) => {
+                setIsPrivacyChecked(val as boolean)
+                if (val as boolean) setIsPrivacyError(false)
+              }}
             />
             <CheckboxLabel htmlFor="privacy">
               Подтверждаю, что ознакомлен и согласен с{" "}
@@ -222,6 +229,11 @@ const WalletRegister = ({
               </a>
             </CheckboxLabel>
           </div>
+          {isPrivacyError && (
+            <p className="id_crypton_message__error">
+              Поле должно быть выбрано
+            </p>
+          )}
         </div>
 
         <Button style={{ marginTop: 24 }} isLoading={isRegisterLoading}>
