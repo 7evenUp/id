@@ -4,7 +4,7 @@ import {
   AuthByWalletRequest,
   LoginRequest,
   LoginResponse,
-  MailRegParams,
+  RegisterByMailRequest,
   RegisterByWalletRequest,
 } from "./types"
 
@@ -41,7 +41,7 @@ export default class AuthApi {
   static async registerByEmail({
     use_verification_code,
     ...body
-  }: MailRegParams): Promise<void> {
+  }: RegisterByMailRequest): Promise<void> {
     const response = await api.post("/users/register-web/", body, {
       params: {
         use_verification_code: use_verification_code,

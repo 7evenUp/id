@@ -16,7 +16,7 @@ export interface AuthByWalletRequest {
   message: string
 }
 
-export interface MailRegParams {
+export interface RegisterByMailRequest {
   email: string
   profile_username: string
   referral_code?: string

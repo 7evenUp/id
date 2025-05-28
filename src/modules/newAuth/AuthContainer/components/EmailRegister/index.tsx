@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { useMutation } from "@tanstack/react-query"
-import { AxiosError } from "axios"
-import { differenceInMinutes } from "date-fns"
 import { isDesktop } from "react-device-detect"
+import { differenceInMinutes } from "date-fns"
+import { useForm } from "react-hook-form"
+import { AxiosError } from "axios"
+import * as z from "zod"
 
 import AuthByCode from "../AuthByCode"
 import MailToLinkMap from "../MailToLinkMap"
@@ -22,7 +22,7 @@ import Input from "../../shared/Input"
 import { Checkbox, CheckboxLabel } from "../../shared/Checkbox"
 
 import AuthApi from "../../api"
-import { MailRegParams } from "../../api/types"
+import { RegisterByMailRequest } from "../../api/types"
 
 import "./styles.css"
 
@@ -44,27 +44,7 @@ const EmailRegister = ({
     isSuccess: isRegisterSuccess,
     error,
   } = useMutation({
-    mutationFn: (body: MailRegParams) => AuthApi.registerByEmail(body),
-    onSuccess: (data) => {
-      console.log("success: ", data)
-    },
-    onError: (error: Error) => {
-      if (error instanceof AxiosError) {
-        if (
-          error.status === 400 &&
-          error.response?.data.code === "user_not_found"
-        ) {
-          console.log("usernotfound")
-        }
-      }
-
-      console.log(error)
-      console.error(
-        error instanceof AxiosError
-          ? `❌ ${error.response?.data?.message || error.message}`
-          : `❌ Неизвестная ошибка`
-      )
-    },
+    mutationFn: (body: RegisterByMailRequest) => AuthApi.registerByEmail(body),
   })
 
   const formSchema = z.object({
@@ -102,7 +82,7 @@ const EmailRegister = ({
 
     const redirect_url = window.location.origin
 
-    let payload: MailRegParams = {
+    let payload: RegisterByMailRequest = {
       email: cleanEmail,
       profile_username: username.trim(),
       redirect_url,

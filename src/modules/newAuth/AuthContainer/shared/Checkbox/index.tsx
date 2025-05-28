@@ -2,7 +2,7 @@ import React from "react"
 import * as RadixCheckbox from "@radix-ui/react-checkbox"
 import clsx from "clsx"
 
-import Check from "@/assets/icons/check.svg?react"
+import Check from "../../components/Icons/Check"
 
 import "./styles.css"
 

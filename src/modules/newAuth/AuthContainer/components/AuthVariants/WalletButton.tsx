@@ -1,14 +1,16 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { useAccount, useDisconnect, useSignMessage } from "wagmi"
+import { useMutation } from "@tanstack/react-query"
 import { useAppKit } from "@reown/appkit/react"
 import { AxiosError } from "axios"
 
 import Web3 from "../Icons/Web3"
+
 import Button from "../../shared/Button"
-import AuthApi from "../../api"
-import { AuthByWalletRequest } from "../../api/types"
-import { useMutation } from "@tanstack/react-query"
 import Loader from "../../shared/Loader"
+
+import { AuthByWalletRequest } from "../../api/types"
+import AuthApi from "../../api"
 
 const AUTH_MESSAGE = "Authorization"
 

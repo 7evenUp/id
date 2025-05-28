@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { useMutation } from "@tanstack/react-query"
-import { AxiosError } from "axios"
 import { isDesktop } from "react-device-detect"
+import { useForm } from "react-hook-form"
+import { AxiosError } from "axios"
 import { useAccount } from "wagmi"
+import * as z from "zod"
 
 import AuthByCode from "../AuthByCode"
 import MailToLinkMap from "../MailToLinkMap"
@@ -50,26 +50,6 @@ const WalletRegister = ({
   } = useMutation({
     mutationFn: (body: RegisterByWalletRequest) =>
       AuthApi.registerByWallet(body),
-    onSuccess: (data) => {
-      console.log("success: ", data)
-    },
-    onError: (error: Error) => {
-      if (error instanceof AxiosError) {
-        if (
-          error.status === 400 &&
-          error.response?.data.code === "user_not_found"
-        ) {
-          console.log("usernotfound")
-        }
-      }
-
-      console.log(error)
-      console.error(
-        error instanceof AxiosError
-          ? `❌ ${error.response?.data?.message || error.message}`
-          : `❌ Неизвестная ошибка`
-      )
-    },
   })
 
   const formSchema = z.object({
