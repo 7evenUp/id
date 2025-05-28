@@ -11,6 +11,16 @@
   outline: none;
 }
 
+@media only screen and (hover: none) and (pointer: coarse) {
+  .id_crypton_input {
+    font-size: 14px;
+  }
+
+  .id_crypton_input:focus {
+    font-size: 16px;
+  }
+}
+
 .id_crypton_input::placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
