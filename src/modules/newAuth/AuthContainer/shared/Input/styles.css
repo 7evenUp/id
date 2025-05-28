@@ -11,13 +11,9 @@
   outline: none;
 }
 
-@media only screen and (hover: none) and (pointer: coarse) {
+@media (width < 640px) {
   .id_crypton_input {
-    font-size: 14px;
-  }
-
-  .id_crypton_input:focus {
-    font-size: 16px;
+    font-size: 16.1px;
   }
 }
 
