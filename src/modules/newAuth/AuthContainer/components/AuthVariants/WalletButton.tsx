@@ -15,9 +15,11 @@ const AUTH_MESSAGE = "Authorization"
 const WalletButton = ({
   setSignature,
   setIsUserNotFoundByWalletAuth,
+  refetchAfterSuccessAuth,
 }: {
   setSignature: Dispatch<SetStateAction<string>>
   setIsUserNotFoundByWalletAuth: Dispatch<SetStateAction<boolean>>
+  refetchAfterSuccessAuth: VoidFunction
 }) => {
   const [isAuthStarted, setIsAuthStarted] = useState(false)
   const [isOpenLoading, setIsOpenLoading] = useState(false)
@@ -33,8 +35,8 @@ const WalletButton = ({
     reset,
   } = useMutation({
     mutationFn: (body: AuthByWalletRequest) => AuthApi.authByWallet(body),
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
+      refetchAfterSuccessAuth()
     },
     onError: (error: Error) => {
       if (error instanceof AxiosError) {
@@ -88,7 +90,6 @@ const WalletButton = ({
       setIsOpenLoading(true)
       open({ view: "Connect" }).finally(() => {
         setIsOpenLoading(false)
-        console.log("i am here")
       })
     }
   }

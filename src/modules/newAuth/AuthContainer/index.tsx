@@ -68,6 +68,7 @@ const AuthContainer = ({
           <AuthVariants
             setSignature={setSignature}
             setIsUserNotFoundByWalletAuth={setIsUserNotFoundByWalletAuth}
+            refetchAfterSuccessAuth={refetchAfterSuccessAuth}
           />
 
           <Divider />
