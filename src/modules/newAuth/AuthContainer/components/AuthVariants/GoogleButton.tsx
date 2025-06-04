@@ -8,7 +8,11 @@ import Button from "../../shared/Button"
 import { LoginRequest } from "../../api/types"
 import AuthApi from "../../api"
 
+import { useTranslate } from "../../useTranslate"
+
 const GoogleButton = () => {
+  const t = useTranslate()
+
   const { mutate: login, isPending: isLoginLoading } = useMutation({
     mutationFn: (body: LoginRequest) => AuthApi.login(body),
     onSuccess: (data) => {
@@ -34,7 +38,7 @@ const GoogleButton = () => {
       ) : (
         <>
           <Google />
-          Продолжить с Google
+          {t("Продолжить с Google")}
         </>
       )}
     </Button>

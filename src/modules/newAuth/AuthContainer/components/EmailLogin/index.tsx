@@ -23,17 +23,19 @@ import Input from "../../shared/Input"
 import AuthApi from "../../api"
 import { LoginRequest } from "../../api/types"
 
+import { useTranslate } from "../../useTranslate"
+
 const EmailLogin = ({
   emailInput,
   setEmailInput,
   setIsUserNotFoundByMailLogin,
-  refetchAfterSuccessAuth,
 }: {
   emailInput: string
   setEmailInput: Dispatch<SetStateAction<string>>
   setIsUserNotFoundByMailLogin: Dispatch<SetStateAction<boolean>>
-  refetchAfterSuccessAuth: VoidFunction
 }) => {
+  const t = useTranslate()
+
   const [emailDomain, setEmailDomain] = useState("")
 
   const {
@@ -59,9 +61,9 @@ const EmailLogin = ({
     email: z
       .string()
       .min(1, {
-        message: "Поле обязательно для заполнения",
+        message: t("Поле обязательно для заполнения"),
       })
-      .email("Неверный формат"),
+      .email(t("Неверный формат")),
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -90,16 +92,11 @@ const EmailLogin = ({
 
   if (isLoginSuccess) {
     if (!isDesktop) {
-      return (
-        <AuthByCode
-          emailDomain={emailDomain}
-          refetchAfterSuccessAuth={refetchAfterSuccessAuth}
-        />
-      )
+      return <AuthByCode emailDomain={emailDomain} />
     } else {
       return (
         <p className="id_crypton_message__success">
-          Ссылка для входа отправлена вам на почту{" "}
+          {t("Ссылка для входа отправлена вам на почту")}{" "}
           <MailToLinkMap emailDomain={emailDomain} />
         </p>
       )
@@ -117,7 +114,7 @@ const EmailLogin = ({
               <FormControl>
                 <Input
                   type="email"
-                  placeholder="Введите вашу почту"
+                  placeholder={t("Введите вашу почту")}
                   {...field}
                 />
               </FormControl>
@@ -127,23 +124,29 @@ const EmailLogin = ({
         />
 
         <Button style={{ marginTop: 24 }} isLoading={isLoginLoading}>
-          Продолжить
+          {t("Продолжить")}
         </Button>
 
         {error && (
           <p className="id_crypton_message__error" style={{ marginTop: 12 }}>
             {error instanceof AxiosError
               ? error.status === 429
-                ? "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                ? t(
+                    "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                  )
                 : error.response?.data.loginBlockedTill
-                ? "Повторное получение письма на почту будет доступно через " +
+                ? t(
+                    "Повторное получение письма на почту будет доступно через "
+                  ) +
                   differenceInMinutes(
                     new Date(error.response?.data.loginBlockedTill * 1000),
                     new Date()
                   ) +
-                  " мин"
-                : "На стороне сервера произошла ошибка"
-              : "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"}
+                  t(" мин")
+                : t("На стороне сервера произошла ошибка")
+              : t(
+                  "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"
+                )}
           </p>
         )}
       </form>

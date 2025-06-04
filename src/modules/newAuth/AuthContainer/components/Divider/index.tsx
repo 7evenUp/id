@@ -1,7 +1,11 @@
+import { useTranslate } from "../../useTranslate"
+
 import "./styles.css"
 
 const Divider = () => {
-  return <p className="id_crypton_divider">или</p>
+  const t = useTranslate()
+
+  return <p className="id_crypton_divider">{t("или")}</p>
 }
 
 export default Divider

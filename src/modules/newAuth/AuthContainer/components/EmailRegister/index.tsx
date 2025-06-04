@@ -24,15 +24,13 @@ import { Checkbox, CheckboxLabel } from "../../shared/Checkbox"
 import AuthApi from "../../api"
 import { RegisterByMailRequest } from "../../api/types"
 
+import { useTranslate } from "../../useTranslate"
+
 import "./styles.css"
 
-const EmailRegister = ({
-  emailInput,
-  refetchAfterSuccessAuth,
-}: {
-  emailInput: string
-  refetchAfterSuccessAuth: VoidFunction
-}) => {
+const EmailRegister = ({ emailInput }: { emailInput: string }) => {
+  const t = useTranslate()
+
   const [emailDomain, setEmailDomain] = useState("")
   const [isNewsChecked, setIsNewsChecked] = useState(true)
   const [isPrivacyChecked, setIsPrivacyChecked] = useState(true)
@@ -48,14 +46,9 @@ const EmailRegister = ({
   })
 
   const formSchema = z.object({
-    email: z
-      .string()
-      .min(1, {
-        message: "Поле обязательно для заполнения",
-      })
-      .email("Неверный формат"),
+    email: z.string(),
     username: z.string().min(1, {
-      message: "Поле обязательно для заполнения",
+      message: t("Поле обязательно для заполнения"),
     }),
   })
 
@@ -63,7 +56,7 @@ const EmailRegister = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: emailInput || "",
+      email: emailInput,
     },
   })
 
@@ -102,16 +95,11 @@ const EmailRegister = ({
 
   if (isRegisterSuccess) {
     if (!isDesktop) {
-      return (
-        <AuthByCode
-          emailDomain={emailDomain}
-          refetchAfterSuccessAuth={refetchAfterSuccessAuth}
-        />
-      )
+      return <AuthByCode emailDomain={emailDomain} />
     } else {
       return (
         <p className="id_crypton_message__success">
-          Ссылка для входа отправлена вам на почту{" "}
+          {t("Ссылка для входа отправлена вам на почту")}
           <MailToLinkMap emailDomain={emailDomain} />
         </p>
       )
@@ -122,7 +110,7 @@ const EmailRegister = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="id_crypton_form">
         <p className="id_crypton_register_description">
-          Создание аккаунта с почтой:
+          {t("Создание аккаунта с почтой")}:
           <br />
           <b>{emailInput}</b>
         </p>
@@ -132,7 +120,7 @@ const EmailRegister = ({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Введите имя пользователя" {...field} />
+                <Input placeholder={t("Введите имя пользователя")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -147,7 +135,7 @@ const EmailRegister = ({
               onCheckedChange={(val) => setIsNewsChecked(val as boolean)}
             />
             <CheckboxLabel htmlFor="news">
-              Подписаться на новости и скидки
+              {t("Подписаться на новости и скидки")}
             </CheckboxLabel>
           </div>
           <div className="id_crypton_checkbox_container">
@@ -161,47 +149,53 @@ const EmailRegister = ({
               }}
             />
             <CheckboxLabel htmlFor="privacy">
-              Подтверждаю, что ознакомлен и согласен с{" "}
+              {t("Подтверждаю, что ознакомлен и согласен с")}{" "}
               <a
                 href="https://id.crypton.xyz/terms-of-use"
                 className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
               >
-                Условиями и Положениями
+                {t("Условиями и Положениями")}
               </a>{" "}
-              и{" "}
+              {t("и")}{" "}
               <a
                 href="https://id.crypton.xyz/privacy-policy"
                 className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
               >
-                Политикой Конфиденциальности
+                {t("Политикой Конфиденциальности")}
               </a>
             </CheckboxLabel>
           </div>
           {isPrivacyError && (
             <p className="id_crypton_message__error">
-              Поле должно быть выбрано
+              {t("Поле должно быть выбрано")}
             </p>
           )}
         </div>
 
         <Button style={{ marginTop: 24 }} isLoading={isRegisterLoading}>
-          Зарегистрироваться
+          {t("Зарегистрироваться")}
         </Button>
 
         {error && (
           <p className="id_crypton_message__error" style={{ marginTop: 12 }}>
             {error instanceof AxiosError
               ? error.status === 429
-                ? "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                ? t(
+                    "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                  )
                 : error.response?.data.loginBlockedTill
-                ? "Повторное получение письма на почту будет доступно через " +
+                ? t(
+                    "Повторное получение письма на почту будет доступно через "
+                  ) +
                   differenceInMinutes(
                     new Date(error.response?.data.loginBlockedTill * 1000),
                     new Date()
                   ) +
-                  " мин"
-                : "На стороне сервера произошла ошибка"
-              : "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"}
+                  t(" мин")
+                : t("На стороне сервера произошла ошибка")
+              : t(
+                  "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"
+                )}
           </p>
         )}
       </form>

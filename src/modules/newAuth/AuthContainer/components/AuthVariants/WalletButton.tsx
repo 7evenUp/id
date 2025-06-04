@@ -12,17 +12,23 @@ import Loader from "../../shared/Loader"
 import { AuthByWalletRequest } from "../../api/types"
 import AuthApi from "../../api"
 
+import { useAuthContext } from "../../AuthContext"
+
+import { useTranslate } from "../../useTranslate"
+
 const AUTH_MESSAGE = "Authorization"
 
 const WalletButton = ({
   setSignature,
   setIsUserNotFoundByWalletAuth,
-  refetchAfterSuccessAuth,
 }: {
   setSignature: Dispatch<SetStateAction<string>>
   setIsUserNotFoundByWalletAuth: Dispatch<SetStateAction<boolean>>
-  refetchAfterSuccessAuth: VoidFunction
 }) => {
+  const t = useTranslate()
+
+  const { refetchAfterSuccessAuth } = useAuthContext()
+
   const [isAuthStarted, setIsAuthStarted] = useState(false)
   const [isOpenLoading, setIsOpenLoading] = useState(false)
 
@@ -103,7 +109,7 @@ const WalletButton = ({
       ) : (
         <>
           <Web3 />
-          Продолжить с Wallet
+          {t("Продолжить с Wallet")}
         </>
       )}
     </Button>

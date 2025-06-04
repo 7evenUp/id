@@ -10,17 +10,19 @@ import Loader from "../../shared/Loader"
 
 import AuthApi from "../../api"
 
+import { useAuthContext } from "../../AuthContext"
+
+import { useTranslate } from "../../useTranslate"
+
 import "./styles.css"
 
 const MAX_CODE_LENGTH = 4
 
-const AuthByCode = ({
-  emailDomain,
-  refetchAfterSuccessAuth,
-}: {
-  emailDomain: string
-  refetchAfterSuccessAuth: VoidFunction
-}) => {
+const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
+  const t = useTranslate()
+
+  const { refetchAfterSuccessAuth } = useAuthContext()
+
   const [value, setValue] = React.useState("")
 
   const {
@@ -49,7 +51,7 @@ const AuthByCode = ({
   return (
     <div className="id_crypton_code_container">
       {isSuccess ? (
-        <p className="id_crypton_message__success">Успешно введённый код</p>
+        <p className="id_crypton_message__success">{t("Код введён успешно")}</p>
       ) : (
         <>
           <InputOTP
@@ -70,16 +72,20 @@ const AuthByCode = ({
             <p className="id_crypton_message__error">
               {error instanceof AxiosError
                 ? error.status === 429
-                  ? "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                  ? t(
+                      "Замечено много попыток авторизации. Пожалуйста, повторите позже"
+                    )
                   : error.status === 400 &&
                     error.response?.data.code === "token_not_found"
-                  ? "Введённый код неверный"
-                  : "На стороне сервера произошла ошибка"
-                : "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"}
+                  ? t("Введённый код неверный")
+                  : t("На стороне сервера произошла ошибка")
+                : t(
+                    "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"
+                  )}
             </p>
           ) : (
             <p className="id_crypton_message">
-              Введите код, который пришёл на почту{" "}
+              {t("Введите код, который пришёл на почту")}{" "}
               <MailToLinkMap emailDomain={emailDomain} />
             </p>
           )}
