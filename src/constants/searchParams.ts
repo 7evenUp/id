@@ -11,6 +11,7 @@ export const SEARCH_PARAM_VALUES = {
     buy_calendar: "buy_calendar",
     topup: "topup",
     referral_system: "referral_system",
+    newsletter: "newsletter",
   },
   open_tab: {
     products: "products",

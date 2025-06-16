@@ -40,5 +40,9 @@
   "Подписка на рассылку": "Subscribe to the newsletter",
   "Подписаться на рассылку, чтобы получать информацию об акциях и новостях экосистемы Crypton.": "Subscribe to the newsletter to receive information about promotions and news of the Crypton ecosystem.",
   "Нет, спасибо": "No, thanks",
-  "Подписаться": "Subscribe"
+  "Подписаться": "Subscribe",
+  "Статус подписки": "Subscription status",
+  "Активна": "Active",
+  "Выключена": "Disabled",
+  "Закрыть": "Close"
 }
