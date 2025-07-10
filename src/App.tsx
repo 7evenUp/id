@@ -1,5 +1,7 @@
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, useEffect } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
+import { sendEvent, init } from "web-analytics-crypton"
 
 import Header from "./modules/header/Header"
 
@@ -16,7 +18,6 @@ import { useAppSelector } from "./redux/hooks"
 
 import { cn } from "./lib/classNames"
 import Button from "./shared/ui/Button"
-import axios from "axios"
 
 const router = createBrowserRouter([
   {
@@ -49,54 +50,14 @@ const router = createBrowserRouter([
 const App = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
-  let currentDate = Math.floor(new Date().getTime() / 1000)
-  const currentDay = new Date().getDate()
-
-  while (currentDate % currentDay !== 0) {
-    currentDate++
-  }
-  const hexCurrentDate = currentDate.toString(16)
-
-  const verificationKeys = {
-    verificationKey1: "",
-    verificationKey2: "",
-    verificationKey3: "",
-  }
-
-  const fake1 = (parseInt(hexCurrentDate, 16) - currentDay).toString(16)
-  const fake2 = (parseInt(hexCurrentDate, 16) - currentDay + 1).toString(16)
-
-  if (currentDay % 3 === 0) {
-    verificationKeys.verificationKey1 = fake1
-    verificationKeys.verificationKey2 = fake2
-    verificationKeys.verificationKey3 = hexCurrentDate
-  } else if (currentDay % 2 === 0) {
-    verificationKeys.verificationKey1 = fake1
-    verificationKeys.verificationKey2 = hexCurrentDate
-    verificationKeys.verificationKey3 = fake2
-  } else {
-    verificationKeys.verificationKey1 = hexCurrentDate
-    verificationKeys.verificationKey2 = fake1
-    verificationKeys.verificationKey3 = fake2
-  }
-
-  let data = {
-    name: "check",
-    createdAtUtc: currentDate,
-    serviceName: "id",
-    client: "web",
-    clientType: "site",
-    platform: "desktop",
-    userId: 790,
-    clientSessionId: "",
-    payload: { someKey: "someValue" },
-    telegramId: null,
-    email: "",
-    evmWallet: "",
-    tonWallet: "",
-  }
-
-  data = { ...data, ...verificationKeys }
+  useEffect(() => {
+    init({
+      url: "https://api.metrics-dev.crypton.xyz/event",
+      client: "web",
+      clientType: "site",
+      serviceName: "id",
+    })
+  }, [])
 
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
@@ -111,15 +72,15 @@ const App = () => {
         <Button
           className="my-5 w-fit"
           onClick={() => {
-            axios.post("https://api.metrics-dev.crypton.xyz/event", data)
-            // fetch("https://api.metrics-dev.crypton.xyz/event", {
-            //   method: "POST",
-            //   body: JSON.stringify(data),
-            // })
-            // navigator.sendBeacon(
-            //   "https://api.metrics-dev.crypton.xyz/event",
-            //   JSON.stringify(data)
-            // )
+            sendEvent({
+              name: "click-something",
+              payload: {},
+              email: null,
+              evmWallet: null,
+              telegramId: null,
+              tonWallet: null,
+              userId: null,
+            })
           }}
         >
           Send analytics event
