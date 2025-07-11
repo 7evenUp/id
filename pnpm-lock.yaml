@@ -141,8 +141,8 @@ importers:
         specifier: ^2.15.2
         version: 2.15.2(@react-native-async-storage/async-storage@1.23.1(react-native@0.73.6(@babel/core@7.23.5)(@babel/preset-env@7.24.4(@babel/core@7.23.5))(bufferutil@4.0.8)(react@18.2.0)(utf-8-validate@5.0.10)))(@tanstack/query-core@5.76.0)(@tanstack/react-query@5.76.0(react@18.2.0))(@types/react@18.2.41)(bufferutil@4.0.8)(immer@9.0.21)(react@18.2.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(viem@2.29.2(bufferutil@4.0.8)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
       web-analytics-crypton:
-        specifier: ^1.2.1
-        version: 1.2.1
+        specifier: ^1.2.2
+        version: 1.2.2
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -6570,8 +6570,8 @@ packages:
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
 
-  web-analytics-crypton@1.2.1:
-    resolution: {integrity: sha512-UhDtwLt2OQ1G/n5mr13KaKecyRHxLlAVB0c1RCjvtJsY1R3I3KlsJMg/nAArtrzBtlceA05YyXWppCKgO1zhZg==}
+  web-analytics-crypton@1.2.2:
+    resolution: {integrity: sha512-yjX9M8+zZNgf/F42Onxz3mTyclr+tzMJms0g7YrNAyDo/Tdq+UD2oB5smRO72mAD5qayGEMAUDViHgadczkQew==}
 
   webextension-polyfill@0.10.0:
     resolution: {integrity: sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==}
@@ -15498,7 +15498,7 @@ snapshots:
       defaults: 1.0.4
     optional: true
 
-  web-analytics-crypton@1.2.1: {}
+  web-analytics-crypton@1.2.2: {}
 
   webextension-polyfill@0.10.0: {}
 
