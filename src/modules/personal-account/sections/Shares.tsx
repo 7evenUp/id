@@ -12,9 +12,11 @@ import Text0 from "@/shared/typography/Text0"
 import RowItem from "@/shared/components/RowItem"
 
 import Button from "@/shared/ui/Button"
+import { Skeleton } from "@/shared/ui/Skeleton"
 
 import { useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
+import { useGetSharesHistoryQuery } from "@/redux/api/user"
 
 import { cn } from "@/lib/classNames"
 
@@ -24,8 +26,25 @@ const Shares = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
+  const { data: transactions, isLoading } = useGetSharesHistoryQuery()
 
   const { investFundBalance } = profileData!
+
+  if (isLoading)
+    return (
+      <div>
+        <Skeleton className="mb-4 w-20 h-[22px]" />
+        <div className="border-t border-gray-4 dark:border-gray-1">
+          <RowItem>
+            <Skeleton className="w-[100px] h-5" />
+            <Skeleton className="w-44 h-[22px]" />
+          </RowItem>
+        </div>
+      </div>
+    )
+
+  if (investFundBalance === 0 && transactions && transactions.count === 0)
+    return
 
   return (
     <div>
