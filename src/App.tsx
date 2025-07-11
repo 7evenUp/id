@@ -1,7 +1,5 @@
-import { lazy, Suspense, useEffect } from "react"
+import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-
-import { sendEvent, init } from "web-analytics-crypton"
 
 import Header from "./modules/header/Header"
 
@@ -17,7 +15,6 @@ import SkeletonLayout from "./components/SkeletonLayout"
 import { useAppSelector } from "./redux/hooks"
 
 import { cn } from "./lib/classNames"
-import Button from "./shared/ui/Button"
 
 const router = createBrowserRouter([
   {
@@ -50,15 +47,6 @@ const router = createBrowserRouter([
 const App = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
-  useEffect(() => {
-    init({
-      url: "https://api.metrics-dev.crypton.xyz/event",
-      client: "web",
-      clientType: "site",
-      serviceName: "id",
-    })
-  }, [])
-
   return (
     <div className="w-full min-h-screen font-montserrat text-gray-1 dark:text-gray-5 bg-white bg-background-texture dark:bg-black dark:bg-background-texture-dark">
       <div
@@ -68,23 +56,6 @@ const App = () => {
         )}
       >
         <Header />
-
-        <Button
-          className="my-5 w-fit"
-          onClick={() => {
-            sendEvent({
-              name: "click-something",
-              payload: {},
-              email: null,
-              evmWallet: null,
-              telegramId: null,
-              tonWallet: null,
-              userId: null,
-            })
-          }}
-        >
-          Send analytics event
-        </Button>
 
         <Suspense
           fallback={
