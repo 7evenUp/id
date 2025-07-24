@@ -190,14 +190,14 @@ const Products = () => {
                 {/* Active indicator */}
                 <span
                   className={cn(
-                    "absolute w-1/5 h-[3px] rounded-full left-0 -bottom-0.5 bg-gray-1 dark:bg-gray-5 transition-transform",
+                    "absolute w-1/4 h-[3px] rounded-full left-0 -bottom-0.5 bg-gray-1 dark:bg-gray-5 transition-transform",
                     activeProduct === TABS_VALUES.calendar &&
                       "translate-x-full",
-                    activeProduct === TABS_VALUES.research &&
-                      "translate-x-[200%]",
-                    activeProduct === TABS_VALUES.tools && "translate-x-[300%]",
+                    // activeProduct === TABS_VALUES.research &&
+                    //   "translate-x-[200%]",
+                    activeProduct === TABS_VALUES.tools && "translate-x-[200%]",
                     activeProduct === TABS_VALUES.nutcracker &&
-                      "translate-x-[400%]",
+                      "translate-x-[300%]",
                     scale && "3xl:h-[0.195vw] 3xl:-bottom-[0.13vw]"
                   )}
                 />

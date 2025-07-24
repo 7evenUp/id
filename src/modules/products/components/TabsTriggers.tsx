@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import ResearchIcon from "@/assets/icons/products/Research.svg?react"
+// import ResearchIcon from "@/assets/icons/products/Research.svg?react"
 import PrimeActivePng from "@/assets/icons/products/Prime-active-png.png"
 import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 import ToolsActiveIcon from "@/assets/icons/products/Tools_Active.svg?react"
@@ -70,7 +70,7 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.research}>
+      {/* <TabsTrigger value={TABS_VALUES.research}>
         <Tooltip content="Research">
           <div>
             <ResearchIcon
@@ -83,7 +83,7 @@ const TabsTriggers = () => {
             />
           </div>
         </Tooltip>
-      </TabsTrigger>
+      </TabsTrigger> */}
       <TabsTrigger value={TABS_VALUES.tools}>
         <Tooltip content="Tools">
           <div>
