@@ -50,15 +50,15 @@ const Referral = () => {
     })
   }
 
-  const onCalendarClick = () => {
-    navigator.clipboard.writeText(
-      "https://calendar.crypton.xyz?ref_code=" + refCode
-    )
+  // const onCalendarClick = () => {
+  //   navigator.clipboard.writeText(
+  //     "https://calendar.crypton.xyz?ref_code=" + refCode
+  //   )
 
-    toast(t("referral.toast-title"), {
-      description: t("referral.calendar-copied"),
-    })
-  }
+  //   toast(t("referral.toast-title"), {
+  //     description: t("referral.calendar-copied"),
+  //   })
+  // }
 
   return (
     <div>
@@ -115,7 +115,7 @@ const Referral = () => {
                 )}
               />
             </Button>
-            <Button onClick={onCalendarClick}>
+            {/* <Button onClick={onCalendarClick}>
               Calendar
               <CopyIcon
                 className={cn(
@@ -123,7 +123,7 @@ const Referral = () => {
                   scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
                 )}
               />
-            </Button>
+            </Button> */}
           </div>
         </RowItem>
         <RowItem>
