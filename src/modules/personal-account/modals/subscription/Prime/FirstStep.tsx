@@ -414,7 +414,7 @@ const FirstStep = ({
 
           <div
             className={cn(
-              "flex flex-col mobile:flex-row items-center flex-wrap gap-3 sm:gap-5 mb-6",
+              "flex flex-col mobile:flex-row items-center mobile:justify-center flex-wrap gap-3 sm:gap-5 mb-6",
               scale && "3xl:gap-[1.302vw] 3xl:mb-[1.563vw]"
             )}
           >
