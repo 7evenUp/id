@@ -13,6 +13,7 @@ import {
 } from "@/shared/ui/Drawer"
 import Text0 from "@/shared/typography/Text0"
 import Switch from "@/shared/ui/Switch"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { useSetAdvertisingConsentMutation } from "@/redux/api/profile"
 
@@ -34,12 +35,18 @@ const AdvertisingConsent = ({
 }) => {
   const { t } = useTranslation()
 
+  const { sendEvent } = useSendEvent()
+
   const [mutate, { isLoading: isMutateLoading }] =
     useSetAdvertisingConsentMutation()
 
   const onChangeAdvertisingClick = async (isAdvertisingOn: boolean) => {
     if (isMutateLoading) return
 
+    sendEvent({
+      name: "advertising_switch",
+      payload: { currentValue: "" + isAdvertisingOn },
+    })
     setConsentState(isAdvertisingOn)
     await mutate({ advertising_consent: isAdvertisingOn })
   }

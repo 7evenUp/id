@@ -40,13 +40,16 @@ import { useAppSelector } from "@/redux/hooks"
 import { useAvailableMethodsQuery } from "@/redux/api/payments"
 
 import { cn } from "@/lib/classNames"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
-const PREDEFINED_AMOUNT_VALUES = ["99", "282", "534", "999"]
+const PREDEFINED_AMOUNT_VALUES = ["390", "639", "998"]
 
 const Balance = () => {
   const { t } = useTranslation("modals")
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -104,6 +107,10 @@ const Balance = () => {
       let paymentUrl = ""
 
       if (paymentType === "card") {
+        sendEvent({
+          name: "topup_click",
+          payload: { type: "card", amount: amount },
+        })
         paymentUrl = await trigger({
           amount: parseInt(amount),
           is_receipt_need:
@@ -114,6 +121,15 @@ const Balance = () => {
           failUrl: "https://id.crypton.xyz/payment-error",
         }).unwrap()
       } else {
+        sendEvent({
+          name: "topup_click",
+          payload: {
+            type: "crypto",
+            amount: amount,
+            network: activeNetwork ?? "BSC",
+            currency: activeToken ?? "USDT",
+          },
+        })
         paymentUrl = await trigger({
           amount: parseInt(amount),
           is_receipt_need:

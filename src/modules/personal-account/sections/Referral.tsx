@@ -17,6 +17,7 @@ import Subheading from "@/shared/typography/Subheading"
 import Text0 from "@/shared/typography/Text0"
 
 import Button from "@/shared/ui/Button"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
@@ -25,6 +26,8 @@ import { cn } from "@/lib/classNames"
 
 const Referral = () => {
   const { t } = useTranslation("profile")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -37,6 +40,8 @@ const Referral = () => {
   const onPromoClick = () => {
     navigator.clipboard.writeText(refCode)
 
+    sendEvent({ name: "copy_promo_click" })
+
     toast(t("referral.toast-title"), {
       description: t("referral.promo-copied"),
     })
@@ -44,6 +49,8 @@ const Referral = () => {
 
   const onPrimeClick = () => {
     navigator.clipboard.writeText("https://in-prime.crypton.xyz?ref=" + refCode)
+
+    sendEvent({ name: "copy_inprime_promo_click" })
 
     toast(t("referral.toast-title"), {
       description: t("referral.prime-copied"),

@@ -24,6 +24,7 @@ import {
 } from "@/constants/searchParams"
 
 import { cn } from "@/lib/classNames"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const SubscriptionMain = ({
   triggerText,
@@ -40,6 +41,8 @@ const SubscriptionMain = ({
   const [secondStepOpened, setSecondStepOpened] = useState(false)
   const [thirdStepOpened, setThirdStepOpened] = useState(false)
   const [balanceOpened, setBalanceOpened] = useState(false)
+
+  const { sendEvent } = useSendEvent()
 
   const [boughtSubDuration, setBoughtSubDuration] = useState(0)
 
@@ -87,6 +90,7 @@ const SubscriptionMain = ({
   const openPrime = () => {
     // setSelectionOpened(false)
     setPrimeOpened(true)
+    sendEvent({ name: "subscription_modal_open" })
   }
 
   // const openCalendar = () => {

@@ -23,6 +23,7 @@ import {
 } from "@/shared/ui/Form"
 
 import Text0 from "@/shared/typography/Text0"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { EMAIL_ALREADY_BEEN_USED, LIMIT_REACHED } from "@/utils/errorCodes"
 
@@ -119,6 +120,8 @@ const NewEmailForm = ({
   const { t: tSchema } = useTranslation("schema")
   const { t: tErrorResponses } = useTranslation("reqResponses")
 
+  const { sendEvent } = useSendEvent()
+
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: userProfileData } = useUserProfileQuery()
@@ -155,6 +158,8 @@ const NewEmailForm = ({
     oldEmail,
   }: z.infer<typeof formSchema>) => {
     try {
+      sendEvent({ name: "email_update" })
+
       await updateEmail({ email: newEmail }).unwrap()
       setOldEmailValue(oldEmail)
       setNewEmailValue(newEmail)

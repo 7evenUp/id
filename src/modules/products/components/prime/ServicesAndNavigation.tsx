@@ -8,16 +8,18 @@ import Text1 from "@/shared/typography/Text1"
 import Text2 from "@/shared/typography/Text2"
 
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
-import ExternalLink from "@/shared/ui/ExternalLink"
 
 import { primeServices } from "@/utils/primeServices"
 
 import { useAppSelector } from "@/redux/hooks"
 
 import { cn } from "@/lib/classNames"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const ServicesAndNavigation = () => {
   const { t } = useTranslation("products")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -80,6 +82,14 @@ const ServicesAndNavigation = () => {
                           "py-1 typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
                           scale && "typography-text-2_large 3xl:py-[0.26vw]"
                         )}
+                        onClick={() =>
+                          sendEvent({
+                            name: "prime_service_click",
+                            payload: {
+                              serviceName: link.name,
+                            },
+                          })
+                        }
                       >
                         {link.name}
                       </a>
@@ -96,6 +106,14 @@ const ServicesAndNavigation = () => {
                     "h-7 flex items-center w-fit typography-text-2 text-gray-1 dark:text-gray-4 hover:text-prime-pink dark:hover:text-prime-pink",
                     scale && "typography-text-2_large 3xl:h-[1.822vw]"
                   )}
+                  onClick={() =>
+                    sendEvent({
+                      name: "prime_service_click",
+                      payload: {
+                        serviceName: service.name,
+                      },
+                    })
+                  }
                 >
                   {service.name}
                 </a>

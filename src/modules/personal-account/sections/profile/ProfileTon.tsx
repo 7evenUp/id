@@ -11,6 +11,7 @@ import EditButton from "../../components/EditButton"
 import UpdateTonWallet from "../../modals/UpdateTonWallet"
 
 import RowItem from "@/shared/components/RowItem"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { LIMIT_REACHED } from "@/utils/errorCodes"
 
@@ -25,6 +26,8 @@ const TON_PAYLOAD_SECRET = "979ef024cb967134d0fd43556582b374"
 
 const ProfileTon = () => {
   const { t } = useTranslation()
+
+  const { sendEvent } = useSendEvent()
 
   const [dialogOpened, setDialogOpened] = useState(false)
 
@@ -51,6 +54,11 @@ const ProfileTon = () => {
           if (!wallet.account.walletStateInit) {
             toast.error(t("ton-your-wallet-is-not-supported"))
           }
+
+          sendEvent({
+            name: "ton_update",
+            payload: { address: wallet.account.address },
+          })
 
           toast.promise(
             verifyTon({

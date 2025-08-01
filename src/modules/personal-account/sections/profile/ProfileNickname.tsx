@@ -7,6 +7,7 @@ import EditContainer from "../../components/EditContainer"
 import ConfirmButton from "../../components/ConfirmButton"
 
 import RowItem from "@/shared/components/RowItem"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import {
   useUpdateNicknameMutation,
@@ -15,10 +16,11 @@ import {
 
 const MAX_NICKNAME_LENGTH = 32
 
-
 const ProfileNickname = () => {
   const { t: tResponse } = useTranslation()
   const { t } = useTranslation("profile")
+
+  const { sendEvent } = useSendEvent()
 
   const [inputValue, setInputValue] = useState("")
   const [isEditingMode, setIsEditingMode] = useState(false)
@@ -47,6 +49,8 @@ const ProfileNickname = () => {
       toast.error("Максимальное количество символов - 32")
       return
     }
+
+    sendEvent({ name: "nickname_update" })
 
     toast.promise(
       updateNickname({ id, profileUsername: inputValue }).unwrap(),
