@@ -24,6 +24,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/ui/Form"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { LIMIT_REACHED } from "@/utils/errorCodes"
 
@@ -46,6 +47,8 @@ const codeFormSchema = z.object({
 const UpdateTelegram = () => {
   const { t } = useTranslation("modals")
 
+  const { sendEvent } = useSendEvent()
+
   const scale = useAppSelector((state) => state.scale.value)
 
   const [nickInputValue, setNickInputValue] = useState("")
@@ -65,6 +68,7 @@ const UpdateTelegram = () => {
   }
 
   const submitCode = ({ code }: z.infer<typeof codeFormSchema>) => {
+    sendEvent({ name: "tg_update" })
     verifyTelegram({ code: parseInt(code) })
   }
 

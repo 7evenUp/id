@@ -11,9 +11,12 @@ import RowItem from "@/shared/components/RowItem"
 import Text1 from "@/shared/typography/Text1"
 
 import ExternalLink from "@/shared/ui/ExternalLink"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
+
+  const { sendEvent } = useSendEvent()
 
   return (
     <>
@@ -38,6 +41,9 @@ const PrimeTab = () => {
               withTgIcon
               href="https://t.me/crypton_support"
               className="w-fit"
+              onClick={() => {
+                sendEvent({ name: "support_link_click" })
+              }}
             >
               {t("prime.mentor")}
             </ExternalLink>
@@ -50,12 +56,18 @@ const PrimeTab = () => {
           <ExternalLink
             href="https://t.me/reviews_prime"
             className="w-fit sm:w-auto"
+            onClick={() => {
+              sendEvent({ name: "leave_review_click" })
+            }}
           >
             {t("prime.leave-review")}
           </ExternalLink>
           <ExternalLink
             href="https://t.me/crypton_support"
             className="w-fit sm:w-auto"
+            onClick={() => {
+              sendEvent({ name: "leave_feedback_click" })
+            }}
           >
             {t("prime.leave-feedback")}
           </ExternalLink>

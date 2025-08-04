@@ -19,6 +19,7 @@ import Text0 from "@/shared/typography/Text0"
 
 import IconButton from "@/shared/ui/IconButton"
 import Button from "@/shared/ui/Button"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
 import { useAppSelector } from "@/redux/hooks"
@@ -27,6 +28,8 @@ import { cn } from "@/lib/classNames"
 
 const Subscription = () => {
   const { t } = useTranslation("profile")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -84,7 +87,13 @@ const Subscription = () => {
               <Button>{t("subs.history-btn")}</Button>
             </ModalTrigger>
             <ModalTrigger content={<Balance />}>
-              <Button>{t("subs.replenish-btn")}</Button>
+              <Button
+                onClick={() => {
+                  sendEvent({ name: "topup_modal_open" })
+                }}
+              >
+                {t("subs.replenish-btn")}
+              </Button>
             </ModalTrigger>
           </div>
         </RowItem>

@@ -36,9 +36,12 @@ import {
 } from "@/constants/searchParams"
 
 import { cn } from "@/lib/classNames"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const Products = () => {
   const { t } = useTranslation("products")
+
+  const { sendEvent } = useSendEvent()
 
   const activeRootTab = useAppSelector((state) => state.rootTabs.value)
   const activeProduct = useAppSelector((state) => state.tabs.value)
@@ -92,6 +95,7 @@ const Products = () => {
                 scale &&
                   "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:gap-[0.36vw]"
               )}
+              onClick={() => sendEvent({ name: "products_tab_click" })}
             >
               <EcosystemIcon
                 className={cn(
@@ -108,6 +112,7 @@ const Products = () => {
                 scale &&
                   "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:gap-[0.36vw]"
               )}
+              onClick={() => sendEvent({ name: "inventory_tab_click" })}
             >
               {activeRootTab === "inventory" ? (
                 <InventoryActiveIcon
@@ -133,6 +138,7 @@ const Products = () => {
                 scale &&
                   "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:gap-[0.36vw]"
               )}
+              onClick={() => sendEvent({ name: "store_tab_click" })}
             >
               <StoreIcon
                 className={cn(

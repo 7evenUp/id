@@ -21,16 +21,22 @@ import { TabsTrigger } from "@/shared/ui/Tabs"
 import Tooltip from "@/shared/ui/Tooltip"
 
 import { cn } from "@/lib/classNames"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const TabsTriggers = () => {
   const { t } = useTranslation("products")
+
+  const { sendEvent } = useSendEvent()
 
   const activeProduct = useAppSelector((state) => state.tabs.value)
   const scale = useAppSelector((state) => state.scale.value)
 
   return (
     <>
-      <TabsTrigger value={TABS_VALUES.prime}>
+      <TabsTrigger
+        value={TABS_VALUES.prime}
+        onClick={() => sendEvent({ name: "prime_product_tab_click" })}
+      >
         <Tooltip content="Prime">
           <div>
             {activeProduct === "prime" ? (
@@ -49,7 +55,10 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.calendar}>
+      <TabsTrigger
+        value={TABS_VALUES.calendar}
+        onClick={() => sendEvent({ name: "calendar_product_tab_click" })}
+      >
         <Tooltip content="Calendar">
           <div>
             {activeProduct === "calendar" ? (
@@ -84,7 +93,10 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger> */}
-      <TabsTrigger value={TABS_VALUES.tools}>
+      <TabsTrigger
+        value={TABS_VALUES.tools}
+        onClick={() => sendEvent({ name: "tools_product_tab_click" })}
+      >
         <Tooltip content="Tools">
           <div>
             {activeProduct === "tools" ? (
@@ -105,7 +117,10 @@ const TabsTriggers = () => {
           </div>
         </Tooltip>
       </TabsTrigger>
-      <TabsTrigger value={TABS_VALUES.nutcracker}>
+      <TabsTrigger
+        value={TABS_VALUES.nutcracker}
+        onClick={() => sendEvent({ name: "nutcracker_product_tab_click" })}
+      >
         <Tooltip content={t("nutcracker.title")}>
           <div>
             <NutcrackerIcon

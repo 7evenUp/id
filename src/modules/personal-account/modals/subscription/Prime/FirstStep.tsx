@@ -39,6 +39,7 @@ import { useAppSelector } from "@/redux/hooks"
 import { Subscription } from "@/types/subscriptions"
 
 import { PROMO_CODE_NOT_FOUND, INSUFFICIENT_BALANCE } from "@/utils/errorCodes"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const FirstStep = ({
   open,
@@ -59,6 +60,8 @@ const FirstStep = ({
 }) => {
   const { t } = useTranslation("modals")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -368,6 +371,12 @@ const FirstStep = ({
 
     try {
       await buy({ id: subscriptions[activeSub].id, promocode: promo }).unwrap()
+      sendEvent({
+        name: "subscription_bought",
+        payload: {
+          duration: subscriptions[activeSub].duration.label,
+        },
+      })
       setBoughtSubDuration(subscriptions[activeSub].duration.id)
       openSecondStep()
       setTotalPrice(0)

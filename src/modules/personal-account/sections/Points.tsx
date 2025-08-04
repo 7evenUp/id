@@ -18,9 +18,12 @@ import { useAppSelector } from "@/redux/hooks"
 import { useNutcrackersQuery, useUserProfileQuery } from "@/redux/api/profile"
 
 import { cn } from "@/lib/classNames"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 const Points = () => {
   const { t } = useTranslation("profile")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -49,7 +52,11 @@ const Points = () => {
           />
         </div>
         <ModalTrigger content={<PointsInfo />}>
-          <div>
+          <div
+            onClick={() => {
+              sendEvent({ name: "crypton_points_modal_open" })
+            }}
+          >
             <HelpCircle
               className={cn(
                 "cursor-pointer stroke-1 hover:fill-gray-1 hover:text-white active:opacity-80 dark:active:opacity-80 dark:text-gray-4 dark:hover:fill-gray-2 w-[26px] h-[26px]",

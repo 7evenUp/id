@@ -13,6 +13,7 @@ import Button from "@/shared/ui/Button"
 
 import Text0 from "@/shared/typography/Text0"
 import Text1 from "@/shared/typography/Text1"
+import useSendEvent from "@/shared/hooks/useSendEvent"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 import { LIMIT_REACHED, USER_WALLET_ALREADY_EXISTS } from "@/utils/errorCodes"
@@ -28,6 +29,8 @@ import { cn } from "@/lib/classNames"
 const UpdateWallet = () => {
   const { t } = useTranslation("modals")
   const { t: tErrorResponses } = useTranslation("reqResponses")
+
+  const { sendEvent } = useSendEvent()
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -50,6 +53,16 @@ const UpdateWallet = () => {
   // const closeConnectWalletModal = () => {
   //   setConnectModalOpened(false)
   // }
+
+  const onUpdateSubmit = () => {
+    if (address) {
+      sendEvent({
+        name: "wallet_update",
+        payload: { address: address.toLowerCase() },
+      })
+      updateWallet({ wallet: address.toLowerCase() })
+    }
+  }
 
   const handleConnect = async () => {
     if (!isConnected) open({ view: "Connect" })
@@ -187,7 +200,7 @@ const UpdateWallet = () => {
         <div className="flex flex-wrap-reverse gap-4">
           <Button
             className="w-fit"
-            onClick={() => updateWallet({ wallet: address.toLowerCase() })}
+            onClick={onUpdateSubmit}
             isLoading={isUpdateLoading}
             disabled={Boolean(wallet) && wallet === address.toLowerCase()}
           >
