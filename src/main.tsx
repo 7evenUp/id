@@ -12,7 +12,7 @@ import "./lib/i18n.ts"
 import "./index.css"
 
 init({
-  url: "https://api.metrics-dev.crypton.xyz",
+  url: "https://api.metrics.crypton.xyz",
   client: "web",
   clientType: "site",
   serviceName: "id",
