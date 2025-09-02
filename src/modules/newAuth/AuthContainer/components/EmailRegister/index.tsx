@@ -99,7 +99,7 @@ const EmailRegister = ({ emailInput }: { emailInput: string }) => {
     } else {
       return (
         <p className="id_crypton_message__success">
-          {t("Ссылка для входа отправлена вам на почту")}
+          {t("Ссылка для входа отправлена вам на почту")}{" "}
           <MailToLinkMap emailDomain={emailDomain} />
         </p>
       )
