@@ -293,9 +293,11 @@ export default PointStoreTab
 const Prize = (prize: PointsPrize) => {
   const { t } = useTranslation("products")
 
-  const { image, photos, title, type, price, availableQuantity, kind } = prize
+  const { image, photos, title, type, price, availableQuantity, kind, info } =
+    prize
 
   const scale = useAppSelector((state) => state.scale.value)
+  const lang = useAppSelector((state) => state.language.value)
 
   const [open, setOpen] = useState(false)
 
@@ -370,7 +372,7 @@ const Prize = (prize: PointsPrize) => {
           )}
         </div>
 
-        {kind !== null && kind === "clothes" && (
+        {lang === "ru" && info.ru ? (
           <HoverCardOrPopover openDelay={100}>
             <HoverCardOrPopoverTrigger asChild>
               <button className="absolute right-1 bottom-1 bg-white dark:bg-gray-1 shadow-sm shadow-black/50 rounded-full">
@@ -388,19 +390,66 @@ const Prize = (prize: PointsPrize) => {
                 scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
               )}
             >
-              <TextAccent>{t("points-store.Размеры одежды")}</TextAccent>
-              <Text0 className="text-left">
-                {t("points-store.Актуальное наличие размеров можно узнать на")}{" "}
-                <a
-                  className="text-res-bot-blue underline hover:opacity-70"
-                  target="_blank"
-                  href="https://merch.crypton.xyz/"
-                >
-                  {t("points-store.сайте")}
-                </a>
-              </Text0>
+              <Text0 className="text-left">{info.ru}</Text0>
             </HoverCardOrPopoverContent>
           </HoverCardOrPopover>
+        ) : lang === "en" && info.en ? (
+          <HoverCardOrPopover openDelay={100}>
+            <HoverCardOrPopoverTrigger asChild>
+              <button className="absolute right-1 bottom-1 bg-white dark:bg-gray-1 shadow-sm shadow-black/50 rounded-full">
+                <InfoCircle
+                  className={cn(
+                    "w-6 h-6",
+                    scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+                  )}
+                />
+              </button>
+            </HoverCardOrPopoverTrigger>
+            <HoverCardOrPopoverContent
+              className={cn(
+                "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5 p-2",
+                scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
+              )}
+            >
+              <Text0 className="text-left">{info.en}</Text0>
+            </HoverCardOrPopoverContent>
+          </HoverCardOrPopover>
+        ) : (
+          kind !== null &&
+          kind === "clothes" && (
+            <HoverCardOrPopover openDelay={100}>
+              <HoverCardOrPopoverTrigger asChild>
+                <button className="absolute right-1 bottom-1 bg-white dark:bg-gray-1 shadow-sm shadow-black/50 rounded-full">
+                  <InfoCircle
+                    className={cn(
+                      "w-6 h-6",
+                      scale && "3xl:w-[1.5625vw] 3xl:h-[1.5625vw]"
+                    )}
+                  />
+                </button>
+              </HoverCardOrPopoverTrigger>
+              <HoverCardOrPopoverContent
+                className={cn(
+                  "w-72 2xl:w-80 flex flex-col gap-2 dark:text-gray-5 p-2",
+                  scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
+                )}
+              >
+                <TextAccent>{t("points-store.Размеры одежды")}</TextAccent>
+                <Text0 className="text-left">
+                  {t(
+                    "points-store.Актуальное наличие размеров можно узнать на"
+                  )}{" "}
+                  <a
+                    className="text-res-bot-blue underline hover:opacity-70"
+                    target="_blank"
+                    href="https://merch.crypton.xyz/"
+                  >
+                    {t("points-store.сайте")}
+                  </a>
+                </Text0>
+              </HoverCardOrPopoverContent>
+            </HoverCardOrPopover>
+          )
         )}
       </div>
 
