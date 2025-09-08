@@ -19,6 +19,10 @@ export interface PointsPrize {
       orderNumber: number
     }
   ]
+  info: {
+    ru: string | null
+    en: string | null
+  }
 }
 
 export interface PointsBuyPrizeResponse {

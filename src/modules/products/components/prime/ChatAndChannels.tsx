@@ -3,6 +3,8 @@ import { isMobile } from "react-device-detect"
 
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
 
+import UpdateTelegram from "@/modules/personal-account/modals/UpdateTelegram"
+
 import RowItem from "@/shared/components/RowItem"
 
 import ExternalLink from "@/shared/ui/ExternalLink"
@@ -12,6 +14,7 @@ import {
   HoverCardTrigger,
 } from "@/shared/ui/HoverCard"
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/Popover"
+import { Dialog, DialogTrigger } from "@/shared/ui/Dialog"
 
 import { useLinksQuery } from "@/redux/api/channels"
 import { useUserProfileQuery } from "@/redux/api/profile"
@@ -99,16 +102,30 @@ const ChatAndChannels = () => {
             scale && "3xl:gap-[0.8vw]"
           )}
         >
-          {userLinks.map((link) => (
-            <ExternalLink
-              key={link.id}
-              href={link.link.url}
-              withTgIcon
-              className="shrink"
-            >
-              {link.link.channel.name}
-            </ExternalLink>
-          ))}
+          {userLinks.map((link) => {
+            if (telegramId)
+              return (
+                <ExternalLink
+                  key={link.id}
+                  href={link.link.url}
+                  withTgIcon
+                  className="shrink"
+                >
+                  {link.link.channel.name}
+                </ExternalLink>
+              )
+
+            return (
+              <Dialog key={link.id}>
+                <DialogTrigger asChild>
+                  <ExternalLink withTgIcon className="shrink cursor-pointer">
+                    {link.link.channel.name}
+                  </ExternalLink>
+                </DialogTrigger>
+                <UpdateTelegram />
+              </Dialog>
+            )
+          })}
         </div>
       </RowItem>
     )

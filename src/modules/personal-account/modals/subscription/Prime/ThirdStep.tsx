@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next"
 import SubscriptionModalHeader from "../components/SubscriptionModalHeader"
 import SubscriptionModalFooter from "../components/SubscriptionModalFooter"
 
+import UpdateTelegram from "@/modules/personal-account/modals/UpdateTelegram"
+
 import Text0 from "@/shared/typography/Text0"
 import TextTip from "@/shared/typography/TextTip"
 
-import { Dialog, DialogContent } from "@/shared/ui/Dialog"
+import { Dialog, DialogTrigger, DialogContent } from "@/shared/ui/Dialog"
 import ExternalLink from "@/shared/ui/ExternalLink"
 import Button from "@/shared/ui/Button"
 
@@ -27,7 +29,6 @@ const ThirdStep = ({
   const { t } = useTranslation("modals")
 
   const scale = useAppSelector((state) => state.scale.value)
-  const language = useAppSelector((state) => state.language.value)
 
   const { data: userLinks } = useLinksQuery({})
   const { data: userProfile } = useUserProfileQuery()
@@ -36,9 +37,9 @@ const ThirdStep = ({
 
   const { telegramId } = userProfile
 
-  const filteredLinks = userLinks?.filter(
-    (link) => link.link.channel.lang === language
-  )
+  // const filteredLinks = userLinks?.filter(
+  //   (link) => link.link.channel.lang === language
+  // )
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -73,18 +74,35 @@ const ThirdStep = ({
                   scale && "3xl:gap-[0.781vw]"
                 )}
               >
-                {filteredLinks &&
-                  filteredLinks.length > 0 &&
-                  filteredLinks.map((link) => (
-                    <ExternalLink
-                      key={link.id}
-                      href={link.link.url}
-                      withTgIcon
-                      className="shrink"
-                    >
-                      {link.link.channel.name}
-                    </ExternalLink>
-                  ))}
+                {userLinks &&
+                  userLinks.length > 0 &&
+                  userLinks.map((link) => {
+                    if (telegramId)
+                      return (
+                        <ExternalLink
+                          key={link.id}
+                          href={link.link.url}
+                          withTgIcon
+                          className="shrink"
+                        >
+                          {link.link.channel.name}
+                        </ExternalLink>
+                      )
+
+                    return (
+                      <Dialog key={link.id}>
+                        <DialogTrigger asChild>
+                          <ExternalLink
+                            withTgIcon
+                            className="shrink cursor-pointer"
+                          >
+                            {link.link.channel.name}
+                          </ExternalLink>
+                        </DialogTrigger>
+                        <UpdateTelegram />
+                      </Dialog>
+                    )
+                  })}
               </div>
               {telegramId ? (
                 <TextTip className={cn("mt-5", scale && "3xl:mt-[1.302vw]")}>
