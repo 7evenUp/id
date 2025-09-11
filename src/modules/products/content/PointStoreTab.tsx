@@ -390,7 +390,7 @@ const Prize = (prize: PointsPrize) => {
                 scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
               )}
             >
-              <Text0 className="text-left">{info.ru}</Text0>
+              <MarkdownLink markdown={info.ru} className="text-left" />
             </HoverCardOrPopoverContent>
           </HoverCardOrPopover>
         ) : lang === "en" && info.en ? (
@@ -411,7 +411,7 @@ const Prize = (prize: PointsPrize) => {
                 scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
               )}
             >
-              <Text0 className="text-left">{info.en}</Text0>
+              <MarkdownLink markdown={info.en} className="text-left" />
             </HoverCardOrPopoverContent>
           </HoverCardOrPopover>
         ) : (
@@ -687,4 +687,57 @@ const ConfirmDialog = ({
       </div>
     </DialogContent>
   )
+}
+
+const MarkdownLink = ({
+  markdown,
+  className,
+}: {
+  markdown: string
+  className?: string
+}) => {
+  if (!markdown) return ""
+
+  const parseMarkdownLinks = (text: string) => {
+    const regex = /\[([^\]]+)\]\(([^)]+)\)/g
+    const parts = []
+    let lastIndex = 0
+    let match
+
+    // Iterate through all matches
+    while ((match = regex.exec(text)) !== null) {
+      const [fullMatch, linkText, href] = match
+
+      if (!fullMatch) return
+
+      // Add text before the link
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index))
+      }
+
+      // Add the link as a React component
+      parts.push(
+        <a
+          key={href}
+          className="text-res-bot-blue underline hover:opacity-70"
+          target="_blank"
+          href="href"
+        >
+          {linkText}
+        </a>
+      )
+
+      // Update the lastIndex to the end of this match
+      lastIndex = regex.lastIndex
+    }
+
+    // Add any remaining text after the last link
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex))
+    }
+
+    return parts
+  }
+
+  return <Text0 className={className}>{parseMarkdownLinks(markdown)}</Text0>
 }
