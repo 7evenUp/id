@@ -721,7 +721,7 @@ const MarkdownLink = ({
           key={href}
           className="text-res-bot-blue underline hover:opacity-70"
           target="_blank"
-          href="href"
+          href={href}
         >
           {linkText}
         </a>
