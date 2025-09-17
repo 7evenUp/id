@@ -390,7 +390,7 @@ const Prize = (prize: PointsPrize) => {
                 scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
               )}
             >
-              <MarkdownLink markdown={info.ru} className="text-left" />
+              <Markdown markdown={info.ru} className="text-left" />
             </HoverCardOrPopoverContent>
           </HoverCardOrPopover>
         ) : lang === "en" && info.en ? (
@@ -411,7 +411,7 @@ const Prize = (prize: PointsPrize) => {
                 scale && "3xl:w-[20.8333vw] 3xl:gap-[0.52vw] 3xl:p-[0.52vw]"
               )}
             >
-              <MarkdownLink markdown={info.en} className="text-left" />
+              <Markdown markdown={info.en} className="text-left" />
             </HoverCardOrPopoverContent>
           </HoverCardOrPopover>
         ) : (
@@ -689,7 +689,7 @@ const ConfirmDialog = ({
   )
 }
 
-const MarkdownLink = ({
+const Markdown = ({
   markdown,
   className,
 }: {
@@ -697,6 +697,15 @@ const MarkdownLink = ({
   className?: string
 }) => {
   if (!markdown) return ""
+
+  const parseMarkdownParagraphs = (text: string) => {
+    return text
+      .split("\n")
+      .filter((p) => p.trim())
+      .map((paragraph, index) => (
+        <p key={index}>{parseMarkdownLinks(paragraph.trim())}</p>
+      ))
+  }
 
   const parseMarkdownLinks = (text: string) => {
     const regex = /\[([^\]]+)\]\(([^)]+)\)/g
@@ -739,5 +748,7 @@ const MarkdownLink = ({
     return parts
   }
 
-  return <Text0 className={className}>{parseMarkdownLinks(markdown)}</Text0>
+  return (
+    <Text0 className={className}>{parseMarkdownParagraphs(markdown)}</Text0>
+  )
 }
