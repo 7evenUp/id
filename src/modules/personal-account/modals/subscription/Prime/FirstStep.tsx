@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { isDesktop } from "react-device-detect"
 
-import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
+// import PrimeIcon from "@/assets/icons/products/Prime.svg?react"
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import CheckIcon from "@/assets/icons/check.svg?react"
 import HelpIcon from "@/assets/icons/help-circle.svg?react"
@@ -419,11 +419,11 @@ const FirstStep = ({
             scale && "3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
           )}
         >
-          <PrimeInfo />
+          {/* <PrimeInfo /> */}
 
           <div
             className={cn(
-              "flex flex-col mobile:flex-row items-center mobile:justify-center flex-wrap gap-3 sm:gap-5 mb-6",
+              "grid grid-cols-1 mobile:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mb-6",
               scale && "3xl:gap-[1.302vw] 3xl:mb-[1.563vw]"
             )}
           >
@@ -842,41 +842,41 @@ const FirstStep = ({
   )
 }
 
-const PrimeInfo = () => {
-  const { t } = useTranslation("modals")
+// const PrimeInfo = () => {
+//   const { t } = useTranslation("modals")
 
-  const scale = useAppSelector((state) => state.scale.value)
+//   const scale = useAppSelector((state) => state.scale.value)
 
-  return (
-    <div
-      className={cn(
-        "flex flex-col sm:flex-row sm:items-center gap-6 mb-6",
-        scale && "3xl:gap-[1.563vw] 3xl:mb-[1.563vw]"
-      )}
-    >
-      <div
-        className={cn("flex items-center gap-3", scale && "3xl:gap-[0.781vw]")}
-      >
-        <PrimeIcon
-          className={cn(
-            "dark:fill-gray-5 w-[27px] h-[30px]",
-            scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
-          )}
-        />
-        <span
-          className={cn(
-            "text-[22px]/[22px] 2xl:text-2xl tracking-[0.03em] font-semibold",
-            scale && "3xl:text-[1.432vw]/[1.432vw]"
-          )}
-        >
-          Prime
-        </span>
-      </div>
-      <Text1 className={cn("max-w-[464px]", scale && "3xl:max-w-[30.208vw]")}>
-        {t("buy-subs.first-step.prime-desc")}
-      </Text1>
-    </div>
-  )
-}
+//   return (
+//     <div
+//       className={cn(
+//         "flex flex-col sm:flex-row sm:items-center gap-6 mb-6",
+//         scale && "3xl:gap-[1.563vw] 3xl:mb-[1.563vw]"
+//       )}
+//     >
+//       <div
+//         className={cn("flex items-center gap-3", scale && "3xl:gap-[0.781vw]")}
+//       >
+//         <PrimeIcon
+//           className={cn(
+//             "dark:fill-gray-5 w-[27px] h-[30px]",
+//             scale && "3xl:w-[1.757vw] 3xl:h-[1.953vw]"
+//           )}
+//         />
+//         <span
+//           className={cn(
+//             "text-[22px]/[22px] 2xl:text-2xl tracking-[0.03em] font-semibold",
+//             scale && "3xl:text-[1.432vw]/[1.432vw]"
+//           )}
+//         >
+//           Prime
+//         </span>
+//       </div>
+//       <Text1 className={cn("max-w-[464px]", scale && "3xl:max-w-[30.208vw]")}>
+//         {t("buy-subs.first-step.prime-desc")}
+//       </Text1>
+//     </div>
+//   )
+// }
 
 export default FirstStep

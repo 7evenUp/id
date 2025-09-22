@@ -64,6 +64,7 @@ const SubscriptionCard = ({
     isPromotionalModeActive,
     referralDiscountAmount,
     referralDiscountKind,
+    kind,
   } = subscription
 
   const [cardPrice, setCardPrice] = useState(0)
@@ -207,6 +208,7 @@ const SubscriptionCard = ({
           scale && "3xl:py-[0.391vw] 3xl:rounded-t-[0.781vw]"
         )}
       >
+        {kind.name}{" "}
         {t("buy-subs.first-step.duration", {
           count: duration.id,
         })}
