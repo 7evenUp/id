@@ -156,7 +156,7 @@ const SubscriptionMain = ({
         // openSelection={openSelection}
         openBalanceModal={openBalanceModal}
         openSecondStep={openSecondStep}
-        subscriptions={subscriptions.filter((sub) => sub.kindId === 1)}
+        subscriptions={[...subscriptions].sort((a, b) => a.price - b.price)}
         setBoughtSubDuration={setBoughtSubDuration}
       />
 
