@@ -102,6 +102,8 @@ const ChatAndChannels = () => {
             scale && "3xl:gap-[0.8vw]"
           )}
         >
+          <CalendarLinks />
+
           {userLinks.map((link) => {
             if (telegramId)
               return (
@@ -135,3 +137,68 @@ const ChatAndChannels = () => {
 }
 
 export default ChatAndChannels
+
+const LINKS = [
+  {
+    name: "Crypton Drops Calendar (Web)",
+    url: "https://calendar.crypton.xyz/events",
+    isTelegramLink: false,
+  },
+  {
+    name: "Crypton Drops Calendar",
+    url: "https://t.me/Crypton_Calendar_bot",
+    isTelegramLink: true,
+  },
+]
+
+const CalendarLinks = () => {
+  const { data: userProfile } = useUserProfileQuery()
+
+  if (!userProfile) return null
+
+  const { telegramId } = userProfile
+
+  return (
+    <>
+      {LINKS.map((link, i) => {
+        if (!link.isTelegramLink)
+          return (
+            <ExternalLink
+              key={i}
+              href={link.url}
+              withTgIcon={link.isTelegramLink}
+              className="shrink"
+            >
+              {link.name}
+            </ExternalLink>
+          )
+
+        if (telegramId)
+          return (
+            <ExternalLink
+              key={i}
+              href={link.url}
+              withTgIcon={link.isTelegramLink}
+              className="shrink"
+            >
+              {link.name}
+            </ExternalLink>
+          )
+
+        return (
+          <Dialog key={i}>
+            <DialogTrigger asChild>
+              <ExternalLink
+                withTgIcon={link.isTelegramLink}
+                className="shrink cursor-pointer"
+              >
+                {link.name}
+              </ExternalLink>
+            </DialogTrigger>
+            <UpdateTelegram />
+          </Dialog>
+        )
+      })}
+    </>
+  )
+}

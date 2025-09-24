@@ -78,13 +78,14 @@ const UpcomingSubscriptions = () => {
                   "3xl:gap-[0.52vw] 3xl:rounded-[0.39vw] 3xl:py-[0.2604vw] 3xl:px-[0.39vw]"
               )}
             >
-              {subscriptions[0].kindName === "Prime" ? (
+              {subscriptions[0].kindName === "Prime" ||
+              subscriptions[0].kindName === "Pro" ? (
                 <img
                   src={PrimeActivePng}
                   className={cn("w-[26px] h-auto", scale && "3xl:w-[1.693vw]")}
                 />
               ) : (
-                subscriptions[0].kindName === "Pro" && (
+                subscriptions[0].kindName === "Start" && (
                   <CalendarActiveIcon
                     className={cn(
                       "w-[26px] h-auto",
@@ -133,7 +134,8 @@ const UpcomingSubscriptions = () => {
                       "3xl:gap-[0.52vw] 3xl:rounded-[0.39vw] 3xl:py-[0.2604vw] 3xl:px-[0.39vw]"
                   )}
                 >
-                  {subscription.kindName === "Prime" ? (
+                  {subscription.kindName === "Prime" ||
+                  subscription.kindName === "Pro" ? (
                     <img
                       src={PrimeActivePng}
                       className={cn(
@@ -142,7 +144,7 @@ const UpcomingSubscriptions = () => {
                       )}
                     />
                   ) : (
-                    subscription.kindName === "Pro" && (
+                    subscription.kindName === "Start" && (
                       <CalendarActiveIcon
                         className={cn(
                           "w-[26px] h-auto",
@@ -170,7 +172,8 @@ const UpcomingSubscriptions = () => {
                       "3xl:gap-[0.52vw] 3xl:rounded-[0.39vw] 3xl:py-[0.2604vw] 3xl:px-[0.39vw]"
                   )}
                 >
-                  {subscription.kindName === "Prime" ? (
+                  {subscription.kindName === "Prime" ||
+                  subscription.kindName === "Pro" ? (
                     <img
                       src={PrimeActivePng}
                       className={cn(
@@ -179,7 +182,7 @@ const UpcomingSubscriptions = () => {
                       )}
                     />
                   ) : (
-                    subscription.kindName === "Pro" && (
+                    subscription.kindName === "Start" && (
                       <CalendarActiveIcon
                         className={cn(
                           "w-[26px] h-auto",

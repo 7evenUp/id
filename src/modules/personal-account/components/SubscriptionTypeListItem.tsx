@@ -22,10 +22,10 @@ const SubscriptionTypeListItem = ({
       className={cn(
         "typography-text-1 italic bg-gray-1 dark:bg-gray-2 px-1.5 py-0.5 text-gray-6 rounded-full select-none",
         status === "ACTIVE" &&
-          kindName === "Prime" &&
+          (kindName === "Prime" || kindName === "Pro") &&
           "bg-gradient-to-r from-corral to-purple",
         status === "ACTIVE" &&
-          kindName === "Calendar" &&
+          kindName === "Start" &&
           "bg-calendar-red dark:bg-calendar-red",
         status === "FROZEN" &&
           "bg-gradient-to-r from-frozen-start to-frozen-end",

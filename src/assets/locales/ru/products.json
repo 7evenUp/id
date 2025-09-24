@@ -29,6 +29,7 @@
     "page-of": "Страница {{current}} из {{total}}"
   },
   "prime": {
+    "Календарь": "Календарь",
     "channels-and-chats": "Каналы и чаты Prime",
     "tg-not-synced-yet-first": "Для корректной работы ссылок, сперва активируйте ",
     "tg-not-synced-yet-link": "telegram бота",
