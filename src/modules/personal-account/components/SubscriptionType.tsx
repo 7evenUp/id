@@ -34,9 +34,9 @@ const SubscriptionType = ({ className }: { className?: string }) => {
           appearance:
             status === "FROZEN"
               ? "frozen"
-              : subscriptionType === "Prime"
+              : subscriptionType === "Prime" || subscriptionType === "Pro"
               ? "prime"
-              : subscriptionType === "Calendar"
+              : subscriptionType === "Start"
               ? "calendar"
               : "notActive",
         }),
