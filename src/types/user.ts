@@ -45,7 +45,7 @@ export interface SubscriptionInfo {
   currentBalance: number
   remainingDays: number | null
   status: "ACTIVE" | "FROZEN" | "EXPIRED" | null
-  subscriptionType: "Prime" | "Calendar" | null
+  subscriptionType: "Prime" | "Start" | "Pro" | null
   subscriptionActiveTillDate: Date | null
   isFreezeAllowed: boolean
 }
@@ -55,7 +55,7 @@ export interface ActiveUserSubscription {
   tillDatetime: string
   status: "ACTIVE" | "UPCOMING" | "FROZEN"
   durationDays: number
-  kindName: "Prime" | "Pro"
+  kindName: "Prime" | "Pro" | "Start"
 }
 
 export interface ReferralInfo {
