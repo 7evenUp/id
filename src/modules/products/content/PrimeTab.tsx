@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 
-import CalendarLinks from "../components/prime/CalendarLinks"
+// import CalendarLinks from "../components/prime/CalendarLinks"
 import ChatAndChannels from "../components/prime/ChatAndChannels"
 import ServicesAndNavigation from "../components/prime/ServicesAndNavigation"
 
@@ -14,16 +14,16 @@ import Text1 from "@/shared/typography/Text1"
 import ExternalLink from "@/shared/ui/ExternalLink"
 import useSendEvent from "@/shared/hooks/useSendEvent"
 
-import { useUserProfileQuery } from "@/redux/api/profile"
+// import { useUserProfileQuery } from "@/redux/api/profile"
 
 const PrimeTab = () => {
   const { t } = useTranslation("products")
 
   const { sendEvent } = useSendEvent()
 
-  const { data: userProfile } = useUserProfileQuery()
+  // const { data: userProfile } = useUserProfileQuery()
 
-  const { subscriptionInfo } = userProfile!
+  // const { subscriptionInfo } = userProfile!
 
   return (
     <>
@@ -31,12 +31,14 @@ const PrimeTab = () => {
         <TabTitle title="Prime" link="https://in-prime.crypton.xyz/" />
       </TabHeader>
 
-      {subscriptionInfo.status === "ACTIVE" &&
+      {/* {subscriptionInfo.status === "ACTIVE" &&
       subscriptionInfo.subscriptionType === "Start" ? (
         <CalendarLinks />
       ) : (
         <ChatAndChannels />
-      )}
+      )} */}
+
+      <ChatAndChannels />
 
       <ServicesAndNavigation />
 
