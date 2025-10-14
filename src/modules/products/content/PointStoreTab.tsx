@@ -2,6 +2,7 @@ import { useState, Dispatch, SetStateAction, useEffect } from "react"
 import { DialogClose } from "@radix-ui/react-dialog"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
+import { isDesktop } from "react-device-detect"
 
 import CryptonIcon from "@/assets/icons/crypton-logo.svg?react"
 import PercentageIcon from "@/assets/icons/percentage.svg?react"
@@ -45,7 +46,6 @@ import { useAppSelector } from "@/redux/hooks"
 import { PointsPrize } from "@/types/points"
 
 import { cn } from "@/lib/classNames"
-import { isDesktop } from "react-device-detect"
 
 const PointStoreTab = () => {
   const { t } = useTranslation("products")
@@ -323,13 +323,27 @@ const Prize = (prize: PointsPrize) => {
     >
       <div className="relative">
         {image ? (
-          <img
-            src={image}
-            className={cn(
-              "rounded-xl object-cover aspect-square",
-              scale && "3xl:rounded-[0.78125vw]"
-            )}
-          />
+          <Dialog>
+            <DialogTrigger>
+              <img
+                src={image}
+                className={cn(
+                  "rounded-xl object-cover aspect-square",
+                  scale && "3xl:rounded-[0.78125vw]"
+                )}
+              />
+            </DialogTrigger>
+            <DialogContent className="p-0 sm:p-0 rounded-none border-none bg-transparent dark:bg-transparent shadow-none">
+              <img
+                src={image}
+                className={cn(
+                  "rounded-xl w-full min-w-[150px] sm:max-w-[550px] md:max-w-[640px] max-h-[500px] object-cover",
+                  scale &&
+                    "3xl:rounded-[0.781vw] 3xl:max-h-[32.552vw] 3xl:max-w-[41.666vw]"
+                )}
+              />
+            </DialogContent>
+          </Dialog>
         ) : photos.length > 0 ? (
           <img
             src={photos[0].file}
