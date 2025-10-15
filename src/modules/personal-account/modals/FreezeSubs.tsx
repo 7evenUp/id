@@ -64,13 +64,13 @@ const FreezeSubs = () => {
     <>
       <DialogContent
         className={cn(
-          "pb-16 max-w-[560px] lg:max-w-[700px] sm:pb-16",
+          "max-w-[560px] pb-16 sm:pb-16 lg:max-w-[700px]",
           scale && "3xl:max-w-[45.572vw] 3xl:pb-[4.166vw]"
         )}
       >
         <DialogHeader
           className={cn(
-            "flex-col mobile:flex-row mobile:items-center mb-4 mobile:mb-6 gap-2",
+            "mb-4 flex-col gap-2 mobile:mb-6 mobile:flex-row mobile:items-center",
             scale && "3xl:mb-[1.563vw] 3xl:gap-[0.521vw]"
           )}
         >
@@ -84,7 +84,7 @@ const FreezeSubs = () => {
               {t("freeze.status")}:{" "}
               <span
                 className={cn(
-                  "italic px-1.5 py-0.5 text-gray-6 select-none bg-gradient-to-r rounded-full",
+                  "select-none rounded-full bg-gradient-to-r px-1.5 py-0.5 italic text-gray-6",
                   scale && "3xl:px-[0.391vw] 3xl:py-[0.13vw]",
                   isFrozen
                     ? "from-frozen-start to-frozen-end"
@@ -226,20 +226,20 @@ const FeedbackDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="max-w-96 sm:p-4 gap-6">
+      <DialogContent className="max-w-96 gap-6 sm:p-4">
         {step === 1 ? (
           <>
             <div className="flex flex-col">
-              <TextAccent className="text-center mb-2">
+              <TextAccent className="mb-2 text-center">
                 Ты заморозил подписку
               </TextAccent>
-              <Text1 className="text-center mb-1">
+              <Text1 className="mb-1 text-center">
                 Подскажи, пожалуйста, причину — это поможет нам стать лучше.
               </Text1>
               <Text1 className="text-center">
                 🎁 Ты получишь +25 поинтов за ответ.{" "}
                 <a
-                  className="underline underline-offset-2 text-res-bot-blue"
+                  className="text-res-bot-blue underline underline-offset-2"
                   href="https://id.crypton.xyz?open_tab=store"
                   target="_blank"
                 >
@@ -272,7 +272,7 @@ const FeedbackDialog = ({
               </VariantButton>
               {activeVariant === "other" && (
                 <textarea
-                  className="rounded-[10px] border border-white/20 bg-white/10 p-3 text-base/[125%] outline-none focus:bg-white/20 focus:border-white/30 transition-colors animate-in fade-in-10 zoom-in-0 text-white placeholder:text-gray-4"
+                  className="rounded-[10px] border border-black/[0.08] bg-black/[0.04] p-3 text-base/[125%] outline-none transition-colors animate-in fade-in-10 zoom-in-0 placeholder:text-black/50 focus:border-black/[0.12] focus:bg-black/[0.06] dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder:text-gray-4 dark:focus:border-white/30 dark:focus:bg-white/20"
                   placeholder="Можешь рассказать подробнее, что именно ты имеешь в виду?"
                   value={inputValue}
                   onChange={(evt) => setInputValue(evt.currentTarget.value)}
@@ -281,7 +281,7 @@ const FeedbackDialog = ({
             </RadioGroup.Root>
 
             <button
-              className="h-10 rounded-[10px] bg-white/10 border border-white/20 text-base font-medium text-white hover:bg-white/20 active:bg-white/15 transition-colors hover:border-white/30 active:border-white/25 disabled:pointer-events-none disabled:text-gray-3 flex items-center justify-center"
+              className="flex h-10 items-center justify-center rounded-[10px] border border-black/[0.08] bg-black/[0.04] text-base font-medium transition-colors hover:border-black/[0.16] hover:bg-black/[0.08] active:border-black/[0.12] active:bg-black/[0.06] disabled:pointer-events-none disabled:text-gray-3 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/30 dark:hover:bg-white/20 dark:active:border-white/25 dark:active:bg-white/15 dark:disabled:text-gray-3"
               disabled={
                 activeVariant === undefined ||
                 (activeVariant === "other" && inputValue.trim().length === 0) ||
@@ -303,14 +303,14 @@ const FeedbackDialog = ({
               имеешь в виду?
             </Text0>
             <textarea
-              className="rounded-[10px] border border-white/20 bg-white/10 p-3 text-base/[125%] outline-none focus:bg-white/20 focus:border-white/30 transition-colors text-white placeholder:text-gray-4"
+              className="rounded-[10px] border border-black/[0.08] bg-black/[0.04] p-3 text-base/[125%] outline-none transition-colors placeholder:text-black/50 focus:border-black/[0.12] focus:bg-black/[0.06] dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder:text-gray-4 dark:focus:border-white/30 dark:focus:bg-white/20"
               placeholder="Можешь рассказать подробнее, что именно ты имеешь в виду?"
               value={inputValue}
               onChange={(evt) => setInputValue(evt.currentTarget.value)}
             />
             <div className="flex flex-col gap-2">
               <button
-                className="h-10 rounded-[10px] bg-white/10 border border-white/20 text-base font-medium text-white hover:bg-white/20 active:bg-white/15 transition-colors hover:border-white/30 active:border-white/25 disabled:pointer-events-none disabled:text-gray-3 flex items-center justify-center"
+                className="flex h-10 items-center justify-center rounded-[10px] border border-black/[0.08] bg-black/[0.04] text-base font-medium transition-colors hover:border-black/[0.16] hover:bg-black/[0.08] active:border-black/[0.12] active:bg-black/[0.06] disabled:pointer-events-none disabled:text-gray-3 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/30 dark:hover:bg-white/20 dark:active:border-white/25 dark:active:bg-white/15 dark:disabled:text-gray-3"
                 disabled={
                   inputValue.trim().length === 0 || isUpdateFeedbackLoading
                 }
@@ -323,7 +323,7 @@ const FeedbackDialog = ({
                 )}
               </button>
               <button
-                className="h-10 rounded-[10px] bg-white/10 border border-white/20 text-base font-medium text-white hover:bg-white/20 active:bg-white/15 transition-colors hover:border-white/30 active:border-white/25 flex items-center justify-center"
+                className="flex h-10 items-center justify-center rounded-[10px] border border-black/[0.08] bg-black/[0.04] text-base font-medium transition-colors hover:border-black/[0.16] hover:bg-black/[0.08] active:border-black/[0.12] active:bg-black/[0.06] disabled:pointer-events-none disabled:text-gray-3 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:border-white/30 dark:hover:bg-white/20 dark:active:border-white/25 dark:active:bg-white/15 dark:disabled:text-gray-3"
                 onClick={() => setIsOpen(false)}
               >
                 Закрыть
@@ -344,7 +344,7 @@ const VariantButton = ({
   <RadioGroup.Item
     {...rest}
     className={cn(
-      "h-9 bg-white/10 rounded-[10px] text-sm hover:bg-white/20 active:bg-white/15 transition-colors text-left px-3 flex items-center justify-between data-[state=checked]:bg-white/20",
+      "flex h-9 items-center justify-between rounded-[10px] bg-black/[0.04] px-3 text-left text-sm transition-colors hover:bg-black/[0.08] active:bg-black/[0.06] data-[state=checked]:bg-black/[0.08] dark:bg-white/10 dark:hover:bg-white/20 dark:active:bg-white/15 dark:data-[state=checked]:bg-white/20",
       className
     )}
   >
