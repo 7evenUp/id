@@ -108,8 +108,8 @@ const InventoryTab = () => {
       <SegmentedRoot
         type="single"
         className={cn(
-          "w-full sm:w-[520px] mt-2",
-          scale && "3xl:w-[33.854vw] 3xl:mt-[0.52vw]"
+          "mt-2 w-full sm:w-[520px]",
+          scale && "3xl:mt-[0.52vw] 3xl:w-[33.854vw]"
         )}
         value={filterType}
         onValueChange={(value) =>
@@ -175,7 +175,7 @@ const Prize = ({
   const [claim, { isLoading }] = useClaimMutation()
   const [claimNft, { isLoading: isNftLoading }] = useClaimNftMutation()
 
-  const HOURS_UNTIL_UNFREEZE = import.meta.env.VITE_HOURS_UNTIL_UNFREEZE || 48
+  const HOURS_UNTIL_UNFREEZE = import.meta.env.VITE_HOURS_UNTIL_UNFREEZE || 12
   const unfreezeDate = addHours(new Date(receivedAt), HOURS_UNTIL_UNFREEZE)
   const isAbleToClaim = isAfter(new Date(), unfreezeDate)
 
@@ -255,16 +255,16 @@ const Prize = ({
     <>
       <div
         className={cn(
-          "flex flex-col gap-2 w-full mobile-sm:w-[80%] mobile:w-52 p-1 pb-2 bg-white dark:bg-gray-1 rounded-2xl shadow-sm",
+          "flex w-full flex-col gap-2 rounded-2xl bg-white p-1 pb-2 shadow-sm dark:bg-gray-1 mobile-sm:w-[80%] mobile:w-52",
           scale &&
-            "3xl:gap-[0.52vw] 3xl:w-[13.541vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw] 3xl:rounded-[1.041vw]"
+            "3xl:w-[13.541vw] 3xl:gap-[0.52vw] 3xl:rounded-[1.041vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw]"
         )}
       >
         {image ? (
           <img
             src={image}
             className={cn(
-              "w-full aspect-square rounded-xl object-cover",
+              "aspect-square w-full rounded-xl object-cover",
               scale && "3xl:rounded-[0.781vw]"
             )}
           />
@@ -273,7 +273,7 @@ const Prize = ({
             <img
               src={photos[0].file}
               className={cn(
-                "w-full aspect-square rounded-xl object-cover",
+                "aspect-square w-full rounded-xl object-cover",
                 scale && "3xl:rounded-[0.781vw]"
               )}
             />
@@ -282,12 +282,12 @@ const Prize = ({
         <TextAccent className="text-center">{title}</TextAccent>
         {isUsed ? (
           type === "nft" ? (
-            <Text0 className="text-center mt-auto">
+            <Text0 className="mt-auto text-center">
               {t("inventory.prize-activated")}
             </Text0>
           ) : (
             type === "crypton_promo_code" && (
-              <Text0 className="text-center mt-auto">{userData}</Text0>
+              <Text0 className="mt-auto text-center">{userData}</Text0>
             )
           )
         ) : (
@@ -295,8 +295,8 @@ const Prize = ({
             <Dialog>
               <DialogTrigger
                 className={cn(
-                  "flex items-center justify-center gap-2 mb-2 hover:text-gray-3 dark:hover:text-gray-3",
-                  scale && "3xl:gap-[0.52vw] 3xl:mb-[0.52vw]"
+                  "mb-2 flex items-center justify-center gap-2 hover:text-gray-3 dark:hover:text-gray-3",
+                  scale && "3xl:mb-[0.52vw] 3xl:gap-[0.52vw]"
                 )}
               >
                 <Text2 className="underline underline-offset-4">
@@ -304,8 +304,8 @@ const Prize = ({
                 </Text2>
                 <HelpCircle
                   className={cn(
-                    "w-[18px] h-[18px]",
-                    scale && "3xl:w-[1.171vw] 3xl:h-[1.171vw]"
+                    "h-[18px] w-[18px]",
+                    scale && "3xl:h-[1.171vw] 3xl:w-[1.171vw]"
                   )}
                 />
               </DialogTrigger>
@@ -315,7 +315,7 @@ const Prize = ({
                 <DialogTitle>
                   {t("inventory.how-to-activate-prize")}
                 </DialogTitle>
-                <Text0 className="h-[400px] md:h-auto overflow-auto break-words">
+                <Text0 className="h-[400px] overflow-auto break-words md:h-auto">
                   {instruction}
                 </Text0>
               </DialogContent>
@@ -347,7 +347,7 @@ const Prize = ({
               userData && (
                 <button
                   className={cn(
-                    "flex items-center gap-2 mx-auto mt-auto",
+                    "mx-auto mt-auto flex items-center gap-2",
                     scale && "3xl:gap-[0.52vw]"
                   )}
                   onClick={onSponsorCopy}
@@ -360,15 +360,15 @@ const Prize = ({
                   {isSponsorCopied ? (
                     <Check
                       className={cn(
-                        "animate-in fade-in-0 w-4 h-4",
-                        scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                        "h-4 w-4 animate-in fade-in-0",
+                        scale && "3xl:h-[1.041vw] 3xl:w-[1.041vw]"
                       )}
                     />
                   ) : (
                     <Copy
                       className={cn(
-                        "animate-in fade-in-0 w-4 h-4",
-                        scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                        "h-4 w-4 animate-in fade-in-0",
+                        scale && "3xl:h-[1.041vw] 3xl:w-[1.041vw]"
                       )}
                     />
                   )}
