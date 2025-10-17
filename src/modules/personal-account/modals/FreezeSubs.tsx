@@ -231,21 +231,21 @@ const FeedbackDialog = ({
           <>
             <div className="flex flex-col">
               <TextAccent className="mb-2 text-center">
-                Ты заморозил подписку
+                Вы заморозили подписку.
               </TextAccent>
               <Text1 className="mb-1 text-center">
-                Подскажи, пожалуйста, причину — это поможет нам стать лучше.
+                Подскажите, пожалуйста, причину — это поможет нам стать лучше.
               </Text1>
               <Text1 className="text-center">
-                🎁 Ты получишь +25 поинтов за ответ.{" "}
+                🎁 Вы получите +25 поинтов за ответ.{" "}
                 <a
                   className="text-res-bot-blue underline underline-offset-2"
                   href="https://id.crypton.xyz?open_tab=store"
                   target="_blank"
                 >
-                  Посмотри
+                  Посмотрите
                 </a>
-                , где их можно потратить
+                , где их можно потратить.
               </Text1>
             </div>
 
@@ -299,8 +299,8 @@ const FeedbackDialog = ({
         ) : (
           <>
             <Text0 className="text-center">
-              Спасибо за ответ! Можешь рассказать подробнее, что именно ты
-              имеешь в виду?
+              Спасибо за ответ! Можете рассказать подробнее, что именно Вы
+              имеете в виду?
             </Text0>
             <textarea
               className="rounded-[10px] border border-black/[0.08] bg-black/[0.04] p-3 text-base/[125%] outline-none transition-colors placeholder:text-black/50 focus:border-black/[0.12] focus:bg-black/[0.06] dark:border-white/20 dark:bg-white/10 dark:text-white dark:placeholder:text-gray-4 dark:focus:border-white/30 dark:focus:bg-white/20"
