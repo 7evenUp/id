@@ -45,20 +45,20 @@ const ThirdStep = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "pb-14 sm:pb-14 sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[820px] lg:max-w-[90vw]",
-          scale && "3xl:pb-[3.645vw] 3xl:max-w-[90vw]"
+          "pb-14 sm:max-w-[560px] sm:pb-14 md:max-w-[650px] xmd:max-w-[820px] lg:max-w-[90vw]",
+          scale && "3xl:max-w-[90vw] 3xl:pb-[3.645vw]"
         )}
       >
         <SubscriptionModalHeader step={t("buy-subs.third-step.step")} />
         <div
           className={cn(
-            "flex flex-col h-[350px] mobile-sm:h-[400px] xl:h-auto xl:max-h-[75vh] overflow-auto pr-2 divide-y divide-gray-4 dark:divide-gray-2",
+            "flex h-[350px] flex-col divide-y divide-gray-4 overflow-auto pr-2 dark:divide-gray-2 mobile-sm:h-[400px] xl:h-auto xl:max-h-[75vh]",
             scale && "3xl:pr-[0.26vw]"
           )}
         >
           <div
             className={cn(
-              "flex flex-col-reverse md:flex-row justify-between gap-10 py-5",
+              "flex flex-col-reverse justify-between gap-10 py-5 md:flex-row",
               scale && "3xl:gap-[2.604vw] 3xl:py-[1.302vw]"
             )}
           >
@@ -127,7 +127,7 @@ const ThirdStep = ({
             >
               <h3
                 className={cn(
-                  "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4",
+                  "typography-head mb-4 bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent",
                   scale && "typography-head_large 3xl:mb-[1.042vw]"
                 )}
               >
@@ -137,28 +137,22 @@ const ThirdStep = ({
                 {t("buy-subs.third-step.part-1-text-1")}
               </Text0>
               <Text0>
-                {t("buy-subs.third-step.part-1-text-2-start")}{" "}
+                {t("buy-subs.third-step.Вы также можете пройти")}{" "}
                 <a
-                  href="https://www.notion.so/crypton-prime/Crypton-Prime-04524d793a584b1fb5491c518b340820"
+                  href="https://t.me/CryptonLobbyBot/prime"
                   target="_blank"
                   className="underline underline-offset-4 hover:opacity-60"
                 >
-                  {t("buy-subs.third-step.part-1-text-2-link-1")}
-                </a>{" "}
-                {t("buy-subs.third-step.part-1-text-2-or")}{" "}
-                <a
-                  href="https://member.crypton.xyz/"
-                  target="_blank"
-                  className="underline underline-offset-4 hover:opacity-60"
-                >
-                  {t("buy-subs.third-step.part-1-text-2-link-2")}
+                  {t("buy-subs.third-step.Эксурсию в Prime")}
                 </a>
+                , {t("buy-subs.third-step.чтобы лучше ознакомиться с проектом")}
+                .
               </Text0>
             </div>
           </div>
           <div
             className={cn(
-              "flex flex-col-reverse md:flex-row justify-between gap-10 py-5",
+              "flex flex-col-reverse justify-between gap-10 py-5 md:flex-row",
               scale && "3xl:gap-[2.604vw] 3xl:py-[1.302vw]"
             )}
           >
@@ -183,7 +177,7 @@ const ThirdStep = ({
             >
               <h3
                 className={cn(
-                  "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4",
+                  "typography-head mb-4 bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent",
                   scale && "typography-head_large 3xl:mb-[1.042vw]"
                 )}
               >
@@ -194,7 +188,7 @@ const ThirdStep = ({
           </div>
           <div
             className={cn(
-              "flex flex-col-reverse md:flex-row justify-between gap-10 py-5",
+              "flex flex-col-reverse justify-between gap-10 py-5 md:flex-row",
               scale && "3xl:gap-[2.604vw] 3xl:py-[1.302vw]"
             )}
           >
@@ -219,7 +213,7 @@ const ThirdStep = ({
             >
               <h3
                 className={cn(
-                  "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text mb-4",
+                  "typography-head mb-4 bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent",
                   scale && "typography-head_large 3xl:mb-[1.042vw]"
                 )}
               >
@@ -236,7 +230,7 @@ const ThirdStep = ({
         </div>
 
         {/* Vissible on Mobile */}
-        <div className="pb-2 text-right block md:hidden">
+        <div className="block pb-2 text-right md:hidden">
           <DialogClose asChild className="w-fit">
             <Button>{t("buy-subs.third-step.okay-btn")}</Button>
           </DialogClose>
