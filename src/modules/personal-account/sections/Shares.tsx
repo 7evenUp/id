@@ -26,31 +26,28 @@ const Shares = () => {
   const scale = useAppSelector((state) => state.scale.value)
 
   const { data: profileData } = useUserProfileQuery()
-  const { data: transactions, isLoading } = useGetSharesHistoryQuery()
+  const { isLoading } = useGetSharesHistoryQuery()
 
   const { investFundBalance } = profileData!
 
   if (isLoading)
     return (
       <div>
-        <Skeleton className="mb-4 w-20 h-[22px]" />
+        <Skeleton className="mb-4 h-[22px] w-20" />
         <div className="border-t border-gray-4 dark:border-gray-1">
           <RowItem>
-            <Skeleton className="w-[100px] h-5" />
-            <Skeleton className="w-44 h-[22px]" />
+            <Skeleton className="h-5 w-[100px]" />
+            <Skeleton className="h-[22px] w-44" />
           </RowItem>
         </div>
       </div>
     )
 
-  if (investFundBalance === 0 && transactions && transactions.count === 0)
-    return
-
   return (
     <div>
       <div
         className={cn(
-          "flex justify-between items-center pb-4",
+          "flex items-center justify-between pb-4",
           scale && "3xl:pb-[1.042vw]"
         )}
       >
@@ -65,7 +62,7 @@ const Shares = () => {
           </Text0>
           <div
             className={cn(
-              "flex gap-1.5 xl:gap-3 flex-wrap justify-end",
+              "flex flex-wrap justify-end gap-1.5 xl:gap-3",
               scale && "3xl:gap-[0.781vw]"
             )}
           >
