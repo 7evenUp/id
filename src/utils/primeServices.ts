@@ -27,10 +27,6 @@ export const primeServices = [
     href: "https://t.me/c/2179694110/5/157",
   },
   {
-    name: "Инвестфонд",
-    href: "https://www.notion.so/crypton-prime/Crypton-Prime-0a71d7f5c24d4130b1a121c12c870f0c",
-  },
-  {
     name: "Гарантия окупаемости",
     href: "https://crypton-prime.notion.site/fb0eb6869a6d4117a9203ee49c6446dc",
   },
