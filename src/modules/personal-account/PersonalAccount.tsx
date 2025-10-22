@@ -11,7 +11,7 @@ import Profile from "./sections/profile/Profile"
 import Subscription from "./sections/Subscription"
 import Referral from "./sections/Referral"
 import Points from "./sections/Points"
-import Shares from "./sections/Shares"
+// import Shares from "./sections/Shares"
 
 import Button from "@/shared/ui/Button"
 
@@ -42,10 +42,10 @@ const PersonalAccount = () => {
 
   return (
     <div className="2xl:flex-1">
-      <div className="flex justify-between sm:max-lg:px-12=">
+      <div className="sm:max-lg:px-12= flex justify-between">
         <h1
           className={cn(
-            "text-[22px]/[22px] 2xl:text-2xl tracking-[0.03em] font-semibold uppercase dark:text-gray-5 text-center w-full sm:text-left mb-10 sm:mb-0",
+            "mb-10 w-full text-center text-[22px]/[22px] font-semibold uppercase tracking-[0.03em] dark:text-gray-5 sm:mb-0 sm:text-left 2xl:text-2xl",
             scale && "3xl:text-[1.432vw]/[1.432vw]"
           )}
         >
@@ -57,17 +57,17 @@ const PersonalAccount = () => {
       </div>
       <div
         className={cn(
-          "flex flex-col gap-10 w-full sm:px-12 lg:px-0 lg:w-[350px] xl:w-[433px] 2xl:w-[100%]",
-          scale && "3xl:gap-[2.604vw] 3xl:w-[28.19vw]"
+          "flex w-full flex-col gap-10 sm:px-12 lg:w-[350px] lg:px-0 xl:w-[433px] 2xl:w-[100%]",
+          scale && "3xl:w-[28.19vw] 3xl:gap-[2.604vw]"
         )}
       >
         <Profile />
         <Subscription />
-        <Shares />
+        {/* <Shares /> */}
         <Points />
         <Referral />
 
-        <div className="hidden sm:flex justify-between">
+        <div className="hidden justify-between sm:flex">
           <Button appearence="text" onClick={onLogout}>
             {t("logout")}
           </Button>
