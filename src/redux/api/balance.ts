@@ -2,7 +2,7 @@ import { api } from "./core"
 
 type ReqResponse = string
 
-interface ReqParams {
+export interface TopUpReqParams {
   amount: number
   is_receipt_need: boolean
   payment_type: "crypto" | "card"
@@ -10,11 +10,13 @@ interface ReqParams {
   currency?: "BTC" | "BUSD" | "USDT" | "USDC" | "RUB" | "USD" | "KZT" | "BNB"
   successUrl: string
   failUrl: string
+  referralCode?: string
+  utm?: string | null
 }
 
 const balanceApi = api.injectEndpoints({
   endpoints: (build) => ({
-    topUpBalance: build.mutation<ReqResponse, ReqParams>({
+    topUpBalance: build.mutation<ReqResponse, TopUpReqParams>({
       query: (body) => ({
         url: "top-up-balance/",
         method: "POST",

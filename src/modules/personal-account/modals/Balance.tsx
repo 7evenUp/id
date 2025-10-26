@@ -35,7 +35,7 @@ import {
 import { Checkbox, CheckboxLabel } from "@/shared/ui/Checkbox"
 
 import { useUserProfileQuery } from "@/redux/api/profile"
-import { useTopUpBalanceMutation } from "@/redux/api/balance"
+import { TopUpReqParams, useTopUpBalanceMutation } from "@/redux/api/balance"
 import { useAppSelector } from "@/redux/hooks"
 import { useAvailableMethodsQuery } from "@/redux/api/payments"
 
@@ -103,6 +103,20 @@ const Balance = () => {
   const onSubmit = async ({ amount }: z.infer<typeof formSchema>) => {
     if (!checkboxRef.current) return
 
+    const url = new URL(location.href)
+    const refCode = url.searchParams.get("ref_code")
+    const utm_source = url.searchParams.get("utm_source")
+    const utm_medium = url.searchParams.get("utm_medium")
+    const utm_campaign = url.searchParams.get("utm_campaign")
+    const utm_content = url.searchParams.get("utm_content")
+
+    const utm_data = {
+      utm_source: utm_source || null,
+      utm_medium: utm_medium || null,
+      utm_campaign: utm_campaign || null,
+      utm_content: utm_content || null,
+    }
+
     try {
       let paymentUrl = ""
 
@@ -111,7 +125,7 @@ const Balance = () => {
           name: "topup_click",
           payload: { type: "card", amount: amount },
         })
-        paymentUrl = await trigger({
+        let payload: TopUpReqParams = {
           amount: parseInt(amount),
           is_receipt_need:
             checkboxRef.current.ariaChecked === "false" ? false : true,
@@ -119,7 +133,17 @@ const Balance = () => {
           currency: "RUB",
           successUrl: "https://id.crypton.xyz/payment-success",
           failUrl: "https://id.crypton.xyz/payment-error",
-        }).unwrap()
+        }
+        if (refCode) {
+          payload = { ...payload, referralCode: refCode }
+        }
+        if (utm_source || utm_medium || utm_campaign || utm_content) {
+          payload = {
+            ...payload,
+            utm: JSON.stringify(utm_data),
+          }
+        }
+        paymentUrl = await trigger(payload).unwrap()
       } else {
         sendEvent({
           name: "topup_click",
@@ -130,7 +154,7 @@ const Balance = () => {
             currency: activeToken ?? "USDT",
           },
         })
-        paymentUrl = await trigger({
+        let payload: TopUpReqParams = {
           amount: parseInt(amount),
           is_receipt_need:
             checkboxRef.current.ariaChecked === "false" ? false : true,
@@ -141,7 +165,17 @@ const Balance = () => {
           currency: activeToken ?? "USDT",
           successUrl: "https://id.crypton.xyz/payment-success",
           failUrl: "https://id.crypton.xyz/payment-error",
-        }).unwrap()
+        }
+        if (refCode) {
+          payload = { ...payload, referralCode: refCode }
+        }
+        if (utm_source || utm_medium || utm_campaign || utm_content) {
+          payload = {
+            ...payload,
+            utm: JSON.stringify(utm_data),
+          }
+        }
+        paymentUrl = await trigger(payload).unwrap()
       }
 
       setPaymentURL(paymentUrl)
@@ -158,8 +192,8 @@ const Balance = () => {
         <CurrentBalance />
         <div
           className={cn(
-            "flex items-center gap-2 mb-4",
-            scale && "3xl:gap-[0.521vw] 3xl:mb-1.041vw]"
+            "mb-4 flex items-center gap-2",
+            scale && "3xl:mb-1.041vw] 3xl:gap-[0.521vw]"
           )}
         >
           <Text1>{t("balance.choose-deposit")}:</Text1>
@@ -171,7 +205,7 @@ const Balance = () => {
           >
             <SelectTrigger
               className={cn(
-                "w-40 2xl:w-44 shrink-0",
+                "w-40 shrink-0 2xl:w-44",
                 scale && "3xl:w-[9.765vw]"
               )}
             />
@@ -195,16 +229,16 @@ const Balance = () => {
           <>
             <Text1
               className={cn(
-                "mt-4 mb-2",
-                scale && "3xl:mt-[1.041vw] 3xl:mb-[0.52vw]"
+                "mb-2 mt-4",
+                scale && "3xl:mb-[0.52vw] 3xl:mt-[1.041vw]"
               )}
             >
               {t("balance.choose-cryptocurrency")}:
             </Text1>
             <div
               className={cn(
-                "flex items-center flex-wrap gap-2.5 mb-6",
-                scale && "3xl:gap-[0.651vw] 3xl:mb-[1.5625vw]"
+                "mb-6 flex flex-wrap items-center gap-2.5",
+                scale && "3xl:mb-[1.5625vw] 3xl:gap-[0.651vw]"
               )}
             >
               {[...tokens].map((el, i) => (
@@ -225,8 +259,8 @@ const Balance = () => {
             </div>
             <div
               className={cn(
-                "flex items-center gap-2 mb-4",
-                scale && "3xl:gap-[0.521vw] 3xl:mb-1.041vw]"
+                "mb-4 flex items-center gap-2",
+                scale && "3xl:mb-1.041vw] 3xl:gap-[0.521vw]"
               )}
             >
               <Text1>{t("balance.choose-network")}:</Text1>
@@ -241,7 +275,7 @@ const Balance = () => {
                 <SelectTrigger
                   placeholder={t("balance.choose")}
                   className={cn(
-                    "shrink-0 w-[100px]",
+                    "w-[100px] shrink-0",
                     scale && "3xl:w-[6.51vw]"
                   )}
                 />
@@ -272,13 +306,13 @@ const Balance = () => {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-3 dark:text-gray-4 group-focus-within:text-gray-1 dark:group-focus-within:text-gray-5">
+                  <FormLabel className="text-gray-3 group-focus-within:text-gray-1 dark:text-gray-4 dark:group-focus-within:text-gray-5">
                     {t("balance.amount-label")}
                   </FormLabel>
                   <div className="relative">
                     <span
                       className={cn(
-                        "absolute left-0 top-1 3xl:top-[0.26vw] text-sm",
+                        "absolute left-0 top-1 text-sm 3xl:top-[0.26vw]",
                         scale && "3xl:text-[0.911vw]/[1.302vw]"
                       )}
                     >
@@ -287,9 +321,9 @@ const Balance = () => {
                     <FormControl>
                       <Input
                         className={cn(
-                          "text-sm pl-4 aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
+                          "pl-4 text-sm aria-[invalid=true]:border-error dark:aria-[invalid=true]:border-error",
                           scale &&
-                            "3xl:text-[0.911vw]/[1.302vw] 3xl:pl-[1.042vw]"
+                            "3xl:pl-[1.042vw] 3xl:text-[0.911vw]/[1.302vw]"
                         )}
                         placeholder={t("balance.amount-placeholder")}
                         {...field}
@@ -303,8 +337,8 @@ const Balance = () => {
             <div>
               <div
                 className={cn(
-                  "flex items-center gap-2.5 mb-6",
-                  scale && "3xl:gap-[0.651vw] 3xl:mb-[1.563vw]"
+                  "mb-6 flex items-center gap-2.5",
+                  scale && "3xl:mb-[1.563vw] 3xl:gap-[0.651vw]"
                 )}
               >
                 {PREDEFINED_AMOUNT_VALUES.map((amount, i) => (
@@ -319,8 +353,8 @@ const Balance = () => {
               </div>
               <div
                 className={cn(
-                  "flex items-center gap-2 mb-6",
-                  scale && "3xl:gap-[0.521vw] 3xl:mb-[1.563vw]"
+                  "mb-6 flex items-center gap-2",
+                  scale && "3xl:mb-[1.563vw] 3xl:gap-[0.521vw]"
                 )}
               >
                 <Checkbox id="email_bill" ref={checkboxRef} />
@@ -332,8 +366,8 @@ const Balance = () => {
               {isSuccess && (
                 <div
                   className={cn(
-                    "flex flex-col gap-2 mb-6",
-                    scale && "3xl:gap-[0.52vw] 3xl:mb-[1.563vw]"
+                    "mb-6 flex flex-col gap-2",
+                    scale && "3xl:mb-[1.563vw] 3xl:gap-[0.52vw]"
                   )}
                 >
                   <ResponseSuccessText className="block">
@@ -360,16 +394,16 @@ const Balance = () => {
                           // @ts-expect-error No-Error-Types
                           .at(-2)} ${error.message.split(" ").at(-1)}`
                       : // @ts-expect-error No-Error-Types
-                      error.code === "top_up_low_limit"
-                      ? tSchema("min-top-up")
-                      : tErrorResponses("server-error")
+                        error.code === "top_up_low_limit"
+                        ? tSchema("min-top-up")
+                        : tErrorResponses("server-error")
                   }
                 </ResponseErrorText>
               )}
 
               <div
                 className={cn(
-                  "flex items-center flex-wrap gap-3",
+                  "flex flex-wrap items-center gap-3",
                   scale && "3xl:gap-[0.781vw]"
                 )}
               >
@@ -411,9 +445,9 @@ const CurrentBalance = () => {
   return (
     <div
       className={cn(
-        "flex justify-between items-end gap-4 sm:gap-6 bg-gray-6 dark:bg-gray-2 rounded-xl p-3 mb-6",
+        "mb-6 flex items-end justify-between gap-4 rounded-xl bg-gray-6 p-3 dark:bg-gray-2 sm:gap-6",
         scale &&
-          "3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw] 3xl:mb-[1.563vw]"
+          "3xl:mb-[1.563vw] 3xl:gap-[1.563vw] 3xl:rounded-[0.781vw] 3xl:p-[0.781vw]"
       )}
     >
       <Text0 className="text-gray-3 dark:text-gray-4">
@@ -421,7 +455,7 @@ const CurrentBalance = () => {
       </Text0>
       <span
         className={cn(
-          "w-fit shrink-0 text-right font-semibold text-4xl sm:text-5xl dark:text-gray-5",
+          "w-fit shrink-0 text-right text-4xl font-semibold dark:text-gray-5 sm:text-5xl",
           scale && "3xl:text-[3.125vw]"
         )}
       >
