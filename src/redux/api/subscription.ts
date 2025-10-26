@@ -15,11 +15,19 @@ const subscriptionApi = api.injectEndpoints({
         return response.sort((a, b) => a.duration.id - b.duration.id)
       },
     }),
-    buy: build.mutation<void, { id: number; promocode: string }>({
-      query: ({ id, promocode }) => ({
+    buy: build.mutation<
+      void,
+      {
+        id: number
+        promocode: string
+        referralCode: string | null
+        utm: string | null
+      }
+    >({
+      query: ({ id, ...body }) => ({
         url: `subscriptions/${id}/buy/`,
         method: "POST",
-        body: { id, promocode },
+        body,
       }),
       transformErrorResponse: (response) => ({
         // @ts-expect-error No-Error-Types

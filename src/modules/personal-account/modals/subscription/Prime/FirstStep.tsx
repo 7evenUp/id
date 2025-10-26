@@ -301,16 +301,16 @@ const FirstStep = ({
         invalidForSubscriptions.length === 0
           ? true
           : invalidForSubscriptions.length === 0 &&
-            validForSubscriptions.includes(subscriptions[activeSub].id)
-          ? true
-          : validForSubscriptions.length === 0 &&
-            !invalidForSubscriptions.includes(subscriptions[activeSub].id)
-          ? true
-          : validForSubscriptions.length !== 0 &&
-            invalidForSubscriptions.length !== 0 &&
-            validForSubscriptions.includes(subscriptions[activeSub].id)
-          ? true
-          : false
+              validForSubscriptions.includes(subscriptions[activeSub].id)
+            ? true
+            : validForSubscriptions.length === 0 &&
+                !invalidForSubscriptions.includes(subscriptions[activeSub].id)
+              ? true
+              : validForSubscriptions.length !== 0 &&
+                  invalidForSubscriptions.length !== 0 &&
+                  validForSubscriptions.includes(subscriptions[activeSub].id)
+                ? true
+                : false
 
       if (!isValid) {
         setTotalPrice(price - baseDiscountAmountNotNullable)
@@ -369,8 +369,38 @@ const FirstStep = ({
   const buySubscription = async () => {
     if (activeSub === null) return
 
+    const url = new URL(location.href)
+    const refCode = url.searchParams.get("ref_code")
+    const utm_source = url.searchParams.get("utm_source")
+    const utm_medium = url.searchParams.get("utm_medium")
+    const utm_campaign = url.searchParams.get("utm_campaign")
+    const utm_content = url.searchParams.get("utm_content")
+
+    let utm_data: {
+      utm_source: string | null
+      utm_medium: string | null
+      utm_campaign: string | null
+      utm_content: string | null
+    } | null
+
+    if (utm_source || utm_medium || utm_campaign || utm_content) {
+      utm_data = {
+        utm_source: utm_source || null,
+        utm_medium: utm_medium || null,
+        utm_campaign: utm_campaign || null,
+        utm_content: utm_content || null,
+      }
+    } else {
+      utm_data = null
+    }
+
     try {
-      await buy({ id: subscriptions[activeSub].id, promocode: promo }).unwrap()
+      await buy({
+        id: subscriptions[activeSub].id,
+        promocode: promo,
+        referralCode: refCode,
+        utm: utm_data ? JSON.stringify(utm_data) : null,
+      }).unwrap()
       sendEvent({
         name: "subscription_bought",
         payload: {
@@ -392,8 +422,8 @@ const FirstStep = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "pb-14 sm:pb-14 sm:max-w-[560px] lg:max-w-[910px] xl:max-w-[1200px]",
-          scale && "3xl:pb-[3.645vw] 3xl:max-w-[70vw]"
+          "pb-14 sm:max-w-[560px] sm:pb-14 lg:max-w-[910px] xl:max-w-[1200px]",
+          scale && "3xl:max-w-[70vw] 3xl:pb-[3.645vw]"
         )}
       >
         {/* <button
@@ -415,16 +445,16 @@ const FirstStep = ({
 
         <div
           className={cn(
-            "h-[400px] lg:h-auto overflow-y-auto pr-2 pb-1",
-            scale && "3xl:pr-[0.521vw] 3xl:pb-[0.26vw]"
+            "h-[400px] overflow-y-auto pb-1 pr-2 lg:h-auto",
+            scale && "3xl:pb-[0.26vw] 3xl:pr-[0.521vw]"
           )}
         >
           {/* <PrimeInfo /> */}
 
           <div
             className={cn(
-              "grid grid-cols-1 mobile:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mb-6",
-              scale && "3xl:gap-[1.302vw] 3xl:mb-[1.563vw]"
+              "mb-6 grid grid-cols-1 gap-3 mobile:grid-cols-2 sm:gap-5 lg:grid-cols-3",
+              scale && "3xl:mb-[1.563vw] 3xl:gap-[1.302vw]"
             )}
           >
             {subscriptions.map((sub, i) => {
@@ -442,14 +472,14 @@ const FirstStep = ({
                     validFor.length === 0 && invalidFor.length === 0
                       ? true
                       : invalidFor.length === 0 && validFor.includes(sub.id)
-                      ? true
-                      : validFor.length === 0 && !invalidFor.includes(sub.id)
-                      ? true
-                      : validFor.length !== 0 &&
-                        invalidFor.length !== 0 &&
-                        validFor.includes(sub.id)
-                      ? true
-                      : false
+                        ? true
+                        : validFor.length === 0 && !invalidFor.includes(sub.id)
+                          ? true
+                          : validFor.length !== 0 &&
+                              invalidFor.length !== 0 &&
+                              validFor.includes(sub.id)
+                            ? true
+                            : false
                   }
                 />
               )
@@ -459,8 +489,8 @@ const FirstStep = ({
           {activeSub !== null && (
             <div
               className={cn(
-                "relative flex items-center flex-wrap gap-2 mb-5 sm:mb-9 lg:mb-5",
-                scale && "3xl:gap-[0.521vw] 3xl:mb-[1.302vw]"
+                "relative mb-5 flex flex-wrap items-center gap-2 sm:mb-9 lg:mb-5",
+                scale && "3xl:mb-[1.302vw] 3xl:gap-[0.521vw]"
               )}
             >
               <Input
@@ -469,13 +499,13 @@ const FirstStep = ({
                 onChange={onPromoInputChange}
                 className={cn(
                   isError &&
-                    "text-error border-error dark:text-error dark:border-error focus:border-error dark:focus:border-error"
+                    "border-error text-error focus:border-error dark:border-error dark:text-error dark:focus:border-error"
                 )}
               />
               {isError && (
                 <Text1
                   className={cn(
-                    "w-full sm:absolute sm:bottom-0 sm:translate-y-8 lg:translate-y-4 text-error",
+                    "w-full text-error sm:absolute sm:bottom-0 sm:translate-y-8 lg:translate-y-4",
                     scale && "3xl:translate-y-[1.042vw]"
                   )}
                 >
@@ -486,22 +516,24 @@ const FirstStep = ({
                         promocodeError.data.code === "discount_not_found"
                         ? t("buy-subs.first-step.promo-error")
                         : /* @ts-expect-error No-Error-Types */
-                        promocodeError.data.code ===
-                          "discount_for_non_subscribed_only"
-                        ? tErrorResponses("discount_for_non_subscribed_only")
-                        : /* @ts-expect-error No-Error-Types */
-                        promocodeError.data.code ===
-                          "discount_for_new_users_only"
-                        ? tErrorResponses("discount_for_new_users_only")
-                        : /* @ts-expect-error No-Error-Types */
-                        promocodeError.data.code ===
-                          "discount_code_already_used"
-                        ? tErrorResponses("discount_code_already_used")
-                        : /* @ts-expect-error No-Error-Types */
-                        promocodeError.data.code ===
-                          "discount_code_validation_error"
-                        ? tErrorResponses("discount_code_validation_error")
-                        : tErrorResponses("server-error")
+                          promocodeError.data.code ===
+                            "discount_for_non_subscribed_only"
+                          ? tErrorResponses("discount_for_non_subscribed_only")
+                          : /* @ts-expect-error No-Error-Types */
+                            promocodeError.data.code ===
+                              "discount_for_new_users_only"
+                            ? tErrorResponses("discount_for_new_users_only")
+                            : /* @ts-expect-error No-Error-Types */
+                              promocodeError.data.code ===
+                                "discount_code_already_used"
+                              ? tErrorResponses("discount_code_already_used")
+                              : /* @ts-expect-error No-Error-Types */
+                                promocodeError.data.code ===
+                                  "discount_code_validation_error"
+                                ? tErrorResponses(
+                                    "discount_code_validation_error"
+                                  )
+                                : tErrorResponses("server-error")
                       : tErrorResponses("server-error")
                   }
                 </Text1>
@@ -523,7 +555,7 @@ const FirstStep = ({
 
           <div
             className={cn(
-              "flex flex-col lg:flex-row lg:items-center justify-between gap-2",
+              "flex flex-col justify-between gap-2 lg:flex-row lg:items-center",
               scale && "3xl:gap-[0.521vw]"
             )}
           >
@@ -542,31 +574,31 @@ const FirstStep = ({
                 {t("buy-subs.first-step.total")}: ${totalPrice.toFixed(2)}
               </span>
               {subscriptions.some((el) => el.referralDiscountKind !== null) && (
-                <Text1 className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+                <Text1 className="bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent">
                   {isPromoLarger === null
                     ? t("buy-subs.first-step.ref-discount-available")
                     : isPromoLarger
-                    ? t("buy-subs.first-step.ref-discount-is-smaller")
-                    : t("buy-subs.first-step.ref-discount-is-larger")}
+                      ? t("buy-subs.first-step.ref-discount-is-smaller")
+                      : t("buy-subs.first-step.ref-discount-is-larger")}
                 </Text1>
               )}
               {promocodeValidateData &&
                 promocodeValidateData.isReferralCode && (
-                  <Text1 className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+                  <Text1 className="bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent">
                     {t("buy-subs.first-step.ref-discount-available")}
                   </Text1>
                 )}
               {totalPrice !== 0 && nutcrackersData && (
                 <div
                   className={cn(
-                    "mobile-sm:min-w-[300px] bg-gray-5/30 dark:bg-gray-2/50 px-3 py-2 rounded-lg flex flex-col gap-1 mt-2",
+                    "mt-2 flex flex-col gap-1 rounded-lg bg-gray-5/30 px-3 py-2 dark:bg-gray-2/50 mobile-sm:min-w-[300px]",
                     scale &&
-                      "3xl:min-w-[19.53vw] 3xl:px-[0.78125vw] 3xl:py-[0.52vw] 3xl:rounded-[0.52vw] 3xl:gap-[0.26vw] 3xl:mt-[0.52vw]"
+                      "3xl:mt-[0.52vw] 3xl:min-w-[19.53vw] 3xl:gap-[0.26vw] 3xl:rounded-[0.52vw] 3xl:px-[0.78125vw] 3xl:py-[0.52vw]"
                   )}
                 >
                   <div
                     className={cn(
-                      "flex justify-between mobile-sm:items-center flex-col mobile-sm:flex-row gap-1 mobile-sm:gap-6",
+                      "flex flex-col justify-between gap-1 mobile-sm:flex-row mobile-sm:items-center mobile-sm:gap-6",
                       scale && "3xl:gap-[1.5625vw]"
                     )}
                   >
@@ -578,28 +610,28 @@ const FirstStep = ({
                         <HoverCardTrigger>
                           <div
                             className={cn(
-                              "w-fit flex items-center gap-1.5 p-1 rounded-xl cursor-pointer hover:opacity-80 transition-opacity",
+                              "flex w-fit cursor-pointer items-center gap-1.5 rounded-xl p-1 transition-opacity hover:opacity-80",
                               scale &&
-                                "3xl:gap-[0.39vw] 3xl:p-[0.26vw] 3xl:rounded-[0.78125vw]",
+                                "3xl:gap-[0.39vw] 3xl:rounded-[0.78125vw] 3xl:p-[0.26vw]",
                               nutcrackersData.maxRarity === null
                                 ? "border border-gray-3 dark:border-gray-5"
                                 : nutcrackersData.maxRarity === "common"
-                                ? "bg-gray-5"
-                                : nutcrackersData.maxRarity === "uncommon"
-                                ? "bg-tools-green"
-                                : nutcrackersData.maxRarity === "rare"
-                                ? "bg-res-bot-blue"
-                                : nutcrackersData.maxRarity === "mythical"
-                                ? "bg-prime-pink"
-                                : nutcrackersData.maxRarity === "epic"
-                                ? "bg-university-velvet"
-                                : nutcrackersData.maxRarity === "legendary" &&
-                                  "bg-academy-gold"
+                                  ? "bg-gray-5"
+                                  : nutcrackersData.maxRarity === "uncommon"
+                                    ? "bg-tools-green"
+                                    : nutcrackersData.maxRarity === "rare"
+                                      ? "bg-res-bot-blue"
+                                      : nutcrackersData.maxRarity === "mythical"
+                                        ? "bg-prime-pink"
+                                        : nutcrackersData.maxRarity === "epic"
+                                          ? "bg-university-velvet"
+                                          : nutcrackersData.maxRarity ===
+                                              "legendary" && "bg-academy-gold"
                             )}
                           >
                             <Text2
                               className={cn(
-                                "rounded-full bg-gray-1 dark:bg-gray-6 text-gray-6 dark:text-black px-1 py-px",
+                                "rounded-full bg-gray-1 px-1 py-px text-gray-6 dark:bg-gray-6 dark:text-black",
                                 scale && "3xl:px-[0.26vw] 3xl:py-[0.0651vw]",
                                 nutcrackersData.maxRarity === null
                                   ? "bg-gray-3 dark:bg-gray-5"
@@ -614,15 +646,15 @@ const FirstStep = ({
                             </Text2>
                             <TextAccent
                               className={cn(
-                                "text-black dark:text-gray-6 tabular-nums",
+                                "tabular-nums text-black dark:text-gray-6",
                                 nutcrackersData.maxRarity === null
                                   ? "dark:text-gray-5"
                                   : nutcrackersData.maxRarity === "common"
-                                  ? "dark:text-gray-1"
-                                  : nutcrackersData.maxRarity === "epic"
-                                  ? "text-gray-6"
-                                  : nutcrackersData.maxRarity === "legendary" &&
-                                    "dark:text-black"
+                                    ? "dark:text-gray-1"
+                                    : nutcrackersData.maxRarity === "epic"
+                                      ? "text-gray-6"
+                                      : nutcrackersData.maxRarity ===
+                                          "legendary" && "dark:text-black"
                               )}
                             >
                               +
@@ -632,16 +664,16 @@ const FirstStep = ({
                             </TextAccent>
                             <CryptonIcon
                               className={cn(
-                                "w-5 h-5",
-                                scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                                "h-5 w-5",
+                                scale && "3xl:h-[1.3vw] 3xl:w-[1.3vw]"
                               )}
                             />
                           </div>
                         </HoverCardTrigger>
                         <HoverCardContent
                           className={cn(
-                            "flex flex-col gap-1 w-[95vw] sm:w-[600px]",
-                            scale && "3xl:gap-[0.26vw] 3xl:w-[39.06vw]"
+                            "flex w-[95vw] flex-col gap-1 sm:w-[600px]",
+                            scale && "3xl:w-[39.06vw] 3xl:gap-[0.26vw]"
                           )}
                         >
                           <CryptonPointsInfo />
@@ -652,28 +684,28 @@ const FirstStep = ({
                         <PopoverTrigger>
                           <div
                             className={cn(
-                              "w-fit flex items-center gap-1.5 p-1 rounded-xl cursor-pointer hover:opacity-80 transition-opacity",
+                              "flex w-fit cursor-pointer items-center gap-1.5 rounded-xl p-1 transition-opacity hover:opacity-80",
                               scale &&
-                                "3xl:gap-[0.39vw] 3xl:p-[0.26vw] 3xl:rounded-[0.78125vw]",
+                                "3xl:gap-[0.39vw] 3xl:rounded-[0.78125vw] 3xl:p-[0.26vw]",
                               nutcrackersData.maxRarity === null
                                 ? "border border-gray-3 dark:border-gray-5"
                                 : nutcrackersData.maxRarity === "common"
-                                ? "bg-gray-5"
-                                : nutcrackersData.maxRarity === "uncommon"
-                                ? "bg-tools-green"
-                                : nutcrackersData.maxRarity === "rare"
-                                ? "bg-res-bot-blue"
-                                : nutcrackersData.maxRarity === "mythical"
-                                ? "bg-prime-pink"
-                                : nutcrackersData.maxRarity === "epic"
-                                ? "bg-university-velvet"
-                                : nutcrackersData.maxRarity === "legendary" &&
-                                  "bg-academy-gold"
+                                  ? "bg-gray-5"
+                                  : nutcrackersData.maxRarity === "uncommon"
+                                    ? "bg-tools-green"
+                                    : nutcrackersData.maxRarity === "rare"
+                                      ? "bg-res-bot-blue"
+                                      : nutcrackersData.maxRarity === "mythical"
+                                        ? "bg-prime-pink"
+                                        : nutcrackersData.maxRarity === "epic"
+                                          ? "bg-university-velvet"
+                                          : nutcrackersData.maxRarity ===
+                                              "legendary" && "bg-academy-gold"
                             )}
                           >
                             <Text2
                               className={cn(
-                                "rounded-full bg-gray-1 dark:bg-gray-6 text-gray-6 dark:text-black px-1 py-px",
+                                "rounded-full bg-gray-1 px-1 py-px text-gray-6 dark:bg-gray-6 dark:text-black",
                                 scale && "3xl:px-[0.26vw] 3xl:py-[0.0651vw]",
                                 nutcrackersData.maxRarity === null
                                   ? "bg-gray-3 dark:bg-gray-5"
@@ -688,15 +720,15 @@ const FirstStep = ({
                             </Text2>
                             <TextAccent
                               className={cn(
-                                "text-black dark:text-gray-6 tabular-nums",
+                                "tabular-nums text-black dark:text-gray-6",
                                 nutcrackersData.maxRarity === null
                                   ? "dark:text-gray-5"
                                   : nutcrackersData.maxRarity === "common"
-                                  ? "dark:text-gray-1"
-                                  : nutcrackersData.maxRarity === "epic"
-                                  ? "text-gray-6"
-                                  : nutcrackersData.maxRarity === "legendary" &&
-                                    "dark:text-black"
+                                    ? "dark:text-gray-1"
+                                    : nutcrackersData.maxRarity === "epic"
+                                      ? "text-gray-6"
+                                      : nutcrackersData.maxRarity ===
+                                          "legendary" && "dark:text-black"
                               )}
                             >
                               +
@@ -706,8 +738,8 @@ const FirstStep = ({
                             </TextAccent>
                             <CryptonIcon
                               className={cn(
-                                "w-5 h-5",
-                                scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                                "h-5 w-5",
+                                scale && "3xl:h-[1.3vw] 3xl:w-[1.3vw]"
                               )}
                             />
                           </div>
@@ -718,7 +750,7 @@ const FirstStep = ({
                       </Popover>
                     )}
                   </div>
-                  <div className="flex justify-between mobile:smitems-center flex-col mobile-sm:flex-row gap-1 mobile-sm:gap-6">
+                  <div className="mobile:smitems-center flex flex-col justify-between gap-1 mobile-sm:flex-row mobile-sm:gap-6">
                     <Text0>{t("buy-subs.first-step.with-nutcracker")}:</Text0>
                     {nutcrackersData.maxRarity === null ? (
                       isDesktop ? (
@@ -726,23 +758,23 @@ const FirstStep = ({
                           <HoverCardTrigger>
                             <div
                               className={cn(
-                                "flex items-center gap-2 cursor-pointer",
+                                "flex cursor-pointer items-center gap-2",
                                 scale && "3xl:gap-[0.52vw]"
                               )}
                             >
                               <TextAccent>100-200%</TextAccent>
                               <HelpIcon
                                 className={cn(
-                                  "w-5 h-5",
-                                  scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                                  "h-5 w-5",
+                                  scale && "3xl:h-[1.3vw] 3xl:w-[1.3vw]"
                                 )}
                               />
                             </div>
                           </HoverCardTrigger>
                           <HoverCardContent
                             className={cn(
-                              "flex flex-col gap-1 w-[220px]",
-                              scale && "3xl:gap-[0.26vw] 3xl:w-[14.32vw]"
+                              "flex w-[220px] flex-col gap-1",
+                              scale && "3xl:w-[14.32vw] 3xl:gap-[0.26vw]"
                             )}
                           >
                             <RarityToDiscountTable />
@@ -753,15 +785,15 @@ const FirstStep = ({
                           <PopoverTrigger>
                             <div
                               className={cn(
-                                "flex items-center gap-2 cursor-pointer",
+                                "flex cursor-pointer items-center gap-2",
                                 scale && "3xl:gap-[0.52vw]"
                               )}
                             >
                               <TextAccent>10-20%</TextAccent>
                               <HelpIcon
                                 className={cn(
-                                  "w-5 h-5",
-                                  scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                                  "h-5 w-5",
+                                  scale && "3xl:h-[1.3vw] 3xl:w-[1.3vw]"
                                 )}
                               />
                             </div>
@@ -774,8 +806,8 @@ const FirstStep = ({
                     ) : (
                       <CheckIcon
                         className={cn(
-                          "w-5 h-5",
-                          scale && "3xl:w-[1.3vw] 3xl:h-[1.3vw]"
+                          "h-5 w-5",
+                          scale && "3xl:h-[1.3vw] 3xl:w-[1.3vw]"
                         )}
                       />
                     )}
@@ -812,24 +844,24 @@ const FirstStep = ({
                     error.errorCode === "discount_not_found"
                     ? t("buy-subs.first-step.promo-error")
                     : /* @ts-expect-error No-Error-Types */
-                    error.errorCode === "discount_for_non_subscribed_only"
-                    ? tErrorResponses("discount_for_non_subscribed_only")
-                    : /* @ts-expect-error No-Error-Types */
-                    error.errorCode === "discount_for_new_users_only"
-                    ? tErrorResponses("discount_for_new_users_only")
-                    : /* @ts-expect-error No-Error-Types */
-                    error.errorCode === "discount_code_already_used"
-                    ? tErrorResponses("discount_code_already_used")
-                    : /* @ts-expect-error No-Error-Types */
-                    error.errorCode === "discount_code_validation_error"
-                    ? tErrorResponses("discount_code_validation_error")
-                    : /* @ts-expect-error No-Error-Types */
-                    error.errorCode === PROMO_CODE_NOT_FOUND
-                    ? tErrorResponses("promocode_not_found")
-                    : /* @ts-expect-error No-Error-Types */
-                    error.errorCode === INSUFFICIENT_BALANCE
-                    ? tErrorResponses("insufficient_balance")
-                    : tErrorResponses("server-error")
+                      error.errorCode === "discount_for_non_subscribed_only"
+                      ? tErrorResponses("discount_for_non_subscribed_only")
+                      : /* @ts-expect-error No-Error-Types */
+                        error.errorCode === "discount_for_new_users_only"
+                        ? tErrorResponses("discount_for_new_users_only")
+                        : /* @ts-expect-error No-Error-Types */
+                          error.errorCode === "discount_code_already_used"
+                          ? tErrorResponses("discount_code_already_used")
+                          : /* @ts-expect-error No-Error-Types */
+                            error.errorCode === "discount_code_validation_error"
+                            ? tErrorResponses("discount_code_validation_error")
+                            : /* @ts-expect-error No-Error-Types */
+                              error.errorCode === PROMO_CODE_NOT_FOUND
+                              ? tErrorResponses("promocode_not_found")
+                              : /* @ts-expect-error No-Error-Types */
+                                error.errorCode === INSUFFICIENT_BALANCE
+                                ? tErrorResponses("insufficient_balance")
+                                : tErrorResponses("server-error")
                   : totalPrice > balance && t("buy-subs.first-step.not-enough")}
               </Text1>
             </div>
