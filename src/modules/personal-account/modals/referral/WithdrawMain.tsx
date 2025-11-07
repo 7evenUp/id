@@ -49,13 +49,13 @@ const WithdrawMain = ({
     })
   }
 
-  const withdrawToShares = () => {
-    requestWithdraw({
-      amount: refBalance,
-      kind: "TO_SHARES",
-      wallet_address: "",
-    })
-  }
+  // const withdrawToShares = () => {
+  //   requestWithdraw({
+  //     amount: refBalance,
+  //     kind: "TO_SHARES",
+  //     wallet_address: "",
+  //   })
+  // }
 
   if (isError) console.log(error)
 
@@ -96,7 +96,7 @@ const WithdrawMain = ({
 
         <div
           className={cn(
-            "flex flex-col items-center mobile:flex-row gap-5",
+            "flex items-center gap-5",
             scale && "3xl:gap-[1.302vw]"
           )}
         >
@@ -127,7 +127,7 @@ const WithdrawMain = ({
             {t("ref-withdraw.wallet-btn")}
           </Button>
 
-          <Button
+          {/* <Button
             disabled={
               (isSuccess && originalArgs?.kind === "TO_SHARES") ||
               refBalance <= 0.0
@@ -142,7 +142,7 @@ const WithdrawMain = ({
             onClick={withdrawToShares}
           >
             {t("ref-withdraw.shares-btn")}
-          </Button>
+          </Button> */}
         </div>
       </DialogContent>
     </Dialog>
