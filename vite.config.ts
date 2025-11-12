@@ -1,45 +1,21 @@
-import { defineConfig, loadEnv } from "vite"
+
 import path from "path"
-
-import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react-swc"
 import svgr from "vite-plugin-svgr"
-import { nodePolyfills } from "vite-plugin-node-polyfills"
 import mkcert from "vite-plugin-mkcert"
-
-export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), "")
-
-  // local
-  if (command === "serve") {
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => {
+  if (mode === "production") {
     return {
-      plugins: [react(), svgr(), mkcert(), nodePolyfills()],
-      server: {
-        proxy: {
-          "/api": {
-            target: env.VITE_API_BASE_URL,
-            changeOrigin: true,
-            secure: true,
-          },
-        },
-      },
+      plugins: [react(), svgr()],
       resolve: {
         alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
       },
     }
-  } else {
-    // build
+  } else if (mode === "development") {
     return {
-      plugins: [react(), svgr(), nodePolyfills()],
-      server: {
-        host: true,
-        proxy: {
-          "/api": {
-            target: env.VITE_API_BASE_URL,
-            changeOrigin: true,
-            secure: true,
-          },
-        },
-      },
+      plugins: [react(), svgr(), mkcert()],
       resolve: {
         alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
       },
