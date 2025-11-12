@@ -1,29 +1,49 @@
-import { defineConfig, loadEnv } from "vite"
-import path from "path"
-
+import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
-import { nodePolyfills } from "vite-plugin-node-polyfills"
-import mkcert from "vite-plugin-mkcert"
+import path from "path"
 
-export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), "")
-
-  // local
+export default defineConfig(({ command }) => {
   if (command === "serve") {
     return {
-      plugins: [react(), svgr(), mkcert(), nodePolyfills()],
+      plugins: [react(), svgr()],
       resolve: {
-        alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+        alias: {
+          "@": path.resolve(__dirname, "./src"),
+        },
       },
     }
   } else {
-    // build
+    // command === "build"
     return {
-      plugins: [react(), svgr(), nodePolyfills()],
+      // build: {
+      //   rollupOptions: {
+      //     output: {
+      //       manualChunks(id) {
+      //         if (id.includes("node_modules")) {
+      //           const modulePath = id.split("node_modules/")[1]
+      //           const topLevelFolder = modulePath.split("/")[0]
+      //           if (topLevelFolder !== ".pnpm") {
+      //             return topLevelFolder
+      //           }
+      //           const scopedPackageName = modulePath.split("/")[1]
+      //           const chunkName =
+      //             scopedPackageName.split("@")[
+      //               scopedPackageName.startsWith("@") ? 1 : 0
+      //             ]
+      //           return chunkName
+      //         }
+      //       },
+      //     },
+      //   },
+      // },
+      plugins: [react(), svgr()],
       resolve: {
-        alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+        alias: {
+          "@": path.resolve(__dirname, "./src"),
+        },
       },
     }
   }
 })
+
