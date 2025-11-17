@@ -3,7 +3,7 @@ import AuthContainer from "./AuthContainer"
 import { useAppSelector } from "@/redux/hooks"
 import { useUserProfileQuery } from "@/redux/api/profile"
 
-const NewAuth = () => {
+const Auth = () => {
   const { refetch } = useUserProfileQuery()
 
   const lang = useAppSelector((state) => state.language.value)
@@ -18,4 +18,4 @@ const NewAuth = () => {
   )
 }
 
-export default NewAuth
+export default Auth
