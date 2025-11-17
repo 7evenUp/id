@@ -6,8 +6,12 @@ import {
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react"
 
+const CORRECT_BASE_URL = import.meta.env.DEV
+  ? "/api/v1"
+  : import.meta.env.VITE_API_BASE_URL + "/api/v1"
+
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_BASE_URL + "/api/v1",
+  baseUrl: CORRECT_BASE_URL,
   credentials: "include",
 })
 

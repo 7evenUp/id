@@ -8,8 +8,12 @@ import {
   RegisterByWalletRequest,
 } from "./types"
 
+const CORRECT_BASE_URL = import.meta.env.DEV
+  ? "/api/v1"
+  : import.meta.env.VITE_API_BASE_URL + "/api/v1"
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL + "/api/v1",
+  baseURL: CORRECT_BASE_URL,
   withCredentials: true,
 })
 
