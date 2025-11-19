@@ -9,6 +9,7 @@ import Divider from "./components/Divider"
 import EmailLogin from "./components/EmailLogin"
 import EmailRegister from "./components/EmailRegister"
 import WalletRegister from "./components/WalletRegister"
+import TelegramLogin from "./components/TelegramLogin"
 import IdIcon from "./components/Icons/ID"
 
 import "./styles.css"
@@ -38,9 +39,12 @@ const AuthContent = () => {
   const [isUserNotFoundByWalletAuth, setIsUserNotFoundByWalletAuth] =
     useState(false)
 
+  const [isTelegramFlow, setIsTelegramFlow] = useState(false)
+
   const resetAuthVariant = () => {
     setIsUserNotFoundByMailLogin(false)
     setIsUserNotFoundByWalletAuth(false)
+    setIsTelegramFlow(false)
   }
 
   return (
@@ -71,6 +75,18 @@ const AuthContent = () => {
             {t("Выбрать другой способ входа")}
           </button>
         </>
+      ) : isTelegramFlow ? (
+        <>
+          <h2 className="id_crypton_title">{t("Вход через Telegram")}</h2>
+
+          <TelegramLogin />
+
+          <Divider />
+
+          <button className="id_crypton_reset_auth" onClick={resetAuthVariant}>
+            {t("Выбрать другой способ входа")}
+          </button>
+        </>
       ) : (
         <>
           <h2 className="id_crypton_title">{t("Вход в Crypton")}</h2>
@@ -78,6 +94,7 @@ const AuthContent = () => {
           <AuthVariants
             setSignature={setSignature}
             setIsUserNotFoundByWalletAuth={setIsUserNotFoundByWalletAuth}
+            setIsTelegramFlow={setIsTelegramFlow}
           />
 
           <Divider />

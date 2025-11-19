@@ -1,10 +1,11 @@
 import { useAuthContext } from "./AuthContext"
 
-const translations: Record<string, string> = {
+const translations = {
   Регистрация: "Sign Up",
   "Продолжить с Wallet": "Continue with Wallet",
   "Продолжить с Google": "Continue with Google",
   "Продолжить с Apple": "Continue with Apple",
+  "Продолжить с Telegram": "Continue with Telegram",
   "Ссылка для входа отправлена вам на почту":
     "The login link has been sent to your email",
   "Выбрать другой способ входа": "Choose another auth method",
@@ -40,12 +41,32 @@ const translations: Record<string, string> = {
   "Введённый код неверный": "The entered code is incorrect",
   "Введите код, который пришёл на почту":
     "Enter the code that has been sent to your email.",
-}
+  "Введите код, который пришёл в": "Enter the code that has been sent to",
+  "Минимальная длина - 5 символов": "The minimum length is 5 characters.",
+  "Максимальная длина - 32 символа": "The maximum length is 32 characters.",
+  "Формат допускает использование символов a-z, 0-9 и _":
+    "The format allows the use of characters a-z, 0-9 and _",
+  "Username не может начинаться с цифры или _":
+    "Username cannot start with a digit or _",
+  "Username не может заканчиваться символом _":
+    "Username cannot end with a character _",
+  "Мы не смогли найти аккаунт с таким Telegram Username":
+    "We couldn't find an account with this Telegram Username.",
+  "1. Перейдите и активируйте": "1. Go ahead and activate",
+  "Таким образом вы создадите аккаунт в нашей системе":
+    "This way you will create an account in our ecosystem",
+  "2. Нажмите кнопку повторной отправки кода ниже":
+    "2. Click the button below to resend the code",
+  "Отправить код повторно": "Send the code again",
+  "Введите ваш Telegram Username": "Enter your Telegram Username",
+  Войти: "Login",
+  "Вход через Telegram": "Login via Telegram",
+} as const
 
 export const useTranslate = () => {
   const { lang } = useAuthContext()
 
-  return (key: string) => {
+  return (key: keyof typeof translations) => {
     if (lang === "ru") return key
 
     if (Object.hasOwn(translations, key)) return translations[key]

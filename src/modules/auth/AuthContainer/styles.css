@@ -96,3 +96,13 @@
   letter-spacing: 0.025em;
   text-wrap: balance;
 }
+
+.id_crypton_link {
+  color: rgb(92 177 255);
+  cursor: pointer;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+.id_crypton_link:hover {
+  text-decoration-line: underline;
+}

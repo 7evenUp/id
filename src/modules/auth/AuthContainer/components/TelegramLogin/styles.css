@@ -1,0 +1,62 @@
+.id_crypton_telegram_label {
+  position: relative;
+}
+
+.id_crypton_telegram_at {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.id_crypton_telegram_label[aria-invalid="true"] input {
+  border: 1px solid rgba(241, 72, 72, 0.16);
+  background-color: rgba(241, 72, 72, 0.04);
+}
+
+.id_crypton_telegram_label[aria-invalid="true"] input::placeholder {
+  color: rgba(241, 72, 72, 0.6);
+}
+
+.id_crypton_telegram_label[aria-invalid="true"] input:hover {
+  border: 1px solid rgba(241, 72, 72, 0.16);
+  background-color: rgba(241, 72, 72, 0.08);
+}
+
+.id_crypton_telegram_label[aria-invalid="true"] input:focus {
+  border: 1px solid rgba(241, 72, 72, 0.12);
+  background-color: rgba(241, 72, 72, 0.06);
+}
+
+.dark .id_crypton_telegram_label[aria-invalid="true"] input {
+  border: 1px solid rgba(241, 72, 72, 0.16);
+  background-color: rgba(241, 72, 72, 0.08);
+}
+
+.dark .id_crypton_telegram_label[aria-invalid="true"] input::placeholder {
+  color: rgba(241, 72, 72, 0.6);
+}
+
+.dark .id_crypton_telegram_label[aria-invalid="true"] input:hover {
+  border: 1px solid rgba(241, 72, 72, 0.32);
+  background-color: rgba(241, 72, 72, 0.16);
+}
+
+.dark .id_crypton_telegram_label[aria-invalid="true"] input:focus {
+  border: 1px solid rgba(241, 72, 72, 0.24);
+  background-color: rgba(241, 72, 72, 0.12);
+}
+
+.id_crypton_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.15rem;
+  letter-spacing: 0.025em;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.dark .id_crypton_list {
+  color: rgba(255, 255, 255, 0.9);
+}

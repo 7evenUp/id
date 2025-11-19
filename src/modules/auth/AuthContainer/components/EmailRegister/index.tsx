@@ -152,14 +152,14 @@ const EmailRegister = ({ emailInput }: { emailInput: string }) => {
               {t("Подтверждаю, что ознакомлен и согласен с")}{" "}
               <a
                 href="https://id.crypton.xyz/terms-of-use"
-                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+                className="id_crypton_link"
               >
                 {t("Условиями и Положениями")}
               </a>{" "}
               {t("и")}{" "}
               <a
                 href="https://id.crypton.xyz/privacy-policy"
-                className="text-res-bot-blue cursor-pointer hover:underline underline-offset-2 font-medium"
+                className="id_crypton_link"
               >
                 {t("Политикой Конфиденциальности")}
               </a>
@@ -184,15 +184,15 @@ const EmailRegister = ({ emailInput }: { emailInput: string }) => {
                     "Замечено много попыток авторизации. Пожалуйста, повторите позже"
                   )
                 : error.response?.data.loginBlockedTill
-                ? t(
-                    "Повторное получение письма на почту будет доступно через "
-                  ) +
-                  differenceInMinutes(
-                    new Date(error.response?.data.loginBlockedTill * 1000),
-                    new Date()
-                  ) +
-                  t(" мин")
-                : t("На стороне сервера произошла ошибка")
+                  ? t(
+                      "Повторное получение письма на почту будет доступно через "
+                    ) +
+                    differenceInMinutes(
+                      new Date(error.response?.data.loginBlockedTill * 1000),
+                      new Date()
+                    ) +
+                    t(" мин")
+                  : t("На стороне сервера произошла ошибка")
               : t(
                   "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"
                 )}

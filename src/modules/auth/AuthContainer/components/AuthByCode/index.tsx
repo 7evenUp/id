@@ -18,7 +18,13 @@ import "./styles.css"
 
 const MAX_CODE_LENGTH = 4
 
-const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
+const AuthByCode = ({
+  emailDomain,
+  isTelegramCode,
+}: {
+  emailDomain?: string
+  isTelegramCode?: boolean
+}) => {
   const t = useTranslate()
 
   const { refetchAfterSuccessAuth } = useAuthContext()
@@ -76,17 +82,30 @@ const AuthByCode = ({ emailDomain }: { emailDomain: string }) => {
                       "Замечено много попыток авторизации. Пожалуйста, повторите позже"
                     )
                   : error.status === 400 &&
-                    error.response?.data.code === "token_not_found"
-                  ? t("Введённый код неверный")
-                  : t("На стороне сервера произошла ошибка")
+                      error.response?.data.code === "token_not_found"
+                    ? t("Введённый код неверный")
+                    : t("На стороне сервера произошла ошибка")
                 : t(
                     "Произошла непредвиденная ошибка. Пожалуйста, попробуйте позже"
                   )}
             </p>
           ) : (
             <p className="id_crypton_message">
-              {t("Введите код, который пришёл на почту")}{" "}
-              <MailToLinkMap emailDomain={emailDomain} />
+              {isTelegramCode ? (
+                <>
+                  {t("Введите код, который пришёл в")}{" "}
+                  <a
+                    className="id_crypton_link"
+                    href="https://t.me/CryptonLobbyBot"
+                    target="_blank"
+                  >
+                    Lobby bot
+                  </a>
+                </>
+              ) : (
+                t("Введите код, который пришёл на почту")
+              )}{" "}
+              {emailDomain && <MailToLinkMap emailDomain={emailDomain} />}
             </p>
           )}
         </>

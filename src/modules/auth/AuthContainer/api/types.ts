@@ -37,7 +37,8 @@ export interface LoginResponse {
 
 export interface LoginRequest {
   email?: string
-  redirect_url: string
+  tg_username?: string
+  redirect_url?: string
   oauth?: "GOOGLE"
   use_verification_code?: boolean
 }
