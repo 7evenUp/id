@@ -264,7 +264,7 @@ const Prize = ({
     if (isSellLoading) return
 
     try {
-      await sellItem({ userId: id }).unwrap()
+      await sellItem({ itemId: id }).unwrap()
       setIsSellOpened(false)
     } catch {
       /* empty */
@@ -300,7 +300,7 @@ const Prize = ({
               />
             )
           )}
-          {unionBalancePrice !== null && unionBalancePrice > 0 && (
+          {unionBalancePrice !== null && unionBalancePrice > 0 && !isSold && (
             <Dialog open={isSellOpened} onOpenChange={setIsSellOpened}>
               <DialogTrigger asChild>
                 <button className="absolute right-3 top-3 flex size-10 items-center justify-center rounded-full border border-lime-800 bg-lime-400 text-lime-800 shadow-sm transition-colors hover:bg-lime-300 active:bg-lime-400">
@@ -332,7 +332,9 @@ const Prize = ({
         </div>
         <TextAccent className="text-center">{title}</TextAccent>
         {isSold ? (
-          <Button disabled>Продано</Button>
+          <Button className="mt-auto" disabled>
+            Продано
+          </Button>
         ) : isUsed ? (
           type === "nft" ? (
             <Text0 className="mt-auto text-center">

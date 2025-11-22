@@ -50,7 +50,7 @@ const inventoryApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Inventory"],
     }),
-    sellItem: build.mutation<void, { userId: number }>({
+    sellItem: build.mutation<void, { itemId: number }>({
       query: (body) => ({
         url: "users/sell/item/",
         method: "POST",
