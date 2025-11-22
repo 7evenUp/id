@@ -29,6 +29,7 @@ export interface User {
   totalOpenedPromoBox: number
   wallet: string | null
   waxWallet: string | null
+  isFreeSpinUsed: boolean
 }
 
 export interface Avatar {

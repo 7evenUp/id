@@ -56,6 +56,24 @@ const cryptonEventsApi = api.injectEndpoints({
       }),
       providesTags: ["LastOpenedContainers"],
     }),
+    makeFreeSpin: build.mutation<void, void>({
+      query: () => ({
+        url: "crypton-events/free-spin/",
+        method: "POST",
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        await queryFulfilled
+        setTimeout(() => {
+          dispatch(
+            api.util.invalidateTags([
+              "UserProfile",
+              "LastOpenedContainers",
+              "Inventory",
+            ])
+          )
+        }, DELAY_AFTER_SUCCESSFUL_OPEN_IN_MS)
+      },
+    }),
   }),
   overrideExisting: false,
 })
@@ -64,4 +82,5 @@ export const {
   useGetContainersQuery,
   useOpenContainerMutation,
   useLastContainerOpenResultsQuery,
+  useMakeFreeSpinMutation,
 } = cryptonEventsApi
