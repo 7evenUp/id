@@ -59,11 +59,8 @@ export const generateAnimation = (
             moreLink={moreLink}
             getgemsLink={getgemsLink}
           >
-            <div className="relative w-[136px] h-[136px] bg-gray-2 rounded-xl flex items-center justify-center text-sm text-center">
-              <img
-                src={image}
-                className="w-full h-full rounded-xl object-cover"
-              />
+            <div className="relative flex h-[136px] w-[136px] items-center justify-center text-center text-sm">
+              <img src={image} className="h-full w-full object-cover" />
             </div>
           </InfoDialog>
         )

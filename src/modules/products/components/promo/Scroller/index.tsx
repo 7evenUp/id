@@ -142,10 +142,13 @@ const Scroller = () => {
         ease: [0, 1.01, 0.73, 1],
       })
 
-      setTimeout(() => {
-        setWinOpened(true)
-        setIsOpenLocked(false)
-      }, ANIMATION_DURATION_IN_SEC * 1000 + 200)
+      setTimeout(
+        () => {
+          setWinOpened(true)
+          setIsOpenLocked(false)
+        },
+        ANIMATION_DURATION_IN_SEC * 1000 + 200
+      )
     } catch (error) {
       // @ts-expect-error NO_RTKQ_ERROR_TYPES
       if (error.status === 400) {
@@ -168,11 +171,11 @@ const Scroller = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <div className="flex md:items-center md:justify-between gap-2 flex-col md:flex-row lg:flex-col lg:items-start xl:flex-row xl:items-center">
+        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between lg:flex-col lg:items-start xl:flex-row xl:items-center">
           <Text0>
             {t("Всего открытий боксов:")} {totalOpenedPromoBox}
           </Text0>
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-8">
             <Text0>
               {t("Осталось открытий боксов:")} {promoBoxAvailableOpensNumber}
             </Text0>
@@ -184,25 +187,25 @@ const Scroller = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-10 h-80 bg-gray-5/25 dark:bg-[#4B4B4B]/[16%] rounded-xl">
-          <div className="relative w-full py-4 overflow-hidden">
+        <div className="flex h-80 flex-col items-center justify-center gap-10 rounded-xl bg-gray-5/25 dark:bg-[#4B4B4B]/[16%]">
+          <div className="relative w-full overflow-hidden py-4">
             {isLoading ? (
               <PrizesSkeleton />
             ) : (
-              <motion.div style={{ x }} className="flex gap-4 w-fit ml-[50%]">
+              <motion.div style={{ x }} className="ml-[50%] flex w-fit gap-4">
                 {wonPrizes}
               </motion.div>
             )}
-            <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 top-2" />
-            <RoundedTriangle className="absolute left-1/2 -translate-x-1/2 rotate-180 bottom-2" />
+            <RoundedTriangle className="absolute left-1/2 top-2 -translate-x-1/2" />
+            <RoundedTriangle className="absolute bottom-2 left-1/2 -translate-x-1/2 rotate-180" />
           </div>
 
           {isLoading ? (
-            <Skeleton className="rounded-[10px] h-10 w-44" />
+            <Skeleton className="h-10 w-44 rounded-[10px]" />
           ) : (
             <button
               className={cn(
-                "text-sm flex items-center justify-center font-semibold gap-2 h-10 px-6 rounded-[10px] bg-[#FFE19D] text-gray-1 hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:shadow-none transition-all duration-100 hover:bg-[#f5d383] active:bg-[#ecc76f] disabled:pointer-events-none",
+                "flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#FFE19D] px-6 text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none",
                 isOpenLocked && "animate-pulse duration-1000",
                 promoBoxAvailableOpensNumber <= 0 && "opacity-50"
               )}
@@ -212,8 +215,8 @@ const Scroller = () => {
               {isOpenLoading && (
                 <Loader
                   className={cn(
-                    "animate-spin w-3.5 h-3.5",
-                    scale && "3xl:w-[0.911vw] 3xl:h-[0.911vw]"
+                    "h-3.5 w-3.5 animate-spin",
+                    scale && "3xl:h-[0.911vw] 3xl:w-[0.911vw]"
                   )}
                 />
               )}
@@ -246,21 +249,21 @@ const RoundedTriangle = ({ className }: { className: string }) => (
 )
 
 const PrizesSkeleton = () => (
-  <div className="flex gap-4 w-fit ml-[50%] -translate-x-1/2">
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
-    <Skeleton className="w-[136px] h-[136px] rounded-xl" />
+  <div className="ml-[50%] flex w-fit -translate-x-1/2 gap-4">
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
+    <Skeleton className="h-[136px] w-[136px] rounded-xl" />
   </div>
 )
