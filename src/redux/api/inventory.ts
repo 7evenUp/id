@@ -50,9 +50,21 @@ const inventoryApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Inventory"],
     }),
+    sellItem: build.mutation<void, { userId: number }>({
+      query: (body) => ({
+        url: "users/sell/item/",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Inventory", "UserProfile"],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useInventoryQuery, useClaimMutation, useClaimNftMutation } =
-  inventoryApi
+export const {
+  useInventoryQuery,
+  useClaimMutation,
+  useClaimNftMutation,
+  useSellItemMutation,
+} = inventoryApi

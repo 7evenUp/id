@@ -11,12 +11,14 @@ import {
 import HelpCircle from "@/assets/icons/help-circle.svg?react"
 import Copy from "@/assets/icons/copy.svg?react"
 import Check from "@/assets/icons/check.svg?react"
+import Coins from "@/assets/icons/coins.svg?react"
 
 // import TabHeader from "../components/TabHeader"
 // import TabTitle from "../components/TabTitle"
 
 import TextAccent from "@/shared/typography/TextAccent"
 import Text0 from "@/shared/typography/Text0"
+import Text1 from "@/shared/typography/Text1"
 import Text2 from "@/shared/typography/Text2"
 
 import Button from "@/shared/ui/Button"
@@ -33,7 +35,9 @@ import {
   useClaimMutation,
   useClaimNftMutation,
   useInventoryQuery,
+  useSellItemMutation,
 } from "@/redux/api/inventory"
+import { useUserProfileQuery } from "@/redux/api/profile"
 
 import { Inventory, InventoryItem } from "@/types/ny-inventory"
 
@@ -163,17 +167,22 @@ const Prize = ({
   instruction,
   photos,
   receivedAt,
+  unionBalancePrice,
+  isSold,
 }: InventoryItem) => {
   const { t } = useTranslation("products")
 
   const [successDialogOpen, setSuccessDialogOpen] = useState(false)
   const [link, setLink] = useState("")
   const [isSponsorCopied, setIsSponsorCopied] = useState(false)
+  const [isSellOpened, setIsSellOpened] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
 
+  const { data: profile } = useUserProfileQuery()
   const [claim, { isLoading }] = useClaimMutation()
   const [claimNft, { isLoading: isNftLoading }] = useClaimNftMutation()
+  const [sellItem, { isLoading: isSellLoading }] = useSellItemMutation()
 
   const HOURS_UNTIL_UNFREEZE = import.meta.env.VITE_HOURS_UNTIL_UNFREEZE || 12
   const unfreezeDate = addHours(new Date(receivedAt), HOURS_UNTIL_UNFREEZE)
@@ -251,6 +260,17 @@ const Prize = ({
     }
   }
 
+  const onSellItemClick = async () => {
+    if (isSellLoading) return
+
+    try {
+      await sellItem({ userId: id }).unwrap()
+      setIsSellOpened(false)
+    } catch {
+      /* empty */
+    }
+  }
+
   return (
     <>
       <div
@@ -260,27 +280,60 @@ const Prize = ({
             "3xl:w-[13.541vw] 3xl:gap-[0.52vw] 3xl:rounded-[1.041vw] 3xl:p-[0.26vw] 3xl:pb-[0.52vw]"
         )}
       >
-        {image ? (
-          <img
-            src={image}
-            className={cn(
-              "aspect-square w-full rounded-xl object-cover",
-              scale && "3xl:rounded-[0.781vw]"
-            )}
-          />
-        ) : (
-          photos.length > 0 && (
+        <div className="relative aspect-square w-full rounded-xl">
+          {image ? (
             <img
-              src={photos[0].file}
+              src={image}
               className={cn(
                 "aspect-square w-full rounded-xl object-cover",
                 scale && "3xl:rounded-[0.781vw]"
               )}
             />
-          )
-        )}
+          ) : (
+            photos.length > 0 && (
+              <img
+                src={photos[0].file}
+                className={cn(
+                  "aspect-square w-full rounded-xl object-cover",
+                  scale && "3xl:rounded-[0.781vw]"
+                )}
+              />
+            )
+          )}
+          {unionBalancePrice !== null && unionBalancePrice > 0 && (
+            <Dialog open={isSellOpened} onOpenChange={setIsSellOpened}>
+              <DialogTrigger asChild>
+                <button className="absolute right-3 top-3 flex size-10 items-center justify-center rounded-full border border-lime-800 bg-lime-400 text-lime-800 shadow-sm transition-colors hover:bg-lime-300 active:bg-lime-400">
+                  <Coins className="size-6" />
+                </button>
+              </DialogTrigger>
+
+              <DialogContent className="sm:w-[350px] sm:p-6">
+                <DialogTitle>Продажа товара</DialogTitle>
+                <Text0>Продайте товар, и ваш баланс ID пополнится</Text0>
+
+                <div className="my-4 grid max-w-fit grid-cols-2 place-items-start items-center gap-1 gap-x-4">
+                  <Text1>Стоимость:</Text1>
+                  <TextAccent>${unionBalancePrice}</TextAccent>
+                  <Text1>Баланс сейчас:</Text1>
+                  <TextAccent>${profile?.balance}</TextAccent>
+                  <Text1>Баланс после продажи:</Text1>
+                  <TextAccent>
+                    ${profile!.balance + unionBalancePrice}
+                  </TextAccent>
+                </div>
+
+                <Button onClick={onSellItemClick} isLoading={isSellLoading}>
+                  Продать
+                </Button>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
         <TextAccent className="text-center">{title}</TextAccent>
-        {isUsed ? (
+        {isSold ? (
+          <Button disabled>Продано</Button>
+        ) : isUsed ? (
           type === "nft" ? (
             <Text0 className="mt-auto text-center">
               {t("inventory.prize-activated")}
@@ -292,34 +345,36 @@ const Prize = ({
           )
         ) : (
           <>
-            <Dialog>
-              <DialogTrigger
-                className={cn(
-                  "mb-2 flex items-center justify-center gap-2 hover:text-gray-3 dark:hover:text-gray-3",
-                  scale && "3xl:mb-[0.52vw] 3xl:gap-[0.52vw]"
-                )}
-              >
-                <Text2 className="underline underline-offset-4">
-                  {t("inventory.how-to-activate")}
-                </Text2>
-                <HelpCircle
+            {instruction !== null && (
+              <Dialog>
+                <DialogTrigger
                   className={cn(
-                    "h-[18px] w-[18px]",
-                    scale && "3xl:h-[1.171vw] 3xl:w-[1.171vw]"
+                    "mb-2 flex items-center justify-center gap-2 hover:text-gray-3 dark:hover:text-gray-3",
+                    scale && "3xl:mb-[0.52vw] 3xl:gap-[0.52vw]"
                   )}
-                />
-              </DialogTrigger>
-              <DialogContent
-                className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
-              >
-                <DialogTitle>
-                  {t("inventory.how-to-activate-prize")}
-                </DialogTitle>
-                <Text0 className="h-[400px] overflow-auto break-words md:h-auto">
-                  {instruction}
-                </Text0>
-              </DialogContent>
-            </Dialog>
+                >
+                  <Text2 className="underline underline-offset-4">
+                    {t("inventory.how-to-activate")}
+                  </Text2>
+                  <HelpCircle
+                    className={cn(
+                      "h-[18px] w-[18px]",
+                      scale && "3xl:h-[1.171vw] 3xl:w-[1.171vw]"
+                    )}
+                  />
+                </DialogTrigger>
+                <DialogContent
+                  className={cn("sm:w-[500px]", scale && "3xl:w-[32.552vw]")}
+                >
+                  <DialogTitle>
+                    {t("inventory.how-to-activate-prize")}
+                  </DialogTitle>
+                  <Text0 className="h-[400px] overflow-auto break-words md:h-auto">
+                    {instruction}
+                  </Text0>
+                </DialogContent>
+              </Dialog>
+            )}
 
             {type === "nft" ? (
               <Button

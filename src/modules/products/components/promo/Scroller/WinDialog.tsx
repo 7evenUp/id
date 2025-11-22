@@ -83,23 +83,27 @@ const WinDialog = ({
                           >
                             Подробнее
                           </a>
-                          <a
-                            href={data.prize.nftImageUrl}
-                            target="_blank"
-                            className="underline underline-offset-2 hover:opacity-70"
-                          >
-                            GetGems
-                          </a>
+                          {data.prize.nftImageUrl && (
+                            <a
+                              href={data.prize.nftImageUrl}
+                              target="_blank"
+                              className="underline underline-offset-2 hover:opacity-70"
+                            >
+                              GetGems
+                            </a>
+                          )}
                         </>
                       )
                     ) : (
-                      <a
-                        href={data.prize.nftImageUrl}
-                        target="_blank"
-                        className="underline underline-offset-2 hover:opacity-70"
-                      >
-                        GetGems
-                      </a>
+                      data.prize.nftImageUrl && (
+                        <a
+                          href={data.prize.nftImageUrl}
+                          target="_blank"
+                          className="underline underline-offset-2 hover:opacity-70"
+                        >
+                          GetGems
+                        </a>
+                      )
                     )}
                   </div>
                   {/* <button
