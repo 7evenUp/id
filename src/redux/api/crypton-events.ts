@@ -3,6 +3,7 @@ import { api } from "./core"
 import {
   ContainersResponse,
   OpenContainerResponse,
+  FreeSpinResponse,
 } from "@/types/crypton-events"
 
 interface OpenContainerArgs {
@@ -56,7 +57,7 @@ const cryptonEventsApi = api.injectEndpoints({
       }),
       providesTags: ["LastOpenedContainers"],
     }),
-    makeFreeSpin: build.mutation<void, void>({
+    makeFreeSpin: build.mutation<FreeSpinResponse, void>({
       query: () => ({
         url: "crypton-events/free-spin/",
         method: "POST",

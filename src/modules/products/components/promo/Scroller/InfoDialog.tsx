@@ -15,10 +15,10 @@ const InfoDialog = ({
 }: {
   children: React.ReactNode
   image: string
-  title: string
+  title: string | null
   description: string
-  getgemsLink: string
-  moreLink?: string
+  getgemsLink: string | null
+  moreLink: string | null
 }) => {
   return (
     <Dialog.Root>
@@ -60,13 +60,15 @@ const InfoDialog = ({
                         >
                           Подробнее
                         </a>
-                        <a
-                          href={getgemsLink}
-                          target="_blank"
-                          className="underline underline-offset-2 hover:opacity-70"
-                        >
-                          GetGems
-                        </a>
+                        {getgemsLink && (
+                          <a
+                            href={getgemsLink}
+                            target="_blank"
+                            className="underline underline-offset-2 hover:opacity-70"
+                          >
+                            GetGems
+                          </a>
+                        )}
                       </>
                     )
                   ) : (

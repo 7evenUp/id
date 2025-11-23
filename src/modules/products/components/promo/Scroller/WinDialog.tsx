@@ -6,19 +6,18 @@ import CloseIcon from "@/assets/icons/close.svg?react"
 import TextAccent from "@/shared/typography/TextAccent"
 import Subheading from "@/shared/typography/Subheading"
 
-// import { changeRootTab } from "@/redux/root-tabs/slice"
-// import { useAppDispatch } from "@/redux/hooks"
-
-import { OpenContainerResponse } from "@/types/crypton-events"
+import { OpenContainerResponse, FreeSpinResponse } from "@/types/crypton-events"
 
 const WinDialog = ({
   open,
   onOpenChange,
   data,
+  freeSpinData,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   data: OpenContainerResponse | undefined
+  freeSpinData: FreeSpinResponse | undefined
 }) => {
   const { t } = useTranslation("products")
 
@@ -38,7 +37,7 @@ const WinDialog = ({
           onOpenAutoFocus={(event) => event.preventDefault()}
           onCloseAutoFocus={(event) => event.preventDefault()}
         >
-          {data === undefined ? (
+          {data === undefined && freeSpinData === undefined ? (
             <>
               <div className="flex items-center justify-center pt-10 text-3xl">
                 {t("Не удалось узнать приз")}
@@ -47,7 +46,7 @@ const WinDialog = ({
                 <CloseIcon className="h-6 w-6 [filter:_drop-shadow(0_0_1px_rgb(0_0_0/0.5));] sm:h-[36px] sm:w-[36px] 3xl:h-[44px] 3xl:w-[44px]" />
               </Dialog.Close>
             </>
-          ) : (
+          ) : data !== undefined ? (
             <>
               <div className="flex h-full w-full flex-col-reverse items-center justify-center gap-6 text-xs/[125%] tracking-[0.02em] mobile-sm:text-sm/[125%] sm:h-auto sm:flex-row sm:items-stretch sm:justify-start sm:gap-0 sm:text-xs/[125%] md:text-sm/[125%] 2xl:text-base/[125%] 3xl:text-[20px]/[125%]">
                 <div className="flex shrink-0">
@@ -118,6 +117,35 @@ const WinDialog = ({
                 <CloseIcon className="h-6 w-6 [filter:_drop-shadow(0_0_1px_rgb(0_0_0/0.5));] sm:h-[36px] sm:w-[36px] 3xl:h-[44px] 3xl:w-[44px]" />
               </Dialog.Close>
             </>
+          ) : (
+            freeSpinData !== undefined && (
+              <>
+                <div className="flex h-full w-full flex-col-reverse items-center justify-center gap-6 text-xs/[125%] tracking-[0.02em] mobile-sm:text-sm/[125%] sm:h-auto sm:flex-row sm:items-stretch sm:justify-start sm:gap-0 sm:text-xs/[125%] md:text-sm/[125%] 2xl:text-base/[125%] 3xl:text-[20px]/[125%]">
+                  <div className="flex shrink-0">
+                    <img
+                      src={freeSpinData.image}
+                      className="h-[85vw] w-[85vw] object-cover mobile-sm:h-[320px] mobile-sm:w-[320px] sm:h-[240px] sm:w-[240px] sm:rounded-l-xl md:h-[280px] md:w-[280px] lg:h-[300px] lg:w-[300px] 2xl:h-[360px] 2xl:w-[360px] 3xl:h-[442px] 3xl:w-[442px]"
+                    />
+                  </div>
+                  <div className="flex flex-col p-3 mobile-sm:px-6 mobile-sm:py-0 sm:p-4 2xl:p-6 3xl:p-8">
+                    <TextAccent className="mb-2">
+                      {t("Поздравляем! Вы выиграли:")}
+                    </TextAccent>
+                    {freeSpinData.title && (
+                      <Subheading className="mb-1">
+                        {freeSpinData.title}
+                      </Subheading>
+                    )}
+                    <p className="sm:max-w-auto max-w-[380px]">
+                      {freeSpinData.description}
+                    </p>
+                  </div>
+                </div>
+                <Dialog.Close className="absolute right-4 top-4 text-black dark:text-white sm:left-full sm:top-0 sm:translate-x-2 md:translate-x-5">
+                  <CloseIcon className="h-6 w-6 [filter:_drop-shadow(0_0_1px_rgb(0_0_0/0.5));] sm:h-[36px] sm:w-[36px] 3xl:h-[44px] 3xl:w-[44px]" />
+                </Dialog.Close>
+              </>
+            )
           )}
         </Dialog.Content>
       </Dialog.Portal>

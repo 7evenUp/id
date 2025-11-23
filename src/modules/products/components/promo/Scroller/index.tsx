@@ -59,7 +59,7 @@ const Scroller = () => {
   const { data: containerData, isLoading } = useGetContainersQuery()
   const [openContainer, { data: winData, isLoading: isOpenLoading }] =
     useOpenContainerMutation()
-  const [makeFreeSpin, { isLoading: isFreeSpinLoading }] =
+  const [makeFreeSpin, { data: freeSpinData, isLoading: isFreeSpinLoading }] =
     useMakeFreeSpinMutation()
 
   const { promoBoxAvailableOpensNumber, totalOpenedPromoBox, isFreeSpinUsed } =
@@ -198,7 +198,12 @@ const Scroller = () => {
       setWonPrizes(
         generateAnimation(
           AMOUNT_OF_GENERATED_PRIZES,
-          winResult.prize,
+          {
+            ...winResult,
+            link: null,
+            nftImageUrl: null,
+            totalCountForUser: null,
+          },
           containerData.containers[0].prizes
         )
       )
@@ -315,7 +320,12 @@ const Scroller = () => {
           </div>
         </div>
       </div>
-      <WinDialog open={winOpened} onOpenChange={setWinOpened} data={winData} />
+      <WinDialog
+        open={winOpened}
+        onOpenChange={setWinOpened}
+        data={winData}
+        freeSpinData={freeSpinData}
+      />
     </>
   )
 }

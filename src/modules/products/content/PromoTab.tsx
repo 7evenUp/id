@@ -54,7 +54,7 @@ const PromoTab = () => {
         {t("Последние подарки")}
       </Text0>
 
-      <div className="flex flex-col items-center mobile-sm:flex-row mobile-sm:items-stretch mobile-sm:flex-wrap gap-x-5 gap-y-6">
+      <div className="flex flex-col items-center gap-x-5 gap-y-6 mobile-sm:flex-row mobile-sm:flex-wrap mobile-sm:items-stretch">
         {lastOpenedContainers &&
           lastOpenedContainers.length !== 0 &&
           lastOpenedContainers.map((lastOpen, i) => (
@@ -63,22 +63,23 @@ const PromoTab = () => {
               title={lastOpen.prizeTitle}
               description={lastOpen.prizeDescription}
               getgemsLink={lastOpen.prizeNftImageUrl}
+              moreLink={null}
               key={i}
             >
-              <div className="flex flex-col gap-3 w-[250px] mobile-sm:w-[160px]">
+              <div className="flex w-[250px] flex-col gap-3 mobile-sm:w-[160px]">
                 <img
                   src={lastOpen.prizeImageUrl}
-                  className="bg-gray-2 rounded-[10px] w-full aspect-square object-cover"
+                  className="aspect-square w-full rounded-[10px] bg-gray-2 object-cover"
                 />
-                <div className="flex items-center gap-1 mt-auto">
+                <div className="mt-auto flex items-center gap-1">
                   <img
-                    className="shrink-0 w-6 h-6 bg-gray-3 rounded-full object-cover"
+                    className="h-6 w-6 shrink-0 rounded-full bg-gray-3 object-cover"
                     src={lastOpen.userProfileAvatar}
                   />
                   <Text0 className="truncate">{lastOpen.userProfileName}</Text0>
                 </div>
                 {lastOpen.openedDatetime && (
-                  <Text1 className="text-gray-2 dark:text-white/50 text-left">
+                  <Text1 className="text-left text-gray-2 dark:text-white/50">
                     {formatDistanceToNow(new Date(lastOpen.openedDatetime), {
                       addSuffix: true,
                       locale: lang === "ru" ? ru : enUS,
