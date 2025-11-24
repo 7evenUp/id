@@ -184,7 +184,7 @@ const Prize = ({
   const [claimNft, { isLoading: isNftLoading }] = useClaimNftMutation()
   const [sellItem, { isLoading: isSellLoading }] = useSellItemMutation()
 
-  const HOURS_UNTIL_UNFREEZE = import.meta.env.VITE_HOURS_UNTIL_UNFREEZE || 12
+  const HOURS_UNTIL_UNFREEZE = import.meta.env.VITE_HOURS_UNTIL_UNFREEZE || 24
   const unfreezeDate = addHours(new Date(receivedAt), HOURS_UNTIL_UNFREEZE)
   const isAbleToClaim = isAfter(new Date(), unfreezeDate)
 
