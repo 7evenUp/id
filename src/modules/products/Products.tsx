@@ -106,6 +106,22 @@ const Products = () => {
               <Text0>{t("products-root")}</Text0>
             </TabsPrimitive.Trigger>
             <TabsPrimitive.Trigger
+              value="promo"
+              className={cn(
+                "flex items-center justify-center gap-1.5 rounded px-2 py-1 text-gray-2 transition-colors hover:bg-gray-5/[0.15] data-[state=active]:bg-gray-5/25 data-[state=active]:text-black dark:text-gray-3 dark:hover:bg-gray-2/30 dark:data-[state=active]:bg-gray-1 dark:data-[state=active]:text-gray-5",
+                scale &&
+                  "3xl:gap-[0.36vw] 3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
+              )}
+            >
+              <PromoIcon
+                className={cn(
+                  "h-4 w-4 shrink-0",
+                  scale && "3xl:h-[1.041vw] 3xl:w-[1.041vw]"
+                )}
+              />
+              <Text0 className="whitespace-nowrap">{t("promo-root")}</Text0>
+            </TabsPrimitive.Trigger>
+            <TabsPrimitive.Trigger
               value="inventory"
               className={cn(
                 "flex items-center justify-center gap-1.5 rounded px-2 py-1 text-gray-2 transition-colors hover:bg-gray-5/[0.15] data-[state=active]:bg-gray-5/25 data-[state=active]:text-black dark:text-gray-3 dark:hover:bg-gray-2/30 dark:data-[state=active]:bg-gray-1 dark:data-[state=active]:text-gray-5",
@@ -147,22 +163,6 @@ const Products = () => {
                 )}
               />
               <Text0>{t("points-store-root")}</Text0>
-            </TabsPrimitive.Trigger>
-            <TabsPrimitive.Trigger
-              value="promo"
-              className={cn(
-                "flex items-center justify-center gap-1.5 rounded px-2 py-1 text-gray-2 transition-colors hover:bg-gray-5/[0.15] data-[state=active]:bg-gray-5/25 data-[state=active]:text-black dark:text-gray-3 dark:hover:bg-gray-2/30 dark:data-[state=active]:bg-gray-1 dark:data-[state=active]:text-gray-5",
-                scale &&
-                  "3xl:gap-[0.36vw] 3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
-              )}
-            >
-              <PromoIcon
-                className={cn(
-                  "h-4 w-4",
-                  scale && "3xl:h-[1.041vw] 3xl:w-[1.041vw]"
-                )}
-              />
-              <Text0>{t("promo-root")}</Text0>
             </TabsPrimitive.Trigger>
           </TabsPrimitive.List>
         </ScrollArea.Viewport>

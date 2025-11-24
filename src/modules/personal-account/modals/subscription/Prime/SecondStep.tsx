@@ -26,11 +26,12 @@ import {
   useUpdateDiscordMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
-import { useAppSelector } from "@/redux/hooks"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
+import { changeRootTab } from "@/redux/root-tabs/slice"
 
 const SecondStep = ({
   open,
@@ -58,19 +59,21 @@ const SecondStep = ({
     updateDiscord({ discordUsername: inputValue })
   }
 
+  const dispatch = useAppDispatch()
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "pb-14 sm:pb-14 sm:max-w-[560px] md:max-w-[650px] xmd:max-w-[800px]",
-          scale && "3xl:pb-[3.645vw] 3xl:max-w-[52.083vw]"
+          "pb-14 sm:max-w-[560px] sm:pb-14 md:max-w-[650px] xmd:max-w-[800px]",
+          scale && "3xl:max-w-[52.083vw] 3xl:pb-[3.645vw]"
         )}
       >
         <ModalHeader step={t("buy-subs.second-step.step")} />
 
         <div
           className={cn(
-            "flex flex-col-reverse md:flex-row justify-between gap-6 md:gap-10 lg:gap-[140px]",
+            "flex flex-col-reverse justify-between gap-6 md:flex-row md:gap-10 lg:gap-[120px]",
             scale && "3xl:gap-[9.114vw]"
           )}
         >
@@ -78,14 +81,14 @@ const SecondStep = ({
             <div
               className={cn(
                 "flex flex-col gap-4 mobile-sm:w-[270px]",
-                scale && "3xl:gap-[1.042vw] 3xl:w-[17.578vw]"
+                scale && "3xl:w-[17.578vw] 3xl:gap-[1.042vw]"
               )}
             >
               <div className="flex items-center">
                 <Telegram
                   className={cn(
-                    "w-[18px] h-[18px]",
-                    scale && "3xl:w-[1.172vw] 3xl:h-[1.172vw]"
+                    "h-[18px] w-[18px]",
+                    scale && "3xl:h-[1.172vw] 3xl:w-[1.172vw]"
                   )}
                 />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
@@ -104,8 +107,8 @@ const SecondStep = ({
               <div className="flex items-center">
                 <Discord
                   className={cn(
-                    "w-[18px] h-[20px]",
-                    scale && "3xl:w-[1.172vw] 3xl:h-[1.302vw]"
+                    "h-[20px] w-[18px]",
+                    scale && "3xl:h-[1.302vw] 3xl:w-[1.172vw]"
                   )}
                 />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
@@ -114,7 +117,7 @@ const SecondStep = ({
                 {discordUsername ? (
                   <Text0 className="ml-auto">@{discordUsername}</Text0>
                 ) : (
-                  <div className="ml-auto relative">
+                  <div className="relative ml-auto">
                     <Input
                       className="peer"
                       placeholder={t("buy-subs.second-step.ds-placeholder")}
@@ -123,7 +126,7 @@ const SecondStep = ({
                     />
                     <div
                       className={cn(
-                        "opacity-0 absolute -right-6 top-1 transition-opacity",
+                        "absolute -right-6 top-1 opacity-0 transition-opacity",
                         scale && "3xl:-right-[1.563vw] 3xl:top-[0.26vw]",
                         inputValue.length && "opacity-100"
                       )}
@@ -131,8 +134,8 @@ const SecondStep = ({
                       {isLoading ? (
                         <Loader
                           className={cn(
-                            "animate-spin w-5 h-5",
-                            scale && "3xl:w-[1.302vw] 3xl:h-[1.302vw]"
+                            "h-5 w-5 animate-spin",
+                            scale && "3xl:h-[1.302vw] 3xl:w-[1.302vw]"
                           )}
                         />
                       ) : (
@@ -150,8 +153,8 @@ const SecondStep = ({
               <div className="flex items-center">
                 <Ethereum
                   className={cn(
-                    "w-[18px] h-[21px]",
-                    scale && "3xl:w-[1.172vw] 3xl:h-[1.367vw]"
+                    "h-[21px] w-[18px]",
+                    scale && "3xl:h-[1.367vw] 3xl:w-[1.172vw]"
                   )}
                 />
                 <Text0 className={cn("ml-2.5", scale && "3xl:ml-[0.651vw]")}>
@@ -174,30 +177,55 @@ const SecondStep = ({
 
             {/* Vissible on Mobile */}
             <Button
-              className="md:hidden mt-6 w-fit self-end"
+              className="mt-6 w-fit self-end md:hidden"
               onClick={openThirdStep}
             >
               {t("buy-subs.second-step.continue-btn")}
             </Button>
           </div>
           <div
-            className={cn("flex flex-col gap-4", scale && "3xl:gap-[1.042vw]")}
+            className={cn("flex flex-col gap-3", scale && "3xl:gap-[1.042vw]")}
           >
             <h3
               className={cn(
-                "typography-head text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text",
+                "typography-head bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent",
                 scale && "typography-head_large"
               )}
             >
               {t("buy-subs.second-step.congrats")}
             </h3>
-            <Text0>
+            {/* <Text0>
               {t("buy-subs.second-step.congrats-message", {
                 count: boughtSubDuration,
               })}
+            </Text0> */}
+            <Text0>
+              🎉 Подписка Prime на{" "}
+              {boughtSubDuration === 1
+                ? "1 месяц"
+                : `${boughtSubDuration} месяцев`}{" "}
+              приобретена!
+            </Text0>
+            <Text0>
+              Вы также получили {boughtSubDuration === 1 ? 1 : 12} праздничных
+              боксов, которые можете открыть прямо сейчас в разделе{" "}
+              <button
+                className="underline"
+                onClick={() => {
+                  onOpenChange(false)
+                  dispatch(changeRootTab("promo"))
+                }}
+              >
+                Crypton Birthday
+              </button>
+            </Text0>
+            <Text0>Поспеши — подарки уже заждались тебя 🎁</Text0>
+            <Text0>
+              Не забудьте важные данные своего аккаунта, чтобы получить доступ
+              ко всем сервисам Prime.
             </Text0>
             <Button
-              className="mt-auto w-fit hidden md:flex"
+              className="mt-auto hidden w-fit md:flex"
               onClick={openThirdStep}
             >
               {t("buy-subs.second-step.continue-btn")}

@@ -80,10 +80,13 @@ const PromoTab = () => {
                 </div>
                 {lastOpen.openedDatetime && (
                   <Text1 className="text-left text-gray-2 dark:text-white/50">
-                    {formatDistanceToNow(new Date(lastOpen.openedDatetime), {
-                      addSuffix: true,
-                      locale: lang === "ru" ? ru : enUS,
-                    })}
+                    {formatDistanceToNow(
+                      new Date(lastOpen.openedDatetime + "+03:00"),
+                      {
+                        addSuffix: true,
+                        locale: lang === "ru" ? ru : enUS,
+                      }
+                    )}
                   </Text1>
                 )}
               </div>
