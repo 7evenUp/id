@@ -411,6 +411,7 @@ const FirstStep = ({
             className={cn(
               "mb-6 grid grid-cols-1 gap-3 mobile:grid-cols-2 sm:gap-5 lg:grid-cols-2",
               // "mb-6 grid grid-cols-1 gap-3 mobile:grid-cols-2 sm:gap-5 lg:grid-cols-3",
+              subscriptions.length > 4 ? "lg:grid-cols-3" : "lg:grid-cols-2",
               scale && "3xl:mb-[1.563vw] 3xl:gap-[1.302vw]"
             )}
           >
