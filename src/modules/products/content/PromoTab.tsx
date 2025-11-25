@@ -63,7 +63,7 @@ const PromoTab = () => {
               title={lastOpen.prizeTitle}
               description={lastOpen.prizeDescription}
               getgemsLink={lastOpen.prizeNftImageUrl}
-              moreLink={null}
+              moreLink={lastOpen.link}
               key={i}
             >
               <div className="flex w-[250px] flex-col gap-3 mobile-sm:w-[160px]">
