@@ -378,7 +378,7 @@ const FirstStep = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "pb-14 sm:max-w-[560px] sm:pb-14 lg:max-w-[910px] xl:max-w-[1200px]",
+          "pb-14 sm:max-w-[560px] sm:pb-14 lg:max-h-[95vh] lg:max-w-[910px] lg:overflow-y-auto lg:overflow-x-hidden xl:max-w-[1200px]",
           scale && "3xl:max-w-[70vw] 3xl:pb-[3.645vw]"
         )}
       >

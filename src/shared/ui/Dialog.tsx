@@ -97,7 +97,7 @@ const DialogFooter = ({
   return (
     <div
       className={cn(
-        "absolute bottom-0 left-0 w-full rounded-b-xl bg-res-bot-blue px-4 py-1.5 text-[10px] font-medium leading-[140%] text-white sm:px-10",
+        "absolute bottom-0 left-0 w-full rounded-b-xl bg-res-bot-blue px-4 py-1.5 text-[10px] font-medium leading-[140%] text-white sm:px-6 lg:hidden",
         scale &&
           "3xl:rounded-b-[0.781vw] 3xl:px-[2.604vw] 3xl:py-[0.391vw] 3xl:text-[0.651vw]",
         className
