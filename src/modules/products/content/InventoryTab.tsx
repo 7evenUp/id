@@ -68,7 +68,9 @@ const InventoryTab = () => {
     } else if (filterType === "activated") {
       setFilteredData({
         itemsCount: inventory.itemsCount,
-        items: inventory.items.filter((el) => el.isUsed === true),
+        items: inventory.items.filter(
+          (el) => el.isUsed === true || el.isSold === true
+        ),
       })
     }
   }, [filterType, inventory])
