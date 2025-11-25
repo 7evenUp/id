@@ -207,11 +207,11 @@ const FirstStep = ({
                 Math.ceil(price * referralDiscountAmount)
             )
           } else {
-             setTotalPrice(
-               price -
-                 baseDiscountAmount -
-                 Math.ceil(price * referralDiscountAmount)
-             )
+            setTotalPrice(
+              price -
+                baseDiscountAmount -
+                Math.ceil(price * referralDiscountAmount)
+            )
           }
         } else {
           setTotalPrice(price - Math.ceil(price * referralDiscountAmount))
@@ -409,7 +409,8 @@ const FirstStep = ({
 
           <div
             className={cn(
-              "mb-6 grid grid-cols-1 gap-3 mobile:grid-cols-2 sm:gap-5 lg:grid-cols-3",
+              "mb-6 grid grid-cols-1 gap-3 mobile:grid-cols-2 sm:gap-5 lg:grid-cols-2",
+              // "mb-6 grid grid-cols-1 gap-3 mobile:grid-cols-2 sm:gap-5 lg:grid-cols-3",
               scale && "3xl:mb-[1.563vw] 3xl:gap-[1.302vw]"
             )}
           >
