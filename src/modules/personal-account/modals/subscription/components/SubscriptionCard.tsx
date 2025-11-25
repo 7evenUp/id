@@ -170,18 +170,12 @@ const SubscriptionCard = ({
   useEffect(() => {
     const price = subscriptionPrice
 
-    let fullPrice
-
     const priceAfterDiscounts =
       price -
       baseDiscountAmountNotNullable -
       Math.max(referralDiscount, promocodeDiscount)
 
-    if (!isPromotionalModeActive && priceAfterDiscounts > 1000) {
-      fullPrice = 999 - Math.max(referralDiscount, promocodeDiscount)
-    } else {
-      fullPrice = priceAfterDiscounts
-    }
+    const fullPrice = priceAfterDiscounts
 
     setCardPrice(fullPrice)
   }, [

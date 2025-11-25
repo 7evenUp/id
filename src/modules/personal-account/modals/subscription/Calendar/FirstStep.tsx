@@ -132,11 +132,7 @@ const FirstStep = ({
           if (subscriptions[activeSub].isPromotionalModeActive) {
             setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
           } else {
-            if (price - baseDiscountAmount - referralDiscountAmount > 1000) {
-              setTotalPrice(999 - referralDiscountAmount)
-            } else {
-              setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
-            }
+            setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
           }
         } else {
           setTotalPrice(price - referralDiscountAmount)
@@ -150,20 +146,11 @@ const FirstStep = ({
                 Math.ceil(price * referralDiscountAmount)
             )
           } else {
-            if (
+            setTotalPrice(
               price -
                 baseDiscountAmount -
-                Math.ceil(price * referralDiscountAmount) >
-              1000
-            ) {
-              setTotalPrice(999 - 999 * referralDiscountAmount)
-            } else {
-              setTotalPrice(
-                price -
-                  baseDiscountAmount -
-                  Math.ceil(price * referralDiscountAmount)
-              )
-            }
+                Math.ceil(price * referralDiscountAmount)
+            )
           }
         } else {
           setTotalPrice(price - Math.ceil(price * referralDiscountAmount))
@@ -174,11 +161,7 @@ const FirstStep = ({
         if (subscriptions[activeSub].isPromotionalModeActive) {
           setTotalPrice(price - baseDiscountAmount)
         } else {
-          if (price - baseDiscountAmount > 1000) {
-            setTotalPrice(999)
-          } else {
-            setTotalPrice(price - baseDiscountAmount)
-          }
+          setTotalPrice(price - baseDiscountAmount)
         }
       } else {
         setTotalPrice(price)
@@ -211,11 +194,7 @@ const FirstStep = ({
           if (subscriptions[subID].isPromotionalModeActive) {
             setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
           } else {
-            if (price - baseDiscountAmount - referralDiscountAmount > 1000) {
-              setTotalPrice(999 - referralDiscountAmount)
-            } else {
-              setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
-            }
+            setTotalPrice(price - baseDiscountAmount - referralDiscountAmount)
           }
         } else {
           setTotalPrice(price - referralDiscountAmount)
@@ -229,20 +208,11 @@ const FirstStep = ({
                 Math.ceil(price * referralDiscountAmount)
             )
           } else {
-            if (
+            setTotalPrice(
               price -
                 baseDiscountAmount -
-                Math.ceil(price * referralDiscountAmount) >
-              1000
-            ) {
-              setTotalPrice(999 - 999 * referralDiscountAmount)
-            } else {
-              setTotalPrice(
-                price -
-                  baseDiscountAmount -
-                  Math.ceil(price * referralDiscountAmount)
-              )
-            }
+                Math.ceil(price * referralDiscountAmount)
+            )
           }
         } else {
           setTotalPrice(price - Math.ceil(price * referralDiscountAmount))
@@ -253,11 +223,7 @@ const FirstStep = ({
         if (subscriptions[subID].isPromotionalModeActive) {
           setTotalPrice(price - baseDiscountAmount)
         } else {
-          if (price - baseDiscountAmount > 1000) {
-            setTotalPrice(999)
-          } else {
-            setTotalPrice(price - baseDiscountAmount)
-          }
+          setTotalPrice(price - baseDiscountAmount)
         }
       } else {
         setTotalPrice(price)
@@ -338,20 +304,10 @@ const FirstStep = ({
           ? preferedDiscount
           : Math.ceil(price * preferedDiscount)
 
-      if (
-        !subscriptions[activeSub].isPromotionalModeActive &&
+      finalPrice =
         price -
-          baseDiscountAmountNotNullable -
-          Math.max(referralDiscount, promocodeDiscount) >
-          1000
-      ) {
-        finalPrice = 999 - Math.max(referralDiscount, promocodeDiscount)
-      } else {
-        finalPrice =
-          price -
-          baseDiscountAmountNotNullable -
-          Math.max(referralDiscount, promocodeDiscount)
-      }
+        baseDiscountAmountNotNullable -
+        Math.max(referralDiscount, promocodeDiscount)
 
       setTotalPrice(finalPrice)
 
