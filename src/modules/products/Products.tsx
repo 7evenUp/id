@@ -108,7 +108,7 @@ const Products = () => {
             <TabsPrimitive.Trigger
               value="promo"
               className={cn(
-                "flex items-center justify-center gap-1.5 rounded px-2 py-1 text-gray-2 transition-colors hover:bg-gray-5/[0.15] data-[state=active]:bg-gray-5/25 data-[state=active]:text-black dark:text-gray-3 dark:hover:bg-gray-2/30 dark:data-[state=active]:bg-gray-1 dark:data-[state=active]:text-gray-5",
+                "flex items-center justify-center gap-1.5 rounded bg-fuchsia-300/50 px-2 py-1 text-black/80 transition-colors hover:bg-fuchsia-300/75 data-[state=active]:bg-fuchsia-300 data-[state=active]:text-black dark:bg-fuchsia-800/50 dark:text-white dark:hover:bg-fuchsia-800/75 dark:data-[state=active]:bg-fuchsia-800 dark:data-[state=active]:text-white",
                 scale &&
                   "3xl:gap-[0.36vw] 3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
               )}
