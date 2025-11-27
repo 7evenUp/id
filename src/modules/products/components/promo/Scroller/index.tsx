@@ -7,24 +7,23 @@ import {
 } from "motion/react"
 import { toast } from "sonner"
 import { useTranslation } from "react-i18next"
+import * as Popover from "@radix-ui/react-popover"
 
 import Loader from "@/assets/icons/loader.svg?react"
-// import Plus from "@/assets/icons/plus.svg?react"
+import Settings from "@/assets/icons/settings.svg?react"
+import Check from "@/assets/icons/check.svg?react"
 
 import { generateAnimation } from "./generateAnimation"
 import WinDialog from "./WinDialog"
 
-// import SubscriptionMain from "@/modules/personal-account/modals/subscription/SubscriptionMain"
-
 import Text0 from "@/shared/typography/Text0"
 
-// import Button from "@/shared/ui/Button"
 import { Skeleton } from "@/shared/ui/Skeleton"
 
 import { useAppSelector } from "@/redux/hooks"
 import {
   useGetContainersQuery,
-  // useMakeFreeSpinMutation,
+  useMakeFreeSpinMutation,
   useOpenContainerMutation,
 } from "@/redux/api/crypton-events"
 import { useUserProfileQuery } from "@/redux/api/profile"
@@ -52,6 +51,7 @@ const Scroller = () => {
   const [animationStarted, setAnimationStarted] = useState(false)
   const [winOpened, setWinOpened] = useState(false)
   const [isOpenLocked, setIsOpenLocked] = useState(false)
+  const [isFreeSpinActivated, setIsFreeSpinActivated] = useState(false)
 
   const scale = useAppSelector((state) => state.scale.value)
 
@@ -59,12 +59,11 @@ const Scroller = () => {
   const { data: containerData, isLoading } = useGetContainersQuery()
   const [openContainer, { data: winData, isLoading: isOpenLoading }] =
     useOpenContainerMutation()
-  // const [makeFreeSpin, { data: freeSpinData, isLoading: isFreeSpinLoading }] =
-  //   useMakeFreeSpinMutation()
+  const [makeFreeSpin, { data: freeSpinData, isLoading: isFreeSpinLoading }] =
+    useMakeFreeSpinMutation()
 
-  const { promoBoxAvailableOpensNumber, totalOpenedPromoBox } = profile!
-  // const { promoBoxAvailableOpensNumber, totalOpenedPromoBox, isFreeSpinUsed } =
-  //   profile!
+  const { promoBoxAvailableOpensNumber, totalOpenedPromoBox, isFreeSpinUsed } =
+    profile!
 
   const x = useMotionValue(0)
 
@@ -112,6 +111,7 @@ const Scroller = () => {
   ) => {
     event.preventDefault()
 
+    if (isFreeSpinActivated) return
     if (isOpenLoading || isOpenLocked) return
 
     if (
@@ -173,74 +173,76 @@ const Scroller = () => {
     }
   }
 
-  // const onFreeSpinClick = async (
-  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  // ) => {
-  //   event.preventDefault()
+  const onFreeSpinClick = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault()
 
-  //   if (isFreeSpinLoading || isOpenLocked) return
+    if (!isFreeSpinActivated) return
+    if (isFreeSpinLoading || isOpenLocked) return
 
-  //   if (
-  //     !containerData ||
-  //     containerData.containers.length === 0 ||
-  //     containerData.containers[0].prizes.length === 0
-  //   )
-  //     return
+    if (
+      !containerData ||
+      containerData.containers.length === 0 ||
+      containerData.containers[0].prizes.length === 0
+    )
+      return
 
-  //   if (soundLoaded) clickWheelSound.play(0)
+    if (soundLoaded) clickWheelSound.play(0)
 
-  //   try {
-  //     const winResult = await makeFreeSpin().unwrap()
+    try {
+      const winResult = await makeFreeSpin().unwrap()
 
-  //     setIsOpenLocked(true)
+      setIsFreeSpinActivated(false)
+      setIsOpenLocked(true)
 
-  //     x.jump(0)
+      x.jump(0)
 
-  //     setWonPrizes(
-  //       generateAnimation(
-  //         AMOUNT_OF_GENERATED_PRIZES,
-  //         {
-  //           ...winResult,
-  //           link: null,
-  //           nftImageUrl: null,
-  //           totalCountForUser: null,
-  //         },
-  //         containerData.containers[0].prizes
-  //       )
-  //     )
+      setWonPrizes(
+        generateAnimation(
+          AMOUNT_OF_GENERATED_PRIZES,
+          {
+            ...winResult,
+            link: null,
+            nftImageUrl: null,
+            totalCountForUser: null,
+          },
+          containerData.containers[0].prizes
+        )
+      )
 
-  //     setAnimationStarted(true)
+      setAnimationStarted(true)
 
-  //     animate(x, -MIDDLE_X_POSITION, {
-  //       duration: ANIMATION_DURATION_IN_SEC,
-  //       ease: [0, 1.01, 0.73, 1],
-  //     })
+      animate(x, -MIDDLE_X_POSITION, {
+        duration: ANIMATION_DURATION_IN_SEC,
+        ease: [0, 1.01, 0.73, 1],
+      })
 
-  //     setTimeout(
-  //       () => {
-  //         setWinOpened(true)
-  //         setIsOpenLocked(false)
-  //       },
-  //       ANIMATION_DURATION_IN_SEC * 1000 + 200
-  //     )
-  //   } catch (error) {
-  //     // @ts-expect-error NO_RTKQ_ERROR_TYPES
-  //     if (error.status === 400) {
-  //       // @ts-expect-error NO_RTKQ_ERROR_TYPES
-  //       if (error.data.code === "not_enough_available_open_box_attempts") {
-  //         toast.error(t("Недостаточно ключей для лутбокса"))
-  //       } else {
-  //         toast.error(t("Не удалось открыть бокс"))
-  //       }
-  //     }
-  //     // @ts-expect-error NO_RTKQ_ERROR_TYPES
-  //     else if (error.status === 429) {
-  //       toast.error("Слишком много запросов. Пожалуйста, попробуйте позже")
-  //     } else {
-  //       toast.error(t("Не удалось открыть бокс"))
-  //     }
-  //   }
-  // }
+      setTimeout(
+        () => {
+          setWinOpened(true)
+          setIsOpenLocked(false)
+        },
+        ANIMATION_DURATION_IN_SEC * 1000 + 200
+      )
+    } catch (error) {
+      // @ts-expect-error NO_RTKQ_ERROR_TYPES
+      if (error.status === 400) {
+        // @ts-expect-error NO_RTKQ_ERROR_TYPES
+        if (error.data.code === "not_enough_available_open_box_attempts") {
+          toast.error(t("Недостаточно ключей для лутбокса"))
+        } else {
+          toast.error(t("Не удалось открыть бокс"))
+        }
+      }
+      // @ts-expect-error NO_RTKQ_ERROR_TYPES
+      else if (error.status === 429) {
+        toast.error("Слишком много запросов. Пожалуйста, попробуйте позже")
+      } else {
+        toast.error(t("Не удалось открыть бокс"))
+      }
+    }
+  }
 
   return (
     <>
@@ -253,11 +255,6 @@ const Scroller = () => {
             <Text0>
               {t("Осталось открытий боксов:")} {promoBoxAvailableOpensNumber}
             </Text0>
-            {/* <SubscriptionMain>
-              <Button className="w-fit" appearence="inverted">
-                {t("получить больше")} <Plus className="w-5 h-5" />
-              </Button>
-            </SubscriptionMain> */}
           </div>
         </div>
 
@@ -278,69 +275,124 @@ const Scroller = () => {
             {isLoading ? (
               <Skeleton className="h-10 w-44 rounded-[10px]" />
             ) : (
-              <button
-                className={cn(
-                  "flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#FFE19D] px-6 text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none",
-                  isOpenLocked && "animate-pulse duration-1000",
-                  promoBoxAvailableOpensNumber <= 0 && "opacity-50"
-                )}
-                onClick={onOpenClick}
-                disabled={promoBoxAvailableOpensNumber <= 0 || isOpenLocked}
-              >
-                {isOpenLoading && (
-                  <Loader
-                    className={cn(
-                      "h-3.5 w-3.5 animate-spin",
-                      scale && "3xl:h-[0.911vw] 3xl:w-[0.911vw]"
-                    )}
-                  />
-                )}
-                {isOpenLocked ? t("Крутим-крутим...") : t("Крутить рулетку")}
-              </button>
-            )}
-            {/* {isLoading ? (
-              <Skeleton className="h-10 w-44 rounded-[10px]" />
-            ) : !isFreeSpinUsed ? (
-              <button
-                className={cn(
-                  "flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#FFE19D] px-6 text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none",
-                  isOpenLocked && "animate-pulse duration-1000"
-                )}
-                onClick={onFreeSpinClick}
-              >
-                {isFreeSpinLoading && (
-                  <Loader
-                    className={cn(
-                      "h-3.5 w-3.5 animate-spin",
-                      scale && "3xl:h-[0.911vw] 3xl:w-[0.911vw]"
-                    )}
-                  />
-                )}
-                Фри спин
-              </button>
-            ) : (
-              <button
-                className={cn(
-                  "flex h-10 items-center justify-center gap-2 rounded-[10px] bg-[#FFE19D] px-6 text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none",
-                  isOpenLocked && "animate-pulse duration-1000",
-                  promoBoxAvailableOpensNumber <= 0 && "opacity-50"
-                )}
-                onClick={onOpenClick}
-                disabled={promoBoxAvailableOpensNumber <= 0 || isOpenLocked}
-              >
-                {isOpenLoading && (
-                  <Loader
-                    className={cn(
-                      "h-3.5 w-3.5 animate-spin",
-                      scale && "3xl:h-[0.911vw] 3xl:w-[0.911vw]"
-                    )}
-                  />
-                )}
-                {isOpenLocked ? t("Крутим-крутим...") : t("Крутить рулетку")}
-              </button>
-            )} */}
+              <>
+                <div className="flex gap-0.5">
+                  {isFreeSpinActivated ? (
+                    isFreeSpinUsed ? (
+                      <div className="relative">
+                        <button
+                          className="flex h-10 w-52 items-center justify-center gap-2 rounded-l-[10px] rounded-r bg-[#FFE19D] text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none disabled:opacity-50"
+                          disabled
+                        >
+                          Вращение использовано
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="relative">
+                        <button
+                          className={cn(
+                            "flex h-10 w-52 items-center justify-center gap-2 rounded-l-[10px] rounded-r bg-[#FFE19D] text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none",
+                            isOpenLocked && "animate-pulse duration-1000"
+                          )}
+                          onClick={onFreeSpinClick}
+                        >
+                          {isFreeSpinLoading && (
+                            <Loader
+                              className={cn(
+                                "h-3.5 w-3.5 animate-spin",
+                                scale && "3xl:h-[0.911vw] 3xl:w-[0.911vw]"
+                              )}
+                            />
+                          )}
+                          {isOpenLocked
+                            ? t("Крутим-крутим...")
+                            : t("Крутить рулетку")}
+                        </button>
+                        {isFreeSpinActivated && !isFreeSpinUsed && (
+                          <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                            Доступен фри спин
+                          </span>
+                        )}
+                      </div>
+                    )
+                  ) : (
+                    <button
+                      className={cn(
+                        "flex h-10 w-52 items-center justify-center gap-2 rounded-l-[10px] rounded-r bg-[#FFE19D] text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none disabled:pointer-events-none",
+                        isOpenLocked && "animate-pulse duration-1000",
+                        promoBoxAvailableOpensNumber <= 0 && "opacity-50"
+                      )}
+                      onClick={onOpenClick}
+                      disabled={
+                        promoBoxAvailableOpensNumber <= 0 || isOpenLocked
+                      }
+                    >
+                      {isOpenLoading && (
+                        <Loader
+                          className={cn(
+                            "h-3.5 w-3.5 animate-spin",
+                            scale && "3xl:h-[0.911vw] 3xl:w-[0.911vw]"
+                          )}
+                        />
+                      )}
+                      {isOpenLocked
+                        ? t("Крутим-крутим...")
+                        : t("Крутить рулетку")}
+                    </button>
+                  )}
 
-            {/* {!isFreeSpinUsed && "Доступен фри спин"} */}
+                  <Popover.Root>
+                    <Popover.Trigger asChild>
+                      <button
+                        className={cn(
+                          "group flex size-10 items-center justify-center gap-2 rounded-l rounded-r-[10px] bg-[#FFE19D] text-sm font-semibold text-gray-1 transition-all duration-100 hover:bg-[#f5d383] hover:shadow-[0_1px_2px_0_rgba(0,0,0,0.3),_0_1px_3px_1px_rgba(0,0,0,0.15)] active:bg-[#ecc76f] active:shadow-none"
+                        )}
+                      >
+                        <Settings className="transition-transform group-data-[state=open]:rotate-90" />
+                      </button>
+                    </Popover.Trigger>
+                    <Popover.Portal>
+                      <Popover.Content
+                        side="left"
+                        align="start"
+                        sideOffset={2}
+                        className="origin-(--radix-popover-content-transform-origin) outline-hidden flex min-h-10 w-52 flex-col rounded-l-[10px] rounded-r bg-[#e9cb86] font-montserrat text-sm font-medium text-black data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[side=left]:slide-in-from-right-2"
+                      >
+                        <Popover.Close asChild>
+                          <button
+                            className="flex min-h-10 items-center rounded-tl-[10px] rounded-tr px-3 text-left text-gray-1 transition-colors hover:bg-[#ddc07c]"
+                            onClick={() => {
+                              setIsFreeSpinActivated(false)
+                            }}
+                          >
+                            Платные спины
+                            {!isFreeSpinActivated && (
+                              <Check className="ml-auto size-4" />
+                            )}
+                          </button>
+                        </Popover.Close>
+                        <Popover.Close asChild>
+                          <button
+                            className="flex min-h-10 items-center rounded-bl-[10px] rounded-br px-3 text-left text-gray-1 transition-colors hover:bg-[#ddc07c] disabled:bg-[#ceb67f] disabled:text-gray-1/50"
+                            onClick={() => {
+                              if (isFreeSpinUsed) return
+
+                              setIsFreeSpinActivated(true)
+                            }}
+                            disabled={isFreeSpinUsed}
+                          >
+                            Бесплатный спин
+                            {isFreeSpinActivated && (
+                              <Check className="ml-auto size-4" />
+                            )}
+                          </button>
+                        </Popover.Close>
+                      </Popover.Content>
+                    </Popover.Portal>
+                  </Popover.Root>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -348,8 +400,7 @@ const Scroller = () => {
         open={winOpened}
         onOpenChange={setWinOpened}
         data={winData}
-        freeSpinData={undefined}
-        // freeSpinData={freeSpinData}
+        freeSpinData={freeSpinData}
       />
     </>
   )

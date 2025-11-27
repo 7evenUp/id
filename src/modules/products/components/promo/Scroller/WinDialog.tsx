@@ -139,6 +139,20 @@ const WinDialog = ({
                     <p className="sm:max-w-auto max-w-[380px]">
                       {freeSpinData.description}
                     </p>
+                    <p className="sm:max-w-auto mt-2 max-w-[380px]">
+                      Чтобы активировать её, перейди по ссылке ниже «Подробнее»
+                      в инвентарь ID и продай подарок — нажми на зелёные монетки
+                      в правом верхнем углу.
+                    </p>
+                    <div className="mt-4 flex items-center gap-3 sm:mt-auto">
+                      <a
+                        href="https://id.crypton.xyz?open_tab=inventory"
+                        target="_blank"
+                        className="underline underline-offset-2 hover:opacity-70"
+                      >
+                        Подробнее
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <Dialog.Close className="absolute right-4 top-4 text-black dark:text-white sm:left-full sm:top-0 sm:translate-x-2 md:translate-x-5">
