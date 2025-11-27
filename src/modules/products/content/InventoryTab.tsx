@@ -304,35 +304,38 @@ const Prize = ({
               />
             )
           )}
-          {unionBalancePrice !== null && unionBalancePrice > 0 && !isSold && (
-            <Dialog open={isSellOpened} onOpenChange={setIsSellOpened}>
-              <DialogTrigger asChild>
-                <button className="absolute right-3 top-3 flex size-10 items-center justify-center rounded-full border border-lime-800 bg-lime-400 text-lime-800 shadow-sm transition-colors hover:bg-lime-300 active:bg-lime-400">
-                  <Coins className="size-6" />
-                </button>
-              </DialogTrigger>
+          {unionBalancePrice !== null &&
+            unionBalancePrice > 0 &&
+            !isSold &&
+            !isUsed && (
+              <Dialog open={isSellOpened} onOpenChange={setIsSellOpened}>
+                <DialogTrigger asChild>
+                  <button className="absolute right-3 top-3 flex size-10 items-center justify-center rounded-full border border-lime-800 bg-lime-400 text-lime-800 shadow-sm transition-colors hover:bg-lime-300 active:bg-lime-400">
+                    <Coins className="size-6" />
+                  </button>
+                </DialogTrigger>
 
-              <DialogContent className="sm:w-[350px] sm:p-6">
-                <DialogTitle>Продажа товара</DialogTitle>
-                <Text0>Продайте товар, и ваш баланс ID пополнится</Text0>
+                <DialogContent className="sm:w-[350px] sm:p-6">
+                  <DialogTitle>Продажа товара</DialogTitle>
+                  <Text0>Продайте товар, и ваш баланс ID пополнится</Text0>
 
-                <div className="my-4 grid max-w-fit grid-cols-2 place-items-start items-center gap-1 gap-x-4">
-                  <Text1>Стоимость:</Text1>
-                  <TextAccent>${unionBalancePrice}</TextAccent>
-                  <Text1>Баланс сейчас:</Text1>
-                  <TextAccent>${profile?.balance}</TextAccent>
-                  <Text1>Баланс после продажи:</Text1>
-                  <TextAccent>
-                    ${profile!.balance + unionBalancePrice}
-                  </TextAccent>
-                </div>
+                  <div className="my-4 grid max-w-fit grid-cols-2 place-items-start items-center gap-1 gap-x-4">
+                    <Text1>Стоимость:</Text1>
+                    <TextAccent>${unionBalancePrice}</TextAccent>
+                    <Text1>Баланс сейчас:</Text1>
+                    <TextAccent>${profile?.balance}</TextAccent>
+                    <Text1>Баланс после продажи:</Text1>
+                    <TextAccent>
+                      ${profile!.balance + unionBalancePrice}
+                    </TextAccent>
+                  </div>
 
-                <Button onClick={onSellItemClick} isLoading={isSellLoading}>
-                  Продать
-                </Button>
-              </DialogContent>
-            </Dialog>
-          )}
+                  <Button onClick={onSellItemClick} isLoading={isSellLoading}>
+                    Продать
+                  </Button>
+                </DialogContent>
+              </Dialog>
+            )}
         </div>
         <TextAccent className="text-center">{title}</TextAccent>
         {isSold ? (
