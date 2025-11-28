@@ -401,6 +401,7 @@ const Prize = ({
                 isLoading={isLoading}
                 onClick={onSubmit}
                 className={cn("mx-1 mt-auto", scale && "3xl:mx-[0.26vw]")}
+                disabled={!isAbleToClaim}
               >
                 {isAbleToClaim
                   ? t("inventory.activate-btn")
