@@ -256,8 +256,6 @@ const SubscriptionCard = ({
         </div>
       )}
 
-      <img src="/images/black-friday-white-gift.png" className="mt-5 w-[100px] aspect-[220/180]" />
-      
       <div className="flex flex-col items-center mt-auto">
         {benefits &&
           benefits.length > 0 &&

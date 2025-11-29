@@ -26,12 +26,11 @@ import {
   useUpdateDiscordMutation,
   useUserProfileQuery,
 } from "@/redux/api/profile"
-import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useAppSelector } from "@/redux/hooks"
 
 import { cutWalletAddr } from "@/utils/cutWalletAddr"
 
 import { cn } from "@/lib/classNames"
-import { changeRootTab } from "@/redux/root-tabs/slice"
 
 const SecondStep = ({
   open,
@@ -58,8 +57,6 @@ const SecondStep = ({
   const onUpdateDiscord = () => {
     updateDiscord({ discordUsername: inputValue })
   }
-
-  const dispatch = useAppDispatch()
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -194,35 +191,10 @@ const SecondStep = ({
             >
               {t("buy-subs.second-step.congrats")}
             </h3>
-            {/* <Text0>
+            <Text0>
               {t("buy-subs.second-step.congrats-message", {
                 count: boughtSubDuration,
               })}
-            </Text0> */}
-            <Text0>
-              🎉 Подписка Prime на{" "}
-              {boughtSubDuration === 1
-                ? "1 месяц"
-                : `${boughtSubDuration} месяцев`}{" "}
-              приобретена!
-            </Text0>
-            <Text0>
-              Вы также получили {boughtSubDuration === 1 ? 1 : 12} праздничных
-              боксов, которые можете открыть прямо сейчас в разделе{" "}
-              <button
-                className="underline"
-                onClick={() => {
-                  onOpenChange(false)
-                  dispatch(changeRootTab("promo"))
-                }}
-              >
-                Crypton Birthday
-              </button>
-            </Text0>
-            <Text0>Поспеши — подарки уже заждались тебя 🎁</Text0>
-            <Text0>
-              Не забудьте важные данные своего аккаунта, чтобы получить доступ
-              ко всем сервисам Prime.
             </Text0>
             <Button
               className="mt-auto hidden w-fit md:flex"
