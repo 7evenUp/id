@@ -8,7 +8,7 @@ import EcosystemIcon from "@/assets/icons/ecosystem.svg?react"
 import InventoryIcon from "@/assets/icons/package.svg?react"
 import InventoryActiveIcon from "@/assets/icons/package-open.svg?react"
 import StoreIcon from "@/assets/icons/store.svg?react"
-import PromoIcon from "@/assets/icons/promo.svg?react"
+// import PromoIcon from "@/assets/icons/promo.svg?react"
 
 import { Tabs, TabsContent, TabsList } from "@/shared/ui/Tabs"
 
@@ -22,7 +22,7 @@ import NutcrackerTab from "./content/NutcrackerTab"
 
 import InventoryTab from "./content/InventoryTab"
 import PointStoreTab from "./content/PointStoreTab"
-import PromoTab from "./content/PromoTab"
+// import PromoTab from "./content/PromoTab"
 
 import Text0 from "@/shared/typography/Text0"
 
@@ -105,7 +105,7 @@ const Products = () => {
               />
               <Text0>{t("products-root")}</Text0>
             </TabsPrimitive.Trigger>
-            <TabsPrimitive.Trigger
+            {/* <TabsPrimitive.Trigger
               value="promo"
               className={cn(
                 "flex items-center justify-center gap-1.5 rounded bg-fuchsia-300/50 px-2 py-1 text-black/80 transition-colors hover:bg-fuchsia-300/75 data-[state=active]:bg-fuchsia-300 data-[state=active]:text-black dark:bg-fuchsia-800/50 dark:text-white dark:hover:bg-fuchsia-800/75 dark:data-[state=active]:bg-fuchsia-800 dark:data-[state=active]:text-white",
@@ -120,7 +120,7 @@ const Products = () => {
                 )}
               />
               <Text0 className="whitespace-nowrap">{t("promo-root")}</Text0>
-            </TabsPrimitive.Trigger>
+            </TabsPrimitive.Trigger> */}
             <TabsPrimitive.Trigger
               value="inventory"
               className={cn(
@@ -240,9 +240,9 @@ const Products = () => {
       <TabsPrimitive.Content value="store">
         <PointStoreTab />
       </TabsPrimitive.Content>
-      <TabsPrimitive.Content value="promo">
+      {/* <TabsPrimitive.Content value="promo">
         <PromoTab />
-      </TabsPrimitive.Content>
+      </TabsPrimitive.Content> */}
     </TabsPrimitive.Root>
   )
 }

@@ -27,14 +27,14 @@ const NutcrackerTab = () => {
       <TabHeader>
         <TabTitle
           title={t("nutcracker.title")}
-          link="https://getgems.io/nutcrackers"
+          link="https://nutcrackers.crypton.xyz/"
         />
       </TabHeader>
 
       <RowItem className="justify-start">
         <div
           className={cn(
-            "flex items-center flex-wrap max-w-[450px] gap-2",
+            "flex max-w-[450px] flex-wrap items-center gap-2",
             scale && "3xl:gap-[0.52vw]"
           )}
         >
@@ -42,13 +42,13 @@ const NutcrackerTab = () => {
             {t("nutcracker.buy-on-getgems")}
           </ExternalLink>
           <ExternalLink
-            href="https://getgems.io/crypton?filter=%7B%22attributes%22%3A%7B%22The+Nutcracker%27s+parts%22%3A%5B%22Right+hand%22%2C%22Body%22%2C%22Left+hand%22%2C%22Head%22%2C%22Left+leg%22%2C%22Right+leg%22%5D%7D%7D"
+            href="https://getgems.io/collection/EQBdJY4Z6U0qmfN-wBAdVLz87S4iYbLfAmWQo0W5uLBRuwdT?filter=%7B%22attributes%22%3A%7B%22The+Nutcracker%27s+parts%22%3A%5B%22Body%22%2C%22Right+hand%22%2C%22Left+hand%22%2C%22Head%22%2C%22Left+leg%22%2C%22Right+leg%22%5D%7D%7D"
             className="w-fit"
           >
             {t("nutcracker.buy-parts")}
           </ExternalLink>
           <ExternalLink
-            href="https://nutcrackers-mint.crypton.xyz/"
+            href="https://nutcrackers.crypton.xyz/"
             className="w-fit"
           >
             {t("nutcracker.mint-website")}
@@ -71,29 +71,29 @@ const NutcrackerTab = () => {
         {t("nutcracker.your-nutcrackers")}
         {isLoading ? (
           <div
-            className={cn("flex gap-4 flex-wrap", scale && "3xl:gap-[1.041vw]")}
+            className={cn("flex flex-wrap gap-4", scale && "3xl:gap-[1.041vw]")}
           >
             <Skeleton
               className={cn(
-                "w-[160px] aspect-square rounded-xl",
+                "aspect-square w-[160px] rounded-xl",
                 scale && "3xl:w-[10.416vw]"
               )}
             />
             <Skeleton
               className={cn(
-                "w-[160px] aspect-square rounded-xl",
+                "aspect-square w-[160px] rounded-xl",
                 scale && "3xl:w-[10.416vw]"
               )}
             />
             <Skeleton
               className={cn(
-                "w-[160px] aspect-square rounded-xl",
+                "aspect-square w-[160px] rounded-xl",
                 scale && "3xl:w-[10.416vw]"
               )}
             />
             <Skeleton
               className={cn(
-                "w-[160px] aspect-square rounded-xl",
+                "aspect-square w-[160px] rounded-xl",
                 scale && "3xl:w-[10.416vw]"
               )}
             />
@@ -104,7 +104,7 @@ const NutcrackerTab = () => {
           ) : (
             <div
               className={cn(
-                "flex gap-4 flex-wrap",
+                "flex flex-wrap gap-4",
                 scale && "3xl:gap-[1.041vw]"
               )}
             >
