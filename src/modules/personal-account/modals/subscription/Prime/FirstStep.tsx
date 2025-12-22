@@ -118,12 +118,24 @@ const FirstStep = ({
 
     if (isError || isValidateSuccess) resetRequest()
 
-    const { baseDiscountAmount, referralDiscountAmount, referralDiscountKind } =
-      subscriptions[activeSub]
+    const {
+      baseDiscount,
+      baseDiscountAmount: backBaseDiscountAmount,
+      referralDiscountAmount,
+      referralDiscountKind,
+    } = subscriptions[activeSub]
 
     setIsPromoLarger(null)
 
     const price = getSubscriptionPrice(activeSub)
+
+    let baseDiscountAmount = 0
+
+    if (baseDiscount && backBaseDiscountAmount === null) {
+      baseDiscountAmount = Math.ceil(price * (baseDiscount / 100))
+    } else {
+      baseDiscountAmount = backBaseDiscountAmount || 0
+    }
 
     if (referralDiscountAmount && referralDiscountKind) {
       if (referralDiscountKind === "MONEY") {
@@ -178,12 +190,24 @@ const FirstStep = ({
     setValidFor([])
     setInvalidFor([])
 
-    const { baseDiscountAmount, referralDiscountAmount, referralDiscountKind } =
-      subscriptions[subID]
+    const {
+      baseDiscount,
+      baseDiscountAmount: backBaseDiscountAmount,
+      referralDiscountAmount,
+      referralDiscountKind,
+    } = subscriptions[subID]
 
     setIsPromoLarger(null)
 
     const price = getSubscriptionPrice(subID)
+
+    let baseDiscountAmount = 0
+
+    if (baseDiscount && backBaseDiscountAmount === null) {
+      baseDiscountAmount = Math.ceil(price * (baseDiscount / 100))
+    } else {
+      baseDiscountAmount = backBaseDiscountAmount || 0
+    }
 
     setActiveSub(subID)
 
@@ -233,10 +257,22 @@ const FirstStep = ({
   const applyPromo = async () => {
     if (activeSub === null) return
 
-    const { baseDiscountAmount, referralDiscountAmount, referralDiscountKind } =
-      subscriptions[activeSub]
+    const {
+      baseDiscount,
+      baseDiscountAmount,
+      referralDiscountAmount,
+      referralDiscountKind,
+    } = subscriptions[activeSub]
 
     const price = getSubscriptionPrice(activeSub)
+
+    let baseDiscountAmountNotNullable = 0
+
+    if (baseDiscount && baseDiscountAmount === null) {
+      baseDiscountAmountNotNullable = Math.ceil(price * (baseDiscount / 100))
+    } else {
+      baseDiscountAmountNotNullable = baseDiscountAmount || 0
+    }
 
     try {
       const {
@@ -257,10 +293,6 @@ const FirstStep = ({
       setInvalidFor(invalidForSubscriptions)
 
       let finalPrice = 0
-
-      const baseDiscountAmountNotNullable = baseDiscountAmount
-        ? baseDiscountAmount
-        : 0
 
       const isValid =
         validForSubscriptions.length === 0 &&

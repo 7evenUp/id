@@ -82,8 +82,8 @@ const SubscriptionCard = ({
     return matchedDiscount
       ? matchedDiscount.discountAmount
       : discountAmount
-      ? discountAmount
-      : 0
+        ? discountAmount
+        : 0
   }, [discountAmount, discounts, id])
 
   const promocodeDiscount = useMemo(() => {
@@ -104,9 +104,15 @@ const SubscriptionCard = ({
     return 0
   }, [subscriptionPrice, referralDiscountAmount, referralDiscountKind])
 
-  const baseDiscountAmountNotNullable = baseDiscountAmount
-    ? baseDiscountAmount
-    : 0
+  let baseDiscountAmountNotNullable = 0
+
+  if (baseDiscount && baseDiscountAmount === null) {
+    baseDiscountAmountNotNullable = Math.ceil(
+      subscriptionPrice * (baseDiscount / 100)
+    )
+  } else {
+    baseDiscountAmountNotNullable = baseDiscountAmount ? baseDiscountAmount : 0
+  }
 
   const totalDiscount = useMemo(() => {
     let discount = 0
@@ -189,7 +195,7 @@ const SubscriptionCard = ({
   return (
     <div
       className={cn(
-        "min-h-[247px] min-w-[188px] flex flex-col items-center rounded-xl border border-gray-1 dark:border-gray-3 pb-5",
+        "flex min-h-[247px] min-w-[188px] flex-col items-center rounded-xl border border-gray-1 pb-5 dark:border-gray-3",
         scale &&
           "3xl:min-h-[16.08vw] 3xl:min-w-[12.239vw] 3xl:rounded-[0.781vw] 3xl:pb-[1.302vw]",
         selected && "min-h-[267px]",
@@ -198,8 +204,8 @@ const SubscriptionCard = ({
     >
       <Text2
         className={cn(
-          "text-white bg-gray-1 dark:bg-gray-2 w-full py-1.5 text-center rounded-t-xl",
-          scale && "3xl:py-[0.391vw] 3xl:rounded-t-[0.781vw]"
+          "w-full rounded-t-xl bg-gray-1 py-1.5 text-center text-white dark:bg-gray-2",
+          scale && "3xl:rounded-t-[0.781vw] 3xl:py-[0.391vw]"
         )}
       >
         {kind.name}{" "}
@@ -209,8 +215,8 @@ const SubscriptionCard = ({
       </Text2>
       <span
         className={cn(
-          "font-semibold text-[40px] dark:text-gray-5 mt-5",
-          scale && "3xl:text-[2.604vw] 3xl:mt-[1.302vw]",
+          "mt-5 text-[40px] font-semibold dark:text-gray-5",
+          scale && "3xl:mt-[1.302vw] 3xl:text-[2.604vw]",
           selected && "mt-7",
           selected && scale && "3xl:mt-[1.823vw]"
         )}
@@ -236,7 +242,7 @@ const SubscriptionCard = ({
         >
           <Text2
             className={cn(
-              "rounded-sm px-1 py-0.5 text-gray-1 bg-gradient-to-r from-corral to-purple",
+              "rounded-sm bg-gradient-to-r from-corral to-purple px-1 py-0.5 text-gray-1",
               scale && "3xl:rounded-[0.13vw] 3xl:px-[0.26vw] 3xl:py-[0.13vw]"
             )}
           >
@@ -244,11 +250,11 @@ const SubscriptionCard = ({
           </Text2>
           <div
             className={cn(
-              "bg-gray-1 rounded-sm px-1 py-0.5 w-fit",
+              "w-fit rounded-sm bg-gray-1 px-1 py-0.5",
               scale && "3xl:rounded-[0.13vw] 3xl:px-[0.26vw] 3xl:py-[0.13vw]"
             )}
           >
-            <Text2 className="text-transparent bg-gradient-to-r from-corral to-purple bg-clip-text">
+            <Text2 className="bg-gradient-to-r from-corral to-purple bg-clip-text text-transparent">
               {t("buy-subs.first-step.savings")}{" "}
               {(price - cardPrice).toFixed(2)}$
             </Text2>
@@ -256,30 +262,30 @@ const SubscriptionCard = ({
         </div>
       )}
 
-      <div className="flex flex-col items-center mt-auto">
+      <div className="mt-auto flex flex-col items-center">
         {benefits &&
           benefits.length > 0 &&
           (isDesktop ? (
             <HoverCard openDelay={150}>
               <HoverCardTrigger
                 className={cn(
-                  "flex items-center justify-center gap-1.5 rounded px-2 py-1 mb-3 text-black dark:text-gray-5 bg-gray-5/25 dark:bg-gray-2/50 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors cursor-pointer",
+                  "mb-3 flex cursor-pointer items-center justify-center gap-1.5 rounded bg-gray-5/25 px-2 py-1 text-black transition-colors hover:bg-gray-5/[0.15] dark:bg-gray-2/50 dark:text-gray-5 dark:hover:bg-gray-2/30",
                   scale &&
-                    "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:mb-[0.78125vw] 3xl:gap-[0.36vw]"
+                    "3xl:mb-[0.78125vw] 3xl:gap-[0.36vw] 3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
                 )}
               >
                 <GiftIcon
                   className={cn(
-                    "w-4 h-4",
-                    scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                    "h-4 w-4",
+                    scale && "3xl:h-[1.041vw] 3xl:w-[1.041vw]"
                   )}
                 />
                 <Text0>{t("buy-subs.first-step.bonuses")}</Text0>
               </HoverCardTrigger>
               <HoverCardContent
                 className={cn(
-                  "flex flex-col gap-1 w-[280px]",
-                  scale && "3xl:gap-[0.26vw] 3xl:w-[19vw]"
+                  "flex w-[280px] flex-col gap-1",
+                  scale && "3xl:w-[19vw] 3xl:gap-[0.26vw]"
                 )}
               >
                 {benefits.map((prize) => (
@@ -288,12 +294,12 @@ const SubscriptionCard = ({
                       ? order === 0
                         ? "- 1 открытие бокса"
                         : order === 1
-                        ? "- 3 открытия бокса"
-                        : order === 2
-                        ? "- 6 открытий бокса"
-                        : order === 3
-                        ? "- 12 открытий бокса"
-                        : "- " + prize.translations.ru.name
+                          ? "- 3 открытия бокса"
+                          : order === 2
+                            ? "- 6 открытий бокса"
+                            : order === 3
+                              ? "- 12 открытий бокса"
+                              : "- " + prize.translations.ru.name
                       : "- " + prize.translations.ru.name}
                     {/* {prize.remainingCount && (
                       <span>(осталось {prize.remainingCount})</span>
@@ -306,20 +312,20 @@ const SubscriptionCard = ({
             <Popover>
               <PopoverTrigger
                 className={cn(
-                  "flex items-center justify-center gap-1.5 rounded px-2 py-1 mb-3 text-black dark:text-gray-5 bg-gray-5/25 dark:bg-gray-2/50 hover:bg-gray-5/[0.15] dark:hover:bg-gray-2/30 transition-colors cursor-pointer",
+                  "mb-3 flex cursor-pointer items-center justify-center gap-1.5 rounded bg-gray-5/25 px-2 py-1 text-black transition-colors hover:bg-gray-5/[0.15] dark:bg-gray-2/50 dark:text-gray-5 dark:hover:bg-gray-2/30",
                   scale &&
-                    "3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw] 3xl:gap-[0.36vw]"
+                    "3xl:gap-[0.36vw] 3xl:rounded-[0.26vw] 3xl:px-[0.52vw] 3xl:py-[0.26vw]"
                 )}
               >
                 <GiftIcon
                   className={cn(
-                    "w-4 h-4",
-                    scale && "3xl:w-[1.041vw] 3xl:h-[1.041vw]"
+                    "h-4 w-4",
+                    scale && "3xl:h-[1.041vw] 3xl:w-[1.041vw]"
                   )}
                 />
                 <Text0>Бонусы</Text0>
               </PopoverTrigger>
-              <PopoverContent className="flex flex-col gap-1 w-[280px]">
+              <PopoverContent className="flex w-[280px] flex-col gap-1">
                 {benefits.map((prize) => (
                   <Text1>
                     - {prize.translations.ru.name}{" "}
@@ -333,7 +339,7 @@ const SubscriptionCard = ({
           ))}
         <Button
           className={cn(
-            "w-[158px] disabled:bg-gray-1 disabled:hover:bg-gray-1 disabled:text-white dark:disabled:bg-white dark:disabled:hover:bg-white dark:disabled:text-black",
+            "w-[158px] disabled:bg-gray-1 disabled:text-white disabled:hover:bg-gray-1 dark:disabled:bg-white dark:disabled:text-black dark:disabled:hover:bg-white",
             scale && "3xl:w-[10.286vw]",
             selected && "bg-gray-1 text-white dark:bg-white dark:text-black"
           )}
